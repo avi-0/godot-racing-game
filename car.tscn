@@ -1,16 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfbi3d3xbwk0g"]
+[gd_scene load_steps=9 format=3 uid="uid://cfbi3d3xbwk0g"]
 
 [ext_resource type="PackedScene" uid="uid://b77pygol30lhj" path="res://assets/carkit/hatchback-sports.glb" id="1_7822p"]
 [ext_resource type="Script" uid="uid://bt503sudnasge" path="res://car.gd" id="1_uoj53"]
+[ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/carsfx.wav" id="3_k61xc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]
+friction = 0.5
+bounce = 0.5
+
+[sub_resource type="Curve" id="Curve_k61xc"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.49605608), 0.0, -0.0899045, 0, 0, Vector2(1, 2), 3.0259128, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_06lh1"]
+_limits = [40.0, 60.0, 0.0, 1.0]
+_data = [Vector2(0, 60), 0.0, -49.447754, 0, 0, Vector2(1, 40), 0.34576532, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_td361"]
+_data = [Vector2(0, 0.50438213), 0.0, 1.4216261, 0, 0, Vector2(0.5046083, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7822p"]
 points = PackedVector3Array(0.65, 0.249961, 1.27491, 0.620605, 0.249961, 1.34549, 0.65, 0.0499364, 1.27491, 0.65, 0.425715, 1.1106, 0.620605, 0.0499364, 1.34549, 0.54998, 0.449985, 1.32485, 0.54998, 0.249961, 1.37478, 0.124961, 0, 1.42472, 0.65, 0.0499364, -0.485136, 0.65, 0.48774, 1.02997, 0.54998, 0.0499364, 1.37478, -0.550108, 0.449985, 1.32485, 0.124961, 0.174917, 1.42472, 0.65, 0.526703, 0.93568, 0.449961, 0.949907, 0.197793, 0.174971, 0.12498, 1.42472, -0.125088, 0, 1.42472, 0.124961, 0, 1.37478, 0.174971, 0.0499364, 1.42472, 0.399951, 0.0499364, -1.08521, 0.620605, 0.149995, -1.34577, 0.65, 0.149995, -1.27519, -0.65, 0.526703, 0.93568, -0.65, 0.48774, 1.02997, -0.65, 0.425715, 1.1106, -0.620732, 0.249961, 1.34549, -0.550108, 0.249961, 1.37478, -0.125088, 0.174917, 1.42472, -0.450088, 0.949907, 0.197793, 0.65, 0.649917, 0.597842, 0.449961, 0.949907, -0.907782, -0.175098, 0.0499364, 1.42472, -0.550108, 0.0499364, 1.37478, -0.620732, 0.0499364, 1.34549, -0.65, 0.0499364, 1.27491, -0.125088, 0, 1.37478, -0.400078, 0.0499364, -1.08521, 0.124961, 0.0999657, -1.425, 0.54998, 0.149995, -1.37506, 0.620605, 0.249961, -1.34577, 0.65, 0.249961, -1.27519, -0.65, 0.649917, 0.597842, -0.65, 0.249961, 1.27491, -0.175098, 0.12498, 1.42472, -0.450088, 0.949907, -0.907782, 0.65, 0.649917, 0.49769, 0.65, 0.539908, -0.785033, 0.65, 0.526703, -0.886022, 0.54998, 0.649917, -1.27519, -0.65, 0.0499364, -0.485136, -0.620732, 0.149995, -1.34577, -0.125088, 0.0999657, -1.425, 0.174971, 0.149995, -1.425, 0.54998, 0.249961, -1.37506, 0.65, 0.425715, -1.06094, -0.65, 0.649917, 0.49769, -0.65, 0.526703, -0.886022, -0.65, 0.539908, -0.785033, -0.550108, 0.649917, -1.27519, 0.65, 0.48774, -0.980036, 0.124961, 0.274976, -1.425, -0.65, 0.149995, -1.27519, -0.620732, 0.249961, -1.34577, -0.550108, 0.149995, -1.37506, -0.175098, 0.149995, -1.425, 0.174971, 0.224946, -1.425, -0.65, 0.48774, -0.980036, -0.125088, 0.274976, -1.425, -0.550108, 0.249961, -1.37506, -0.65, 0.249961, -1.27519, -0.65, 0.425715, -1.06094, -0.175098, 0.224946, -1.425)
 
 [node name="car" type="VehicleBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_k61xc")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.15, -0.2)
 continuous_cd = true
+angular_damp = 0.1
 script = ExtResource("1_uoj53")
+speed_to_pitch_curve = SubResource("Curve_k61xc")
+speed_to_steering_curve = SubResource("Curve_06lh1")
+skid_to_friction_curve = SubResource("Curve_td361")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.140863, -0.0268662)
@@ -24,6 +48,7 @@ wheel_roll_influence = 1.0
 wheel_radius = 0.35
 wheel_friction_slip = 1.0
 suspension_stiffness = 40.0
+suspension_max_force = 40000.0
 damping_compression = 0.955
 damping_relaxation = 0.925
 
@@ -39,6 +64,7 @@ wheel_roll_influence = 1.0
 wheel_radius = 0.35
 wheel_friction_slip = 1.0
 suspension_stiffness = 40.0
+suspension_max_force = 40000.0
 damping_compression = 0.955
 damping_relaxation = 0.925
 
@@ -49,12 +75,12 @@ remote_path = NodePath("../../hatchback-sports/wheel-back-right")
 [node name="wheel_fl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.299547, 0.810471)
-steering = 0.478744
 use_as_steering = true
 wheel_roll_influence = 1.0
 wheel_radius = 0.35
 wheel_friction_slip = 1.0
 suspension_stiffness = 40.0
+suspension_max_force = 40000.0
 damping_compression = 0.955
 damping_relaxation = 0.925
 
@@ -70,6 +96,7 @@ wheel_roll_influence = 1.0
 wheel_radius = 0.35
 wheel_friction_slip = 1.0
 suspension_stiffness = 40.0
+suspension_max_force = 40000.0
 damping_compression = 0.955
 damping_relaxation = 0.925
 
@@ -111,5 +138,12 @@ transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77636e-15, 0, 3.68151)
 current = true
 fov = 80.0
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_k61xc")
+autoplay = true
+attenuation_filter_cutoff_hz = 20500.0
+doppler_tracking = 2
 
 [editable path="hatchback-sports"]

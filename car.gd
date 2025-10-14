@@ -2,15 +2,28 @@ extends VehicleBody3D
 
 const MOUSE_SENS = 1.0
 const ENGINE_FORCE = 120.0
-const BRAKE_FORCE = 0.1
+const DRIFT_BONUS = 1.0
+const BRAKE_FORCE = 0.5
 const BRAKE_FW_SLIP = 0.85
-const BRAKE_RW_SLIP = 0.6
-const NORMAL_SLIP = 0.92
+const BRAKE_RW_SLIP = 0.5
+const NORMAL_SLIP = 0.96
 const NORMAL_RW_SLIP = 0.90
 const STEERING_MAX = 30.0
 const STEERING_SPEED = 200.0
+const FRICTION_ADJ_SPEED = 10.0
+
+@onready var wheel_fl: VehicleWheel3D = %wheel_fl
+@onready var wheel_fr: VehicleWheel3D = %wheel_fr
+@onready var wheel_bl: VehicleWheel3D = %wheel_bl
+@onready var wheel_br: VehicleWheel3D = %wheel_br
+
+@export var speed_to_pitch_curve: Curve
+@export var speed_to_steering_curve: Curve
+@export var skid_to_friction_curve: Curve
+const PITCH_MAX_SPEED = 500
 
 var mouse_sensitivity: float
+var wheel_target_friction: Dictionary[VehicleWheel3D, float]
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -27,6 +40,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		elif event.physical_keycode == KEY_R:
+			get_tree().reload_current_scene()
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var delta = event.relative
@@ -35,25 +50,78 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float):
 	engine_force = 0
+	var engine_sound_target: float = 0.5
 	if Input.is_action_pressed("throttle"):
 		engine_force = ENGINE_FORCE
+		engine_sound_target = 1.0
+	%EngineSound.volume_linear = move_toward(%EngineSound.volume_linear, engine_sound_target, 2 * delta)
 	
-	%wheel_fl.wheel_friction_slip = NORMAL_SLIP
-	%wheel_fr.wheel_friction_slip = NORMAL_SLIP
-	%wheel_bl.wheel_friction_slip = NORMAL_RW_SLIP
-	%wheel_br.wheel_friction_slip = NORMAL_RW_SLIP
+	var speediness = get_speediness()
+	%EngineSound.pitch_scale = speed_to_pitch_curve.sample(speediness)
+	
+	wheel_target_friction[wheel_fl] = NORMAL_SLIP
+	wheel_target_friction[wheel_fr] = NORMAL_SLIP
+	wheel_target_friction[wheel_bl] = NORMAL_RW_SLIP
+	wheel_target_friction[wheel_br] = NORMAL_RW_SLIP
 	brake = 0
 	if Input.is_action_pressed("brake"):
-		brake = BRAKE_FORCE
-		%wheel_fl.wheel_friction_slip = BRAKE_FW_SLIP
-		%wheel_fr.wheel_friction_slip = BRAKE_FW_SLIP
-		%wheel_bl.wheel_friction_slip = BRAKE_RW_SLIP
-		%wheel_br.wheel_friction_slip = BRAKE_RW_SLIP
+		var apply_slip := false
+		if not Input.is_action_pressed("throttle"):
+			if get_rpm() > 10:
+				brake = BRAKE_FORCE
+				apply_slip = true
+			else:
+				engine_force = -ENGINE_FORCE
+		else:
+			engine_force *= DRIFT_BONUS
+			apply_slip = true
+		
+		if apply_slip:
+			wheel_target_friction[wheel_fl] = BRAKE_FW_SLIP
+			wheel_target_friction[wheel_fr] = BRAKE_FW_SLIP
+			wheel_target_friction[wheel_bl] = BRAKE_RW_SLIP
+			wheel_target_friction[wheel_br] = BRAKE_RW_SLIP
 	
 	var target_steering = 0
 	if Input.is_action_pressed("steer_left"):
-		target_steering += STEERING_MAX
+		target_steering += 1
 	if Input.is_action_pressed("steer_right"):
-		target_steering -= STEERING_MAX
-	target_steering = deg_to_rad(target_steering)
+		target_steering -= 1
+	target_steering *= deg_to_rad(speed_to_steering_curve.sample(speediness))
 	steering = move_toward(steering, target_steering, deg_to_rad(STEERING_SPEED) * delta)
+
+	update_wheel(wheel_fl, delta)
+	update_wheel(wheel_fr, delta)
+	update_wheel(wheel_bl, delta)
+	update_wheel(wheel_br, delta)
+
+	#print("%f %f %f %f" % [
+		#%wheel_fl.wheel_friction_slip, 
+		#%wheel_fr.wheel_friction_slip, 
+		#%wheel_bl.wheel_friction_slip, 
+		#%wheel_br.wheel_friction_slip])
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	var max_angular_speed = 2.0
+	if state.angular_velocity.length() > max_angular_speed:
+		state.angular_velocity = state.angular_velocity.normalized() * max_angular_speed
+		print("limiting angular velocity")
+
+func get_rpm() -> float:
+	var speed_left: float = wheel_bl.get_rpm()
+	var speed_right: float = wheel_br.get_rpm()
+	return (speed_left + speed_right) / 2
+
+func get_speediness() -> float:
+	var rpm = get_rpm()
+	rpm /= PITCH_MAX_SPEED
+	return clamp(rpm, 0, 1)
+
+func update_wheel(wheel: VehicleWheel3D, delta: float):
+	var target := wheel_target_friction[wheel]
+	if not wheel.is_in_contact():
+		target = 0
+	
+	wheel.wheel_friction_slip = target
+	#wheel.wheel_friction_slip = move_toward(wheel.wheel_friction_slip, target, FRICTION_ADJ_SPEED * delta)
+	#wheel.wheel_friction_slip = target * skid_to_friction_curve.sample(wheel.get_skidinfo())
