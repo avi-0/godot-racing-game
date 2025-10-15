@@ -10,12 +10,12 @@ bounce = 0.5
 
 [sub_resource type="Curve" id="Curve_k61xc"]
 _limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 0.49605608), 0.0, -0.0899045, 0, 0, Vector2(1, 2), 3.0259128, 0.0, 0, 0]
+_data = [Vector2(0, 0.49605608), 0.0, 0.23025756, 0, 0, Vector2(1, 2), 2.2959864, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_06lh1"]
 _limits = [20.0, 60.0, 0.0, 1.0]
-_data = [Vector2(0.006711416, 59.290596), 0.0, -118.915405, 0, 0, Vector2(1, 20), 0.34576532, 0.0, 0, 0]
+_data = [Vector2(0, 45), 0.0, -59.0962, 0, 0, Vector2(1, 20), 0.34576532, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_td361"]
@@ -31,8 +31,9 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.1, -0.2)
 continuous_cd = true
 linear_damp_mode = 1
+linear_damp = 0.05
 angular_damp_mode = 1
-angular_damp = 0.1
+angular_damp = 0.25
 script = ExtResource("1_uoj53")
 speed_to_pitch_curve = SubResource("Curve_k61xc")
 speed_to_steering_curve = SubResource("Curve_06lh1")
@@ -44,15 +45,15 @@ shape = SubResource("ConvexPolygonShape3D_7822p")
 
 [node name="wheel_bl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.299547, -0.808228)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.335, -0.808228)
 use_as_traction = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.32
+wheel_radius = 0.3
 wheel_friction_slip = 1.0
-suspension_stiffness = 40.0
-suspension_max_force = 40000.0
-damping_compression = 0.955
-damping_relaxation = 0.925
+suspension_stiffness = 100.0
+suspension_max_force = 400000.0
+damping_compression = 4.5
+damping_relaxation = 7.5
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_bl"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
@@ -60,15 +61,15 @@ remote_path = NodePath("../../hatchback-sports/wheel-back-left")
 
 [node name="wheel_br" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.3, -0.808)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.335, -0.808)
 use_as_traction = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.32
+wheel_radius = 0.3
 wheel_friction_slip = 1.0
-suspension_stiffness = 40.0
-suspension_max_force = 40000.0
-damping_compression = 0.955
-damping_relaxation = 0.925
+suspension_stiffness = 100.0
+suspension_max_force = 400000.0
+damping_compression = 4.5
+damping_relaxation = 7.5
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_br"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
@@ -76,15 +77,15 @@ remote_path = NodePath("../../hatchback-sports/wheel-back-right")
 
 [node name="wheel_fl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.299547, 0.810471)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.335, 0.810471)
 use_as_steering = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.32
+wheel_radius = 0.3
 wheel_friction_slip = 1.0
-suspension_stiffness = 40.0
-suspension_max_force = 40000.0
-damping_compression = 0.955
-damping_relaxation = 0.925
+suspension_stiffness = 100.0
+suspension_max_force = 400000.0
+damping_compression = 4.5
+damping_relaxation = 7.5
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_fl"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
@@ -92,15 +93,15 @@ remote_path = NodePath("../../hatchback-sports/wheel-front-left")
 
 [node name="wheel_fr" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.3, 0.810698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.335, 0.810698)
 use_as_steering = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.32
+wheel_radius = 0.3
 wheel_friction_slip = 1.0
-suspension_stiffness = 40.0
-suspension_max_force = 40000.0
-damping_compression = 0.955
-damping_relaxation = 0.925
+suspension_stiffness = 100.0
+suspension_max_force = 400000.0
+damping_compression = 4.5
+damping_relaxation = 7.5
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_fr"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
@@ -109,16 +110,16 @@ remote_path = NodePath("../../hatchback-sports/wheel-front-right")
 [node name="hatchback-sports" parent="." instance=ExtResource("1_7822p")]
 
 [node name="wheel-front-left" parent="hatchback-sports" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314612, 0.299547, 0.810471)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314612, 0.335, 0.810471)
 
 [node name="wheel-back-right" parent="hatchback-sports" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315, 0.3, -0.808)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315, 0.335, -0.808)
 
 [node name="wheel-back-left" parent="hatchback-sports" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314612, 0.299547, -0.808228)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314612, 0.335, -0.808228)
 
 [node name="wheel-front-right" parent="hatchback-sports" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315, 0.3, 0.810698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315, 0.335, 0.810698)
 
 [node name="CameraMover" type="RemoteTransform3D" parent="."]
 unique_name_in_owner = true

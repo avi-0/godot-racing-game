@@ -1,13 +1,13 @@
 extends VehicleBody3D
 
 const MOUSE_SENS = 1.0
-const ENGINE_FORCE = 120.0
+const ENGINE_FORCE = 90.0
 const DRIFT_BONUS = 1.0
 const BRAKE_FORCE = 0.5
-const NORMAL_SLIP = 3.0
-const NORMAL_RW_SLIP = NORMAL_SLIP * 0.8
+const NORMAL_SLIP = 2.0
+const NORMAL_RW_SLIP = NORMAL_SLIP * 0.86
 const BRAKE_FW_SLIP = NORMAL_SLIP * 0.8
-const BRAKE_RW_SLIP = NORMAL_RW_SLIP * 0.4
+const BRAKE_RW_SLIP = NORMAL_RW_SLIP * 0.6
 const STEERING_MAX = 30.0
 const STEERING_SPEED = 200.0
 const FRICTION_ADJ_SPEED = 10.0
@@ -33,7 +33,7 @@ func _process(delta: float):
 	
 	control_camera()
 	update_camera_yaw(delta)
-	print(get_rpm())
+	#print(get_rpm())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_released():
@@ -106,7 +106,7 @@ func _physics_process(delta: float):
 		#%wheel_br.wheel_friction_slip])
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	var max_angular_speed = 2.0
+	var max_angular_speed = 3.0
 	if state.angular_velocity.length() > max_angular_speed:
 		state.angular_velocity = state.angular_velocity.normalized() * max_angular_speed
 		print("limiting angular velocity")
