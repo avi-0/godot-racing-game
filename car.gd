@@ -4,10 +4,10 @@ const MOUSE_SENS = 1.0
 const ENGINE_FORCE = 120.0
 const DRIFT_BONUS = 1.0
 const BRAKE_FORCE = 0.5
-const BRAKE_FW_SLIP = 0.85
-const BRAKE_RW_SLIP = 0.5
-const NORMAL_SLIP = 0.96
-const NORMAL_RW_SLIP = 0.90
+const NORMAL_SLIP = 3.0
+const NORMAL_RW_SLIP = NORMAL_SLIP * 0.8
+const BRAKE_FW_SLIP = NORMAL_SLIP * 0.8
+const BRAKE_RW_SLIP = NORMAL_RW_SLIP * 0.4
 const STEERING_MAX = 30.0
 const STEERING_SPEED = 200.0
 const FRICTION_ADJ_SPEED = 10.0
@@ -28,10 +28,12 @@ var wheel_target_friction: Dictionary[VehicleWheel3D, float]
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _process(_delta: float):
+func _process(delta: float):
 	mouse_sensitivity = MOUSE_SENS * 0.25 * 2 * PI / DisplayServer.screen_get_size().y
 	
-	%CameraStickBase.rotation.y = rotation.y
+	control_camera()
+	update_camera_yaw(delta)
+	print(get_rpm())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_released():
@@ -47,6 +49,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var delta = event.relative
 		%CameraStick.rotation.x -= delta.y * mouse_sensitivity
 		%CameraStick.rotation.y -= delta.x * mouse_sensitivity
+		
+		control_camera()
 
 func _physics_process(delta: float):
 	engine_force = 0
@@ -87,7 +91,7 @@ func _physics_process(delta: float):
 		target_steering += 1
 	if Input.is_action_pressed("steer_right"):
 		target_steering -= 1
-	target_steering *= deg_to_rad(speed_to_steering_curve.sample(speediness))
+	target_steering *= deg_to_rad(speed_to_steering_curve.sample(abs(speediness)))
 	steering = move_toward(steering, target_steering, deg_to_rad(STEERING_SPEED) * delta)
 
 	update_wheel(wheel_fl, delta)
@@ -125,3 +129,13 @@ func update_wheel(wheel: VehicleWheel3D, delta: float):
 	wheel.wheel_friction_slip = target
 	#wheel.wheel_friction_slip = move_toward(wheel.wheel_friction_slip, target, FRICTION_ADJ_SPEED * delta)
 	#wheel.wheel_friction_slip = target * skid_to_friction_curve.sample(wheel.get_skidinfo())
+
+func update_camera_yaw(delta: float):
+	if linear_velocity.length() > 1.0:
+		var target = -linear_velocity.slide(Vector3.UP).signed_angle_to(Vector3.BACK, Vector3.UP)
+		#print(target)
+		%CameraStickBase.rotation.y = lerp_angle(target, %CameraStickBase.rotation.y, exp(-5.0 * delta))
+
+func control_camera():
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		%CameraStick.rotation.y = PI
