@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=12 format=3 uid="uid://quenom6jkxmi"]
 
-[ext_resource type="PackedScene" uid="uid://cfbi3d3xbwk0g" path="res://car.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://UiSoundPlayer.cs" id="1_ryrav"]
 [ext_resource type="MeshLibrary" uid="uid://era2w4qrmolc" path="res://assets/cityroads.tres" id="2_e2o6t"]
+[ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_eow3j"]
+[ext_resource type="Material" uid="uid://k74vwpi5dbqu" path="res://assets/panoramasky.tres" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://Editor.cs" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://c4ufx0xdlin1u" path="res://blocks/cityroads/road_straight.tscn" id="4_fc0e3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mwb40"]
 size = Vector3(40, 1, 40)
@@ -9,14 +13,14 @@ size = Vector3(40, 1, 40)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_80nbo"]
 points = PackedVector3Array(-20, -0.5, -20, -20, 0.5, -20, 20, -0.5, -20, -20, -0.5, 20, -20, 0.5, 20, 20, 0.5, -20, 20, -0.5, 20, 20, 0.5, 20)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
-
 [sub_resource type="Sky" id="Sky_e2o6t"]
-sky_material = SubResource("ProceduralSkyMaterial_80nbo")
+sky_material = ExtResource("2_feb5d")
 
 [sub_resource type="Environment" id="Environment_feb5d"]
 background_mode = 2
+background_energy_multiplier = 0.8
 sky = SubResource("Sky_e2o6t")
+ambient_light_sky_contribution = 0.8
 tonemap_mode = 2
 ssao_enabled = true
 
@@ -25,24 +29,28 @@ dof_blur_amount = 0.05
 
 [node name="Game" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("1_ryrav")
+Player = NodePath("AudioStreamPlayer")
+BlockPlacedSound = ExtResource("2_eow3j")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
+
+[node name="plane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.482495, 0)
 mesh = SubResource("BoxMesh_mwb40")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="plane"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="plane/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_80nbo")
-
-[node name="car" parent="." instance=ExtResource("1_80nbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15689903, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_feb5d")
 camera_attributes = SubResource("CameraAttributesPractical_e2o6t")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(0.03409712, -0.7323899, 0.68003124, 0, 0.68042696, 0.732816, -0.99941856, -0.024986915, 0.023200596, 1.86084, 3.9538, 1.40453)
+transform = Transform3D(0.94174683, 0.24646278, -0.22884314, -4.4868667e-08, 0.6804271, 0.7328161, 0.33632284, -0.6901272, 0.64078987, 1.86084, 3.9538, 1.40453)
 shadow_enabled = true
 
 [node name="GridMap" type="GridMap" parent="."]
@@ -51,6 +59,23 @@ cell_size = Vector3(8, 2, 8)
 cell_center_y = false
 cell_scale = 8.0
 data = {
-"cells": PackedInt32Array(65535, 1, 1441793, 1, 0, 1441794, 1, 65535, 1441792, 131071, 2, 1048576, 131070, 3, 655360, 131069, 3, 655362, 131069, 2, 1048576, 131069, 1, 1048577, 196605, 0, 1048576, 196605, 65535, 1048576, 196605, 65534, 1048578, 131071, 3, 1441794, 131070, 65534, 655361, 65535, 65534, 655361, 1, 65534, 2, 0, 65534, 655360, 0, 0, 0, 65535, 0, 1048578)
+"cells": PackedInt32Array(131070, 3, 655360, 131069, 3, 655362, 131069, 2, 1048576, 131069, 1, 1048577, 196605, 0, 1048576, 196605, 65535, 1048576, 196605, 65534, 1048578, 131071, 3, 1441794, 0, 0, 0, 65535, 0, 1048578, 65535, 65534, 655363, 0, 65534, 655360, 65535, 1, 1441793, 131071, 2, 1441792, 2, 65533, 1441796, 2, 65532, 1048580, 5, 65531, 4, 4, 65531, 655360, 6, 65533, 1441792, 6, 65534, 1441794, 5, 65534, 1048578, 5, 65535, 1441792, 5, 0, 1441796, 3, 1, 0, 2, 1, 655362, 2, 0, 2, 1, 0, 655360)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("Camera", "TrackBlocksNode")]
+script = ExtResource("3_feb5d")
+CameraSpeed = 24.0
+Camera = NodePath("../EditorCamera")
+BlockScene = ExtResource("4_fc0e3")
+TrackBlocksNode = NodePath("../Track/TrackBlocks")
+
+[node name="EditorCamera" type="Camera3D" parent="."]
+physics_interpolation_mode = 2
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 8, 0)
+current = true
+fov = 80.0
+
+[node name="Track" type="Node3D" parent="."]
+
+[node name="TrackBlocks" type="Node3D" parent="Track"]

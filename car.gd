@@ -5,9 +5,9 @@ const ENGINE_FORCE = 90.0
 const DRIFT_BONUS = 1.0
 const BRAKE_FORCE = 0.5
 const NORMAL_SLIP = 2.0
-const NORMAL_RW_SLIP = NORMAL_SLIP * 0.86
-const BRAKE_FW_SLIP = NORMAL_SLIP * 0.8
-const BRAKE_RW_SLIP = NORMAL_RW_SLIP * 0.6
+const NORMAL_RW_SLIP = NORMAL_SLIP * 0.965
+const BRAKE_FW_SLIP = NORMAL_SLIP * 0.3
+const BRAKE_RW_SLIP = NORMAL_RW_SLIP * 0.25
 const STEERING_MAX = 30.0
 const STEERING_SPEED = 200.0
 const FRICTION_ADJ_SPEED = 10.0
@@ -21,6 +21,12 @@ const FRICTION_ADJ_SPEED = 10.0
 @export var speed_to_steering_curve: Curve
 @export var skid_to_friction_curve: Curve
 const PITCH_MAX_SPEED = 500
+
+var is_locally_controlled: bool = true
+var is_camera_active: bool = true:
+	set(value):
+		%Camera3D.current = value
+		is_camera_active = value
 
 var mouse_sensitivity: float
 var wheel_target_friction: Dictionary[VehicleWheel3D, float]
@@ -36,6 +42,9 @@ func _process(delta: float):
 	#print(get_rpm())
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not is_locally_controlled:
+		return
+	
 	if event is InputEventKey and event.is_released():
 		if event.physical_keycode == KEY_ESCAPE:
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -61,7 +70,7 @@ func _physics_process(delta: float):
 	%EngineSound.volume_linear = move_toward(%EngineSound.volume_linear, engine_sound_target, 2 * delta)
 	
 	var speediness = get_speediness()
-	%EngineSound.pitch_scale = speed_to_pitch_curve.sample(speediness)
+	%EngineSound.pitch_scale = speed_to_pitch_curve.sample(abs(speediness))
 	
 	wheel_target_friction[wheel_fl] = NORMAL_SLIP
 	wheel_target_friction[wheel_fr] = NORMAL_SLIP
@@ -119,7 +128,7 @@ func get_rpm() -> float:
 func get_speediness() -> float:
 	var rpm = get_rpm()
 	rpm /= PITCH_MAX_SPEED
-	return clamp(rpm, 0, 1)
+	return clamp(rpm, -1, 1)
 
 func update_wheel(wheel: VehicleWheel3D, delta: float):
 	var target := wheel_target_friction[wheel]

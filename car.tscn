@@ -14,8 +14,8 @@ _data = [Vector2(0, 0.49605608), 0.0, 0.23025756, 0, 0, Vector2(1, 2), 2.2959864
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_06lh1"]
-_limits = [20.0, 60.0, 0.0, 1.0]
-_data = [Vector2(0, 45), 0.0, -59.0962, 0, 0, Vector2(1, 20), 0.34576532, 0.0, 0, 0]
+_limits = [15.0, 60.0, 0.0, 1.0]
+_data = [Vector2(0, 45), 0.0, -59.0962, 0, 0, Vector2(1, 15), 0.34576532, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_td361"]
@@ -49,11 +49,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.335, -0.808228)
 use_as_traction = true
 wheel_roll_influence = 1.0
 wheel_radius = 0.3
+wheel_rest_length = 0.1
 wheel_friction_slip = 1.0
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
-damping_compression = 4.5
-damping_relaxation = 7.5
+damping_compression = 2.4
+damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_bl"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
@@ -65,11 +66,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.335, -0.808)
 use_as_traction = true
 wheel_roll_influence = 1.0
 wheel_radius = 0.3
+wheel_rest_length = 0.1
 wheel_friction_slip = 1.0
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
-damping_compression = 4.5
-damping_relaxation = 7.5
+damping_compression = 2.4
+damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_br"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
@@ -81,11 +83,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.335, 0.810471)
 use_as_steering = true
 wheel_roll_influence = 1.0
 wheel_radius = 0.3
+wheel_rest_length = 0.12
 wheel_friction_slip = 1.0
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
-damping_compression = 4.5
-damping_relaxation = 7.5
+damping_compression = 2.4
+damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_fl"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
@@ -97,11 +100,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.335, 0.810698)
 use_as_steering = true
 wheel_roll_influence = 1.0
 wheel_radius = 0.3
+wheel_rest_length = 0.12
 wheel_friction_slip = 1.0
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
-damping_compression = 4.5
-damping_relaxation = 7.5
+damping_compression = 2.4
+damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_fr"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
@@ -138,6 +142,7 @@ unique_name_in_owner = true
 transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, -1.77636e-15, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraStickBase/CameraStick"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77636e-15, 0, 3.68151)
 doppler_tracking = 2
 current = true
