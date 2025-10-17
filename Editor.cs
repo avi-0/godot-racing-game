@@ -24,6 +24,10 @@ public partial class Editor : Node
 
 	[Export] public VBoxContainer BlockListContainer;
 
+	[Export] public Button PlayButton;
+
+	[Export] public Control EditorUINode;
+
 	private blocks.Block Cursor;
 
 	private Block _hoveredBlock;
@@ -32,6 +36,19 @@ public partial class Editor : Node
 
 	private int _rotation = 0;
 
+	private bool _isRunning = true;
+	
+	public bool IsRunning
+	{
+		get => _isRunning;
+		set
+		{
+			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
+			EditorUINode.Visible = value;
+			_isRunning = value;
+		}
+	}
+
 	private enum Mode
 	{
 		Normal,
@@ -39,12 +56,20 @@ public partial class Editor : Node
 	}
 
 	private Mode _mode = Mode.Normal;
-
+	
 	public override void _Ready()
 	{
+		PlayButton.Pressed += PlayButtonOnPressed;
+		
 		CreateCursor();
 		
 		UpdateBlockList();
+	}
+
+	private void PlayButtonOnPressed()
+	{
+		IsRunning = false;
+		GameManager.__Instance.Play();
 	}
 
 	private IEnumerable<String> GetBlockPaths(string basePath, string dirPath = "")
@@ -114,6 +139,9 @@ public partial class Editor : Node
 
 	private void OnBlockMouseEntered(Block block)
 	{
+		if (!IsRunning)
+			return;
+		
 		if (_hoveredBlock != null)
 			_hoveredBlock.SetMaterialOverlay(null);
 		
@@ -167,6 +195,9 @@ public partial class Editor : Node
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		if (!IsRunning)
+			return;
+		
 		if (_mode == Mode.Normal)
 		{
 			if (@event is InputEventMouseButton mouseEvent)

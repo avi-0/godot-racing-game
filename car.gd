@@ -1,3 +1,4 @@
+class_name Car
 extends VehicleBody3D
 
 const MOUSE_SENS = 1.0
@@ -11,6 +12,8 @@ const BRAKE_RW_SLIP = NORMAL_RW_SLIP * 0.25
 const STEERING_MAX = 30.0
 const STEERING_SPEED = 200.0
 const FRICTION_ADJ_SPEED = 10.0
+
+signal restart_requested()
 
 @onready var wheel_fl: VehicleWheel3D = %wheel_fl
 @onready var wheel_fr: VehicleWheel3D = %wheel_fr
@@ -52,7 +55,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		elif event.physical_keycode == KEY_R:
-			get_tree().reload_current_scene()
+			restart_requested.emit()
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var delta = event.relative
@@ -108,12 +111,6 @@ func _physics_process(delta: float):
 	update_wheel(wheel_bl, delta)
 	update_wheel(wheel_br, delta)
 
-	#print("%f %f %f %f" % [
-		#%wheel_fl.wheel_friction_slip, 
-		#%wheel_fr.wheel_friction_slip, 
-		#%wheel_bl.wheel_friction_slip, 
-		#%wheel_br.wheel_friction_slip])
-
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var max_angular_speed = 3.0
 	if state.angular_velocity.length() > max_angular_speed:
@@ -130,7 +127,7 @@ func get_speediness() -> float:
 	rpm /= PITCH_MAX_SPEED
 	return clamp(rpm, -1, 1)
 
-func update_wheel(wheel: VehicleWheel3D, delta: float):
+func update_wheel(wheel: VehicleWheel3D, _delta: float):
 	var target := wheel_target_friction[wheel]
 	if not wheel.is_in_contact():
 		target = 0
@@ -142,7 +139,6 @@ func update_wheel(wheel: VehicleWheel3D, delta: float):
 func update_camera_yaw(delta: float):
 	if linear_velocity.length() > 1.0:
 		var target = -linear_velocity.slide(Vector3.UP).signed_angle_to(Vector3.BACK, Vector3.UP)
-		#print(target)
 		%CameraStickBase.rotation.y = lerp_angle(target, %CameraStickBase.rotation.y, exp(-5.0 * delta))
 
 func control_camera():

@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=12 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://UiSoundPlayer.cs" id="1_ryrav"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_eow3j"]
 [ext_resource type="Material" uid="uid://k74vwpi5dbqu" path="res://assets/panoramasky.tres" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://Editor.cs" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://c4ufx0xdlin1u" path="res://blocks/cityroads/road_straight.tscn" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://GameManager.cs" id="6_eow3j"]
+[ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://car_cs.tscn" id="7_eow3j"]
 
 [sub_resource type="Sky" id="Sky_e2o6t"]
 sky_material = ExtResource("2_feb5d")
@@ -24,7 +26,7 @@ dof_blur_amount = 0.05
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.2509804)
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node"]
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("1_ryrav")
@@ -41,14 +43,22 @@ camera_attributes = SubResource("CameraAttributesPractical_e2o6t")
 transform = Transform3D(0.94174683, 0.24646278, -0.22884314, -4.4868667e-08, 0.6804271, 0.7328161, 0.33632284, -0.6901272, 0.64078987, 1.86084, 3.9538, 1.40453)
 shadow_enabled = true
 
-[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("Camera", "TrackBlocksNode", "BlockListContainer")]
+[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("Camera", "TrackBlocksNode", "BlockListContainer", "PlayButton", "EditorUINode")]
 script = ExtResource("3_feb5d")
 CameraSpeed = 24.0
-Camera = NodePath("../EditorCamera")
+Camera = NodePath("EditorCamera")
 BlockScene = ExtResource("4_fc0e3")
 TrackBlocksNode = NodePath("../Track/TrackBlocks")
 BlockEraseHighlightMaterial = SubResource("StandardMaterial3D_ryrav")
 BlockListContainer = NodePath("EditorUI/MarginContainer/Panel/MarginContainer/BlockListContainer")
+PlayButton = NodePath("EditorUI/PlayButton")
+EditorUINode = NodePath("EditorUI")
+
+[node name="EditorCamera" type="Camera3D" parent="Editor"]
+physics_interpolation_mode = 2
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 24, 0)
+current = true
+fov = 80.0
 
 [node name="EditorUI" type="Control" parent="Editor"]
 layout_mode = 3
@@ -98,11 +108,21 @@ text = "block A"
 layout_mode = 2
 text = "block B"
 
-[node name="EditorCamera" type="Camera3D" parent="."]
-physics_interpolation_mode = 2
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 24, 0)
-current = true
-fov = 80.0
+[node name="PlayButton" type="Button" parent="Editor/EditorUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -39.0
+offset_right = 49.0
+offset_bottom = -8.0
+grow_vertical = 0
+text = "Play"
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("6_eow3j")
+CarScene = ExtResource("7_eow3j")
 
 [node name="Track" type="Node3D" parent="."]
 
