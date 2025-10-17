@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Fractural.Tasks;
 using Godot;
 using racingGame.blocks;
 
@@ -68,8 +69,17 @@ public partial class Editor : Node
 
 	private void PlayButtonOnPressed()
 	{
+		PlayButtonOnPressedAsync().Forget();
+	}
+
+	private async GDTaskVoid PlayButtonOnPressedAsync()
+	{
 		IsRunning = false;
+		
 		GameManager.__Instance.Play();
+		await GDTask.ToSignal(GameManager.__Instance, GameManager.SignalName.StoppedPlaying);
+
+		IsRunning = true;
 	}
 
 	private IEnumerable<String> GetBlockPaths(string basePath, string dirPath = "")

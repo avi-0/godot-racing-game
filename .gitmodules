@@ -1,0 +1,4 @@
+[submodule "addons/GDTask"]
+	path = addons/GDTask
+	url = https://github.com/fractural/GDTask.git
+	branch = release

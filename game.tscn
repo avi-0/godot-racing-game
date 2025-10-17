@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://Editor.cs" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://c4ufx0xdlin1u" path="res://blocks/cityroads/road_straight.tscn" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://GameManager.cs" id="6_eow3j"]
-[ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://car_cs.tscn" id="7_eow3j"]
+[ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://car.tscn" id="7_eow3j"]
 
 [sub_resource type="Sky" id="Sky_e2o6t"]
 sky_material = ExtResource("2_feb5d")

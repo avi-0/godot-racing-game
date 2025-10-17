@@ -18,6 +18,10 @@ public partial class Car : VehicleBody3D
     
     [Signal]
     public delegate void RestartRequestedEventHandler();
+
+    [Signal]
+    public delegate void PauseRequestedEventHandler();
+    
     
     [Export] public VehicleWheel3D WheelFl { get; set; }
     [Export] public VehicleWheel3D WheelFr { get; set; }
@@ -30,17 +34,16 @@ public partial class Car : VehicleBody3D
     [Export] public Curve SpeedToPitchCurve { get; set; }
     [Export] public Curve SpeedToSteeringCurve { get; set; }
     [Export] public Curve SkidToFrictionCurve { get; set; }
+
     
-    public bool IsLocallyControlled { get; set; } = true;
-    
-    private bool _isCameraActive = true;
-    public bool IsCameraActive
+    private bool _isLocallyControlled = true;
+    public bool IsLocallyControlled
     {
-        get => _isCameraActive;
+        get => _isLocallyControlled;
         set
         {
             Camera.Current = value;
-            _isCameraActive = value;
+            _isLocallyControlled = value;
         }
     }
     
@@ -71,13 +74,17 @@ public partial class Car : VehicleBody3D
             if (keyEvent.PhysicalKeycode == Key.Escape)
             {
                 if (Input.MouseMode == Input.MouseModeEnum.Captured)
+                {
                     Input.MouseMode = Input.MouseModeEnum.Visible;
+                    EmitSignalPauseRequested();
+                }
+                    
                 else
                     Input.MouseMode = Input.MouseModeEnum.Captured;
             }
             else if (keyEvent.PhysicalKeycode == Key.R)
             {
-                EmitSignal(SignalName.RestartRequested);
+                EmitSignalRestartRequested();
             }
         }
         
