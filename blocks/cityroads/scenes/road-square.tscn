@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=4 uid="uid://d0pl1r3mjc35"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_dt663"]
+[ext_resource type="Texture2D" uid="uid://cseg54knwfo74" path="res://assets/cityroads/Textures/colormap.png" id="2_j7tek"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb4fm"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("2_j7tek")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_eiqvt"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
+"format": 34896613377,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAACAAEAAwACAAUAAgAEAAUABgAAAAMABwABAAAAAAAGAAcABwAIAAEACAAJAAEACAAHAAoACgAJAAgACgAHAAYACwABAAkACwAJAAoABgALAAoAAQALAAQABAALAAYABgAMAAQAAwAMAAYADQAEAAwADQAFAAQADAADAA4ADgANAAwAAwAFAA8ADwAOAAMABQANABAAEAANAA4AEQAPAAUADgAPABEAEAASAAUABQASABEAEQASABAADgATABAAEAATABEAEQATAA4A"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("Zeb/f5kZAACZGf9/mRkAAJkZ//+ZGQAAZeb//5kZAACZGf//ZeYAAAAA//8AAAAAZeb/f2XmAADMzP9/MjMAADIz/38yMwAAMjP/f8zMAADMzP9/zMwAAJkZ/39l5gAAZeb//2XmAAAAAP////8AAP///////wAA/////wAAAAAAAAAA//8AAP//AAAAAAAAAAAAAAAAAAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yb7s2"]
+resource_name = "road-square_road-square"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
+"attribute_data": PackedByteArray("//f/3//3/9//92XG//dlxv/3Zcb/95j5//eY+f/3Zcb/95j5//eY+f/3mPn/95j5//dlxv/3mPn/95j5//dlxv/3mPn/95j5//dlxv/3Zcb/92XG//dlxv/3/9//9//f//dlxv/3Zcb/95j5//eY+f/3Zcb/9//f//f/3//3Zcb/9//f//f/3//3Zcb/92XG//dlxv/3Zcb/92XG//dlxv/3Zcb/92XG//dlxv/3Zcb/B//f/wf/3/8H/9//B//f/wf/3/8H/9//B//f/wf/3/8n/9//J//f/yf/3/8n/98="),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJQAnACYAJAAmACgAKQAmACcAKAAqACQAKQAnACsAKwAkACoAKgApACsALAAtAC4ALQAvAC4ALAAuADAAMQAuAC8AMAAyACwAMQAvADMAMwAsADIAMgAxADMANAA1ADYANgA3ADQA"),
+"material": SubResource("StandardMaterial3D_xb4fm"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("Zeb/f5kZAICZGf9/mRkAgJkZ//+ZGQCAZeb//5kZAIAAAP//AAD//wAAAAAAAP////8AAAAA////////AAD//wAAAAD///+///8AAP///7///wAAAAD/vwAAAAAAAP+/////////AID//wAA//8AgAAAAAD//wCAAAD/////AIAAAAAA////vwAAAAAAAP+/AAD//wAA/78AAP//////v5kZ//9l5v+/mRn//5kZ/7+ZGf9/mRn/v5kZ/39l5v+//////////7//////AAD/v///AAAAAP+///8AAP///7+ZGf//Zeb//5kZ/39l5v//Zeb/f2Xm//9l5v//Zeb//2Xm/39l5v+/Zeb/f5kZ/79l5v//mRn/v2Xm//9l5v+/Zeb//5kZ//+ZGf//mRn//wAA//8AAP//mRn//2Xm////////AAD//wAA//////////////////9l5v//Zeb//8zM/38yM///MjP/fzIz//+ZGf9/mRn//zIz/3/MzP//Zeb/f5kZ//+ZGf9/Zeb//2Xm/39l5v//zMz/f8zM//8yM/9/MjP//8zM/38yM///zMz/f8zM//8yM/9/zMz///9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_eiqvt")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2bvs1"]
+data = PackedVector3Array(0.39999998, 0.01, -0.39999998, -0.39999998, 0.01, -0.39999998, -0.39999998, 0.02, -0.39999998, -0.39999998, 0.02, -0.39999998, 0.39999998, 0.02, -0.39999998, 0.39999998, 0.01, -0.39999998, -0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.5, -0.5, 0, 0.5, -0.39999998, 0.02, 0.39999998, -0.39999998, 0.02, -0.39999998, -0.39999998, 0.01, -0.39999998, -0.39999998, 0.01, -0.39999998, -0.39999998, 0.01, 0.39999998, -0.39999998, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.02, 0.5, -0.39999998, 0.02, 0.39999998, -0.39999998, 0.01, 0.39999998, 0.39999998, 0.01, 0.39999998, 0.39999998, 0.01, 0.39999998, 0.39999998, 0.02, 0.39999998, -0.39999998, 0.02, 0.39999998, 0.39999998, 0.01, 0.39999998, 0.39999998, 0.01, -0.39999998, 0.39999998, 0.02, -0.39999998, 0.39999998, 0.02, -0.39999998, 0.39999998, 0.02, 0.39999998, 0.39999998, 0.01, 0.39999998, 0.39999998, 0.02, -0.39999998, -0.39999998, 0.02, -0.39999998, -0.5, 0.02, -0.5, -0.39999998, 0.02, -0.39999998, -0.39999998, 0.02, 0.39999998, -0.5, 0.02, -0.5, 0.39999998, 0.02, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, 0.5, -0.5, 0.02, -0.5, -0.39999998, 0.02, 0.39999998, 0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.39999998, 0.02, -0.39999998, -0.5, 0.02, 0.5, -0.39999998, 0.02, 0.39999998, 0.39999998, 0.02, 0.39999998, 0.39999998, 0.02, 0.39999998, 0.39999998, 0.02, -0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, 0.39999998, 0.02, 0.39999998, 0.29999998, 0.01, -0.29999998, -0.29999998, 0.01, -0.29999998, -0.39999998, 0.01, -0.39999998, -0.29999998, 0.01, -0.29999998, -0.29999998, 0.01, 0.29999998, -0.39999998, 0.01, -0.39999998, 0.29999998, 0.01, -0.29999998, -0.39999998, 0.01, -0.39999998, 0.39999998, 0.01, -0.39999998, -0.39999998, 0.01, 0.39999998, -0.39999998, 0.01, -0.39999998, -0.29999998, 0.01, 0.29999998, 0.39999998, 0.01, -0.39999998, 0.39999998, 0.01, 0.39999998, 0.29999998, 0.01, -0.29999998, -0.39999998, 0.01, 0.39999998, -0.29999998, 0.01, 0.29999998, 0.29999998, 0.01, 0.29999998, 0.29999998, 0.01, 0.29999998, 0.29999998, 0.01, -0.29999998, 0.39999998, 0.01, 0.39999998, 0.39999998, 0.01, 0.39999998, -0.39999998, 0.01, 0.39999998, 0.29999998, 0.01, 0.29999998, -0.29999998, 0.01, -0.29999998, 0.29999998, 0.01, -0.29999998, 0.29999998, 0.01, 0.29999998, 0.29999998, 0.01, 0.29999998, -0.29999998, 0.01, 0.29999998, -0.29999998, 0.01, -0.29999998)
+
+[node name="@Node3D@145568" type="Node3D"]
+script = ExtResource("1_dt663")
+
+[node name="road-square2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="road-square" type="MeshInstance3D" parent="road-square2"]
+mesh = SubResource("ArrayMesh_yb7s2")
+skeleton = NodePath("")
+
+[node name="road-square_col" type="StaticBody3D" parent="road-square2/road-square"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road-square2/road-square/road-square_col"]
+shape = SubResource("ConcavePolygonShape3D_2bvs1")

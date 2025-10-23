@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cj8dxddi6p0lx"]
+[gd_scene load_steps=10 format=3 uid="uid://cj8dxddi6p0lx"]
 
 [ext_resource type="Script" uid="uid://dwmxm5gl3jjr3" path="res://scripts/Car.cs" id="1_jxqfv"]
 [ext_resource type="PackedScene" uid="uid://b77pygol30lhj" path="res://assets/carkit/hatchback-sports.glb" id="2_eauv3"]
@@ -20,6 +20,11 @@ point_count = 2
 
 [sub_resource type="Curve" id="Curve_03w70"]
 _data = [Vector2(0, 0.50438213), 0.0, 1.4216261, 0, 0, Vector2(0.5046083, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_50v30"]
+_limits = [1.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.49664426, 1.5238743), -2.9068227, -2.9068227, 0, 0, Vector2(1, 1), 0.19170682, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7822p"]
@@ -46,6 +51,7 @@ EngineSound = NodePath("EngineSound")
 SpeedToPitchCurve = SubResource("Curve_eauv3")
 SpeedToSteeringCurve = SubResource("Curve_mk5fm")
 SkidToFrictionCurve = SubResource("Curve_03w70")
+SpeedToEngineMultCurve = SubResource("Curve_50v30")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.140863, -0.0268662)
@@ -160,6 +166,7 @@ fov = 80.0
 unique_name_in_owner = true
 stream = ExtResource("3_mk5fm")
 autoplay = true
+bus = &"enginesounds"
 attenuation_filter_cutoff_hz = 20500.0
 doppler_tracking = 2
 

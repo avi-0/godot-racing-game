@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=4 uid="uid://lt3bfjdmr0xf"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_p55il"]
+[ext_resource type="Texture2D" uid="uid://cseg54knwfo74" path="res://assets/cityroads/Textures/colormap.png" id="2_pfdg8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktpwf"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("2_pfdg8")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y6pb5"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
+"format": 34896613377,
+"index_count": 216,
+"index_data": PackedByteArray("AAABAAIAAQAAAAMAAwAAAAIAAgAEAAMAAwAEAAUABQAEAAIABQAGAAMAAwAGAAEAAgABAAcAAQAGAAgAAgAJAAUABwAJAAIABQAKAAYACgAIAAYACAALAAEACwAHAAEACgAMAAgABwANAAkACQANAA4ADgANAAcADgAPAAkABQAJAA8ABwAQAA4ADgAQAA8ACwAQAAcADwARAAUAEQAPABAABQARABIAEAASABEAEAALABIAEgAKAAUAEwALAAgACAAMABMACwATABIAEwAMABQACgAUAAwAFAAVABMAEwAVABIACgAWABQAFQAUABYACgAXABYAFgAYABUAFQAYABIAGAAWABcAGQAKABIACgAZABcAGQAaABcAFwAaABsAGwAaABkAHAAXABsAFwAcABgAGwAdABwAHAAdABgAGQAeABsAHgAdABsAEgAeABkAHQAfABgAHwAdAB4AHwAgABgAIAAhABgAIQAgAB8AGAAhABIAHwAiACEAHgAjAB8AIwAiAB8AIwAeABIAIgAkACEAJAAiACMAIQAkABIAIwAlACQAJAAlABIAEgAlACMA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 38,
+"vertex_data": PackedByteArray("R6H//5kZAABHof9/mRkAAEeh//8AAAAA/////5kZAAD/////AAAAAP//AAAAAAAA////f5kZAAC3Xv9/mRkAAP///38yMwAAt17//wAAAAD//wAA//8AAAAA/38yMwAA////f3B9AAC3Xv//mRkAAAAA//+ZGQAAAAD//wAAAAAAAP9/mRkAAAAAAAAAAAAAAAAAAP//AAAAAP9/cH0AAP///3+OggAAAAD/f46CAAD///9/zMwAAP///39l5gAAAAD/f8zMAAD///////8AAP////9l5gAAR6H//2XmAAATrv9/ZeYAAEeh/39l5gAAR6H/////AAC3Xv9/ZeYAAOtR/39l5gAAAAD/f2XmAAC3Xv//ZeYAALde/////wAAAAD//2XmAAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5a8jl"]
+resource_name = "road-driveway-double_road-driveway-double"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
+"attribute_data": PackedByteArray("//dlxv/3/9//92XG//dlxv/3Zcb/9//f//dlxv/3/9//92XG//f/3//3Zcb/92XG//dlxv/3/9//9//f//f/3//3Zcb/95j5//eY+f/3mPn/95j5//dlxv/3Zcb/92XG//dlxv/3/9//9//f//f/3//3Zcb/92XG//dlxv/3Zcb/92XG//dlxv/3/9//9//f//dlxv/3Zcb/92XG//eY+f/3mPn/92XG//dlxv/3Zcb/95j5//dlxv/3Zcb/92XG//dlxv/3mPn/92XG//dlxv/3Zcb/92XG//dlxv/3/9//9//f//dlxv/3Zcb/92XG//dlxv/3Zcb/N2XG/zf/3/83Zcb/N5j5/zeY+f83/9//N//f/zf/3/83/9//N//f/zdlxv83Zcb/N2XG/zdlxv83/9//N5j5/zf/3/83/9//N//f/zf/3/83/9//N5j5/zdlxv83Zcb/J//f/yf/3/8n/9//J//f/yf/3/8n/9//J//f/yf/3/8XZcb/F//f/xf/3/8XZcb/F//f/xf/3/8XZcb/F2XG/wf/3/8H/9//B//f/wf/3/8H/9//B//f/wf/3/8H/9//B//f/wf/3/8H/9//B//f/wf/3/8H/9//R//f/0f/3/9H/9//R//f"),
+"format": 34896613399,
+"index_count": 216,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADgAPAAwADwAQAAwAEQASABMAEwAUABEAFQAWABcAFwAYABUAGQAaABsAGwAcABkAHAAdABkAHgAfACAAIAAhAB4AIgAjACQAJAAlACIAJgAnACgAKAApACYAKgApACgAKAArACoALAAtAC4ALgAvACwALAAvADAAMAAxACwAMgAzADQANAA1ADIANgA3ADgAOAA5ADYAOgA7ADwAPAA9ADoAPgA/AEAAQQBAAD8APwBCAEEAPwBDAEIAQwBEAEIARABFAEIARQBGAEIARgBHAEIARwBIAEIASABJAEIASgBLAEwATQBKAEwATQBMAE4ATQBOAE8ATQBPAFAATQBQAFEATQBRAFIAUwBNAFIAUwBSAFQAVABVAFMAVgBXAFgAWABZAFYAWgBbAFwAXABdAFoAXgBfAGAAYABhAF4AYgBjAGQAZABlAGIAZgBnAGgAaABpAGYAaQBqAGYAaQBrAGoAbABtAG4AbgBvAGwAbwBwAGwAcABxAGwAcQByAGwAcgBzAGwAdAB1AHYAdgB3AHQA"),
+"material": SubResource("StandardMaterial3D_ktpwf"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 120,
+"vertex_data": PackedByteArray("R6H//5kZ/79Hof9/mRn/v0eh//8AAP+/t17//////7+3Xv//Zeb/v7de/39l5v+/R6H//////79Hof9/Zeb/v0eh//9l5v+/t17/f5kZ/7+3Xv//mRn/v7de//8AAP+/R6H//2Xm//9Hof9/Zeb//xOu/39l5v//////f2Xm////////Zeb//wAAAAD///+///8AAP///7///wAAAAD/vwAAAAAAAP+/AAD//2Xm//+3Xv//Zeb//7de////////AAD///////8AAP9/Zeb//+tR/39l5v//t17/f2Xm//+3Xv//Zeb//wAA//9l5v//t17//wAA//+3Xv//mRn//wAA//+ZGf//AAD//wAA//+3Xv9/mRkAgAAA/3+ZGQCAAAD//5kZAIC3Xv//mRkAgAAA//8AAP//AAAAAAAA/////wAAAAD//7de//8AAP//R6H//wAA////////AAD//wAAAAD//wCAAAD/////AIC3Xv////8AgEeh/////wCA////////AID//wAA//8AgEeh//9l5v///////2Xm/////////////0eh/////////////5kZAID///9/mRkAgEeh/3+ZGQCAR6H//5kZAIBHof//AAD///////8AAP///////5kZ//9Hof//mRn//wAA//+ZGf+/AAD/f5kZ/78AAP//AAD/vwAAAAAAAP+/AAAAAP///78AAP9/MjP/vwAA/39wff+/AAD/f46C/78AAP9/zMz/vwAA/39l5v+/AAD//2Xm/78AAP//////v/////////+//////2Xm/7////9/Zeb/v///AAD///+/////f8zM/7////9/joL/v////39wff+/////fzIz/7////9/mRn/v///AAAAAP+//////5kZ/7//////AAD/v////38yM///////f3B9//8AAP9/cH3//wAA/38yM///AAD/f46C//////9/joL//////3/MzP//AAD/f8zM//9Hof//AADvu0eh/3+ZGe+7t17/f5kZ77u3Xv//AADvu7de/39l5v//R6H/f2Xm//9Hof///////7de////////R6H/f5kZ//////9/mRn//////38yM///AAD/fzIz//+3Xv9/mRn//wAA/3+ZGf//AAD/f8zM//////9/zMz//////39l5v//E67/f2Xm//9Hof9/Zeb//7de/39l5v//61H/f2Xm//8AAP9/Zeb//wAA/39wff//////f3B9//////9/joL//wAA/3+Ogv///3////9/////f////38AAP9/AAD/fwAA/3////9/////f////38AAP9/AAD/fwAA/3////9/////f////3////9///8AAP9/AAD/fwAA/38AAP9//3//v/9//7//f/+//3//v/9/////f////3////9/////f////3//v/9//7//f/+//3//v/9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f/+//3//v/9//7//f/+//3////9/////f////3////9//7//f/+//3//v/9//7//f////3////9/////f////3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v////3////9/////f////3//fzDD/38ww/9/MMP/fzDD/3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_y6pb5")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d8pas"]
+data = PackedVector3Array(0.13, 0.02, -0.39999998, 0.13, 0.01, -0.39999998, 0.13, 0.02, -0.5, -0.13, 0.02, 0.5, -0.13, 0.02, 0.39999998, -0.13, 0.01, 0.39999998, 0.13, 0.02, 0.5, 0.13, 0.01, 0.39999998, 0.13, 0.02, 0.39999998, -0.13, 0.01, -0.39999998, -0.13, 0.02, -0.39999998, -0.13, 0.02, -0.5, 0.13, 0.02, 0.39999998, 0.13, 0.01, 0.39999998, 0.17999999, 0.01, 0.39999998, 0.17999999, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.13, 0.02, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.02, 0.39999998, 0.13, 0.02, 0.39999998, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.39999998, -0.13, 0.02, 0.39999998, -0.13, 0.02, 0.5, -0.13, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, -0.5, 0.01, 0.39999998, -0.17999999, 0.01, 0.39999998, -0.13, 0.01, 0.39999998, -0.13, 0.01, 0.39999998, -0.13, 0.02, 0.39999998, -0.5, 0.01, 0.39999998, -0.13, 0.02, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0.01, 0.39999998, -0.13, 0.02, -0.5, -0.13, 0.02, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, -0.13, 0.02, -0.5, -0.13, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.02, -0.39999998, -0.13, 0.02, -0.39999998, -0.13, 0.01, -0.39999998, -0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.13, 0.02, -0.5, -0.5, 0.02, -0.5, 0.13, 0.02, -0.5, -0.13, 0.02, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, 0.13, 0.02, -0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, -0.13, 0.02, 0.5, -0.13, 0.02, 0.5, 0.13, 0.02, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.13, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.13, 0.02, 0.39999998, 0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.13, 0.02, 0.5, 0.13, 0.02, 0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.01, -0.39999998, 0.13, 0.01, -0.39999998, 0.13, 0.01, -0.39999998, 0.13, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, 0.13, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, 0.13, 0.02, -0.39999998, 0.13, 0.02, -0.5, -0.5, 0.02, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.01, -0.5, 0.01, 0.01, -0.5, 0, 0.5, -0.5, 0.01, 0.01, -0.5, 0.01, 0.29999998, -0.5, 0, 0.5, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, -0.5, 0.02, 0.39999998, -0.5, 0.02, 0.5, -0.5, 0, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.02, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.29999998, 0.5, 0, 0.5, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.01, 0.5, 0, 0.5, 0.5, 0.01, 0.01, 0.5, 0.01, -0.01, 0.5, 0, 0.5, 0.5, 0.01, -0.01, 0.5, 0.01, -0.29999998, 0.5, 0, 0.5, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0.01, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.5, 0.5, 0, -0.5, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.01, -0.5, 0.01, -0.01, -0.5, 0.01, -0.01, -0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, -0.5, 0.01, 0.01, 0.5, 0.01, 0.01, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.01, 0.13, 0.02, -0.5, 0.13, 0.01, -0.39999998, -0.13, 0.01, -0.39999998, -0.13, 0.01, -0.39999998, -0.13, 0.02, -0.5, 0.13, 0.02, -0.5, -0.13, 0.01, 0.39999998, 0.13, 0.01, 0.39999998, 0.13, 0.02, 0.5, 0.13, 0.02, 0.5, -0.13, 0.02, 0.5, -0.13, 0.01, 0.39999998, 0.13, 0.01, -0.39999998, 0.5, 0.01, -0.39999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, -0.5, 0.01, -0.29999998, 0.13, 0.01, -0.39999998, -0.5, 0.01, -0.29999998, -0.13, 0.01, -0.39999998, 0.13, 0.01, -0.39999998, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, -0.13, 0.01, -0.39999998, -0.5, 0.01, 0.29999998, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.17999999, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, 0.17999999, 0.01, 0.39999998, 0.13, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, 0.13, 0.01, 0.39999998, -0.13, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, -0.13, 0.01, 0.39999998, -0.17999999, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, -0.17999999, 0.01, 0.39999998, -0.5, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, -0.01, 0.5, 0.01, -0.01, 0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, 0.01, -0.5, 0.01, -0.01)
+
+[node name="@Node3D@133354" type="Node3D"]
+script = ExtResource("1_p55il")
+
+[node name="road-driveway-double2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="road-driveway-double" type="MeshInstance3D" parent="road-driveway-double2"]
+mesh = SubResource("ArrayMesh_5a8jl")
+skeleton = NodePath("")
+
+[node name="road-driveway-double_col" type="StaticBody3D" parent="road-driveway-double2/road-driveway-double"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road-driveway-double2/road-driveway-double/road-driveway-double_col"]
+shape = SubResource("ConcavePolygonShape3D_d8pas")

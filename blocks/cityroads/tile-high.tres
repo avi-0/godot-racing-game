@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://de7wtf6oqm2uu"]
 
 [ext_resource type="PackedScene" uid="uid://cbes14pec4kla" path="res://assets/cityroads/tile-high.glb" id="1_7wv3r"]
-[ext_resource type="PackedScene" uid="uid://bnam0m2lpa1sm" path="res://blocks/cityroads/tile-high_scene.tscn" id="1_q5puw"]
+[ext_resource type="PackedScene" uid="uid://eim1ui6qrj81" path="res://blocks/cityroads/scenes/tile-high.tscn" id="1_q5puw"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_148wu"]
-[ext_resource type="Texture2D" uid="uid://c1wwn4nmumdcu" path="res://blocks/cityroads/tile-high_img.png" id="3_gon7c"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/images/tile-high.png" id="3_gon7c"]
 
 [resource]
 script = ExtResource("2_148wu")

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://chdlwbbsgvxkd"]
 
 [ext_resource type="PackedScene" uid="uid://ctrp7fsa8m07o" path="res://assets/cityroads/road-square-barrier.glb" id="1_hf44g"]
-[ext_resource type="PackedScene" uid="uid://b8vdj5cptg0i8" path="res://blocks/cityroads/road-square-barrier_scene.tscn" id="1_p6dt4"]
+[ext_resource type="PackedScene" uid="uid://muxihapqqtu5" path="res://blocks/cityroads/scenes/road-square-barrier.tscn" id="1_p6dt4"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_bfmrm"]
-[ext_resource type="Texture2D" uid="uid://d0uvx8nbhffus" path="res://blocks/cityroads/road-square-barrier_img.png" id="3_x65xn"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/images/road-square-barrier.png" id="3_x65xn"]
 
 [resource]
 script = ExtResource("2_bfmrm")

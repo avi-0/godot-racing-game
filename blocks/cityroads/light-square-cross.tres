@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://c75twaq1cwmpg"]
 
-[ext_resource type="PackedScene" uid="uid://c3l7cfouqr8qa" path="res://blocks/cityroads/light-square-cross_scene.tscn" id="1_5nyx3"]
+[ext_resource type="PackedScene" uid="uid://c7fc17v1q6amr" path="res://blocks/cityroads/scenes/light-square-cross.tscn" id="1_5nyx3"]
 [ext_resource type="PackedScene" uid="uid://cfusox5cvf2k2" path="res://assets/cityroads/light-square-cross.glb" id="1_snlai"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_uep7i"]
-[ext_resource type="Texture2D" uid="uid://cushs81txb143" path="res://blocks/cityroads/light-square-cross_img.png" id="3_wbcc8"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/images/light-square-cross.png" id="3_wbcc8"]
 
 [resource]
 script = ExtResource("2_uep7i")

@@ -68,14 +68,14 @@ public partial class BlockRecord : Resource
         var image = root.GetTexture().GetImage();
         image.GenerateMipmaps();
         ThumbnailTexture = ImageTexture.CreateFromImage(image);
-        ThumbnailTexture.TakeOverPath(ResourcePath.GetBaseName() + "_img.png");
+        ThumbnailTexture.TakeOverPath(ResourcePath.GetBaseDir().PathJoin("/images/" + ResourcePath.GetFile().GetBaseName() + ".png"));
         ResourceSaver.Singleton.Save(ThumbnailTexture);
 
         // pack and save
         
         var packedScene = new PackedScene();
         packedScene.Pack(node);
-        packedScene.TakeOverPath(ResourcePath.GetBaseName() + "_scene.tscn");
+        packedScene.TakeOverPath(ResourcePath.GetBaseDir().PathJoin("/scenes/" + ResourcePath.GetFile().GetBaseName() + ".tscn"));
 
         ResourceSaver.Singleton.Save(packedScene);
         

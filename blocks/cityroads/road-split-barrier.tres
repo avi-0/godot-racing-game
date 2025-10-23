@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cqvyagwmlvfd4"]
 
 [ext_resource type="PackedScene" uid="uid://bgeylkh8djaac" path="res://assets/cityroads/road-split-barrier.glb" id="1_3m8xo"]
-[ext_resource type="PackedScene" uid="uid://dqp4pmi2ansuk" path="res://blocks/cityroads/road-split-barrier_scene.tscn" id="1_mclea"]
+[ext_resource type="PackedScene" uid="uid://bir5e2yktubyo" path="res://blocks/cityroads/scenes/road-split-barrier.tscn" id="1_mclea"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ojnm3"]
-[ext_resource type="Texture2D" uid="uid://d2ri6kdk66ki2" path="res://blocks/cityroads/road-split-barrier_img.png" id="3_wu4ku"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/images/road-split-barrier.png" id="3_wu4ku"]
 
 [resource]
 script = ExtResource("2_ojnm3")

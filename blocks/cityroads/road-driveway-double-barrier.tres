@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dseg8sdko6wwc"]
 
 [ext_resource type="PackedScene" uid="uid://iwchviba8cft" path="res://assets/cityroads/road-driveway-double-barrier.glb" id="1_5q8ce"]
-[ext_resource type="PackedScene" uid="uid://behdqfs11yh2g" path="res://blocks/cityroads/road-driveway-double-barrier_scene.tscn" id="1_qikq6"]
+[ext_resource type="PackedScene" uid="uid://byvt4cdj73x8y" path="res://blocks/cityroads/scenes/road-driveway-double-barrier.tscn" id="1_qikq6"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_qj3el"]
-[ext_resource type="Texture2D" uid="uid://bjkvjecwgd451" path="res://blocks/cityroads/road-driveway-double-barrier_img.png" id="3_kbjaf"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/images/road-driveway-double-barrier.png" id="3_kbjaf"]
 
 [resource]
 script = ExtResource("2_qj3el")

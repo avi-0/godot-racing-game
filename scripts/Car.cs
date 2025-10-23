@@ -21,18 +21,19 @@ public partial class Car : VehicleBody3D
 
     [Signal]
     public delegate void PauseRequestedEventHandler();
-    
-    [Export] public VehicleWheel3D WheelFl { get; set; }
-    [Export] public VehicleWheel3D WheelFr { get; set; }
-    [Export] public VehicleWheel3D WheelBl { get; set; }
-    [Export] public VehicleWheel3D WheelBr { get; set; }
-    [Export] public Camera3D Camera { get; set; }
-    [Export] public Node3D CameraStick { get; set; }
-    [Export] public Node3D CameraStickBase { get; set; }
-    [Export] public AudioStreamPlayer3D EngineSound { get; set; }
-    [Export] public Curve SpeedToPitchCurve { get; set; }
-    [Export] public Curve SpeedToSteeringCurve { get; set; }
-    [Export] public Curve SkidToFrictionCurve { get; set; }
+
+    [Export] public VehicleWheel3D WheelFl;
+    [Export] public VehicleWheel3D WheelFr;
+    [Export] public VehicleWheel3D WheelBl;
+    [Export] public VehicleWheel3D WheelBr;
+    [Export] public Camera3D Camera;
+    [Export] public Node3D CameraStick;
+    [Export] public Node3D CameraStickBase;
+    [Export] public AudioStreamPlayer3D EngineSound;
+    [Export] public Curve SpeedToPitchCurve;
+    [Export] public Curve SpeedToSteeringCurve;
+    [Export] public Curve SkidToFrictionCurve;
+    [Export] public Curve SpeedToEngineMultCurve;
 
     
     private bool _isLocallyControlled = true;
@@ -102,19 +103,19 @@ public partial class Car : VehicleBody3D
     
     public override void _PhysicsProcess(double delta)
     {
+        float speediness = GetSpeediness();
+        EngineSound.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
+        
         EngineForce = 0;
         float engineSoundTarget = 0.5f;
         if (Input.IsActionPressed("throttle"))
         {
-            EngineForce = EngineForceForward;
+            EngineForce = EngineForceForward * (speediness > 0 ? SpeedToEngineMultCurve.Sample(speediness) : 1.0f);
             engineSoundTarget = 1.0f;
         }
         EngineSound.VolumeDb = Mathf.LinearToDb(
             Mathf.MoveToward(Mathf.DbToLinear(EngineSound.VolumeDb), engineSoundTarget, 2 * (float)delta)
         );
-        
-        float speediness = GetSpeediness();
-        EngineSound.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
         
         _wheelTargetFriction[WheelFl] = NormalSlip;
         _wheelTargetFriction[WheelFr] = NormalSlip;
