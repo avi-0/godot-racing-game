@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://7gaq6s6pqwi5"]
+
+[ext_resource type="PackedScene" uid="uid://cim2dmfrul2ry" path="res://blocks/cityroads/road-intersection-barrier_scene.tscn" id="1_0uf3d"]
+[ext_resource type="PackedScene" uid="uid://c18s1n3pc1p7b" path="res://assets/cityroads/road-intersection-barrier.glb" id="1_wrj1p"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_0uf3d"]
+
+[resource]
+script = ExtResource("2_0uf3d")
+SourceScene = ExtResource("1_wrj1p")
+Scene = ExtResource("1_0uf3d")

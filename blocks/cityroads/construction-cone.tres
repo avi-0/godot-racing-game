@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://iwhle5tqbb2q"]
+
+[ext_resource type="PackedScene" uid="uid://ggw2h14foboq" path="res://blocks/cityroads/construction-cone_scene.tscn" id="1_5j3x6"]
+[ext_resource type="PackedScene" uid="uid://byw0cfo3j1xx3" path="res://assets/cityroads/construction-cone.glb" id="1_8l0l2"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_5j3x6"]
+
+[resource]
+script = ExtResource("2_5j3x6")
+SourceScene = ExtResource("1_8l0l2")
+Scene = ExtResource("1_5j3x6")

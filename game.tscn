@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=15 format=3 uid="uid://quenom6jkxmi"]
 
-[ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://UiSoundPlayer.cs" id="1_ryrav"]
+[ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_ryrav"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_eow3j"]
 [ext_resource type="Material" uid="uid://k74vwpi5dbqu" path="res://assets/panoramasky.tres" id="2_feb5d"]
-[ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://Editor.cs" id="3_feb5d"]
-[ext_resource type="PackedScene" uid="uid://c4ufx0xdlin1u" path="res://blocks/cityroads/road_straight.tscn" id="4_fc0e3"]
-[ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://GameManager.cs" id="6_eow3j"]
+[ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="5_j5wjh"]
+[ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="6_eow3j"]
+[ext_resource type="PackedScene" uid="uid://cf7de2p2h6rha" path="res://assets/cityroads/road-straight.glb" id="6_vef74"]
 [ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://car.tscn" id="7_eow3j"]
 
 [sub_resource type="Sky" id="Sky_e2o6t"]
@@ -21,6 +22,22 @@ ssao_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_e2o6t"]
 dof_blur_amount = 0.05
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_shvp3"]
+data = PackedVector3Array(0.5, 0.02, -0.39999998, 0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.02, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.02, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.29999998, 0.5, 0, 0.5, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.01, 0.5, 0, 0.5, 0.5, 0.01, 0.01, 0.5, 0.01, -0.01, 0.5, 0, 0.5, 0.5, 0.01, -0.01, 0.5, 0.01, -0.29999998, 0.5, 0, 0.5, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0.01, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.5, 0.5, 0, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.02, 0.5, -0.5, 0, 0.5, -0.5, 0.01, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.01, -0.5, 0.01, 0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.01, -0.5, 0.01, 0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.01, 0.01, 0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.01, 0.5, 0.01, -0.01, -0.5, 0.01, -0.01, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, 0.5, 0.01, -0.39999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, 0.29999998, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, -0.5, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, -0.01, 0.5, 0.01, -0.01, 0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, 0.01, -0.5, 0.01, -0.01)
+
+[sub_resource type="PackedScene" id="PackedScene_hve3p"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [NodePath("Node3D/road-straight2")],
+"names": PackedStringArray("road_straight", "Node3D", "script", "Node3D", "Node3D", "transform", "StaticBody3D", "StaticBody3D", "CollisionShape3D", "CollisionShape3D", "shape", "road-straight2"),
+"node_count": 5,
+"node_paths": [NodePath("."), NodePath("./Node3D"), NodePath("./Node3D/StaticBody3D"), NodePath("./Node3D")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 0, 0, 1073741826, 0, 9, 8, -1, 1, 10, 2, 0, 1073741827, 0, 2147483647, 11, 3, 0, 0),
+"variants": [ExtResource("5_j5wjh"), Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0), SubResource("ConcavePolygonShape3D_shvp3"), ExtResource("6_vef74")],
+"version": 3
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryrav"]
 transparency = 1
@@ -47,10 +64,10 @@ shadow_enabled = true
 script = ExtResource("3_feb5d")
 CameraSpeed = 24.0
 Camera = NodePath("EditorCamera")
-BlockScene = ExtResource("4_fc0e3")
+BlockScene = SubResource("PackedScene_hve3p")
 TrackBlocksNode = NodePath("../Track/TrackBlocks")
 BlockEraseHighlightMaterial = SubResource("StandardMaterial3D_ryrav")
-BlockListContainer = NodePath("EditorUI/MarginContainer/Panel/MarginContainer/BlockListContainer")
+BlockListContainer = NodePath("EditorUI/MarginContainer/Panel/MarginContainer/ScrollContainer/BlockListContainer")
 PlayButton = NodePath("EditorUI/PlayButton")
 EditorUINode = NodePath("EditorUI")
 
@@ -93,18 +110,25 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="BlockListContainer" type="VBoxContainer" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer"]
 layout_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
 
-[node name="Button3" type="Button" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer/BlockListContainer"]
+[node name="BlockListContainer" type="VBoxContainer" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button3" type="Button" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer/ScrollContainer/BlockListContainer"]
 layout_mode = 2
 text = "..."
 
-[node name="Button" type="Button" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer/BlockListContainer"]
+[node name="Button" type="Button" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer/ScrollContainer/BlockListContainer"]
 layout_mode = 2
 text = "block A"
 
-[node name="Button2" type="Button" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer/BlockListContainer"]
+[node name="Button2" type="Button" parent="Editor/EditorUI/MarginContainer/Panel/MarginContainer/ScrollContainer/BlockListContainer"]
 layout_mode = 2
 text = "block B"
 
@@ -120,9 +144,10 @@ offset_bottom = -8.0
 grow_vertical = 0
 text = "Play"
 
-[node name="GameManager" type="Node" parent="."]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode")]
 script = ExtResource("6_eow3j")
 CarScene = ExtResource("7_eow3j")
+TrackNode = NodePath("../Track")
 
 [node name="Track" type="Node3D" parent="."]
 

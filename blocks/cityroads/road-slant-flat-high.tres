@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://syxwnkm5h8ml"]
+
+[ext_resource type="PackedScene" uid="uid://yupnq1woes3v" path="res://blocks/cityroads/road-slant-flat-high_scene.tscn" id="1_2llmc"]
+[ext_resource type="PackedScene" uid="uid://r80cass2apxe" path="res://assets/cityroads/road-slant-flat-high.glb" id="1_m5375"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_2llmc"]
+
+[resource]
+script = ExtResource("2_2llmc")
+SourceScene = ExtResource("1_m5375")
+Scene = ExtResource("1_2llmc")

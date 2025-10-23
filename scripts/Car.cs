@@ -11,8 +11,8 @@ public partial class Car : VehicleBody3D
     private const float BrakeForce = 0.5f;
     private const float NormalSlip = 2.0f;
     private const float NormalRwSlip = NormalSlip * 0.965f;
-    private const float BrakeFwSlip = NormalSlip * 0.3f;
-    private const float BrakeRwSlip = NormalRwSlip * 0.25f;
+    private const float BrakeFwSlip = NormalSlip * 0.2f;
+    private const float BrakeRwSlip = NormalRwSlip * 0.20f;
     private const float SteeringSpeed = 200.0f;
     private const float PitchMaxSpeed = 500f;
     
@@ -21,7 +21,6 @@ public partial class Car : VehicleBody3D
 
     [Signal]
     public delegate void PauseRequestedEventHandler();
-    
     
     [Export] public VehicleWheel3D WheelFl { get; set; }
     [Export] public VehicleWheel3D WheelFr { get; set; }
@@ -200,18 +199,34 @@ public partial class Car : VehicleBody3D
         //wheel.WheelFrictionSlip = Mathf.MoveToward(wheel.WheelFrictionSlip, target, FrictionAdjSpeed * delta);
         //wheel.WheelFrictionSlip = target * SkidToFrictionCurve.Sample(wheel.GetSkidinfo());
     }
+
+    private float GetCameraTargetYaw(Vector3 dir)
+    {
+        return -dir.Slide(Vector3.Up).SignedAngleTo(Vector3.Back, Vector3.Up);
+    }
     
     private void UpdateCameraYaw(float delta)
     {
         if (LinearVelocity.Length() > 1.0f)
         {
-            float target = -LinearVelocity.Slide(Vector3.Up).SignedAngleTo(Vector3.Back, Vector3.Up);
+            float target = GetCameraTargetYaw(LinearVelocity);
             CameraStickBase.Rotation = new Vector3(
                 CameraStickBase.Rotation.X,
                 Mathf.LerpAngle(target, CameraStickBase.Rotation.Y, Mathf.Exp(-5.0f * delta)),
                 CameraStickBase.Rotation.Z
             );
         }
+    }
+
+    private void SnapCameraYaw()
+    {
+        CameraStickBase.Rotation =
+            new Vector3(CameraStickBase.Rotation.X, GetCameraTargetYaw(GlobalBasis.Z), CameraStickBase.Rotation.Z);
+    }
+
+    public void Started()
+    {
+        SnapCameraYaw();
     }
     
     private void ControlCamera()

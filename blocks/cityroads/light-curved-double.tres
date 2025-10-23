@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://drxcb3cj1aiww"]
+
+[ext_resource type="PackedScene" uid="uid://cn8n04sstmohh" path="res://assets/cityroads/light-curved-double.glb" id="1_2jaw4"]
+[ext_resource type="PackedScene" uid="uid://cqbgrpdcou0uk" path="res://blocks/cityroads/light-curved-double_scene.tscn" id="1_7jq7j"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_7jq7j"]
+
+[resource]
+script = ExtResource("2_7jq7j")
+SourceScene = ExtResource("1_2jaw4")
+Scene = ExtResource("1_7jq7j")

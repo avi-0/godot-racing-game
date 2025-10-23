@@ -23,6 +23,10 @@ GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload
 
 project/assembly_name="racinggame"
 
+[global_group]
+
+start_point=""
+
 [input]
 
 throttle={

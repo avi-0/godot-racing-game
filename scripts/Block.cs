@@ -3,6 +3,7 @@ using Godot;
 
 namespace racingGame.blocks;
 
+[GlobalClass]
 public partial class Block : Node3D
 {
 	[Signal]

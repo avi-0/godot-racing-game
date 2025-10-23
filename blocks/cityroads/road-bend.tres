@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://cpuqwt8c1n0sf"]
+
+[ext_resource type="PackedScene" uid="uid://dmkcmby0ihhqj" path="res://assets/cityroads/road-bend.glb" id="1_pvyfd"]
+[ext_resource type="PackedScene" uid="uid://c1qwy12lns72f" path="res://blocks/cityroads/road-bend_scene.tscn" id="1_u7npl"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_u7npl"]
+
+[resource]
+script = ExtResource("2_u7npl")
+SourceScene = ExtResource("1_pvyfd")
+Scene = ExtResource("1_u7npl")

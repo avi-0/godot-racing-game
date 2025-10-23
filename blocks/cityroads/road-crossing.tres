@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://ddly3y1ywqcy8"]
+
+[ext_resource type="PackedScene" uid="uid://bjicye7no426t" path="res://blocks/cityroads/road-crossing_scene.tscn" id="1_lc45o"]
+[ext_resource type="PackedScene" uid="uid://11dlh4yjbni0" path="res://assets/cityroads/road-crossing.glb" id="1_xjcme"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_lc45o"]
+
+[resource]
+script = ExtResource("2_lc45o")
+SourceScene = ExtResource("1_xjcme")
+Scene = ExtResource("1_lc45o")

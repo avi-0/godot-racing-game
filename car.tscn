@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cj8dxddi6p0lx"]
 
-[ext_resource type="Script" uid="uid://dwmxm5gl3jjr3" path="res://Car.cs" id="1_jxqfv"]
+[ext_resource type="Script" uid="uid://dwmxm5gl3jjr3" path="res://scripts/Car.cs" id="1_jxqfv"]
 [ext_resource type="PackedScene" uid="uid://b77pygol30lhj" path="res://assets/carkit/hatchback-sports.glb" id="2_eauv3"]
 [ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/carsfx.wav" id="3_mk5fm"]
 
@@ -14,8 +14,8 @@ _data = [Vector2(0, 0.49605608), 0.0, 0.23025756, 0, 0, Vector2(1, 2), 2.2959864
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_mk5fm"]
-_limits = [15.0, 60.0, 0.0, 1.0]
-_data = [Vector2(0, 45), 0.0, -59.0962, 0, 0, Vector2(1, 15), 0.34576532, 0.0, 0, 0]
+_limits = [0.0, 60.0, 0.0, 1.0]
+_data = [Vector2(0, 30), 0.0, -59.0962, 0, 0, Vector2(1, 9), 0.34576532, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_03w70"]

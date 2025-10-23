@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://dwuunnmkrs5oj"]
+
+[ext_resource type="PackedScene" uid="uid://c8r8mmosqkdk3" path="res://blocks/cityroads/sign-highway-detailed_scene.tscn" id="1_5obo1"]
+[ext_resource type="PackedScene" uid="uid://c5yn4ixyklhny" path="res://assets/cityroads/sign-highway-detailed.glb" id="1_qp2py"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_5obo1"]
+
+[resource]
+script = ExtResource("2_5obo1")
+SourceScene = ExtResource("1_qp2py")
+Scene = ExtResource("1_5obo1")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://cmlosestj6jql"]
+
+[ext_resource type="PackedScene" uid="uid://dfeqkunuh7qo" path="res://assets/cityroads/road-roundabout.glb" id="1_4m7l8"]
+[ext_resource type="PackedScene" uid="uid://dvv4updelenqc" path="res://blocks/cityroads/road-roundabout_scene.tscn" id="1_yvq2c"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_yvq2c"]
+
+[resource]
+script = ExtResource("2_yvq2c")
+SourceScene = ExtResource("1_4m7l8")
+Scene = ExtResource("1_yvq2c")

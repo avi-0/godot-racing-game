@@ -46,6 +46,16 @@ public partial class Editor : Node
 		{
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
 			EditorUINode.Visible = value;
+			
+			if (value)
+			{
+				CreateCursor();
+			}
+			else
+			{
+				DestroyCursor();
+			}
+			
 			_isRunning = value;
 		}
 	}
@@ -130,12 +140,25 @@ public partial class Editor : Node
 		Cursor.RotateY(-float.DegreesToRadians(90) * _rotation);
 	}
 
+	private void DestroyCursor()
+	{
+		if (Cursor != null)
+		{
+			RemoveChild(Cursor);
+			Cursor.QueueFree();
+			Cursor = null;
+		}
+	}
+
 	private void PlaceCursorBlock()
 	{
-		var existingBlock = GetBlockAtPosition(Cursor.GlobalPosition);
-		if (existingBlock != null)
+		if (!Input.IsKeyPressed(Key.Shift))
 		{
-			EraseBlock(existingBlock);
+			var existingBlock = GetBlockAtPosition(Cursor.GlobalPosition);
+			if (existingBlock != null)
+			{
+				EraseBlock(existingBlock);
+			}
 		}
 		
 		Cursor.Reparent(TrackBlocksNode, true);

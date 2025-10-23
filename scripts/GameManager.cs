@@ -7,6 +7,8 @@ public partial class GameManager : Node
     public static GameManager __Instance;
     
     [Export] public PackedScene CarScene;
+
+    [Export] public Node3D TrackNode;
     
     private bool _isPlaying = false;
 
@@ -30,6 +32,8 @@ public partial class GameManager : Node
         
         _localCar = CarScene.Instantiate<Car>();
         AddChild(_localCar);
+        _localCar.GlobalTransform = GetStartPoint();
+        _localCar.Started();
         
         _localCar.RestartRequested += LocalCarOnRestartRequested;
         _localCar.PauseRequested += LocalCarOnPauseRequested;
@@ -60,5 +64,16 @@ public partial class GameManager : Node
     private void LocalCarOnRestartRequested()
     {
         Play();
+    }
+
+    private Transform3D GetStartPoint()
+    {
+        var node = GetTree().GetFirstNodeInGroup("start_point");
+        if (node is Node3D node3d)
+        {
+            return node3d.GlobalTransform;
+        }
+        
+        return Transform3D.Identity;
     }
 }
