@@ -10,7 +10,7 @@ namespace racingGame;
 public partial class Editor : Node
 {
 	public const float CellSize = 8;
-	public const float CellHeight = 2;
+	public const float CellHeight = 1;
 	public const string BlockPath = "res://blocks/";
 	
 	[Export] public float CameraSpeed;
@@ -23,7 +23,7 @@ public partial class Editor : Node
 
 	[Export] public Material BlockEraseHighlightMaterial;
 
-	[Export] public VBoxContainer BlockListContainer;
+	[Export] public Container BlockListContainer;
 
 	[Export] public Button PlayButton;
 
@@ -96,13 +96,22 @@ public partial class Editor : Node
 	{
 		foreach (var path in ResourceLoader.ListDirectory(basePath + dirPath).ToList().Order())
 		{
-			var subpath = dirPath + path;
-			if (ResourceLoader.Exists(basePath + subpath, "PackedScene"))
+			var subpath = dirPath.PathJoin(path);
+			if (ResourceLoader.Exists(basePath.PathJoin(subpath), "BlockRecord"))
 				yield return subpath;
 
 			foreach (var result in GetBlockPaths(basePath, subpath))
 				yield return result;
 		}
+	}
+
+	private IEnumerable<BlockRecord> GetBlockRecords()
+	{
+		return GetBlockPaths(BlockPath)
+			.Select(path => ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord"))
+			// fuck knows why the type hint doesn't work right
+			.Where(resource => resource is BlockRecord)
+			.Cast<BlockRecord>();
 	}
 
 	public override void _Process(double delta)
@@ -306,22 +315,25 @@ public partial class Editor : Node
 		foreach (var child in BlockListContainer.GetChildren())
 			child.QueueFree();
 		
-		foreach (var path in GetBlockPaths(BlockPath))
+		foreach (var record in GetBlockRecords())
 		{
+			GD.Print(record.ResourcePath);
+			GD.Print(record.ThumbnailTexture);
 			var button = new Button();
-			button.Text = path;
-			button.Alignment = HorizontalAlignment.Left;
-			button.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+			button.CustomMinimumSize = 64 * Vector2.One;
+			button.Icon = record.ThumbnailTexture;
+			button.IconAlignment = HorizontalAlignment.Center;
+			button.ExpandIcon = true;
 
 			BlockListContainer.AddChild(button);
 			
-			button.Pressed += () => OnBlockButtonPressed(BlockPath + path);
+			button.Pressed += () => OnBlockButtonPressed(record);
 		}
 	}
 
-	private void OnBlockButtonPressed(string path)
+	private void OnBlockButtonPressed(BlockRecord blockRecord)
 	{
-		BlockScene = ResourceLoader.Load<PackedScene>(path);
+		BlockScene = blockRecord.Scene;
 		
 		CreateCursor();
 	}

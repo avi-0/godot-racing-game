@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://dxodwcxfmlerw"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dxodwcxfmlerw"]
 
+[ext_resource type="PackedScene" uid="uid://b3lvnkf702fbo" path="res://blocks/cityroads/light-curved_scene.tscn" id="1_c5ein"]
 [ext_resource type="PackedScene" uid="uid://dnl5s3t7r05cc" path="res://assets/cityroads/light-curved.glb" id="1_rqve2"]
-[ext_resource type="PackedScene" uid="uid://b3lvnkf702fbo" path="res://blocks/cityroads/light-curved_scene.tscn" id="1_ynabv"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ynabv"]
+[ext_resource type="Texture2D" uid="uid://bat451cyao0mr" path="res://blocks/cityroads/light-curved_img.png" id="3_7vgyb"]
 
 [resource]
 script = ExtResource("2_ynabv")
 SourceScene = ExtResource("1_rqve2")
-Scene = ExtResource("1_ynabv")
+Scene = ExtResource("1_c5ein")
+ThumbnailTexture = ExtResource("3_7vgyb")

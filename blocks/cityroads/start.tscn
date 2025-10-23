@@ -22,10 +22,4 @@ shape = SubResource("ConcavePolygonShape3D_6ijqk")
 [node name="SpawnPoint" type="Marker3D" parent="." groups=["start_point"]]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
 
-[node name="@Node3D@61836" type="Node3D" parent="."]
-
-[node name="@Node3D@61916" type="Node3D" parent="."]
-
-[node name="@Node3D@62004" type="Node3D" parent="."]
-
 [editable path="Node3D/sign-highway-wide2"]

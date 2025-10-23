@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://e4fgrrowfj20"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://e4fgrrowfj20"]
 
-[ext_resource type="PackedScene" uid="uid://bgc5smkfwekk6" path="res://blocks/cityroads/road-driveway-double_scene.tscn" id="1_hso81"]
+[ext_resource type="PackedScene" uid="uid://bgc5smkfwekk6" path="res://blocks/cityroads/road-driveway-double_scene.tscn" id="1_goofl"]
 [ext_resource type="PackedScene" uid="uid://bachgvg87dd5h" path="res://assets/cityroads/road-driveway-double.glb" id="1_k5pqo"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_hso81"]
+[ext_resource type="Texture2D" uid="uid://drx4yx1ij356j" path="res://blocks/cityroads/road-driveway-double_img.png" id="3_5gswl"]
 
 [resource]
 script = ExtResource("2_hso81")
 SourceScene = ExtResource("1_k5pqo")
-Scene = ExtResource("1_hso81")
+Scene = ExtResource("1_goofl")
+ThumbnailTexture = ExtResource("3_5gswl")

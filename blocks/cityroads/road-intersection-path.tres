@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://qafgv1c0nsom"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://qafgv1c0nsom"]
 
-[ext_resource type="PackedScene" uid="uid://21wxxt67jpnk" path="res://blocks/cityroads/road-intersection-path_scene.tscn" id="1_bntki"]
+[ext_resource type="PackedScene" uid="uid://21wxxt67jpnk" path="res://blocks/cityroads/road-intersection-path_scene.tscn" id="1_eoppw"]
 [ext_resource type="PackedScene" uid="uid://xdyad0j034g5" path="res://assets/cityroads/road-intersection-path.glb" id="1_kovqp"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_bntki"]
+[ext_resource type="Texture2D" uid="uid://cxmbdswj8j6t0" path="res://blocks/cityroads/road-intersection-path_img.png" id="3_tl0jy"]
 
 [resource]
 script = ExtResource("2_bntki")
 SourceScene = ExtResource("1_kovqp")
-Scene = ExtResource("1_bntki")
+Scene = ExtResource("1_eoppw")
+ThumbnailTexture = ExtResource("3_tl0jy")

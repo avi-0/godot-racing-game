@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Fractural.Tasks;
 
 [GlobalClass]
 [Tool]
@@ -12,9 +14,9 @@ public partial class BlockDirectoryImporter : Resource
     [Export(PropertyHint.Dir)] public string SourcePath;
 
     [ExportToolButton("Generate all")]
-    public Callable GenerateAllButton => Callable.From(GenerateAll);
+    public Callable GenerateAllButton => Callable.From(() => GenerateAll().Forget());
 
-    public void GenerateAll()
+    public async GDTaskVoid GenerateAll()
     {
         foreach (var path in GetModelPaths(SourcePath + "/"))
         {
@@ -29,7 +31,13 @@ public partial class BlockDirectoryImporter : Resource
             ResourceSaver.Singleton.Save(record);
             
             record.GenerateScene();
+            
+            // mildly horrifying trick to slow down the process a bit
+            // doing everything in one go crashes the editor for some reason xdd
+            await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
         }
+        
+        EditorInterface.Singleton.GetResourceFilesystem().ScanSources();
     }
     
     private IEnumerable<String> GetModelPaths(string basePath, string dirPath = "")

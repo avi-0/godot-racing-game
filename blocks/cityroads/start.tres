@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cxlg13xwfhqln"]
+
+[ext_resource type="PackedScene" uid="uid://c5u3srvscupwo" path="res://blocks/cityroads/start.tscn" id="1_m12lm"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_rb2jx"]
+
+[resource]
+script = ExtResource("1_rb2jx")
+Scene = ExtResource("1_m12lm")
+metadata/_custom_type_script = "uid://lv38sateupjv"

@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://cuknvufmhbj4j"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cuknvufmhbj4j"]
 
-[ext_resource type="PackedScene" uid="uid://80malkxd003k" path="res://blocks/cityroads/road-bend-sidewalk_scene.tscn" id="1_37kbm"]
 [ext_resource type="PackedScene" uid="uid://btfhj0hcnyhxj" path="res://assets/cityroads/road-bend-sidewalk.glb" id="1_qfbf1"]
+[ext_resource type="PackedScene" uid="uid://80malkxd003k" path="res://blocks/cityroads/road-bend-sidewalk_scene.tscn" id="1_r0pf8"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_37kbm"]
+[ext_resource type="Texture2D" uid="uid://cb47lan1megnd" path="res://blocks/cityroads/road-bend-sidewalk_img.png" id="3_evc1o"]
 
 [resource]
 script = ExtResource("2_37kbm")
 SourceScene = ExtResource("1_qfbf1")
-Scene = ExtResource("1_37kbm")
+Scene = ExtResource("1_r0pf8")
+ThumbnailTexture = ExtResource("3_evc1o")

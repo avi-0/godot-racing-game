@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://ph2pqfwvfxqh"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://ph2pqfwvfxqh"]
 
-[ext_resource type="PackedScene" uid="uid://epr2rjpbkqw7" path="res://blocks/cityroads/road-end-barrier_scene.tscn" id="1_wn83j"]
+[ext_resource type="PackedScene" uid="uid://epr2rjpbkqw7" path="res://blocks/cityroads/road-end-barrier_scene.tscn" id="1_d1bl7"]
 [ext_resource type="PackedScene" uid="uid://c35tmp27521im" path="res://assets/cityroads/road-end-barrier.glb" id="1_xrulj"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_wn83j"]
+[ext_resource type="Texture2D" uid="uid://d3aje8mdplgg2" path="res://blocks/cityroads/road-end-barrier_img.png" id="3_u2s8w"]
 
 [resource]
 script = ExtResource("2_wn83j")
 SourceScene = ExtResource("1_xrulj")
-Scene = ExtResource("1_wn83j")
+Scene = ExtResource("1_d1bl7")
+ThumbnailTexture = ExtResource("3_u2s8w")

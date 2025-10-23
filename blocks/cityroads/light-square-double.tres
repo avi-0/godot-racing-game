@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://di8lnu83spg8k"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://di8lnu83spg8k"]
 
-[ext_resource type="PackedScene" uid="uid://csxrr7jn5yk8b" path="res://blocks/cityroads/light-square-double_scene.tscn" id="1_akemx"]
+[ext_resource type="PackedScene" uid="uid://csxrr7jn5yk8b" path="res://blocks/cityroads/light-square-double_scene.tscn" id="1_2q8u3"]
 [ext_resource type="PackedScene" uid="uid://bt3ohmb2xwxks" path="res://assets/cityroads/light-square-double.glb" id="1_bnrtu"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_akemx"]
+[ext_resource type="Texture2D" uid="uid://b0w5q204l2uri" path="res://blocks/cityroads/light-square-double_img.png" id="3_yjs65"]
 
 [resource]
 script = ExtResource("2_akemx")
 SourceScene = ExtResource("1_bnrtu")
-Scene = ExtResource("1_akemx")
+Scene = ExtResource("1_2q8u3")
+ThumbnailTexture = ExtResource("3_yjs65")

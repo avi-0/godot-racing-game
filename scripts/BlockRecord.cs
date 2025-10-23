@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.IO;
 using System.Linq;
+using Fractural.Tasks;
 using racingGame.blocks;
 
 [GlobalClass]
@@ -12,17 +13,22 @@ public partial class BlockRecord : Resource
 
     [Export] public PackedScene Scene;
 
+    [Export] public Texture2D ThumbnailTexture;
+
     [ExportToolButton("Generate from source")]
-    public Callable GenerateButton => Callable.From(GenerateScene);
+    public Callable GenerateButton => Callable.From(() => GenerateScene().Forget());
     
-    public void GenerateScene()
+    public async GDTaskVoid GenerateScene()
     {
         // creating node (somewhere in current scene, doesn't matter)
         
-        var root = EditorInterface.Singleton.GetEditedSceneRoot();
+        EditorInterface.Singleton.OpenSceneFromPath("res://scenes/model_import_scene.tscn");
+        var root = EditorInterface.Singleton.GetEditedSceneRoot() as SubViewport;
+        var modelBase = root.GetNode("ModelBase");
+        var camera = root.GetNode<Camera3D>("Camera3D");
+        
         var node = new Block();
-        GD.Print(node.GetScript());
-        root.AddChild(node);
+        modelBase.AddChild(node);
 
         // this adds the node to the EDITED scene, not actually needed but lets us see the node in the editor
         // and helps make sure we delete it later
@@ -49,6 +55,21 @@ public partial class BlockRecord : Resource
         {
             child.Owner = node;
         }
+        
+        // take screenshot
+
+        var bounds = CalculateCameraSize(model);
+        camera.Size = bounds.GetLongestAxisSize();
+        camera.GlobalTranslate(new Vector3(bounds.GetCenter().X, bounds.GetCenter().Y, 0));
+        
+        root.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
+        await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+
+        var image = root.GetTexture().GetImage();
+        image.GenerateMipmaps();
+        ThumbnailTexture = ImageTexture.CreateFromImage(image);
+        ThumbnailTexture.TakeOverPath(ResourcePath.GetBaseName() + "_img.png");
+        ResourceSaver.Singleton.Save(ThumbnailTexture);
 
         // pack and save
         
@@ -58,13 +79,34 @@ public partial class BlockRecord : Resource
 
         ResourceSaver.Singleton.Save(packedScene);
         
-        
         Scene = packedScene;
         ResourceSaver.Singleton.Save(this);
         
         // clean up
         
-        root.RemoveChild(node);
-        node.QueueFree();
+        EditorInterface.Singleton.CloseScene();
+    }
+
+    private Aabb CalculateCameraSize(Node3D node)
+    {
+        Aabb combinedBounds = new Aabb();
+        bool first = true;
+        foreach (var meshChild in node.FindChildren("*", "MeshInstance3D", true, false).Cast<MeshInstance3D>())
+        {
+            var meshAabb = meshChild.GetAabb();
+            var globalAabb = meshChild.GlobalTransform * meshAabb;
+    
+            if (first)
+            {
+                combinedBounds = globalAabb;
+                first = false;
+            }
+            else
+            {
+                combinedBounds = combinedBounds.Merge(globalAabb);
+            }
+        }
+
+        return combinedBounds;
     }
 }

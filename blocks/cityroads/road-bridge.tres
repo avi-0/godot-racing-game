@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=4 format=3 uid="uid://dwnp00mponhqe"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dwnp00mponhqe"]
 
-[ext_resource type="PackedScene" uid="uid://cpatc2rxappy0" path="res://blocks/cityroads/road-bridge_scene.tscn" id="1_4gia3"]
+[ext_resource type="PackedScene" uid="uid://cpatc2rxappy0" path="res://blocks/cityroads/road-bridge_scene.tscn" id="1_p6ecl"]
 [ext_resource type="PackedScene" uid="uid://fgvatlstgaoe" path="res://assets/cityroads/road-bridge.glb" id="1_swu2a"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_4gia3"]
+[ext_resource type="Texture2D" uid="uid://cnuafu4o2jcbe" path="res://blocks/cityroads/road-bridge_img.png" id="3_b8c8i"]
 
 [resource]
 script = ExtResource("2_4gia3")
 SourceScene = ExtResource("1_swu2a")
-Scene = ExtResource("1_4gia3")
+Scene = ExtResource("1_p6ecl")
+ThumbnailTexture = ExtResource("3_b8c8i")
