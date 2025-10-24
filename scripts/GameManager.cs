@@ -33,6 +33,7 @@ public partial class GameManager : Node
         _localCar = CarScene.Instantiate<Car>();
         AddChild(_localCar);
         _localCar.GlobalTransform = GetStartPoint();
+        _localCar.ResetPhysicsInterpolation(); // doesnt help the wheels lol
         _localCar.Started();
         
         _localCar.RestartRequested += LocalCarOnRestartRequested;

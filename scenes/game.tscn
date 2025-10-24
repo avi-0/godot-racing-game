@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=16 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
@@ -6,22 +6,10 @@
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="4_kvpfn"]
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="5_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cf7de2p2h6rha" path="res://assets/cityroads/road-straight.glb" id="6_kvuet"]
+[ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
+[ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="7_vtaks"]
 [ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://scenes/car.tscn" id="8_ir15t"]
-
-[sub_resource type="Sky" id="Sky_e2o6t"]
-sky_material = ExtResource("3_vtaks")
-
-[sub_resource type="Environment" id="Environment_feb5d"]
-background_mode = 2
-background_energy_multiplier = 0.8
-sky = SubResource("Sky_e2o6t")
-ambient_light_sky_contribution = 0.8
-tonemap_mode = 2
-ssao_enabled = true
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_e2o6t"]
-dof_blur_amount = 0.05
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_shvp3"]
 data = PackedVector3Array(0.5, 0.02, -0.39999998, 0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.02, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.02, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.29999998, 0.5, 0, 0.5, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.01, 0.5, 0, 0.5, 0.5, 0.01, 0.01, 0.5, 0.01, -0.01, 0.5, 0, 0.5, 0.5, 0.01, -0.01, 0.5, 0.01, -0.29999998, 0.5, 0, 0.5, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0.01, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.5, 0.5, 0, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.02, 0.5, -0.5, 0, 0.5, -0.5, 0.01, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.01, -0.5, 0.01, 0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.01, -0.5, 0.01, 0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.01, 0.01, 0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.01, 0.5, 0.01, -0.01, -0.5, 0.01, -0.01, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, 0.5, 0.01, -0.39999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, 0.29999998, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, -0.5, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, -0.01, 0.5, 0.01, -0.01, 0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, 0.01, -0.5, 0.01, -0.01)
@@ -39,9 +27,19 @@ _bundled = {
 "version": 3
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryrav"]
-transparency = 1
-albedo_color = Color(1, 0, 0, 0.2509804)
+[sub_resource type="Sky" id="Sky_e2o6t"]
+sky_material = ExtResource("3_vtaks")
+
+[sub_resource type="Environment" id="Environment_feb5d"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_e2o6t")
+ambient_light_sky_contribution = 0.8
+tonemap_mode = 2
+ssao_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_e2o6t"]
+dof_blur_amount = 0.05
 
 [node name="Game" type="Node"]
 
@@ -52,22 +50,15 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_feb5d")
-camera_attributes = SubResource("CameraAttributesPractical_e2o6t")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(0.94174683, 0.24646278, -0.22884314, -4.4868667e-08, 0.6804271, 0.7328161, 0.33632284, -0.6901272, 0.64078987, 1.86084, 3.9538, 1.40453)
-shadow_enabled = true
-
 [node name="Editor" type="Node" parent="." node_paths=PackedStringArray("Camera", "TrackBlocksNode", "BlockListContainer", "PlayButton", "EditorUINode")]
 script = ExtResource("4_kvpfn")
 CameraSpeed = 24.0
 Camera = NodePath("EditorCamera")
 BlockScene = SubResource("PackedScene_hve3p")
 TrackBlocksNode = NodePath("../Track/TrackBlocks")
-BlockEraseHighlightMaterial = SubResource("StandardMaterial3D_ryrav")
-BlockListContainer = NodePath("EditorUI/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/BlockListContainer")
+BlockEraseHighlightMaterial = ExtResource("7_0tnpc")
+BlockHighlightMaterial = ExtResource("7_vtaks")
+BlockListContainer = NodePath("EditorUI/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/BlockListContainer")
 PlayButton = NodePath("EditorUI/PlayButton")
 EditorUINode = NodePath("EditorUI")
 
@@ -102,34 +93,34 @@ theme_override_constants/margin_bottom = 8
 [node name="PanelContainer" type="PanelContainer" parent="Editor/EditorUI/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/MarginContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Editor/EditorUI/MarginContainer/PanelContainer"]
+layout_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/MarginContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Editor/EditorUI/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 0
-mouse_force_pass_scroll_events = false
-horizontal_scroll_mode = 0
-
-[node name="BlockListContainer" type="GridContainer" parent="Editor/EditorUI/MarginContainer/PanelContainer/MarginContainer/ScrollContainer"]
+[node name="BlockListContainer" type="GridContainer" parent="Editor/EditorUI/MarginContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 4
 
-[node name="Button3" type="Button" parent="Editor/EditorUI/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/BlockListContainer"]
+[node name="Button3" type="Button" parent="Editor/EditorUI/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/BlockListContainer"]
 layout_mode = 2
 text = "..."
 
-[node name="Button" type="Button" parent="Editor/EditorUI/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/BlockListContainer"]
+[node name="Button" type="Button" parent="Editor/EditorUI/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/BlockListContainer"]
 layout_mode = 2
 text = "block A"
 
-[node name="Button2" type="Button" parent="Editor/EditorUI/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/BlockListContainer"]
+[node name="Button2" type="Button" parent="Editor/EditorUI/MarginContainer/PanelContainer/ScrollContainer/MarginContainer/BlockListContainer"]
 layout_mode = 2
 text = "block B"
 
@@ -151,5 +142,13 @@ CarScene = ExtResource("8_ir15t")
 TrackNode = NodePath("../Track")
 
 [node name="Track" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Track"]
+environment = SubResource("Environment_feb5d")
+camera_attributes = SubResource("CameraAttributesPractical_e2o6t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Track/WorldEnvironment"]
+transform = Transform3D(0.94174683, 0.24646278, -0.22884314, -4.4868667e-08, 0.6804271, 0.7328161, 0.33632284, -0.6901272, 0.64078987, 1.86084, 3.9538, 1.40453)
+shadow_enabled = true
 
 [node name="TrackBlocks" type="Node3D" parent="Track"]

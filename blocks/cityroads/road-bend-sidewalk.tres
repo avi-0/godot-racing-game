@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://btfhj0hcnyhxj" path="res://assets/cityroads/road-bend-sidewalk.glb" id="1_qfbf1"]
 [ext_resource type="PackedScene" uid="uid://cfxlh1ugobsfl" path="res://blocks/cityroads/scenes/road-bend-sidewalk.tscn" id="1_r0pf8"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_37kbm"]
-[ext_resource type="Texture2D" path="res://blocks/cityroads/images/road-bend-sidewalk.png" id="3_evc1o"]
+[ext_resource type="Texture2D" uid="uid://bmb506bikc25f" path="res://blocks/cityroads/images/road-bend-sidewalk.png" id="3_evc1o"]
 
 [resource]
 script = ExtResource("2_37kbm")

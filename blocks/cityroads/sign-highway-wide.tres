@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c65q3m4sy4j7n" path="res://assets/cityroads/sign-highway-wide.glb" id="1_ipqxg"]
 [ext_resource type="PackedScene" uid="uid://ceniw1kf3112" path="res://blocks/cityroads/scenes/sign-highway-wide.tscn" id="1_vgpvi"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_r4q6u"]
-[ext_resource type="Texture2D" path="res://blocks/cityroads/images/sign-highway-wide.png" id="3_ip7ck"]
+[ext_resource type="Texture2D" uid="uid://d23uuwkn8xv2y" path="res://blocks/cityroads/images/sign-highway-wide.png" id="3_ip7ck"]
 
 [resource]
 script = ExtResource("2_r4q6u")

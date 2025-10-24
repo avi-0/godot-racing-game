@@ -23,6 +23,8 @@ public partial class Editor : Node
 
 	[Export] public Material BlockEraseHighlightMaterial;
 
+	[Export] public Material BlockHighlightMaterial;
+
 	[Export] public Container BlockListContainer;
 
 	[Export] public Button PlayButton;
@@ -108,6 +110,7 @@ public partial class Editor : Node
 	private IEnumerable<BlockRecord> GetBlockRecords()
 	{
 		return GetBlockPaths(BlockPath)
+			.Order()
 			.Select(path => ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord"))
 			// fuck knows why the type hint doesn't work right
 			.Where(resource => resource is BlockRecord)
@@ -145,8 +148,10 @@ public partial class Editor : Node
 
 		Cursor = BlockScene.Instantiate<blocks.Block>();
 		Cursor.PhysicsInterpolationMode = PhysicsInterpolationModeEnum.Off;
+		
 		AddChild(Cursor);
 		Cursor.RotateY(-float.DegreesToRadians(90) * _rotation);
+		Cursor.SetMaterialOverlay(BlockHighlightMaterial);
 	}
 
 	private void DestroyCursor()
@@ -161,7 +166,7 @@ public partial class Editor : Node
 
 	private void PlaceCursorBlock()
 	{
-		if (!Input.IsKeyPressed(Key.Shift))
+		if (Input.IsKeyPressed(Key.Shift))
 		{
 			var existingBlock = GetBlockAtPosition(Cursor.GlobalPosition);
 			if (existingBlock != null)
@@ -170,6 +175,7 @@ public partial class Editor : Node
 			}
 		}
 		
+		Cursor.SetMaterialOverlay(null);
 		Cursor.Reparent(TrackBlocksNode, true);
 		Cursor.ChildMouseEntered += OnBlockMouseEntered;
 		
@@ -294,6 +300,8 @@ public partial class Editor : Node
 		if (_hoveredBlock != null)
 		{
 			EraseBlock(_hoveredBlock);
+			
+			UiSoundPlayer.__Instance.PlayBlockPlaced(0.8f);
 		}
 	}
 
@@ -317,13 +325,12 @@ public partial class Editor : Node
 		
 		foreach (var record in GetBlockRecords())
 		{
-			GD.Print(record.ResourcePath);
-			GD.Print(record.ThumbnailTexture);
 			var button = new Button();
 			button.CustomMinimumSize = 64 * Vector2.One;
 			button.Icon = record.ThumbnailTexture;
 			button.IconAlignment = HorizontalAlignment.Center;
 			button.ExpandIcon = true;
+			button.TooltipText = record.ResourcePath;
 
 			BlockListContainer.AddChild(button);
 			

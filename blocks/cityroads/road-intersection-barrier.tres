@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c00mk8wktiap" path="res://blocks/cityroads/scenes/road-intersection-barrier.tscn" id="1_h8yaw"]
 [ext_resource type="PackedScene" uid="uid://c18s1n3pc1p7b" path="res://assets/cityroads/road-intersection-barrier.glb" id="1_wrj1p"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_0uf3d"]
-[ext_resource type="Texture2D" path="res://blocks/cityroads/images/road-intersection-barrier.png" id="3_j4rt0"]
+[ext_resource type="Texture2D" uid="uid://jfilnt2a8o0i" path="res://blocks/cityroads/images/road-intersection-barrier.png" id="3_j4rt0"]
 
 [resource]
 script = ExtResource("2_0uf3d")

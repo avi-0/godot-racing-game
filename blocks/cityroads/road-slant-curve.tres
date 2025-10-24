@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://w7u1dpsd2fs2" path="res://blocks/cityroads/scenes/road-slant-curve.tscn" id="1_2kc8p"]
 [ext_resource type="PackedScene" uid="uid://ddjohsyicvcmw" path="res://assets/cityroads/road-slant-curve.glb" id="1_5me6m"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_vr1nn"]
-[ext_resource type="Texture2D" path="res://blocks/cityroads/images/road-slant-curve.png" id="3_oosug"]
+[ext_resource type="Texture2D" uid="uid://hm3i0l8pt024" path="res://blocks/cityroads/images/road-slant-curve.png" id="3_oosug"]
 
 [resource]
 script = ExtResource("2_vr1nn")

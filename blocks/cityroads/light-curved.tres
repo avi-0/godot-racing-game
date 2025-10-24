@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c8vwmbqlovt7f" path="res://blocks/cityroads/scenes/light-curved.tscn" id="1_c5ein"]
 [ext_resource type="PackedScene" uid="uid://dnl5s3t7r05cc" path="res://assets/cityroads/light-curved.glb" id="1_rqve2"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ynabv"]
-[ext_resource type="Texture2D" path="res://blocks/cityroads/images/light-curved.png" id="3_7vgyb"]
+[ext_resource type="Texture2D" uid="uid://bhahp7by38ptk" path="res://blocks/cityroads/images/light-curved.png" id="3_7vgyb"]
 
 [resource]
 script = ExtResource("2_ynabv")

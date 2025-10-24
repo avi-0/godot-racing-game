@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b6p1sax5nymkv" path="res://blocks/cityroads/scenes/light-square-double.tscn" id="1_2q8u3"]
 [ext_resource type="PackedScene" uid="uid://bt3ohmb2xwxks" path="res://assets/cityroads/light-square-double.glb" id="1_bnrtu"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_akemx"]
-[ext_resource type="Texture2D" path="res://blocks/cityroads/images/light-square-double.png" id="3_yjs65"]
+[ext_resource type="Texture2D" uid="uid://kb18jr0wcpq2" path="res://blocks/cityroads/images/light-square-double.png" id="3_yjs65"]
 
 [resource]
 script = ExtResource("2_akemx")

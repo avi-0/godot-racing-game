@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dp8r485ilh64i" path="res://blocks/cityroads/scenes/road-bridge.tscn" id="1_p6ecl"]
 [ext_resource type="PackedScene" uid="uid://fgvatlstgaoe" path="res://assets/cityroads/road-bridge.glb" id="1_swu2a"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_4gia3"]
-[ext_resource type="Texture2D" path="res://blocks/cityroads/images/road-bridge.png" id="3_b8c8i"]
+[ext_resource type="Texture2D" uid="uid://7nasstki0w0" path="res://blocks/cityroads/images/road-bridge.png" id="3_b8c8i"]
 
 [resource]
 script = ExtResource("2_4gia3")

@@ -25,8 +25,8 @@ public partial class UiSoundPlayer : Node
 		_playback = Player.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
 	}
 
-	public void PlayBlockPlaced()
+	public void PlayBlockPlaced(float pitchScale = 1f)
 	{
-		_playback.PlayStream(BlockPlacedSound, volumeDb: -3f);
+		_playback.PlayStream(BlockPlacedSound, volumeDb: -3f, pitchScale: pitchScale);
 	}
 }

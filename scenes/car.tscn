@@ -5,8 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/carsfx.wav" id="3_mk5fm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]
-friction = 0.5
-bounce = 0.5
+friction = 0.1
 
 [sub_resource type="Curve" id="Curve_eauv3"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -24,7 +23,7 @@ point_count = 3
 
 [sub_resource type="Curve" id="Curve_50v30"]
 _limits = [1.0, 5.0, 0.0, 1.0]
-_data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.49664426, 1.5238743), -2.9068227, -2.9068227, 0, 0, Vector2(1, 1), 0.19170682, 0.0, 0, 0]
+_data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.27181208, 1.9232769), -4.818681, -4.818681, 0, 0, Vector2(1, 1), -0.23527792, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7822p"]
