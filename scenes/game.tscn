@@ -187,7 +187,6 @@ text = "block B"
 transparent_bg = true
 oversampling_override = 1.0
 initial_position = 1
-visible = true
 transparent = true
 display_mode = 1
 access = 1

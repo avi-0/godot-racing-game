@@ -84,7 +84,6 @@ public partial class Editor : Node
 		FileMenu.SetItemAccelerator(0, (Key) KeyModifierMask.MaskCtrl | Key.O);
 		FileMenu.SetItemAccelerator(1, (Key) KeyModifierMask.MaskCtrl | Key.S);
 		
-		
 		FileDialog.FileSelected += FileDialogOnFileSelected;
 
 		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
@@ -175,6 +174,12 @@ public partial class Editor : Node
 
 		Cursor.GlobalPosition = GetGridMousePosition();
 		Cursor.Visible = true;
+
+		if (_hoveredBlock != null && !IsInstanceValid(_hoveredBlock))
+		{
+			_hoveredBlock = null;
+		}
+		
 		if (_mode == Mode.Erase)
 		{
 			Cursor.Visible = false;
