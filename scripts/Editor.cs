@@ -30,6 +30,8 @@ public partial class Editor : Node
 
 	[Export] public FileDialog FileDialog;
 
+	[Export] public ConfirmationDialog ConfirmNewDialog;
+
 	[Export] public Button PlayButton;
 
 	[Export] public Control EditorUINode;
@@ -81,9 +83,10 @@ public partial class Editor : Node
 		EditorViewport.Input += ViewportInput;
 		
 		FileMenu.IdPressed += FileMenuOnIdPressed;
-		FileMenu.SetItemAccelerator(0, (Key) KeyModifierMask.MaskCtrl | Key.O);
-		FileMenu.SetItemAccelerator(1, (Key) KeyModifierMask.MaskCtrl | Key.S);
+		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(0), (Key) KeyModifierMask.MaskCtrl | Key.O);
+		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(1), (Key) KeyModifierMask.MaskCtrl | Key.S);
 		
+		ConfirmNewDialog.Confirmed += ConfirmNewDialogOnConfirmed;
 		FileDialog.FileSelected += FileDialogOnFileSelected;
 
 		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
@@ -93,19 +96,28 @@ public partial class Editor : Node
 		UpdateBlockList();
 	}
 
+	private void ConfirmNewDialogOnConfirmed()
+	{
+		GameManager.Singleton.NewTrack();
+	}
+
 	private void FileMenuOnIdPressed(long id)
 	{
 		if (id == 0)
 		{
 			// open
 			FileDialog.FileMode = FileDialog.FileModeEnum.OpenFile;
-			FileDialog.Visible = true;
+			FileDialog.Show();
 		}
 		else if (id == 1)
 		{
 			// save
 			FileDialog.FileMode = FileDialog.FileModeEnum.SaveFile;
-			FileDialog.Visible = true;
+			FileDialog.Show();
+		}
+		else if (id == 2)
+		{
+			ConfirmNewDialog.Show();
 		}
 	}
 	

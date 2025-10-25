@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/track_base.tscn" id="2_h2pho"]
 
 [node name="Track" type="Node3D"]
+physics_interpolation_mode = 2
 
 [node name="TrackWorldEnvironment" parent="." instance=ExtResource("1_nvs4h")]
 

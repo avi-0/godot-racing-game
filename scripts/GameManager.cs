@@ -5,6 +5,8 @@ using racingGame;
 public partial class GameManager : Node
 {
     public static GameManager Singleton;
+
+    [Export(PropertyHint.FilePath)] public string TrackTemplatePath;
     
     [Export] public PackedScene CarScene;
 
@@ -20,6 +22,8 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         Singleton = this;
+        
+        NewTrack();
     }
 
     public void Play()
@@ -105,5 +109,10 @@ public partial class GameManager : Node
         TrackNode.QueueFree();
         TrackNode = newTrackNode;
         TrackNode.Name = "Track";
+    }
+
+    public void NewTrack()
+    {
+        OpenTrack(TrackTemplatePath);
     }
 }

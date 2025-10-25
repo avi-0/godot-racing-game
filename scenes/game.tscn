@@ -1,15 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=12 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="4_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/track_base.tscn" id="6_kvpfn"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
 [ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="7_vtaks"]
 [ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://scenes/car.tscn" id="8_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bfxxyh44b8xbw" path="res://blocks/cityroads/scenes/road-straight.tscn" id="8_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://ci1ixarerslh8" path="res://scenes/track_world_environment.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://ec3tpqskxxmf" path="res://scenes/EditorViewport.cs" id="12_dinhu"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_kvpfn"]
@@ -30,17 +28,13 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode")]
 script = ExtResource("7_trtic")
+TrackTemplatePath = "res://scenes/track_template.tscn"
 CarScene = ExtResource("8_ir15t")
 TrackNode = NodePath("Track")
 
 [node name="Track" type="Node3D" parent="GameManager"]
-physics_interpolation_mode = 2
 
-[node name="TrackWorldEnvironment" parent="GameManager/Track" instance=ExtResource("10_vtaks")]
-
-[node name="TrackBase" parent="GameManager/Track" instance=ExtResource("6_kvpfn")]
-
-[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "PlayButton", "EditorUINode")]
+[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "PlayButton", "EditorUINode")]
 physics_interpolation_mode = 2
 script = ExtResource("4_kvpfn")
 CameraSpeed = 48.0
@@ -52,6 +46,7 @@ BlockHighlightMaterial = ExtResource("7_vtaks")
 BlockListContainer = NodePath("EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer")
 FileMenu = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar/FileMenu")
 FileDialog = NodePath("FileDialog")
+ConfirmNewDialog = NodePath("ConfirmNewDialog")
 PlayButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer/PlayButton")
 EditorUINode = NodePath("EditorUI")
 
@@ -92,11 +87,13 @@ layout_mode = 2
 [node name="FileMenu" type="PopupMenu" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar"]
 oversampling_override = 1.0
 title = "File"
-item_count = 2
-item_0/text = "Open"
-item_0/id = 0
-item_1/text = "Save"
-item_1/id = 1
+item_count = 3
+item_0/text = "New"
+item_0/id = 2
+item_1/text = "Open"
+item_1/id = 0
+item_2/text = "Save"
+item_2/id = 1
 
 [node name="ViewportWrapper" type="Control" parent="Editor/EditorUI/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -182,6 +179,12 @@ text = "block A"
 [node name="Button2" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
 layout_mode = 2
 text = "block B"
+
+[node name="ConfirmNewDialog" type="ConfirmationDialog" parent="Editor"]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(565, 100)
+dialog_text = "Are you sure you want to create a new track? Unsaved data will be lost."
 
 [node name="FileDialog" type="FileDialog" parent="Editor"]
 transparent_bg = true
