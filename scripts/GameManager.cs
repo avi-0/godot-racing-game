@@ -4,7 +4,7 @@ using racingGame;
 
 public partial class GameManager : Node
 {
-    public static GameManager __Instance;
+    public static GameManager Singleton;
     
     [Export] public PackedScene CarScene;
 
@@ -19,7 +19,7 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
-        __Instance = this;
+        Singleton = this;
     }
 
     public void Play()
@@ -76,5 +76,34 @@ public partial class GameManager : Node
         }
         
         return Transform3D.Identity;
+    }
+
+    public void SaveTrack(string path)
+    {
+        GD.Print($"Saving track as {path}");
+        
+        foreach (var child in TrackNode.GetChildren())
+        {
+            child.Owner = TrackNode;
+        }
+
+        var scene = new PackedScene();
+        GD.Print($"Packing: {scene.Pack(TrackNode)}");
+        
+        GD.Print($"Saving: {ResourceSaver.Save(scene, path)}");
+    }
+
+    public void OpenTrack(string path)
+    {
+        GD.Print($"Opening track at {path}");
+
+        var scene = ResourceLoader.Load<PackedScene>(path, cacheMode: ResourceLoader.CacheMode.Ignore);
+        var newTrackNode = scene.Instantiate<Node3D>();
+        
+        TrackNode.AddSibling(newTrackNode);
+        TrackNode.GetParent().RemoveChild(TrackNode);
+        TrackNode.QueueFree();
+        TrackNode = newTrackNode;
+        TrackNode.Name = "Track";
     }
 }

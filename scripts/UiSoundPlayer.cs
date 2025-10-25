@@ -1,6 +1,6 @@
 using Godot;
 
-namespace racingGame;
+namespace racinggame;
 
 public partial class UiSoundPlayer : Node
 {

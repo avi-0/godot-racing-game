@@ -27,6 +27,10 @@ project/assembly_name="racinggame"
 
 start_point=""
 
+[gui]
+
+theme/custom="uid://k2e54iiohf5p"
+
 [importer_defaults]
 
 texture={

@@ -1,24 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci1ixarerslh8"]
+[gd_scene load_steps=2 format=3 uid="uid://ci1ixarerslh8"]
 
-[ext_resource type="Material" uid="uid://k74vwpi5dbqu" path="res://assets/panoramasky.tres" id="1_uk1mk"]
-
-[sub_resource type="Sky" id="Sky_e2o6t"]
-sky_material = ExtResource("1_uk1mk")
-
-[sub_resource type="Environment" id="Environment_feb5d"]
-background_mode = 2
-background_energy_multiplier = 0.8
-sky = SubResource("Sky_e2o6t")
-ambient_light_sky_contribution = 0.8
-tonemap_mode = 2
-ssao_enabled = true
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_e2o6t"]
-dof_blur_amount = 0.05
+[ext_resource type="Environment" uid="uid://ci5sq1602gfac" path="res://resources/track_environment.tres" id="1_uk1mk"]
 
 [node name="TrackWorldEnvironment" type="WorldEnvironment"]
-environment = SubResource("Environment_feb5d")
-camera_attributes = SubResource("CameraAttributesPractical_e2o6t")
+environment = ExtResource("1_uk1mk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.94174683, 0.24646278, -0.22884314, -4.4868667e-08, 0.6804271, 0.7328161, 0.33632284, -0.6901272, 0.64078987, 1.86084, 3.9538, 1.40453)

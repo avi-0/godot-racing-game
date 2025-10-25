@@ -1,0 +1,14 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://ci5sq1602gfac"]
+
+[ext_resource type="Material" uid="uid://k74vwpi5dbqu" path="res://assets/panoramasky.tres" id="1_pv7pb"]
+
+[sub_resource type="Sky" id="Sky_e2o6t"]
+sky_material = ExtResource("1_pv7pb")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_e2o6t")
+ambient_light_sky_contribution = 0.8
+tonemap_mode = 2
+ssao_enabled = true

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fractural.Tasks;
 
+namespace racinggame;
+
 [GlobalClass]
 [Tool]
 public partial class BlockDirectoryImporter : Resource

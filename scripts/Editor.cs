@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Fractural.Tasks;
 using Godot;
-using racingGame.blocks;
 
-namespace racingGame;
+namespace racinggame;
 
 public partial class Editor : Node
 {
@@ -21,19 +20,23 @@ public partial class Editor : Node
 
 	[Export] public PackedScene BlockScene;
 
-	[Export] public Node3D TrackBlocksNode;
-
 	[Export] public Material BlockEraseHighlightMaterial;
 
 	[Export] public Material BlockHighlightMaterial;
 
 	[Export] public Container BlockListContainer;
 
+	[Export] public PopupMenu FileMenu;
+
+	[Export] public FileDialog FileDialog;
+
 	[Export] public Button PlayButton;
 
 	[Export] public Control EditorUINode;
 
-	private blocks.Block Cursor;
+	private Node3D TrackNode => GameManager.Singleton.TrackNode;
+	
+	private Block Cursor;
 
 	private Block _hoveredBlock;
 
@@ -77,9 +80,51 @@ public partial class Editor : Node
 		PlayButton.Pressed += PlayButtonOnPressed;
 		EditorViewport.Input += ViewportInput;
 		
+		FileMenu.IdPressed += FileMenuOnIdPressed;
+		FileMenu.SetItemAccelerator(0, (Key) KeyModifierMask.MaskCtrl | Key.O);
+		FileMenu.SetItemAccelerator(1, (Key) KeyModifierMask.MaskCtrl | Key.S);
+		
+		
+		FileDialog.FileSelected += FileDialogOnFileSelected;
+
+		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
+		
 		CreateCursor();
 		
 		UpdateBlockList();
+	}
+
+	private void FileMenuOnIdPressed(long id)
+	{
+		if (id == 0)
+		{
+			// open
+			FileDialog.FileMode = FileDialog.FileModeEnum.OpenFile;
+			FileDialog.Visible = true;
+		}
+		else if (id == 1)
+		{
+			// save
+			FileDialog.FileMode = FileDialog.FileModeEnum.SaveFile;
+			FileDialog.Visible = true;
+		}
+	}
+	
+	private void FileDialogOnFileSelected(string path)
+	{
+		if (FileDialog.FileMode == FileDialog.FileModeEnum.OpenFile)
+		{
+			GameManager.Singleton.OpenTrack(path);
+
+			foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>())
+			{
+				ConnectBlockSignals(block);
+			}
+		}
+		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
+		{
+			GameManager.Singleton.SaveTrack(path);
+		}
 	}
 
 	private void PlayButtonOnPressed()
@@ -91,8 +136,8 @@ public partial class Editor : Node
 	{
 		IsRunning = false;
 		
-		GameManager.__Instance.Play();
-		await GDTask.ToSignal(GameManager.__Instance, GameManager.SignalName.StoppedPlaying);
+		GameManager.Singleton.Play();
+		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
 
 		IsRunning = true;
 	}
@@ -149,8 +194,7 @@ public partial class Editor : Node
 	{
 		Cursor?.QueueFree();
 
-		Cursor = BlockScene.Instantiate<blocks.Block>();
-		Cursor.PhysicsInterpolationMode = PhysicsInterpolationModeEnum.Off;
+		Cursor = BlockScene.Instantiate<Block>();
 		
 		AddChild(Cursor);
 		Cursor.RotateY(-float.DegreesToRadians(90) * _rotation);
@@ -179,13 +223,18 @@ public partial class Editor : Node
 		}
 		
 		Cursor.SetMaterialOverlay(null);
-		Cursor.Reparent(TrackBlocksNode, true);
-		Cursor.ChildMouseEntered += OnBlockMouseEntered;
+		Cursor.Reparent(TrackNode, true);
+		ConnectBlockSignals(Cursor);
 		
 		UiSoundPlayer.__Instance.PlayBlockPlaced();
 
 		Cursor = null;
 		CreateCursor();
+	}
+
+	private void ConnectBlockSignals(Block block)
+	{
+		block.ChildMouseEntered += OnBlockMouseEntered;
 	}
 
 	private void OnBlockMouseEntered(Block block)
@@ -227,7 +276,7 @@ public partial class Editor : Node
 	private Vector2 ProjectMousePosition()
 	{
 		var plane = new Plane(Vector3.Up, new Vector3(0, YLevel * CellHeight, 0));
-		var mousePosition = GetViewport().GetMousePosition();
+		var mousePosition = EditorViewport.GetMousePosition();
 		var from = Camera.ProjectRayOrigin(mousePosition);
 		var dir = Camera.ProjectRayNormal(mousePosition);
 		var intersection = plane.IntersectsRay(from, dir) ?? Vector3.Zero;
@@ -291,7 +340,7 @@ public partial class Editor : Node
 
 	private void EraseBlock(Block block)
 	{
-		TrackBlocksNode.RemoveChild(block);
+		TrackNode.RemoveChild(block);
 		block.QueueFree();
 
 		if (_hoveredBlock == block)
@@ -310,7 +359,7 @@ public partial class Editor : Node
 
 	private Block GetBlockAtPosition(Vector3 pos)
 	{
-		foreach (var block in TrackBlocksNode.GetChildren().Cast<Block>())
+		foreach (var block in TrackNode.GetChildren().Cast<Block>())
 		{
 			if (block.GlobalPosition.IsEqualApprox(pos))
 			{

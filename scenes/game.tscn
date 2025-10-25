@@ -1,33 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=14 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="4_kvpfn"]
-[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="5_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/track_base.tscn" id="6_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://cf7de2p2h6rha" path="res://assets/cityroads/road-straight.glb" id="6_kvuet"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
 [ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="7_vtaks"]
 [ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://scenes/car.tscn" id="8_ir15t"]
+[ext_resource type="PackedScene" uid="uid://bfxxyh44b8xbw" path="res://blocks/cityroads/scenes/road-straight.tscn" id="8_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://ci1ixarerslh8" path="res://scenes/track_world_environment.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://ec3tpqskxxmf" path="res://scenes/EditorViewport.cs" id="12_dinhu"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_shvp3"]
-data = PackedVector3Array(0.5, 0.02, -0.39999998, 0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.02, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.02, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.29999998, 0.5, 0, 0.5, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.01, 0.5, 0, 0.5, 0.5, 0.01, 0.01, 0.5, 0.01, -0.01, 0.5, 0, 0.5, 0.5, 0.01, -0.01, 0.5, 0.01, -0.29999998, 0.5, 0, 0.5, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0.01, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.5, 0.5, 0, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.02, 0.5, -0.5, 0, 0.5, -0.5, 0.01, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.01, -0.5, 0.01, 0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.01, -0.5, 0.01, 0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.01, 0.01, 0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.01, 0.5, 0.01, -0.01, -0.5, 0.01, -0.01, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, 0.5, 0.01, -0.39999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, 0.29999998, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, -0.5, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, -0.01, 0.5, 0.01, -0.01, 0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, 0.01, -0.5, 0.01, -0.01)
+[sub_resource type="InputEventKey" id="InputEventKey_kvpfn"]
+device = -1
+keycode = 4194306
 
-[sub_resource type="PackedScene" id="PackedScene_hve3p"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [NodePath("Node3D/road-straight2")],
-"names": PackedStringArray("road_straight", "Node3D", "script", "Node3D", "Node3D", "transform", "StaticBody3D", "StaticBody3D", "CollisionShape3D", "CollisionShape3D", "shape", "road-straight2"),
-"node_count": 5,
-"node_paths": [NodePath("."), NodePath("./Node3D"), NodePath("./Node3D/StaticBody3D"), NodePath("./Node3D")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 0, 0, 1073741826, 0, 9, 8, -1, 1, 10, 2, 0, 1073741827, 0, 2147483647, 11, 3, 0, 0),
-"variants": [ExtResource("5_dinhu"), Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0), SubResource("ConcavePolygonShape3D_shvp3"), ExtResource("6_kvuet")],
-"version": 3
-}
+[sub_resource type="Shortcut" id="Shortcut_dinhu"]
+events = [SubResource("InputEventKey_kvpfn")]
 
 [node name="Game" type="Node"]
 
@@ -44,22 +34,25 @@ CarScene = ExtResource("8_ir15t")
 TrackNode = NodePath("Track")
 
 [node name="Track" type="Node3D" parent="GameManager"]
+physics_interpolation_mode = 2
 
 [node name="TrackWorldEnvironment" parent="GameManager/Track" instance=ExtResource("10_vtaks")]
 
 [node name="TrackBase" parent="GameManager/Track" instance=ExtResource("6_kvpfn")]
 
-[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "TrackBlocksNode", "BlockListContainer", "PlayButton", "EditorUINode")]
+[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "PlayButton", "EditorUINode")]
+physics_interpolation_mode = 2
 script = ExtResource("4_kvpfn")
 CameraSpeed = 48.0
-EditorViewport = NodePath("EditorUI/HBoxContainer/SubViewportContainer/EditorViewport")
-Camera = NodePath("EditorUI/HBoxContainer/SubViewportContainer/EditorViewport/EditorCamera")
-BlockScene = SubResource("PackedScene_hve3p")
-TrackBlocksNode = NodePath("../GameManager/Track")
+EditorViewport = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
+Camera = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/EditorCamera")
+BlockScene = ExtResource("8_kvpfn")
 BlockEraseHighlightMaterial = ExtResource("7_0tnpc")
 BlockHighlightMaterial = ExtResource("7_vtaks")
-BlockListContainer = NodePath("EditorUI/HBoxContainer/MarginContainer/ScrollContainer/BlockListContainer")
-PlayButton = NodePath("EditorUI/PlayButton")
+BlockListContainer = NodePath("EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer")
+FileMenu = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar/FileMenu")
+FileDialog = NodePath("FileDialog")
+PlayButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer/PlayButton")
 EditorUINode = NodePath("EditorUI")
 
 [node name="EditorUI" type="Control" parent="Editor"]
@@ -81,24 +74,76 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Editor/EditorUI/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Editor/EditorUI/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MenuBar" type="MenuBar" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="FileMenu" type="PopupMenu" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar"]
+oversampling_override = 1.0
+title = "File"
+item_count = 2
+item_0/text = "Open"
+item_0/id = 0
+item_1/text = "Save"
+item_1/id = 1
+
+[node name="ViewportWrapper" type="Control" parent="Editor/EditorUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 focus_mode = 0
 stretch = true
 mouse_target = true
 
-[node name="EditorViewport" type="SubViewport" parent="Editor/EditorUI/HBoxContainer/SubViewportContainer"]
+[node name="EditorViewport" type="SubViewport" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer"]
 handle_input_locally = false
+screen_space_aa = 1
 physics_object_picking = true
-size = Vector2i(976, 648)
+size = Vector2i(972, 601)
+render_target_update_mode = 4
 script = ExtResource("12_dinhu")
 
-[node name="EditorCamera" type="Camera3D" parent="Editor/EditorUI/HBoxContainer/SubViewportContainer/EditorViewport"]
+[node name="EditorCamera" type="Camera3D" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport"]
 physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 24, 0)
 current = true
 fov = 80.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="PlayButton" type="Button" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Play the track"
+shortcut = SubResource("Shortcut_dinhu")
+text = "Play"
 
 [node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/HBoxContainer"]
 layout_mode = 2
@@ -113,42 +158,41 @@ mouse_filter = 0
 mouse_force_pass_scroll_events = false
 horizontal_scroll_mode = 0
 
-[node name="BlockListContainer" type="GridContainer" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="BlockListContainer" type="GridContainer" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 4
 
-[node name="Button3" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/BlockListContainer"]
+[node name="Button3" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
 layout_mode = 2
 text = "..."
 
-[node name="Button" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/BlockListContainer"]
+[node name="Button" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
 layout_mode = 2
 text = "block A"
 
-[node name="Button2" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/BlockListContainer"]
+[node name="Button2" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
 layout_mode = 2
 text = "block B"
 
-[node name="PlayButton" type="Button" parent="Editor/EditorUI"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -39.0
-offset_right = 49.0
-offset_bottom = -8.0
-grow_vertical = 0
-text = "Play"
-
 [node name="FileDialog" type="FileDialog" parent="Editor"]
+transparent_bg = true
 oversampling_override = 1.0
 initial_position = 1
+visible = true
+transparent = true
 display_mode = 1
 access = 1
-filters = PackedStringArray("*tk.tres;Track Files;application/x-godot-resource")
+root_subfolder = "tracks/"
+filters = PackedStringArray("*.tk.tscn;Track Files;application/x-godot-resource")
 hidden_files_toggle_enabled = false
 file_filter_toggle_enabled = false
 favorites_enabled = false

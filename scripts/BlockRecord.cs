@@ -3,7 +3,8 @@ using System;
 using System.IO;
 using System.Linq;
 using Fractural.Tasks;
-using racingGame.blocks;
+
+namespace racinggame;
 
 [GlobalClass]
 [Tool]
