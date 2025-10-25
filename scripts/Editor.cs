@@ -14,6 +14,8 @@ public partial class Editor : Node
 	public const string BlockPath = "res://blocks/";
 	
 	[Export] public float CameraSpeed;
+
+	[Export] public EditorViewport EditorViewport;
 	
 	[Export] public Camera3D Camera;
 
@@ -73,6 +75,7 @@ public partial class Editor : Node
 	public override void _Ready()
 	{
 		PlayButton.Pressed += PlayButtonOnPressed;
+		EditorViewport.Input += ViewportInput;
 		
 		CreateCursor();
 		
@@ -241,7 +244,7 @@ public partial class Editor : Node
 			CellSize * (float.Round(pos.Y / CellSize - 0.5f) + 0.5f));
 	}
 
-	public override void _UnhandledInput(InputEvent @event)
+	public void ViewportInput(InputEvent @event)
 	{
 		if (!IsRunning)
 			return;

@@ -172,7 +172,7 @@ public partial class Car : VehicleBody3D
         if (state.AngularVelocity.Length() > maxAngularSpeed)
         {
             state.AngularVelocity = state.AngularVelocity.Normalized() * maxAngularSpeed;
-            GD.Print("limiting angular velocity");
+            //GD.Print("limiting angular velocity");
         }
     }
     
