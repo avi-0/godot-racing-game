@@ -26,13 +26,14 @@ _limits = [1.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.27181208, 1.9232769), -4.818681, -4.818681, 0, 0, Vector2(1, 1), -0.23527792, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7822p"]
-points = PackedVector3Array(0.65, 0.249961, 1.27491, 0.620605, 0.249961, 1.34549, 0.65, 0.0499364, 1.27491, 0.65, 0.425715, 1.1106, 0.620605, 0.0499364, 1.34549, 0.54998, 0.449985, 1.32485, 0.54998, 0.249961, 1.37478, 0.124961, 0, 1.42472, 0.65, 0.0499364, -0.485136, 0.65, 0.48774, 1.02997, 0.54998, 0.0499364, 1.37478, -0.550108, 0.449985, 1.32485, 0.124961, 0.174917, 1.42472, 0.65, 0.526703, 0.93568, 0.449961, 0.949907, 0.197793, 0.174971, 0.12498, 1.42472, -0.125088, 0, 1.42472, 0.124961, 0, 1.37478, 0.174971, 0.0499364, 1.42472, 0.399951, 0.0499364, -1.08521, 0.620605, 0.149995, -1.34577, 0.65, 0.149995, -1.27519, -0.65, 0.526703, 0.93568, -0.65, 0.48774, 1.02997, -0.65, 0.425715, 1.1106, -0.620732, 0.249961, 1.34549, -0.550108, 0.249961, 1.37478, -0.125088, 0.174917, 1.42472, -0.450088, 0.949907, 0.197793, 0.65, 0.649917, 0.597842, 0.449961, 0.949907, -0.907782, -0.175098, 0.0499364, 1.42472, -0.550108, 0.0499364, 1.37478, -0.620732, 0.0499364, 1.34549, -0.65, 0.0499364, 1.27491, -0.125088, 0, 1.37478, -0.400078, 0.0499364, -1.08521, 0.124961, 0.0999657, -1.425, 0.54998, 0.149995, -1.37506, 0.620605, 0.249961, -1.34577, 0.65, 0.249961, -1.27519, -0.65, 0.649917, 0.597842, -0.65, 0.249961, 1.27491, -0.175098, 0.12498, 1.42472, -0.450088, 0.949907, -0.907782, 0.65, 0.649917, 0.49769, 0.65, 0.539908, -0.785033, 0.65, 0.526703, -0.886022, 0.54998, 0.649917, -1.27519, -0.65, 0.0499364, -0.485136, -0.620732, 0.149995, -1.34577, -0.125088, 0.0999657, -1.425, 0.174971, 0.149995, -1.425, 0.54998, 0.249961, -1.37506, 0.65, 0.425715, -1.06094, -0.65, 0.649917, 0.49769, -0.65, 0.526703, -0.886022, -0.65, 0.539908, -0.785033, -0.550108, 0.649917, -1.27519, 0.65, 0.48774, -0.980036, 0.124961, 0.274976, -1.425, -0.65, 0.149995, -1.27519, -0.620732, 0.249961, -1.34577, -0.550108, 0.149995, -1.37506, -0.175098, 0.149995, -1.425, 0.174971, 0.224946, -1.425, -0.65, 0.48774, -0.980036, -0.125088, 0.274976, -1.425, -0.550108, 0.249961, -1.37506, -0.65, 0.249961, -1.27519, -0.65, 0.425715, -1.06094, -0.175098, 0.224946, -1.425)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_50v30"]
+points = PackedVector3Array(0.65, 0.24996085, 1.274912, 0.6206049, 0.24996085, 1.3454925, 0.65, 0.049936377, 1.274912, 0.65, 0.42571458, 1.1105963, 0.6206049, 0.049936377, 1.3454925, 0.5499804, 0.44998533, 1.3248485, 0.5499804, 0.24996085, 1.3747848, 0.12496084, 0, 1.4247211, 0.65, 0.049936377, -0.48513603, 0.65, 0.48773983, 1.0299727, 0.5499804, 0.049936377, 1.3747848, -0.55010766, 0.44998533, 1.3248485, 0.12496084, 0.1749168, 1.4247211, 0.65, 0.52670324, 0.93567955, 0.44996083, 0.949907, 0.19779277, 0.17497063, 0.12498043, 1.4247211, -0.1250881, 0, 1.4247211, 0.12496084, 0, 1.3747848, 0.17497063, 0.049936377, 1.4247211, 0.39995098, 0.049936377, -1.0852095, 0.6206049, 0.1499951, -1.3457714, 0.65, 0.1499951, -1.275191, -0.65, 0.52670324, 0.93567955, -0.65, 0.48773983, 1.0299727, -0.65, 0.42571458, 1.1105963, -0.6207322, 0.24996085, 1.3454925, -0.55010766, 0.24996085, 1.3747848, -0.1250881, 0.1749168, 1.4247211, -0.45008808, 0.949907, 0.19779277, 0.65, 0.6499168, 0.59784186, 0.44996083, 0.949907, -0.90778196, -0.17509788, 0.049936377, 1.4247211, -0.55010766, 0.049936377, 1.3747848, -0.6207322, 0.049936377, 1.3454925, -0.65, 0.049936377, 1.274912, -0.1250881, 0, 1.3747848, -0.4000783, 0.049936377, -1.0852095, 0.12496084, 0.09996574, -1.4250001, 0.5499804, 0.1499951, -1.3750637, 0.6206049, 0.24996085, -1.3457714, 0.65, 0.24996085, -1.275191, -0.65, 0.6499168, 0.59784186, -0.65, 0.24996085, 1.274912, -0.17509788, 0.12498043, 1.4247211, -0.45008808, 0.949907, -0.90778196, 0.65, 0.6499168, 0.49768996, 0.65, 0.539908, -0.7850333, 0.65, 0.52670324, -0.886022, 0.5499804, 0.6499168, -1.275191, -0.65, 0.049936377, -0.48513603, -0.6207322, 0.1499951, -1.3457714, -0.1250881, 0.09996574, -1.4250001, 0.17497063, 0.1499951, -1.4250001, 0.5499804, 0.24996085, -1.3750637, 0.65, 0.42571458, -1.0609387, -0.65, 0.6499168, 0.49768996, -0.65, 0.52670324, -0.886022, -0.65, 0.539908, -0.7850333, -0.55010766, 0.6499168, -1.275191, 0.65, 0.48773983, -0.98003626, 0.12496084, 0.27497554, -1.4250001, -0.65, 0.1499951, -1.275191, -0.6207322, 0.24996085, -1.3457714, -0.55010766, 0.1499951, -1.3750637, -0.17509788, 0.1499951, -1.4250001, 0.17497063, 0.22494617, -1.4250001, -0.65, 0.48773983, -0.98003626, -0.1250881, 0.27497554, -1.4250001, -0.55010766, 0.24996085, -1.3750637, -0.65, 0.24996085, -1.275191, -0.65, 0.42571458, -1.0609387, -0.17509788, 0.22494617, -1.4250001)
 
 [node name="car" type="VehicleBody3D" node_paths=PackedStringArray("WheelFl", "WheelFr", "WheelBl", "WheelBr", "Camera", "CameraStick", "CameraStickBase", "EngineSound")]
+mass = 32.0
 physics_material_override = SubResource("PhysicsMaterial_k61xc")
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0.1, -0.2)
+center_of_mass = Vector3(0, 0.08, -0.16)
 continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.05
@@ -53,90 +54,95 @@ SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.140863, -0.0268662)
-shape = SubResource("ConvexPolygonShape3D_7822p")
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.120000005, -0.020000001)
+shape = SubResource("ConvexPolygonShape3D_50v30")
 
 [node name="wheel_bl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.335, -0.808228)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.415, 0.24174961, -0.64836186)
 use_as_traction = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.3
-wheel_rest_length = 0.1
+wheel_radius = 0.24
+wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
+suspension_travel = 0.16
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_bl"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.08, 0, 0)
 remote_path = NodePath("../../hatchback-sports/wheel-back-left")
 
 [node name="wheel_br" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.335, -0.808)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.24174961, -0.64836186)
 use_as_traction = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.3
-wheel_rest_length = 0.1
+wheel_radius = 0.24
+wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
+suspension_travel = 0.16
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_br"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.08, 0, 0)
 remote_path = NodePath("../../hatchback-sports/wheel-back-right")
 
 [node name="wheel_fl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414612, 0.335, 0.810471)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.415, 0.24174961, 0.648)
 use_as_steering = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.3
-wheel_rest_length = 0.12
+wheel_radius = 0.24
+wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
+suspension_travel = 0.16
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_fl"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.08, 0, 0)
 remote_path = NodePath("../../hatchback-sports/wheel-front-left")
 
 [node name="wheel_fr" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.335, 0.810698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415, 0.24174961, 0.648)
 use_as_steering = true
 wheel_roll_influence = 1.0
-wheel_radius = 0.3
-wheel_rest_length = 0.12
+wheel_radius = 0.24
+wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
+suspension_travel = 0.16
 suspension_stiffness = 100.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="wheel_fr"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.08, 0, 0)
 remote_path = NodePath("../../hatchback-sports/wheel-front-right")
 
 [node name="hatchback-sports" parent="." instance=ExtResource("2_eauv3")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
 [node name="wheel-front-left" parent="hatchback-sports" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314612, 0.335, 0.810471)
+transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, 0.41875, 0.30218703, 0.81)
 
 [node name="wheel-back-right" parent="hatchback-sports" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315, 0.335, -0.808)
+transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, -0.41875, 0.30218703, -0.81045234)
 
 [node name="wheel-back-left" parent="hatchback-sports" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314612, 0.335, -0.808228)
+transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, 0.41875, 0.30218703, -0.81045234)
 
 [node name="wheel-front-right" parent="hatchback-sports" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315, 0.335, 0.810698)
+transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, -0.41875, 0.30218703, 0.81)
 
 [node name="CameraMover" type="RemoteTransform3D" parent="."]
 unique_name_in_owner = true

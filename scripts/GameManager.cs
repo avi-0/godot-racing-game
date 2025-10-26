@@ -93,7 +93,6 @@ public partial class GameManager : Node
 
         var scene = new PackedScene();
         GD.Print($"Packing: {scene.Pack(TrackNode)}");
-        
         GD.Print($"Saving: {ResourceSaver.Save(scene, path)}");
     }
 

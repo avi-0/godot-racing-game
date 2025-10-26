@@ -6,7 +6,7 @@ namespace racingGame;
 public partial class Car : VehicleBody3D
 {
     private const float MouseSens = 1.0f;
-    private const float EngineForceForward = 90.0f;
+    private const float EngineForceForward = 72.0f;
     private const float DriftBonus = 1.0f;
     private const float BrakeForce = 0.5f;
     private const float NormalSlip = 2.0f;
