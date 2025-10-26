@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Fractural.Tasks;
 using Godot;
@@ -8,8 +9,6 @@ namespace racinggame;
 
 public partial class Editor : Node
 {
-	public const float CellSize = 8;
-	public const float CellHeight = 1;
 	public const string BlockPath = "res://blocks/";
 	
 	[Export] public float CameraSpeed;
@@ -36,17 +35,29 @@ public partial class Editor : Node
 
 	[Export] public Control EditorUINode;
 
+	[Export] public LineEdit GridSizeLabel;
+
+	[Export] public Button GridSizeDecButton;
+	
+	[Export] public Button GridSizeIncButton;
+
 	private Node3D TrackNode => GameManager.Singleton.TrackNode;
 	
-	private Block Cursor;
+	private Block _cursor;
 
 	private Block _hoveredBlock;
 
-	private int YLevel = 0;
+	private float _yLevel = 0;
+
+	private float YLevelRounded => _cellHeight * float.Round(_yLevel / _cellHeight);
 
 	private int _rotation = 0;
 
 	private bool _isRunning = true;
+
+	private int _gridSizeSetting;
+	private float _cellSize = 8;
+	private float _cellHeight = 1;
 	
 	public bool IsRunning
 	{
@@ -76,7 +87,7 @@ public partial class Editor : Node
 	}
 
 	private Mode _mode = Mode.Normal;
-	
+
 	public override void _Ready()
 	{
 		PlayButton.Pressed += PlayButtonOnPressed;
@@ -89,11 +100,24 @@ public partial class Editor : Node
 		ConfirmNewDialog.Confirmed += ConfirmNewDialogOnConfirmed;
 		FileDialog.FileSelected += FileDialogOnFileSelected;
 
+		SetGridSizeSetting(3);
+		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
+		GridSizeIncButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting + 1); };
+
 		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
 		
 		CreateCursor();
 		
 		UpdateBlockList();
+	}
+
+	private void SetGridSizeSetting(int setting)
+	{
+		setting = int.Clamp(setting, -3, 3);
+		_gridSizeSetting = setting;
+		_cellSize = Mathf.Pow(2, setting);
+		_cellHeight = float.Min(_cellSize, 1f);
+		GridSizeLabel.Text = _cellSize.ToString();
 	}
 
 	private void ConfirmNewDialogOnConfirmed()
@@ -184,8 +208,8 @@ public partial class Editor : Node
 		
 		UpdateCamera((float) delta);
 
-		Cursor.GlobalPosition = GetGridMousePosition();
-		Cursor.Visible = true;
+		_cursor.GlobalPosition = GetGridMousePosition();
+		_cursor.Visible = true;
 
 		if (_hoveredBlock != null && !IsInstanceValid(_hoveredBlock))
 		{
@@ -194,7 +218,7 @@ public partial class Editor : Node
 		
 		if (_mode == Mode.Erase)
 		{
-			Cursor.Visible = false;
+			_cursor.Visible = false;
 			
 			if (_hoveredBlock != null)
 				_hoveredBlock.SetMaterialOverlay(BlockEraseHighlightMaterial);
@@ -209,22 +233,22 @@ public partial class Editor : Node
 
 	private void CreateCursor()
 	{
-		Cursor?.QueueFree();
+		_cursor?.QueueFree();
 
-		Cursor = BlockScene.Instantiate<Block>();
+		_cursor = BlockScene.Instantiate<Block>();
 		
-		AddChild(Cursor);
-		Cursor.RotateY(-float.DegreesToRadians(90) * _rotation);
-		Cursor.SetMaterialOverlay(BlockHighlightMaterial);
+		AddChild(_cursor);
+		_cursor.RotateY(-float.DegreesToRadians(90) * _rotation);
+		_cursor.SetMaterialOverlay(BlockHighlightMaterial);
 	}
 
 	private void DestroyCursor()
 	{
-		if (Cursor != null)
+		if (_cursor != null)
 		{
-			RemoveChild(Cursor);
-			Cursor.QueueFree();
-			Cursor = null;
+			RemoveChild(_cursor);
+			_cursor.QueueFree();
+			_cursor = null;
 		}
 	}
 
@@ -232,20 +256,20 @@ public partial class Editor : Node
 	{
 		if (Input.IsKeyPressed(Key.Shift))
 		{
-			var existingBlock = GetBlockAtPosition(Cursor.GlobalPosition);
+			var existingBlock = GetBlockAtPosition(_cursor.GlobalPosition);
 			if (existingBlock != null)
 			{
 				EraseBlock(existingBlock);
 			}
 		}
 		
-		Cursor.SetMaterialOverlay(null);
-		Cursor.Reparent(TrackNode, true);
-		ConnectBlockSignals(Cursor);
+		_cursor.SetMaterialOverlay(null);
+		_cursor.Reparent(TrackNode, true);
+		ConnectBlockSignals(_cursor);
 		
 		UiSoundPlayer.__Instance.PlayBlockPlaced();
 
-		Cursor = null;
+		_cursor = null;
 		CreateCursor();
 	}
 
@@ -268,8 +292,8 @@ public partial class Editor : Node
 
 	private void RotateCursor()
 	{
-		Cursor.RotateY(-float.DegreesToRadians(90));
-		Cursor.GlobalRotationDegrees = Cursor.GlobalRotationDegrees.Round();
+		_cursor.RotateY(-float.DegreesToRadians(90));
+		_cursor.GlobalRotationDegrees = _cursor.GlobalRotationDegrees.Round();
 		
 		_rotation = (_rotation + 1) % 4;
 	}
@@ -292,7 +316,7 @@ public partial class Editor : Node
 
 	private Vector2 ProjectMousePosition()
 	{
-		var plane = new Plane(Vector3.Up, new Vector3(0, YLevel * CellHeight, 0));
+		var plane = new Plane(Vector3.Up, new Vector3(0, YLevelRounded, 0));
 		var mousePosition = EditorViewport.GetMousePosition();
 		var from = Camera.ProjectRayOrigin(mousePosition);
 		var dir = Camera.ProjectRayNormal(mousePosition);
@@ -305,9 +329,9 @@ public partial class Editor : Node
 	{
 		var pos = ProjectMousePosition();
 		return new Vector3(
-			CellSize * (float.Round(pos.X / CellSize - 0.5f) + 0.5f),
-			YLevel * CellHeight,
-			CellSize * (float.Round(pos.Y / CellSize - 0.5f) + 0.5f));
+			_cellSize * float.Round(pos.X / _cellSize),
+			YLevelRounded,
+			_cellSize * float.Round(pos.Y / _cellSize));
 	}
 
 	public void ViewportInput(InputEvent @event)
@@ -331,14 +355,14 @@ public partial class Editor : Node
 
 				if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
 				{
-					YLevel--;
-					Camera.GlobalPosition += CellHeight * Vector3.Down;
+					_yLevel -= _cellHeight;
+					Camera.GlobalPosition += _cellHeight * Vector3.Down;
 				}
 
 				if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
 				{
-					YLevel++;
-					Camera.GlobalPosition += CellHeight * Vector3.Up;
+					_yLevel += _cellHeight;
+					Camera.GlobalPosition += _cellHeight * Vector3.Up;
 				}
 			}
 		}
