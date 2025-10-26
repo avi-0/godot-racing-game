@@ -265,6 +265,7 @@ public partial class Editor : Node
 		
 		_cursor.SetMaterialOverlay(null);
 		_cursor.Reparent(TrackNode, true);
+		_cursor.Owner = TrackNode;
 		ConnectBlockSignals(_cursor);
 		
 		UiSoundPlayer.__Instance.PlayBlockPlaced();

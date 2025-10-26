@@ -29,6 +29,7 @@ public partial class BlockRecord : Resource
         var camera = root.GetNode<Camera3D>("Camera3D");
         
         var node = new Block();
+        node.Name = SourceScene.ResourcePath.GetFile().GetBaseName();
         modelBase.AddChild(node);
 
         // this adds the node to the EDITED scene, not actually needed but lets us see the node in the editor
