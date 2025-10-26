@@ -116,7 +116,7 @@ public partial class Editor : Node
 		setting = int.Clamp(setting, -3, 3);
 		_gridSizeSetting = setting;
 		_cellSize = Mathf.Pow(2, setting);
-		_cellHeight = float.Min(_cellSize, 1f);
+		_cellHeight = float.Min(_cellSize, 2f);
 		GridSizeLabel.Text = _cellSize.ToString();
 	}
 
@@ -341,14 +341,14 @@ public partial class Editor : Node
 		
 		if (_mode == Mode.Normal)
 		{
-			if (@event is InputEventMouseButton mouseEvent)
+			if (@event is InputEventMouseButton mouseEvent && mouseEvent.IsPressed())
 			{
-				if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.IsPressed())
+				if (mouseEvent.ButtonIndex == MouseButton.Left)
 				{
 					PlaceCursorBlock();
 				}
 
-				if (mouseEvent.ButtonIndex == MouseButton.Right && mouseEvent.IsPressed())
+				if (mouseEvent.ButtonIndex == MouseButton.Right)
 				{
 					RotateCursor();
 				}
