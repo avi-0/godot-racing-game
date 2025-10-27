@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5ka32jnsmy0s"]
+
+[ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/Menu.cs" id="1_vjb58"]
+[ext_resource type="StyleBox" uid="uid://ecyclfrvfw84" path="res://scenes/menu/menu_button.tres" id="1_yqeox"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqeox"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_size = 8
+shadow_offset = Vector2(3, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4h3mk"]
+
+[node name="MenuControl" type="Control" node_paths=PackedStringArray("MenuFileDialog")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjb58")
+MenuFileDialog = NodePath("MenuFileDialog")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.5
+offset_right = 35.5
+offset_bottom = 49.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 128
+text = "Машинки"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -486.0
+offset_top = -240.0
+offset_right = 486.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("1_yqeox")
+theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
+text = "Play"
+
+[node name="LoadButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("1_yqeox")
+theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
+text = "Play Local Map
+"
+
+[node name="EditorButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("1_yqeox")
+theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
+text = "Editor
+"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("1_yqeox")
+theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
+text = "Settings
+"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("1_yqeox")
+theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
+text = "Exit
+"
+
+[node name="MenuFileDialog" type="FileDialog" parent="."]
+transparent_bg = true
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+transparent = true
+file_mode = 0
+display_mode = 1
+access = 1
+root_subfolder = "tracks/"
+filters = PackedStringArray("*.tk.tscn;Track Files;application/x-godot-resource")
+hidden_files_toggle_enabled = false
+file_filter_toggle_enabled = false
+favorites_enabled = false
+recent_list_enabled = false
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/EditorButton" to="." method="_on_editor_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="file_selected" from="MenuFileDialog" to="." method="_on_menu_file_dialog_file_selected"]

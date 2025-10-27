@@ -6,6 +6,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]
 friction = 0.1
+bounce = 0.5
 
 [sub_resource type="Curve" id="Curve_eauv3"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -33,7 +34,6 @@ points = PackedVector3Array(0.65, 0.24996085, 1.274912, 0.6206049, 0.24996085, 1
 mass = 32.0
 physics_material_override = SubResource("PhysicsMaterial_k61xc")
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0.08, -0.16)
 continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.05

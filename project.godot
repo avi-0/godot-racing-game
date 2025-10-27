@@ -11,13 +11,21 @@ config_version=5
 [application]
 
 config/name="racistgame"
-run/main_scene="uid://quenom6jkxmi"
+config/version="Alpha 0.1"
+run/main_scene="uid://c5ka32jnsmy0s"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
 
 GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload.cs"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 
 [dotnet]
 
@@ -131,4 +139,9 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
-anti_aliasing/quality/screen_space_aa=1
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/screen_space_aa=2
+
+[xr]
+
+shaders/enabled=true

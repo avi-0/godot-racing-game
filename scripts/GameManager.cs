@@ -11,6 +11,8 @@ public partial class GameManager : Node
     [Export] public PackedScene CarScene;
 
     [Export] public Node3D TrackNode;
+
+    [Export] public Label TimeLabel;
     
     private bool _isPlaying = false;
 
@@ -25,6 +27,18 @@ public partial class GameManager : Node
         
         NewTrack();
     }
+
+    public override void _Process(double delta)
+    {
+        TimeLabel.Text = "";
+        if (_isPlaying == true)
+        {   
+            var RaceTime = DateTime.Now.Subtract(RaceStartTime);
+            TimeLabel.Text =  RaceTime.ToString("mm") + ":" + RaceTime.ToString("ss") + "." + RaceTime.ToString("fff");
+        }   
+    }
+
+    private DateTime RaceStartTime = DateTime.Now;
 
     public void Play()
     {
@@ -44,6 +58,13 @@ public partial class GameManager : Node
         _localCar.PauseRequested += LocalCarOnPauseRequested;
 
         _isPlaying = true;
+
+        RaceStartTime = DateTime.Now;
+    }
+
+    public bool IsPlaying()
+    {
+        return _isPlaying;
     }
 
     private void LocalCarOnPauseRequested()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=19 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
@@ -35,6 +35,9 @@ keycode = 4194306
 [sub_resource type="Shortcut" id="Shortcut_dinhu"]
 events = [SubResource("InputEventKey_kvpfn")]
 
+[sub_resource type="SystemFont" id="SystemFont_kvpfn"]
+font_names = PackedStringArray("Tahoma")
+
 [node name="Game" type="Node"]
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
@@ -43,14 +46,6 @@ Player = NodePath("AudioStreamPlayer")
 BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
-
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode")]
-script = ExtResource("7_trtic")
-TrackTemplatePath = "res://scenes/track_template.tscn"
-CarScene = ExtResource("8_ir15t")
-TrackNode = NodePath("Track")
-
-[node name="Track" type="Node3D" parent="GameManager"]
 
 [node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "PlayButton", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton")]
 physics_interpolation_mode = 2
@@ -165,7 +160,7 @@ mouse_target = true
 handle_input_locally = false
 screen_space_aa = 1
 physics_object_picking = true
-size = Vector2i(972, 574)
+size = Vector2i(1740, 1006)
 render_target_update_mode = 4
 script = ExtResource("12_dinhu")
 
@@ -248,3 +243,29 @@ hidden_files_toggle_enabled = false
 file_filter_toggle_enabled = false
 favorites_enabled = false
 recent_list_enabled = false
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode", "TimeLabel")]
+script = ExtResource("7_trtic")
+TrackTemplatePath = "res://scenes/track_template.tscn"
+CarScene = ExtResource("8_ir15t")
+TrackNode = NodePath("Track")
+TimeLabel = NodePath("TimeLabel")
+
+[node name="Track" type="Node3D" parent="GameManager"]
+
+[node name="TimeLabel" type="Label" parent="GameManager"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -254.5
+offset_top = -175.0
+offset_right = 254.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = SubResource("SystemFont_kvpfn")
+theme_override_font_sizes/font_size = 128
+text = "00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
