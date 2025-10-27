@@ -4,22 +4,15 @@ using System.Collections.Generic;
 namespace racingGame;
 
 public partial class Car : VehicleBody3D
-{
-	private const float MouseSens = 1.0f;
-	private const float EngineForceForward = 90.0f;
-	private const float BrakeForce = 2.00f;
-	private const float NormalSlip = 4.0f;
-	private const float NormalRwSlip = NormalSlip * 0.965f;
-	private const float BrakeFwSlip = NormalSlip * 3.0f;
-	private const float BrakeRwSlip = NormalRwSlip * 0.25f;
-	private const float SteeringSpeed = 400.0f;
-	private const float PitchMaxSpeed = 500f;
-	
+{	
 	[Signal]
 	public delegate void RestartRequestedEventHandler();
 
 	[Signal]
 	public delegate void PauseRequestedEventHandler();
+
+	private const float MouseSens = 1.0f;
+	private const float PitchMaxSpeed = 500f;
 
 	[Export] public VehicleWheel3D WheelFl;
 	[Export] public VehicleWheel3D WheelFr;
@@ -34,7 +27,17 @@ public partial class Car : VehicleBody3D
 	[Export] public Curve SkidToFrictionCurve;
 	[Export] public Curve SpeedToEngineMultCurve;
 
-	
+	[Export] public float EngineForceForward = 90.0f;
+	[Export] public float BrakeForce = 2.00f;
+	[Export] public float NormalSlip = 4.0f;
+	[Export] public float NormalRwSlip = 3.9f;
+	[Export] public float SteeringSpeed = 400.0f;
+	[Export] public float BrakeFwSlipMultiplier = 1.5f;
+	[Export] public float BrakeRwSlipMultiplier = 0.25f;
+
+	private float BrakeFwSlip;
+	private float BrakeRwSlip;
+
 	private bool _isLocallyControlled = true;
 	public bool IsLocallyControlled
 	{
@@ -52,6 +55,9 @@ public partial class Car : VehicleBody3D
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		BrakeFwSlip = NormalSlip * BrakeFwSlipMultiplier;
+		BrakeRwSlip = NormalRwSlip * BrakeRwSlipMultiplier;
 	}
 	
 	public override void _Process(double delta)
