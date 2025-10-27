@@ -6,6 +6,7 @@ using Fractural.Tasks;
 public partial class Menu : Control
 {
 
+	[Export] public PackedScene GameScene;
 	[Export] public FileDialog MenuFileDialog;
 
 	// Called when the node enters the scene tree for the first time.
@@ -64,7 +65,7 @@ public partial class Menu : Control
 
 	private void LoadGame()
 	{
-		GameInstance = GD.Load<PackedScene>("res://scenes/game.tscn").Instantiate();
+		GameInstance = GameScene.Instantiate<Game>();
 		GetTree().Root.AddChild(GameInstance);
 
 		Visible = false;
@@ -78,16 +79,14 @@ public partial class Menu : Control
 		Visible = true;
 	}
 
-	private async void OpenTrack(string path)
+	private async GDTaskVoid OpenTrack(string path)
 	{
 		LoadGame();
 
-		var GameManager = GameInstance.GetNode<GameManager>("GameManager");
 		GameManager.Singleton.OpenTrack(path);
 		GameManager.Singleton.Play();
 
-		var EditorUI = GameInstance.GetNode<Control>("Editor/EditorUI");
-		EditorUI.Visible = false;
+		Editor.Hueditor.ToggleEditor(false);
 
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
 		UnloadGame();

@@ -1,7 +1,7 @@
 using System.Linq;
 using Godot;
 
-namespace racinggame;
+namespace racingGame;
 
 [GlobalClass]
 public partial class Block : Node3D

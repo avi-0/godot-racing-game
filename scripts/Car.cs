@@ -7,11 +7,11 @@ public partial class Car : VehicleBody3D
 {
 	private const float MouseSens = 1.0f;
 	private const float EngineForceForward = 90.0f;
-	private const float BrakeForce = 2.50f;
+	private const float BrakeForce = 2.00f;
 	private const float NormalSlip = 4.0f;
 	private const float NormalRwSlip = NormalSlip * 0.965f;
-	private const float BrakeFwSlip = NormalSlip * 0.3f;
-	private const float BrakeRwSlip = NormalRwSlip * 0.30f;
+	private const float BrakeFwSlip = NormalSlip * 3.0f;
+	private const float BrakeRwSlip = NormalRwSlip * 0.25f;
 	private const float SteeringSpeed = 400.0f;
 	private const float PitchMaxSpeed = 500f;
 	
@@ -134,7 +134,15 @@ public partial class Car : VehicleBody3D
 			bool applySlip = false;
 			if (GetRpm() > 10)
 			{
-				Brake = BrakeForce - Mathf.Abs(targetSteering*3);
+				if (targetSteering == 0)
+				{
+					Brake = BrakeForce;
+				}
+				else
+				{
+					Brake = BrakeForce/4;
+				}
+
 				applySlip = true;
 			}
 			else

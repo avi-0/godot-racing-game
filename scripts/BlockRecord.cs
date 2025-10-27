@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Fractural.Tasks;
 
-namespace racinggame;
+namespace racingGame;
 
 [GlobalClass]
 [Tool]

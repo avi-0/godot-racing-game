@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=6 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/Menu.cs" id="1_vjb58"]
 [ext_resource type="StyleBox" uid="uid://ecyclfrvfw84" path="res://scenes/menu/menu_button.tres" id="1_yqeox"]
+[ext_resource type="PackedScene" uid="uid://quenom6jkxmi" path="res://scenes/game.tscn" id="2_con2f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqeox"]
 bg_color = Color(0, 0, 0, 1)
@@ -23,6 +24,7 @@ offset_left = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vjb58")
+GameScene = ExtResource("2_con2f")
 MenuFileDialog = NodePath("MenuFileDialog")
 
 [node name="Panel" type="Panel" parent="."]

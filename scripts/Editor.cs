@@ -5,12 +5,14 @@ using System.Linq;
 using Fractural.Tasks;
 using Godot;
 
-namespace racinggame;
+namespace racingGame;
 
 public partial class Editor : Node
 {
 	public const string BlockPath = "res://blocks/";
-	
+
+	public static Editor Hueditor;
+
 	[Export] public float CameraSpeed;
 
 	[Export] public EditorViewport EditorViewport;
@@ -90,6 +92,8 @@ public partial class Editor : Node
 
 	public override void _Ready()
 	{
+		Hueditor = this;
+
 		PlayButton.Pressed += PlayButtonOnPressed;
 		EditorViewport.Input += ViewportInput;
 		
@@ -160,6 +164,11 @@ public partial class Editor : Node
 		{
 			GameManager.Singleton.SaveTrack(path);
 		}
+	}
+
+	public void ToggleEditor(bool Visibility)
+	{
+		IsRunning = Visibility;
 	}
 
 	private void PlayButtonOnPressed()

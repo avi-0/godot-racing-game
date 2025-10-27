@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=20 format=3 uid="uid://quenom6jkxmi"]
 
+[ext_resource type="Script" uid="uid://bo8knqnnacerb" path="res://scripts/Game.cs" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="4_kvpfn"]
@@ -38,7 +39,9 @@ events = [SubResource("InputEventKey_kvpfn")]
 [sub_resource type="SystemFont" id="SystemFont_kvpfn"]
 font_names = PackedStringArray("Tahoma")
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" node_paths=PackedStringArray("Hueditor")]
+script = ExtResource("1_dinhu")
+Hueditor = NodePath("Editor")
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("1_gee14")
