@@ -11,6 +11,8 @@ public partial class Editor : Node
 {
 	public const string BlockPath = "res://blocks/";
 
+	public const string CarsPath = "res://scenes/cars/";
+
 	public static Editor Hueditor;
 
 	[Export] public float CameraSpeed;
@@ -34,6 +36,10 @@ public partial class Editor : Node
 	[Export] public ConfirmationDialog ConfirmNewDialog;
 
 	[Export] public Button PlayButton;
+
+	[Export] public Control CarSelect;
+
+	[Export] public Container CarSelectContainer;
 
 	[Export] public Control EditorUINode;
 
@@ -113,6 +119,8 @@ public partial class Editor : Node
 		CreateCursor();
 		
 		UpdateBlockList();
+	
+		LoadCarList();
 	}
 
 	private void SetGridSizeSetting(int setting)
@@ -173,7 +181,8 @@ public partial class Editor : Node
 
 	private void PlayButtonOnPressed()
 	{
-		PlayButtonOnPressedAsync().Forget();
+		CarSelect.Visible = true;
+		DestroyCursor();
 	}
 
 	private async GDTaskVoid PlayButtonOnPressedAsync()
@@ -446,5 +455,27 @@ public partial class Editor : Node
 		BlockScene = blockRecord.Scene;
 		
 		CreateCursor();
+	}
+
+	private void LoadCarList()
+	{
+		var paths = ResourceLoader.ListDirectory(CarsPath).ToList().Order();
+
+		foreach (var carPath in paths)
+		{
+			var button = new Button();
+			button.CustomMinimumSize = 64 * Vector2.One;
+			button.Text = carPath;
+			button.Pressed += () => OnCarButtonPressed(carPath);
+
+			CarSelectContainer.AddChild(button);
+		}
+	}
+
+	private void OnCarButtonPressed(string carPath)
+	{
+		CarSelect.Visible = false;
+		GameManager.Singleton.SelectCarScene(CarsPath + carPath);
+		PlayButtonOnPressedAsync().Forget();
 	}
 }

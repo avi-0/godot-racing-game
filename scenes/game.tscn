@@ -7,11 +7,11 @@
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
 [ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="7_vtaks"]
-[ext_resource type="PackedScene" uid="uid://cj8dxddi6p0lx" path="res://scenes/car.tscn" id="8_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bfxxyh44b8xbw" path="res://blocks/cityroads/scenes/road-straight.tscn" id="8_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://dyx154afg0s1q" path="res://assets/godot-icons/RangeSliderLeft.svg" id="9_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://hmfs1b0dmqq1" path="res://assets/godot-icons/RangeSliderRight.svg" id="10_dinhu"]
 [ext_resource type="Script" uid="uid://ec3tpqskxxmf" path="res://scenes/EditorViewport.cs" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://b5kxpk7e7n6ri" path="res://scenes/cars/hatchback.tscn" id="12_kvuet"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_dinhu"]
 device = -1
@@ -38,10 +38,10 @@ events = [SubResource("InputEventKey_kvpfn")]
 
 [sub_resource type="SystemFont" id="SystemFont_kvpfn"]
 font_names = PackedStringArray("Tahoma")
+subpixel_positioning = 0
 
-[node name="Game" type="Node" node_paths=PackedStringArray("Hueditor")]
+[node name="Game" type="Node"]
 script = ExtResource("1_dinhu")
-Hueditor = NodePath("Editor")
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("1_gee14")
@@ -50,7 +50,7 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "PlayButton", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton")]
+[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "PlayButton", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton")]
 physics_interpolation_mode = 2
 script = ExtResource("4_kvpfn")
 CameraSpeed = 48.0
@@ -64,6 +64,8 @@ FileMenu = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBa
 FileDialog = NodePath("FileDialog")
 ConfirmNewDialog = NodePath("ConfirmNewDialog")
 PlayButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer/PlayButton")
+CarSelect = NodePath("CarSelect")
+CarSelectContainer = NodePath("CarSelect/GridContainer")
 EditorUINode = NodePath("EditorUI")
 GridSizeLabel = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit")
 GridSizeDecButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/DecreaseButton")
@@ -247,10 +249,41 @@ file_filter_toggle_enabled = false
 favorites_enabled = false
 recent_list_enabled = false
 
+[node name="CarSelect" type="Control" parent="Editor"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -422.1
+offset_top = -244.79999
+offset_right = 422.1
+offset_bottom = 244.79999
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Editor/CarSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Editor/CarSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode", "TimeLabel")]
 script = ExtResource("7_trtic")
 TrackTemplatePath = "res://scenes/track_template.tscn"
-CarScene = ExtResource("8_ir15t")
+CarScene = ExtResource("12_kvuet")
 TrackNode = NodePath("Track")
 TimeLabel = NodePath("TimeLabel")
 

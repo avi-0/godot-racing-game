@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cj8dxddi6p0lx"]
+[gd_scene load_steps=10 format=3 uid="uid://b5kxpk7e7n6ri"]
 
 [ext_resource type="Script" uid="uid://dwmxm5gl3jjr3" path="res://scripts/Car.cs" id="1_jxqfv"]
 [ext_resource type="PackedScene" uid="uid://b77pygol30lhj" path="res://assets/carkit/hatchback-sports.glb" id="2_eauv3"]
@@ -52,6 +52,14 @@ SpeedToPitchCurve = SubResource("Curve_eauv3")
 SpeedToSteeringCurve = SubResource("Curve_mk5fm")
 SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
+EngineForceForward = 80.0
+BrakeForce = 1.5
+NormalSlip = 3.9
+NormalRwSlip = 3.8
+SteeringSpeed = 100.0
+BrakeFwSlipMultiplier = 0.4
+BrakeRwSlipMultiplier = 0.4
+BrakeForceInTurnMultiplier = 0.4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.120000005, -0.020000001)

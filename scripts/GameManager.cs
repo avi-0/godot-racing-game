@@ -40,6 +40,11 @@ public partial class GameManager : Node
 
     private DateTime RaceStartTime = DateTime.Now;
 
+    public void SelectCarScene(string scenePath)
+    {
+        CarScene = GD.Load<PackedScene>(scenePath);
+    }
+
     public void Play()
     {
         if (_localCar != null)

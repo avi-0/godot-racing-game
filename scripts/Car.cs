@@ -34,6 +34,7 @@ public partial class Car : VehicleBody3D
 	[Export] public float SteeringSpeed = 400.0f;
 	[Export] public float BrakeFwSlipMultiplier = 1.5f;
 	[Export] public float BrakeRwSlipMultiplier = 0.25f;
+	[Export] public float BrakeForceInTurnMultiplier = 0.25f;
 
 	private float BrakeFwSlip;
 	private float BrakeRwSlip;
@@ -146,10 +147,9 @@ public partial class Car : VehicleBody3D
 				}
 				else
 				{
-					Brake = BrakeForce/4;
+					Brake = BrakeForce*BrakeForceInTurnMultiplier;
+					applySlip = true;
 				}
-
-				applySlip = true;
 			}
 			else
 			{
