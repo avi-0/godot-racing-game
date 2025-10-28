@@ -52,14 +52,14 @@ SpeedToPitchCurve = SubResource("Curve_eauv3")
 SpeedToSteeringCurve = SubResource("Curve_mk5fm")
 SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
-EngineForceForward = 80.0
-BrakeForce = 1.5
-NormalSlip = 3.9
-NormalRwSlip = 3.8
-SteeringSpeed = 100.0
-BrakeFwSlipMultiplier = 0.4
-BrakeRwSlipMultiplier = 0.4
-BrakeForceInTurnMultiplier = 0.4
+EngineForceForward = 72.0
+BrakeForce = 0.5
+NormalSlip = 2.0
+NormalRwSlip = 1.95
+SteeringSpeed = 200.0
+BrakeFwSlipMultiplier = 0.2
+BrakeRwSlipMultiplier = 0.2
+BrakeForceInTurnMultiplier = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.120000005, -0.020000001)
