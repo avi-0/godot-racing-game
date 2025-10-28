@@ -13,6 +13,8 @@ public partial class GameManager : Node
     [Export] public Node3D TrackNode;
 
     [Export] public Label TimeLabel;
+
+    [Export] public Label SpeedLabel;
     
     private bool _isPlaying = false;
 
@@ -47,6 +49,8 @@ public partial class GameManager : Node
 
     public void Play()
     {
+        SpeedLabel.Visible = true;
+
         if (_localCar != null)
         {
             RemoveChild(_localCar);
@@ -79,6 +83,8 @@ public partial class GameManager : Node
 
     public void Stop()
     {
+        SpeedLabel.Visible = false;
+
         if (_localCar != null)
         {
             RemoveChild(_localCar);

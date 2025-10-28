@@ -182,7 +182,7 @@ public partial class Editor : Node
 	private void PlayButtonOnPressed()
 	{
 		CarSelect.Visible = true;
-		DestroyCursor();
+		//DestroyCursor();
 	}
 
 	private async GDTaskVoid PlayButtonOnPressedAsync()

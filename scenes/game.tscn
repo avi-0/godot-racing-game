@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=21 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://bo8knqnnacerb" path="res://scripts/Game.cs" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
@@ -39,6 +39,9 @@ events = [SubResource("InputEventKey_kvpfn")]
 [sub_resource type="SystemFont" id="SystemFont_kvpfn"]
 font_names = PackedStringArray("Tahoma")
 subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_dinhu"]
+font_names = PackedStringArray("Tahoma")
 
 [node name="Game" type="Node"]
 script = ExtResource("1_dinhu")
@@ -280,12 +283,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode", "TimeLabel")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode", "TimeLabel", "SpeedLabel")]
 script = ExtResource("7_trtic")
 TrackTemplatePath = "res://scenes/track_template.tscn"
 CarScene = ExtResource("12_kvuet")
 TrackNode = NodePath("Track")
 TimeLabel = NodePath("TimeLabel")
+SpeedLabel = NodePath("SpeedLabel")
 
 [node name="Track" type="Node3D" parent="GameManager"]
 
@@ -303,5 +307,19 @@ grow_vertical = 0
 theme_override_fonts/font = SubResource("SystemFont_kvpfn")
 theme_override_font_sizes/font_size = 128
 text = "00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="GameManager"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -156.0
+offset_right = 271.0
+grow_vertical = 0
+theme_override_fonts/font = SubResource("SystemFont_dinhu")
+theme_override_font_sizes/font_size = 128
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1

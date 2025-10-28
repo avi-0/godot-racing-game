@@ -112,6 +112,8 @@ public partial class Car : VehicleBody3D
 		float speediness = GetSpeediness();
 		EngineSound.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
 		
+		GameManager.Singleton.SpeedLabel.Text = Mathf.Floor(LinearVelocity.Length()*5).ToString();
+
 		EngineForce = 0;
 		float engineSoundTarget = 0.5f;
 		if (Input.IsActionPressed("throttle"))
