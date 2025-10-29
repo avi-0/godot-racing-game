@@ -3,32 +3,19 @@ using System;
 using racingGame;
 using Fractural.Tasks;
 
-public partial class Menu : Control
+public partial class MainMenu : Control
 {
-
-	[Export] public PackedScene GameScene;
 	[Export] public FileDialog MenuFileDialog;
-
-	// Called when the node enters the scene tree for the first time.
+	
 	public override void _Ready()
 	{
+		Editor.Singleton.IsRunning = false;
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 	public override void _Process(double delta)
 	{
-		if (InEditor && Input.IsKeyPressed(Key.Escape) && !GameInstance.GetNode<GameManager>("GameManager").IsPlaying())
-		{
-			InEditor = false;
-			UnloadGame();
-		}
 	}
-
-	private bool InEditor = false;
-
-	private Node GameInstance;
-
-	//--USER INPUTS
+	
 	public void _on_play_button_pressed()
 	{
 		OpenTrack("res://tracks/TestTrack.tk.tscn");
@@ -36,8 +23,7 @@ public partial class Menu : Control
 
 	public async void _on_editor_button_pressed()
 	{
-		LoadGame();
-		InEditor = true;
+		OpenEditor().Forget();
 	}
 
 	public void _on_load_button_pressed()
@@ -59,36 +45,30 @@ public partial class Menu : Control
 	public void _on_menu_file_dialog_file_selected(string path)
 	{
 		MenuFileDialog.Hide();
-		OpenTrack(path);
+		OpenTrack(path).Forget();
 	}
-	//--
 
-	private void LoadGame()
+	private async GDTaskVoid OpenEditor()
 	{
-		GameInstance = GameScene.Instantiate<Game>();
-		GetTree().Root.AddChild(GameInstance);
-
 		Visible = false;
-	}
 
-	private void UnloadGame()
-	{
-		GameInstance.QueueFree();
-		GetTree().Root.RemoveChild(GameInstance);
+		GameManager.Singleton.NewTrack();
+		Editor.Singleton.IsRunning = true;
+
+		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
 
 		Visible = true;
 	}
 
 	private async GDTaskVoid OpenTrack(string path)
 	{
-		LoadGame();
+		Visible = false;
 
 		GameManager.Singleton.OpenTrack(path);
 		GameManager.Singleton.Play();
 
-		Editor.Hueditor.ToggleEditor(false);
-
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
-		UnloadGame();
+
+		Visible = true;
 	}
 }

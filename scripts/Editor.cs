@@ -13,7 +13,7 @@ public partial class Editor : Node
 
 	public const string CarsPath = "res://scenes/cars/";
 
-	public static Editor Hueditor;
+	public static Editor Singleton;
 
 	[Export] public float CameraSpeed;
 
@@ -48,6 +48,9 @@ public partial class Editor : Node
 	[Export] public Button GridSizeDecButton;
 	
 	[Export] public Button GridSizeIncButton;
+	
+	[Signal]
+	public delegate void ExitedEventHandler();
 
 	private Node3D TrackNode => GameManager.Singleton.TrackNode;
 	
@@ -82,6 +85,8 @@ public partial class Editor : Node
 			else
 			{
 				DestroyCursor();
+				
+				EmitSignalExited();
 			}
 			
 			_isRunning = value;
@@ -98,7 +103,7 @@ public partial class Editor : Node
 
 	public override void _Ready()
 	{
-		Hueditor = this;
+		Singleton = this;
 
 		PlayButton.Pressed += PlayButtonOnPressed;
 		EditorViewport.Input += ViewportInput;
@@ -477,5 +482,16 @@ public partial class Editor : Node
 		CarSelect.Visible = false;
 		GameManager.Singleton.SelectCarScene(CarsPath + carPath);
 		PlayButtonOnPressedAsync().Forget();
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event is InputEventKey keyEvent && keyEvent.IsReleased())
+		{
+			if (keyEvent.PhysicalKeycode == Key.Escape)
+			{
+				IsRunning = false;
+			}
+		}
 	}
 }

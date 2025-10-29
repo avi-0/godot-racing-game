@@ -1,40 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=9 format=3 uid="uid://quenom6jkxmi"]
 
-[ext_resource type="Script" uid="uid://bo8knqnnacerb" path="res://scripts/Game.cs" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
-[ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="4_kvpfn"]
-[ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="7_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
-[ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="7_vtaks"]
-[ext_resource type="PackedScene" uid="uid://bfxxyh44b8xbw" path="res://blocks/cityroads/scenes/road-straight.tscn" id="8_kvpfn"]
-[ext_resource type="Texture2D" uid="uid://dyx154afg0s1q" path="res://assets/godot-icons/RangeSliderLeft.svg" id="9_kvpfn"]
-[ext_resource type="Texture2D" uid="uid://hmfs1b0dmqq1" path="res://assets/godot-icons/RangeSliderRight.svg" id="10_dinhu"]
-[ext_resource type="Script" uid="uid://ec3tpqskxxmf" path="res://scenes/EditorViewport.cs" id="12_dinhu"]
 [ext_resource type="PackedScene" uid="uid://b5kxpk7e7n6ri" path="res://scenes/cars/hatchback.tscn" id="12_kvuet"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_dinhu"]
-device = -1
-keycode = 49
-unicode = 49
-
-[sub_resource type="Shortcut" id="Shortcut_kvuet"]
-events = [SubResource("InputEventKey_dinhu")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_kvuet"]
-device = -1
-keycode = 50
-unicode = 50
-
-[sub_resource type="Shortcut" id="Shortcut_trtic"]
-events = [SubResource("InputEventKey_kvuet")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_kvpfn"]
-device = -1
-keycode = 4194306
-
-[sub_resource type="Shortcut" id="Shortcut_dinhu"]
-events = [SubResource("InputEventKey_kvpfn")]
+[ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu.tscn" id="12_trtic"]
 
 [sub_resource type="SystemFont" id="SystemFont_kvpfn"]
 font_names = PackedStringArray("Tahoma")
@@ -44,7 +15,6 @@ subpixel_positioning = 0
 font_names = PackedStringArray("Tahoma")
 
 [node name="Game" type="Node"]
-script = ExtResource("1_dinhu")
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("1_gee14")
@@ -52,236 +22,6 @@ Player = NodePath("AudioStreamPlayer")
 BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
-
-[node name="Editor" type="Node" parent="." node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "PlayButton", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton")]
-physics_interpolation_mode = 2
-script = ExtResource("4_kvpfn")
-CameraSpeed = 48.0
-EditorViewport = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
-Camera = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/EditorCamera")
-BlockScene = ExtResource("8_kvpfn")
-BlockEraseHighlightMaterial = ExtResource("7_0tnpc")
-BlockHighlightMaterial = ExtResource("7_vtaks")
-BlockListContainer = NodePath("EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer")
-FileMenu = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar/FileMenu")
-FileDialog = NodePath("FileDialog")
-ConfirmNewDialog = NodePath("ConfirmNewDialog")
-PlayButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer/PlayButton")
-CarSelect = NodePath("CarSelect")
-CarSelectContainer = NodePath("CarSelect/GridContainer")
-EditorUINode = NodePath("EditorUI")
-GridSizeLabel = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit")
-GridSizeDecButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/DecreaseButton")
-GridSizeIncButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/IncreaseButton")
-
-[node name="EditorUI" type="Control" parent="Editor"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Editor/EditorUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-alignment = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Editor/EditorUI/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="MenuBar" type="MenuBar" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="FileMenu" type="PopupMenu" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar"]
-oversampling_override = 1.0
-title = "File"
-item_count = 3
-item_0/text = "New"
-item_0/id = 2
-item_1/text = "Open"
-item_1/id = 0
-item_2/text = "Save"
-item_2/id = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
-layout_mode = 2
-text = "Grid Size"
-
-[node name="LineEdit" type="LineEdit" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-placeholder_text = "0"
-editable = false
-
-[node name="DecreaseButton" type="Button" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
-layout_mode = 2
-shortcut = SubResource("Shortcut_kvuet")
-icon = ExtResource("9_kvpfn")
-
-[node name="IncreaseButton" type="Button" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
-layout_mode = 2
-shortcut = SubResource("Shortcut_trtic")
-icon = ExtResource("10_dinhu")
-
-[node name="ViewportWrapper" type="Control" parent="Editor/EditorUI/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-stretch = true
-mouse_target = true
-
-[node name="EditorViewport" type="SubViewport" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer"]
-handle_input_locally = false
-screen_space_aa = 1
-physics_object_picking = true
-size = Vector2i(1740, 1006)
-render_target_update_mode = 4
-script = ExtResource("12_dinhu")
-
-[node name="EditorCamera" type="Camera3D" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport"]
-physics_interpolation_mode = 2
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 24, 0)
-current = true
-fov = 80.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_bottom = -8.0
-grow_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="PlayButton" type="Button" parent="Editor/EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer"]
-layout_mode = 2
-tooltip_text = "Play the track"
-shortcut = SubResource("Shortcut_dinhu")
-text = "Play"
-
-[node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Editor/EditorUI/HBoxContainer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 0
-mouse_force_pass_scroll_events = false
-horizontal_scroll_mode = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="BlockListContainer" type="GridContainer" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 4
-
-[node name="Button3" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
-layout_mode = 2
-text = "..."
-
-[node name="Button" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
-layout_mode = 2
-text = "block A"
-
-[node name="Button2" type="Button" parent="Editor/EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
-layout_mode = 2
-text = "block B"
-
-[node name="ConfirmNewDialog" type="ConfirmationDialog" parent="Editor"]
-oversampling_override = 1.0
-initial_position = 1
-size = Vector2i(565, 100)
-dialog_text = "Are you sure you want to create a new track? Unsaved data will be lost."
-
-[node name="FileDialog" type="FileDialog" parent="Editor"]
-transparent_bg = true
-oversampling_override = 1.0
-initial_position = 1
-transparent = true
-display_mode = 1
-access = 1
-root_subfolder = "tracks/"
-filters = PackedStringArray("*.tk.tscn;Track Files;application/x-godot-resource")
-hidden_files_toggle_enabled = false
-file_filter_toggle_enabled = false
-favorites_enabled = false
-recent_list_enabled = false
-
-[node name="CarSelect" type="Control" parent="Editor"]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -422.1
-offset_top = -244.79999
-offset_right = 422.1
-offset_bottom = 244.79999
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="Editor/CarSelect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" type="GridContainer" parent="Editor/CarSelect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode", "TimeLabel", "SpeedLabel")]
 script = ExtResource("7_trtic")
@@ -323,3 +63,7 @@ theme_override_font_sizes/font_size = 128
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Editor" parent="." instance=ExtResource("5_p57ef")]
+
+[node name="MainMenu" parent="." instance=ExtResource("12_trtic")]

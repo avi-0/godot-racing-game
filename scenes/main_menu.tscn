@@ -1,8 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5ka32jnsmy0s"]
 
-[ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/Menu.cs" id="1_vjb58"]
-[ext_resource type="StyleBox" uid="uid://ecyclfrvfw84" path="res://scenes/menu/menu_button.tres" id="1_yqeox"]
-[ext_resource type="PackedScene" uid="uid://quenom6jkxmi" path="res://scenes/game.tscn" id="2_con2f"]
+[ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
+[ext_resource type="StyleBox" uid="uid://ecyclfrvfw84" path="res://scenes/main_menu/menu_button.tres" id="3_8ln24"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqeox"]
 bg_color = Color(0, 0, 0, 1)
@@ -15,7 +14,7 @@ shadow_offset = Vector2(3, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4h3mk"]
 
-[node name="MenuControl" type="Control" node_paths=PackedStringArray("MenuFileDialog")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("MenuFileDialog")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,8 +22,7 @@ anchor_bottom = 1.0
 offset_left = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vjb58")
-GameScene = ExtResource("2_con2f")
+script = ExtResource("1_bqqt6")
 MenuFileDialog = NodePath("MenuFileDialog")
 
 [node name="Panel" type="Panel" parent="."]
@@ -68,8 +66,8 @@ theme_override_constants/separation = 24
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("1_yqeox")
-theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/normal = ExtResource("3_8ln24")
+theme_override_styles/pressed = ExtResource("3_8ln24")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Play"
@@ -78,8 +76,8 @@ text = "Play"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("1_yqeox")
-theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/normal = ExtResource("3_8ln24")
+theme_override_styles/pressed = ExtResource("3_8ln24")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Play Local Map
@@ -89,8 +87,8 @@ text = "Play Local Map
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("1_yqeox")
-theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/normal = ExtResource("3_8ln24")
+theme_override_styles/pressed = ExtResource("3_8ln24")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Editor
@@ -100,8 +98,8 @@ text = "Editor
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("1_yqeox")
-theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/normal = ExtResource("3_8ln24")
+theme_override_styles/pressed = ExtResource("3_8ln24")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Settings
@@ -111,8 +109,8 @@ text = "Settings
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("1_yqeox")
-theme_override_styles/pressed = ExtResource("1_yqeox")
+theme_override_styles/normal = ExtResource("3_8ln24")
+theme_override_styles/pressed = ExtResource("3_8ln24")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Exit
