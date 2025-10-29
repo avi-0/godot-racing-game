@@ -15,8 +15,10 @@ public partial class BlockDirectoryImporter : Resource
 {
     [Export(PropertyHint.Dir)] public string SourcePath;
 
+#if TOOLS
     [ExportToolButton("Generate all")]
     public Callable GenerateAllButton => Callable.From(() => GenerateAll().Forget());
+    
 
     public async GDTaskVoid GenerateAll()
     {
@@ -54,4 +56,5 @@ public partial class BlockDirectoryImporter : Resource
                 yield return result;
         }
     }
+#endif
 }

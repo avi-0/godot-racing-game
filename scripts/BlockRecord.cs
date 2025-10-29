@@ -16,6 +16,7 @@ public partial class BlockRecord : Resource
 
     [Export] public Texture2D ThumbnailTexture;
 
+#if TOOLS
     [ExportToolButton("Generate from source")]
     public Callable GenerateButton => Callable.From(() => GenerateScene().Forget());
     
@@ -111,4 +112,5 @@ public partial class BlockRecord : Resource
 
         return combinedBounds;
     }
+#endif
 }

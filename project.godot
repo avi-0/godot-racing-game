@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="racistgame"
+config/name="mashinki"
 config/version="0.0.1"
 run/main_scene="uid://quenom6jkxmi"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
@@ -29,7 +29,11 @@ window/size/mode=4
 
 [dotnet]
 
-project/assembly_name="racinggame"
+project/assembly_name="mashinki"
+
+[editor]
+
+export/convert_text_resources_to_binary=false
 
 [global_group]
 
