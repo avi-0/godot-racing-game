@@ -26,6 +26,8 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         Singleton = this;
+
+        GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
         
         NewTrack();
     }
@@ -145,5 +147,15 @@ public partial class GameManager : Node
     public void NewTrack()
     {
         OpenTrack(TrackTemplatePath);
+    }
+
+    private float GuessResolutionScaling()
+    {
+        if (OS.HasFeature("windows"))
+        {
+            var height = DisplayServer.WindowGetSize().Y;
+            return height / 1080.0f;
+        }
+        return DisplayServer.ScreenGetScale(); // only works on macOS and Linux
     }
 }
