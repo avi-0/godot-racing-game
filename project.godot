@@ -25,7 +25,7 @@ GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
+window/size/mode=4
 
 [dotnet]
 
@@ -34,10 +34,6 @@ project/assembly_name="racinggame"
 [global_group]
 
 start_point=""
-
-[gui]
-
-theme/custom="uid://k2e54iiohf5p"
 
 [importer_defaults]
 
@@ -139,8 +135,6 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
-anti_aliasing/quality/msaa_3d=1
-anti_aliasing/quality/screen_space_aa=2
 
 [xr]
 

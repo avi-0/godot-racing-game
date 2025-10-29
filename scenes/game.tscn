@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=13 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor.tscn" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://omuaqht0le35" path="res://scripts/GameMenu.cs" id="7_gee14"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
+[ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/SettingsMenu.cs" id="9_0tnpc"]
+[ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://b5kxpk7e7n6ri" path="res://scenes/cars/hatchback.tscn" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu.tscn" id="12_trtic"]
 
@@ -14,6 +17,8 @@ subpixel_positioning = 0
 [sub_resource type="SystemFont" id="SystemFont_dinhu"]
 font_names = PackedStringArray("Tahoma")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tnpc"]
+
 [node name="Game" type="Node"]
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
@@ -23,10 +28,12 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TrackNode", "TimeLabel", "SpeedLabel")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("GameMenu", "SettingsMenu", "TrackNode", "TimeLabel", "SpeedLabel")]
 script = ExtResource("7_trtic")
 TrackTemplatePath = "res://scenes/track_template.tscn"
 CarScene = ExtResource("12_kvuet")
+GameMenu = NodePath("../GameMenu")
+SettingsMenu = NodePath("../SettingsMenu")
 TrackNode = NodePath("Track")
 TimeLabel = NodePath("TimeLabel")
 SpeedLabel = NodePath("SpeedLabel")
@@ -40,12 +47,12 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -254.5
-offset_top = -175.0
+offset_top = -117.0
 offset_right = 254.5
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = SubResource("SystemFont_kvpfn")
-theme_override_font_sizes/font_size = 128
+theme_override_font_sizes/font_size = 96
 text = "00:00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -55,11 +62,11 @@ visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -156.0
-offset_right = 271.0
+offset_top = -117.0
+offset_right = 175.0
 grow_vertical = 0
 theme_override_fonts/font = SubResource("SystemFont_dinhu")
-theme_override_font_sizes/font_size = 128
+theme_override_font_sizes/font_size = 96
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -67,3 +74,331 @@ vertical_alignment = 1
 [node name="Editor" parent="." instance=ExtResource("5_p57ef")]
 
 [node name="MainMenu" parent="." instance=ExtResource("12_trtic")]
+
+[node name="GameMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_vtaks")
+script = ExtResource("7_gee14")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -373.5
+offset_top = -156.0
+offset_right = 373.5
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="ResumeButton" type="Button" parent="GameMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
+text = "Resume
+"
+
+[node name="SettingsButton" type="Button" parent="GameMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
+text = "Settings
+"
+
+[node name="ExitButton" type="Button" parent="GameMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
+text = "Exit"
+
+[node name="SettingsMenu" type="Control" parent="." node_paths=PackedStringArray("TDrs", "AA", "Vsync", "WINMODE", "SHADOWQ", "MusicSlider", "SoundSlider")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_vtaks")
+script = ExtResource("9_0tnpc")
+TDrs = NodePath("Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/3drenderscale/3drsslider")
+AA = NodePath("Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/aa/aaopt")
+Vsync = NodePath("Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/vsync/vsyncopt")
+WINMODE = NodePath("Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/winmode/winopt")
+SHADOWQ = NodePath("Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/shadowquality/sqopt")
+MusicSlider = NodePath("Panel/TabContainer/Volume/MarginContainer/VBoxContainer/music/musicslider")
+SoundSlider = NodePath("Panel/TabContainer/Volume/MarginContainer/VBoxContainer/sound/soundslider")
+
+[node name="Panel" type="Panel" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="SettingsMenu/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -120.0
+offset_right = 183.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
+
+[node name="GraphicsGC" type="GridContainer" parent="SettingsMenu/Panel"]
+layout_mode = 1
+offset_right = 535.0
+offset_bottom = 559.0
+
+[node name="TabContainer" type="TabContainer" parent="SettingsMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -131.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
+
+[node name="Graphics" type="TabBar" parent="SettingsMenu/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/Panel/TabContainer/Graphics"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer"]
+layout_mode = 2
+
+[node name="3drenderscale" type="Label" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "3D Render Scale"
+
+[node name="3drsslider" type="HSlider" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/3drenderscale"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -27.25
+offset_right = 215.0
+offset_bottom = 27.25
+grow_horizontal = 2
+grow_vertical = 2
+min_value = 25.0
+step = 5.0
+value = 100.0
+
+[node name="aa" type="Label" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Anti-Aliasing"
+
+[node name="aaopt" type="OptionButton" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/aa"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -40.0
+offset_right = 147.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "TAA"
+popup/item_2/id = 2
+popup/item_3/text = "MSAA 2X"
+popup/item_3/id = 3
+popup/item_4/text = "MSAA 4X"
+popup/item_4/id = 4
+popup/item_5/text = "MSAA 8X"
+popup/item_5/id = 5
+
+[node name="vsync" type="Label" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "V-Sync"
+
+[node name="vsyncopt" type="OptionButton" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/vsync"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -40.0
+offset_right = 147.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+selected = 1
+item_count = 2
+popup/item_0/text = "OFF"
+popup/item_0/id = 0
+popup/item_1/text = "ON"
+popup/item_1/id = 1
+
+[node name="winmode" type="Label" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Window Mode"
+
+[node name="winopt" type="OptionButton" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/winmode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.5
+offset_top = -44.0
+offset_right = 175.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "Full Screen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Exclusive"
+popup/item_2/id = 2
+
+[node name="shadowquality" type="Label" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Shadow Quality"
+
+[node name="sqopt" type="OptionButton" parent="SettingsMenu/Panel/TabContainer/Graphics/MarginContainer/VBoxContainer/shadowquality"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.5
+offset_top = -44.0
+offset_right = 175.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+selected = 2
+item_count = 6
+popup/item_0/text = "Potato"
+popup/item_0/id = 0
+popup/item_1/text = "Very Low"
+popup/item_1/id = 1
+popup/item_2/text = "Low"
+popup/item_2/id = 2
+popup/item_3/text = "Medium"
+popup/item_3/id = 3
+popup/item_4/text = "High"
+popup/item_4/id = 4
+popup/item_5/text = "Ultra"
+popup/item_5/id = 5
+
+[node name="Volume" type="TabBar" parent="SettingsMenu/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/Panel/TabContainer/Volume"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/Panel/TabContainer/Volume/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="sound" type="Label" parent="SettingsMenu/Panel/TabContainer/Volume/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sound"
+
+[node name="soundslider" type="HSlider" parent="SettingsMenu/Panel/TabContainer/Volume/MarginContainer/VBoxContainer/sound"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -27.25
+offset_right = 215.0
+offset_bottom = 27.25
+grow_horizontal = 2
+grow_vertical = 2
+step = 10.0
+value = 50.0
+
+[node name="music" type="Label" parent="SettingsMenu/Panel/TabContainer/Volume/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music"
+
+[node name="musicslider" type="HSlider" parent="SettingsMenu/Panel/TabContainer/Volume/MarginContainer/VBoxContainer/music"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -27.25
+offset_right = 215.0
+offset_bottom = 27.25
+grow_horizontal = 2
+grow_vertical = 2
+step = 10.0
+value = 50.0
+
+[node name="Controls" type="TabBar" parent="SettingsMenu/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/Panel/TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/Panel/TabContainer/Controls/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[connection signal="pressed" from="GameMenu/VBoxContainer/ResumeButton" to="GameMenu" method="OnResumeButton"]
+[connection signal="pressed" from="GameMenu/VBoxContainer/SettingsButton" to="GameMenu" method="OnSettingsButton"]
+[connection signal="pressed" from="GameMenu/VBoxContainer/ExitButton" to="GameMenu" method="OnExitButton"]
+[connection signal="pressed" from="SettingsMenu/Panel/BackButton" to="SettingsMenu" method="OnBackButton"]

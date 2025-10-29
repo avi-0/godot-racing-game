@@ -78,6 +78,8 @@ public partial class Editor : Node
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
 			EditorUINode.Visible = value;
 			
+			CarSelect.Visible = false;
+
 			if (value)
 			{
 				CreateCursor();

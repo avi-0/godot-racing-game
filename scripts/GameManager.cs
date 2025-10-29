@@ -10,6 +10,10 @@ public partial class GameManager : Node
     
     [Export] public PackedScene CarScene;
 
+    [Export] public Control GameMenu;
+
+    [Export] public Control SettingsMenu;
+
     [Export] public Node3D TrackNode;
 
     [Export] public Label TimeLabel;
@@ -80,7 +84,16 @@ public partial class GameManager : Node
 
     private void LocalCarOnPauseRequested()
     {
-        Stop();
+        if (GameMenu.Visible)
+        {
+            GameMenu.Hide();
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+        }
+        else
+        {
+            GameMenu.Show();
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
     }
 
     public void Stop()

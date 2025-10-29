@@ -1,18 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=4 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
-[ext_resource type="StyleBox" uid="uid://ecyclfrvfw84" path="res://scenes/main_menu/menu_button.tres" id="3_8ln24"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqeox"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-shadow_size = 8
-shadow_offset = Vector2(3, 0)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4h3mk"]
+[ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="1_ekxnf"]
+[ext_resource type="Theme" uid="uid://blp1y44oyfi1x" path="res://resources/basic_godot_theme.tres" id="3_bqqt6"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("MenuFileDialog")]
 layout_mode = 3
@@ -22,6 +12,7 @@ anchor_bottom = 1.0
 offset_left = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
 MenuFileDialog = NodePath("MenuFileDialog")
 
@@ -54,10 +45,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -486.0
-offset_top = -240.0
-offset_right = 486.0
-offset_bottom = 240.0
+offset_left = -356.25
+offset_top = -268.0
+offset_right = 356.25
+offset_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 24
@@ -65,54 +56,29 @@ theme_override_constants/separation = 24
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("3_8ln24")
-theme_override_styles/pressed = ExtResource("3_8ln24")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Play"
 
 [node name="LoadButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("3_8ln24")
-theme_override_styles/pressed = ExtResource("3_8ln24")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Play Local Map
 "
 
 [node name="EditorButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("3_8ln24")
-theme_override_styles/pressed = ExtResource("3_8ln24")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Editor
 "
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("3_8ln24")
-theme_override_styles/pressed = ExtResource("3_8ln24")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Settings
 "
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("3_8ln24")
-theme_override_styles/pressed = ExtResource("3_8ln24")
-theme_override_styles/hover = SubResource("StyleBoxFlat_yqeox")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4h3mk")
 text = "Exit
 "
 
@@ -121,7 +87,9 @@ transparent_bg = true
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 1
+size = Vector2i(640, 664)
 transparent = true
+theme = ExtResource("3_bqqt6")
 file_mode = 0
 display_mode = 1
 access = 1
@@ -132,9 +100,9 @@ file_filter_toggle_enabled = false
 favorites_enabled = false
 recent_list_enabled = false
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/EditorButton" to="." method="_on_editor_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="file_selected" from="MenuFileDialog" to="." method="_on_menu_file_dialog_file_selected"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
+[connection signal="file_selected" from="MenuFileDialog" to="." method="OnMenuFileDialogFileSelected"]

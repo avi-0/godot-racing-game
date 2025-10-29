@@ -16,33 +16,33 @@ public partial class MainMenu : Control
 	{
 	}
 	
-	public void _on_play_button_pressed()
+	public void OnPlayButtonPressed()
 	{
 		OpenTrack("res://tracks/TestTrack.tk.tscn");
 	}
 
-	public async void _on_editor_button_pressed()
+	public async void OnEditorButtonPressed()
 	{
 		OpenEditor().Forget();
 	}
 
-	public void _on_load_button_pressed()
+	public void OnLoadButtonPressed()
 	{
 		MenuFileDialog.Show();
 	}
 
-	public void _on_settings_button_pressed()
+	public void OnSettingsButtonPressed()
 	{
-
+		GameManager.Singleton.SettingsMenu.Show();
 	}
 
-	public void _on_exit_button_pressed()
+	public void OnExitButtonPressed()
 	{
 		GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
 		GetTree().Quit();
 	}
 
-	public void _on_menu_file_dialog_file_selected(string path)
+	public void OnMenuFileDialogFileSelected(string path)
 	{
 		MenuFileDialog.Hide();
 		OpenTrack(path).Forget();

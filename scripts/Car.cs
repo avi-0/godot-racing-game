@@ -79,14 +79,7 @@ public partial class Car : VehicleBody3D
 		{
 			if (keyEvent.PhysicalKeycode == Key.Escape)
 			{
-				if (Input.MouseMode == Input.MouseModeEnum.Captured)
-				{
-					Input.MouseMode = Input.MouseModeEnum.Visible;
-					EmitSignalPauseRequested();
-				}
-					
-				else
-					Input.MouseMode = Input.MouseModeEnum.Captured;
+				EmitSignalPauseRequested();
 			}
 			else if (keyEvent.PhysicalKeycode == Key.R)
 			{
