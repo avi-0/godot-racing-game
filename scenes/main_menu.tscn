@@ -41,45 +41,51 @@ text = "mashinki"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -114.5
-offset_top = -136.5
-offset_right = 114.5
-offset_bottom = 136.5
+offset_left = -154.5
+offset_top = -200.5
+offset_right = 154.5
+offset_bottom = 200.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
+[node name="PlayButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Campaign"
 
-[node name="LoadButton" type="Button" parent="VBoxContainer"]
+[node name="LoadButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Play Local Map
 "
 
-[node name="EditorButton" type="Button" parent="VBoxContainer"]
+[node name="EditorButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Editor
 "
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Settings
 "
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="ExitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Exit
@@ -144,10 +150,10 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
-[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
-[connection signal="pressed" from="VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
-[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="OnSettingsButtonPressed"]
-[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="file_selected" from="MenuFileDialog" to="." method="OnMenuFileDialogFileSelected"]
 [connection signal="pressed" from="CampMenu/Panel/BackButton" to="." method="OnCampBackButton"]
