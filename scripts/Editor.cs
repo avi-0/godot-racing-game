@@ -85,8 +85,6 @@ public partial class Editor : Node
 			else
 			{
 				DestroyCursor();
-				
-				EmitSignalExited();
 			}
 			
 			_isRunning = value;
@@ -177,11 +175,6 @@ public partial class Editor : Node
 		{
 			GameManager.Singleton.SaveTrack(path);
 		}
-	}
-
-	public void ToggleEditor(bool Visibility)
-	{
-		IsRunning = Visibility;
 	}
 
 	private void PlayButtonOnPressed()
@@ -491,6 +484,7 @@ public partial class Editor : Node
 			if (keyEvent.PhysicalKeycode == Key.Escape)
 			{
 				IsRunning = false;
+				EmitSignalExited();
 			}
 		}
 	}
