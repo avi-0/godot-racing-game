@@ -1,0 +1,262 @@
+[gd_scene load_steps=14 format=3 uid="uid://c1rq5irkqaorb"]
+
+[ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
+[ext_resource type="PackedScene" uid="uid://bfxxyh44b8xbw" path="res://blocks/cityroads/scenes/road-straight.tscn" id="2_5tm2q"]
+[ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="3_j8y2p"]
+[ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="4_o435n"]
+[ext_resource type="Texture2D" uid="uid://dyx154afg0s1q" path="res://assets/godot-icons/RangeSliderLeft.svg" id="5_3vi5u"]
+[ext_resource type="Texture2D" uid="uid://hmfs1b0dmqq1" path="res://assets/godot-icons/RangeSliderRight.svg" id="6_78fwb"]
+[ext_resource type="Script" uid="uid://ec3tpqskxxmf" path="res://scripts/EditorViewport.cs" id="7_74j0u"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_dinhu"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_kvuet"]
+events = [SubResource("InputEventKey_dinhu")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_kvuet"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_trtic"]
+events = [SubResource("InputEventKey_kvuet")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_kvpfn"]
+device = -1
+keycode = 4194306
+
+[sub_resource type="Shortcut" id="Shortcut_dinhu"]
+events = [SubResource("InputEventKey_kvpfn")]
+
+[node name="Editor" type="Node" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "PlayButton", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton")]
+physics_interpolation_mode = 2
+script = ExtResource("1_5lcyj")
+CameraSpeed = 48.0
+EditorViewport = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
+Camera = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/EditorCamera")
+BlockScene = ExtResource("2_5tm2q")
+BlockEraseHighlightMaterial = ExtResource("3_j8y2p")
+BlockHighlightMaterial = ExtResource("4_o435n")
+BlockListContainer = NodePath("EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer")
+FileMenu = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar/FileMenu")
+FileDialog = NodePath("FileDialog")
+ConfirmNewDialog = NodePath("ConfirmNewDialog")
+PlayButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer/PlayButton")
+CarSelect = NodePath("CarSelect")
+CarSelectContainer = NodePath("CarSelect/GridContainer")
+EditorUINode = NodePath("EditorUI")
+GridSizeLabel = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit")
+GridSizeDecButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/DecreaseButton")
+GridSizeIncButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/IncreaseButton")
+
+[node name="EditorUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MenuBar" type="MenuBar" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="FileMenu" type="PopupMenu" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar"]
+oversampling_override = 1.0
+title = "File"
+item_count = 3
+item_0/text = "New"
+item_0/id = 2
+item_1/text = "Open"
+item_1/id = 0
+item_2/text = "Save"
+item_2/id = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="EditorUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Grid Size"
+
+[node name="LineEdit" type="LineEdit" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+placeholder_text = "0"
+editable = false
+
+[node name="DecreaseButton" type="Button" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_kvuet")
+icon = ExtResource("5_3vi5u")
+
+[node name="IncreaseButton" type="Button" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_trtic")
+icon = ExtResource("6_78fwb")
+
+[node name="ViewportWrapper" type="Control" parent="EditorUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+stretch = true
+mouse_target = true
+
+[node name="EditorViewport" type="SubViewport" parent="EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer"]
+handle_input_locally = false
+screen_space_aa = 1
+physics_object_picking = true
+size = Vector2i(1740, 1006)
+render_target_update_mode = 4
+script = ExtResource("7_74j0u")
+
+[node name="EditorCamera" type="Camera3D" parent="EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport"]
+physics_interpolation_mode = 2
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 24, 0)
+current = true
+fov = 80.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="PlayButton" type="Button" parent="EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Play the track"
+shortcut = SubResource("Shortcut_dinhu")
+text = "Play"
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="EditorUI/HBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/HBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="BlockListContainer" type="GridContainer" parent="EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="Button3" type="Button" parent="EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
+layout_mode = 2
+text = "..."
+
+[node name="Button" type="Button" parent="EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
+layout_mode = 2
+text = "block A"
+
+[node name="Button2" type="Button" parent="EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer"]
+layout_mode = 2
+text = "block B"
+
+[node name="ConfirmNewDialog" type="ConfirmationDialog" parent="."]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(565, 100)
+dialog_text = "Are you sure you want to create a new track? Unsaved data will be lost."
+
+[node name="FileDialog" type="FileDialog" parent="."]
+transparent_bg = true
+oversampling_override = 1.0
+initial_position = 1
+transparent = true
+display_mode = 1
+access = 1
+root_subfolder = "tracks/"
+filters = PackedStringArray("*.tk.tscn;Track Files;application/x-godot-resource")
+hidden_files_toggle_enabled = false
+file_filter_toggle_enabled = false
+favorites_enabled = false
+recent_list_enabled = false
+
+[node name="CarSelect" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -422.1
+offset_top = -244.79999
+offset_right = 422.1
+offset_bottom = 244.79999
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CarSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CarSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

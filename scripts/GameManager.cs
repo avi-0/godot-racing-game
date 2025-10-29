@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using racingGame;
 
 public partial class GameManager : Node
@@ -7,6 +8,8 @@ public partial class GameManager : Node
     public static GameManager Singleton;
 
     [Export(PropertyHint.FilePath)] public string TrackTemplatePath;
+
+    public const string CarsPath = "res://scenes/cars/";
     
     [Export] public PackedScene CarScene;
 
@@ -50,7 +53,7 @@ public partial class GameManager : Node
 
     public void SelectCarScene(string scenePath)
     {
-        CarScene = GD.Load<PackedScene>(scenePath);
+        CarScene = GD.Load<PackedScene>(CarsPath+scenePath);
     }
 
     public void Play()
@@ -143,9 +146,20 @@ public partial class GameManager : Node
         GD.Print($"Saving: {ResourceSaver.Save(scene, path)}");
     }
 
+    public IOrderedEnumerable<string> LoadCarList()
+    {
+        return ResourceLoader.ListDirectory(CarsPath).ToList().Order();
+    }
+
     public void OpenTrack(string path)
     {
         GD.Print($"Opening track at {path}");
+
+        var trackName = path.Split("/")[path.Split("/").Length-1];
+        if (LoadCarList().Contains(trackName.Split("_")[0]+".tscn"))
+        {
+            SelectCarScene(trackName.Split("_")[0]+".tscn");
+        }
 
         var scene = ResourceLoader.Load<PackedScene>(path, cacheMode: ResourceLoader.CacheMode.Ignore);
         var newTrackNode = scene.Instantiate<Node3D>();

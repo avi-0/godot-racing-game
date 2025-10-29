@@ -1,0 +1,426 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/track_world_environment.tscn" id="1_lfyqc"]
+[ext_resource type="Environment" path="res://resources/track_environment.tres" id="2_c6cpu"]
+[ext_resource type="PackedScene" path="res://scenes/track_base.tscn" id="3_c8euf"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-slant.tscn" id="4_5hapg"]
+[ext_resource type="Script" path="res://scripts/Block.cs" id="5_h7r45"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-end-round.tscn" id="6_i7qe7"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-bend.tscn" id="7_t4twt"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-straight.tscn" id="8_ua02i"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/start.tscn" id="9_11xcw"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-straight-barrier.tscn" id="10_qry6a"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-bend-barrier.tscn" id="11_bsvby"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-end-round-barrier.tscn" id="12_42e33"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-slant-barrier.tscn" id="13_62077"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-curve.tscn" id="14_8v18m"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-curve-barrier.tscn" id="15_habj2"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/sign-highway-detailed.tscn" id="16_28mbd"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/sign-highway-wide.tscn" id="17_vlh6d"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/tile-high.tscn" id="18_8dt3t"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/light-curved-cross.tscn" id="19_d1fgc"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/construction-cone.tscn" id="20_bi1b4"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/construction-barrier.tscn" id="21_hfbbb"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-bend-square.tscn" id="22_uxrct"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_uk1mk"]
+
+[sub_resource type="Compositor" id="Compositor_uk1mk"]
+
+[node name="Track" type="Node3D"]
+physics_interpolation_mode = 2
+
+[node name="TrackWorldEnvironment" type="WorldEnvironment" parent="." instance=ExtResource("1_lfyqc")]
+environment = ExtResource("2_c6cpu")
+camera_attributes = SubResource("CameraAttributesPhysical_uk1mk")
+compositor = SubResource("Compositor_uk1mk")
+
+[node name="TrackBase" type="Node3D" parent="." instance=ExtResource("3_c8euf")]
+
+[node name="road-slant" type="Node3D" parent="." instance=ExtResource("4_5hapg")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 6, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@374" type="Node3D" parent="." instance=ExtResource("4_5hapg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8, 4, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@375" type="Node3D" parent="." instance=ExtResource("4_5hapg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="road-end-round" type="Node3D" parent="." instance=ExtResource("6_i7qe7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8, -24)
+script = ExtResource("5_h7r45")
+
+[node name="road-bend" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@376" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 4, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@377" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -8, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@379" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@380" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16, 2, -24)
+script = ExtResource("5_h7r45")
+
+[node name="road-straight" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -8, 2, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@381" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -16, 2, -16)
+script = ExtResource("5_h7r45")
+
+[node name="Start" type="Node3D" parent="." instance=ExtResource("9_11xcw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8, -24)
+script = ExtResource("5_h7r45")
+
+[node name="road-straight-barrier" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 2, -16)
+script = ExtResource("5_h7r45")
+
+[node name="road-bend-barrier" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@383" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 4, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@385" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@386" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16, 2, -24)
+script = ExtResource("5_h7r45")
+
+[node name="road-end-round-barrier" type="Node3D" parent="." instance=ExtResource("12_42e33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8, -24)
+script = ExtResource("5_h7r45")
+
+[node name="road-slant-barrier" type="Node3D" parent="." instance=ExtResource("13_62077")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 6, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@387" type="Node3D" parent="." instance=ExtResource("13_62077")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8, 4, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@388" type="Node3D" parent="." instance=ExtResource("13_62077")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@412" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -16, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@413" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -16, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@414" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -16, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@415" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@417" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@420" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@421" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@424" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -24, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@454" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="road-curve" type="Node3D" parent="." instance=ExtResource("14_8v18m")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -24, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@455" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@456" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -32, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@457" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@458" type="Node3D" parent="." instance=ExtResource("8_ua02i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@459" type="Node3D" parent="." instance=ExtResource("6_i7qe7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@460" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@461" type="Node3D" parent="." instance=ExtResource("7_t4twt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@462" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@463" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@464" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@465" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@466" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@467" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@468" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@469" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@471" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 2, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@472" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 2, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@473" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -8, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@474" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@475" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@476" type="Node3D" parent="." instance=ExtResource("10_qry6a")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@477" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@478" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32, 2, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@479" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@480" type="Node3D" parent="." instance=ExtResource("11_bsvby")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -24, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="road-curve-barrier" type="Node3D" parent="." instance=ExtResource("15_habj2")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@481" type="Node3D" parent="." instance=ExtResource("12_42e33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="sign-highway-detailed" type="Node3D" parent="." instance=ExtResource("16_28mbd")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@482" type="Node3D" parent="." instance=ExtResource("17_vlh6d")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8, 2, -16)
+script = ExtResource("5_h7r45")
+
+[node name="sign-highway-wide" type="Node3D" parent="." instance=ExtResource("17_vlh6d")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 4, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@483" type="Node3D" parent="." instance=ExtResource("17_vlh6d")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@485" type="Node3D" parent="." instance=ExtResource("17_vlh6d")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -24, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@486" type="Node3D" parent="." instance=ExtResource("17_vlh6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="tile-high" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@487" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@488" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@489" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@490" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@491" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@492" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@493" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@494" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@495" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@496" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@497" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@498" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@499" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@500" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@501" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@502" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@503" type="Node3D" parent="." instance=ExtResource("18_8dt3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
+script = ExtResource("5_h7r45")
+
+[node name="light-curved-cross" type="Node3D" parent="." instance=ExtResource("19_d1fgc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 8)
+script = ExtResource("5_h7r45")
+
+[node name="construction-cone" type="Node3D" parent="." instance=ExtResource("20_bi1b4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -8)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@504" type="Node3D" parent="." instance=ExtResource("20_bi1b4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@506" type="Node3D" parent="." instance=ExtResource("20_bi1b4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, -24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@507" type="Node3D" parent="." instance=ExtResource("20_bi1b4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@508" type="Node3D" parent="." instance=ExtResource("20_bi1b4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 16)
+script = ExtResource("5_h7r45")
+
+[node name="construction-barrier" type="Node3D" parent="." instance=ExtResource("21_hfbbb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 24)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@511" type="Node3D" parent="." instance=ExtResource("21_hfbbb")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="road-bend-square" type="Node3D" parent="." instance=ExtResource("22_uxrct")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16, 0, 40)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@512" type="Node3D" parent="." instance=ExtResource("22_uxrct")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8, 0, 40)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@513" type="Node3D" parent="." instance=ExtResource("22_uxrct")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8, 0, 32)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@514" type="Node3D" parent="." instance=ExtResource("22_uxrct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 32)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@516" type="Node3D" parent="." instance=ExtResource("21_hfbbb")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30, 2, 0)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@517" type="Node3D" parent="." instance=ExtResource("21_hfbbb")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32, 2, 10)
+script = ExtResource("5_h7r45")
+
+[node name="@Node3D@518" type="Node3D" parent="." instance=ExtResource("21_hfbbb")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -34, 2, 10)
+script = ExtResource("5_h7r45")

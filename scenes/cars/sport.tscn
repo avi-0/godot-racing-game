@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/carsfx.wav" id="3_mk5fm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]
-bounce = 1.0
+bounce = 0.5
 
 [sub_resource type="Curve" id="Curve_eauv3"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -14,7 +14,7 @@ point_count = 2
 
 [sub_resource type="Curve" id="Curve_mk5fm"]
 _limits = [0.0, 60.0, 0.0, 1.0]
-_data = [Vector2(0, 55.366993), 0.0, -67.578575, 0, 0, Vector2(0.9890909, 13.008064), 0.34576532, 0.0, 0, 0]
+_data = [Vector2(0, 55.366993), 0.0, 66.396355, 0, 0, Vector2(0.9890909, 13.008064), 0.34576532, 0.0, 0, 0]
 point_count = 2
 metadata/_snap_count = 27
 
@@ -209,6 +209,7 @@ points = PackedVector3Array(0.6, 0.099995986, 0.11533666, 0.54996085, 0.45942426
 [node name="car" type="VehicleBody3D" node_paths=PackedStringArray("WheelFl", "WheelFr", "WheelBl", "WheelBr", "Camera", "CameraStick", "CameraStickBase", "EngineSound")]
 mass = 16.0
 physics_material_override = SubResource("PhysicsMaterial_k61xc")
+gravity_scale = 2.0
 center_of_mass_mode = 1
 continuous_cd = true
 linear_damp_mode = 1
@@ -228,14 +229,14 @@ SpeedToPitchCurve = SubResource("Curve_eauv3")
 SpeedToSteeringCurve = SubResource("Curve_mk5fm")
 SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
-EngineForceForward = 65.0
-BrakeForce = 1.5
+EngineForceForward = 80.0
+BrakeForce = 1.65
 NormalSlip = 4.5
 NormalRwSlip = 4.4
-SteeringSpeed = 175.0
+SteeringSpeed = 125.0
 BrakeFwSlipMultiplier = 0.1
-BrakeRwSlipMultiplier = 0.05
-BrakeForceInTurnMultiplier = 0.8
+BrakeRwSlipMultiplier = 0.01
+BrakeForceInTurnMultiplier = 0.1
 
 [node name="wheel_bl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
@@ -246,7 +247,7 @@ wheel_radius = 0.24
 wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
 suspension_travel = 0.16
-suspension_stiffness = 100.0
+suspension_stiffness = 180.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
@@ -264,7 +265,7 @@ wheel_radius = 0.24
 wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
 suspension_travel = 0.16
-suspension_stiffness = 100.0
+suspension_stiffness = 180.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
@@ -282,7 +283,7 @@ wheel_radius = 0.24
 wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
 suspension_travel = 0.16
-suspension_stiffness = 100.0
+suspension_stiffness = 200.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
@@ -300,7 +301,7 @@ wheel_radius = 0.24
 wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
 suspension_travel = 0.16
-suspension_stiffness = 100.0
+suspension_stiffness = 200.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0

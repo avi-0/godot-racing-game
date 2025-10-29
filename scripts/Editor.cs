@@ -11,8 +11,6 @@ public partial class Editor : Node
 {
 	public const string BlockPath = "res://blocks/";
 
-	public const string CarsPath = "res://scenes/cars/";
-
 	public static Editor Singleton;
 
 	[Export] public float CameraSpeed;
@@ -459,7 +457,9 @@ public partial class Editor : Node
 
 	private void LoadCarList()
 	{
-		var paths = ResourceLoader.ListDirectory(CarsPath).ToList().Order();
+		var paths = GameManager.Singleton.LoadCarList();
+
+		GD.Print($"{paths.GetType()}");
 
 		foreach (var carPath in paths)
 		{
@@ -475,7 +475,7 @@ public partial class Editor : Node
 	private void OnCarButtonPressed(string carPath)
 	{
 		CarSelect.Visible = false;
-		GameManager.Singleton.SelectCarScene(CarsPath + carPath);
+		GameManager.Singleton.SelectCarScene(carPath);
 		PlayButtonOnPressedAsync().Forget();
 	}
 

@@ -158,11 +158,6 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[node name="GraphicsGC" type="GridContainer" parent="SettingsMenu/Panel"]
-layout_mode = 1
-offset_right = 535.0
-offset_bottom = 559.0
-
 [node name="TabContainer" type="TabContainer" parent="SettingsMenu/Panel"]
 layout_mode = 1
 anchors_preset = 15

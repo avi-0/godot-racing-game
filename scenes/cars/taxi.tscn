@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://daf5s5qv3u3b2" path="res://assets/carkit/Textures/colormap.png" id="3_p7odm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]
-friction = 0.1
-bounce = 0.5
+friction = 0.0
+bounce = 0.05
 
 [sub_resource type="Curve" id="Curve_eauv3"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -246,7 +246,7 @@ wheel_radius = 0.24
 wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
 suspension_travel = 0.16
-suspension_stiffness = 100.0
+suspension_stiffness = 75.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
@@ -264,7 +264,7 @@ wheel_radius = 0.24
 wheel_rest_length = 0.08
 wheel_friction_slip = 1.0
 suspension_travel = 0.16
-suspension_stiffness = 100.0
+suspension_stiffness = 75.0
 suspension_max_force = 400000.0
 damping_compression = 2.4
 damping_relaxation = 4.0
