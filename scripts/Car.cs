@@ -75,7 +75,7 @@ public partial class Car : VehicleBody3D
 		if (!IsLocallyControlled)
 			return;
 		
-		if (@event is InputEventKey keyEvent && keyEvent.IsReleased())
+		if (@event is InputEventKey keyEvent && keyEvent.IsPressed())
 		{
 			if (keyEvent.PhysicalKeycode == Key.Escape)
 			{

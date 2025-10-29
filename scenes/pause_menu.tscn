@@ -1,9 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj6oje4umktpq"]
+[gd_scene load_steps=6 format=3 uid="uid://dj6oje4umktpq"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="1_myx47"]
 [ext_resource type="Script" uid="uid://omuaqht0le35" path="res://scripts/PauseMenu.cs" id="2_myx47"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tnpc"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_myx47"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_kukqi"]
+events = [SubResource("InputEventAction_myx47")]
 
 [node name="PauseMenu" type="Control"]
 visible = false
@@ -39,6 +45,7 @@ layout_mode = 2
 [node name="ResumeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
+shortcut = SubResource("Shortcut_kukqi")
 text = "Resume
 "
 

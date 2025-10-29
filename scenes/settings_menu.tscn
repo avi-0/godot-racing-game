@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://m1qpnrxiyo34"]
+[gd_scene load_steps=5 format=3 uid="uid://m1qpnrxiyo34"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="1_cr101"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/SettingsMenu.cs" id="2_wswnh"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_cr101"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_wswnh"]
+events = [SubResource("InputEventAction_cr101")]
 
 [node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "AA", "Vsync", "WINMODE", "SHADOWQ", "MusicSlider", "SoundSlider")]
 layout_mode = 3
@@ -194,6 +200,7 @@ metadata/_tab_index = 2
 [node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+shortcut = SubResource("Shortcut_wswnh")
 text = "Back"
 
 [connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton" to="." method="OnBackButton"]

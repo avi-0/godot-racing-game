@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=6 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="1_ekxnf"]
 [ext_resource type="Theme" uid="uid://blp1y44oyfi1x" path="res://resources/basic_godot_theme.tres" id="3_bqqt6"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_wu84c"]
+events = [SubResource("InputEventAction_bqqt6")]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("MenuFileDialog", "CampMenu", "TrackContainer")]
 layout_mode = 3
@@ -16,7 +22,7 @@ theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
 MenuFileDialog = NodePath("MenuFileDialog")
 CampMenu = NodePath("CampMenu")
-TrackContainer = NodePath("CampMenu/Panel/trackGC")
+TrackContainer = NodePath("CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/trackGC")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -118,7 +124,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CampMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="CampMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,28 +132,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="trackGC" type="GridContainer" parent="CampMenu/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -149.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Panel" type="PanelContainer" parent="CampMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CampMenu/MarginContainer/Panel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CampMenu/MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="trackGC" type="GridContainer" parent="CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 columns = 5
 
-[node name="BackButton" type="Button" parent="CampMenu/Panel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -183.0
-offset_top = -120.0
-offset_right = 183.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="BackButton" type="Button" parent="CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
@@ -156,4 +158,4 @@ text = "Back"
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="file_selected" from="MenuFileDialog" to="." method="OnMenuFileDialogFileSelected"]
-[connection signal="pressed" from="CampMenu/Panel/BackButton" to="." method="OnCampBackButton"]
+[connection signal="pressed" from="CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton" to="." method="OnCampBackButton"]
