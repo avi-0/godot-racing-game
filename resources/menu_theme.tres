@@ -5,11 +5,15 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fnlfk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nn6ra"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
 bg_color = Color(0.33960572, 0.54263246, 1, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 shadow_size = 8
 shadow_offset = Vector2(0, 3)
 
@@ -53,13 +57,14 @@ bg_color = Color(0, 0, 0, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6u33h"]
 
 [resource]
-Button/font_sizes/font_size = 64
+Button/font_sizes/font_size = 32
 Button/styles/focus = SubResource("StyleBoxEmpty_fnlfk")
 Button/styles/hover = SubResource("StyleBoxFlat_nn6ra")
 Button/styles/normal = ExtResource("1_muft2")
 Button/styles/pressed = ExtResource("1_muft2")
 GridContainer/constants/h_separation = 32
 GridContainer/constants/v_separation = 16
+HBoxContainer/constants/separation = 12
 Label/font_sizes/font_size = 48
 MarginContainer/constants/margin_bottom = 25
 MarginContainer/constants/margin_left = 25
@@ -85,4 +90,4 @@ TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_m2bvp")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_k8x1m")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxEmpty_nn6ra")
 TabContainer/styles/tabbar_background = SubResource("StyleBoxEmpty_6u33h")
-VBoxContainer/constants/separation = 64
+VBoxContainer/constants/separation = 12

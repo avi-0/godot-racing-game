@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=12 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor.tscn" id="5_p57ef"]
-[ext_resource type="Script" uid="uid://omuaqht0le35" path="res://scripts/GameMenu.cs" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/pause_menu.tscn" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/SettingsMenu.cs" id="9_0tnpc"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="10_vtaks"]
@@ -17,8 +17,6 @@ subpixel_positioning = 0
 [sub_resource type="SystemFont" id="SystemFont_dinhu"]
 font_names = PackedStringArray("Tahoma")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tnpc"]
-
 [node name="Game" type="Node"]
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
@@ -28,11 +26,11 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("GameMenu", "SettingsMenu", "TrackNode", "TimeLabel", "SpeedLabel")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "TimeLabel", "SpeedLabel")]
 script = ExtResource("7_trtic")
 TrackTemplatePath = "res://scenes/track_template.tscn"
 CarScene = ExtResource("12_kvuet")
-GameMenu = NodePath("../GameMenu")
+PauseMenu = NodePath("../PauseMenu")
 SettingsMenu = NodePath("../SettingsMenu")
 TrackNode = NodePath("Track")
 TimeLabel = NodePath("TimeLabel")
@@ -75,48 +73,7 @@ vertical_alignment = 1
 
 [node name="MainMenu" parent="." instance=ExtResource("12_trtic")]
 
-[node name="GameMenu" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("10_vtaks")
-script = ExtResource("7_gee14")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -373.5
-offset_top = -156.0
-offset_right = 373.5
-offset_bottom = 156.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 24
-
-[node name="ResumeButton" type="Button" parent="GameMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
-text = "Resume
-"
-
-[node name="SettingsButton" type="Button" parent="GameMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
-text = "Settings
-"
-
-[node name="ExitButton" type="Button" parent="GameMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
-text = "Exit"
+[node name="PauseMenu" parent="." instance=ExtResource("7_0tnpc")]
 
 [node name="SettingsMenu" type="Control" parent="." node_paths=PackedStringArray("TDrs", "AA", "Vsync", "WINMODE", "SHADOWQ", "MusicSlider", "SoundSlider")]
 visible = false
@@ -393,7 +350,4 @@ grow_vertical = 2
 layout_mode = 2
 alignment = 1
 
-[connection signal="pressed" from="GameMenu/VBoxContainer/ResumeButton" to="GameMenu" method="OnResumeButton"]
-[connection signal="pressed" from="GameMenu/VBoxContainer/SettingsButton" to="GameMenu" method="OnSettingsButton"]
-[connection signal="pressed" from="GameMenu/VBoxContainer/ExitButton" to="GameMenu" method="OnExitButton"]
 [connection signal="pressed" from="SettingsMenu/Panel/BackButton" to="SettingsMenu" method="OnBackButton"]

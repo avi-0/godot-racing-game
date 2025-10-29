@@ -13,7 +13,7 @@ public partial class GameManager : Node
     
     [Export] public PackedScene CarScene;
 
-    [Export] public Control GameMenu;
+    [Export] public Control PauseMenu;
 
     [Export] public Control SettingsMenu;
 
@@ -87,14 +87,14 @@ public partial class GameManager : Node
 
     private void LocalCarOnPauseRequested()
     {
-        if (GameMenu.Visible)
+        if (PauseMenu.Visible)
         {
-            GameMenu.Hide();
+            PauseMenu.Hide();
             Input.MouseMode = Input.MouseModeEnum.Captured;
         }
         else
         {
-            GameMenu.Show();
+            PauseMenu.Show();
             Input.MouseMode = Input.MouseModeEnum.Visible;
         }
     }
