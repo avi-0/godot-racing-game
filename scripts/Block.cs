@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 
@@ -6,7 +7,13 @@ namespace racingGame;
 [GlobalClass]
 public partial class Block : Node3D
 {
+	[Export] public bool IsStart = false;
+	[Export] public bool IsCheckpoint = false;
 	[Export] public bool IsFinish = false;
+	[Export] public Node3D SpawnPointNode;
+
+	public Transform3D SpawnPoint =>
+		SpawnPointNode.GlobalTransform.Orthonormalized().RotatedLocal(Vector3.Up, Single.Pi / 2);
 	
 	[Signal]
 	public delegate void ChildMouseEnteredEventHandler(Block block);
@@ -35,7 +42,7 @@ public partial class Block : Node3D
 
 		foreach (var area in FindChildren("*", "Area3D").Cast<Area3D>())
 		{
-			if (area.IsInGroup("finish_hitbox"))
+			if (area.IsInGroup("finish_hitbox") || area.IsInGroup("checkpoint_hitbox"))
 			{
 				area.BodyEntered += AreaOnBodyEntered;
 			}

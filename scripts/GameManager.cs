@@ -143,10 +143,12 @@ public partial class GameManager : Node
 
     private Transform3D GetStartPoint()
     {
-        var node = GetTree().GetFirstNodeInGroup("start_point");
-        if (node is Node3D node3d)
+        foreach (var block in TrackNode.FindChildren("*", "Block", false).Cast<Block>())
         {
-            return node3d.GlobalTransform;
+            if (block.IsStart)
+            {
+                return block.SpawnPoint;
+            }
         }
         
         return Transform3D.Identity;

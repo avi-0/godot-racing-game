@@ -5,46 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1df4c4c9-d1fd-4a51-b71a-d7701def8e72" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-crossroad-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-crossroad-barrier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout-barrier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry-barrier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit-barrier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-split-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-split-barrier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar-wide.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar-wide.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-cone.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-cone.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-light.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-light.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-cross.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-cross.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-double.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-double.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-cross.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-cross.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-double.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-double.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-square-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-square-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-crossroad-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-crossroad-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-intersection-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-intersection-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split-barrier.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split.tscn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/blender/blocks/func-checkpoint.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.racinggame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.racinggame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/blocks/func-start.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/blocks/func-start.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/cityroads/func-start.glb" beforeDir="false" afterPath="$PROJECT_DIR$/assets/cityroads/func-start.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/func-finish.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/func-finish.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/func-start.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/func-start.tscn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/cars/hatchback.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/cars/hatchback.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/cars/sport.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/cars/sport.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/cars/taxi.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/cars/taxi.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/main_menu/menu_button.tres" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/main_menu/menu_button.tres" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Block.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/BlockRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/BlockRecord.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/GameManager.cs" afterDir="false" />
@@ -165,7 +132,7 @@
       <workItem from="1761667606444" duration="3747000" />
       <workItem from="1761708804138" duration="2805000" />
       <workItem from="1761716655088" duration="2318000" />
-      <workItem from="1761758502038" duration="9649000" />
+      <workItem from="1761758502038" duration="14057000" />
     </task>
     <servers />
   </component>

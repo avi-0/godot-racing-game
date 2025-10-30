@@ -43,6 +43,7 @@ import/blender/enabled=false
 
 start_point=""
 finish_hitbox=""
+checkpoint_hitbox=""
 
 [importer_defaults]
 

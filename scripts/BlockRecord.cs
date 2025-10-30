@@ -100,31 +100,70 @@ public partial class BlockRecord : Resource
         {
             if (NameHasTag(meshChild, "finishhitbox"))
             {
-                var shape = meshChild.Mesh.CreateConvexShape();
-                var area = new Area3D();
-                var collisionShape = new CollisionShape3D();
-                
-                block.AddChild(area);
+                ConvertMeshToHitbox(block, meshChild, "finish_hitbox");
                 block.IsFinish = true;
-                
-                area.Name = meshChild.Name;
-                area.AddChild(collisionShape);
-                area.AddToGroup("finish_hitbox", true);
-                area.CollisionLayer = GameManager.BlockLayer;
-                area.CollisionMask = GameManager.CarLayer;
-                
-                collisionShape.Name = meshChild.Name;
-                collisionShape.Shape = shape;
-                collisionShape.GlobalTransform = meshChild.GlobalTransform;
-                
-                meshChild.GetParent().RemoveChild(meshChild);
-                meshChild.QueueFree();
+
+                continue;
+            }
+            
+            if (NameHasTag(meshChild, "checkpointhitbox"))
+            {
+                ConvertMeshToHitbox(block, meshChild, "checkpoint_hitbox");
+                block.IsCheckpoint = true;
+
+                continue;
+            }
+
+            if (NameHasTag(meshChild, "spawnpoint"))
+            {
+                ConvertMeshToSpawnPoint(block, meshChild);
+
+                if (NameHasTag(meshChild, "startspawnpoint"))
+                {
+                    block.IsStart = true;
+                }
                 
                 continue;
             }
             
             meshChild.CreateTrimeshCollision();
         }
+    }
+
+    private static void ConvertMeshToHitbox(Block block, MeshInstance3D meshChild, string group)
+    {
+        var shape = meshChild.Mesh.CreateConvexShape();
+        var area = new Area3D();
+        var collisionShape = new CollisionShape3D();
+                
+        block.AddChild(area);
+                
+        area.Name = meshChild.Name;
+        area.AddChild(collisionShape);
+        area.AddToGroup(group, true);
+        area.CollisionLayer = GameManager.BlockLayer;
+        area.CollisionMask = GameManager.CarLayer;
+                
+        collisionShape.Name = meshChild.Name;
+        collisionShape.Shape = shape;
+        collisionShape.GlobalTransform = meshChild.GlobalTransform;
+                
+        meshChild.GetParent().RemoveChild(meshChild);
+        meshChild.QueueFree();
+    }
+
+    private static void ConvertMeshToSpawnPoint(Block block, MeshInstance3D meshChild)
+    {
+        var node = new Node3D();
+        
+        block.AddChild(node);
+        block.SpawnPointNode = node;
+                
+        node.Name = meshChild.Name;
+        node.GlobalTransform = meshChild.GlobalTransform;
+                
+        meshChild.GetParent().RemoveChild(meshChild);
+        meshChild.QueueFree();
     }
 
     private Aabb CalculateCameraSize(Node3D node)
