@@ -15,12 +15,12 @@
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-slant-barrier.tscn" id="13_62077"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-curve.tscn" id="14_8v18m"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-curve-barrier.tscn" id="15_habj2"]
-[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/sign-highway-detailed.tscn" id="16_28mbd"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/sign-highway-wide.tscn" id="17_vlh6d"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/tile-high.tscn" id="18_8dt3t"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/light-curved-cross.tscn" id="19_d1fgc"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/construction-cone.tscn" id="20_bi1b4"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/construction-barrier.tscn" id="21_hfbbb"]
+[ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/func-finish.tscn" id="22_lfyqc"]
 [ext_resource type="PackedScene" path="res://blocks/cityroads/scenes/road-bend-square.tscn" id="22_uxrct"]
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_uk1mk"]
@@ -269,10 +269,6 @@ script = ExtResource("5_h7r45")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 16)
 script = ExtResource("5_h7r45")
 
-[node name="sign-highway-detailed" type="Node3D" parent="." instance=ExtResource("16_28mbd")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8, 2, 16)
-script = ExtResource("5_h7r45")
-
 [node name="@Node3D@482" type="Node3D" parent="." instance=ExtResource("17_vlh6d")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8, 2, -16)
 script = ExtResource("5_h7r45")
@@ -424,3 +420,8 @@ script = ExtResource("5_h7r45")
 [node name="@Node3D@518" type="Node3D" parent="." instance=ExtResource("21_hfbbb")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -34, 2, 10)
 script = ExtResource("5_h7r45")
+
+[node name="func-finish" type="Node3D" parent="." instance=ExtResource("22_lfyqc")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12, 2, 16)
+script = ExtResource("5_h7r45")
+IsFinish = true

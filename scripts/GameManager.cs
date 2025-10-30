@@ -14,7 +14,7 @@ public partial class GameManager : Node
     [Export(PropertyHint.FilePath)] public string TrackTemplatePath;
 
     public const string CarsPath = "res://scenes/cars/";
-    
+
     [Export] public PackedScene CarScene;
 
     [Export] public Control PauseMenu;
@@ -23,13 +23,20 @@ public partial class GameManager : Node
 
     [Export] public Node3D TrackNode;
 
+    [Export] public Control RaceUI;
     [Export] public Label TimeLabel;
-
     [Export] public Label SpeedLabel;
+    [Export] public Label PBLabel;
+    [Export] public Label StartTimerLabel;
+
+    [Export] public Panel FinishPanel;
+    [Export] public Label FinishTimeLabel;
     
     private bool _isPlaying = false;
 
     private Car _localCar = null;
+
+    private int LocalPlayerID = -1;
 
     [Signal]
     public delegate void StoppedPlayingEventHandler();
@@ -45,15 +52,7 @@ public partial class GameManager : Node
 
     public override void _Process(double delta)
     {
-        TimeLabel.Text = "";
-        if (_isPlaying == true)
-        {   
-            var RaceTime = DateTime.Now.Subtract(RaceStartTime);
-            TimeLabel.Text =  RaceTime.ToString("mm") + ":" + RaceTime.ToString("ss") + "." + RaceTime.ToString("fff");
-        }   
     }
-
-    private DateTime RaceStartTime = DateTime.Now;
 
     public void SelectCarScene(string scenePath)
     {
@@ -62,7 +61,7 @@ public partial class GameManager : Node
 
     public void Play()
     {
-        SpeedLabel.Visible = true;
+        SetGameUIVisiblity(true);
 
         if (_localCar != null)
         {
@@ -89,12 +88,21 @@ public partial class GameManager : Node
 
         _isPlaying = true;
 
-        RaceStartTime = DateTime.Now;
+        if (LocalPlayerID == -1)
+        {
+            LocalPlayerID = GameMode.CurrentGameMode.SpawnPlayer(true, _localCar);
+        }
+        else
+        {
+            GameMode.CurrentGameMode.RespawnPlayer(LocalPlayerID, _localCar);
+        }
+
+        GameMode.CurrentGameMode.Running(true);
     }
 
     public void Stop()
     {
-        SpeedLabel.Visible = false;
+        SetGameUIVisiblity(false);
 
         if (_localCar != null)
         {
@@ -115,8 +123,18 @@ public partial class GameManager : Node
         _isPlaying = false;
         
         EmitSignalStoppedPlaying();
+
+        LocalPlayerID = -1;
+        GameMode.CurrentGameMode.KillGame();
     }
     
+    private void SetGameUIVisiblity(bool Visible)
+    {
+        RaceUI.Visible = Visible;
+
+        FinishPanel.Hide();
+    }
+
     public bool IsPlaying()
     {
         return _isPlaying;
@@ -191,11 +209,20 @@ public partial class GameManager : Node
         TrackNode.QueueFree();
         TrackNode = newTrackNode;
         TrackNode.Name = "Track";
+
+        GameMode.CurrentGameMode.InitTrack(TrackNode);
     }
 
     private void FinishOnCarEntered(Car car)
     {
-        Play(); // рестарт
+        GameMode.CurrentGameMode.PlayerAttemptFinish(0);
+    }
+
+    public void OnFinishButtonPressed()
+    {
+        FinishPanel.Hide();
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+        LocalCarOnRestartRequested();
     }
 
     public void NewTrack()
