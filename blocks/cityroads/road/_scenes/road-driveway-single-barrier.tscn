@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://dh3agqiya187f"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_i47em"]
+[ext_resource type="Material" uid="uid://ds2tnd45lhtof" path="res://assets/kenney/materials/colormap.tres" id="2_eeek5"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yheax"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.08, 1),
+"format": 34896613377,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAwAFAAIABAACAAUAAAAGAAMABQAHAAQAAAAEAAcABwAFAAMABwAGAAAAAwAGAAcACAAJAAoACgAJAAsACwAJAAgACgAMAAgACAANAAsADQAIAAwACwAOAAoADgALAA0ADAAKAA4ADQAPAA4ADgAPAAwADAAPAA0AEAARABIAEgATABAAEAATABQAFAATABIAEQAQABUAFAAVABAAFQAWABEAEgAXABQAFQAUABcAFwASABEAFwAWABUAEQAWABcA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAMwMAAAAAAAAAAAAAAAA//8AAAAA//8AAAAAAAAAAP//rgcAAP////8AAAAA//8AAMwMAAD/////rgcAAP////9Q+AAA//8AADLzAAD//wAA//8AAEehAAAy8wAA////////AABHof//UPgAAEehAAD//wAAR6H/////AAC3Xv////8AALdeAAD//wAAAAAAAP//AAAAAP////8AAAAA//9Q+AAAt17//1D4AAC3XgAAMvMAAAAAAAAy8wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ks32a"]
+resource_name = "road-driveway-single-barrier_road-driveway-single-barrier"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.08, 1),
+"attribute_data": PackedByteArray("/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f"),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQA"),
+"material": ExtResource("2_eeek5"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("AAAAAMwM/78AAAAAAAD/vwAA//8AAP+/AAD//64H/7//////UPj/v///AAAy8/+///8AAP///7//////////vwAA//8AAP//AAAAAAAA/////wAAAAD///////8AAP///////wAA////////rgf//wAA//+uB///AAD//wAA//+3Xv////8AgLdeAAD//wCAAAAAAP//AIAAAP////8AgLde//9Q+P+/t14AADLz/7+3XgAA////v7de//////+/R6EAADLz/////wAAMvP///////9Q+P//R6H//1D4//8AAAAAzAz/v///AADMDP+///8AAAAA/78AAAAAAAD/vwAAAAAy8///t14AADLz//+3Xv//UPj//wAA//9Q+P///////64H+on//wAAzAz6iQAAAADMDPqJAAD//64H+om3XgAA////v7deAAAy8/+/AAAAADLz/78AAAAA////vwAA//9Q+P//t17//1D4//+3Xv///////wAA////////AAAAAP///78AAAAAMvP/vwAA//9Q+P+/AAD//////79Hof//UPj///////9Q+P////////////9Hof//////////AAD///+///8AADLz/79HoQAAMvP/v0ehAAD///+//////64H/7//////AAD/v///AAAAAP+///8AAMwM/79HoQAA////v0ehAAAy8/+/R6H//1D4/79Hof//////v////////wCA//8AAP//AIBHoQAA//8AgEeh/////wCA/3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3//v/9//7//f/+//3//v/9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/3/38f9/9/H/f/fx/3/38QAA/38AAP9/AAD/fwAA/3//f/fx/3/38f9/9/H/f/fx////f////3////9/////fwAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+//3////9/////f////3////9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9//38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_yheax")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_g0ucn"]
+data = PackedVector3Array(-0.5, 0, -0.45, -0.5, 0, -0.5, -0.5, 0.08, -0.5, -0.5, 0.08, -0.5, -0.5, 0.08, -0.47, -0.5, 0, -0.45, 0.5, 0.08, 0.47, 0.5, 0, 0.45, 0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0.08, 0.5, 0.5, 0.08, 0.47, -0.5, 0.08, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.08, -0.5, -0.5, 0.08, -0.5, 0.5, 0.08, -0.5, 0.5, 0.08, -0.47, -0.5, 0.08, -0.47, -0.5, 0.08, -0.47, -0.5, 0.08, -0.5, 0.5, 0.08, -0.5, -0.13, 0.08, 0.5, -0.13, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.08, 0.5, -0.13, 0.08, 0.5, -0.13, 0.08, 0.47, -0.13, 0, 0.45, -0.13, 0, 0.5, -0.13, 0, 0.5, -0.13, 0.08, 0.5, -0.13, 0.08, 0.47, 0.13, 0, 0.45, 0.5, 0, 0.45, 0.5, 0.08, 0.47, 0.5, 0.08, 0.47, 0.13, 0.08, 0.47, 0.13, 0, 0.45, -0.5, 0, -0.45, 0.5, 0, -0.45, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, -0.45, -0.5, 0, 0.45, -0.13, 0, 0.45, -0.13, 0.08, 0.47, -0.13, 0.08, 0.47, -0.5, 0.08, 0.47, -0.5, 0, 0.45, 0.5, 0.08, -0.47, 0.5, 0, -0.45, -0.5, 0, -0.45, -0.5, 0, -0.45, -0.5, 0.08, -0.47, 0.5, 0.08, -0.47, -0.13, 0, 0.5, -0.13, 0, 0.45, -0.5, 0, 0.45, -0.5, 0, 0.45, -0.5, 0, 0.5, -0.13, 0, 0.5, -0.5, 0.08, 0.47, -0.13, 0.08, 0.47, -0.13, 0.08, 0.5, -0.13, 0.08, 0.5, -0.5, 0.08, 0.5, -0.5, 0.08, 0.47, -0.5, 0, 0.5, -0.5, 0, 0.45, -0.5, 0.08, 0.47, -0.5, 0.08, 0.47, -0.5, 0.08, 0.5, -0.5, 0, 0.5, 0.13, 0.08, 0.47, 0.5, 0.08, 0.47, 0.5, 0.08, 0.5, 0.5, 0.08, 0.5, 0.13, 0.08, 0.5, 0.13, 0.08, 0.47, 0.5, 0, 0.5, 0.5, 0, 0.45, 0.13, 0, 0.45, 0.13, 0, 0.45, 0.13, 0, 0.5, 0.5, 0, 0.5, 0.5, 0.08, -0.47, 0.5, 0.08, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.45, 0.5, 0.08, -0.47, 0.13, 0, 0.5, 0.13, 0, 0.45, 0.13, 0.08, 0.47, 0.13, 0.08, 0.47, 0.13, 0.08, 0.5, 0.13, 0, 0.5, 0.5, 0.08, 0.5, 0.5, 0, 0.5, 0.13, 0, 0.5, 0.13, 0, 0.5, 0.13, 0.08, 0.5, 0.5, 0.08, 0.5)
+
+[node name="road-driveway-single-barrier" type="Node3D"]
+script = ExtResource("1_i47em")
+
+[node name="road-driveway-single-barrier2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="road-driveway-single-barrier" type="MeshInstance3D" parent="road-driveway-single-barrier2"]
+mesh = SubResource("ArrayMesh_ks32a")
+skeleton = NodePath("")
+
+[node name="road-driveway-single-barrier_col" type="StaticBody3D" parent="road-driveway-single-barrier2/road-driveway-single-barrier"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road-driveway-single-barrier2/road-driveway-single-barrier/road-driveway-single-barrier_col"]
+shape = SubResource("ConcavePolygonShape3D_g0ucn")

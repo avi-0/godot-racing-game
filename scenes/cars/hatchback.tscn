@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b5kxpk7e7n6ri"]
 
 [ext_resource type="Script" uid="uid://dwmxm5gl3jjr3" path="res://scripts/Car.cs" id="1_jxqfv"]
-[ext_resource type="PackedScene" uid="uid://b77pygol30lhj" path="res://assets/carkit/hatchback-sports.glb" id="2_eauv3"]
+[ext_resource type="PackedScene" uid="uid://b77pygol30lhj" path="res://assets/kenney/carkit/hatchback-sports.glb" id="2_eauv3"]
 [ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/carsfx.wav" id="3_mk5fm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]

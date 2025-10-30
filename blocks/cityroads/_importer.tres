@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_nwilm")
-SourcePath = "res://assets/cityroads"
+SourcePath = "res://assets/kenney/cityroads"
 metadata/_custom_type_script = "uid://d0mlqj4pey0s3"

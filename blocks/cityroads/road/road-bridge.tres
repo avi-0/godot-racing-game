@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bcnf3cm8k0rko"]
+
+[ext_resource type="PackedScene" uid="uid://c60s88k26bexx" path="res://assets/kenney/cityroads/road/road-bridge.glb" id="1_25bbt"]
+[ext_resource type="PackedScene" uid="uid://qkvsf1jcrm0c" path="res://blocks/cityroads/road/_scenes/road-bridge.tscn" id="1_rpivk"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_dj5ur"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/road/_images/road-bridge.png" id="3_ffm0e"]
+
+[resource]
+script = ExtResource("2_dj5ur")
+SourceScene = ExtResource("1_25bbt")
+Scene = ExtResource("1_rpivk")
+ThumbnailTexture = ExtResource("3_ffm0e")

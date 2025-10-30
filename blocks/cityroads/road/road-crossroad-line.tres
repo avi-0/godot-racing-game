@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b1x1cr7imvetb"]
+
+[ext_resource type="PackedScene" uid="uid://di6uectq44ibi" path="res://assets/kenney/cityroads/road/road-crossroad-line.glb" id="1_6nppp"]
+[ext_resource type="PackedScene" uid="uid://d12vtjqgg5kid" path="res://blocks/cityroads/road/_scenes/road-crossroad-line.tscn" id="1_12gad"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_gr82f"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/road/_images/road-crossroad-line.png" id="3_k3lp0"]
+
+[resource]
+script = ExtResource("2_gr82f")
+SourceScene = ExtResource("1_6nppp")
+Scene = ExtResource("1_12gad")
+ThumbnailTexture = ExtResource("3_k3lp0")

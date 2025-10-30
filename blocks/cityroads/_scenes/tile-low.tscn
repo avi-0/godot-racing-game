@@ -1,15 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://dvrdd2cvi110m"]
+[gd_scene load_steps=6 format=4 uid="uid://ui4wiakw6t4x"]
 
-[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_004qk"]
-[ext_resource type="Texture2D" uid="uid://cseg54knwfo74" path="res://assets/cityroads/Textures/colormap.png" id="2_fl2p2"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_3ews8"]
+[ext_resource type="Material" uid="uid://ds2tnd45lhtof" path="res://assets/kenney/materials/colormap.tres" id="2_07xqk"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08owh"]
-resource_name = "colormap"
-cull_mode = 2
-albedo_texture = ExtResource("2_fl2p2")
-texture_filter = 2
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_670yu"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lglb3"]
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
 "format": 34896613377,
@@ -23,7 +17,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_oac6f"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_m42u8"]
 resource_name = "tile-low_tile-low"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
@@ -31,7 +25,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_08owh"),
+"material": ExtResource("2_07xqk"),
 "name": "colormap",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -39,22 +33,22 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD//wAA//8AAAAAAAD/////AAAAAP///////wAA//////////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgP////////+//////wAA/7///wAAAAD/v///AAD///+/AAD//wAA////////AAD/////////////AAD///////8AAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/vwAAAAD///+/AAAAAAAA/78AAP//AAD/vwAA//////+//3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3//f////3////9/////f///")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_670yu")
+shadow_mesh = SubResource("ArrayMesh_lglb3")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_metje"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lvsrw"]
 data = PackedVector3Array(-0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.5, -0.5, 0, 0.5)
 
 [node name="tile-low" type="Node3D"]
-script = ExtResource("1_004qk")
+script = ExtResource("1_3ews8")
 
 [node name="tile-low2" type="Node3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
 [node name="tile-low" type="MeshInstance3D" parent="tile-low2"]
-mesh = SubResource("ArrayMesh_oac6f")
+mesh = SubResource("ArrayMesh_m42u8")
 skeleton = NodePath("")
 
 [node name="tile-low_col" type="StaticBody3D" parent="tile-low2/tile-low"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tile-low2/tile-low/tile-low_col"]
-shape = SubResource("ConcavePolygonShape3D_metje")
+shape = SubResource("ConcavePolygonShape3D_lvsrw")

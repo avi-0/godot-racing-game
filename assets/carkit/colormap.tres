@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cqppwungse8ga"]
-
-[ext_resource type="Texture2D" uid="uid://daf5s5qv3u3b2" path="res://assets/carkit/Textures/colormap.png" id="1_61jt5"]
-
-[resource]
-resource_name = "colormap"
-albedo_texture = ExtResource("1_61jt5")

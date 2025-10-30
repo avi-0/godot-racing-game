@@ -66,11 +66,12 @@ public partial class BlockRecord : Resource
         
         root.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
         await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
-
+        
         var image = root.GetTexture().GetImage();
         image.GenerateMipmaps();
         ThumbnailTexture = ImageTexture.CreateFromImage(image);
         ThumbnailTexture.TakeOverPath(ResourcePath.GetBaseDir().PathJoin("/_images/" + ResourcePath.GetFile().GetBaseName() + ".png"));
+        DirAccess.MakeDirRecursiveAbsolute(ThumbnailTexture.ResourcePath.GetBaseDir());
         ResourceSaver.Singleton.Save(ThumbnailTexture);
 
         // pack and save
@@ -78,10 +79,11 @@ public partial class BlockRecord : Resource
         var packedScene = new PackedScene();
         packedScene.Pack(node);
         packedScene.TakeOverPath(ResourcePath.GetBaseDir().PathJoin("/_scenes/" + ResourcePath.GetFile().GetBaseName() + ".tscn"));
-
+        DirAccess.MakeDirRecursiveAbsolute(packedScene.ResourcePath.GetBaseDir());
         ResourceSaver.Singleton.Save(packedScene);
         
         Scene = packedScene;
+        DirAccess.MakeDirRecursiveAbsolute(ResourcePath.GetBaseDir());
         ResourceSaver.Singleton.Save(this);
         
         // clean up

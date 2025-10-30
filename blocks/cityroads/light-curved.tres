@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dxodwcxfmlerw"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://hxv7mbq8kigt"]
 
-[ext_resource type="PackedScene" uid="uid://c8vwmbqlovt7f" path="res://blocks/cityroads/_scenes/light-curved.tscn" id="1_c5ein"]
-[ext_resource type="PackedScene" uid="uid://dnjk1c18khxxg" path="res://assets/cityroads/light-curved.glb" id="1_rqve2"]
+[ext_resource type="PackedScene" uid="uid://dgxuk0ijc4dog" path="res://blocks/cityroads/_scenes/light-curved.tscn" id="1_c5ein"]
+[ext_resource type="PackedScene" uid="uid://dnjk1c18khxxg" path="res://assets/kenney/cityroads/light-curved.glb" id="1_rqve2"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ynabv"]
-[ext_resource type="Texture2D" uid="uid://bhahp7by38ptk" path="res://blocks/cityroads/_images/light-curved.png" id="3_7vgyb"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/_images/light-curved.png" id="3_7vgyb"]
 
 [resource]
 script = ExtResource("2_ynabv")

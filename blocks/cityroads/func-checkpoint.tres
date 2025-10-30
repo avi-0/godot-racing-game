@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cdadiobvtoyo"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bcj3pgb8dcvjg"]
 
-[ext_resource type="PackedScene" uid="uid://8mkr0ji0x7ak" path="res://assets/cityroads/func-checkpoint.glb" id="1_lou72"]
-[ext_resource type="PackedScene" uid="uid://cyh1msn76ul7k" path="res://blocks/cityroads/_scenes/func-checkpoint.tscn" id="1_nfngo"]
+[ext_resource type="PackedScene" uid="uid://8mkr0ji0x7ak" path="res://assets/kenney/cityroads/func-checkpoint.glb" id="1_lou72"]
+[ext_resource type="PackedScene" uid="uid://bprurakw77qm1" path="res://blocks/cityroads/_scenes/func-checkpoint.tscn" id="1_nfngo"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_dnnln"]
-[ext_resource type="Texture2D" uid="uid://bfan4j7d4w5x3" path="res://blocks/cityroads/_images/func-checkpoint.png" id="3_17yhw"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/_images/func-checkpoint.png" id="3_17yhw"]
 
 [resource]
 script = ExtResource("2_dnnln")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b37yoc3fk3bmp"]
+
+[ext_resource type="PackedScene" uid="uid://d17c45sdu47l0" path="res://blocks/cityroads/road/_scenes/road-roundabout.tscn" id="1_6h445"]
+[ext_resource type="PackedScene" uid="uid://dky76aswxdjwv" path="res://assets/kenney/cityroads/road/road-roundabout.glb" id="1_hoonl"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_3i07a"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/road/_images/road-roundabout.png" id="3_ra0mm"]
+
+[resource]
+script = ExtResource("2_3i07a")
+SourceScene = ExtResource("1_hoonl")
+Scene = ExtResource("1_6h445")
+ThumbnailTexture = ExtResource("3_ra0mm")

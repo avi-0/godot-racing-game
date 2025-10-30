@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bvbx1nh84ylnv"]
+
+[ext_resource type="PackedScene" uid="uid://4d4v6oojfvf3" path="res://assets/kenney/cityroads/road/road-driveway-double-barrier.glb" id="1_h61dh"]
+[ext_resource type="PackedScene" uid="uid://b7e4a85a8hdqe" path="res://blocks/cityroads/road/_scenes/road-driveway-double-barrier.tscn" id="1_yyawk"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_i1vx3"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/road/_images/road-driveway-double-barrier.png" id="3_vycuv"]
+
+[resource]
+script = ExtResource("2_i1vx3")
+SourceScene = ExtResource("1_h61dh")
+Scene = ExtResource("1_yyawk")
+ThumbnailTexture = ExtResource("3_vycuv")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bd8n7jhnipjkt"]
+
+[ext_resource type="PackedScene" uid="uid://cfnq2v773gju0" path="res://assets/kenney/cityroads/road/road-curve-pavement.glb" id="1_1r7f1"]
+[ext_resource type="PackedScene" uid="uid://kubrr7im1uqf" path="res://blocks/cityroads/road/_scenes/road-curve-pavement.tscn" id="1_nntat"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_8uaes"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/road/_images/road-curve-pavement.png" id="3_aom48"]
+
+[resource]
+script = ExtResource("2_8uaes")
+SourceScene = ExtResource("1_1r7f1")
+Scene = ExtResource("1_nntat")
+ThumbnailTexture = ExtResource("3_aom48")

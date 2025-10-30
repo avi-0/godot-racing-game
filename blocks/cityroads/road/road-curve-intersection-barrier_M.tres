@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://csg24u5fsswes"]
+
+[ext_resource type="PackedScene" uid="uid://d0ux2ke51gom6" path="res://assets/kenney/cityroads/road/road-curve-intersection-barrier_M.glb" id="1_fhpuw"]
+[ext_resource type="PackedScene" uid="uid://csjpijeefq6xp" path="res://blocks/cityroads/road/_scenes/road-curve-intersection-barrier_M.tscn" id="1_ke36n"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_oe4ei"]
+[ext_resource type="Texture2D" path="res://blocks/cityroads/road/_images/road-curve-intersection-barrier_M.png" id="3_2b6rw"]
+
+[resource]
+script = ExtResource("2_oe4ei")
+SourceScene = ExtResource("1_fhpuw")
+Scene = ExtResource("1_ke36n")
+ThumbnailTexture = ExtResource("3_2b6rw")
