@@ -14,8 +14,6 @@ public partial class GameManager : Node
     [Export(PropertyHint.FilePath)] public string TrackTemplatePath;
 
     public const string CarsPath = "res://scenes/cars/";
-    
-    [Export] public PackedScene GameModeScene;
 
     [Export] public PackedScene CarScene;
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=13 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
-[ext_resource type="PackedScene" path="res://scenes/gamemodes/gamemode_timeattack.tscn" id="4_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor.tscn" id="5_p57ef"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="6_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/pause_menu.tscn" id="7_0tnpc"]
@@ -31,7 +30,6 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "TimeLabel", "SpeedLabel", "PBLabel", "FinishPanel", "FinishTimeLabel")]
 script = ExtResource("7_trtic")
 TrackTemplatePath = "res://scenes/track_template.tscn"
-GameModeScene = ExtResource("4_0tnpc")
 CarScene = ExtResource("12_kvuet")
 PauseMenu = NodePath("../PauseMenu")
 SettingsMenu = NodePath("../SettingsMenu")
