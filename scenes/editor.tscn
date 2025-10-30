@@ -1,12 +1,67 @@
-[gd_scene load_steps=14 format=3 uid="uid://c1rq5irkqaorb"]
+[gd_scene load_steps=20 format=4 uid="uid://c1rq5irkqaorb"]
 
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
-[ext_resource type="PackedScene" uid="uid://bfxxyh44b8xbw" path="res://blocks/cityroads/scenes/road-straight.tscn" id="2_5tm2q"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="2_5tm2q"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="3_j8y2p"]
+[ext_resource type="Texture2D" uid="uid://cseg54knwfo74" path="res://assets/cityroads/Textures/colormap.png" id="3_o435n"]
 [ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="4_o435n"]
 [ext_resource type="Texture2D" uid="uid://dyx154afg0s1q" path="res://assets/godot-icons/RangeSliderLeft.svg" id="5_3vi5u"]
 [ext_resource type="Texture2D" uid="uid://hmfs1b0dmqq1" path="res://assets/godot-icons/RangeSliderRight.svg" id="6_78fwb"]
 [ext_resource type="Script" uid="uid://ec3tpqskxxmf" path="res://scripts/EditorViewport.cs" id="7_74j0u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rhtm"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("3_o435n")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0dw76"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
+"format": 34896613377,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAABAAAAAAADAAUAAwACAAUABQAGAAAAAAAGAAQABAAGAAUABQAHAAQABwAFAAIABAAHAAgAAgAIAAcABAAJAAEACAAJAAQAAgABAAoACQAKAAEACgALAAIAAgALAAgACwAKAAwACQAMAAoADAANAAsACwANAAgADQAMAA4ACQAOAAwADgAPAA0ADQAPAAgACQAQAA4AEQAPAA4ADgAQABEADwARAAgACQASABAAEQAQABIAEgATABEAEQATAAgACQAUABIAFAAJAAgAFAAVABIAFgATABIAEgAVABYAEwAWAAgAFgAVABQACAAXABQAFAAXABYAFgAXAAgA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////5kZAAD///9/mRkAAAAA/3+ZGQAAAAD//5kZAAD//wAAAAAAAAAA//8AAAAA/////wAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAD///9/MjMAAAAA/38yMwAA////f3B9AAAAAP9/cH0AAP///3+OggAAAAD/f46CAAD///9/zMwAAAAA/3/MzAAA////f2XmAAAAAP9/ZeYAAP///////wAA/////2XmAAAAAP//ZeYAAAAA/////wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5ux3p"]
+resource_name = "road-straight_road-straight"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
+"attribute_data": PackedByteArray("//dlxv/3/9//9//f//dlxv/3Zcb/95j5//eY+f/3Zcb/92XG//f/3//3/9//92XG//eY+f/3mPn/95j5//eY+f/3Zcb/92XG//dlxv/3Zcb/92XG//eY+f/3mPn/92XG//dlxv/3Zcb/92XG//dlxv83Zcb/N2XG/zf/3/83mPn/N//f/zf/3/83/9//N//f/zf/3/83mPn/N2XG/zdlxv83Zcb/N2XG/zeY+f83/9//N//f/zf/3/83/9//N//f/zf/3/83mPn/N2XG/zdlxv8n/9//J//f/yf/3/8n/9//J//f/yf/3/8n/9//J//f/wf/3/8H/9//B//f/wf/3/8H/9//B//f/wf/3/8H/9//R//f/0f/3/9H/9//R//f"),
+"format": 34896613399,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHwAcAB4AHwAeACAAHwAgACEAHwAhACIAHwAiACMAHwAjACQAJQAfACQAJQAkACYAJgAnACUAKAApACoAKwAoACoALAArACoALQAsACoALgAtACoALwAuACoAMAAvACoAMAAqADEAMQAyADAAMwAwADIANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQA"),
+"material": SubResource("StandardMaterial3D_5rhtm"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("/////5kZAID///9/mRkAgAAA/3+ZGQCAAAD//5kZAIAAAP//AAD//wAAAAAAAP////8AAAAA////////AAD//wAA//9l5v//AAD/f2Xm//////9/Zeb///////9l5v//AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAP//AAD///////8AAP///////5kZ//8AAP//mRn//////////wCA//8AAP//AIAAAAAA//8AgAAA/////wCAAAD//2Xm////////Zeb/////////////AAD/////////////////v/////9l5v+/////f2Xm/7///wAA////v////3/MzP+/////f46C/7////9/cH3/v////38yM/+/////f5kZ/7///wAAAAD/v/////+ZGf+//////wAA/78AAP//Zeb/vwAA//////+/AAAAAP///78AAP9/Zeb/vwAA/3/MzP+/AAD/f46C/78AAP9/cH3/vwAA/38yM/+/AAD/f5kZ/78AAAAAAAD/vwAA//8AAP+/AAD//5kZ/7////9/joL//////3/MzP//AAD/f8zM//8AAP9/joL//wAA/38yM///////fzIz//////9/cH3//wAA/39wff//AAD/f5kZ//////9/mRn//////38yM///AAD/fzIz//8AAP9/zMz//////3/MzP//////f2Xm//8AAP9/Zeb//wAA/39wff//////f3B9//////9/joL//wAA/3+Ogv///3////9/////f////3////9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9//7//f/+//3//v/9//7//f////3////9/////f////3//v/9//7//f/+//3//v/9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f////3////9/////f////3////9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0dw76")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_yq160"]
+data = PackedVector3Array(0.5, 0.02, -0.39999998, 0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0.02, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, 0.39999998, 0.5, 0.02, 0.5, 0.5, 0.02, 0.39999998, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.02, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0, 0.5, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.29999998, 0.5, 0, 0.5, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.01, 0.5, 0, 0.5, 0.5, 0.01, 0.01, 0.5, 0.01, -0.01, 0.5, 0, 0.5, 0.5, 0.01, -0.01, 0.5, 0.01, -0.29999998, 0.5, 0, 0.5, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.01, -0.39999998, 0.5, 0, -0.5, 0.5, 0.01, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.39999998, 0.5, 0.02, -0.5, 0.5, 0, -0.5, -0.5, 0.02, 0.39999998, -0.5, 0.02, 0.5, -0.5, 0, 0.5, -0.5, 0.01, 0.39999998, -0.5, 0.02, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.39999998, -0.5, 0, 0.5, -0.5, 0.01, 0.01, -0.5, 0.01, 0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.01, -0.5, 0.01, 0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.01, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0.01, -0.29999998, -0.5, 0, 0.5, -0.5, 0.01, -0.39999998, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.39999998, -0.5, 0.01, -0.39999998, -0.5, 0.02, -0.5, 0.5, 0.01, 0.01, 0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.01, 0.5, 0.01, -0.01, -0.5, 0.01, -0.01, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, 0.5, 0.01, -0.39999998, 0.5, 0.01, -0.29999998, 0.5, 0.01, -0.29999998, -0.5, 0.01, -0.29999998, -0.5, 0.01, -0.39999998, -0.5, 0.01, 0.29999998, 0.5, 0.01, 0.29999998, 0.5, 0.01, 0.39999998, 0.5, 0.01, 0.39999998, -0.5, 0.01, 0.39999998, -0.5, 0.01, 0.29999998, -0.5, 0.01, -0.01, 0.5, 0.01, -0.01, 0.5, 0.01, 0.01, 0.5, 0.01, 0.01, -0.5, 0.01, 0.01, -0.5, 0.01, -0.01)
+
+[sub_resource type="PackedScene" id="PackedScene_3vi5u"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("road-straight", "Node3D", "script", "road-straight2", "Node3D", "transform", "road-straight", "MeshInstance3D", "mesh", "skeleton", "road-straight_col", "StaticBody3D", "CollisionShape3D", "CollisionShape3D", "shape"),
+"node_count": 5,
+"node_paths": [NodePath("."), NodePath("./road-straight2"), NodePath("./road-straight2/road-straight"), NodePath("./road-straight2/road-straight/road-straight_col")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 2, 8, 2, 9, 3, 0, 1073741826, 0, 11, 10, -1, 0, 0, 1073741827, 0, 13, 12, -1, 1, 14, 4, 0),
+"variants": [ExtResource("2_5tm2q"), Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0), SubResource("ArrayMesh_5ux3p"), NodePath(""), SubResource("ConcavePolygonShape3D_yq160")],
+"version": 3
+}
 
 [sub_resource type="InputEventKey" id="InputEventKey_dinhu"]
 device = -1
@@ -31,19 +86,20 @@ keycode = 4194306
 [sub_resource type="Shortcut" id="Shortcut_dinhu"]
 events = [SubResource("InputEventKey_kvpfn")]
 
-[node name="Editor" type="Node" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "PlayButton", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton")]
+[node name="Editor" type="Node" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "ConfirmQuitDialog", "PlayButton", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton")]
 physics_interpolation_mode = 2
 script = ExtResource("1_5lcyj")
 CameraSpeed = 48.0
 EditorViewport = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
 Camera = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/EditorCamera")
-BlockScene = ExtResource("2_5tm2q")
+BlockScene = SubResource("PackedScene_3vi5u")
 BlockEraseHighlightMaterial = ExtResource("3_j8y2p")
 BlockHighlightMaterial = ExtResource("4_o435n")
 BlockListContainer = NodePath("EditorUI/HBoxContainer/MarginContainer/ScrollContainer/MarginContainer/BlockListContainer")
 FileMenu = NodePath("EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar/FileMenu")
 FileDialog = NodePath("FileDialog")
 ConfirmNewDialog = NodePath("ConfirmNewDialog")
+ConfirmQuitDialog = NodePath("ConfirmQuitDialog")
 PlayButton = NodePath("EditorUI/HBoxContainer/VBoxContainer/ViewportWrapper/HBoxContainer/PlayButton")
 CarSelect = NodePath("CarSelect")
 CarSelectContainer = NodePath("CarSelect/GridContainer")
@@ -89,13 +145,17 @@ layout_mode = 2
 [node name="FileMenu" type="PopupMenu" parent="EditorUI/HBoxContainer/VBoxContainer/MarginContainer/MenuBar"]
 oversampling_override = 1.0
 title = "File"
-item_count = 3
+item_count = 5
 item_0/text = "New"
 item_0/id = 2
 item_1/text = "Open"
 item_1/id = 0
 item_2/text = "Save"
 item_2/id = 1
+item_3/id = 100
+item_3/separator = true
+item_4/text = "Quit"
+item_4/id = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="EditorUI/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -215,6 +275,12 @@ oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(565, 100)
 dialog_text = "Are you sure you want to create a new track? Unsaved data will be lost."
+
+[node name="ConfirmQuitDialog" type="ConfirmationDialog" parent="."]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(565, 100)
+dialog_text = "Are you sure you want to quit? Unsaved data will be lost."
 
 [node name="FileDialog" type="FileDialog" parent="."]
 transparent_bg = true

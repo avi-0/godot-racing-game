@@ -32,6 +32,8 @@ public partial class Editor : Node
 	[Export] public FileDialog FileDialog;
 
 	[Export] public ConfirmationDialog ConfirmNewDialog;
+	
+	[Export] public ConfirmationDialog ConfirmQuitDialog;
 
 	[Export] public Button PlayButton;
 
@@ -109,8 +111,10 @@ public partial class Editor : Node
 		FileMenu.IdPressed += FileMenuOnIdPressed;
 		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(0), (Key) KeyModifierMask.MaskCtrl | Key.O);
 		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(1), (Key) KeyModifierMask.MaskCtrl | Key.S);
+		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(3), Key.Escape);
 		
 		ConfirmNewDialog.Confirmed += ConfirmNewDialogOnConfirmed;
+		ConfirmQuitDialog.Confirmed += ConfirmQuitDialogOnConfirmed;
 		FileDialog.FileSelected += FileDialogOnFileSelected;
 
 		SetGridSizeSetting(3);
@@ -157,6 +161,10 @@ public partial class Editor : Node
 		else if (id == 2)
 		{
 			ConfirmNewDialog.Show();
+		}
+		else if (id == 3)
+		{
+			ConfirmQuitDialog.Show();
 		}
 	}
 	
@@ -477,16 +485,10 @@ public partial class Editor : Node
 		GameManager.Singleton.SelectCarScene(carPath);
 		PlayButtonOnPressedAsync().Forget();
 	}
-
-	public override void _UnhandledInput(InputEvent @event)
+	
+	private void ConfirmQuitDialogOnConfirmed()
 	{
-		if (@event is InputEventKey keyEvent && keyEvent.IsReleased())
-		{
-			if (keyEvent.PhysicalKeycode == Key.Escape)
-			{
-				IsRunning = false;
-				EmitSignalExited();
-			}
-		}
+		IsRunning = false;
+		EmitSignalExited();
 	}
 }
