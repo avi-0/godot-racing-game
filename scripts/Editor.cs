@@ -7,7 +7,7 @@ using Godot;
 
 namespace racingGame;
 
-public partial class Editor : Node
+public partial class Editor : Control
 {
 	public const string BlockPath = "res://blocks/";
 
@@ -25,7 +25,7 @@ public partial class Editor : Node
 
 	[Export] public Material BlockHighlightMaterial;
 
-	[Export] public Container BlockListContainer;
+	[Export] public GridContainer BlockListContainer;
 
 	[Export] public PopupMenu FileMenu;
 
@@ -48,6 +48,12 @@ public partial class Editor : Node
 	[Export] public Button GridSizeDecButton;
 	
 	[Export] public Button GridSizeIncButton;
+
+	[Export] public PackedScene EditorBlockButtonScene;
+
+	[Export] public HSplitContainer HSplitContainer;
+
+	[Export] public Container DirectoryListContainer;
 	
 	[Signal]
 	public delegate void ExitedEventHandler();
@@ -69,6 +75,8 @@ public partial class Editor : Node
 	private int _gridSizeSetting;
 	private float _cellSize = 8;
 	private float _cellHeight = 1;
+
+	private string _blockDirectory;
 	
 	public bool IsRunning
 	{
@@ -76,7 +84,7 @@ public partial class Editor : Node
 		set
 		{
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
-			EditorUINode.Visible = value;
+			Visible = value;
 			
 			CarSelect.Visible = false;
 
@@ -120,14 +128,25 @@ public partial class Editor : Node
 		SetGridSizeSetting(3);
 		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
 		GridSizeIncButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting + 1); };
+		
+		HSplitContainer.Dragged += HSplitContainerOnDragged;
 
 		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
 		
 		CreateCursor();
 		
-		UpdateBlockList();
+		SetDirectory("/");
 	
 		LoadCarList();
+	}
+
+	private void HSplitContainerOnDragged(long offset)
+	{
+		var width = BlockListContainer.Size.X;
+		int itemWidth = 64;
+		var sep = BlockListContainer.GetThemeConstant("separation");
+		var columns = (int) Math.Floor((width + sep) / (itemWidth + sep));
+		BlockListContainer.Columns = columns;
 	}
 
 	private void SetGridSizeSetting(int setting)
@@ -207,15 +226,12 @@ public partial class Editor : Node
 			var subpath = dirPath.PathJoin(path);
 			if (ResourceLoader.Exists(basePath.PathJoin(subpath), "BlockRecord"))
 				yield return subpath;
-
-			foreach (var result in GetBlockPaths(basePath, subpath))
-				yield return result;
 		}
 	}
 
-	private IEnumerable<BlockRecord> GetBlockRecords()
+	private IEnumerable<BlockRecord> GetBlockRecords(string path)
 	{
-		return GetBlockPaths(BlockPath)
+		return GetBlockPaths(BlockPath, path)
 			.Order()
 			.Select(path => ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord"))
 			// fuck knows why the type hint doesn't work right
@@ -434,27 +450,7 @@ public partial class Editor : Node
 
 		return null;
 	}
-
-	private void UpdateBlockList()
-	{
-		foreach (var child in BlockListContainer.GetChildren())
-			child.QueueFree();
-		
-		foreach (var record in GetBlockRecords())
-		{
-			var button = new Button();
-			button.CustomMinimumSize = 64 * Vector2.One;
-			button.Icon = record.ThumbnailTexture;
-			button.IconAlignment = HorizontalAlignment.Center;
-			button.ExpandIcon = true;
-			button.TooltipText = record.ResourcePath;
-
-			BlockListContainer.AddChild(button);
-			
-			button.Pressed += () => OnBlockButtonPressed(record);
-		}
-	}
-
+	
 	private void OnBlockButtonPressed(BlockRecord blockRecord)
 	{
 		BlockScene = blockRecord.Scene;
@@ -490,5 +486,53 @@ public partial class Editor : Node
 	{
 		IsRunning = false;
 		EmitSignalExited();
+	}
+
+	private void SetDirectory(string path)
+	{
+		GD.Print(path);
+		
+		_blockDirectory = path;
+		
+		DirectoryListContainer.DestroyAllChildren();
+		BlockListContainer.DestroyAllChildren();
+
+		var dir = DirAccess.Open(BlockPath.PathJoin(_blockDirectory));
+
+		if (path != "/")
+		{
+			var baseDir = path.GetBaseDir();
+			
+			var button = new Button();
+			button.Text = "..";
+			button.Pressed += () => SetDirectory(baseDir);
+
+			DirectoryListContainer.AddChild(button);
+		}
+		
+		foreach (var subDir in dir.GetDirectories())
+		{
+			if (subDir.GetFile().StartsWith('_'))
+				continue;
+			
+			var subDirPath = _blockDirectory.PathJoin(subDir);
+
+			var button = new Button();
+			button.Text = subDir;
+			button.Pressed += () => SetDirectory(subDirPath);
+			
+			DirectoryListContainer.AddChild(button);
+		}
+		
+		foreach (var record in GetBlockRecords(path))
+		{
+			var button = EditorBlockButtonScene.Instantiate<Button>();
+			button.Icon = record.ThumbnailTexture;
+			button.TooltipText = record.ResourcePath;
+
+			BlockListContainer.AddChild(button);
+			
+			button.Pressed += () => OnBlockButtonPressed(record);
+		}
 	}
 }

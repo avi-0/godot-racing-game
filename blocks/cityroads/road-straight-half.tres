@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://3a84sbnvktk7"]
 
-[ext_resource type="PackedScene" uid="uid://lpf7omujlmto" path="res://blocks/cityroads/scenes/road-straight-half.tscn" id="1_aj76l"]
+[ext_resource type="PackedScene" uid="uid://lpf7omujlmto" path="res://blocks/cityroads/_scenes/road-straight-half.tscn" id="1_aj76l"]
 [ext_resource type="PackedScene" uid="uid://p51pwi34tob4" path="res://assets/cityroads/road-straight-half.glb" id="1_ddrnk"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_juo7a"]
-[ext_resource type="Texture2D" uid="uid://d3i66w32fekir" path="res://blocks/cityroads/images/road-straight-half.png" id="3_u4lvv"]
+[ext_resource type="Texture2D" uid="uid://d3i66w32fekir" path="res://blocks/cityroads/_images/road-straight-half.png" id="3_u4lvv"]
 
 [resource]
 script = ExtResource("2_juo7a")

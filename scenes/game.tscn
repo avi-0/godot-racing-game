@@ -177,6 +177,7 @@ grow_vertical = 0
 text = "Ok"
 
 [node name="Editor" parent="." instance=ExtResource("5_p57ef")]
+visible = false
 
 [node name="MainMenu" parent="." instance=ExtResource("12_trtic")]
 

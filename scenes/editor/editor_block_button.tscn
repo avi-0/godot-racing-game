@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dklqrgy3scfr7"]
+
+[node name="EditorBlockButton" type="Button"]
+custom_minimum_size = Vector2(0, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+icon_alignment = 1
+expand_icon = true

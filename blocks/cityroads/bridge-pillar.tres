@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b68n2cq1w57x3"]
 
-[ext_resource type="PackedScene" uid="uid://kcq1hh24be50" path="res://blocks/cityroads/scenes/bridge-pillar.tscn" id="1_45xrr"]
+[ext_resource type="PackedScene" uid="uid://kcq1hh24be50" path="res://blocks/cityroads/_scenes/bridge-pillar.tscn" id="1_45xrr"]
 [ext_resource type="PackedScene" uid="uid://dngoegr2lmjbe" path="res://assets/cityroads/bridge-pillar.glb" id="1_dbtow"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_q0t8e"]
-[ext_resource type="Texture2D" uid="uid://81wnb0spf8yj" path="res://blocks/cityroads/images/bridge-pillar.png" id="3_7pbe4"]
+[ext_resource type="Texture2D" uid="uid://81wnb0spf8yj" path="res://blocks/cityroads/_images/bridge-pillar.png" id="3_7pbe4"]
 
 [resource]
 script = ExtResource("2_q0t8e")

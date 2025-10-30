@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://ckd1nc5fm0ygd"]
 
 [ext_resource type="PackedScene" uid="uid://ccsm6b1q5cpqk" path="res://assets/cityroads/tile-slant.glb" id="1_3tyqx"]
-[ext_resource type="PackedScene" uid="uid://dkoxbqjl38sv5" path="res://blocks/cityroads/scenes/tile-slant.tscn" id="1_k0opc"]
+[ext_resource type="PackedScene" uid="uid://dkoxbqjl38sv5" path="res://blocks/cityroads/_scenes/tile-slant.tscn" id="1_k0opc"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_6yr8q"]
-[ext_resource type="Texture2D" uid="uid://cup6vncyeem7a" path="res://blocks/cityroads/images/tile-slant.png" id="3_mysrp"]
+[ext_resource type="Texture2D" uid="uid://cup6vncyeem7a" path="res://blocks/cityroads/_images/tile-slant.png" id="3_mysrp"]
 
 [resource]
 script = ExtResource("2_6yr8q")

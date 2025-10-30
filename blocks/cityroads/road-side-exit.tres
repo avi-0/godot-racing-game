@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cjq478v2d50n2"]
 
 [ext_resource type="PackedScene" uid="uid://i0ulnahedq7g" path="res://assets/cityroads/road-side-exit.glb" id="1_l87bi"]
-[ext_resource type="PackedScene" uid="uid://ct8hsbvli5d8k" path="res://blocks/cityroads/scenes/road-side-exit.tscn" id="1_o3unx"]
+[ext_resource type="PackedScene" uid="uid://ct8hsbvli5d8k" path="res://blocks/cityroads/_scenes/road-side-exit.tscn" id="1_o3unx"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_w52q7"]
-[ext_resource type="Texture2D" uid="uid://b013fhtokrxna" path="res://blocks/cityroads/images/road-side-exit.png" id="3_xyal4"]
+[ext_resource type="Texture2D" uid="uid://b013fhtokrxna" path="res://blocks/cityroads/_images/road-side-exit.png" id="3_xyal4"]
 
 [resource]
 script = ExtResource("2_w52q7")

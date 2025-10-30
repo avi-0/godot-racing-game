@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b063lvv6sxgty"]
 
-[ext_resource type="PackedScene" uid="uid://cj5f5ioi6sf3c" path="res://blocks/cityroads/scenes/road-crossroad-path.tscn" id="1_i8eeb"]
+[ext_resource type="PackedScene" uid="uid://cj5f5ioi6sf3c" path="res://blocks/cityroads/_scenes/road-crossroad-path.tscn" id="1_i8eeb"]
 [ext_resource type="PackedScene" uid="uid://ddyryfg7sepgw" path="res://assets/cityroads/road-crossroad-path.glb" id="1_th6bm"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_krwgx"]
-[ext_resource type="Texture2D" uid="uid://cfbct1arwjiks" path="res://blocks/cityroads/images/road-crossroad-path.png" id="3_pgcqm"]
+[ext_resource type="Texture2D" uid="uid://cfbct1arwjiks" path="res://blocks/cityroads/_images/road-crossroad-path.png" id="3_pgcqm"]
 
 [resource]
 script = ExtResource("2_krwgx")

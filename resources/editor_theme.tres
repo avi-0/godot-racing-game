@@ -1,0 +1,4 @@
+[gd_resource type="Theme" format=3 uid="uid://d0edsagec8yv6"]
+
+[resource]
+SplitContainer/constants/autohide = 0
