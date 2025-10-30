@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://kt82gxpfci6q"
+uid="uid://cfnq2v773gju0"
 path="res://.godot/imported/road-curve-pavement.glb-8e7b22c7440ba2cf95ce5204c0d480d1.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

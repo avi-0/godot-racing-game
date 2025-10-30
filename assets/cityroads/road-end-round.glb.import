@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://crtnrvv8y2sn1"
+uid="uid://d0q6vrqi280ky"
 path="res://.godot/imported/road-end-round.glb-b98e20e353632eac570025af4fa2e588.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

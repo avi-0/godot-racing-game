@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://ph2pqfwvfxqh"]
 
 [ext_resource type="PackedScene" uid="uid://blbp4455163x5" path="res://blocks/cityroads/scenes/road-end-barrier.tscn" id="1_d1bl7"]
-[ext_resource type="PackedScene" uid="uid://c35tmp27521im" path="res://assets/cityroads/road-end-barrier.glb" id="1_xrulj"]
+[ext_resource type="PackedScene" uid="uid://u08c6thi6bh3" path="res://assets/cityroads/road-end-barrier.glb" id="1_xrulj"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_wn83j"]
 [ext_resource type="Texture2D" uid="uid://cy6801vu6iece" path="res://blocks/cityroads/images/road-end-barrier.png" id="3_u2s8w"]
 

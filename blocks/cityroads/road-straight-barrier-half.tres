@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://c364japlaqpnl"]
 
 [ext_resource type="PackedScene" uid="uid://ys68buvamwbk" path="res://blocks/cityroads/scenes/road-straight-barrier-half.tscn" id="1_3j00v"]
-[ext_resource type="PackedScene" uid="uid://dtj31ceab3me4" path="res://assets/cityroads/road-straight-barrier-half.glb" id="1_jb3n6"]
+[ext_resource type="PackedScene" uid="uid://cloxyv0mkxs61" path="res://assets/cityroads/road-straight-barrier-half.glb" id="1_jb3n6"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_sv4u3"]
 [ext_resource type="Texture2D" uid="uid://7ccqwdsegrv5" path="res://blocks/cityroads/images/road-straight-barrier-half.png" id="3_qi4xh"]
 

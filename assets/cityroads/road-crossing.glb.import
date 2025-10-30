@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://11dlh4yjbni0"
+uid="uid://djnf7ksn4q6k4"
 path="res://.godot/imported/road-crossing.glb-274bf298d25921a5b84e6237ad068bf2.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

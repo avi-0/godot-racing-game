@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://de8434jlfd1ix"
+uid="uid://d364dywosjxhk"
 path="res://.godot/imported/road-curve-intersection-barrier.glb-81925f5f4412e2568ba4d4eb62d9a8ff.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

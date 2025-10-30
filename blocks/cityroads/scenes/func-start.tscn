@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://dswys5a3yxcgr"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_fml0p"]
-[ext_resource type="Texture2D" uid="uid://dofxjh45sfi3t" path="res://assets/cityroads/func-start_colormap.png" id="2_uj8h1"]
+[ext_resource type="Texture2D" uid="uid://bfts7kjxvpjff" path="res://assets/cityroads/func-start_colormap.png" id="2_uj8h1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4cxiu"]
 resource_name = "colormap.002"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://w7u1dpsd2fs2"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_wo6y1"]
-[ext_resource type="Texture2D" uid="uid://chr2yodhl2usm" path="res://assets/cityroads/road-slant-curve_colormap.png" id="2_7d5qh"]
+[ext_resource type="Texture2D" uid="uid://c1g5fvqoiyila" path="res://assets/cityroads/road-slant-curve_colormap.png" id="2_7d5qh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0iir"]
 resource_name = "colormap.008"

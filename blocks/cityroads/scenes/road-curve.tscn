@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://dhvxqoc2qcmyw"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_pli76"]
-[ext_resource type="Texture2D" uid="uid://e6wlpshcn3i8" path="res://assets/cityroads/road-curve_colormap.png" id="2_sbbux"]
+[ext_resource type="Texture2D" uid="uid://d0ydtfy6j1xnc" path="res://assets/cityroads/road-curve_colormap.png" id="2_sbbux"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3fyl"]
 resource_name = "colormap"

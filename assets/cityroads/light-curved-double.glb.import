@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cn8n04sstmohh"
+uid="uid://bc438fr7v6pa2"
 path="res://.godot/imported/light-curved-double.glb-e4980b1c78efba91f5ed586be0d21864.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

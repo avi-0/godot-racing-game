@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bvyl02sv8stub"]
 
-[ext_resource type="PackedScene" uid="uid://cguful6fhy8nr" path="res://assets/cityroads/construction-light.glb" id="1_be4fp"]
+[ext_resource type="PackedScene" uid="uid://5vmwy7fbiqkb" path="res://assets/cityroads/construction-light.glb" id="1_be4fp"]
 [ext_resource type="PackedScene" uid="uid://dwe0mrpvhb24w" path="res://blocks/cityroads/scenes/construction-light.tscn" id="1_cf0xi"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_mgipg"]
 [ext_resource type="Texture2D" uid="uid://b620tkps1oj60" path="res://blocks/cityroads/images/construction-light.png" id="3_7l7h7"]

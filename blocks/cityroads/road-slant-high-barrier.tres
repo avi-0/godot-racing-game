@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cb1c0htfiql3h"]
 
-[ext_resource type="PackedScene" uid="uid://ijwtaw7708iq" path="res://assets/cityroads/road-slant-high-barrier.glb" id="1_bu8u7"]
+[ext_resource type="PackedScene" uid="uid://bsjj436w4lij2" path="res://assets/cityroads/road-slant-high-barrier.glb" id="1_bu8u7"]
 [ext_resource type="PackedScene" uid="uid://guxmv8ogjcqx" path="res://blocks/cityroads/scenes/road-slant-high-barrier.tscn" id="1_v7ru6"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_3mb6w"]
 [ext_resource type="Texture2D" uid="uid://3rw2w7ran13r" path="res://blocks/cityroads/images/road-slant-high-barrier.png" id="3_3vbb5"]

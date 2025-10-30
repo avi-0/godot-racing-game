@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dficfg6b765o4"
+uid="uid://p51pwi34tob4"
 path="res://.godot/imported/road-straight-half.glb-2731b776098fd8ce7573c8f14460f168.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://btmk22qbl72nn"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_e08dl"]
-[ext_resource type="Texture2D" uid="uid://b0n6pdfgcpnm3" path="res://assets/cityroads/road-curve-intersection_M_colormap.png" id="2_i455e"]
+[ext_resource type="Texture2D" uid="uid://diuue625d8p5m" path="res://assets/cityroads/road-curve-intersection_M_colormap.png" id="2_i455e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcph6"]
 resource_name = "colormap.005"

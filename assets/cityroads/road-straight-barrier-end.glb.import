@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cjoxxcc5pemas"
+uid="uid://dokide2gid5pd"
 path="res://.godot/imported/road-straight-barrier-end.glb-6f7b719254daa9a478c03374f2583100.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

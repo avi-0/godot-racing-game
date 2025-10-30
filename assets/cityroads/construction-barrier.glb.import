@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d4jwq2syvad7a"
+uid="uid://b32cwbjryon8p"
 path="res://.godot/imported/construction-barrier.glb-5c7643392beb412e7d329a2a1fe28711.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

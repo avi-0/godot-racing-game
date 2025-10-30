@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bergpeuuesrcm"
+uid="uid://xriftlfii4lw"
 path="res://.godot/imported/road-square.glb-4e8751ecf0b9905ee2d95f3134bf23b3.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

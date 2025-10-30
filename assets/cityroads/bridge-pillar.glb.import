@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dvdfhtx56lmi4"
+uid="uid://dngoegr2lmjbe"
 path="res://.godot/imported/bridge-pillar.glb-1867a89bdc4305a20026cabd4cdeff88.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dgpk5013731m7"
+uid="uid://6wf3ujx3pe1a"
 path="res://.godot/imported/road-end-round-barrier.glb-f886b5921c1dcc1940ce112078d480c7.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

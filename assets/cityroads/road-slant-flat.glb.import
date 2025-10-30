@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dln57acppllt2"
+uid="uid://qpc3t58pvenr"
 path="res://.godot/imported/road-slant-flat.glb-e2396d49abe4001c22fedaf00e2e433d.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

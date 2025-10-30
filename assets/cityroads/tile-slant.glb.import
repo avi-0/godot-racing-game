@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b0km42pp84dyk"
+uid="uid://ccsm6b1q5cpqk"
 path="res://.godot/imported/tile-slant.glb-18eefebd6b10c23b81c71ae7fa3bc4aa.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

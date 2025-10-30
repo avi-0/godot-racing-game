@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://dtms1ttwieou4"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_ndbd5"]
-[ext_resource type="Texture2D" uid="uid://cmxuposrlidc3" path="res://assets/cityroads/road-curve-intersection-barrier_colormap.png" id="2_cgyat"]
+[ext_resource type="Texture2D" uid="uid://bv3ns8ru4tw5h" path="res://assets/cityroads/road-curve-intersection-barrier_colormap.png" id="2_cgyat"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ka3bi"]
 resource_name = "colormap.004"

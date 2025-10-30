@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c5bh1cjv0urfm"
+uid="uid://ivh8qx0ca07t"
 path="res://.godot/imported/road-side-barrier.glb-1118fc4f63fb6b33fabd796597d32e75.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

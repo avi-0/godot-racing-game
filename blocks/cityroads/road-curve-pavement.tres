@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bn8883i5dqtgk"]
 
-[ext_resource type="PackedScene" uid="uid://kt82gxpfci6q" path="res://assets/cityroads/road-curve-pavement.glb" id="1_5g43e"]
+[ext_resource type="PackedScene" uid="uid://cfnq2v773gju0" path="res://assets/cityroads/road-curve-pavement.glb" id="1_5g43e"]
 [ext_resource type="PackedScene" uid="uid://gssjg5cdfjgs" path="res://blocks/cityroads/scenes/road-curve-pavement.tscn" id="1_6warw"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_w8cdr"]
 [ext_resource type="Texture2D" uid="uid://c57cwwopetxll" path="res://blocks/cityroads/images/road-curve-pavement.png" id="3_0jfsr"]

@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dciytxeivmk4f"
+uid="uid://xs622q3v6kir"
 path="res://.godot/imported/road-bend-square.glb-f7a9cf21d235d7bc7b8c6aff6990e12e.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://iwhle5tqbb2q"]
 
-[ext_resource type="PackedScene" uid="uid://byw0cfo3j1xx3" path="res://assets/cityroads/construction-cone.glb" id="1_8l0l2"]
+[ext_resource type="PackedScene" uid="uid://chvshnpx3160x" path="res://assets/cityroads/construction-cone.glb" id="1_8l0l2"]
 [ext_resource type="PackedScene" uid="uid://bsuvqvgeetfew" path="res://blocks/cityroads/scenes/construction-cone.tscn" id="1_qobln"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_5j3x6"]
 [ext_resource type="Texture2D" uid="uid://dv2j3fb8b17sv" path="res://blocks/cityroads/images/construction-cone.png" id="3_6r2ls"]

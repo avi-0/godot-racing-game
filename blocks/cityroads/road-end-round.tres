@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dcxh4d3nh3ylb"]
 
-[ext_resource type="PackedScene" uid="uid://crtnrvv8y2sn1" path="res://assets/cityroads/road-end-round.glb" id="1_ami4i"]
+[ext_resource type="PackedScene" uid="uid://d0q6vrqi280ky" path="res://assets/cityroads/road-end-round.glb" id="1_ami4i"]
 [ext_resource type="PackedScene" uid="uid://bukrkcqkvyl2w" path="res://blocks/cityroads/scenes/road-end-round.tscn" id="1_jojpe"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_8no0c"]
 [ext_resource type="Texture2D" uid="uid://sewteiwa17qs" path="res://blocks/cityroads/images/road-end-round.png" id="3_u7hha"]

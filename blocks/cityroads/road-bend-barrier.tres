@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bw6la30dbehuw"]
 
 [ext_resource type="PackedScene" uid="uid://dr312dgnpbecl" path="res://blocks/cityroads/scenes/road-bend-barrier.tscn" id="1_5u5yf"]
-[ext_resource type="PackedScene" uid="uid://bi7mxy8m6et6v" path="res://assets/cityroads/road-bend-barrier.glb" id="1_vqh74"]
+[ext_resource type="PackedScene" uid="uid://cumnem2ti8b0d" path="res://assets/cityroads/road-bend-barrier.glb" id="1_vqh74"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_0eyfr"]
 [ext_resource type="Texture2D" uid="uid://7inhjynvckow" path="res://blocks/cityroads/images/road-bend-barrier.png" id="3_baeo7"]
 

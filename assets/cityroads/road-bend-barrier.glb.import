@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bi7mxy8m6et6v"
+uid="uid://cumnem2ti8b0d"
 path="res://.godot/imported/road-bend-barrier.glb-c12a4f065c0c8e95de01cd0b20899ca1.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

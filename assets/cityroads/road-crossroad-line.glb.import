@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bymlyy44y8igu"
+uid="uid://di6uectq44ibi"
 path="res://.godot/imported/road-crossroad-line.glb-def525eb49e0fe0e79b4b36d2587ecb0.scn"
 
 [deps]
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1
