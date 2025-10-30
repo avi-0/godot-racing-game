@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1df4c4c9-d1fd-4a51-b71a-d7701def8e72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/blender/blocks/func-checkpoint.blend" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/GameModeController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/gamemodes/GameModeUtils.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/gamemodes/IGameMode.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/gamemodes/timeattack/GameModeTimeAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/gamemodes/timeattack/TimeAttackMap.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/gamemodes/timeattack/TimeAttackPlayer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.racinggame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.racinggame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/blocks/func-start.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/blocks/func-start.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/cityroads/func-start.glb" beforeDir="false" afterPath="$PROJECT_DIR$/assets/cityroads/func-start.glb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/func-finish.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/func-finish.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/func-start.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/func-start.tscn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Block.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/BlockRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/BlockRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/game.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/game.tscn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/GameMode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/GameMode.cs.uid" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/GameModeController.cs.uid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/PauseMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PauseMenu.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +135,7 @@
       <workItem from="1761667606444" duration="3747000" />
       <workItem from="1761708804138" duration="2805000" />
       <workItem from="1761716655088" duration="2318000" />
-      <workItem from="1761758502038" duration="14057000" />
+      <workItem from="1761758502038" duration="15177000" />
     </task>
     <servers />
   </component>

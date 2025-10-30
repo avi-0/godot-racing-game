@@ -1,8 +1,9 @@
 using Godot;
 using System;
-using racingGame;
 using System.Linq;
 using Fractural.Tasks;
+
+namespace racingGame;
 
 public partial class MainMenu : Control
 {

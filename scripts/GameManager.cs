@@ -1,7 +1,8 @@
 using Godot;
 using System;
 using System.Linq;
-using racingGame;
+
+namespace racingGame;
 
 public partial class GameManager : Node
 {
@@ -23,10 +24,10 @@ public partial class GameManager : Node
 
     [Export] public Node3D TrackNode;
 
-    [Export] public Control RaceUI;
+    [Export] public Control RaceUi;
     [Export] public Label TimeLabel;
     [Export] public Label SpeedLabel;
-    [Export] public Label PBLabel;
+    [Export] public Label PbLabel;
     [Export] public Label StartTimerLabel;
 
     [Export] public Panel FinishPanel;
@@ -36,7 +37,7 @@ public partial class GameManager : Node
 
     private Car _localCar = null;
 
-    private int LocalPlayerID = -1;
+    private int _localPlayerId = -1;
 
     [Signal]
     public delegate void StoppedPlayingEventHandler();
@@ -61,7 +62,7 @@ public partial class GameManager : Node
 
     public void Play()
     {
-        SetGameUIVisiblity(true);
+        SetGameUiVisiblity(true);
 
         if (_localCar != null)
         {
@@ -88,21 +89,21 @@ public partial class GameManager : Node
 
         _isPlaying = true;
 
-        if (LocalPlayerID == -1)
+        if (_localPlayerId == -1)
         {
-            LocalPlayerID = GameMode.CurrentGameMode.SpawnPlayer(true, _localCar);
+            _localPlayerId = GameModeController.CurrentGameMode.SpawnPlayer(true, _localCar);
         }
         else
         {
-            GameMode.CurrentGameMode.RespawnPlayer(LocalPlayerID, _localCar);
+            GameModeController.CurrentGameMode.RespawnPlayer(_localPlayerId, _localCar);
         }
 
-        GameMode.CurrentGameMode.Running(true);
+        GameModeController.CurrentGameMode.Running(true);
     }
 
     public void Stop()
     {
-        SetGameUIVisiblity(false);
+        SetGameUiVisiblity(false);
 
         if (_localCar != null)
         {
@@ -124,13 +125,13 @@ public partial class GameManager : Node
         
         EmitSignalStoppedPlaying();
 
-        LocalPlayerID = -1;
-        GameMode.CurrentGameMode.KillGame();
+        _localPlayerId = -1;
+        GameModeController.CurrentGameMode.KillGame();
     }
     
-    private void SetGameUIVisiblity(bool Visible)
+    private void SetGameUiVisiblity(bool visible)
     {
-        RaceUI.Visible = Visible;
+        RaceUi.Visible = visible;
 
         FinishPanel.Hide();
     }
@@ -210,12 +211,12 @@ public partial class GameManager : Node
         TrackNode = newTrackNode;
         TrackNode.Name = "Track";
 
-        GameMode.CurrentGameMode.InitTrack(TrackNode);
+        GameModeController.CurrentGameMode.InitTrack(TrackNode);
     }
 
     private void FinishOnCarEntered(Car car)
     {
-        GameMode.CurrentGameMode.PlayerAttemptFinish(0);
+        GameModeController.CurrentGameMode.PlayerAttemptFinish(0);
     }
 
     public void OnFinishButtonPressed()

@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace racingGame;
+
 public partial class PauseMenu : Control
 {
 	// Called when the node enters the scene tree for the first time.
