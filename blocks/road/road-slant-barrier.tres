@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cfk150ed55g5g"]
+
+[ext_resource type="PackedScene" uid="uid://b0pleewt1362v" path="res://assets/kenney/cityroads/road/road-slant-barrier.glb" id="1_bevxe"]
+[ext_resource type="PackedScene" uid="uid://bia0t77ag5ivj" path="res://blocks/road/_scenes/road-slant-barrier.tscn" id="1_swubp"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_p8y2w"]
+[ext_resource type="Texture2D" path="res://blocks/road/_images/road-slant-barrier.png" id="3_vdvfr"]
+
+[resource]
+script = ExtResource("2_p8y2w")
+SourceScene = ExtResource("1_bevxe")
+Scene = ExtResource("1_swubp")
+ThumbnailTexture = ExtResource("3_vdvfr")

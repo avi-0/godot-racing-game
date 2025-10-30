@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bek1rv8wfym8x"]
+
+[ext_resource type="PackedScene" uid="uid://cl4dp58b8m31j" path="res://blocks/road/_scenes/road-square-barrier.tscn" id="1_8nmum"]
+[ext_resource type="PackedScene" uid="uid://bd26tjbsvxq8m" path="res://assets/kenney/cityroads/road/road-square-barrier.glb" id="1_v54wq"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_abmhr"]
+[ext_resource type="Texture2D" path="res://blocks/road/_images/road-square-barrier.png" id="3_qcrgv"]
+
+[resource]
+script = ExtResource("2_abmhr")
+SourceScene = ExtResource("1_v54wq")
+Scene = ExtResource("1_8nmum")
+ThumbnailTexture = ExtResource("3_qcrgv")

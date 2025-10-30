@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BlockDirectoryImporter" load_steps=2 format=3 uid="uid://dytw44bc7pxrt"]
+
+[ext_resource type="Script" uid="uid://d0mlqj4pey0s3" path="res://scripts/BlockDirectoryImporter.cs" id="1_rq3l2"]
+
+[resource]
+script = ExtResource("1_rq3l2")
+SourcePath = "res://assets/kenney/cityroads/platform"
+metadata/_custom_type_script = "uid://d0mlqj4pey0s3"

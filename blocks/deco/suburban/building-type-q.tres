@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://3bc1uxvx2sj5"]
+
+[ext_resource type="PackedScene" uid="uid://8n2hb0b1kdth" path="res://assets/kenney/citysuburban/building-type-q.glb" id="1_7x2gq"]
+[ext_resource type="PackedScene" uid="uid://bsc1e4t6i1iju" path="res://blocks/deco/suburban/_scenes/building-type-q.tscn" id="1_fqccm"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_yfx4n"]
+[ext_resource type="Texture2D" uid="uid://cc1tf07bg51dw" path="res://blocks/deco/suburban/_images/building-type-q.png" id="3_8jui8"]
+
+[resource]
+script = ExtResource("2_yfx4n")
+SourceScene = ExtResource("1_7x2gq")
+Scene = ExtResource("1_fqccm")
+ThumbnailTexture = ExtResource("3_8jui8")

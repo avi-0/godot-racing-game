@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://beqrpfwot12c0"]
+
+[ext_resource type="PackedScene" uid="uid://cmw20esoqysao" path="res://assets/kenney/cityroads/road/road-driveway-single.glb" id="1_50ovq"]
+[ext_resource type="PackedScene" uid="uid://f0etgxgfqje7" path="res://blocks/road/_scenes/road-driveway-single.tscn" id="1_dxonf"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_6phus"]
+[ext_resource type="Texture2D" path="res://blocks/road/_images/road-driveway-single.png" id="3_mk4kk"]
+
+[resource]
+script = ExtResource("2_6phus")
+SourceScene = ExtResource("1_50ovq")
+Scene = ExtResource("1_dxonf")
+ThumbnailTexture = ExtResource("3_mk4kk")

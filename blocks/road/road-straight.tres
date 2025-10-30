@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cey7wro604g7j"]
+
+[ext_resource type="PackedScene" uid="uid://c0td1bm70sbv8" path="res://blocks/road/_scenes/road-straight.tscn" id="1_wd0f5"]
+[ext_resource type="PackedScene" uid="uid://cdoeqqg3sfv3l" path="res://assets/kenney/cityroads/road/road-straight.glb" id="1_xeq08"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ydw6m"]
+[ext_resource type="Texture2D" path="res://blocks/road/_images/road-straight.png" id="3_u2f1y"]
+
+[resource]
+script = ExtResource("2_ydw6m")
+SourceScene = ExtResource("1_xeq08")
+Scene = ExtResource("1_wd0f5")
+ThumbnailTexture = ExtResource("3_u2f1y")

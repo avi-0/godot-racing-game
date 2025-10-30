@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BlockDirectoryImporter" load_steps=2 format=3 uid="uid://b1lfq0twlaxjv"]
+
+[ext_resource type="Script" uid="uid://d0mlqj4pey0s3" path="res://scripts/BlockDirectoryImporter.cs" id="1_byqpm"]
+
+[resource]
+script = ExtResource("1_byqpm")
+SourcePath = "res://assets/kenney/cityroads/deco"
+metadata/_custom_type_script = "uid://d0mlqj4pey0s3"

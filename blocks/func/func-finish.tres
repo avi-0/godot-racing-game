@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://5ryrrlqt27y5"]
+
+[ext_resource type="PackedScene" uid="uid://cr3dewptocejc" path="res://assets/kenney/cityroads/func/func-finish.glb" id="1_f2jjg"]
+[ext_resource type="PackedScene" uid="uid://c5wd84pjhhdtj" path="res://blocks/func/_scenes/func-finish.tscn" id="1_qr8vc"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_w7noq"]
+[ext_resource type="Texture2D" path="res://blocks/func/_images/func-finish.png" id="3_vwryt"]
+
+[resource]
+script = ExtResource("2_w7noq")
+SourceScene = ExtResource("1_f2jjg")
+Scene = ExtResource("1_qr8vc")
+ThumbnailTexture = ExtResource("3_vwryt")

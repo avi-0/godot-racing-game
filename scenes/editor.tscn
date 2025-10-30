@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
 [ext_resource type="Theme" uid="uid://d0edsagec8yv6" path="res://resources/editor_theme.tres" id="1_o435n"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="3_j8y2p"]
-[ext_resource type="PackedScene" uid="uid://cddi2e20nph36" path="res://blocks/roads/road/_scenes/road-straight.tscn" id="3_o435n"]
+[ext_resource type="PackedScene" uid="uid://c0td1bm70sbv8" path="res://blocks/road/_scenes/road-straight.tscn" id="3_o435n"]
 [ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="4_o435n"]
 [ext_resource type="Texture2D" uid="uid://dyx154afg0s1q" path="res://assets/godot-icons/RangeSliderLeft.svg" id="5_3vi5u"]
 [ext_resource type="Texture2D" uid="uid://hmfs1b0dmqq1" path="res://assets/godot-icons/RangeSliderRight.svg" id="6_78fwb"]

@@ -36,12 +36,12 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 materials/extract=1
 materials/extract_format=0
-materials/extract_path="res://assets/kenney/materials"
+materials/extract_path="res://assets/kenney/cityroads/materials"
 _subresources={
 "materials": {
 "colormap": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/kenney/materials/colormap.tres",
+"use_external/fallback_path": "res://assets/kenney/cityroads/materials/colormap.tres",
 "use_external/path": "uid://ds2tnd45lhtof"
 }
 }

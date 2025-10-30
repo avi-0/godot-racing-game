@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b3bf21sge8is6"]
+
+[ext_resource type="PackedScene" uid="uid://cvyj81eyx1p5b" path="res://assets/kenney/cityroads/deco/sign-highway-detailed.glb" id="1_1jcqw"]
+[ext_resource type="PackedScene" uid="uid://csfvlfyeguw3v" path="res://blocks/deco/_scenes/sign-highway-detailed.tscn" id="1_bjqhs"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_vwreh"]
+[ext_resource type="Texture2D" path="res://blocks/deco/_images/sign-highway-detailed.png" id="3_osfl1"]
+
+[resource]
+script = ExtResource("2_vwreh")
+SourceScene = ExtResource("1_1jcqw")
+Scene = ExtResource("1_bjqhs")
+ThumbnailTexture = ExtResource("3_osfl1")

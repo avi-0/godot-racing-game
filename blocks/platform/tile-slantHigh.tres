@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b5d0iteh7mqk0"]
+
+[ext_resource type="PackedScene" uid="uid://dgt2rnd1nrvjq" path="res://assets/kenney/cityroads/platform/tile-slantHigh.glb" id="1_ghlfl"]
+[ext_resource type="PackedScene" uid="uid://bpq4vg8oqdowm" path="res://blocks/platform/_scenes/tile-slantHigh.tscn" id="1_w5ocu"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_frb2t"]
+[ext_resource type="Texture2D" path="res://blocks/platform/_images/tile-slantHigh.png" id="3_cnbl2"]
+
+[resource]
+script = ExtResource("2_frb2t")
+SourceScene = ExtResource("1_ghlfl")
+Scene = ExtResource("1_w5ocu")
+ThumbnailTexture = ExtResource("3_cnbl2")

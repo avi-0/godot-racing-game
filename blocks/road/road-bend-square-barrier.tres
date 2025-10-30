@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://c4pf7hspaa63o"]
+
+[ext_resource type="PackedScene" uid="uid://dwjqf5ktsyad7" path="res://assets/kenney/cityroads/road/road-bend-square-barrier.glb" id="1_83inp"]
+[ext_resource type="PackedScene" uid="uid://b46110u1328pf" path="res://blocks/road/_scenes/road-bend-square-barrier.tscn" id="1_hdn4s"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_sstba"]
+[ext_resource type="Texture2D" path="res://blocks/road/_images/road-bend-square-barrier.png" id="3_te6j1"]
+
+[resource]
+script = ExtResource("2_sstba")
+SourceScene = ExtResource("1_83inp")
+Scene = ExtResource("1_hdn4s")
+ThumbnailTexture = ExtResource("3_te6j1")

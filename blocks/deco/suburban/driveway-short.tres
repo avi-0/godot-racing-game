@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dgl04diq5kfiy"]
+
+[ext_resource type="PackedScene" uid="uid://bmlpgdddug0m8" path="res://blocks/deco/suburban/_scenes/driveway-short.tscn" id="1_5lq06"]
+[ext_resource type="PackedScene" uid="uid://dd12vto4id8cj" path="res://assets/kenney/citysuburban/driveway-short.glb" id="1_gbtmo"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ay30g"]
+[ext_resource type="Texture2D" uid="uid://bmyl5v5ck4ffc" path="res://blocks/deco/suburban/_images/driveway-short.png" id="3_5lpe1"]
+
+[resource]
+script = ExtResource("2_ay30g")
+SourceScene = ExtResource("1_gbtmo")
+Scene = ExtResource("1_5lq06")
+ThumbnailTexture = ExtResource("3_5lpe1")
