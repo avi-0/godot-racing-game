@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dhomka6pnp61f"]
+
+[ext_resource type="PackedScene" uid="uid://crl2cg8q7havv" path="res://blocks/suburban/_scenes/path-stones-messy.tscn" id="1_6ldve"]
+[ext_resource type="PackedScene" uid="uid://ddigstew27tpp" path="res://assets/kenney/citysuburban/path-stones-messy.glb" id="1_wuwnr"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_06tpj"]
+[ext_resource type="Texture2D" path="res://blocks/suburban/_images/path-stones-messy.png" id="3_hdiha"]
+
+[resource]
+script = ExtResource("2_06tpj")
+SourceScene = ExtResource("1_wuwnr")
+Scene = ExtResource("1_6ldve")
+ThumbnailTexture = ExtResource("3_hdiha")

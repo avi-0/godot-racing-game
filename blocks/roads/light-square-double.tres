@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://2l6k56ojjav4"]
+
+[ext_resource type="PackedScene" uid="uid://by1cyppet07wo" path="res://blocks/roads/_scenes/light-square-double.tscn" id="1_2q8u3"]
+[ext_resource type="PackedScene" uid="uid://bbesaxnu0qamg" path="res://assets/kenney/cityroads/light-square-double.glb" id="1_bnrtu"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_akemx"]
+[ext_resource type="Texture2D" uid="uid://wni545wj36my" path="res://blocks/roads/_images/light-square-double.png" id="3_yjs65"]
+
+[resource]
+script = ExtResource("2_akemx")
+SourceScene = ExtResource("1_bnrtu")
+Scene = ExtResource("1_2q8u3")
+ThumbnailTexture = ExtResource("3_yjs65")

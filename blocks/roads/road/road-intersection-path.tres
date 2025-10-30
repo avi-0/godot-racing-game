@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://h0oi2nl2chkb"]
+
+[ext_resource type="PackedScene" uid="uid://7lm2163pc18n" path="res://assets/kenney/cityroads/road/road-intersection-path.glb" id="1_367ci"]
+[ext_resource type="PackedScene" uid="uid://rn12ehvg4nto" path="res://blocks/roads/road/_scenes/road-intersection-path.tscn" id="1_ejtvl"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_h6uji"]
+[ext_resource type="Texture2D" uid="uid://s6ojp1w8b0mj" path="res://blocks/roads/road/_images/road-intersection-path.png" id="3_ranos"]
+
+[resource]
+script = ExtResource("2_h6uji")
+SourceScene = ExtResource("1_367ci")
+Scene = ExtResource("1_ejtvl")
+ThumbnailTexture = ExtResource("3_ranos")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bhin58phj16at"]
+
+[ext_resource type="PackedScene" uid="uid://dike730w48khs" path="res://blocks/suburban/_scenes/fence-2x3.tscn" id="1_20avf"]
+[ext_resource type="PackedScene" uid="uid://briwpkhln0wap" path="res://assets/kenney/citysuburban/fence-2x3.glb" id="1_pimma"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ddgh2"]
+[ext_resource type="Texture2D" path="res://blocks/suburban/_images/fence-2x3.png" id="3_0g8jd"]
+
+[resource]
+script = ExtResource("2_ddgh2")
+SourceScene = ExtResource("1_pimma")
+Scene = ExtResource("1_20avf")
+ThumbnailTexture = ExtResource("3_0g8jd")

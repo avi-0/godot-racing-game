@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://hxv7mbq8kigt"]
+
+[ext_resource type="PackedScene" uid="uid://dgxuk0ijc4dog" path="res://blocks/roads/_scenes/light-curved.tscn" id="1_c5ein"]
+[ext_resource type="PackedScene" uid="uid://dnjk1c18khxxg" path="res://assets/kenney/cityroads/light-curved.glb" id="1_rqve2"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ynabv"]
+[ext_resource type="Texture2D" uid="uid://bv1nkdhwym20o" path="res://blocks/roads/_images/light-curved.png" id="3_7vgyb"]
+
+[resource]
+script = ExtResource("2_ynabv")
+SourceScene = ExtResource("1_rqve2")
+Scene = ExtResource("1_c5ein")
+ThumbnailTexture = ExtResource("3_7vgyb")

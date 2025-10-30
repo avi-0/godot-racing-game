@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bdhqkem4kjiro"]
+
+[ext_resource type="PackedScene" uid="uid://b5c3cq0cnlbcm" path="res://blocks/roads/road/_scenes/road-side-exit.tscn" id="1_l22u0"]
+[ext_resource type="PackedScene" uid="uid://i0ulnahedq7g" path="res://assets/kenney/cityroads/road/road-side-exit.glb" id="1_r3tio"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_hpgjq"]
+[ext_resource type="Texture2D" uid="uid://cnsx7nykias5m" path="res://blocks/roads/road/_images/road-side-exit.png" id="3_a3lor"]
+
+[resource]
+script = ExtResource("2_hpgjq")
+SourceScene = ExtResource("1_r3tio")
+Scene = ExtResource("1_l22u0")
+ThumbnailTexture = ExtResource("3_a3lor")

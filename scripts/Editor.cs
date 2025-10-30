@@ -490,8 +490,6 @@ public partial class Editor : Control
 
 	private void SetDirectory(string path)
 	{
-		GD.Print(path);
-		
 		_blockDirectory = path;
 		
 		DirectoryListContainer.DestroyAllChildren();

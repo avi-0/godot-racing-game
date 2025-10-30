@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://btju284b6ejv3"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_txhki"]
+[ext_resource type="Material" uid="uid://dbxc174mn5qum" path="res://assets/kenney/citysuburban/materials/colormap.tres" id="2_nchkg"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ddb75"]
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.2, 0.2, 0.01, 0.4),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAgAEAAAABAACAAMABQAAAAQAAwAGAAQABAAGAAUAAQAHAAMABgADAAcABwABAAAABwAFAAYAAAAFAAcA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAmNn//wAAAAAAAAAAAAAAAGYm/////wAAZib//wAAAACY2f////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xdfki"]
+resource_name = "path-long_path-long"
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.2, 0.2, 0.01, 0.4),
+"attribute_data": PackedByteArray("/xfMrP8XzKz/F8ys/xfMrP8XzKz/F8ys/xcyk/8XMpP/FzKT/xcyk/8XMpP/FzKT/xcyk/8XzKz/F8ys/xcyk/+XMpP/l8ys/5fMrP+XMpP/l8ys/5cyk/+XMpP/l8ys"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": ExtResource("2_nchkg"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAAAAAAD/////AAAAAP//mNn//wAA//9mJv//AAD//2Ym//8AAP//mNn//wAA//+Y2f///////2Ym////////mNn/////AID//wAA//8AgAAAAAD//wCAZib/////AICY2f//AAA2zv//AAAAADbO//8AAP//Ns6Y2f////82zgAAAAAAADbOZib//wAANs5mJv////82zgAAAAD//zbOAAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f/+//3//v/9//7//f/+//3////9/////f////3///5LLySWSy8klksvJJZLLySXIpWy0yKVstMilbLTIpWy0")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ddb75")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_260kc"]
+data = PackedVector3Array(-0.099999994, 0, 0.19999999, 0.099999994, 0, 0.19999999, 0.099999994, 0, -0.19999999, 0.099999994, 0, -0.19999999, -0.099999994, 0, -0.19999999, -0.099999994, 0, 0.19999999, -0.099999994, 0, -0.19999999, 0.099999994, 0, -0.19999999, 0.07, 0.01, -0.19999999, 0.07, 0.01, -0.19999999, -0.07, 0.01, -0.19999999, -0.099999994, 0, -0.19999999, -0.07, 0.01, -0.19999999, 0.07, 0.01, -0.19999999, 0.07, 0.01, 0.19999999, 0.07, 0.01, 0.19999999, -0.07, 0.01, 0.19999999, -0.07, 0.01, -0.19999999, 0.07, 0.01, 0.19999999, 0.099999994, 0, 0.19999999, -0.099999994, 0, 0.19999999, -0.099999994, 0, 0.19999999, -0.07, 0.01, 0.19999999, 0.07, 0.01, 0.19999999, 0.07, 0.01, -0.19999999, 0.099999994, 0, -0.19999999, 0.099999994, 0, 0.19999999, 0.099999994, 0, 0.19999999, 0.07, 0.01, 0.19999999, 0.07, 0.01, -0.19999999, -0.099999994, 0, -0.19999999, -0.07, 0.01, -0.19999999, -0.07, 0.01, 0.19999999, -0.07, 0.01, 0.19999999, -0.099999994, 0, 0.19999999, -0.099999994, 0, -0.19999999)
+
+[node name="path-long" type="Node3D"]
+script = ExtResource("1_txhki")
+
+[node name="path-long2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="path-long" type="MeshInstance3D" parent="path-long2"]
+mesh = SubResource("ArrayMesh_xdfki")
+skeleton = NodePath("")
+
+[node name="path-long_col" type="StaticBody3D" parent="path-long2/path-long"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="path-long2/path-long/path-long_col"]
+shape = SubResource("ConcavePolygonShape3D_260kc")

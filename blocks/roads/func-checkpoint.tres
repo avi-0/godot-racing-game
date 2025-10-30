@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bcj3pgb8dcvjg"]
+
+[ext_resource type="PackedScene" uid="uid://8mkr0ji0x7ak" path="res://assets/kenney/cityroads/func-checkpoint.glb" id="1_lou72"]
+[ext_resource type="PackedScene" uid="uid://bprurakw77qm1" path="res://blocks/roads/_scenes/func-checkpoint.tscn" id="1_nfngo"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_dnnln"]
+[ext_resource type="Texture2D" uid="uid://dvqms3q2bh124" path="res://blocks/roads/_images/func-checkpoint.png" id="3_17yhw"]
+
+[resource]
+script = ExtResource("2_dnnln")
+SourceScene = ExtResource("1_lou72")
+Scene = ExtResource("1_nfngo")
+ThumbnailTexture = ExtResource("3_17yhw")

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://c0rldupxtqjwy"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_5j40n"]
+[ext_resource type="Material" uid="uid://dbxc174mn5qum" path="res://assets/kenney/citysuburban/materials/colormap.tres" id="2_nka1d"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_whdvv"]
+_surfaces = [{
+"aabb": AABB(-0.17999999, 0, -0.2, 0.35999998, 0.01, 0.4),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAgAEAAAAAQAFAAMABQABAAAAAgADAAYABgADAAUABgAEAAIAAAAHAAUABQAHAAYABwAAAAQABAAGAAcA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAcNz//wAAAAAAAAAAAAAAAHDc/////wAAjiP//wAAAACOI/////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vwrba"]
+resource_name = "driveway-long_driveway-long"
+_surfaces = [{
+"aabb": AABB(-0.17999999, 0, -0.2, 0.35999998, 0.01, 0.4),
+"attribute_data": PackedByteArray("/zfMrP83zKz/N8ys/zfMrP83MpP/NzKT/zcyk/83MpP/NzKT/zfMrP83zKz/NzKT/zcyk/83zKz/N8ys/zcyk/8XzKz/FzKT/xcyk/8XzKz/FzKT/xfMrP8XzKz/FzKT"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": ExtResource("2_nka1d"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/7+OI///AAD//3Dc//8AAP//cNz///////+OI////////3Dc/////wCA//8AAP//AIAAAAAA//8AgI4j/////wCAjiP//wAA//8AAAAAAAD/////AAAAAP//cNz//wAA//8AAAAAAADZ0I4j//8AANnQjiP/////2dAAAAAA///Z0HDc//8AANnQ//8AAAAA2dD//wAA///Z0HDc/////9nQAAD/fwAA/38AAP9/AAD/f/9//7//f/+//3//v/9//7//f////3////9/////f////3////9/////f////3///8CnfbDAp32wwKd9sMCnfbCBz8Angc/AJ4HPwCeBz8An")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_whdvv")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xgegh"]
+data = PackedVector3Array(-0.17999999, 0, 0.19999999, 0.17999999, 0, 0.19999999, 0.17999999, 0, -0.19999999, 0.17999999, 0, -0.19999999, -0.17999999, 0, -0.19999999, -0.17999999, 0, 0.19999999, -0.13, 0.01, -0.19999999, 0.13, 0.01, -0.19999999, 0.13, 0.01, 0.19999999, 0.13, 0.01, 0.19999999, -0.13, 0.01, 0.19999999, -0.13, 0.01, -0.19999999, 0.13, 0.01, 0.19999999, 0.17999999, 0, 0.19999999, -0.17999999, 0, 0.19999999, -0.17999999, 0, 0.19999999, -0.13, 0.01, 0.19999999, 0.13, 0.01, 0.19999999, -0.13, 0.01, -0.19999999, -0.17999999, 0, -0.19999999, 0.17999999, 0, -0.19999999, 0.17999999, 0, -0.19999999, 0.13, 0.01, -0.19999999, -0.13, 0.01, -0.19999999, -0.17999999, 0, -0.19999999, -0.13, 0.01, -0.19999999, -0.13, 0.01, 0.19999999, -0.13, 0.01, 0.19999999, -0.17999999, 0, 0.19999999, -0.17999999, 0, -0.19999999, 0.13, 0.01, -0.19999999, 0.17999999, 0, -0.19999999, 0.17999999, 0, 0.19999999, 0.17999999, 0, 0.19999999, 0.13, 0.01, 0.19999999, 0.13, 0.01, -0.19999999)
+
+[node name="driveway-long" type="Node3D"]
+script = ExtResource("1_5j40n")
+
+[node name="driveway-long2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="driveway-long" type="MeshInstance3D" parent="driveway-long2"]
+mesh = SubResource("ArrayMesh_vwrba")
+skeleton = NodePath("")
+
+[node name="driveway-long_col" type="StaticBody3D" parent="driveway-long2/driveway-long"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="driveway-long2/driveway-long/driveway-long_col"]
+shape = SubResource("ConcavePolygonShape3D_xgegh")

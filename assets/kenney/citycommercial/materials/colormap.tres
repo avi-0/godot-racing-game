@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://chxgmwga2x4lh"]
+
+[ext_resource type="Texture2D" uid="uid://boirm3wj22qiu" path="res://assets/kenney/citycommercial/materials/colormap.png" id="1_v3u6y"]
+
+[resource]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_v3u6y")

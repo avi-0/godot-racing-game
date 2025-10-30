@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dy7ln5ytcha7v"]
+
+[ext_resource type="PackedScene" uid="uid://uwvwefufrace" path="res://blocks/industrial/_scenes/chimney-basic.tscn" id="1_ikx12"]
+[ext_resource type="PackedScene" uid="uid://dsyjkujon3aii" path="res://assets/kenney/cityindustrial/chimney-basic.glb" id="1_y48o8"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_r0qa3"]
+[ext_resource type="Texture2D" path="res://blocks/industrial/_images/chimney-basic.png" id="3_0n37i"]
+
+[resource]
+script = ExtResource("2_r0qa3")
+SourceScene = ExtResource("1_y48o8")
+Scene = ExtResource("1_ikx12")
+ThumbnailTexture = ExtResource("3_0n37i")

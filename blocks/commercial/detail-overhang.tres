@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://chnfx6s5yw0dn"]
+
+[ext_resource type="PackedScene" uid="uid://u212il8uo2ss" path="res://blocks/commercial/_scenes/detail-overhang.tscn" id="1_0njwm"]
+[ext_resource type="PackedScene" uid="uid://c8rr62mix0lv6" path="res://assets/kenney/citycommercial/detail-overhang.glb" id="1_ouo46"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_mjbhr"]
+[ext_resource type="Texture2D" uid="uid://dd7vv0oakvw5f" path="res://blocks/commercial/_images/detail-overhang.png" id="3_2f1vg"]
+
+[resource]
+script = ExtResource("2_mjbhr")
+SourceScene = ExtResource("1_ouo46")
+Scene = ExtResource("1_0njwm")
+ThumbnailTexture = ExtResource("3_2f1vg")

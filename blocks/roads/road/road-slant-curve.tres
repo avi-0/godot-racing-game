@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cmf21ol0wwuua"]
+
+[ext_resource type="PackedScene" uid="uid://cnkn3hwt75a23" path="res://assets/kenney/cityroads/road/road-slant-curve.glb" id="1_1c8mk"]
+[ext_resource type="PackedScene" uid="uid://clvnkki7pdcb" path="res://blocks/roads/road/_scenes/road-slant-curve.tscn" id="1_yshs5"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_xbhjo"]
+[ext_resource type="Texture2D" uid="uid://dm7cica5y5o4w" path="res://blocks/roads/road/_images/road-slant-curve.png" id="3_ogb51"]
+
+[resource]
+script = ExtResource("2_xbhjo")
+SourceScene = ExtResource("1_1c8mk")
+Scene = ExtResource("1_yshs5")
+ThumbnailTexture = ExtResource("3_ogb51")

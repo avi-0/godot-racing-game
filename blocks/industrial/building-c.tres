@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bkuftfy4ur1wx"]
+
+[ext_resource type="PackedScene" uid="uid://5h4bcg08fitn" path="res://assets/kenney/cityindustrial/building-c.glb" id="1_ddxx8"]
+[ext_resource type="PackedScene" uid="uid://bpkhntipykxmb" path="res://blocks/industrial/_scenes/building-c.tscn" id="1_yeuuc"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_j57kk"]
+[ext_resource type="Texture2D" path="res://blocks/industrial/_images/building-c.png" id="3_s51be"]
+
+[resource]
+script = ExtResource("2_j57kk")
+SourceScene = ExtResource("1_ddxx8")
+Scene = ExtResource("1_yeuuc")
+ThumbnailTexture = ExtResource("3_s51be")
