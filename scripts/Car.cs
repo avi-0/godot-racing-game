@@ -49,6 +49,16 @@ public partial class Car : VehicleBody3D
 			_isLocallyControlled = value;
 		}
 	}
+
+	private bool _acceptsInputs = true;
+	public bool AcceptsInputs
+	{
+		get => _acceptsInputs;
+		set
+		{
+			_acceptsInputs = value;
+		}
+	}	
 	
 	private float _mouseSensitivity;
 	private Dictionary<VehicleWheel3D, float> _wheelTargetFriction = new();
@@ -74,7 +84,7 @@ public partial class Car : VehicleBody3D
 	{
 		if (!IsLocallyControlled)
 			return;
-		
+
 		if (@event is InputEventKey keyEvent && keyEvent.IsPressed())
 		{
 			if (keyEvent.PhysicalKeycode == Key.Escape)
@@ -109,7 +119,7 @@ public partial class Car : VehicleBody3D
 
 		EngineForce = 0;
 		float engineSoundTarget = 0.5f;
-		if (Input.IsActionPressed("throttle"))
+		if (Input.IsActionPressed("throttle") && AcceptsInputs)
 		{
 			EngineForce = EngineForceForward * (speediness > 0 ? SpeedToEngineMultCurve.Sample(speediness) : 1.0f);
 			engineSoundTarget = 1.0f;
@@ -131,7 +141,7 @@ public partial class Car : VehicleBody3D
 		_wheelTargetFriction[WheelBl] = NormalRwSlip;
 		_wheelTargetFriction[WheelBr] = NormalRwSlip;
 		Brake = 0;
-		if (Input.IsActionPressed("brake"))
+		if (Input.IsActionPressed("brake") && AcceptsInputs)
 		{
 			bool applySlip = false;
 			if (GetRpm() > 10)

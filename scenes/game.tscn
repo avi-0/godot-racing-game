@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=14 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
+[ext_resource type="PackedScene" path="res://scenes/gamemodes/gamemode_timeattack.tscn" id="4_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor.tscn" id="5_p57ef"]
+[ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="6_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/pause_menu.tscn" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
 [ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/settings_menu.tscn" id="8_gee14"]
+[ext_resource type="Script" uid="uid://ctqoofbnioxhi" path="res://scripts/GameMode.cs" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://b5kxpk7e7n6ri" path="res://scenes/cars/hatchback.tscn" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu.tscn" id="12_trtic"]
 
@@ -25,19 +28,24 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "TimeLabel", "SpeedLabel")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "TimeLabel", "SpeedLabel", "PBLabel", "FinishPanel", "FinishTimeLabel")]
 script = ExtResource("7_trtic")
 TrackTemplatePath = "res://scenes/track_template.tscn"
+GameModeScene = ExtResource("4_0tnpc")
 CarScene = ExtResource("12_kvuet")
 PauseMenu = NodePath("../PauseMenu")
 SettingsMenu = NodePath("../SettingsMenu")
 TrackNode = NodePath("Track")
 TimeLabel = NodePath("TimeLabel")
 SpeedLabel = NodePath("SpeedLabel")
+PBLabel = NodePath("PersonalBest")
+FinishPanel = NodePath("FinishPanel")
+FinishTimeLabel = NodePath("FinishPanel/VBoxContainer/FinishTimeLabel")
 
 [node name="Track" type="Node3D" parent="GameManager"]
 
 [node name="TimeLabel" type="Label" parent="GameManager"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -48,6 +56,7 @@ offset_top = -117.0
 offset_right = 254.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = SubResource("SystemFont_kvpfn")
 theme_override_font_sizes/font_size = 96
 text = "00:00:00"
@@ -62,11 +71,76 @@ anchor_bottom = 1.0
 offset_top = -117.0
 offset_right = 175.0
 grow_vertical = 0
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = SubResource("SystemFont_dinhu")
 theme_override_font_sizes/font_size = 96
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PersonalBest" type="Label" parent="GameManager"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -952.0
+offset_top = -1072.0
+offset_right = 368.0
+offset_bottom = -1000.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_kvpfn")
+theme_override_font_sizes/font_size = 48
+text = "PB: "
+vertical_alignment = 1
+
+[node name="FinishPanel" type="Panel" parent="GameManager"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -378.0
+offset_top = -264.0
+offset_right = 378.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_kvpfn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameManager/FinishPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="FinishTimeLabel" type="Label" parent="GameManager/FinishPanel/VBoxContainer"]
+layout_mode = 2
+text = "Race Time: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameManager/FinishPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -61.0
+offset_right = 37.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ok"
 
 [node name="Editor" parent="." instance=ExtResource("5_p57ef")]
 
@@ -76,3 +150,8 @@ vertical_alignment = 1
 
 [node name="SettingsMenu" parent="." instance=ExtResource("8_gee14")]
 visible = false
+
+[node name="GameMode" type="Node" parent="."]
+script = ExtResource("10_vtaks")
+
+[connection signal="pressed" from="GameManager/FinishPanel/Button" to="GameManager" method="OnFinishButtonPressed"]
