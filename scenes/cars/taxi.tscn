@@ -230,13 +230,13 @@ SpeedToSteeringCurve = SubResource("Curve_mk5fm")
 SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
 EngineForceForward = 35.0
-BrakeForce = 1.5
+BrakeForce = 1.0
 NormalSlip = 3.5
 NormalRwSlip = 3.4
 SteeringSpeed = 75.0
-BrakeFwSlipMultiplier = 0.3
-BrakeRwSlipMultiplier = 0.3
-BrakeForceInTurnMultiplier = 0.5
+BrakeFwSlipMultiplier = 0.5
+BrakeRwSlipMultiplier = 0.5
+BrakeForceInTurnMultiplier = 1.0
 
 [node name="wheel_bl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true

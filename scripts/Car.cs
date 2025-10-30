@@ -50,7 +50,7 @@ public partial class Car : VehicleBody3D
 		}
 	}
 
-	private bool _acceptsInputs = true;
+	private bool _acceptsInputs = false;
 	public bool AcceptsInputs
 	{
 		get => _acceptsInputs;

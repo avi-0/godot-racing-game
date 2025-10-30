@@ -23,9 +23,11 @@ public partial class GameManager : Node
 
     [Export] public Node3D TrackNode;
 
+    [Export] public Control RaceUI;
     [Export] public Label TimeLabel;
     [Export] public Label SpeedLabel;
     [Export] public Label PBLabel;
+    [Export] public Label StartTimerLabel;
 
     [Export] public Panel FinishPanel;
     [Export] public Label FinishTimeLabel;
@@ -92,7 +94,7 @@ public partial class GameManager : Node
         }
         else
         {
-            GameMode.CurrentGameMode.RespawnPlayer(LocalPlayerID);
+            GameMode.CurrentGameMode.RespawnPlayer(LocalPlayerID, _localCar);
         }
 
         GameMode.CurrentGameMode.Running(true);
@@ -128,9 +130,7 @@ public partial class GameManager : Node
     
     private void SetGameUIVisiblity(bool Visible)
     {
-        TimeLabel.Visible = Visible;
-        SpeedLabel.Visible = Visible;
-        PBLabel.Visible = Visible;
+        RaceUI.Visible = Visible;
 
         FinishPanel.Hide();
     }

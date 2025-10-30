@@ -34,7 +34,7 @@ public interface GameModeBase
 	void Tick();
 	void InitTrack(Node3D TrackNode);
 	int SpawnPlayer(bool LocalPlayer, Car PlayerCar);
-	void RespawnPlayer(int PlayerID);
+	void RespawnPlayer(int PlayerID, Car PlayerCar);
 	void PlayerAttemptFinish(int PlayerID);
 	void KillGame();
 }
@@ -55,6 +55,10 @@ public class GameModeUtils
 	{
 		GameManager.Singleton.PBLabel.Text = "PB: " + NewPB.ToString("mm") + ":" + NewPB.ToString("ss") + "." + NewPB.ToString("fff");
 	}	
+	public void UnloadLocalPB()
+	{
+		GameManager.Singleton.PBLabel.Text = "PB: ";
+	}
 
 	public void OpenFinishWindow(TimeSpan FinishTime, bool IsPB)
 	{
@@ -68,9 +72,17 @@ public class GameModeUtils
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
-	public void UnloadLocalPB()
+	public void SetStartTimer(int Time)
 	{
-		GameManager.Singleton.PBLabel.Text = "PB: ";
+		if (Time > 0)
+		{
+			GameManager.Singleton.StartTimerLabel.Show();
+			GameManager.Singleton.StartTimerLabel.Text = Time.ToString();
+		}
+		else
+		{
+			GameManager.Singleton.StartTimerLabel.Hide();
+		}
 	}
 }
 
@@ -90,12 +102,37 @@ public class GameModeTimeAttack : GameModeBase
 		{
 			var Player = Players[PlayerID];
 
-			if (Player.InGame && Player.RaceStartTime != null)
+			if (Player.InGame)
 			{
-				Player.CurrentRaceTime = DateTime.Now.Subtract(Player.RaceStartTime);
-				if (Player.LocalPlayer)
+				if (Player.RaceStartTime.Ticks == 0)
 				{
-					GameMode.Utils.UpdateLocalRaceTime(Player.CurrentRaceTime);
+					var TimeSinceStartMS = DateTime.Now.Subtract(Player.SpawnTime).TotalMilliseconds;
+					if (TimeSinceStartMS > 1500)
+					{
+						GameMode.Utils.SetStartTimer(0);
+						Player.PlayerCar.AcceptsInputs = true;
+						Player.RaceStartTime = DateTime.Now;
+					}
+					else if (TimeSinceStartMS > 1000)
+					{
+						GameMode.Utils.SetStartTimer(1);
+					}
+					else if (TimeSinceStartMS > 500)
+					{
+						GameMode.Utils.SetStartTimer(2);
+					}
+					else
+					{
+						GameMode.Utils.SetStartTimer(3);
+					}
+				}
+				else
+				{
+					Player.CurrentRaceTime = DateTime.Now.Subtract(Player.RaceStartTime);
+					if (Player.LocalPlayer)
+					{
+						GameMode.Utils.UpdateLocalRaceTime(Player.CurrentRaceTime);
+					}
 				}
 			}
 
@@ -117,18 +154,25 @@ public class GameModeTimeAttack : GameModeBase
 		Players.Add(new TAPlayer(PlayerID, LocalPlayer, PlayerCar));
 		var Player = Players[PlayerID];
 
-		Player.RaceStartTime = DateTime.Now;
-	
+		Player.SpawnTime = DateTime.Now;
+
 		Players[PlayerID] = Player;
 		return PlayerID;
 	}
 
-	public void RespawnPlayer(int PlayerID)
+	public void RespawnPlayer(int PlayerID, Car PlayerCar)
 	{
 		var Player = Players[PlayerID];
 
-		Player.RaceStartTime = DateTime.Now;
+		Player.PlayerCar = PlayerCar;
+		Player.SpawnTime = DateTime.Now;
+		Player.RaceStartTime = new DateTime();
 		Player.InGame = true;
+
+		if (Player.LocalPlayer)
+		{
+			GameMode.Utils.UpdateLocalRaceTime(new TimeSpan());
+		}
 
 		Players[PlayerID] = Player;
 	}
@@ -184,6 +228,7 @@ public struct TAPlayer
 	public int LapsDone {get; set;} = 0;
 
 	public DateTime RaceStartTime {get; set;}
+	public DateTime SpawnTime {get; set;}
 	public TimeSpan CurrentRaceTime {get; set;}
 	public TimeSpan PBTime {get; set;}
 
