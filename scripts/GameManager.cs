@@ -7,6 +7,10 @@ public partial class GameManager : Node
 {
     public static GameManager Singleton;
 
+    // constants that hui znaet where they should be
+    public const int BlockLayer = 1;
+    public const int CarLayer = 2;
+
     [Export(PropertyHint.FilePath)] public string TrackTemplatePath;
 
     public const string CarsPath = "res://scenes/cars/";
@@ -74,12 +78,45 @@ public partial class GameManager : Node
         
         _localCar.RestartRequested += LocalCarOnRestartRequested;
         _localCar.PauseRequested += LocalCarOnPauseRequested;
+        
+        foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>())
+        {
+            if (block.IsFinish)
+            {
+                block.CarEntered += FinishOnCarEntered;
+            }
+        }
 
         _isPlaying = true;
 
         RaceStartTime = DateTime.Now;
     }
 
+    public void Stop()
+    {
+        SpeedLabel.Visible = false;
+
+        if (_localCar != null)
+        {
+            RemoveChild(_localCar);
+            _localCar.QueueFree();
+            
+            _localCar = null;
+        }
+        
+        foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>())
+        {
+            if (block.IsFinish)
+            {
+                block.CarEntered -= FinishOnCarEntered;
+            }
+        }
+        
+        _isPlaying = false;
+        
+        EmitSignalStoppedPlaying();
+    }
+    
     public bool IsPlaying()
     {
         return _isPlaying;
@@ -97,23 +134,6 @@ public partial class GameManager : Node
             PauseMenu.Show();
             Input.MouseMode = Input.MouseModeEnum.Visible;
         }
-    }
-
-    public void Stop()
-    {
-        SpeedLabel.Visible = false;
-
-        if (_localCar != null)
-        {
-            RemoveChild(_localCar);
-            _localCar.QueueFree();
-            
-            _localCar = null;
-        }
-        
-        _isPlaying = false;
-        
-        EmitSignalStoppedPlaying();
     }
 
     private void LocalCarOnRestartRequested()
@@ -169,6 +189,11 @@ public partial class GameManager : Node
         TrackNode.QueueFree();
         TrackNode = newTrackNode;
         TrackNode.Name = "Track";
+    }
+
+    private void FinishOnCarEntered(Car car)
+    {
+        Play(); // рестарт
     }
 
     public void NewTrack()

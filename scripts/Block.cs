@@ -6,8 +6,13 @@ namespace racingGame;
 [GlobalClass]
 public partial class Block : Node3D
 {
+	[Export] public bool IsFinish = false;
+	
 	[Signal]
 	public delegate void ChildMouseEnteredEventHandler(Block block);
+
+	[Signal]
+	public delegate void CarEnteredEventHandler(Car car);
 	
 	public override void _Ready()
 	{
@@ -26,6 +31,22 @@ public partial class Block : Node3D
 					mat.CullMode = BaseMaterial3D.CullModeEnum.Back;
 				}
 			}
+		}
+
+		foreach (var area in FindChildren("*", "Area3D").Cast<Area3D>())
+		{
+			if (area.IsInGroup("finish_hitbox"))
+			{
+				area.BodyEntered += AreaOnBodyEntered;
+			}
+		}
+	}
+
+	private void AreaOnBodyEntered(Node3D body)
+	{
+		if (body is Car car)
+		{
+			EmitSignalCarEntered(car);
 		}
 	}
 

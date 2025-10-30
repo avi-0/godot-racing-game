@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://0onfls1vij0x"]
+
+[ext_resource type="PackedScene" uid="uid://cp13f70hyxy2u" path="res://assets/cityroads/func-finish.glb" id="1_pmdc7"]
+[ext_resource type="PackedScene" uid="uid://b2lr7761hejuw" path="res://blocks/cityroads/scenes/func-finish.tscn" id="1_tmolm"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_mfeyv"]
+[ext_resource type="Texture2D" uid="uid://cst7sakw8pix7" path="res://blocks/cityroads/images/func-finish.png" id="3_i3c6c"]
+
+[resource]
+script = ExtResource("2_mfeyv")
+SourceScene = ExtResource("1_pmdc7")
+Scene = ExtResource("1_tmolm")
+ThumbnailTexture = ExtResource("3_i3c6c")

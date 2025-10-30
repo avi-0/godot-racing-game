@@ -47,13 +47,12 @@ public partial class BlockRecord : Resource
         
         model.SetScale(8 * Vector3.One);
 
-        foreach (var meshChild in model.FindChildren("*", "MeshInstance3D", true, false).Cast<MeshInstance3D>())
-        {
-            meshChild.CreateTrimeshCollision();
-        }
+        // process stuff (add collisions etc.)
+        
+        ProcessModel(node, model);
         
         // set owner for everything
-
+        
         foreach (var child in node.FindChildren("*", "", true, false))
         {
             child.Owner = node;
@@ -88,6 +87,44 @@ public partial class BlockRecord : Resource
         // clean up
         
         EditorInterface.Singleton.CloseScene();
+    }
+
+    private static bool NameHasTag(Node node, string tag)
+    {
+        return node.Name.ToString().ToLower().Contains(tag);
+    }
+
+    private static void ProcessModel(Block block, Node3D model)
+    {
+        foreach (var meshChild in model.FindChildren("*", "MeshInstance3D", true, false).Cast<MeshInstance3D>())
+        {
+            if (NameHasTag(meshChild, "finishhitbox"))
+            {
+                var shape = meshChild.Mesh.CreateConvexShape();
+                var area = new Area3D();
+                var collisionShape = new CollisionShape3D();
+                
+                block.AddChild(area);
+                block.IsFinish = true;
+                
+                area.Name = meshChild.Name;
+                area.AddChild(collisionShape);
+                area.AddToGroup("finish_hitbox", true);
+                area.CollisionLayer = GameManager.BlockLayer;
+                area.CollisionMask = GameManager.CarLayer;
+                
+                collisionShape.Name = meshChild.Name;
+                collisionShape.Shape = shape;
+                collisionShape.GlobalTransform = meshChild.GlobalTransform;
+                
+                meshChild.GetParent().RemoveChild(meshChild);
+                meshChild.QueueFree();
+                
+                continue;
+            }
+            
+            meshChild.CreateTrimeshCollision();
+        }
     }
 
     private Aabb CalculateCameraSize(Node3D node)

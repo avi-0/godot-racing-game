@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1df4c4c9-d1fd-4a51-b71a-d7701def8e72" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-crossroad-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-crossroad-barrier.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout-barrier.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-roundabout.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry-barrier.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-entry.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit-barrier.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-side-exit.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/images/road-split-barrier.png" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/images/road-split-barrier.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar-wide.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar-wide.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/bridge-pillar.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-cone.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-cone.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-light.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/construction-light.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-cross.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-cross.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-double.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved-double.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-curved.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-cross.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-cross.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-double.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square-double.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/light-square.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-square-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend-square-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-bend.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-crossroad-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-crossroad-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-end-round.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-intersection-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-intersection-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-roundabout.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-entry.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-side-exit.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split-barrier.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split-barrier.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/cityroads/scenes/road-split.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/cars/hatchback.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/cars/hatchback.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/cars/sport.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/cars/sport.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/cars/taxi.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/cars/taxi.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/main_menu/menu_button.tres" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/main_menu/menu_button.tres" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Block.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/BlockRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/BlockRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/GameManager.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/B033380F53F6AE1C6049DCAD/Godot.SourceGenerators/Godot.SourceGenerators.ScriptMethodsGenerator/racingGame.Editor_ScriptMethods.generated.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1c378f459c054fecaf4484a0fa6d44c055a800/86/48f65f04/StringExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1c378f459c054fecaf4484a0fa6d44c055a800/9b/8cb9a88e/Callable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/183686b881a45c595930382491e119c81c167b84484b03b8f713f93123d4526/AudioStreamPolyphonic.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/716d154fef5cbe863cd637bd32beda6e3cec5f12e8fed2dc5b2d8149a0d558ab/Node.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7467e7a03427483962deebd2e9bcc3ce7f97b602f1c8659fda64af65b131d85/Resource.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/803a43bc95cbb6386cccbc3f3ee22878c11e93312a5ccc982fc0d971881792/Node3D.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/scripts/BlockRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/scripts/Car.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/scripts/Editor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/scripts/MainMenu.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="347hksoC7M24XhoCyNjqnUqHA97" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;gdscript.promo.shown&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected=".NET Executable.Editor">
+    <configuration name="Player GDScript" type="GDSCRIPT_DEBUG_RUN_CONFIGURATION" factoryName="GdScriptRunFactory" show_console_on_std_err="false" show_console_on_std_out="false" port="6006">
+      <option name="address" value="127.0.0.1" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Editor" type="RunExe" factoryName=".NET Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Documents/Godot_v4.5.1-stable_mono_win64/Godot_v4.5.1-stable_mono_win64.exe" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;./&quot; --editor" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\db0zm\Desktop\Code\Godot\racistgame" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="AUTO_ATTACH_CHILDREN" value="0" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <option name="RUNTIME_TYPE" value="coreclr" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Player" type="RunExe" factoryName=".NET Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Documents/Godot_v4.5.1-stable_mono_win64/Godot_v4.5.1-stable_mono_win64.exe" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;./&quot;" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\db0zm\Desktop\Code\Godot\racistgame" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="AUTO_ATTACH_CHILDREN" value="0" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <option name="RUNTIME_TYPE" value="coreclr" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1df4c4c9-d1fd-4a51-b71a-d7701def8e72" name="Changes" comment="" />
+      <created>1760570665174</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1760570665174</updated>
+      <workItem from="1760570668032" duration="1727000" />
+      <workItem from="1760634859660" duration="11505000" />
+      <workItem from="1760741519883" duration="570000" />
+      <workItem from="1760742106735" duration="6419000" />
+      <workItem from="1761159676878" duration="26371000" />
+      <workItem from="1761328033309" duration="8249000" />
+      <workItem from="1761371359098" duration="4227000" />
+      <workItem from="1761419332822" duration="13101000" />
+      <workItem from="1761507086105" duration="2249000" />
+      <workItem from="1761572356385" duration="6115000" />
+      <workItem from="1761667606444" duration="3747000" />
+      <workItem from="1761708804138" duration="2805000" />
+      <workItem from="1761716655088" duration="2318000" />
+      <workItem from="1761758502038" duration="9649000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
