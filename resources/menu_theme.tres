@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=21 format=3 uid="uid://icnr3mmy82ij"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://icnr3mmy82ij"]
 
 [ext_resource type="StyleBox" uid="uid://ecyclfrvfw84" path="res://scenes/main_menu/menu_button.tres" id="1_muft2"]
 
@@ -106,6 +106,35 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7xm5h"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muft2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.25, 0.25, 0.25, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.175, 0.175, 0.175, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnlfk"]
 content_margin_left = 32.0
 content_margin_top = 32.0
@@ -190,6 +219,10 @@ OptionButton/styles/pressed = SubResource("StyleBoxFlat_tg67o")
 OptionButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_5qr67")
 Panel/styles/panel = SubResource("StyleBoxFlat_vn0o2")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_vn0o2")
+PopupMenu/font_sizes/font_separator_size = 32
+PopupMenu/font_sizes/font_size = 32
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_7xm5h")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_muft2")
 TabContainer/constants/tab_separation = 24
 TabContainer/font_sizes/font_size = 48
 TabContainer/styles/panel = SubResource("StyleBoxFlat_fnlfk")
