@@ -31,7 +31,7 @@ public partial class GameManager : Node
     [Export] public Label StartTimerLabel;
     [Export] public Label CheckPointLabel;
 
-    [Export] public Panel FinishPanel;
+    [Export] public PanelContainer FinishPanel;
     [Export] public Label FinishTimeLabel;
     
     private bool _isPlaying = false;
