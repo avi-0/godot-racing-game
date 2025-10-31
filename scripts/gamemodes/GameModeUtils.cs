@@ -73,6 +73,8 @@ public class GameModeUtils
     private const string savePBPath = "user://userdata.mdat";
     public void SaveUserPB(TimeSpan time, string TrackUID)
     {
+        if (time == TimeSpan.Zero || TrackUID == "0") { return;}
+        
         var config = new ConfigFile();
         config.LoadEncrypted(savePBPath, "sosal?".Sha256Buffer());
         config.SetValue("PBS", TrackUID, time.TotalMilliseconds);
