@@ -12,6 +12,5 @@ camera_attributes = SubResource("CameraAttributesPhysical_uk1mk")
 compositor = SubResource("Compositor_uk1mk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.94174683, 0.24646278, -0.22884314, -4.4868667e-08, 0.6804271, 0.7328161, 0.33632284, -0.6901272, 0.64078987, 1.86084, 3.9538, 1.40453)
-light_color = Color(0.97453326, 0.88142484, 0.78073496, 1)
+transform = Transform3D(0.81382173, 0.42585024, -0.39540604, -9.556254e-08, 0.68042696, 0.732816, 0.5811148, -0.5963816, 0.55374616, 1.86084, 3.9538, 1.40453)
 shadow_enabled = true

@@ -15,6 +15,5 @@ image = SubResource("Image_hftw7")
 
 [resource]
 resource_name = "colormap.002"
-cull_mode = 2
 albedo_texture = SubResource("ImageTexture_r1fww")
 texture_filter = 2
