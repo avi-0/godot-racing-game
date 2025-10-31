@@ -29,8 +29,9 @@ public partial class GameManager : Node
     [Export] public Label SpeedLabel;
     [Export] public Label PbLabel;
     [Export] public Label StartTimerLabel;
+    [Export] public Label CheckPointLabel;
 
-    [Export] public Panel FinishPanel;
+    [Export] public PanelContainer FinishPanel;
     [Export] public Label FinishTimeLabel;
     
     private bool _isPlaying = false;
@@ -78,14 +79,6 @@ public partial class GameManager : Node
         
         _localCar.RestartRequested += LocalCarOnRestartRequested;
         _localCar.PauseRequested += LocalCarOnPauseRequested;
-        
-        foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>())
-        {
-            if (block.IsFinish)
-            {
-                block.CarEntered += FinishOnCarEntered;
-            }
-        }
 
         _isPlaying = true;
 
@@ -111,14 +104,6 @@ public partial class GameManager : Node
             _localCar.QueueFree();
             
             _localCar = null;
-        }
-        
-        foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>())
-        {
-            if (block.IsFinish)
-            {
-                block.CarEntered -= FinishOnCarEntered;
-            }
         }
         
         _isPlaying = false;
@@ -176,6 +161,12 @@ public partial class GameManager : Node
     public void SaveTrack(string path)
     {
         GD.Print($"Saving track as {path}");
+
+        if ((string)TrackNode.GetMeta("TrackUID") == "0")
+        {
+            TrackNode.SetMeta("TrackUID", Guid.NewGuid().ToString());
+            GD.Print($"New Track UID: {GetLoadedTrackUID()}");
+        }
         
         foreach (var child in TrackNode.GetChildren())
         {
@@ -212,11 +203,7 @@ public partial class GameManager : Node
         TrackNode.Name = "Track";
 
         GameModeController.CurrentGameMode.InitTrack(TrackNode);
-    }
-
-    private void FinishOnCarEntered(Car car)
-    {
-        GameModeController.CurrentGameMode.PlayerAttemptFinish(0);
+        GD.Print("Track UID: "+GetLoadedTrackUID());
     }
 
     public void OnFinishButtonPressed()
@@ -239,5 +226,10 @@ public partial class GameManager : Node
             return height / 1080.0f;
         }
         return DisplayServer.ScreenGetScale(); // only works on macOS and Linux
+    }
+
+    public string GetLoadedTrackUID()
+    {
+        return (string)TrackNode.GetMeta("TrackUID");
     }
 }

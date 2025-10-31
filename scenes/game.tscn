@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=15 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
@@ -18,6 +18,12 @@ subpixel_positioning = 0
 [sub_resource type="SystemFont" id="SystemFont_dinhu"]
 font_names = PackedStringArray("Tahoma")
 
+[sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_kvpfn"]
+events = [SubResource("InputEventAction_vtaks")]
+
 [node name="Game" type="Node"]
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
@@ -27,7 +33,7 @@ BlockPlacedSound = ExtResource("2_0tnpc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "RaceUi", "TimeLabel", "SpeedLabel", "PbLabel", "StartTimerLabel", "FinishPanel", "FinishTimeLabel")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "RaceUi", "TimeLabel", "SpeedLabel", "PbLabel", "StartTimerLabel", "CheckPointLabel", "FinishPanel", "FinishTimeLabel")]
 script = ExtResource("7_trtic")
 TrackTemplatePath = "res://scenes/track_template.tscn"
 CarScene = ExtResource("12_kvuet")
@@ -39,8 +45,9 @@ TimeLabel = NodePath("RaceUI/TimeLabel")
 SpeedLabel = NodePath("RaceUI/SpeedLabel")
 PbLabel = NodePath("RaceUI/PersonalBest")
 StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
+CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
 FinishPanel = NodePath("RaceUI/FinishPanel")
-FinishTimeLabel = NodePath("RaceUI/FinishPanel/VBoxContainer/FinishTimeLabel")
+FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")
 
 [node name="GameMode" type="Node" parent="GameManager"]
 script = ExtResource("10_vtaks")
@@ -50,9 +57,11 @@ script = ExtResource("10_vtaks")
 [node name="RaceUI" type="Control" parent="GameManager"]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TimeLabel" type="Label" parent="GameManager/RaceUI"]
 layout_mode = 1
@@ -61,10 +70,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 685.5
-offset_top = 923.0
-offset_right = 1194.5
-offset_bottom = 1040.0
+offset_left = -254.5
+offset_top = -117.0
+offset_right = 254.5
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/outline_size = 4
@@ -79,9 +87,8 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = 923.0
+offset_top = -117.0
 offset_right = 175.0
-offset_bottom = 1040.0
 grow_vertical = 0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = SubResource("SystemFont_dinhu")
@@ -92,17 +99,10 @@ vertical_alignment = 1
 
 [node name="PersonalBest" type="Label" parent="GameManager/RaceUI"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -12.0
-offset_top = -32.0
-offset_right = 1308.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 1328.0
+offset_bottom = 80.0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = SubResource("SystemFont_kvpfn")
 theme_override_font_sizes/font_size = 48
@@ -116,10 +116,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 710.0
-offset_top = 254.25
-offset_right = 1170.0
-offset_bottom = 785.75
+offset_left = -230.0
+offset_top = -265.75
+offset_right = 230.0
+offset_bottom = 265.75
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 4
@@ -130,50 +130,57 @@ text = "3
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FinishPanel" type="Panel" parent="GameManager/RaceUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 562.0
-offset_top = 256.0
-offset_right = 1318.0
-offset_bottom = 784.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("6_kvpfn")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameManager/RaceUI/FinishPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -92.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="FinishTimeLabel" type="Label" parent="GameManager/RaceUI/FinishPanel/VBoxContainer"]
-layout_mode = 2
-text = "Race Time: "
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="GameManager/RaceUI/FinishPanel"]
+[node name="CheckPointLabel" type="Label" parent="GameManager/RaceUI"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -37.5
-offset_top = -61.0
-offset_right = 37.5
+offset_left = -32.0
+offset_top = -160.0
+offset_right = 39.0
+offset_bottom = -101.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_kvpfn")
+theme_override_font_sizes/font_size = 48
+text = "0/0"
+vertical_alignment = 1
+
+[node name="FinishPanel" type="PanelContainer" parent="GameManager/RaceUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -378.0
+offset_top = -264.0
+offset_right = 378.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_kvpfn")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameManager/RaceUI/FinishPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameManager/RaceUI/FinishPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FinishTimeLabel" type="Label" parent="GameManager/RaceUI/FinishPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Race Time: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameManager/RaceUI/FinishPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_kvpfn")
 text = "Ok"
 
 [node name="Editor" parent="." instance=ExtResource("5_p57ef")]
@@ -186,4 +193,4 @@ visible = false
 [node name="SettingsMenu" parent="." instance=ExtResource("8_gee14")]
 visible = false
 
-[connection signal="pressed" from="GameManager/RaceUI/FinishPanel/Button" to="GameManager" method="OnFinishButtonPressed"]
+[connection signal="pressed" from="GameManager/RaceUI/FinishPanel/MarginContainer/VBoxContainer/Button" to="GameManager" method="OnFinishButtonPressed"]

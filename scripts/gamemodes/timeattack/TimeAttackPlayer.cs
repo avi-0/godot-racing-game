@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using racingGame;
 
 public struct TimeAttackPlayer
@@ -8,7 +9,7 @@ public struct TimeAttackPlayer
     public bool LocalPlayer {get; set;} = false;
     public bool InGame {get; set;} = true;
 
-    public int CheckPointsCollected {get; set;} = 0;
+    public List<int> CheckPointsCollected {get; set;}
     public int LapsDone {get; set;} = 0;
 
     public DateTime RaceStartTime {get; set;}

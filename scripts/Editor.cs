@@ -212,7 +212,8 @@ public partial class Editor : Control
 	private async GDTaskVoid PlayButtonOnPressedAsync()
 	{
 		IsRunning = false;
-		
+
+		GameModeController.CurrentGameMode.InitTrack(TrackNode);
 		GameManager.Singleton.Play();
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
 
