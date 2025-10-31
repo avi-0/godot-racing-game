@@ -1,4 +1,13 @@
-[gd_resource type="Theme" format=3 uid="uid://d0edsagec8yv6"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://d0edsagec8yv6"]
+
+[ext_resource type="FontFile" uid="uid://cn554o1b23kww" path="res://assets/fonts/Exo_2/Exo2-VariableFont_wght.ttf" id="1_yfxrn"]
+
+[sub_resource type="FontVariation" id="FontVariation_hmgv5"]
+base_font = ExtResource("1_yfxrn")
+variation_opentype = {
+2003265652: 500
+}
 
 [resource]
+default_font = SubResource("FontVariation_hmgv5")
 SplitContainer/constants/autohide = 0

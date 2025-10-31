@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=14 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_gee14"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor.tscn" id="5_p57ef"]
+[ext_resource type="Theme" uid="uid://cqn7x347w3gke" path="res://resources/hud_theme.tres" id="6_dinhu"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://resources/menu_theme.tres" id="6_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/pause_menu.tscn" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="7_trtic"]
@@ -10,13 +11,6 @@
 [ext_resource type="Script" uid="uid://ctqoofbnioxhi" path="res://scripts/GameModeController.cs" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://b5kxpk7e7n6ri" path="res://scenes/cars/hatchback.tscn" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu.tscn" id="12_trtic"]
-
-[sub_resource type="SystemFont" id="SystemFont_kvpfn"]
-font_names = PackedStringArray("Tahoma")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_dinhu"]
-font_names = PackedStringArray("Tahoma")
 
 [sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
 action = &"ui_accept"
@@ -62,6 +56,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_dinhu")
 
 [node name="TimeLabel" type="Label" parent="GameManager/RaceUI"]
 layout_mode = 1
@@ -75,8 +70,6 @@ offset_top = -117.0
 offset_right = 254.5
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource("SystemFont_kvpfn")
 theme_override_font_sizes/font_size = 96
 text = "00:00:00"
 horizontal_alignment = 1
@@ -90,8 +83,6 @@ anchor_bottom = 1.0
 offset_top = -117.0
 offset_right = 175.0
 grow_vertical = 0
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource("SystemFont_dinhu")
 theme_override_font_sizes/font_size = 96
 text = "0"
 horizontal_alignment = 1
@@ -103,8 +94,6 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 1328.0
 offset_bottom = 80.0
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource("SystemFont_kvpfn")
 theme_override_font_sizes/font_size = 48
 text = "PB: "
 vertical_alignment = 1
@@ -122,8 +111,6 @@ offset_right = 230.0
 offset_bottom = 265.75
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource("SystemFont_dinhu")
 theme_override_font_sizes/font_size = 150
 text = "3
 "
@@ -143,8 +130,6 @@ offset_right = 39.0
 offset_bottom = -101.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource("SystemFont_kvpfn")
 theme_override_font_sizes/font_size = 48
 text = "0/0"
 vertical_alignment = 1
