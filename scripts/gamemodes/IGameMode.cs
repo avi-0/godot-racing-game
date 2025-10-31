@@ -10,6 +10,5 @@ public interface IGameMode
     void InitTrack(Node3D trackNode);
     int SpawnPlayer(bool localPlayer, Car playerCar);
     void RespawnPlayer(int playerId, Car playerCar);
-    void PlayerAttemptFinish(int playerId);
     void KillGame();
 }

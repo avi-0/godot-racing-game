@@ -12,6 +12,8 @@ public partial class Block : Node3D
 	[Export] public bool IsFinish = false;
 	[Export] public Node3D SpawnPointNode;
 
+	public int BlockID = 0;
+
 	public Transform3D SpawnPoint =>
 		SpawnPointNode.GlobalTransform.Orthonormalized().RotatedLocal(Vector3.Up, Single.Pi / 2);
 	
@@ -19,7 +21,7 @@ public partial class Block : Node3D
 	public delegate void ChildMouseEnteredEventHandler(Block block);
 
 	[Signal]
-	public delegate void CarEnteredEventHandler(Car car);
+	public delegate void CarEnteredEventHandler(Car car, int BlockID);
 	
 	public override void _Ready()
 	{
@@ -53,7 +55,7 @@ public partial class Block : Node3D
 	{
 		if (body is Car car)
 		{
-			EmitSignalCarEntered(car);
+			EmitSignalCarEntered(car, BlockID);
 		}
 	}
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 namespace racingGame;
@@ -56,11 +57,31 @@ public class GameModeTimeAttack : IGameMode
             _players[playerId] = player;
         }	
     }
-
+    
+    
     public void InitTrack(Node3D trackNode)
     {
         _currentTrack = new TimeAttackMap(trackNode);
         _players = new List<TimeAttackPlayer>();
+
+        var blockCount = 0;
+        foreach (var block in trackNode.FindChildren("*", "Block", false).Cast<Block>())
+        {
+            block.BlockID = blockCount;
+            blockCount++;
+            
+            if (block.IsCheckpoint)
+            {
+                _currentTrack.CheckPointCount++;
+                block.CarEntered += PlayerEnterCheckPoint;
+            }
+            else if (block.IsFinish)
+            {
+                block.CarEntered += PlayerAttemptFinish;
+            }
+        }
+        
+        GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
     }
 
     public int SpawnPlayer(bool localPlayer, Car playerCar)
@@ -70,7 +91,19 @@ public class GameModeTimeAttack : IGameMode
         var player = _players[playerId];
 
         player.SpawnTime = DateTime.Now;
-
+        player.CheckPointsCollected = new List<int>();
+        
+        if (player.LocalPlayer)
+        {
+            TimeSpan LoadedPB = GameModeController.Utils.LoadUserPB(GameManager.Singleton.GetLoadedTrackUID());
+            if (LoadedPB != TimeSpan.Zero)
+            {
+                player.PbTime = LoadedPB;
+                GameModeController.Utils.UpdateLocalPb(player.PbTime);
+            }
+        }
+        
+        playerCar.PlayerID = playerId;
         _players[playerId] = player;
         return playerId;
     }
@@ -82,29 +115,50 @@ public class GameModeTimeAttack : IGameMode
         player.PlayerCar = playerCar;
         player.SpawnTime = DateTime.Now;
         player.RaceStartTime = new DateTime();
+        player.CheckPointsCollected = new List<int>();
         player.InGame = true;
 
         if (player.LocalPlayer)
         {
             GameModeController.Utils.UpdateLocalRaceTime(TimeSpan.Zero);
+            GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
         }
 
+        playerCar.PlayerID = playerId;
         _players[playerId] = player;
     }
-
-    public void PlayerAttemptFinish(int playerId)
-    {
-        if (_players[playerId].InGame && _players[playerId].CheckPointsCollected == _currentTrack.CheckPointCount)
-        {
-            PlayerFinished(playerId);
-        }
-    }	
 
     public void KillGame()
     {
         _running = false;
-        _players = null;	
-        GameModeController.Utils.UnloadLocalPb();
+        _players = null;
+        GameModeController.Utils.UnloadLocalStats();
+    }
+    
+    private void PlayerAttemptFinish(Car playerCar, int BlockID)
+    {
+        int playerId = playerCar.PlayerID;
+        
+        if (_players[playerId].InGame && _players[playerId].CheckPointsCollected.Count == _currentTrack.CheckPointCount)
+        {
+            PlayerFinished(playerId);
+        }
+    }
+
+    private void PlayerEnterCheckPoint(Car playerCar, int BlockID)
+    {
+        var player = _players[playerCar.PlayerID];
+
+        if (!player.CheckPointsCollected.Contains(BlockID))
+        {
+            player.CheckPointsCollected.Add(BlockID);
+            if (player.LocalPlayer)
+            {
+                GameModeController.Utils.SetCheckPointCount(player.CheckPointsCollected.Count, _currentTrack.CheckPointCount);
+            }
+        }
+            
+        _players[playerCar.PlayerID] = player;
     }
 
     private void PlayerFinished(int playerId)
@@ -124,6 +178,7 @@ public class GameModeTimeAttack : IGameMode
             if (player.LocalPlayer)
             {
                 GameModeController.Utils.UpdateLocalPb(player.PbTime);
+                GameModeController.Utils.SaveUserPB(player.PbTime, GameManager.Singleton.GetLoadedTrackUID());
             }
         }
         GameModeController.Utils.OpenFinishWindow(player.CurrentRaceTime, isPb);

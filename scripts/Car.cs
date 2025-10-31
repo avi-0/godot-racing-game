@@ -39,6 +39,8 @@ public partial class Car : VehicleBody3D
 	private float BrakeFwSlip;
 	private float BrakeRwSlip;
 
+	public int PlayerID;
+	
 	private bool _isLocallyControlled = true;
 	public bool IsLocallyControlled
 	{

@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/track_world_environment.tscn" id="1_gv3d6"]
+[ext_resource type="Environment" path="res://resources/track_environment.tres" id="2_wjdak"]
+[ext_resource type="PackedScene" path="res://scenes/track_base.tscn" id="3_nq6u3"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-straight.tscn" id="4_1mtvf"]
+[ext_resource type="Script" path="res://scripts/Block.cs" id="5_71uh8"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-split.tscn" id="6_b0ahu"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-bend.tscn" id="7_01t4d"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-end-round.tscn" id="8_c41pc"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-end-round-barrier.tscn" id="9_10wxv"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-straight-barrier.tscn" id="10_wpodg"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-bend-barrier.tscn" id="11_pq5ey"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-split-barrier.tscn" id="12_8du5s"]
+[ext_resource type="PackedScene" path="res://blocks/func/_scenes/func-start.tscn" id="13_6nagq"]
+[ext_resource type="PackedScene" path="res://blocks/func/_scenes/func-checkpoint.tscn" id="14_aprro"]
+[ext_resource type="PackedScene" path="res://blocks/func/_scenes/func-finish.tscn" id="15_fh4dx"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_uk1mk"]
+
+[sub_resource type="Compositor" id="Compositor_uk1mk"]
+
+[node name="Track" type="Node3D"]
+physics_interpolation_mode = 2
+metadata/TrackUID = "08aba1fe-45f2-4f08-8861-f9e0f19697bb"
+
+[node name="TrackWorldEnvironment" type="WorldEnvironment" parent="." instance=ExtResource("1_gv3d6")]
+environment = ExtResource("2_wjdak")
+camera_attributes = SubResource("CameraAttributesPhysical_uk1mk")
+compositor = SubResource("Compositor_uk1mk")
+
+[node name="TrackBase" type="Node3D" parent="." instance=ExtResource("3_nq6u3")]
+
+[node name="road-straight" type="Node3D" parent="." instance=ExtResource("4_1mtvf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, 24)
+script = ExtResource("5_71uh8")
+
+[node name="road-split" type="Node3D" parent="." instance=ExtResource("6_b0ahu")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, 16)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@366" type="Node3D" parent="." instance=ExtResource("7_01t4d")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, 32)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@367" type="Node3D" parent="." instance=ExtResource("7_01t4d")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -40, 0, 32)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@368" type="Node3D" parent="." instance=ExtResource("4_1mtvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 32)
+script = ExtResource("5_71uh8")
+
+[node name="road-end-round" type="Node3D" parent="." instance=ExtResource("8_c41pc")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -40, 0, 24)
+script = ExtResource("5_71uh8")
+
+[node name="road-end-round-barrier" type="Node3D" parent="." instance=ExtResource("9_10wxv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -40, 0, 24)
+script = ExtResource("5_71uh8")
+
+[node name="road-straight-barrier" type="Node3D" parent="." instance=ExtResource("10_wpodg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, 24)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@369" type="Node3D" parent="." instance=ExtResource("10_wpodg")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -32, 0, 32)
+script = ExtResource("5_71uh8")
+
+[node name="road-bend-barrier" type="Node3D" parent="." instance=ExtResource("11_pq5ey")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, 32)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@370" type="Node3D" parent="." instance=ExtResource("11_pq5ey")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -40, 0, 32)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@375" type="Node3D" parent="." instance=ExtResource("4_1mtvf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -28, 0, 8)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@376" type="Node3D" parent="." instance=ExtResource("4_1mtvf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20, 0, 8)
+script = ExtResource("5_71uh8")
+
+[node name="road-bend" type="Node3D" parent="." instance=ExtResource("7_01t4d")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -28, 0, 0)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@377" type="Node3D" parent="." instance=ExtResource("7_01t4d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@378" type="Node3D" parent="." instance=ExtResource("11_pq5ey")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -28, 0, 0)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@379" type="Node3D" parent="." instance=ExtResource("11_pq5ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@380" type="Node3D" parent="." instance=ExtResource("10_wpodg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20, 0, 8)
+script = ExtResource("5_71uh8")
+
+[node name="@Node3D@381" type="Node3D" parent="." instance=ExtResource("10_wpodg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -28, 0, 8)
+script = ExtResource("5_71uh8")
+
+[node name="road-split-barrier" type="Node3D" parent="." instance=ExtResource("12_8du5s")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0, 16)
+script = ExtResource("5_71uh8")
+
+[node name="func-start" type="Node3D" parent="." node_paths=PackedStringArray("SpawnPointNode") instance=ExtResource("13_6nagq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -24, 0, 28)
+script = ExtResource("5_71uh8")
+IsStart = true
+SpawnPointNode = NodePath("startSpawnPoint")
+
+[node name="func-checkpoint" type="Node3D" parent="." node_paths=PackedStringArray("SpawnPointNode") instance=ExtResource("14_aprro")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -28, 0, 8)
+script = ExtResource("5_71uh8")
+IsCheckpoint = true
+SpawnPointNode = NodePath("spawnpoint")
+
+[node name="@Node3D@389" type="Node3D" parent="." node_paths=PackedStringArray("SpawnPointNode") instance=ExtResource("14_aprro")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20, 0, 8)
+script = ExtResource("5_71uh8")
+IsCheckpoint = true
+SpawnPointNode = NodePath("spawnpoint")
+
+[node name="func-finish" type="Node3D" parent="." instance=ExtResource("15_fh4dx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -40, 0, 20)
+script = ExtResource("5_71uh8")
+IsFinish = true
