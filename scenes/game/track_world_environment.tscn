@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci1ixarerslh8"]
+
+[ext_resource type="Environment" uid="uid://ci5sq1602gfac" path="res://scenes/game/track_environment.tres" id="1_l2dry"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_uk1mk"]
+
+[sub_resource type="Compositor" id="Compositor_uk1mk"]
+
+[node name="TrackWorldEnvironment" type="WorldEnvironment"]
+environment = ExtResource("1_l2dry")
+camera_attributes = SubResource("CameraAttributesPhysical_uk1mk")
+compositor = SubResource("Compositor_uk1mk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.81382173, 0.42585024, -0.39540604, -9.556254e-08, 0.68042696, 0.732816, 0.5811148, -0.5963816, 0.55374616, 1.86084, 3.9538, 1.40453)
+shadow_enabled = true

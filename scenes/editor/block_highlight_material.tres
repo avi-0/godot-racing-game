@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cii18sx6kkh7w"]
+
+[resource]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0627451)
+grow_amount = -0.33
