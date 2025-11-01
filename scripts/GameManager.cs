@@ -32,6 +32,8 @@ public partial class GameManager : Node
 	[Export] public Label FinishTimeLabel;
 	[Export] public Label LapsLabel;
 
+	[Export] public AudioStreamPlayer MusicPlayer;
+
 	[Export] public Control PauseMenu;
 	[Export] public Label PbLabel;
 
@@ -92,6 +94,9 @@ public partial class GameManager : Node
 			GameModeController.CurrentGameMode.RespawnPlayer(_localPlayerId, _localCar);
 
 		GameModeController.CurrentGameMode.Running(true);
+
+		if (!MusicPlayer.IsPlaying())
+			MusicPlayer.Play();
 	}
 
 	public void Stop()
@@ -113,6 +118,8 @@ public partial class GameManager : Node
 		_localPlayerId = -1;
 		GameModeController.CurrentGameMode.KillGame();
 		//CurrentTrackMeta = null;
+
+		MusicPlayer.Stop();
 	}
 
 	private void SetGameUiVisiblity(bool visible)
