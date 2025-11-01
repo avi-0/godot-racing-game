@@ -373,6 +373,11 @@ public partial class Editor : Control
 	{
 		if (!IsRunning)
 			return;
+
+		if (@event is InputEventKey keyEvent && keyEvent.KeyLabel == Key.X)
+		{
+			EraseButton.SetPressed(keyEvent.Pressed);
+		}
 		
 		if (_mode == Mode.Normal)
 		{

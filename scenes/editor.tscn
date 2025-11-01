@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c1rq5irkqaorb"]
+[gd_scene load_steps=30 format=3 uid="uid://c1rq5irkqaorb"]
 
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="3_j8y2p"]
@@ -64,14 +64,6 @@ unicode = 50
 
 [sub_resource type="Shortcut" id="Shortcut_trtic"]
 events = [SubResource("InputEventKey_kvuet")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_0u1f5"]
-device = -1
-keycode = 88
-unicode = 120
-
-[sub_resource type="Shortcut" id="Shortcut_8g6du"]
-events = [SubResource("InputEventKey_0u1f5")]
 
 [node name="Editor" type="Control" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "QuitButton", "OpenButton", "SaveButton", "PlayButton", "FileDialog", "ConfirmNewDialog", "ConfirmQuitDialog", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton", "HSplitContainer", "DirectoryListContainer", "OptionsTree", "EraseButton")]
 layout_mode = 3
@@ -265,10 +257,9 @@ theme = ExtResource("14_5tdu1")
 
 [node name="EraseButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
 layout_mode = 2
+tooltip_text = "(hold X)"
 toggle_mode = true
 action_mode = 0
-shortcut = SubResource("Shortcut_8g6du")
-shortcut_feedback = false
 text = "Erase
 "
 icon = ExtResource("17_0u1f5")
