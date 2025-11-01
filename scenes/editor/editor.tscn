@@ -224,7 +224,7 @@ mouse_target = true
 handle_input_locally = false
 screen_space_aa = 1
 physics_object_picking = true
-size = Vector2i(2, 2)
+size = Vector2i(1571, 1008)
 render_target_update_mode = 4
 script = ExtResource("7_74j0u")
 

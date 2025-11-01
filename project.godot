@@ -14,7 +14,7 @@ config/name="mashinki"
 config/version="0.0.1"
 run/main_scene="uid://quenom6jkxmi"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
-boot_splash/show_image=false
+boot_splash/image="uid://bc5ncwb8874wr"
 config/icon="res://icon.svg"
 
 [autoload]

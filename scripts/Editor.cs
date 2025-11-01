@@ -131,7 +131,7 @@ public partial class Editor : Control
 		};
 		SaveButton.Pressed += () =>
 		{
-			FileDialog.FileMode = FileDialog.FileModeEnum.OpenFile;
+			FileDialog.FileMode = FileDialog.FileModeEnum.SaveFile;
 			FileDialog.Show();
 		};
 		PlayButton.Pressed += PlayButtonOnPressed;
@@ -462,7 +462,7 @@ public partial class Editor : Control
 	{
 		var paths = GameManager.Singleton.LoadCarList();
 
-		GD.Print($"{paths.GetType()}");
+		//GD.Print($"{paths.GetType()}");
 
 		foreach (var carPath in paths)
 		{
