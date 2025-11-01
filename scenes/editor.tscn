@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c1rq5irkqaorb"]
+[gd_scene load_steps=32 format=3 uid="uid://c1rq5irkqaorb"]
 
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="3_j8y2p"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://c7cgy8pdtwccw" path="res://assets/godot-icons/FileBrowse.svg" id="8_74j0u"]
 [ext_resource type="Script" uid="uid://d4wjoyefkgcw" path="res://scripts/TreePopupFix.cs" id="9_j8y2p"]
 [ext_resource type="Texture2D" uid="uid://kedovh6u17wl" path="res://assets/godot-icons/Save.svg" id="9_sdh1e"]
+[ext_resource type="Theme" uid="uid://g7t3ddg3tu7f" path="res://scenes/editor/tool_panel_theme.tres" id="14_5tdu1"]
+[ext_resource type="Texture2D" uid="uid://ckprvp4bgfutw" path="res://assets/godot-icons/Eraser.svg" id="17_0u1f5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o435n"]
 bg_color = Color(0.28485027, 0.2848503, 0.28485018, 1)
@@ -63,7 +65,15 @@ unicode = 50
 [sub_resource type="Shortcut" id="Shortcut_trtic"]
 events = [SubResource("InputEventKey_kvuet")]
 
-[node name="Editor" type="Control" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "QuitButton", "OpenButton", "SaveButton", "PlayButton", "FileDialog", "ConfirmNewDialog", "ConfirmQuitDialog", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton", "HSplitContainer", "DirectoryListContainer", "OptionsTree")]
+[sub_resource type="InputEventKey" id="InputEventKey_0u1f5"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="Shortcut" id="Shortcut_8g6du"]
+events = [SubResource("InputEventKey_0u1f5")]
+
+[node name="Editor" type="Control" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "QuitButton", "OpenButton", "SaveButton", "PlayButton", "FileDialog", "ConfirmNewDialog", "ConfirmQuitDialog", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton", "HSplitContainer", "DirectoryListContainer", "OptionsTree", "EraseButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,6 +106,7 @@ EditorBlockButtonScene = ExtResource("6_j8y2p")
 HSplitContainer = NodePath("EditorUI/HSplitContainer")
 DirectoryListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/DirectoryListContainer")
 OptionsTree = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/Tree")
+EraseButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/EraseButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -230,6 +241,37 @@ physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 24, 0)
 current = true
 fov = 80.0
+
+[node name="Control" type="Control" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 71.0
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ToolContainer" type="VBoxContainer" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("14_5tdu1")
+
+[node name="EraseButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+shortcut = SubResource("Shortcut_8g6du")
+shortcut_feedback = false
+text = "Erase
+"
+icon = ExtResource("17_0u1f5")
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/HSplitContainer"]
 layout_mode = 2

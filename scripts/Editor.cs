@@ -60,6 +60,8 @@ public partial class Editor : Control
 	[Export] public Container DirectoryListContainer;
 
 	[Export] public Tree OptionsTree;
+
+	[Export] public Button EraseButton;
 	
 	[Signal]
 	public delegate void ExitedEventHandler();
@@ -137,6 +139,11 @@ public partial class Editor : Control
 		ConfirmNewDialog.Confirmed += ConfirmNewDialogOnConfirmed;
 		ConfirmQuitDialog.Confirmed += ConfirmQuitDialogOnConfirmed;
 		FileDialog.FileSelected += FileDialogOnFileSelected;
+
+		EraseButton.Toggled += (on) =>
+		{
+			_mode = on ? Mode.Erase : Mode.Normal;
+		};
 
 		SetGridSizeSetting(3);
 		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
@@ -233,10 +240,6 @@ public partial class Editor : Control
 
 	public override void _Process(double delta)
 	{
-		_mode = Mode.Normal;
-		if (Input.IsActionPressed("editor_erase"))
-			_mode = Mode.Erase;
-		
 		UpdateCamera((float) delta);
 
 		_cursor.GlobalPosition = GetGridMousePosition();
