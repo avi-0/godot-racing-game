@@ -41,10 +41,6 @@ public partial class Editor : Control
 	
 	[Export] public ConfirmationDialog ConfirmQuitDialog;
 
-	[Export] public Control CarSelect;
-
-	[Export] public Container CarSelectContainer;
-
 	[Export] public Control EditorUINode;
 
 	[Export] public LineEdit GridSizeLabel;
@@ -93,8 +89,6 @@ public partial class Editor : Control
 		{
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
 			Visible = value;
-			
-			CarSelect.Visible = false;
 
 			if (value)
 			{
@@ -156,10 +150,8 @@ public partial class Editor : Control
 		CreateCursor();
 		
 		SetDirectory("/");
-
-		SetupOptions();
-	
-		LoadCarList();
+		
+		OptionsTree.ItemEdited += OptionEdited;
 	}
 
 	private void HSplitContainerOnDragged(long offset)
@@ -182,14 +174,19 @@ public partial class Editor : Control
 
 	private void ConfirmNewDialogOnConfirmed()
 	{
+		CloseTrack();
 		GameManager.Singleton.NewTrack();
+		SetupOptions();
 	}
 	
 	private void FileDialogOnFileSelected(string path)
 	{
 		if (FileDialog.FileMode == FileDialog.FileModeEnum.OpenFile)
 		{
+			CloseTrack();
 			GameManager.Singleton.OpenTrack(path);
+			GameManager.Singleton.CurrentTrackMeta["TrackUID"] = "0";
+			SetupOptions();
 
 			foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>())
 			{
@@ -204,7 +201,7 @@ public partial class Editor : Control
 
 	private void PlayButtonOnPressed()
 	{
-		CarSelect.Visible = true;
+		PlayButtonOnPressedAsync().Forget();
 	}
 
 	private async GDTaskVoid PlayButtonOnPressedAsync()
@@ -457,30 +454,6 @@ public partial class Editor : Control
 		
 		CreateCursor();
 	}
-
-	private void LoadCarList()
-	{
-		var paths = GameManager.Singleton.LoadCarList();
-
-		//GD.Print($"{paths.GetType()}");
-
-		foreach (var carPath in paths)
-		{
-			var button = new Button();
-			button.CustomMinimumSize = 64 * Vector2.One;
-			button.Text = carPath;
-			button.Pressed += () => OnCarButtonPressed(carPath);
-
-			CarSelectContainer.AddChild(button);
-		}
-	}
-
-	private void OnCarButtonPressed(string carPath)
-	{
-		CarSelect.Visible = false;
-		GameManager.Singleton.SelectCarScene(carPath);
-		PlayButtonOnPressedAsync().Forget();
-	}
 	
 	private void ConfirmQuitDialogOnConfirmed()
 	{
@@ -534,24 +507,74 @@ public partial class Editor : Control
 		}
 	}
 	
-	private void SetupOptions()
+	public void SetupOptions()
 	{
+		OptionsTree.Clear();
 		var root = OptionsTree.CreateItem();
 		
 		var trackName = OptionsTree.CreateItem(root);
-		trackName.SetText(0, "Track Name");
-		trackName.SetText(1, "hello world");
+		trackName.SetText(0, "TrackName");
+		trackName.SetText(1, GameManager.Singleton.CurrentTrackMeta["TrackName"]);
 		trackName.SetEditable(1, true);
-
+		
+		var authorName = OptionsTree.CreateItem(root);
+		authorName.SetText(0, "AuthorName");
+		authorName.SetText(1, GameManager.Singleton.CurrentTrackMeta["AuthorName"]);
+		authorName.SetEditable(1, true);
+		
+		var mapType = OptionsTree.CreateItem(root);
+		mapType.SetText(0, "MapType");
+		mapType.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		mapType.SetText(1, GameManager.Singleton.CurrentTrackMeta["MapType"]);
+		mapType.SetEditable(1, true);
+		
 		var carType = OptionsTree.CreateItem(root);
-		carType.SetText(0, "Car Type");
+		carType.SetText(0, "CarType");
 		carType.SetCellMode(1, TreeItem.TreeCellMode.Range);
-		carType.SetText(1, "hatchback,sport,taxi"); // тут что-то курили
+		
+		var paths = GameManager.Singleton.LoadCarList();
+		foreach (var carPath in paths)
+		{
+			carType.SetText(1, carType.GetText(1)+carPath+",");
+		}
+		carType.SetText(1, carType.GetText(1).Trim(','));
 		carType.SetEditable(1, true);
 		
 		var piztadost = OptionsTree.CreateItem(root);
-		piztadost.SetText(0, "pizdatost");
+		piztadost.SetText(0, "LapsCount");
 		piztadost.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		piztadost.SetRange(1, GameManager.Singleton.CurrentTrackMeta["LapsCount"].ToInt());
 		piztadost.SetEditable(1, true);
+	}
+
+	public void OptionEdited()
+	{
+		var editedItem = OptionsTree.GetEdited();
+		var editedColumn = OptionsTree.GetEditedColumn();
+		
+		switch (editedItem.GetText(0))
+		{
+			case "TrackName":
+				GameManager.Singleton.CurrentTrackMeta["TrackName"] = editedItem.GetText(editedColumn);
+				break;
+			case "AuthorName":
+				GameManager.Singleton.CurrentTrackMeta["AuthorName"] = editedItem.GetText(editedColumn);
+				break;
+			case "MapType":
+				GameManager.Singleton.CurrentTrackMeta["MapType"] = editedItem.GetText(editedColumn);
+				break;
+			case "CarType":
+				GameManager.Singleton.CurrentTrackMeta["CarType"] = editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				GD.Print(GameManager.Singleton.CurrentTrackMeta["CarType"]);
+				break;
+			case "LapsCount":
+				GameManager.Singleton.CurrentTrackMeta["LapsCount"] = editedItem.GetRange(editedColumn).ToString();
+				break;
+		}
+	}
+
+	private void CloseTrack()
+	{
+		
 	}
 }

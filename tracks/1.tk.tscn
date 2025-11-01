@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/game/track_world_environment.tscn" id="1_mhtg1"]
+[ext_resource type="Environment" path="res://scenes/game/track_environment.tres" id="2_lvoj4"]
+[ext_resource type="PackedScene" path="res://scenes/game/track_base.tscn" id="3_bkr27"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-straight.tscn" id="4_sa5ko"]
+[ext_resource type="Script" path="res://scripts/Block.cs" id="5_if2yd"]
+[ext_resource type="PackedScene" path="res://blocks/func/_scenes/func-finish.tscn" id="6_xuurv"]
+[ext_resource type="PackedScene" path="res://blocks/func/_scenes/func-start.tscn" id="7_o06c7"]
+[ext_resource type="PackedScene" path="res://blocks/func/_scenes/func-checkpoint.tscn" id="8_tawn4"]
+[ext_resource type="PackedScene" path="res://blocks/road/_scenes/road-bend.tscn" id="9_ig6y2"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_uk1mk"]
+
+[sub_resource type="Compositor" id="Compositor_uk1mk"]
+
+[node name="Track" type="Node3D"]
+physics_interpolation_mode = 2
+metadata/TrackUID = "096930b3-3d6f-4c98-b1a9-ee3a7568c3e1"
+metadata/TrackName = "Taxi MultiLap"
+metadata/AuthorName = "Avondale"
+metadata/CarType = "taxi.tscn"
+metadata/LapsCount = "3"
+metadata/MapType = "Race"
+metadata/AuthorTime = "18940"
+
+[node name="TrackWorldEnvironment" type="WorldEnvironment" parent="." instance=ExtResource("1_mhtg1")]
+environment = ExtResource("2_lvoj4")
+camera_attributes = SubResource("CameraAttributesPhysical_uk1mk")
+compositor = SubResource("Compositor_uk1mk")
+
+[node name="TrackBase" type="Node3D" parent="." instance=ExtResource("3_bkr27")]
+
+[node name="road-straight" type="Node3D" parent="." instance=ExtResource("4_sa5ko")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8, 0, -24)
+script = ExtResource("5_if2yd")
+
+[node name="@Node3D@319" type="Node3D" parent="." instance=ExtResource("4_sa5ko")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, 8, 0, -24)
+script = ExtResource("5_if2yd")
+
+[node name="@Node3D@320" type="Node3D" parent="." instance=ExtResource("4_sa5ko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+script = ExtResource("5_if2yd")
+
+[node name="@Node3D@321" type="Node3D" parent="." instance=ExtResource("4_sa5ko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+script = ExtResource("5_if2yd")
+
+[node name="func-finish" type="Node3D" parent="." instance=ExtResource("6_xuurv")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -8, 0, -28)
+script = ExtResource("5_if2yd")
+IsFinish = true
+
+[node name="func-start" type="Node3D" parent="." node_paths=PackedStringArray("SpawnPointNode") instance=ExtResource("7_o06c7")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, -8, 0, -20)
+script = ExtResource("5_if2yd")
+IsStart = true
+SpawnPointNode = NodePath("startSpawnPoint")
+
+[node name="func-checkpoint" type="Node3D" parent="." node_paths=PackedStringArray("SpawnPointNode") instance=ExtResource("8_tawn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+script = ExtResource("5_if2yd")
+IsCheckpoint = true
+SpawnPointNode = NodePath("spawnpoint")
+
+[node name="@Node3D@325" type="Node3D" parent="." node_paths=PackedStringArray("SpawnPointNode") instance=ExtResource("8_tawn4")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, -24)
+script = ExtResource("5_if2yd")
+IsCheckpoint = true
+SpawnPointNode = NodePath("spawnpoint")
+
+[node name="@Node3D@326" type="Node3D" parent="." node_paths=PackedStringArray("SpawnPointNode") instance=ExtResource("8_tawn4")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -16)
+script = ExtResource("5_if2yd")
+IsCheckpoint = true
+SpawnPointNode = NodePath("spawnpoint")
+
+[node name="road-bend" type="Node3D" parent="." instance=ExtResource("9_ig6y2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8, 0, -32)
+script = ExtResource("5_if2yd")
+
+[node name="@Node3D@387" type="Node3D" parent="." instance=ExtResource("9_ig6y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -32)
+script = ExtResource("5_if2yd")
+
+[node name="@Node3D@388" type="Node3D" parent="." instance=ExtResource("9_ig6y2")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, -16)
+script = ExtResource("5_if2yd")
+
+[node name="@Node3D@389" type="Node3D" parent="." instance=ExtResource("9_ig6y2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -8, 0, -16)
+script = ExtResource("5_if2yd")

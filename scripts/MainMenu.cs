@@ -21,9 +21,10 @@ public partial class MainMenu : Control
 
 		foreach (var trackPath in trackList)
 		{
+			var trackMeta = GameManager.Singleton.GetTrackMetadata(CampTracksPath+trackPath);
 			var button = new Button();
 			button.CustomMinimumSize = 64 * Vector2.One;
-			button.Text = trackPath;
+			button.Text = trackMeta["TrackName"];
 			button.Pressed += () => OpenTrack(CampTracksPath+trackPath);
 
 			TrackContainer.AddChild(button);
@@ -77,7 +78,8 @@ public partial class MainMenu : Control
 
 		GameManager.Singleton.NewTrack();
 		Editor.Singleton.IsRunning = true;
-
+		Editor.Singleton.SetupOptions();
+		
 		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
 
 		Visible = true;

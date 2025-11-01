@@ -11,6 +11,7 @@ public class GameModeTimeAttack : IGameMode
     private TimeAttackMap _currentTrack;
 
     private bool _running = false;
+    private bool _inEditor = false;
     public void Running(bool running) {this._running = running;}
     public bool Running() {return _running;}
 
@@ -58,12 +59,31 @@ public class GameModeTimeAttack : IGameMode
         }	
     }
     
-    
     public void InitTrack(Node3D trackNode)
     {
-        _currentTrack = new TimeAttackMap(trackNode);
+        _currentTrack = new TimeAttackMap(GameManager.Singleton.CurrentTrackMeta["TrackUID"], trackNode);
         _players = new List<TimeAttackPlayer>();
 
+        if (_currentTrack.TrackUID == "0")
+        {
+            _inEditor = true;
+        }
+        else
+        {
+            _inEditor = false;
+        }
+
+        if (GameManager.Singleton.CurrentTrackMeta.ContainsKey("AuthorTime"))
+        {
+            _currentTrack.AuthorTime = GameManager.Singleton.CurrentTrackMeta["AuthorTime"].ToInt();
+        }
+        else
+        {
+            _currentTrack.AuthorTime = 0;
+        }
+        
+        GameManager.Singleton.SelectCarScene(GameManager.Singleton.CurrentTrackMeta["CarType"]);
+        
         var blockCount = 0;
         foreach (var block in trackNode.FindChildren("*", "Block", false).Cast<Block>())
         {
@@ -80,8 +100,15 @@ public class GameModeTimeAttack : IGameMode
                 block.CarEntered += PlayerAttemptFinish;
             }
         }
-        
         GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
+
+        _currentTrack.MapType = GameManager.Singleton.CurrentTrackMeta["MapType"];
+        _currentTrack.TrackName = GameManager.Singleton.CurrentTrackMeta["TrackName"];
+        _currentTrack.AuthorName = GameManager.Singleton.CurrentTrackMeta["AuthorName"];
+        GameModeController.Utils.SetTrackInfo(_currentTrack.TrackName, _currentTrack.AuthorName);
+        
+        _currentTrack.LapsCount = GameManager.Singleton.CurrentTrackMeta["LapsCount"].ToInt();
+        GameModeController.Utils.SetLapsCount(0, _currentTrack.LapsCount);
     }
 
     public int SpawnPlayer(bool localPlayer, Car playerCar)
@@ -95,7 +122,16 @@ public class GameModeTimeAttack : IGameMode
         
         if (player.LocalPlayer)
         {
-            TimeSpan LoadedPB = GameModeController.Utils.LoadUserPB(GameManager.Singleton.GetLoadedTrackUID());
+            TimeSpan LoadedPB = TimeSpan.Zero;
+            if (!_inEditor)
+            {
+                LoadedPB = GameModeController.Utils.LoadUserPB(_currentTrack.TrackUID);
+            }
+            else
+            {
+                LoadedPB = new TimeSpan(0,0,0,0,_currentTrack.AuthorTime);
+            }
+            
             if (LoadedPB != TimeSpan.Zero)
             {
                 player.PbTime = LoadedPB;
@@ -116,6 +152,7 @@ public class GameModeTimeAttack : IGameMode
         player.SpawnTime = DateTime.Now;
         player.RaceStartTime = new DateTime();
         player.CheckPointsCollected = new List<int>();
+        player.LapsDone = 0;
         player.InGame = true;
 
         if (player.LocalPlayer)
@@ -138,11 +175,25 @@ public class GameModeTimeAttack : IGameMode
     private void PlayerAttemptFinish(Car playerCar, int BlockID)
     {
         int playerId = playerCar.PlayerID;
+        var player = _players[playerId];
         
-        if (_players[playerId].InGame && _players[playerId].CheckPointsCollected.Count == _currentTrack.CheckPointCount)
+        if (player.InGame && player.CheckPointsCollected.Count == _currentTrack.CheckPointCount)
         {
-            PlayerFinished(playerId);
+            if (player.LapsDone < _currentTrack.LapsCount)
+            {
+                player.CheckPointsCollected = new List<int>();
+                player.LapsDone++;
+                GameModeController.Utils.SetLapsCount(player.LapsDone, _currentTrack.LapsCount);
+                GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
+            }
+            
+            if (player.LapsDone >= _currentTrack.LapsCount)
+            {
+                player = PlayerFinished(player);
+            }
         }
+
+        _players[playerId] = player;
     }
 
     private void PlayerEnterCheckPoint(Car playerCar, int BlockID)
@@ -161,16 +212,13 @@ public class GameModeTimeAttack : IGameMode
         _players[playerCar.PlayerID] = player;
     }
 
-    private void PlayerFinished(int playerId)
+    private TimeAttackPlayer PlayerFinished(TimeAttackPlayer player)
     {
-        var player = _players[playerId];
-
         player.InGame = false;
         player.PlayerCar.AcceptsInputs = false;
 
-
         var isPb = false;
-        if (player.PbTime.TotalMilliseconds == 0 || TimeSpan.Compare(player.PbTime, player.CurrentRaceTime) == 1)
+        if (player.PbTime == TimeSpan.Zero || player.PbTime.TotalMilliseconds > player.CurrentRaceTime.TotalMilliseconds)
         {
             isPb = true;
 
@@ -179,10 +227,21 @@ public class GameModeTimeAttack : IGameMode
             {
                 GameModeController.Utils.UpdateLocalPb(player.PbTime);
                 GameModeController.Utils.SaveUserPB(player.PbTime, GameManager.Singleton.GetLoadedTrackUID());
+
+                if (_inEditor)
+                {
+                    SetAuthorTime((int)player.CurrentRaceTime.TotalMilliseconds);
+                }
             }
         }
-        GameModeController.Utils.OpenFinishWindow(player.CurrentRaceTime, isPb);
+        GameModeController.Utils.OpenFinishWindow(player.CurrentRaceTime, isPb, _inEditor);
 
-        _players[playerId] = player;
+        return player;
+    }
+
+    private void SetAuthorTime(int ms)
+    {
+        _currentTrack.AuthorTime = ms;
+        GameManager.Singleton.CurrentTrackMeta["AuthorTime"] = ms.ToString();
     }
 }

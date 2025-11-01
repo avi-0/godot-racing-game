@@ -27,7 +27,7 @@ BlockPlacedSound = ExtResource("2_5jirj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "RaceUi", "TimeLabel", "SpeedLabel", "PbLabel", "StartTimerLabel", "CheckPointLabel", "FinishPanel", "FinishTimeLabel")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "RaceUi", "TimeLabel", "SpeedLabel", "PbLabel", "StartTimerLabel", "CheckPointLabel", "LapsLabel", "TrackInfoLabel", "FinishPanel", "FinishTimeLabel")]
 script = ExtResource("3_vaxfo")
 TrackTemplatePath = "res://scenes/game/track_template.tscn"
 CarScene = ExtResource("4_ftsea")
@@ -40,6 +40,8 @@ SpeedLabel = NodePath("RaceUI/SpeedLabel")
 PbLabel = NodePath("RaceUI/PersonalBest")
 StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
 CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
+LapsLabel = NodePath("RaceUI/LapsLabel")
+TrackInfoLabel = NodePath("RaceUI/TrackInfo")
 FinishPanel = NodePath("RaceUI/FinishPanel")
 FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")
 
@@ -88,11 +90,20 @@ theme_override_font_sizes/font_size = 96
 text = "0"
 vertical_alignment = 2
 
+[node name="TrackInfo" type="Label" parent="GameManager/RaceUI"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 1336.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 28
+text = "TrackName"
+
 [node name="PersonalBest" type="Label" parent="GameManager/RaceUI"]
 layout_mode = 1
 offset_left = 16.0
+offset_top = 36.0
 offset_right = 1336.0
-offset_bottom = 72.0
+offset_bottom = 108.0
 theme_override_font_sizes/font_size = 48
 text = "PB: "
 
@@ -130,6 +141,20 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "0/0"
+vertical_alignment = 1
+
+[node name="LapsLabel" type="Label" parent="GameManager/RaceUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -211.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = 71.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Laps: 0/0"
 vertical_alignment = 1
 
 [node name="FinishPanel" type="PanelContainer" parent="GameManager/RaceUI"]

@@ -23,12 +23,40 @@ public class GameModeUtils
         GameManager.Singleton.PbLabel.Text = "PB: " + newPb.ToString("mm") + ":" + newPb.ToString("ss") + "." + newPb.ToString("fff");
     }	
 
-    public void OpenFinishWindow(TimeSpan finishTime, bool isPb)
+    public void OpenFinishWindow(TimeSpan finishTime, bool isPb, bool isEditor)
     {
         GameManager.Singleton.FinishTimeLabel.Text = "Race Time: " + finishTime.ToString("mm") + ":" + finishTime.ToString("ss") + "." + finishTime.ToString("fff");
         if (isPb)
         {
-            GameManager.Singleton.FinishTimeLabel.Text += "\nPersonal Best!!!";
+            if (!isEditor)
+            {
+                GameManager.Singleton.FinishTimeLabel.Text += "\nPersonal Best!!!";
+            }
+            else
+            {
+                GameManager.Singleton.FinishTimeLabel.Text += "\nNew Author Time!!!";
+            }
+        }
+
+        if (!isEditor)
+        {
+            var AT = GameManager.Singleton.CurrentTrackMeta["AuthorTime"].ToInt();
+            if (finishTime.TotalMilliseconds <= AT)
+            {
+                GameManager.Singleton.FinishTimeLabel.Text += "\nDiamond Medal!!!!";
+            }
+            else if (finishTime.TotalMilliseconds <= GetGoldFromAT(AT))
+            {
+                GameManager.Singleton.FinishTimeLabel.Text += "\nGold Medal!!!";
+            }
+            else if (finishTime.TotalMilliseconds <= GetSilverFromAT(AT))
+            {
+                GameManager.Singleton.FinishTimeLabel.Text += "\nSilver Medal!!";
+            }
+            else if (finishTime.TotalMilliseconds <= GetBronzeFromAT(AT))
+            {
+                GameManager.Singleton.FinishTimeLabel.Text += "\nBronze Medal!";
+            }
         }
 
         GameManager.Singleton.FinishPanel.Show();
@@ -59,6 +87,30 @@ public class GameModeUtils
             GameManager.Singleton.CheckPointLabel.Text = current + "/" + total;
         }
     }
+
+    public void SetLapsCount(int current, int total)
+    {
+        if (total == 0)
+        {
+            GameManager.Singleton.LapsLabel.Text = "";
+        }
+        else
+        {
+            GameManager.Singleton.LapsLabel.Text = "Laps: " + current + "/" + total;
+        }
+    }
+
+    public void SetTrackInfo(string TrackName, string AuthorName)
+    {
+        if (TrackName != "")
+        {
+            GameManager.Singleton.TrackInfoLabel.Text = TrackName + " by " + AuthorName;
+        }
+        else
+        {
+            GameManager.Singleton.TrackInfoLabel.Text = "";
+        }
+    }
     
     public void UnloadLocalStats()
     {
@@ -66,7 +118,26 @@ public class GameModeUtils
         UpdateLocalRaceTime(TimeSpan.Zero);
         SetStartTimer(0);
         SetCheckPointCount(0,0);
+        SetLapsCount(0,0);
+        SetTrackInfo("", "");
     }
+    //----//
+    
+    //TRACK INFO
+    public int GetGoldFromAT(int ms)
+    {
+        return Mathf.FloorToInt(ms * 1.2);
+    }
+    
+    public int GetSilverFromAT(int ms)
+    {
+        return Mathf.FloorToInt(ms * 1.6);
+    }    
+    
+    public int GetBronzeFromAT(int ms)
+    {
+        return Mathf.FloorToInt(ms * 2.0);
+    }    
     //----//
     
     //PLAYER SAVES//
