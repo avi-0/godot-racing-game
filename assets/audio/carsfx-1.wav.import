@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://pg86qjlo7cjf"
-path="res://.godot/imported/carsfx-1.wav-9deb01f1e32e432f0fa39ba2b054888e.sample"
+path="res://.godot/imported/carsfx-1.wav-d9720f3daedddcd63fca3408eef21986.sample"
 
 [deps]
 
-source_file="res://assets/carsfx-1.wav"
-dest_files=["res://.godot/imported/carsfx-1.wav-9deb01f1e32e432f0fa39ba2b054888e.sample"]
+source_file="res://assets/audio/carsfx-1.wav"
+dest_files=["res://.godot/imported/carsfx-1.wav-d9720f3daedddcd63fca3408eef21986.sample"]
 
 [params]
 

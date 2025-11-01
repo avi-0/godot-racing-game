@@ -1,9 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=24 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_kp23o"]
-[ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/click_001.ogg" id="2_5jirj"]
+[ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_5jirj"]
+[ext_resource type="Script" uid="uid://bl5cpfcp361n1" path="res://scripts/UiSound.cs" id="3_5jirj"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="3_vaxfo"]
+[ext_resource type="AudioStream" uid="uid://cbh2o7irh5lmy" path="res://assets/audio/ui/switch_004.ogg" id="4_3xj4h"]
 [ext_resource type="PackedScene" uid="uid://b5kxpk7e7n6ri" path="res://scenes/cars/hatchback.tscn" id="4_ftsea"]
+[ext_resource type="AudioStream" uid="uid://c11gwvvxqgkr" path="res://assets/audio/ui/select_001.ogg" id="4_otnwt"]
+[ext_resource type="AudioStream" uid="uid://b2kvcbs1acbcs" path="res://assets/audio/ui/toggle_002.ogg" id="5_3xj4h"]
 [ext_resource type="Script" uid="uid://ctqoofbnioxhi" path="res://scripts/GameModeController.cs" id="5_otnwt"]
 [ext_resource type="Theme" uid="uid://cqn7x347w3gke" path="res://scenes/game/hud_theme.tres" id="6_3xj4h"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="7_5v6r0"]
@@ -11,6 +15,42 @@
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu/main_menu.tscn" id="9_10c2w"]
 [ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/game/pause_menu.tscn" id="10_pg2xm"]
 [ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/game/settings_menu.tscn" id="11_gc57s"]
+
+[sub_resource type="Resource" id="Resource_ftsea"]
+script = ExtResource("3_5jirj")
+AudioStream = ExtResource("2_5jirj")
+PitchScale = 0.8
+VolumeDb = -3.0
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_vaxfo"]
+script = ExtResource("3_5jirj")
+AudioStream = ExtResource("2_5jirj")
+VolumeDb = -3.0
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_10c2w"]
+script = ExtResource("3_5jirj")
+AudioStream = ExtResource("4_3xj4h")
+PitchScale = 1.1219999999999999
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_otnwt"]
+script = ExtResource("3_5jirj")
+AudioStream = ExtResource("4_3xj4h")
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_5v6r0"]
+script = ExtResource("3_5jirj")
+AudioStream = ExtResource("4_otnwt")
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_uyinl"]
+script = ExtResource("3_5jirj")
+AudioStream = ExtResource("5_3xj4h")
+PitchScale = 0.6
+VolumeDb = -6.0
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
 [sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
 action = &"ui_accept"
@@ -22,28 +62,33 @@ events = [SubResource("InputEventAction_vtaks")]
 
 [node name="UISoundPlayer" type="Node" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("1_kp23o")
+BlockErasedSound = SubResource("Resource_ftsea")
+BlockPlacedSound = SubResource("Resource_vaxfo")
+CheckpointCollectedSound = SubResource("Resource_10c2w")
+LapFinishedSound = SubResource("Resource_otnwt")
 Player = NodePath("AudioStreamPlayer")
-BlockPlacedSound = ExtResource("2_5jirj")
+RaceCountDownSound = SubResource("Resource_5v6r0")
+RaceStartSound = SubResource("Resource_uyinl")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "TrackNode", "RaceUi", "TimeLabel", "SpeedLabel", "PbLabel", "StartTimerLabel", "CheckPointLabel", "LapsLabel", "TrackInfoLabel", "FinishPanel", "FinishTimeLabel")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "PauseMenu", "PbLabel", "RaceUi", "SettingsMenu", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "TrackNode")]
 script = ExtResource("3_vaxfo")
-TrackTemplatePath = "res://scenes/game/track_template.tscn"
 CarScene = ExtResource("4_ftsea")
-PauseMenu = NodePath("../PauseMenu")
-SettingsMenu = NodePath("../SettingsMenu")
-TrackNode = NodePath("Track")
-RaceUi = NodePath("RaceUI")
-TimeLabel = NodePath("RaceUI/TimeLabel")
-SpeedLabel = NodePath("RaceUI/SpeedLabel")
-PbLabel = NodePath("RaceUI/PersonalBest")
-StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
 CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
-LapsLabel = NodePath("RaceUI/LapsLabel")
-TrackInfoLabel = NodePath("RaceUI/TrackInfo")
 FinishPanel = NodePath("RaceUI/FinishPanel")
 FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")
+LapsLabel = NodePath("RaceUI/LapsLabel")
+PauseMenu = NodePath("../PauseMenu")
+PbLabel = NodePath("RaceUI/PersonalBest")
+RaceUi = NodePath("RaceUI")
+SettingsMenu = NodePath("../SettingsMenu")
+SpeedLabel = NodePath("RaceUI/SpeedLabel")
+StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
+TimeLabel = NodePath("RaceUI/TimeLabel")
+TrackInfoLabel = NodePath("RaceUI/TrackInfo")
+TrackNode = NodePath("Track")
+TrackTemplatePath = "res://scenes/game/track_template.tscn"
 
 [node name="GameMode" type="Node" parent="GameManager"]
 script = ExtResource("5_otnwt")
@@ -148,14 +193,13 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -211.0
-offset_top = 4.0
-offset_right = -3.0
-offset_bottom = 71.0
+offset_left = -224.0
+offset_right = -16.0
+offset_bottom = 67.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 48
 text = "Laps: 0/0"
-vertical_alignment = 1
+horizontal_alignment = 2
 
 [node name="FinishPanel" type="PanelContainer" parent="GameManager/RaceUI"]
 layout_mode = 1

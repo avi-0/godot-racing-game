@@ -9,15 +9,18 @@ public class GameModeUtils
 
 	//PLAYER SAVES//
 	private const string SavePbPath = "user://userdata.mdat";
+	//----//
+
+	//--UI--//
+
+	private int _startTime = -1;
 
 	//--GAMEMODE SELECTION--//
 	public void TimeAttack()
 	{
 		GameModeController.CurrentGameMode = new GameModeTimeAttack();
 	}
-	//----//
 
-	//--UI--//
 	public void UpdateLocalRaceTime(TimeSpan raceTime)
 	{
 		GameManager.Singleton.TimeLabel.Text =
@@ -59,8 +62,21 @@ public class GameModeUtils
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
-	public void SetStartTimer(int time)
+	public void SetStartTimer(int time, bool playSound = true)
 	{
+		if (_startTime != time)
+		{
+			_startTime = time;
+
+			if (playSound)
+			{
+				if (time == 0)
+					UiSoundPlayer.Singleton.RaceStartSound.Play();
+				else
+					UiSoundPlayer.Singleton.RaceCountDownSound.Play();
+			}
+		}
+
 		if (time > 0)
 		{
 			GameManager.Singleton.StartTimerLabel.Show();
@@ -85,7 +101,7 @@ public class GameModeUtils
 		if (total == 0)
 			GameManager.Singleton.LapsLabel.Text = "";
 		else
-			GameManager.Singleton.LapsLabel.Text = "Laps: " + current + "/" + total;
+			GameManager.Singleton.LapsLabel.Text = $"Lap {current + 1}/{total}";
 	}
 
 	public void SetTrackInfo(string trackName, string authorName)
@@ -100,7 +116,7 @@ public class GameModeUtils
 	{
 		GameManager.Singleton.PbLabel.Text = "PB: ";
 		UpdateLocalRaceTime(TimeSpan.Zero);
-		SetStartTimer(0);
+		SetStartTimer(0, false);
 		SetCheckPointCount(0, 0);
 		SetLapsCount(0, 0);
 		SetTrackInfo("", "");

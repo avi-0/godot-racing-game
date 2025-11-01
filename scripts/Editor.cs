@@ -282,7 +282,7 @@ public partial class Editor : Control
 		_cursor.Owner = TrackNode;
 		ConnectBlockSignals(_cursor);
 
-		UiSoundPlayer.Singleton.PlayBlockPlaced();
+		UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 
 		_cursor = null;
 		CreateCursor();
@@ -398,7 +398,7 @@ public partial class Editor : Control
 		{
 			EraseBlock(_hoveredBlock);
 
-			UiSoundPlayer.Singleton.PlayBlockPlaced(0.8f);
+			UiSoundPlayer.Singleton.BlockErasedSound.Play();
 		}
 	}
 

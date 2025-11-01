@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwmxm5gl3jjr3" path="res://scripts/Car.cs" id="1_jxqfv"]
 [ext_resource type="Texture2D" uid="uid://daf5s5qv3u3b2" path="res://assets/kenney/carkit/Textures/colormap.png" id="3_16v8s"]
-[ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/carsfx.wav" id="3_mk5fm"]
+[ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/audio/carsfx.wav" id="3_mk5fm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]
 bounce = 0.5

@@ -120,10 +120,14 @@ public partial class Car : VehicleBody3D
 		);
 
 		float targetSteering = 0;
-		if (Input.IsActionPressed("steer_left"))
-			targetSteering += 1;
-		if (Input.IsActionPressed("steer_right"))
-			targetSteering -= 1;
+		if (AcceptsInputs)
+		{
+			if (Input.IsActionPressed("steer_left"))
+				targetSteering += 1;
+			if (Input.IsActionPressed("steer_right"))
+				targetSteering -= 1;
+		}
+
 		targetSteering *= Mathf.DegToRad(SpeedToSteeringCurve.Sample(Mathf.Abs(speediness)));
 		Steering = Mathf.MoveToward(Steering, targetSteering, Mathf.DegToRad(SteeringSpeed) * (float)delta);
 

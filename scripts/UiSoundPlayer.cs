@@ -8,9 +8,25 @@ public partial class UiSoundPlayer : Node
 
 	private AudioStreamPlaybackPolyphonic _playback;
 
-	[Export] public AudioStream BlockPlacedSound;
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound BlockErasedSound;
+
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound BlockPlacedSound;
+
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound CheckpointCollectedSound;
+
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound LapFinishedSound;
 
 	[Export] public AudioStreamPlayer Player;
+
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound RaceCountDownSound;
+
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound RaceStartSound;
 
 	public override void _Ready()
 	{
@@ -25,8 +41,8 @@ public partial class UiSoundPlayer : Node
 		_playback = Player.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
 	}
 
-	public void PlayBlockPlaced(float pitchScale = 1f)
+	public void Play(UiSound sound)
 	{
-		_playback.PlayStream(BlockPlacedSound, volumeDb: -3f, pitchScale: pitchScale);
+		_playback.PlayStream(sound.AudioStream, volumeDb: sound.VolumeDb, pitchScale: sound.PitchScale);
 	}
 }

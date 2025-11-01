@@ -173,15 +173,20 @@ public class GameModeTimeAttack : IGameMode
 
 		if (player.InGame && player.CheckPointsCollected.Count == _currentTrack.CheckPointCount)
 		{
+			player.LapsDone++;
+
 			if (player.LapsDone < _currentTrack.LapsCount)
 			{
 				player.CheckPointsCollected = new List<int>();
-				player.LapsDone++;
 				GameModeController.Utils.SetLapsCount(player.LapsDone, _currentTrack.LapsCount);
 				GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
 			}
+			else
+			{
+				player = PlayerFinished(player);
+			}
 
-			if (player.LapsDone >= _currentTrack.LapsCount) player = PlayerFinished(player);
+			UiSoundPlayer.Singleton.LapFinishedSound.Play();
 		}
 
 		_players[playerId] = player;
@@ -195,8 +200,11 @@ public class GameModeTimeAttack : IGameMode
 		{
 			player.CheckPointsCollected.Add(blockId);
 			if (player.LocalPlayer)
+			{
 				GameModeController.Utils.SetCheckPointCount(player.CheckPointsCollected.Count,
 					_currentTrack.CheckPointCount);
+				UiSoundPlayer.Singleton.CheckpointCollectedSound.Play();
+			}
 		}
 
 		_players[playerCar.PlayerId] = player;
