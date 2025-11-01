@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace racingGame;
@@ -33,6 +34,8 @@ public partial class GameManager : Node
 
     [Export] public PanelContainer FinishPanel;
     [Export] public Label FinishTimeLabel;
+
+    public Dictionary<string, string> CurrentTrackMeta;
     
     private bool _isPlaying = false;
 
@@ -112,6 +115,7 @@ public partial class GameManager : Node
 
         _localPlayerId = -1;
         GameModeController.CurrentGameMode.KillGame();
+        CurrentTrackMeta = null;
     }
     
     private void SetGameUiVisiblity(bool visible)
@@ -161,12 +165,9 @@ public partial class GameManager : Node
     public void SaveTrack(string path)
     {
         GD.Print($"Saving track as {path}");
-
-        if ((string)TrackNode.GetMeta("TrackUID") == "0")
-        {
-            TrackNode.SetMeta("TrackUID", Guid.NewGuid().ToString());
-            GD.Print($"New Track UID: {GetLoadedTrackUID()}");
-        }
+        
+        TrackNode.SetMeta("TrackUID", Guid.NewGuid().ToString());
+        GD.Print($"New Track UID: {GetLoadedTrackUID()}");
         
         foreach (var child in TrackNode.GetChildren())
         {
@@ -183,10 +184,30 @@ public partial class GameManager : Node
         return ResourceLoader.ListDirectory(CarsPath).ToList().Order();
     }
 
+    public Dictionary<string, string> GetTrackMetadata(string path)
+    {
+        Dictionary<string, string> returnList = new Dictionary<string, string>();
+        
+        var scenestate = ResourceLoader.Load<PackedScene>(path, cacheMode: ResourceLoader.CacheMode.Ignore).GetState();;
+        for (int propertyID = 0; propertyID < scenestate.GetNodePropertyCount(0); propertyID++)
+        {
+            string propertyName = scenestate.GetNodePropertyName(0, propertyID);
+            if (propertyName.Contains("metadata/"))
+            {
+                propertyName = propertyName.Replace("metadata/", "");
+                returnList.Add(propertyName, (string)scenestate.GetNodePropertyValue(0, propertyID));
+                GD.Print(propertyName + " " + returnList[propertyName]);
+            }
+        }
+        
+        return returnList;
+    }
     public void OpenTrack(string path)
     {
         GD.Print($"Opening track at {path}");
 
+        CurrentTrackMeta = GetTrackMetadata(path);
+        
         var trackName = path.Split("/")[path.Split("/").Length-1];
         if (LoadCarList().Contains(trackName.Split("_")[0]+".tscn"))
         {
@@ -230,6 +251,6 @@ public partial class GameManager : Node
 
     public string GetLoadedTrackUID()
     {
-        return (string)TrackNode.GetMeta("TrackUID");
+        return CurrentTrackMeta["TrackUID"];
     }
 }
