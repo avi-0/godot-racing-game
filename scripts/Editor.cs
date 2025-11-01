@@ -16,6 +16,11 @@ public partial class Editor : Control
 
 	public static Editor Singleton;
 
+	// this thing is used to ensure loaded blocks are kept in memory
+	// so that ResourceLoader's cache doesn't remove them
+	// aka it leaks memory :)
+	private readonly Dictionary<string, Resource> _blockCache = new();
+
 	private string _blockDirectory;
 	private float _cellHeight = 1;
 	private float _cellSize = 8;
@@ -134,7 +139,7 @@ public partial class Editor : Control
 
 		CreateCursor();
 
-		SetDirectory("/");
+		SetDirectory("/").Forget();
 
 		OptionsTree.ItemEdited += OptionEdited;
 	}
@@ -211,8 +216,12 @@ public partial class Editor : Control
 	{
 		return GetBlockPaths(BlockPath, dirPath)
 			.Order()
-			.Select(path => ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord"))
-			// fuck knows why the type hint doesn't work right
+			.Select(path =>
+			{
+				var res = ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord");
+				_blockCache[path] = res;
+				return res;
+			})
 			.Where(resource => resource is BlockRecord)
 			.Cast<BlockRecord>();
 	}
@@ -345,7 +354,8 @@ public partial class Editor : Control
 		if (!IsRunning)
 			return;
 
-		if (@event is InputEventKey keyEvent && keyEvent.KeyLabel == Key.X) EraseButton.SetPressed(keyEvent.Pressed);
+		if (@event is InputEventKey keyEvent && keyEvent.PhysicalKeycode == Key.X)
+			EraseButton.SetPressed(keyEvent.Pressed);
 
 		if (_mode == Mode.Normal)
 			if (@event is InputEventMouseButton mouseEvent && mouseEvent.IsPressed())
@@ -414,7 +424,7 @@ public partial class Editor : Control
 		EmitSignalExited();
 	}
 
-	private void SetDirectory(string path)
+	private async GDTaskVoid SetDirectory(string path)
 	{
 		_blockDirectory = path;
 
@@ -429,7 +439,7 @@ public partial class Editor : Control
 
 			var button = new Button();
 			button.Text = "..";
-			button.Pressed += () => SetDirectory(baseDir);
+			button.Pressed += () => SetDirectory(baseDir).Forget();
 
 			DirectoryListContainer.AddChild(button);
 		}
@@ -443,7 +453,7 @@ public partial class Editor : Control
 
 			var button = new Button();
 			button.Text = subDir;
-			button.Pressed += () => SetDirectory(subDirPath);
+			button.Pressed += () => SetDirectory(subDirPath).Forget();
 
 			DirectoryListContainer.AddChild(button);
 		}
@@ -490,11 +500,11 @@ public partial class Editor : Control
 		carType.SetText(1, carType.GetText(1).Trim(','));
 		carType.SetEditable(1, true);
 
-		var piztadost = OptionsTree.CreateItem(root);
-		piztadost.SetText(0, "LapsCount");
-		piztadost.SetCellMode(1, TreeItem.TreeCellMode.Range);
-		piztadost.SetRange(1, GameManager.Singleton.CurrentTrackMeta["LapsCount"].ToInt());
-		piztadost.SetEditable(1, true);
+		var lapsCount = OptionsTree.CreateItem(root);
+		lapsCount.SetText(0, "LapsCount");
+		lapsCount.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		lapsCount.SetRange(1, GameManager.Singleton.CurrentTrackMeta["LapsCount"].ToInt());
+		lapsCount.SetEditable(1, true);
 	}
 
 	public void OptionEdited()
