@@ -14,7 +14,8 @@ config/name="mashinki"
 config/version="0.0.1"
 run/main_scene="uid://quenom6jkxmi"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
-boot_splash/image="uid://bc5ncwb8874wr"
+boot_splash/fullsize=false
+boot_splash/image="uid://du74tb2gnkhxk"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -150,7 +151,7 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
-environment/defaults/default_clear_color=Color(0.49300006, 0.6120001, 0.85, 1)
+environment/defaults/default_clear_color=Color(0.23137255, 0.23137255, 0.24313726, 1)
 
 [xr]
 

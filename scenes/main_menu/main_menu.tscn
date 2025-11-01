@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=7 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
 [ext_resource type="Theme" uid="uid://d0edsagec8yv6" path="res://scenes/editor/editor_theme.tres" id="3_ob46e"]
+[ext_resource type="Texture2D" uid="uid://du74tb2gnkhxk" path="res://assets/mashinkilogo.png" id="3_uqeha"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
 action = &"ui_cancel"
@@ -10,7 +11,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("MenuFileDialog", "CampMenu", "TrackContainer")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("CampMenu", "MenuFileDialog", "TrackContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,27 +21,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
-MenuFileDialog = NodePath("MenuFileDialog")
 CampMenu = NodePath("CampMenu")
+MenuFileDialog = NodePath("MenuFileDialog")
 TrackContainer = NodePath("CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/trackGC")
 
-[node name="Label" type="Label" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -160.0
-offset_top = 114.0
-offset_right = 160.0
-offset_bottom = 202.0
+offset_left = -736.5
+offset_top = 24.0
+offset_right = 736.5
+offset_bottom = 320.0
 grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 64
-text = "mashinki"
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("3_uqeha")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

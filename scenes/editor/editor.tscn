@@ -65,7 +65,7 @@ unicode = 50
 [sub_resource type="Shortcut" id="Shortcut_trtic"]
 events = [SubResource("InputEventKey_kvuet")]
 
-[node name="Editor" type="Control" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "QuitButton", "OpenButton", "SaveButton", "PlayButton", "FileDialog", "ConfirmNewDialog", "ConfirmQuitDialog", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton", "HSplitContainer", "DirectoryListContainer", "OptionsTree", "EraseButton")]
+[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewport", "EraseButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,31 +74,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_o435n")
 script = ExtResource("1_5lcyj")
-CameraSpeed = 48.0
-EditorViewport = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
-Camera = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/EditorCamera")
-BlockScene = ExtResource("3_o435n")
 BlockEraseHighlightMaterial = ExtResource("3_j8y2p")
 BlockHighlightMaterial = ExtResource("4_o435n")
 BlockListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer")
-QuitButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/QuitButton")
-OpenButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/OpenButton")
-SaveButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/SaveButton")
-PlayButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/PlayButton")
-FileDialog = NodePath("FileDialog")
+BlockScene = ExtResource("3_o435n")
+Camera = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/EditorCamera")
+CameraSpeed = 48.0
 ConfirmNewDialog = NodePath("ConfirmNewDialog")
 ConfirmQuitDialog = NodePath("ConfirmQuitDialog")
-CarSelect = NodePath("CarSelect")
-CarSelectContainer = NodePath("CarSelect/GridContainer")
-EditorUINode = NodePath("EditorUI")
-GridSizeLabel = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit")
+DirectoryListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/DirectoryListContainer")
+EditorBlockButtonScene = ExtResource("6_j8y2p")
+EditorViewport = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
+EraseButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/EraseButton")
+FileDialog = NodePath("FileDialog")
 GridSizeDecButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/DecreaseButton")
 GridSizeIncButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/IncreaseButton")
-EditorBlockButtonScene = ExtResource("6_j8y2p")
+GridSizeLabel = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit")
 HSplitContainer = NodePath("EditorUI/HSplitContainer")
-DirectoryListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/DirectoryListContainer")
+OpenButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/OpenButton")
 OptionsTree = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/Tree")
-EraseButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/EraseButton")
+PlayButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/PlayButton")
+QuitButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/QuitButton")
+SaveButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/SaveButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
