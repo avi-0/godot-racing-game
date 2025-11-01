@@ -9,17 +9,30 @@ namespace racingGame;
 
 public partial class Editor : Control
 {
+	[Signal]
+	public delegate void ExitedEventHandler();
+
 	public const string BlockPath = "res://blocks/";
 
 	public static Editor Singleton;
 
-	[Export] public float CameraSpeed;
+	private string _blockDirectory;
+	private float _cellHeight = 1;
+	private float _cellSize = 8;
 
-	[Export] public EditorViewport EditorViewport;
-	
-	[Export] public Camera3D Camera;
+	private Block _cursor;
 
-	[Export] public PackedScene BlockScene;
+	private int _gridSizeSetting;
+
+	private Block _hoveredBlock;
+
+	private bool _isRunning = true;
+
+	private Mode _mode = Mode.Normal;
+
+	private int _rotation = 0;
+
+	private float _yLevel = 0;
 
 	[Export] public Material BlockEraseHighlightMaterial;
 
@@ -27,61 +40,48 @@ public partial class Editor : Control
 
 	[Export] public GridContainer BlockListContainer;
 
-	[Export] public Button QuitButton;
-	
-	[Export] public Button OpenButton;
-	
-	[Export] public Button SaveButton;
-	
-	[Export] public Button PlayButton;
+	[Export] public PackedScene BlockScene;
 
-	[Export] public FileDialog FileDialog;
+	[Export] public Camera3D Camera;
+
+	[Export] public float CameraSpeed;
 
 	[Export] public ConfirmationDialog ConfirmNewDialog;
-	
+
 	[Export] public ConfirmationDialog ConfirmQuitDialog;
-
-	[Export] public Control EditorUINode;
-
-	[Export] public LineEdit GridSizeLabel;
-
-	[Export] public Button GridSizeDecButton;
-	
-	[Export] public Button GridSizeIncButton;
-
-	[Export] public PackedScene EditorBlockButtonScene;
-
-	[Export] public HSplitContainer HSplitContainer;
 
 	[Export] public Container DirectoryListContainer;
 
-	[Export] public Tree OptionsTree;
+	[Export] public PackedScene EditorBlockButtonScene;
+
+	[Export] public EditorViewport EditorViewport;
 
 	[Export] public Button EraseButton;
-	
-	[Signal]
-	public delegate void ExitedEventHandler();
+
+	[Export] public FileDialog FileDialog;
+
+	[Export] public Button GridSizeDecButton;
+
+	[Export] public Button GridSizeIncButton;
+
+	[Export] public LineEdit GridSizeLabel;
+
+	[Export] public HSplitContainer HSplitContainer;
+
+	[Export] public Button OpenButton;
+
+	[Export] public Tree OptionsTree;
+
+	[Export] public Button PlayButton;
+
+	[Export] public Button QuitButton;
+
+	[Export] public Button SaveButton;
 
 	private Node3D TrackNode => GameManager.Singleton.TrackNode;
-	
-	private Block _cursor;
-
-	private Block _hoveredBlock;
-
-	private float _yLevel = 0;
 
 	private float YLevelRounded => _cellHeight * float.Round(_yLevel / _cellHeight);
 
-	private int _rotation = 0;
-
-	private bool _isRunning = true;
-
-	private int _gridSizeSetting;
-	private float _cellSize = 8;
-	private float _cellHeight = 1;
-
-	private string _blockDirectory;
-	
 	public bool IsRunning
 	{
 		get => _isRunning;
@@ -91,32 +91,20 @@ public partial class Editor : Control
 			Visible = value;
 
 			if (value)
-			{
 				CreateCursor();
-			}
 			else
-			{
 				DestroyCursor();
-			}
-			
+
 			_isRunning = value;
 		}
 	}
 
-	private enum Mode
-	{
-		Normal,
-		Erase,
-	}
-
-	private Mode _mode = Mode.Normal;
-
 	public override void _Ready()
 	{
 		Singleton = this;
-		
+
 		EditorViewport.Input += ViewportInput;
-		
+
 		QuitButton.Pressed += () => ConfirmQuitDialog.Show();
 		OpenButton.Pressed += () =>
 		{
@@ -129,37 +117,34 @@ public partial class Editor : Control
 			FileDialog.Show();
 		};
 		PlayButton.Pressed += PlayButtonOnPressed;
-		
+
 		ConfirmNewDialog.Confirmed += ConfirmNewDialogOnConfirmed;
 		ConfirmQuitDialog.Confirmed += ConfirmQuitDialogOnConfirmed;
 		FileDialog.FileSelected += FileDialogOnFileSelected;
 
-		EraseButton.Toggled += (on) =>
-		{
-			_mode = on ? Mode.Erase : Mode.Normal;
-		};
+		EraseButton.Toggled += on => { _mode = on ? Mode.Erase : Mode.Normal; };
 
 		SetGridSizeSetting(3);
 		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
 		GridSizeIncButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting + 1); };
-		
+
 		HSplitContainer.Dragged += HSplitContainerOnDragged;
 
 		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
-		
+
 		CreateCursor();
-		
+
 		SetDirectory("/");
-		
+
 		OptionsTree.ItemEdited += OptionEdited;
 	}
 
 	private void HSplitContainerOnDragged(long offset)
 	{
 		var width = BlockListContainer.Size.X;
-		int itemWidth = 64;
+		var itemWidth = 64;
 		var sep = BlockListContainer.GetThemeConstant("separation");
-		var columns = (int) Math.Floor((width + sep) / (itemWidth + sep));
+		var columns = (int)Math.Floor((width + sep) / (itemWidth + sep));
 		BlockListContainer.Columns = columns;
 	}
 
@@ -169,7 +154,7 @@ public partial class Editor : Control
 		_gridSizeSetting = setting;
 		_cellSize = Mathf.Pow(2, setting);
 		_cellHeight = float.Min(_cellSize, 2f);
-		GridSizeLabel.Text = _cellSize.ToString();
+		GridSizeLabel.Text = _cellSize.ToString(CultureInfo.InvariantCulture);
 	}
 
 	private void ConfirmNewDialogOnConfirmed()
@@ -178,7 +163,7 @@ public partial class Editor : Control
 		GameManager.Singleton.NewTrack();
 		SetupOptions();
 	}
-	
+
 	private void FileDialogOnFileSelected(string path)
 	{
 		if (FileDialog.FileMode == FileDialog.FileModeEnum.OpenFile)
@@ -188,10 +173,7 @@ public partial class Editor : Control
 			GameManager.Singleton.CurrentTrackMeta["TrackUID"] = "0";
 			SetupOptions();
 
-			foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>())
-			{
-				ConnectBlockSignals(block);
-			}
+			foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>()) ConnectBlockSignals(block);
 		}
 		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
 		{
@@ -215,7 +197,7 @@ public partial class Editor : Control
 		IsRunning = true;
 	}
 
-	private IEnumerable<String> GetBlockPaths(string basePath, string dirPath = "")
+	private IEnumerable<string> GetBlockPaths(string basePath, string dirPath = "")
 	{
 		foreach (var path in ResourceLoader.ListDirectory(basePath + dirPath).ToList().Order())
 		{
@@ -225,9 +207,9 @@ public partial class Editor : Control
 		}
 	}
 
-	private IEnumerable<BlockRecord> GetBlockRecords(string path)
+	private IEnumerable<BlockRecord> GetBlockRecords(string dirPath)
 	{
-		return GetBlockPaths(BlockPath, path)
+		return GetBlockPaths(BlockPath, dirPath)
 			.Order()
 			.Select(path => ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord"))
 			// fuck knows why the type hint doesn't work right
@@ -237,29 +219,24 @@ public partial class Editor : Control
 
 	public override void _Process(double delta)
 	{
-		UpdateCamera((float) delta);
+		UpdateCamera((float)delta);
 
 		_cursor.GlobalPosition = GetGridMousePosition();
 		_cursor.Visible = true;
 
-		if (_hoveredBlock != null && !IsInstanceValid(_hoveredBlock))
-		{
-			_hoveredBlock = null;
-		}
-		
+		if (_hoveredBlock != null && !IsInstanceValid(_hoveredBlock)) _hoveredBlock = null;
+
 		if (_mode == Mode.Erase)
 		{
 			_cursor.Visible = false;
-			
+
 			if (_hoveredBlock != null)
 				_hoveredBlock.SetMaterialOverlay(BlockEraseHighlightMaterial);
 		}
 
 		if (_mode == Mode.Normal)
-		{
 			if (_hoveredBlock != null)
 				_hoveredBlock.SetMaterialOverlay(null);
-		}
 	}
 
 	private void CreateCursor()
@@ -267,7 +244,7 @@ public partial class Editor : Control
 		_cursor?.QueueFree();
 
 		_cursor = BlockScene.Instantiate<Block>();
-		
+
 		AddChild(_cursor);
 		_cursor.RotateY(-float.DegreesToRadians(90) * _rotation);
 		_cursor.SetMaterialOverlay(BlockHighlightMaterial);
@@ -288,18 +265,15 @@ public partial class Editor : Control
 		if (Input.IsKeyPressed(Key.Shift))
 		{
 			var existingBlock = GetBlockAtPosition(_cursor.GlobalPosition);
-			if (existingBlock != null)
-			{
-				EraseBlock(existingBlock);
-			}
+			if (existingBlock != null) EraseBlock(existingBlock);
 		}
-		
+
 		_cursor.SetMaterialOverlay(null);
-		_cursor.Reparent(TrackNode, true);
+		_cursor.Reparent(TrackNode);
 		_cursor.Owner = TrackNode;
 		ConnectBlockSignals(_cursor);
-		
-		UiSoundPlayer.__Instance.PlayBlockPlaced();
+
+		UiSoundPlayer.Singleton.PlayBlockPlaced();
 
 		_cursor = null;
 		CreateCursor();
@@ -314,10 +288,10 @@ public partial class Editor : Control
 	{
 		if (!IsRunning)
 			return;
-		
+
 		if (_hoveredBlock != null)
 			_hoveredBlock.SetMaterialOverlay(null);
-		
+
 		block.SetMaterialOverlay(BlockEraseHighlightMaterial);
 		_hoveredBlock = block;
 	}
@@ -326,7 +300,7 @@ public partial class Editor : Control
 	{
 		_cursor.RotateY(-float.DegreesToRadians(90));
 		_cursor.GlobalRotationDegrees = _cursor.GlobalRotationDegrees.Round();
-		
+
 		_rotation = (_rotation + 1) % 4;
 	}
 
@@ -353,7 +327,7 @@ public partial class Editor : Control
 		var from = Camera.ProjectRayOrigin(mousePosition);
 		var dir = Camera.ProjectRayNormal(mousePosition);
 		var intersection = plane.IntersectsRay(from, dir) ?? Vector3.Zero;
-		
+
 		return new Vector2(intersection.X, intersection.Z);
 	}
 
@@ -371,24 +345,14 @@ public partial class Editor : Control
 		if (!IsRunning)
 			return;
 
-		if (@event is InputEventKey keyEvent && keyEvent.KeyLabel == Key.X)
-		{
-			EraseButton.SetPressed(keyEvent.Pressed);
-		}
-		
+		if (@event is InputEventKey keyEvent && keyEvent.KeyLabel == Key.X) EraseButton.SetPressed(keyEvent.Pressed);
+
 		if (_mode == Mode.Normal)
-		{
 			if (@event is InputEventMouseButton mouseEvent && mouseEvent.IsPressed())
 			{
-				if (mouseEvent.ButtonIndex == MouseButton.Left)
-				{
-					PlaceCursorBlock();
-				}
+				if (mouseEvent.ButtonIndex == MouseButton.Left) PlaceCursorBlock();
 
-				if (mouseEvent.ButtonIndex == MouseButton.Right)
-				{
-					RotateCursor();
-				}
+				if (mouseEvent.ButtonIndex == MouseButton.Right) RotateCursor();
 
 				if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
 				{
@@ -402,18 +366,11 @@ public partial class Editor : Control
 					Camera.GlobalPosition += _cellHeight * Vector3.Up;
 				}
 			}
-		}
 
 		if (_mode == Mode.Erase)
-		{
 			if (@event is InputEventMouseButton mouseEvent)
-			{
 				if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.IsPressed())
-				{
 					EraseHoveredBlock();
-				}
-			}
-		}
 	}
 
 	private void EraseBlock(Block block)
@@ -430,31 +387,27 @@ public partial class Editor : Control
 		if (_hoveredBlock != null)
 		{
 			EraseBlock(_hoveredBlock);
-			
-			UiSoundPlayer.__Instance.PlayBlockPlaced(0.8f);
+
+			UiSoundPlayer.Singleton.PlayBlockPlaced(0.8f);
 		}
 	}
 
 	private Block GetBlockAtPosition(Vector3 pos)
 	{
 		foreach (var block in TrackNode.GetChildren().Cast<Block>())
-		{
 			if (block.GlobalPosition.IsEqualApprox(pos))
-			{
 				return block;
-			}
-		}
 
 		return null;
 	}
-	
+
 	private void OnBlockButtonPressed(BlockRecord blockRecord)
 	{
 		BlockScene = blockRecord.Scene;
-		
+
 		CreateCursor();
 	}
-	
+
 	private void ConfirmQuitDialogOnConfirmed()
 	{
 		IsRunning = false;
@@ -464,7 +417,7 @@ public partial class Editor : Control
 	private void SetDirectory(string path)
 	{
 		_blockDirectory = path;
-		
+
 		DirectoryListContainer.DestroyAllChildren();
 		BlockListContainer.DestroyAllChildren();
 
@@ -473,28 +426,28 @@ public partial class Editor : Control
 		if (path != "/")
 		{
 			var baseDir = path.GetBaseDir();
-			
+
 			var button = new Button();
 			button.Text = "..";
 			button.Pressed += () => SetDirectory(baseDir);
 
 			DirectoryListContainer.AddChild(button);
 		}
-		
+
 		foreach (var subDir in dir.GetDirectories())
 		{
 			if (subDir.GetFile().StartsWith('_'))
 				continue;
-			
+
 			var subDirPath = _blockDirectory.PathJoin(subDir);
 
 			var button = new Button();
 			button.Text = subDir;
 			button.Pressed += () => SetDirectory(subDirPath);
-			
+
 			DirectoryListContainer.AddChild(button);
 		}
-		
+
 		foreach (var record in GetBlockRecords(path))
 		{
 			var button = EditorBlockButtonScene.Instantiate<Button>();
@@ -502,44 +455,41 @@ public partial class Editor : Control
 			button.TooltipText = record.ResourcePath;
 
 			BlockListContainer.AddChild(button);
-			
+
 			button.Pressed += () => OnBlockButtonPressed(record);
 		}
 	}
-	
+
 	public void SetupOptions()
 	{
 		OptionsTree.Clear();
 		var root = OptionsTree.CreateItem();
-		
+
 		var trackName = OptionsTree.CreateItem(root);
 		trackName.SetText(0, "TrackName");
 		trackName.SetText(1, GameManager.Singleton.CurrentTrackMeta["TrackName"]);
 		trackName.SetEditable(1, true);
-		
+
 		var authorName = OptionsTree.CreateItem(root);
 		authorName.SetText(0, "AuthorName");
 		authorName.SetText(1, GameManager.Singleton.CurrentTrackMeta["AuthorName"]);
 		authorName.SetEditable(1, true);
-		
+
 		var mapType = OptionsTree.CreateItem(root);
 		mapType.SetText(0, "MapType");
 		mapType.SetCellMode(1, TreeItem.TreeCellMode.Range);
 		mapType.SetText(1, GameManager.Singleton.CurrentTrackMeta["MapType"]);
 		mapType.SetEditable(1, true);
-		
+
 		var carType = OptionsTree.CreateItem(root);
 		carType.SetText(0, "CarType");
 		carType.SetCellMode(1, TreeItem.TreeCellMode.Range);
-		
+
 		var paths = GameManager.Singleton.LoadCarList();
-		foreach (var carPath in paths)
-		{
-			carType.SetText(1, carType.GetText(1)+carPath+",");
-		}
+		foreach (var carPath in paths) carType.SetText(1, carType.GetText(1) + carPath + ",");
 		carType.SetText(1, carType.GetText(1).Trim(','));
 		carType.SetEditable(1, true);
-		
+
 		var piztadost = OptionsTree.CreateItem(root);
 		piztadost.SetText(0, "LapsCount");
 		piztadost.SetCellMode(1, TreeItem.TreeCellMode.Range);
@@ -551,7 +501,7 @@ public partial class Editor : Control
 	{
 		var editedItem = OptionsTree.GetEdited();
 		var editedColumn = OptionsTree.GetEditedColumn();
-		
+
 		switch (editedItem.GetText(0))
 		{
 			case "TrackName":
@@ -564,17 +514,24 @@ public partial class Editor : Control
 				GameManager.Singleton.CurrentTrackMeta["MapType"] = editedItem.GetText(editedColumn);
 				break;
 			case "CarType":
-				GameManager.Singleton.CurrentTrackMeta["CarType"] = editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				GameManager.Singleton.CurrentTrackMeta["CarType"] =
+					editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
 				GD.Print(GameManager.Singleton.CurrentTrackMeta["CarType"]);
 				break;
 			case "LapsCount":
-				GameManager.Singleton.CurrentTrackMeta["LapsCount"] = editedItem.GetRange(editedColumn).ToString();
+				GameManager.Singleton.CurrentTrackMeta["LapsCount"] =
+					editedItem.GetRange(editedColumn).ToString(CultureInfo.InvariantCulture);
 				break;
 		}
 	}
 
 	private void CloseTrack()
 	{
-		
+	}
+
+	private enum Mode
+	{
+		Normal,
+		Erase
 	}
 }

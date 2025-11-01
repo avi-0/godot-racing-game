@@ -1,46 +1,45 @@
-using Godot;
-using System;
 using System.Linq;
 using Fractural.Tasks;
+using Godot;
 
 namespace racingGame;
 
 public partial class MainMenu : Control
 {
-	[Export] public FileDialog MenuFileDialog;
 	[Export] public Control CampMenu;
-	[Export] public GridContainer TrackContainer;
 
 	public string CampTracksPath = "res://tracks/";
+	[Export] public FileDialog MenuFileDialog;
+	[Export] public GridContainer TrackContainer;
 
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
-	
+
 		var trackList = LoadCampTracksList();
 
 		foreach (var trackPath in trackList)
 		{
-			var trackMeta = GameManager.Singleton.GetTrackMetadata(CampTracksPath+trackPath);
+			var trackMeta = GameManager.Singleton.GetTrackMetadata(CampTracksPath + trackPath);
 			var button = new Button();
 			button.CustomMinimumSize = 64 * Vector2.One;
 			button.Text = trackMeta["TrackName"];
-			button.Pressed += () => OpenTrack(CampTracksPath+trackPath);
+			button.Pressed += () => OpenTrack(CampTracksPath + trackPath).Forget();
 
 			TrackContainer.AddChild(button);
 		}
 	}
-	
+
 	public override void _Process(double delta)
 	{
 	}
-	
+
 	public void OnPlayButtonPressed()
 	{
 		CampMenu.Show();
 	}
 
-	public async void OnEditorButtonPressed()
+	public void OnEditorButtonPressed()
 	{
 		OpenEditor().Forget();
 	}
@@ -79,7 +78,7 @@ public partial class MainMenu : Control
 		GameManager.Singleton.NewTrack();
 		Editor.Singleton.IsRunning = true;
 		Editor.Singleton.SetupOptions();
-		
+
 		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
 
 		Visible = true;

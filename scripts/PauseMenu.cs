@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 namespace racingGame;
 
@@ -17,7 +16,7 @@ public partial class PauseMenu : Control
 
 	public void OnResumeButton()
 	{
-		this.Hide();
+		Hide();
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
@@ -28,7 +27,7 @@ public partial class PauseMenu : Control
 
 	public void OnExitButton()
 	{
-		this.Hide();
+		Hide();
 		GameManager.Singleton.Stop();
-	}	
+	}
 }

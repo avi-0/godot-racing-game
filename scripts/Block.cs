@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Godot;
 
@@ -7,56 +6,41 @@ namespace racingGame;
 [GlobalClass]
 public partial class Block : Node3D
 {
-	[Export] public bool IsStart = false;
-	[Export] public bool IsCheckpoint = false;
-	[Export] public bool IsFinish = false;
-	[Export] public Node3D SpawnPointNode;
+	[Signal]
+	public delegate void CarEnteredEventHandler(Car car, int blockId);
 
-	public int BlockID = 0;
-
-	public Transform3D SpawnPoint =>
-		SpawnPointNode.GlobalTransform.Orthonormalized().RotatedLocal(Vector3.Up, Single.Pi / 2);
-	
 	[Signal]
 	public delegate void ChildMouseEnteredEventHandler(Block block);
 
-	[Signal]
-	public delegate void CarEnteredEventHandler(Car car, int BlockID);
-	
+	public int BlockId = 0;
+	[Export] public bool IsCheckpoint = false;
+	[Export] public bool IsFinish = false;
+	[Export] public bool IsStart = false;
+	[Export] public Node3D SpawnPointNode;
+
+	public Transform3D SpawnPoint =>
+		SpawnPointNode.GlobalTransform.Orthonormalized().RotatedLocal(Vector3.Up, float.Pi / 2);
+
 	public override void _Ready()
 	{
 		foreach (var child in FindChildren("*", "CollisionObject3D").Cast<CollisionObject3D>())
-		{
 			child.MouseEntered += OnChildMouseEntered;
-		}
 
 		foreach (var child in FindChildren("*", "MeshInstance3D").Cast<MeshInstance3D>())
-		{
-			for (int i = 0; i < child.Mesh.GetSurfaceCount(); i++)
+			for (var i = 0; i < child.Mesh.GetSurfaceCount(); i++)
 			{
 				var material = child.Mesh.SurfaceGetMaterial(i);
-				if (material is BaseMaterial3D mat)
-				{
-					mat.CullMode = BaseMaterial3D.CullModeEnum.Back;
-				}
+				if (material is BaseMaterial3D mat) mat.CullMode = BaseMaterial3D.CullModeEnum.Back;
 			}
-		}
 
 		foreach (var area in FindChildren("*", "Area3D").Cast<Area3D>())
-		{
 			if (area.IsInGroup("finish_hitbox") || area.IsInGroup("checkpoint_hitbox"))
-			{
 				area.BodyEntered += AreaOnBodyEntered;
-			}
-		}
 	}
 
 	private void AreaOnBodyEntered(Node3D body)
 	{
-		if (body is Car car)
-		{
-			EmitSignalCarEntered(car, BlockID);
-		}
+		if (body is Car car) EmitSignalCarEntered(car, BlockId);
 	}
 
 	private void OnChildMouseEntered()
@@ -67,8 +51,6 @@ public partial class Block : Node3D
 	public void SetMaterialOverlay(Material material)
 	{
 		foreach (var child in FindChildren("*", "MeshInstance3D").Cast<MeshInstance3D>())
-		{
 			child.MaterialOverlay = material;
-		}
 	}
 }

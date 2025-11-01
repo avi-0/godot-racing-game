@@ -9,7 +9,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "AA", "Vsync", "WINMODE", "SHADOWQ", "MusicSlider", "SoundSlider")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,13 +18,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
-TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/3drsslider")
-AA = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/aaopt")
-Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/vsyncopt")
-WINMODE = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/winopt")
-SHADOWQ = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/sqopt")
+Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/aaopt")
 MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
+Shadowq = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/sqopt")
 SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/soundslider")
+TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/3drsslider")
+Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/vsyncopt")
+WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/winopt")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

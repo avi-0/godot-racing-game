@@ -4,17 +4,17 @@ namespace racingGame;
 
 public partial class UiSoundPlayer : Node
 {
-	public static UiSoundPlayer __Instance;
-
-	[Export] public AudioStreamPlayer Player;
-
-	[Export] public AudioStream BlockPlacedSound;
+	public static UiSoundPlayer Singleton;
 
 	private AudioStreamPlaybackPolyphonic _playback;
 
+	[Export] public AudioStream BlockPlacedSound;
+
+	[Export] public AudioStreamPlayer Player;
+
 	public override void _Ready()
 	{
-		__Instance = this;
+		Singleton = this;
 
 		var stream = new AudioStreamPolyphonic();
 		stream.Polyphony = 32;

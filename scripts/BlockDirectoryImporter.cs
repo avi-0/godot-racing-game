@@ -1,11 +1,7 @@
-using Godot;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Fractural.Tasks;
+using Godot;
 
 namespace racingGame;
 
@@ -13,48 +9,47 @@ namespace racingGame;
 [Tool]
 public partial class BlockDirectoryImporter : Resource
 {
-    [Export(PropertyHint.Dir)] public string SourcePath;
+	[Export(PropertyHint.Dir)] public string SourcePath;
 
 #if TOOLS
-    [ExportToolButton("Generate all")]
-    public Callable GenerateAllButton => Callable.From(() => GenerateAll().Forget());
-    
+	[ExportToolButton("Generate all")] public Callable GenerateAllButton => Callable.From(() => GenerateAll().Forget());
 
-    public async GDTaskVoid GenerateAll()
-    {
-        foreach (var path in GetModelPaths(SourcePath + "/"))
-        {
-            var modelPath = SourcePath.PathJoin(path);
-            var model = ResourceLoader.Load<PackedScene>(modelPath);
-            var recordPath = ResourcePath.GetBaseDir().PathJoin(path.GetBaseName() + ".tres");
 
-            var record = new BlockRecord();
-            record.SourceScene = model;
-            record.TakeOverPath(recordPath);
+	public async GDTaskVoid GenerateAll()
+	{
+		foreach (var path in GetModelPaths(SourcePath + "/"))
+		{
+			var modelPath = SourcePath.PathJoin(path);
+			var model = ResourceLoader.Load<PackedScene>(modelPath);
+			var recordPath = ResourcePath.GetBaseDir().PathJoin(path.GetBaseName() + ".tres");
 
-            ResourceSaver.Singleton.Save(record);
-            
-            record.GenerateScene();
-            
-            // mildly horrifying trick to slow down the process a bit
-            // doing everything in one go crashes the editor for some reason xdd
-            await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
-        }
-        
-        EditorInterface.Singleton.GetResourceFilesystem().ScanSources();
-    }
-    
-    private IEnumerable<String> GetModelPaths(string basePath, string dirPath = "")
-    {
-        foreach (var path in ResourceLoader.ListDirectory(basePath + dirPath).ToList().Order())
-        {
-            var subpath = dirPath + path;
-            if (ResourceLoader.Exists(basePath + subpath, "PackedScene") && subpath.EndsWith(".glb"))
-                yield return subpath;
+			var record = new BlockRecord();
+			record.SourceScene = model;
+			record.TakeOverPath(recordPath);
 
-            foreach (var result in GetModelPaths(basePath, subpath))
-                yield return result;
-        }
-    }
+			ResourceSaver.Singleton.Save(record);
+
+			await record.GenerateScene();
+
+			// mildly horrifying trick to slow down the process a bit
+			// doing everything in one go crashes the editor for some reason xdd
+			await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+		}
+
+		EditorInterface.Singleton.GetResourceFilesystem().ScanSources();
+	}
+
+	private IEnumerable<string> GetModelPaths(string basePath, string dirPath = "")
+	{
+		foreach (var path in ResourceLoader.ListDirectory(basePath + dirPath).ToList().Order())
+		{
+			var subpath = dirPath + path;
+			if (ResourceLoader.Exists(basePath + subpath, "PackedScene") && subpath.EndsWith(".glb"))
+				yield return subpath;
+
+			foreach (var result in GetModelPaths(basePath, subpath))
+				yield return result;
+		}
+	}
 #endif
 }
