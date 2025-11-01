@@ -27,15 +27,19 @@ public partial class Editor : Control
 
 	[Export] public GridContainer BlockListContainer;
 
-	[Export] public PopupMenu FileMenu;
+	[Export] public Button QuitButton;
+	
+	[Export] public Button OpenButton;
+	
+	[Export] public Button SaveButton;
+	
+	[Export] public Button PlayButton;
 
 	[Export] public FileDialog FileDialog;
 
 	[Export] public ConfirmationDialog ConfirmNewDialog;
 	
 	[Export] public ConfirmationDialog ConfirmQuitDialog;
-
-	[Export] public Button PlayButton;
 
 	[Export] public Control CarSelect;
 
@@ -54,6 +58,8 @@ public partial class Editor : Control
 	[Export] public HSplitContainer HSplitContainer;
 
 	[Export] public Container DirectoryListContainer;
+
+	[Export] public Tree OptionsTree;
 	
 	[Signal]
 	public delegate void ExitedEventHandler();
@@ -112,14 +118,21 @@ public partial class Editor : Control
 	public override void _Ready()
 	{
 		Singleton = this;
-
-		PlayButton.Pressed += PlayButtonOnPressed;
+		
 		EditorViewport.Input += ViewportInput;
 		
-		FileMenu.IdPressed += FileMenuOnIdPressed;
-		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(0), (Key) KeyModifierMask.MaskCtrl | Key.O);
-		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(1), (Key) KeyModifierMask.MaskCtrl | Key.S);
-		FileMenu.SetItemAccelerator(FileMenu.GetItemIndex(3), Key.Escape);
+		QuitButton.Pressed += () => ConfirmQuitDialog.Show();
+		OpenButton.Pressed += () =>
+		{
+			FileDialog.FileMode = FileDialog.FileModeEnum.OpenFile;
+			FileDialog.Show();
+		};
+		SaveButton.Pressed += () =>
+		{
+			FileDialog.FileMode = FileDialog.FileModeEnum.OpenFile;
+			FileDialog.Show();
+		};
+		PlayButton.Pressed += PlayButtonOnPressed;
 		
 		ConfirmNewDialog.Confirmed += ConfirmNewDialogOnConfirmed;
 		ConfirmQuitDialog.Confirmed += ConfirmQuitDialogOnConfirmed;
@@ -136,6 +149,8 @@ public partial class Editor : Control
 		CreateCursor();
 		
 		SetDirectory("/");
+
+		SetupOptions();
 	
 		LoadCarList();
 	}
@@ -161,30 +176,6 @@ public partial class Editor : Control
 	private void ConfirmNewDialogOnConfirmed()
 	{
 		GameManager.Singleton.NewTrack();
-	}
-
-	private void FileMenuOnIdPressed(long id)
-	{
-		if (id == 0)
-		{
-			// open
-			FileDialog.FileMode = FileDialog.FileModeEnum.OpenFile;
-			FileDialog.Show();
-		}
-		else if (id == 1)
-		{
-			// save
-			FileDialog.FileMode = FileDialog.FileModeEnum.SaveFile;
-			FileDialog.Show();
-		}
-		else if (id == 2)
-		{
-			ConfirmNewDialog.Show();
-		}
-		else if (id == 3)
-		{
-			ConfirmQuitDialog.Show();
-		}
 	}
 	
 	private void FileDialogOnFileSelected(string path)
@@ -533,5 +524,26 @@ public partial class Editor : Control
 			
 			button.Pressed += () => OnBlockButtonPressed(record);
 		}
+	}
+	
+	private void SetupOptions()
+	{
+		var root = OptionsTree.CreateItem();
+		
+		var trackName = OptionsTree.CreateItem(root);
+		trackName.SetText(0, "Track Name");
+		trackName.SetText(1, "hello world");
+		trackName.SetEditable(1, true);
+
+		var carType = OptionsTree.CreateItem(root);
+		carType.SetText(0, "Car Type");
+		carType.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		carType.SetText(1, "hatchback,sport,taxi"); // тут что-то курили
+		carType.SetEditable(1, true);
+		
+		var piztadost = OptionsTree.CreateItem(root);
+		piztadost.SetText(0, "pizdatost");
+		piztadost.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		piztadost.SetEditable(1, true);
 	}
 }

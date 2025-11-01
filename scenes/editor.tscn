@@ -1,17 +1,51 @@
-[gd_scene load_steps=17 format=3 uid="uid://c1rq5irkqaorb"]
+[gd_scene load_steps=28 format=3 uid="uid://c1rq5irkqaorb"]
 
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
-[ext_resource type="Theme" uid="uid://d0edsagec8yv6" path="res://resources/editor_theme.tres" id="1_o435n"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://resources/block_erase_material.tres" id="3_j8y2p"]
 [ext_resource type="PackedScene" uid="uid://c0td1bm70sbv8" path="res://blocks/road/_scenes/road-straight.tscn" id="3_o435n"]
 [ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://resources/block_highlight_material.tres" id="4_o435n"]
 [ext_resource type="Texture2D" uid="uid://dyx154afg0s1q" path="res://assets/godot-icons/RangeSliderLeft.svg" id="5_3vi5u"]
 [ext_resource type="Texture2D" uid="uid://hmfs1b0dmqq1" path="res://assets/godot-icons/RangeSliderRight.svg" id="6_78fwb"]
 [ext_resource type="PackedScene" uid="uid://dklqrgy3scfr7" path="res://scenes/editor/editor_block_button.tscn" id="6_j8y2p"]
+[ext_resource type="Theme" uid="uid://d0edsagec8yv6" path="res://resources/editor_theme.tres" id="6_o435n"]
+[ext_resource type="Texture2D" uid="uid://dvltcw8wlvlh3" path="res://assets/godot-icons/Play.svg" id="7_3vi5u"]
 [ext_resource type="Script" uid="uid://ec3tpqskxxmf" path="res://scripts/EditorViewport.cs" id="7_74j0u"]
+[ext_resource type="Texture2D" uid="uid://vrvcfkufywdw" path="res://assets/godot-icons/Close.svg" id="7_78fwb"]
+[ext_resource type="Texture2D" uid="uid://c7cgy8pdtwccw" path="res://assets/godot-icons/FileBrowse.svg" id="8_74j0u"]
+[ext_resource type="Script" uid="uid://d4wjoyefkgcw" path="res://scripts/TreePopupFix.cs" id="9_j8y2p"]
+[ext_resource type="Texture2D" uid="uid://kedovh6u17wl" path="res://assets/godot-icons/Save.svg" id="9_sdh1e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o435n"]
 bg_color = Color(0.28485027, 0.2848503, 0.28485018, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_sdh1e"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_2w0at"]
+events = [SubResource("InputEventAction_sdh1e")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_sdh1e"]
+device = -1
+ctrl_pressed = true
+keycode = 79
+
+[sub_resource type="Shortcut" id="Shortcut_5tdu1"]
+events = [SubResource("InputEventKey_sdh1e")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_2w0at"]
+device = -1
+ctrl_pressed = true
+keycode = 83
+
+[sub_resource type="Shortcut" id="Shortcut_q8l03"]
+events = [SubResource("InputEventKey_2w0at")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_kvpfn"]
+device = -1
+keycode = 4194306
+
+[sub_resource type="Shortcut" id="Shortcut_dinhu"]
+events = [SubResource("InputEventKey_kvpfn")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_dinhu"]
 device = -1
@@ -29,21 +63,14 @@ unicode = 50
 [sub_resource type="Shortcut" id="Shortcut_trtic"]
 events = [SubResource("InputEventKey_kvuet")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_kvpfn"]
-device = -1
-keycode = 4194306
-
-[sub_resource type="Shortcut" id="Shortcut_dinhu"]
-events = [SubResource("InputEventKey_kvpfn")]
-
-[node name="Editor" type="Control" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "FileMenu", "FileDialog", "ConfirmNewDialog", "ConfirmQuitDialog", "PlayButton", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton", "HSplitContainer", "DirectoryListContainer")]
+[node name="Editor" type="Control" node_paths=PackedStringArray("EditorViewport", "Camera", "BlockListContainer", "QuitButton", "OpenButton", "SaveButton", "PlayButton", "FileDialog", "ConfirmNewDialog", "ConfirmQuitDialog", "CarSelect", "CarSelectContainer", "EditorUINode", "GridSizeLabel", "GridSizeDecButton", "GridSizeIncButton", "HSplitContainer", "DirectoryListContainer", "OptionsTree")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o435n")
+theme = ExtResource("6_o435n")
 script = ExtResource("1_5lcyj")
 CameraSpeed = 48.0
 EditorViewport = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
@@ -51,12 +78,14 @@ Camera = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubVie
 BlockScene = ExtResource("3_o435n")
 BlockEraseHighlightMaterial = ExtResource("3_j8y2p")
 BlockHighlightMaterial = ExtResource("4_o435n")
-BlockListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer")
-FileMenu = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/MenuBar/FileMenu")
+BlockListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer")
+QuitButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/QuitButton")
+OpenButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/OpenButton")
+SaveButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/SaveButton")
+PlayButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/PlayButton")
 FileDialog = NodePath("FileDialog")
 ConfirmNewDialog = NodePath("ConfirmNewDialog")
 ConfirmQuitDialog = NodePath("ConfirmQuitDialog")
-PlayButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/HBoxContainer/PlayButton")
 CarSelect = NodePath("CarSelect")
 CarSelectContainer = NodePath("CarSelect/GridContainer")
 EditorUINode = NodePath("EditorUI")
@@ -65,7 +94,8 @@ GridSizeDecButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginConta
 GridSizeIncButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/IncreaseButton")
 EditorBlockButtonScene = ExtResource("6_j8y2p")
 HSplitContainer = NodePath("EditorUI/HSplitContainer")
-DirectoryListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/DirectoryListContainer")
+DirectoryListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/DirectoryListContainer")
+OptionsTree = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/Tree")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -108,23 +138,33 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="MenuBar" type="MenuBar" parent="EditorUI/HSplitContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/HSplitContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="FileMenu" type="PopupMenu" parent="EditorUI/HSplitContainer/VBoxContainer/MarginContainer/MenuBar"]
-oversampling_override = 1.0
-title = "File"
-item_count = 5
-item_0/text = "New"
-item_0/id = 2
-item_1/text = "Open"
-item_1/id = 0
-item_2/text = "Save"
-item_2/id = 1
-item_3/id = 100
-item_3/separator = true
-item_4/text = "Quit"
-item_4/id = 3
+[node name="QuitButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_2w0at")
+text = "Quit"
+icon = ExtResource("7_78fwb")
+
+[node name="OpenButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_5tdu1")
+text = "Open"
+icon = ExtResource("8_74j0u")
+
+[node name="SaveButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_q8l03")
+text = "Save"
+icon = ExtResource("9_sdh1e")
+
+[node name="PlayButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Play the track"
+shortcut = SubResource("Shortcut_dinhu")
+text = "Play"
+icon = ExtResource("7_3vi5u")
 
 [node name="MarginContainer2" type="MarginContainer" parent="EditorUI/HSplitContainer/VBoxContainer"]
 layout_mode = 2
@@ -168,6 +208,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
 stretch = true
 mouse_target = true
 
@@ -175,7 +221,7 @@ mouse_target = true
 handle_input_locally = false
 screen_space_aa = 1
 physics_object_picking = true
-size = Vector2i(1571, 1006)
+size = Vector2i(1571, 1008)
 render_target_update_mode = 4
 script = ExtResource("7_74j0u")
 
@@ -185,22 +231,6 @@ transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.70710
 current = true
 fov = 80.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_bottom = -8.0
-grow_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="PlayButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/HBoxContainer"]
-layout_mode = 2
-tooltip_text = "Play the track"
-shortcut = SubResource("Shortcut_dinhu")
-text = "Play"
-
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -209,68 +239,91 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="EditorUI/HSplitContainer/MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="EditorUI/HSplitContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+
+[node name="Blocks" type="ScrollContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer"]
 layout_mode = 2
 mouse_filter = 0
 mouse_force_pass_scroll_events = false
 horizontal_scroll_mode = 0
+metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DirectoryListContainer" type="VBoxContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="DirectoryListContainer" type="VBoxContainer" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="BlockListContainer" type="GridContainer" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="BlockListContainer" type="GridContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer"]
 layout_mode = 2
 columns = 4
 
-[node name="EditorBlockButton" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton2" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton2" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton3" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton3" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton4" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton4" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton5" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton5" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton6" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton6" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton7" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton7" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton8" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton8" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton9" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton9" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton10" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton10" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton11" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton11" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton12" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton12" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
 
-[node name="EditorBlockButton13" parent="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
+[node name="EditorBlockButton13" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer" instance=ExtResource("6_j8y2p")]
 layout_mode = 2
+
+[node name="Options" type="MarginContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 1
+
+[node name="Tree" type="Tree" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options"]
+layout_mode = 2
+columns = 2
+hide_root = true
+script = ExtResource("9_j8y2p")
 
 [node name="ConfirmNewDialog" type="ConfirmationDialog" parent="."]
 oversampling_override = 1.0
@@ -329,4 +382,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[editable path="EditorUI/HSplitContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/BlockListContainer/EditorBlockButton"]
+[editable path="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer/EditorBlockButton"]
