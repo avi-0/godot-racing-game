@@ -8,6 +8,15 @@
 friction = 0.0
 bounce = 0.05
 
+[sub_resource type="Curve" id="Curve_03w70"]
+_data = [Vector2(0, 0.50438213), 0.0, 1.4216261, 0, 0, Vector2(0.5046083, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_50v30"]
+_limits = [1.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.27181208, 1.9232769), -4.818681, -4.818681, 0, 0, Vector2(1, 1), -0.23527792, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Curve" id="Curve_eauv3"]
 _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.49605608), 0.0, 0.23025756, 0, 0, Vector2(1, 2), 2.2959864, 0.0, 0, 0]
@@ -17,15 +26,6 @@ point_count = 2
 _limits = [0.0, 60.0, 0.0, 1.0]
 _data = [Vector2(0, 40.810932), 0.0, -59.0962, 0, 0, Vector2(1, 9), 0.34576532, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="Curve" id="Curve_03w70"]
-_data = [Vector2(0, 0.50438213), 0.0, 1.4216261, 0, 0, Vector2(0.5046083, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_50v30"]
-_limits = [1.0, 5.0, 0.0, 1.0]
-_data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.27181208, 1.9232769), -4.818681, -4.818681, 0, 0, Vector2(1, 1), -0.23527792, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uuul"]
 resource_name = "colormap"
@@ -206,7 +206,7 @@ shadow_mesh = SubResource("ArrayMesh_a0sfp")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p7odm"]
 points = PackedVector3Array(0.75, 0.64989233, 0.5477927, 0.54987276, 0.64989233, 1.2748629, 0.649863, 0.24988742, 1.2247945, 0.75, 0.5499902, 0.5477927, 0.75, 0.64989233, 0.44765568, 0.4498825, 1.1499314, 0.2107724, -0.55001956, 0.64989233, 1.2748629, 0.124951065, 0.17496084, 1.3747307, 0.54987276, 0.24988742, 1.3249315, 0.6206441, 0.24988742, 1.2955903, 0.04992169, 1.35, 0.07483363, 0.649863, 0.049951058, 1.2247945, 0.75, 0.5499902, 0.44765568, 0.649863, 0.24988742, -1.2250636, 0.649863, 0.42564115, -1.0107918, 0.649863, 0.4877496, -0.9300361, 0.649863, 0.5266004, -0.8360903, 0.4498825, 1.1499314, -0.57121176, -0.75, 0.64989233, 0.5477927, -0.6500098, 0.24988742, 1.2247945, -0.6207909, 0.24988742, 1.2955903, -0.55001956, 0.24988742, 1.3249315, -0.12509787, 0.17496084, 1.3747307, -0.050068498, 1.35, 0.07483363, -0.45002937, 1.1499314, 0.2107724, 0.17487276, 0.12487764, 1.3747307, 0.54987276, 0.049951058, 1.3249315, 0.6206441, 0.049951058, 1.2955903, 0.04992169, 1.35, -0.425044, 0.124951065, 0, 1.3747307, 0.649863, 0.049951058, -1.2250636, 0.6206441, 0.24988742, -1.2958593, 0.54987276, 0.5499902, -1.3252006, 0.45986688, 1.0999804, -0.6452378, -0.75, 0.64989233, 0.44765568, -0.75, 0.5499902, 0.5477927, -0.6500098, 0.049951058, 1.2247945, -0.6207909, 0.049951058, 1.2955903, -0.55001956, 0.049951058, 1.3249315, -0.17501956, 0.12487764, 1.3747307, -0.050068498, 1.35, -0.425044, -0.45002937, 1.1499314, -0.57121176, 0.17487276, 0.049951058, 1.3747307, -0.12509787, 0, 1.3747307, 0.124951065, 0, -1.3749999, 0.6206441, 0.049951058, -1.2958593, 0.54987276, 0.049951058, -1.3252006, 0.17487276, 0.12487764, -1.3749999, 0.124951065, 0.17496084, -1.3749999, -0.55001956, 0.5499902, -1.3252006, -0.75, 0.5499902, 0.44765568, -0.6500098, 0.5266004, -0.8360903, -0.6500098, 0.4877496, -0.9300361, -0.6500098, 0.42564115, -1.0107918, -0.6500098, 0.24988742, -1.2250636, -0.6500098, 0.049951058, -1.2250636, -0.17501956, 0.049951058, 1.3747307, -0.46001372, 1.0999804, -0.6452378, -0.12509787, 0, -1.3749999, 0.17487276, 0.049951058, -1.3749999, -0.12509787, 0.17496084, -1.3749999, -0.17501956, 0.12487764, -1.3749999, -0.55001956, 0.049951058, -1.3252006, -0.6207909, 0.24988742, -1.2958593, -0.6207909, 0.049951058, -1.2958593, -0.17501956, 0.049951058, -1.3749999)
 
-[node name="car" type="VehicleBody3D" node_paths=PackedStringArray("WheelFl", "WheelFr", "WheelBl", "WheelBr", "Camera", "CameraStick", "CameraStickBase", "EngineSound")]
+[node name="car" type="VehicleBody3D" node_paths=PackedStringArray("Camera", "CameraStick", "CameraStickBase", "EngineSound", "WheelBl", "WheelBr", "WheelFl", "WheelFr")]
 collision_layer = 2
 mass = 52.0
 physics_material_override = SubResource("PhysicsMaterial_k61xc")
@@ -217,26 +217,26 @@ linear_damp = 0.05
 angular_damp_mode = 1
 angular_damp = 0.25
 script = ExtResource("1_jxqfv")
-WheelFl = NodePath("wheel_fl")
-WheelFr = NodePath("wheel_fr")
-WheelBl = NodePath("wheel_bl")
-WheelBr = NodePath("wheel_br")
+BrakeForce = 1.0
+BrakeForceInTurnMultiplier = 1.0
+BrakeFwSlipMultiplier = 0.5
+BrakeRwSlipMultiplier = 0.5
 Camera = NodePath("CameraStickBase/CameraStick/Camera3D")
 CameraStick = NodePath("CameraStickBase/CameraStick")
 CameraStickBase = NodePath("CameraStickBase")
+EngineForceForward = 35.0
 EngineSound = NodePath("EngineSound")
-SpeedToPitchCurve = SubResource("Curve_eauv3")
-SpeedToSteeringCurve = SubResource("Curve_mk5fm")
+NormalRwSlip = 3.4
+NormalSlip = 3.5
 SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
-EngineForceForward = 35.0
-BrakeForce = 1.0
-NormalSlip = 3.5
-NormalRwSlip = 3.4
+SpeedToPitchCurve = SubResource("Curve_eauv3")
+SpeedToSteeringCurve = SubResource("Curve_mk5fm")
 SteeringSpeed = 75.0
-BrakeFwSlipMultiplier = 0.5
-BrakeRwSlipMultiplier = 0.5
-BrakeForceInTurnMultiplier = 1.0
+WheelBl = NodePath("wheel_bl")
+WheelBr = NodePath("wheel_br")
+WheelFl = NodePath("wheel_fl")
+WheelFr = NodePath("wheel_fr")
 
 [node name="wheel_bl" type="VehicleWheel3D" parent="."]
 unique_name_in_owner = true
@@ -345,21 +345,25 @@ doppler_tracking = 2
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 
 [node name="wheel-front-right" type="MeshInstance3D" parent="taxi"]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42857146, 0.21428573, 0.76428574)
 mesh = SubResource("ArrayMesh_gnjh2")
 skeleton = NodePath("")
 
 [node name="wheel-front-left" type="MeshInstance3D" parent="taxi"]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42857146, 0.21428573, 0.76428574)
 mesh = SubResource("ArrayMesh_denii")
 skeleton = NodePath("")
 
 [node name="wheel-back-right" type="MeshInstance3D" parent="taxi"]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42857146, 0.21428573, -0.76428574)
 mesh = SubResource("ArrayMesh_vwi5m")
 skeleton = NodePath("")
 
 [node name="wheel-back-left" type="MeshInstance3D" parent="taxi"]
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42857146, 0.21428573, -0.76428574)
 mesh = SubResource("ArrayMesh_sw6ji")
 skeleton = NodePath("")

@@ -223,7 +223,7 @@ public partial class Car : VehicleBody3D
 		}
 	}
 
-	private void SnapCameraYaw()
+	public void SnapCameraYaw()
 	{
 		CameraStickBase.Rotation =
 			new Vector3(CameraStickBase.Rotation.X, GetCameraTargetYaw(GlobalBasis.Z), CameraStickBase.Rotation.Z);
@@ -231,11 +231,16 @@ public partial class Car : VehicleBody3D
 
 	public void Started()
 	{
+		ResetPhysicsInterpolation();
+
 		SnapCameraYaw();
 	}
 
 	private void ControlCamera()
 	{
+		if (!AcceptsInputs)
+			SnapCameraYaw();
+
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 			CameraStick.Rotation = new Vector3(
 				CameraStick.Rotation.X,

@@ -8,6 +8,15 @@
 friction = 0.1
 bounce = 0.5
 
+[sub_resource type="Curve" id="Curve_03w70"]
+_data = [Vector2(0, 0.50438213), 0.0, 1.4216261, 0, 0, Vector2(0.5046083, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_50v30"]
+_limits = [1.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.27181208, 1.9232769), -4.818681, -4.818681, 0, 0, Vector2(1, 1), -0.23527792, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Curve" id="Curve_eauv3"]
 _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.49605608), 0.0, 0.23025756, 0, 0, Vector2(1, 2), 2.2959864, 0.0, 0, 0]
@@ -18,19 +27,10 @@ _limits = [0.0, 60.0, 0.0, 1.0]
 _data = [Vector2(0, 30), 0.0, -59.0962, 0, 0, Vector2(1, 9), 0.34576532, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve" id="Curve_03w70"]
-_data = [Vector2(0, 0.50438213), 0.0, 1.4216261, 0, 0, Vector2(0.5046083, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_50v30"]
-_limits = [1.0, 5.0, 0.0, 1.0]
-_data = [Vector2(0, 5), 0.0, -11.476284, 0, 0, Vector2(0.27181208, 1.9232769), -4.818681, -4.818681, 0, 0, Vector2(1, 1), -0.23527792, 0.0, 0, 0]
-point_count = 3
-
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_50v30"]
 points = PackedVector3Array(0.65, 0.24996085, 1.274912, 0.6206049, 0.24996085, 1.3454925, 0.65, 0.049936377, 1.274912, 0.65, 0.42571458, 1.1105963, 0.6206049, 0.049936377, 1.3454925, 0.5499804, 0.44998533, 1.3248485, 0.5499804, 0.24996085, 1.3747848, 0.12496084, 0, 1.4247211, 0.65, 0.049936377, -0.48513603, 0.65, 0.48773983, 1.0299727, 0.5499804, 0.049936377, 1.3747848, -0.55010766, 0.44998533, 1.3248485, 0.12496084, 0.1749168, 1.4247211, 0.65, 0.52670324, 0.93567955, 0.44996083, 0.949907, 0.19779277, 0.17497063, 0.12498043, 1.4247211, -0.1250881, 0, 1.4247211, 0.12496084, 0, 1.3747848, 0.17497063, 0.049936377, 1.4247211, 0.39995098, 0.049936377, -1.0852095, 0.6206049, 0.1499951, -1.3457714, 0.65, 0.1499951, -1.275191, -0.65, 0.52670324, 0.93567955, -0.65, 0.48773983, 1.0299727, -0.65, 0.42571458, 1.1105963, -0.6207322, 0.24996085, 1.3454925, -0.55010766, 0.24996085, 1.3747848, -0.1250881, 0.1749168, 1.4247211, -0.45008808, 0.949907, 0.19779277, 0.65, 0.6499168, 0.59784186, 0.44996083, 0.949907, -0.90778196, -0.17509788, 0.049936377, 1.4247211, -0.55010766, 0.049936377, 1.3747848, -0.6207322, 0.049936377, 1.3454925, -0.65, 0.049936377, 1.274912, -0.1250881, 0, 1.3747848, -0.4000783, 0.049936377, -1.0852095, 0.12496084, 0.09996574, -1.4250001, 0.5499804, 0.1499951, -1.3750637, 0.6206049, 0.24996085, -1.3457714, 0.65, 0.24996085, -1.275191, -0.65, 0.6499168, 0.59784186, -0.65, 0.24996085, 1.274912, -0.17509788, 0.12498043, 1.4247211, -0.45008808, 0.949907, -0.90778196, 0.65, 0.6499168, 0.49768996, 0.65, 0.539908, -0.7850333, 0.65, 0.52670324, -0.886022, 0.5499804, 0.6499168, -1.275191, -0.65, 0.049936377, -0.48513603, -0.6207322, 0.1499951, -1.3457714, -0.1250881, 0.09996574, -1.4250001, 0.17497063, 0.1499951, -1.4250001, 0.5499804, 0.24996085, -1.3750637, 0.65, 0.42571458, -1.0609387, -0.65, 0.6499168, 0.49768996, -0.65, 0.52670324, -0.886022, -0.65, 0.539908, -0.7850333, -0.55010766, 0.6499168, -1.275191, 0.65, 0.48773983, -0.98003626, 0.12496084, 0.27497554, -1.4250001, -0.65, 0.1499951, -1.275191, -0.6207322, 0.24996085, -1.3457714, -0.55010766, 0.1499951, -1.3750637, -0.17509788, 0.1499951, -1.4250001, 0.17497063, 0.22494617, -1.4250001, -0.65, 0.48773983, -0.98003626, -0.1250881, 0.27497554, -1.4250001, -0.55010766, 0.24996085, -1.3750637, -0.65, 0.24996085, -1.275191, -0.65, 0.42571458, -1.0609387, -0.17509788, 0.22494617, -1.4250001)
 
-[node name="car" type="VehicleBody3D" node_paths=PackedStringArray("WheelFl", "WheelFr", "WheelBl", "WheelBr", "Camera", "CameraStick", "CameraStickBase", "EngineSound")]
+[node name="car" type="VehicleBody3D" node_paths=PackedStringArray("Camera", "CameraStick", "CameraStickBase", "EngineSound", "WheelBl", "WheelBr", "WheelFl", "WheelFr")]
 collision_layer = 2
 mass = 32.0
 physics_material_override = SubResource("PhysicsMaterial_k61xc")
@@ -41,26 +41,26 @@ linear_damp = 0.05
 angular_damp_mode = 1
 angular_damp = 0.25
 script = ExtResource("1_jxqfv")
-WheelFl = NodePath("wheel_fl")
-WheelFr = NodePath("wheel_fr")
-WheelBl = NodePath("wheel_bl")
-WheelBr = NodePath("wheel_br")
+BrakeForce = 0.5
+BrakeForceInTurnMultiplier = 1.0
+BrakeFwSlipMultiplier = 0.2
+BrakeRwSlipMultiplier = 0.2
 Camera = NodePath("CameraStickBase/CameraStick/Camera3D")
 CameraStick = NodePath("CameraStickBase/CameraStick")
 CameraStickBase = NodePath("CameraStickBase")
+EngineForceForward = 72.0
 EngineSound = NodePath("EngineSound")
-SpeedToPitchCurve = SubResource("Curve_eauv3")
-SpeedToSteeringCurve = SubResource("Curve_mk5fm")
+NormalRwSlip = 1.95
+NormalSlip = 2.0
 SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
-EngineForceForward = 72.0
-BrakeForce = 0.5
-NormalSlip = 2.0
-NormalRwSlip = 1.95
+SpeedToPitchCurve = SubResource("Curve_eauv3")
+SpeedToSteeringCurve = SubResource("Curve_mk5fm")
 SteeringSpeed = 200.0
-BrakeFwSlipMultiplier = 0.2
-BrakeRwSlipMultiplier = 0.2
-BrakeForceInTurnMultiplier = 1.0
+WheelBl = NodePath("wheel_bl")
+WheelBr = NodePath("wheel_br")
+WheelFl = NodePath("wheel_fl")
+WheelFr = NodePath("wheel_fr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.120000005, -0.020000001)
@@ -142,15 +142,19 @@ remote_path = NodePath("../../hatchback-sports/wheel-front-right")
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
 [node name="wheel-front-left" parent="hatchback-sports" index="0"]
+physics_interpolation_mode = 2
 transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, 0.41875, 0.30218703, 0.81)
 
 [node name="wheel-back-right" parent="hatchback-sports" index="1"]
+physics_interpolation_mode = 2
 transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, -0.41875, 0.30218703, -0.81045234)
 
 [node name="wheel-back-left" parent="hatchback-sports" index="2"]
+physics_interpolation_mode = 2
 transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, 0.41875, 0.30218703, -0.81045234)
 
 [node name="wheel-front-right" parent="hatchback-sports" index="3"]
+physics_interpolation_mode = 2
 transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, -0.41875, 0.30218703, 0.81)
 
 [node name="CameraMover" type="RemoteTransform3D" parent="."]
