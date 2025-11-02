@@ -18,9 +18,9 @@ public struct TimeAttackPlayer
 	public TimeSpan CurrentRaceTime { get; set; }
 	public TimeSpan PbTime { get; set; }
 
-	public Car PlayerCar { get; set; }
+	public NewCar PlayerCar { get; set; }
 
-	public TimeAttackPlayer(int playerId, bool localPlayer, Car playerCar)
+	public TimeAttackPlayer(int playerId, bool localPlayer, NewCar playerCar)
 	{
 		PlayerId = playerId;
 		LocalPlayer = localPlayer;
