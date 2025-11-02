@@ -21,18 +21,17 @@ public partial class Car : VehicleBody3D
 	private bool _isLocallyControlled = true;
 
 	private float _mouseSensitivity;
+
 	[Export] public float BrakeForce = 2.00f;
 	[Export] public float BrakeForceInTurnMultiplier = 0.25f;
 	[Export] public float BrakeFwSlipMultiplier = 1.5f;
 	[Export] public float BrakeRwSlipMultiplier = 0.25f;
-	[Export] public Camera3D Camera;
-	[Export] public Node3D CameraStick;
-	[Export] public Node3D CameraStickBase;
 
 	[Export] public float EngineForceForward = 90.0f;
 	[Export] public AudioStreamPlayer3D EngineSound;
 	[Export] public float NormalRwSlip = 3.9f;
 	[Export] public float NormalSlip = 4.0f;
+	[Export] public OrbitCamera OrbitCamera;
 
 	public int PlayerId;
 	[Export] public Curve SkidToFrictionCurve;
@@ -51,7 +50,7 @@ public partial class Car : VehicleBody3D
 		get => _isLocallyControlled;
 		set
 		{
-			Camera.Current = value;
+			OrbitCamera.Camera.Current = value;
 			_isLocallyControlled = value;
 		}
 	}
@@ -71,8 +70,8 @@ public partial class Car : VehicleBody3D
 		_mouseSensitivity = MouseSens * 0.25f * 2 * Mathf.Pi / DisplayServer.ScreenGetSize().Y;
 
 		ControlCamera();
-		UpdateCameraYaw((float)delta);
-		//GD.Print(GetRpm());
+
+		if (LinearVelocity.Length() > 1.0f) OrbitCamera.UpdateYaw((float)delta, LinearVelocity);
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -85,18 +84,6 @@ public partial class Car : VehicleBody3D
 			if (keyEvent.PhysicalKeycode == Key.Escape)
 				EmitSignalPauseRequested();
 			else if (keyEvent.PhysicalKeycode == Key.R) EmitSignalRestartRequested();
-		}
-
-		if (@event is InputEventMouseMotion motionEvent && Input.MouseMode == Input.MouseModeEnum.Captured)
-		{
-			var delta = motionEvent.Relative;
-			CameraStick.Rotation = new Vector3(
-				CameraStick.Rotation.X - delta.Y * _mouseSensitivity,
-				CameraStick.Rotation.Y - delta.X * _mouseSensitivity,
-				CameraStick.Rotation.Z
-			);
-
-			ControlCamera();
 		}
 	}
 
@@ -205,47 +192,16 @@ public partial class Car : VehicleBody3D
 		//wheel.WheelFrictionSlip = target * SkidToFrictionCurve.Sample(wheel.GetSkidinfo());
 	}
 
-	private float GetCameraTargetYaw(Vector3 dir)
-	{
-		return -dir.Slide(Vector3.Up).SignedAngleTo(Vector3.Back, Vector3.Up);
-	}
-
-	private void UpdateCameraYaw(float delta)
-	{
-		if (LinearVelocity.Length() > 1.0f)
-		{
-			var target = GetCameraTargetYaw(LinearVelocity);
-			CameraStickBase.Rotation = new Vector3(
-				CameraStickBase.Rotation.X,
-				Mathf.LerpAngle(target, CameraStickBase.Rotation.Y, Mathf.Exp(-5.0f * delta)),
-				CameraStickBase.Rotation.Z
-			);
-		}
-	}
-
-	public void SnapCameraYaw()
-	{
-		CameraStickBase.Rotation =
-			new Vector3(CameraStickBase.Rotation.X, GetCameraTargetYaw(GlobalBasis.Z), CameraStickBase.Rotation.Z);
-	}
-
 	public void Started()
 	{
 		ResetPhysicsInterpolation();
 
-		SnapCameraYaw();
+		OrbitCamera.SnapYaw();
 	}
 
 	private void ControlCamera()
 	{
 		if (!AcceptsInputs)
-			SnapCameraYaw();
-
-		if (Input.IsMouseButtonPressed(MouseButton.Left))
-			CameraStick.Rotation = new Vector3(
-				CameraStick.Rotation.X,
-				Mathf.Pi,
-				CameraStick.Rotation.Z
-			);
+			OrbitCamera.SnapYaw();
 	}
 }

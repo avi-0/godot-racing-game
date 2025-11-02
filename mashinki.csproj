@@ -6,4 +6,7 @@
         <AssemblyName>mashinki</AssemblyName>
         <RootNamespace>racingGame</RootNamespace>
     </PropertyGroup>
+    <ItemGroup>
+        <Folder Include="scenes\cars\"/>
+    </ItemGroup>
 </Project>

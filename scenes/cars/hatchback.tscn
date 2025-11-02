@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5kxpk7e7n6ri"]
+[gd_scene load_steps=11 format=3 uid="uid://b5kxpk7e7n6ri"]
 
 [ext_resource type="Script" uid="uid://dwmxm5gl3jjr3" path="res://scripts/Car.cs" id="1_jxqfv"]
 [ext_resource type="PackedScene" uid="uid://b77pygol30lhj" path="res://assets/kenney/carkit/hatchback-sports.glb" id="2_eauv3"]
+[ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars/orbit_camera.tscn" id="3_lsyg6"]
 [ext_resource type="AudioStream" uid="uid://ek2xywx065l" path="res://assets/audio/carsfx.wav" id="3_mk5fm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k61xc"]
@@ -30,7 +31,7 @@ point_count = 2
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_50v30"]
 points = PackedVector3Array(0.65, 0.24996085, 1.274912, 0.6206049, 0.24996085, 1.3454925, 0.65, 0.049936377, 1.274912, 0.65, 0.42571458, 1.1105963, 0.6206049, 0.049936377, 1.3454925, 0.5499804, 0.44998533, 1.3248485, 0.5499804, 0.24996085, 1.3747848, 0.12496084, 0, 1.4247211, 0.65, 0.049936377, -0.48513603, 0.65, 0.48773983, 1.0299727, 0.5499804, 0.049936377, 1.3747848, -0.55010766, 0.44998533, 1.3248485, 0.12496084, 0.1749168, 1.4247211, 0.65, 0.52670324, 0.93567955, 0.44996083, 0.949907, 0.19779277, 0.17497063, 0.12498043, 1.4247211, -0.1250881, 0, 1.4247211, 0.12496084, 0, 1.3747848, 0.17497063, 0.049936377, 1.4247211, 0.39995098, 0.049936377, -1.0852095, 0.6206049, 0.1499951, -1.3457714, 0.65, 0.1499951, -1.275191, -0.65, 0.52670324, 0.93567955, -0.65, 0.48773983, 1.0299727, -0.65, 0.42571458, 1.1105963, -0.6207322, 0.24996085, 1.3454925, -0.55010766, 0.24996085, 1.3747848, -0.1250881, 0.1749168, 1.4247211, -0.45008808, 0.949907, 0.19779277, 0.65, 0.6499168, 0.59784186, 0.44996083, 0.949907, -0.90778196, -0.17509788, 0.049936377, 1.4247211, -0.55010766, 0.049936377, 1.3747848, -0.6207322, 0.049936377, 1.3454925, -0.65, 0.049936377, 1.274912, -0.1250881, 0, 1.3747848, -0.4000783, 0.049936377, -1.0852095, 0.12496084, 0.09996574, -1.4250001, 0.5499804, 0.1499951, -1.3750637, 0.6206049, 0.24996085, -1.3457714, 0.65, 0.24996085, -1.275191, -0.65, 0.6499168, 0.59784186, -0.65, 0.24996085, 1.274912, -0.17509788, 0.12498043, 1.4247211, -0.45008808, 0.949907, -0.90778196, 0.65, 0.6499168, 0.49768996, 0.65, 0.539908, -0.7850333, 0.65, 0.52670324, -0.886022, 0.5499804, 0.6499168, -1.275191, -0.65, 0.049936377, -0.48513603, -0.6207322, 0.1499951, -1.3457714, -0.1250881, 0.09996574, -1.4250001, 0.17497063, 0.1499951, -1.4250001, 0.5499804, 0.24996085, -1.3750637, 0.65, 0.42571458, -1.0609387, -0.65, 0.6499168, 0.49768996, -0.65, 0.52670324, -0.886022, -0.65, 0.539908, -0.7850333, -0.55010766, 0.6499168, -1.275191, 0.65, 0.48773983, -0.98003626, 0.12496084, 0.27497554, -1.4250001, -0.65, 0.1499951, -1.275191, -0.6207322, 0.24996085, -1.3457714, -0.55010766, 0.1499951, -1.3750637, -0.17509788, 0.1499951, -1.4250001, 0.17497063, 0.22494617, -1.4250001, -0.65, 0.48773983, -0.98003626, -0.1250881, 0.27497554, -1.4250001, -0.55010766, 0.24996085, -1.3750637, -0.65, 0.24996085, -1.275191, -0.65, 0.42571458, -1.0609387, -0.17509788, 0.22494617, -1.4250001)
 
-[node name="car" type="VehicleBody3D" node_paths=PackedStringArray("Camera", "CameraStick", "CameraStickBase", "EngineSound", "WheelBl", "WheelBr", "WheelFl", "WheelFr")]
+[node name="car" type="VehicleBody3D" node_paths=PackedStringArray("EngineSound", "OrbitCamera", "WheelBl", "WheelBr", "WheelFl", "WheelFr")]
 collision_layer = 2
 mass = 32.0
 physics_material_override = SubResource("PhysicsMaterial_k61xc")
@@ -45,13 +46,11 @@ BrakeForce = 0.5
 BrakeForceInTurnMultiplier = 1.0
 BrakeFwSlipMultiplier = 0.2
 BrakeRwSlipMultiplier = 0.2
-Camera = NodePath("CameraStickBase/CameraStick/Camera3D")
-CameraStick = NodePath("CameraStickBase/CameraStick")
-CameraStickBase = NodePath("CameraStickBase")
 EngineForceForward = 72.0
 EngineSound = NodePath("EngineSound")
 NormalRwSlip = 1.95
 NormalSlip = 2.0
+OrbitCamera = NodePath("OrbitCamera")
 SkidToFrictionCurve = SubResource("Curve_03w70")
 SpeedToEngineMultCurve = SubResource("Curve_50v30")
 SpeedToPitchCurve = SubResource("Curve_eauv3")
@@ -157,28 +156,7 @@ transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, 0.41875, 0.30218703, -0.81
 physics_interpolation_mode = 2
 transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 1, -0.41875, 0.30218703, 0.81)
 
-[node name="CameraMover" type="RemoteTransform3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77636e-15, 0, 0)
-remote_path = NodePath("../CameraStickBase")
-update_rotation = false
-update_scale = false
-
-[node name="CameraStickBase" type="Marker3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77636e-15, 0, 0)
-top_level = true
-
-[node name="CameraStick" type="Node3D" parent="CameraStickBase"]
-unique_name_in_owner = true
-transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, -1.77636e-15, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CameraStickBase/CameraStick"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77636e-15, 0, 3.68151)
-doppler_tracking = 2
-current = true
-fov = 80.0
+[node name="OrbitCamera" parent="." instance=ExtResource("3_lsyg6")]
 
 [node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
