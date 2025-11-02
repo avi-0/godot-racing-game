@@ -19,7 +19,7 @@ public partial class GameManager : Node
 
 	private bool _isPlaying = false;
 
-	private Car _localCar = null;
+	private NewCar _localCar = null;
 
 	private int _localPlayerId = -1;
 
@@ -77,7 +77,7 @@ public partial class GameManager : Node
 			_localCar.QueueFree();
 		}
 
-		_localCar = CarScene.Instantiate<Car>();
+		_localCar = CarScene.Instantiate<NewCar>();
 		AddChild(_localCar);
 		_localCar.GlobalTransform = GetStartPoint();
 		_localCar.ResetPhysicsInterpolation(); // doesnt help the wheels lol

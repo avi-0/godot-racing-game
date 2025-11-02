@@ -94,7 +94,7 @@ public class GameModeTimeAttack : IGameMode
 			}
 			else if (block.IsFinish)
 			{
-				block.CarEntered += PlayerAttemptFinish;
+				//block.CarEntered += PlayerAttemptFinish;
 			}
 		}
 
@@ -109,7 +109,7 @@ public class GameModeTimeAttack : IGameMode
 		GameModeController.Utils.SetLapsCount(0, _currentTrack.LapsCount);
 	}
 
-	public int SpawnPlayer(bool localPlayer, Car playerCar)
+	public int SpawnPlayer(bool localPlayer, NewCar playerCar)
 	{
 		var playerId = _players.Count;
 		_players.Add(new TimeAttackPlayer(playerId, localPlayer, playerCar));
@@ -138,7 +138,7 @@ public class GameModeTimeAttack : IGameMode
 		return playerId;
 	}
 
-	public void RespawnPlayer(int playerId, Car playerCar)
+	public void RespawnPlayer(int playerId, NewCar playerCar)
 	{
 		var player = _players[playerId];
 
@@ -166,7 +166,7 @@ public class GameModeTimeAttack : IGameMode
 		GameModeController.Utils.UnloadLocalStats();
 	}
 
-	private void PlayerAttemptFinish(Car playerCar, int blockId)
+	private void PlayerAttemptFinish(NewCar playerCar, int blockId)
 	{
 		var playerId = playerCar.PlayerId;
 		var player = _players[playerId];
