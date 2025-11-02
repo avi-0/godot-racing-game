@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor/editor.tscn" id="8_uyinl"]
 [ext_resource type="AudioStream" uid="uid://b0givguxksht0" path="res://assets/audio/music/StayInsideMe.mp3" id="9_3xj4h"]
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu/main_menu.tscn" id="9_10c2w"]
-[ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/game/pause_menu.tscn" id="10_pg2xm"]
-[ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/game/settings_menu.tscn" id="11_gc57s"]
+[ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/main_menu/pause_menu.tscn" id="10_pg2xm"]
+[ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/main_menu/settings_menu.tscn" id="11_gc57s"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
 script = ExtResource("3_5jirj")
@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 [sub_resource type="Resource" id="Resource_10c2w"]
 script = ExtResource("3_5jirj")
 AudioStream = ExtResource("4_3xj4h")
-PitchScale = 1.1219999999999999
+PitchScale = 1.122
 metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
 [sub_resource type="Resource" id="Resource_otnwt"]

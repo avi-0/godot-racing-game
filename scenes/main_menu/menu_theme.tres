@@ -1,23 +1,9 @@
-[gd_resource type="Theme" load_steps=25 format=3 uid="uid://icnr3mmy82ij"]
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://icnr3mmy82ij"]
 
 [ext_resource type="StyleBox" uid="uid://ecyclfrvfw84" path="res://scenes/main_menu/menu_button.tres" id="1_muft2"]
 [ext_resource type="FontFile" uid="uid://cn554o1b23kww" path="res://assets/fonts/Exo_2/Exo2-VariableFont_wght.ttf" id="2_fnlfk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fnlfk"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nn6ra"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 8.0
-bg_color = Color(0.33960572, 0.54263246, 1, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-shadow_color = Color(0, 0, 0, 0.5019608)
-shadow_size = 2
-shadow_offset = Vector2(0, 4)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2bvp"]
 
@@ -165,7 +151,7 @@ content_margin_left = 16.0
 content_margin_top = 8.0
 content_margin_right = 16.0
 content_margin_bottom = 8.0
-bg_color = Color(0.3106171, 0.31061712, 0.310617, 1)
+bg_color = Color(0.31, 0.31, 0.31, 0.5019608)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -204,7 +190,7 @@ variation_opentype = {
 default_font = SubResource("FontVariation_nn6ra")
 Button/font_sizes/font_size = 32
 Button/styles/focus = SubResource("StyleBoxEmpty_fnlfk")
-Button/styles/hover = SubResource("StyleBoxFlat_nn6ra")
+Button/styles/hover = ExtResource("1_muft2")
 Button/styles/normal = ExtResource("1_muft2")
 Button/styles/pressed = ExtResource("1_muft2")
 GridContainer/constants/h_separation = 32

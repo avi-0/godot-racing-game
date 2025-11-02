@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://m1qpnrxiyo34"]
+[gd_scene load_steps=6 format=3 uid="uid://m1qpnrxiyo34"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_cr101"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/SettingsMenu.cs" id="2_wswnh"]
+[ext_resource type="Theme" uid="uid://bsps78iirgjnp" path="res://scenes/main_menu/controls_menu_theme.tres" id="3_7upf4"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_cr101"]
 action = &"ui_cancel"
@@ -52,10 +53,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 2
+current_tab = 0
 
 [node name="Graphics" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -194,8 +194,89 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="Controls" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_7upf4")
+columns = 3
+
+[node name="Control" type="Control" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+
+[node name="Keyboard" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Keyboard"
+horizontal_alignment = 1
+
+[node name="Controller" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Controller"
+horizontal_alignment = 1
+
+[node name="Throttle" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "Throttle"
+
+[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "W"
+
+[node name="Button2" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+
+[node name="Brake" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "Brake/Reverse"
+
+[node name="Button3" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "S, Space"
+
+[node name="Button4" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+
+[node name="Left" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "Left"
+
+[node name="Button5" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "A"
+
+[node name="Button6" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+
+[node name="Right" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "Right"
+
+[node name="Button7" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "D"
+
+[node name="Button8" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+
+[node name="Restart" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Button9" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "R"
+
+[node name="Button10" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
