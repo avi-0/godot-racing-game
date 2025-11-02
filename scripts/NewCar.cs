@@ -56,7 +56,6 @@ public partial class NewCar : RigidBody3D
 	
 	public int PlayerId;
 	public bool AcceptsInputs { get; set; } = false;
-	public bool MagnetEffect { get; set; } = false;
 	
 	public override void _Ready()
 	{
@@ -126,10 +125,7 @@ public partial class NewCar : RigidBody3D
 	{
 		if (wheelRay.IsColliding())
 		{
-			if (!MagnetEffect)
-			{
-				wheelRay.TargetPosition = new Vector3(wheelRay.TargetPosition.X, -(wheelRay.SpringRest + wheelRay.WheelRadius + wheelRay.OverExtend), wheelRay.TargetPosition.Z);
-			}
+			wheelRay.TargetPosition = new Vector3(wheelRay.TargetPosition.X, -(wheelRay.SpringRest + wheelRay.WheelRadius + wheelRay.OverExtend), wheelRay.TargetPosition.Z);
 			
 			var contactPoint = wheelRay.GetCollisionPoint();
 			var springUpDirection = wheelRay.GlobalTransform.Basis.Y;
@@ -283,6 +279,10 @@ public partial class NewCar : RigidBody3D
 				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, xForce / Mass, 0.1f, Color.Color8(0, 0, 255));
 				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, zForce / Mass, 0.1f, Color.Color8(0, 0, 255));
 			}
+		}
+		else
+		{
+			SkidMarks[wheelId].Emitting = false;
 		}
 	}
 
