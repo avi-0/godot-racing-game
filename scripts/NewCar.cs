@@ -24,8 +24,9 @@ public partial class NewCar : RigidBody3D
 	[ExportCategory("Steering and Drifting")]
 	[Export] public float TireTurnSpeed = 2.0f;
 	[Export] public int SteeringMaxDegrees = 25;
-	[Export] public float SlippingTraction = 0.5f;
-	[Export] public float BrakingTraction = 0.1f;
+	[Export] public float SlippingTraction = 0.1f;
+	[Export] public float SlipThreshold = 0.5f;
+	[Export] public float UnslipThreshold = 0.5f;
 	
 	[ExportCategory("Debug")]
 	[Export] public bool DebugMode = false;
@@ -38,6 +39,8 @@ public partial class NewCar : RigidBody3D
 	private int _wheelCount;
 	private bool _isReversing = false;
 	private bool _isBreaking = false;
+
+	private bool _isSlipping = false;
 	
 	private bool _isLocallyControlled = true;
 	public bool IsLocallyControlled
@@ -97,7 +100,7 @@ public partial class NewCar : RigidBody3D
 			wheelId++;
 		}
 
-		GameManager.Singleton.SpeedLabel.Text = ((int)Mathf.Round(LinearVelocity.Length())).ToString();
+		GameManager.Singleton.SpeedLabel.Text = ((int)Mathf.Round(LinearVelocity.Length() * 10)).ToString();
 
 		if (DebugMode)
 		{
@@ -201,13 +204,16 @@ public partial class NewCar : RigidBody3D
 					targetSteering += Input.GetActionStrength("steer_left");
 					targetSteering -= Input.GetActionStrength("steer_right");
 					
-					targetSteering *= SpeedSteeringCurve.SampleBaked(Mathf.Abs(wheelRay.GlobalBasis.Z.Dot(LinearVelocity)/ MaxSpeed));
+					targetSteering *= SpeedSteeringCurve.SampleBaked(
+						Mathf.Clamp(
+							Mathf.Abs(wheelRay.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
+							0, 1));
 			}
 			
 			if (targetSteering != 0)
 			{
-				var y = Mathf.MoveToward(wheelRay.Rotation.Y, targetSteering, TireTurnSpeed * delta);
-				wheelRay.Rotation = new Vector3(wheelRay.Rotation.X, Math.Clamp((float)y, float.DegreesToRadians(-SteeringMaxDegrees), float.DegreesToRadians(SteeringMaxDegrees)), wheelRay.Rotation.Z);
+				var y = Mathf.MoveToward(wheelRay.Rotation.Y, targetSteering * float.DegreesToRadians(SteeringMaxDegrees), TireTurnSpeed * delta);
+				wheelRay.Rotation = new Vector3(wheelRay.Rotation.X, (float)y, wheelRay.Rotation.Z);
 			}
 			else
 			{
@@ -228,25 +234,28 @@ public partial class NewCar : RigidBody3D
 			var tireVelocity = GetPointVelocity(contactPoint);
 			var steerXVelocity = steerSideDirection.Dot(tireVelocity);
 
-			var grip = Mathf.Abs(steerXVelocity / tireVelocity.Length()); 
+			var grip = Mathf.Abs(steerXVelocity / tireVelocity.Length());
+			if (tireVelocity.IsZeroApprox())
+				grip = 1;
 			var xTraction = wheelRay.GripCurve.SampleBaked(grip);
 
 			SkidMarks[wheelId].GlobalPosition = wheelRay.GetCollisionPoint() + Vector3.Up * 0.01f;
 			SkidMarks[wheelId].LookAt(wheelRay.GlobalPosition + LinearVelocity);
 
-			if (!_isBreaking)
+			if (_isBreaking || grip > SlipThreshold)
 			{
-				SkidMarks[wheelId].Emitting = false;
-				if (grip > 0.2)
-				{
-					xTraction = SlippingTraction;
-					//SkidMarks[wheelId].Emitting = true;
-				}
+				_isSlipping = true;
 			}
-			else
+			else if (!_isBreaking && grip < UnslipThreshold)
 			{
+				_isSlipping = false;
+			}
+
+			SkidMarks[wheelId].Emitting = false;
+			if (_isSlipping)
+			{
+				xTraction = SlippingTraction;
 				SkidMarks[wheelId].Emitting = true;
-				xTraction = BrakingTraction;
 			}
 			
 			var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;

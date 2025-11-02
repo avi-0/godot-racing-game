@@ -31,7 +31,7 @@ public partial class SettingsMenu : Control
 	{
 		_configFile = new ConfigFile();
 
-		_configFile.Load(SettingsFilePath);
+		GD.Print(_configFile.Load(SettingsFilePath));
 
 		TDrs.Value = (double)_configFile.GetValue("graphics", "render_scale", 100);
 		Aa.Selected = (int)_configFile.GetValue("graphics", "antialiasing", 0);
@@ -95,7 +95,7 @@ public partial class SettingsMenu : Control
 
 	private void SaveSettings()
 	{
-		_configFile.Save(SettingsFilePath);
+		GD.Print(_configFile.Save(SettingsFilePath));
 	}
 
 	public void OnBackButton()

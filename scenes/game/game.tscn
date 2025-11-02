@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=24 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_kp23o"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_5jirj"]
 [ext_resource type="Script" uid="uid://bl5cpfcp361n1" path="res://scripts/UiSound.cs" id="3_5jirj"]
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="3_vaxfo"]
 [ext_resource type="AudioStream" uid="uid://cbh2o7irh5lmy" path="res://assets/audio/ui/switch_004.ogg" id="4_3xj4h"]
-[ext_resource type="PackedScene" uid="uid://b5kxpk7e7n6ri" path="res://scenes/cars/hatchback.tscn" id="4_ftsea"]
 [ext_resource type="AudioStream" uid="uid://c11gwvvxqgkr" path="res://assets/audio/ui/select_001.ogg" id="4_otnwt"]
 [ext_resource type="AudioStream" uid="uid://b2kvcbs1acbcs" path="res://assets/audio/ui/toggle_002.ogg" id="5_3xj4h"]
 [ext_resource type="Script" uid="uid://ctqoofbnioxhi" path="res://scripts/GameModeController.cs" id="5_otnwt"]
@@ -75,7 +74,6 @@ RaceStartSound = SubResource("Resource_uyinl")
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "MusicPlayer", "PauseMenu", "PbLabel", "RaceUi", "SettingsMenu", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "TrackNode")]
 script = ExtResource("3_vaxfo")
-CarScene = ExtResource("4_ftsea")
 CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
 FinishPanel = NodePath("RaceUI/FinishPanel")
 FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")
