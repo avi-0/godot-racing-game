@@ -137,7 +137,7 @@ public partial class NewCar : RigidBody3D
 			var offset = wheelRay.SpringRest - springLength;
 
 			Vector3 wheelPos = (Vector3)wheelRay.WheelModel.Get("position");
-			wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsInterpolationMode());
+			wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
 			wheelRay.WheelModel.Set("position", wheelPos);
 			
 			var force = wheelRay.SpringStrength * offset;
