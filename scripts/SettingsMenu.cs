@@ -1,14 +1,16 @@
 using Godot;
-using Godot.Collections;
 
 namespace racingGame;
 
 public partial class SettingsMenu : Control
 {
-	private Dictionary<string, int> _settings;
+	private ConfigFile _configFile;
+
 	[Export] public OptionButton Aa;
 
 	[Export] public Slider MusicSlider;
+
+	[Export] public string SettingsFilePath;
 	[Export] public OptionButton Shadowq;
 	[Export] public Slider SoundSlider;
 
@@ -17,99 +19,83 @@ public partial class SettingsMenu : Control
 
 	[Export] public OptionButton WinMode;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		LoadSettings();
-	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-	private void DefaultSettings()
-	{
-		_settings = new Dictionary<string, int>();
-		_settings.Add("render_scale", 100);
-		_settings.Add("aa", 0);
-		_settings.Add("vsync", 1);
-		_settings.Add("winmode", 2);
-		_settings.Add("shadowq", 2);
-
-		_settings.Add("gamesound", 50);
-		_settings.Add("musicsound", 50);
+		SoundSlider.ValueChanged += _ => ApplySoundSettings();
+		MusicSlider.ValueChanged += _ => ApplySoundSettings();
 	}
 
 	private void LoadSettings()
 	{
-		DefaultSettings();
+		_configFile = new ConfigFile();
 
-		if (FileAccess.FileExists("user://settings.save"))
-		{
-			using var file = FileAccess.Open("user://settings.save", FileAccess.ModeFlags.Read);
-			while (file.GetPosition() < file.GetLength())
-			{
-				var saveline = file.GetLine().Split('=');
-				_settings[saveline[0]] = saveline[1].ToInt();
-			}
-		}
+		_configFile.Load(SettingsFilePath);
 
-		TDrs.Value = _settings["render_scale"];
-		Aa.Selected = _settings["aa"];
-		Vsync.Selected = _settings["vsync"];
-		WinMode.Selected = _settings["winmode"];
-		Shadowq.Selected = _settings["shadowq"];
+		TDrs.Value = (double)_configFile.GetValue("graphics", "render_scale", 100);
+		Aa.Selected = (int)_configFile.GetValue("graphics", "antialiasing", 0);
+		Vsync.Selected = (int)_configFile.GetValue("graphics", "vsync", 1);
+		WinMode.Selected = (int)_configFile.GetValue("graphics", "window_mode", 2);
+		Shadowq.Selected = (int)_configFile.GetValue("graphics", "shadow_quality", 2);
 
-		SoundSlider.Value = _settings["gamesound"];
-		MusicSlider.Value = _settings["musicsound"];
+		SoundSlider.Value = (double)_configFile.GetValue("audio", "sfx_level", 50);
+		MusicSlider.Value = (double)_configFile.GetValue("audio", "music_level", 50);
 
 		ApplySettings();
 	}
 
 	private void ApplySettings()
 	{
-		_settings["render_scale"] = (int)TDrs.Value;
-		GetViewport().Scaling3DScale = _settings["render_scale"] * 0.01f;
+		var viewport = GetViewport();
+		var window = GetWindow();
 
-		_settings["aa"] = Aa.Selected;
-		GetViewport().ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Disabled;
-		GetViewport().UseTaa = false;
-		GetViewport().Msaa3D = Viewport.Msaa.Disabled;
-		if (_settings["aa"] == 1)
-			GetViewport().ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Fxaa;
-		else if (_settings["aa"] == 2)
-			GetViewport().UseTaa = true;
-		else if (_settings["aa"] == 3)
-			GetViewport().Msaa3D = Viewport.Msaa.Msaa2X;
-		else if (_settings["aa"] == 4)
-			GetViewport().Msaa3D = Viewport.Msaa.Msaa4X;
-		else if (_settings["aa"] == 5) GetViewport().Msaa3D = Viewport.Msaa.Msaa8X;
+		_configFile.SetValue("graphics", "render_scale", TDrs.Value);
+		viewport.Scaling3DScale = (float)TDrs.Value * 0.01f;
 
-		_settings["vsync"] = Vsync.Selected;
-		DisplayServer.WindowSetVsyncMode((DisplayServer.VSyncMode)_settings["vsync"]);
+		_configFile.SetValue("graphics", "antialiasing", Aa.Selected);
+		viewport.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Disabled;
+		viewport.UseTaa = false;
+		viewport.Msaa3D = Viewport.Msaa.Disabled;
+		if (Aa.Selected == 1)
+			viewport.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Fxaa;
+		else if (Aa.Selected == 2)
+			viewport.UseTaa = true;
+		else if (Aa.Selected == 3)
+			viewport.Msaa3D = Viewport.Msaa.Msaa2X;
+		else if (Aa.Selected == 4)
+			viewport.Msaa3D = Viewport.Msaa.Msaa4X;
+		else if (Aa.Selected == 5)
+			viewport.Msaa3D = Viewport.Msaa.Msaa8X;
 
-		_settings["winmode"] = WinMode.Selected;
-		if (_settings["winmode"] == 1)
-			GetWindow().Mode = Window.ModeEnum.Windowed;
-		else if (_settings["winmode"] == 2)
-			GetWindow().Mode = Window.ModeEnum.ExclusiveFullscreen;
+		_configFile.SetValue("graphics", "vsync", Vsync.Selected);
+		DisplayServer.WindowSetVsyncMode((DisplayServer.VSyncMode)Vsync.Selected);
+
+		_configFile.SetValue("graphics", "window_mode", WinMode.Selected);
+		if (WinMode.Selected == 1)
+			window.Mode = Window.ModeEnum.Windowed;
+		else if (WinMode.Selected == 2)
+			window.Mode = Window.ModeEnum.ExclusiveFullscreen;
 		else
-			GetWindow().Mode = Window.ModeEnum.Fullscreen;
+			window.Mode = Window.ModeEnum.Fullscreen;
 
-		_settings["shadowq"] = Shadowq.Selected;
-		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)_settings["shadowq"]);
+		_configFile.SetValue("graphics", "shadow_quality", Shadowq.Selected);
+		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)Shadowq.Selected);
 
-		_settings["gamesound"] = (int)SoundSlider.Value;
+		ApplySoundSettings();
+	}
+
+	private void ApplySoundSettings()
+	{
+		_configFile.SetValue("audio", "sfx_level", SoundSlider.Value);
 		AudioServer.SetBusVolumeDb(1, (float)Mathf.LinearToDb(SoundSlider.Value * 0.01f));
-		_settings["musicsound"] = (int)MusicSlider.Value;
+		_configFile.SetValue("audio", "music_level", MusicSlider.Value);
 		AudioServer.SetBusVolumeDb(2, (float)Mathf.LinearToDb(MusicSlider.Value * 0.01f));
 	}
 
 	private void SaveSettings()
 	{
-		using var saveFile = FileAccess.Open("user://settings.save", FileAccess.ModeFlags.Write);
-		foreach (var settingline in _settings) saveFile.StoreLine(settingline.Key + "=" + settingline.Value);
+		_configFile.Save(SettingsFilePath);
 	}
 
 	public void OnBackButton()

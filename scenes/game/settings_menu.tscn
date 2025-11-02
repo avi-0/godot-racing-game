@@ -20,6 +20,7 @@ theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
 Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/aaopt")
 MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
+SettingsFilePath = "user://settings.cfg"
 Shadowq = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/sqopt")
 SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/soundslider")
 TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/3drsslider")
@@ -51,9 +52,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Graphics" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -186,14 +188,12 @@ text = "Music Volume"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-step = 10.0
 value = 50.0
 tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
 [node name="Controls" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
