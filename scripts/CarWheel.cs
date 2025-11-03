@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class CarWheel : RayCast3D
+public partial class CarWheel : ShapeCast3D
 {
 	[ExportCategory("Suspension")]
 	[Export] public int SpringStrength = 100;

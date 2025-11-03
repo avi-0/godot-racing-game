@@ -38,7 +38,7 @@ public partial class NewCar : RigidBody3D
 	private float _mouseSensitivity;
 	private int _wheelCount;
 	private bool _isReversing = false;
-	private bool _isBreaking = false;
+	private bool _isBraking = false;
 
 	private bool _isSlipping = false;
 	
@@ -91,7 +91,17 @@ public partial class NewCar : RigidBody3D
 		{
 			SteeringRotation(delta, wheelRay);
 
-			wheelRay.ForceRaycastUpdate();
+			// ебаный хак
+			// проблема: если ShapeCast уже коллайдится в начальной позиции,
+			// он репортит расстояние как будто бы он растягивается на полную дистанцию
+			// => сначала чекнем нулевой вектор и только потом дадим какой надо
+			wheelRay.TargetPosition = new Vector3();
+			wheelRay.ForceShapecastUpdate();
+			if (!wheelRay.IsColliding())
+			{
+				wheelRay.TargetPosition = new Vector3(wheelRay.TargetPosition.X, -(wheelRay.SpringRest + wheelRay.OverExtend), wheelRay.TargetPosition.Z);
+				wheelRay.ForceShapecastUpdate();
+			}
 
 			ProcessSuspension(wheelRay);
 			ProcessAcceleration(wheelRay);
@@ -110,28 +120,24 @@ public partial class NewCar : RigidBody3D
 
 	private void ProcessSuspension(CarWheel wheelRay)
 	{
+		var springLength = wheelRay.TargetPosition.Length() * wheelRay.GetClosestCollisionSafeFraction();
+		Vector3 wheelPos = (Vector3)wheelRay.WheelModel.Get("position");
+		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
+		wheelRay.WheelModel.Set("position", wheelPos);
+		
 		if (wheelRay.IsColliding())
 		{
-			wheelRay.TargetPosition = new Vector3(wheelRay.TargetPosition.X, -(wheelRay.SpringRest + wheelRay.WheelRadius + wheelRay.OverExtend), wheelRay.TargetPosition.Z);
-			
-			var contactPoint = wheelRay.GetCollisionPoint();
+			var contactPoint = wheelRay.GetCollisionPoint(0);
 			var springUpDirection = wheelRay.GlobalTransform.Basis.Y;
-			var springLength = Mathf.Max(0.0f, wheelRay.GlobalPosition.DistanceTo(contactPoint) - wheelRay.WheelRadius);
-			var offset = wheelRay.SpringRest - springLength;
-
-			Vector3 wheelPos = (Vector3)wheelRay.WheelModel.Get("position");
-			wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
-			wheelRay.WheelModel.Set("position", wheelPos);
+			var offset = Mathf.Max(0, wheelRay.SpringRest - springLength);
 			
 			var force = wheelRay.SpringStrength * offset;
 			var worldVelocity = GetPointVelocity(contactPoint);
 			var relativeVelocity = springUpDirection.Dot(worldVelocity);
 			var dampForce = wheelRay.SpringDamping * relativeVelocity;
-			var forceVector = (force - dampForce) * wheelRay.GetCollisionNormal();
+			var forceVector = (force - dampForce) * springUpDirection;
 
-			contactPoint = wheelRay.WheelModel.GlobalPosition;
-			
-			var forcePositionOffset = contactPoint - GlobalPosition;
+			var forcePositionOffset = wheelRay.GetCollisionPoint(0) - GlobalPosition;
 			ApplyForce(forceVector, forcePositionOffset);
 
 			if (DebugMode)
@@ -153,7 +159,10 @@ public partial class NewCar : RigidBody3D
 			var throttleStrength = Input.GetActionStrength("throttle");
 			var brakeStrength = -Input.GetActionStrength("brake");
 			
-			var accelerationFromCurve = AccelerationCurve.SampleBaked(velocity / MaxSpeed);
+			var accelerationFromCurve = AccelerationCurve.SampleBaked(Mathf.Clamp(velocity / MaxSpeed, 0, 1));
+			if (velocity < 0)
+				accelerationFromCurve = 1.0f;
+			
 			var contactPoint = wheelRay.WheelModel.GlobalPosition;
 			var forceVectorForward = forwardDir * Acceleration * throttleStrength * accelerationFromCurve;
 			var forceVectorBackward = forwardDir * Acceleration * brakeStrength * accelerationFromCurve;
@@ -166,7 +175,7 @@ public partial class NewCar : RigidBody3D
 					if (velocity > 0)
 					{
 						forceVectorBackward *= BrakingSpeedMultiplier;
-						_isBreaking = true;
+						_isBraking = true;
 					}
 					else
 					{
@@ -176,7 +185,7 @@ public partial class NewCar : RigidBody3D
 				}
 				else
 				{
-					_isBreaking = false;
+					_isBraking = false;
 					_isReversing = false;
 				}
 
@@ -239,14 +248,16 @@ public partial class NewCar : RigidBody3D
 				grip = 1;
 			var xTraction = wheelRay.GripCurve.SampleBaked(grip);
 
-			SkidMarks[wheelId].GlobalPosition = wheelRay.GetCollisionPoint() + Vector3.Up * 0.01f;
-			SkidMarks[wheelId].LookAt(wheelRay.GlobalPosition + LinearVelocity);
+			SkidMarks[wheelId].GlobalPosition = wheelRay.GetCollisionPoint(0) + Vector3.Up * 0.01f;
+			//SkidMarks[wheelId].LookAt(wheelRay.GlobalPosition + LinearVelocity);
 
-			if (_isBreaking || grip > SlipThreshold)
+			var handbrake = _isBraking && !_isReversing;
+
+			if (handbrake || grip > SlipThreshold)
 			{
 				_isSlipping = true;
 			}
-			else if (!_isBreaking && grip < UnslipThreshold)
+			else if (!handbrake && grip < UnslipThreshold)
 			{
 				_isSlipping = false;
 			}
