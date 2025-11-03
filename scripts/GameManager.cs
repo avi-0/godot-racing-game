@@ -19,7 +19,7 @@ public partial class GameManager : Node
 
 	private bool _isPlaying = false;
 
-	private NewCar _localCar = null;
+	private Car _localCar = null;
 
 	private int _localPlayerId = -1;
 
@@ -77,7 +77,7 @@ public partial class GameManager : Node
 			_localCar.QueueFree();
 		}
 
-		_localCar = CarScene.Instantiate<NewCar>();
+		_localCar = CarScene.Instantiate<Car>();
 		AddChild(_localCar);
 		_localCar.GlobalTransform = GetStartPoint();
 		_localCar.Started();
