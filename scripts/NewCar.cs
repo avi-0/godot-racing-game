@@ -137,7 +137,7 @@ public partial class NewCar : RigidBody3D
 			if (DebugMode)
 			{
 				//DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f);
-				//DebugDraw3D.DrawSphere(wheelRay.WheelModel.GlobalPosition, wheelRay.WheelRadius);
+				DebugDraw3D.DrawSphere(wheelRay.WheelModel.GlobalPosition, wheelRay.WheelRadius);
 			}
 		}
 	}
@@ -153,7 +153,7 @@ public partial class NewCar : RigidBody3D
 			var throttleStrength = Input.GetActionStrength("throttle");
 			var brakeStrength = -Input.GetActionStrength("brake");
 			
-			var accelerationFromCurve = AccelerationCurve.SampleBaked(velocity / MaxSpeed);
+			var accelerationFromCurve = AccelerationCurve.SampleBaked(Math.Abs(velocity) / MaxSpeed);
 			var contactPoint = wheelRay.WheelModel.GlobalPosition;
 			var forceVectorForward = forwardDir * Acceleration * throttleStrength * accelerationFromCurve;
 			var forceVectorBackward = forwardDir * Acceleration * brakeStrength * accelerationFromCurve;
@@ -242,7 +242,7 @@ public partial class NewCar : RigidBody3D
 			SkidMarks[wheelId].GlobalPosition = wheelRay.GetCollisionPoint() + Vector3.Up * 0.01f;
 			SkidMarks[wheelId].LookAt(wheelRay.GlobalPosition + LinearVelocity);
 
-			if (_isBreaking || grip > SlipThreshold)
+			if ((_isBreaking && !_isReversing) || grip > SlipThreshold)
 			{
 				_isSlipping = true;
 			}
