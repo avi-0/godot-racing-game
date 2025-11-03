@@ -34,6 +34,10 @@ public partial class NewCar : RigidBody3D
 	[ExportCategory("Curves")]
 	[Export] public Curve AccelerationCurve;
 	[Export] public Curve SpeedSteeringCurve;
+	[Export] public Curve SpeedToPitchCurve;
+
+	[ExportCategory("Engine")]
+	[Export] public AudioStreamPlayer3D EngineSound;
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;
@@ -59,6 +63,8 @@ public partial class NewCar : RigidBody3D
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		EngineSound.Play();
 
 		_wheelCount = Wheels.Length;
 	}
@@ -110,13 +116,29 @@ public partial class NewCar : RigidBody3D
 			wheelId++;
 		}
 
+		ProcessEngineSound();
+
 		GameManager.Singleton.SpeedLabel.Text = ((int)Mathf.Round(LinearVelocity.Length() * 10)).ToString();
 
 		if (DebugMode)
 		{
-			DebugDraw3D.DrawArrowRay(GlobalPosition, LinearVelocity, 0.5f, Color.Color8(255, 255, 255));
+			DebugDraw3D.DrawArrowRay(GlobalPosition, LinearVelocity, 0.5f, Color.Color8(255, 255, 255), arrow_size: 0.1f);
 		}
 }
+
+	private void ProcessEngineSound()
+	{
+		var engineSoundTarget = 0.5f;
+		if (Input.IsActionPressed("throttle") || Input.IsActionPressed("brake"))
+			engineSoundTarget = 1.0f;
+		
+		EngineSound.VolumeDb = Mathf.LinearToDb(
+			Mathf.MoveToward(Mathf.DbToLinear(EngineSound.VolumeDb), engineSoundTarget, 2 * (float)GetPhysicsProcessDeltaTime())
+		);
+		
+		var speediness = GetSpeediness();
+		EngineSound.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
+	}
 
 	private void ProcessSuspension(CarWheel wheelRay)
 	{
@@ -143,7 +165,7 @@ public partial class NewCar : RigidBody3D
 			if (DebugMode)
 			{
 				//DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f);
-				DebugDraw3D.DrawSphere(wheelRay.WheelModel.GlobalPosition, wheelRay.WheelRadius);
+				DebugDraw3D.DrawSphere(contactPoint, wheelRay.WheelRadius * 0.1f);
 			}
 		}
 	}
@@ -195,8 +217,8 @@ public partial class NewCar : RigidBody3D
 					ApplyForce(forceVectorBackward, forcePosition);
 					if (DebugMode)
 					{
-						DebugDraw3D.DrawArrowRay(contactPoint, forceVectorForward / Mass, 0.5f, Color.Color8(0, 255, 0));
-						DebugDraw3D.DrawArrowRay(contactPoint, forceVectorBackward / Mass, 0.5f, Color.Color8(255, 000, 0));
+						DebugDraw3D.DrawArrowRay(contactPoint, forceVectorForward / Mass, 0.5f, Color.Color8(0, 255, 0), arrow_size: 0.1f);
+						DebugDraw3D.DrawArrowRay(contactPoint, forceVectorBackward / Mass, 0.5f, Color.Color8(255, 000, 0), arrow_size: 0.1f);
 					}
 				}
 			}
@@ -249,7 +271,7 @@ public partial class NewCar : RigidBody3D
 			var xTraction = wheelRay.GripCurve.SampleBaked(grip);
 
 			SkidMarks[wheelId].GlobalPosition = wheelRay.GetCollisionPoint(0) + Vector3.Up * 0.01f;
-			//SkidMarks[wheelId].LookAt(wheelRay.GlobalPosition + LinearVelocity);
+			SkidMarks[wheelId].LookAt(wheelRay.GlobalPosition + LinearVelocity);
 
 			var handbrake = _isBraking && !_isReversing;
 
@@ -280,8 +302,8 @@ public partial class NewCar : RigidBody3D
 			ApplyForce(zForce, forcePos);
 			if (DebugMode)
 			{
-				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, xForce / Mass, 0.1f, Color.Color8(0, 0, 255));
-				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, zForce / Mass, 0.1f, Color.Color8(0, 0, 255));
+				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, xForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
+				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, zForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
 			}
 		}
 		else
@@ -303,5 +325,11 @@ public partial class NewCar : RigidBody3D
 	public void Started()
 	{
 		OrbitCamera.SnapYaw();
+	}
+
+	private float GetSpeediness()
+	{
+		var velocity = Basis.Z.Dot(LinearVelocity);
+		return Mathf.Clamp(velocity / MaxSpeed, -1, 1);
 	}
 }
