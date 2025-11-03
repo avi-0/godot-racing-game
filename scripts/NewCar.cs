@@ -143,7 +143,7 @@ public partial class NewCar : RigidBody3D
 			if (DebugMode)
 			{
 				//DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f);
-				//DebugDraw3D.DrawSphere(wheelRay.WheelModel.GlobalPosition, wheelRay.WheelRadius);
+				DebugDraw3D.DrawSphere(wheelRay.WheelModel.GlobalPosition, wheelRay.WheelRadius);
 			}
 		}
 	}
