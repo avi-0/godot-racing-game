@@ -1,15 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=20 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_micox"]
 [ext_resource type="PackedScene" uid="uid://biodx1fq5tguf" path="res://assets/kenney/carkit/sedan-sports.glb" id="2_g5cig"]
+[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_glvfi"]
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/CarWheel.cs" id="3_hcdi7"]
-[ext_resource type="Curve" uid="uid://ldx8yjfmml3t" path="res://scenes/cars_extras/curves/driftcar_fronttiregrip_curve.tres" id="4_g5cig"]
-[ext_resource type="Curve" uid="uid://c213x6eax80ca" path="res://scenes/cars_extras/curves/driftcar_reartiresgrip_curve.tres" id="5_g5cig"]
 [ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="6_g5cig"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="6_xv7xt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
-friction = 0.5
+friction = 0.0
 bounce = 0.1
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
@@ -26,6 +25,23 @@ point_count = 4
 _limits = [1.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Resource" id="Resource_x43s4"]
+script = ExtResource("2_glvfi")
+SpringStrength = 6000.0
+SpringDamping = 500.0
+SpringRest = 0.15
+OverExtend = 0.05
+WheelRadius = 0.21
+IsSteeringWheel = true
+BaseGrip = 0.5
+metadata/_custom_type_script = "uid://dkdi4r3choyux"
+
+[sub_resource type="Resource" id="Resource_cn2cu"]
+script = ExtResource("2_glvfi")
+IsDriveWheel = true
+BaseGrip = 0.6
+metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x43s4"]
 points = PackedVector3Array(0.65, 0.24996082, 1.1249853, 0.6206049, 0.24996082, 1.1956245, 0.65, 0.049936373, 1.1249853, 0.65, 0.42571455, 0.96074283, 0.5499804, 0.24996082, 1.2248286, 0.6206049, 0.049936373, 1.1956245, 0.5499804, 0.4499853, 1.1749068, 0.12496084, 0, 1.275, 0.65, 0.049936373, -1.1252348, 0.65, 0.4877398, 0.8798698, 0.12496084, 0.17491679, 1.275, 0.17497063, 0.12498041, 1.275, 0.5499804, 0.049936373, 1.2248286, -0.55010766, 0.4499853, 1.1749068, 0.5499804, 0.5999804, 0.9247993, 0.17497063, 0.049936373, 1.275, -0.1250881, 0, 1.275, 0.12496084, 0, -1.275, 0.6206049, 0.049936373, -1.1958741, 0.65, 0.24996082, -1.1252348, 0.65, 0.5267032, 0.78576744, -0.1250881, 0.17491679, 1.275, -0.6207322, 0.24996082, 1.1956245, -0.55010766, 0.24996082, 1.2248286, -0.55010766, 0.5999804, 0.9247993, -0.65, 0.4877398, 0.8798698, -0.65, 0.42571455, 0.96074283, 0.65, 0.64991677, 0.44779754, 0.44996083, 0.9499999, 0.17497551, -0.17509788, 0.049936373, 1.275, -0.55010766, 0.049936373, 1.2248286, -0.6207322, 0.049936373, 1.1956245, -0.65, 0.049936373, 1.1249853, -0.1250881, 0, -1.275, 0.17497063, 0.049936373, -1.275, 0.5499804, 0.049936373, -1.2250783, 0.6206049, 0.24996082, -1.1958741, 0.5499804, 0.4499853, -1.2250783, 0.65, 0.42571455, -0.91082126, -0.17509788, 0.12498041, 1.275, -0.65, 0.24996082, 1.1249853, -0.65, 0.64991677, 0.44779754, -0.65, 0.5267032, 0.78576744, -0.45008808, 0.9499999, 0.17497551, 0.65, 0.64991677, 0.34770453, 0.44996083, 0.9499999, -0.52517617, -0.65, 0.049936373, -1.1252348, -0.6207322, 0.049936373, -1.1958741, -0.55010766, 0.049936373, -1.2250783, -0.17509788, 0.049936373, -1.275, 0.17497063, 0.12498041, -1.275, 0.12496084, 0.17491679, -1.275, -0.55010766, 0.4499853, -1.2250783, 0.5499804, 0.64991677, -0.82520556, 0.65, 0.4877398, -0.8301977, -0.65, 0.64991677, 0.34770453, -0.45008808, 0.9499999, -0.52517617, 0.65, 0.53990793, -0.6350039, 0.65, 0.5267032, -0.7360953, -0.65, 0.24996082, -1.1252348, -0.6207322, 0.24996082, -1.1958741, -0.17509788, 0.12498041, -1.275, -0.1250881, 0.17491679, -1.275, -0.65, 0.42571455, -0.91082126, -0.65, 0.4877398, -0.8301977, -0.55010766, 0.64991677, -0.82520556, -0.65, 0.53990793, -0.6350039, -0.65, 0.5267032, -0.7360953)
@@ -68,8 +84,7 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 300
 MaxSpeed = 30
-TireTurnSpeed = 8.0
-SteeringMaxDegrees = 5
+SteeringBaseDegrees = 5
 SlippingTraction = 0.15
 SlipThreshold = 0.8
 UnslipThreshold = 0.8
@@ -78,6 +93,8 @@ AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")
 EngineSound = NodePath("EngineSoundPlayer")
+FrontWheelConfig = SubResource("Resource_x43s4")
+RearWheelConfig = SubResource("Resource_cn2cu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -103,13 +120,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, 0.47616428)
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
-SpringStrength = 5000
-SpringDamping = 200.0
-SpringRest = 0.15
-OverExtend = 0.1
-WheelRadius = 0.21
-IsSteerWheel = true
-GripCurve = ExtResource("4_g5cig")
+IsFrontWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.085, 0, 0)
@@ -120,13 +131,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, 0.47616428
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
-SpringStrength = 5000
-SpringDamping = 200.0
-SpringRest = 0.15
-OverExtend = 0.1
-WheelRadius = 0.21
-IsSteerWheel = true
-GripCurve = ExtResource("4_g5cig")
+IsFrontWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)
@@ -137,13 +142,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, -0.45746768
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
-SpringStrength = 5000
-SpringDamping = 200.0
-SpringRest = 0.15
-OverExtend = 0.1
-WheelRadius = 0.21
-IsDriveWheel = true
-GripCurve = ExtResource("5_g5cig")
+IsRearWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.085, 0, 0)
@@ -154,13 +153,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, -0.4574676
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
-SpringStrength = 5000
-SpringDamping = 200.0
-SpringRest = 0.15
-OverExtend = 0.1
-WheelRadius = 0.21
-IsDriveWheel = true
-GripCurve = ExtResource("5_g5cig")
+IsRearWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)

@@ -24,7 +24,7 @@ public partial class Car : RigidBody3D
 
 	[ExportCategory("Steering and Drifting")]
 	[Export] public float TireTurnSpeed = 2.0f;
-	[Export] public int SteeringMaxDegrees = 25;
+	[Export(PropertyHint.None, "degrees")] public int SteeringBaseDegrees = 25;
 	[Export] public float SlippingTraction = 0.1f;
 	[Export] public float SlipThreshold = 0.5f;
 	[Export] public float UnslipThreshold = 0.5f;
@@ -39,6 +39,10 @@ public partial class Car : RigidBody3D
 
 	[ExportCategory("Engine")]
 	[Export] public AudioStreamPlayer3D EngineSound;
+
+	[ExportCategory("Wheel Setup")] 
+	[Export] public WheelConfig FrontWheelConfig;
+	[Export] public WheelConfig RearWheelConfig;
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;
@@ -68,13 +72,50 @@ public partial class Car : RigidBody3D
 		EngineSound.Play();
 
 		_wheelCount = Wheels.Length;
+
+		SetupWheels();
+	}
+
+	private void SetupWheels()
+	{
+		if (FrontWheelConfig != null)
+		{
+			if (RearWheelConfig == null)
+				RearWheelConfig = FrontWheelConfig;
+
+			if (RearWheelConfig.SpringStrength < 0)
+				RearWheelConfig.SpringStrength = FrontWheelConfig.SpringStrength;
+			if (RearWheelConfig.SpringDamping < 0)
+				RearWheelConfig.SpringDamping = FrontWheelConfig.SpringDamping;
+			if (RearWheelConfig.SpringRest < 0)
+				RearWheelConfig.SpringRest = FrontWheelConfig.SpringRest;
+			if (RearWheelConfig.OverExtend < 0)
+				RearWheelConfig.OverExtend = FrontWheelConfig.OverExtend;
+			if (RearWheelConfig.WheelRadius < 0)
+				RearWheelConfig.WheelRadius = RearWheelConfig.WheelRadius;
+			if (RearWheelConfig.BaseGrip < 0)
+				RearWheelConfig.BaseGrip = FrontWheelConfig.BaseGrip;
+			if (RearWheelConfig.GripCurve == null)
+				RearWheelConfig.GripCurve = FrontWheelConfig.GripCurve;
+
+			foreach (var wheel in Wheels)
+			{
+				if (wheel.IsFrontWheel)
+				{
+					wheel.Config = FrontWheelConfig;
+				} else if (wheel.IsRearWheel)
+				{
+					wheel.Config = RearWheelConfig;
+				}
+			}
+		}
 	}
 
 	public override void _Process(double delta)
 	{
 		_mouseSensitivity = 1.0f * 0.25f * 2 * Mathf.Pi / DisplayServer.ScreenGetSize().Y;
 		
-		if (LinearVelocity.Length() > 1.0f)
+		if (LinearVelocity.Slide(Vector3.Up).Length() > 5.0f)
 			OrbitCamera.UpdateYaw((float) delta, LinearVelocity);
 	}
 
@@ -106,7 +147,7 @@ public partial class Car : RigidBody3D
 			wheelRay.ForceShapecastUpdate();
 			if (!wheelRay.IsColliding())
 			{
-				wheelRay.TargetPosition = new Vector3(wheelRay.TargetPosition.X, -(wheelRay.SpringRest + wheelRay.OverExtend), wheelRay.TargetPosition.Z);
+				wheelRay.TargetPosition = new Vector3(wheelRay.TargetPosition.X, -(wheelRay.Config.SpringRest + wheelRay.Config.OverExtend), wheelRay.TargetPosition.Z);
 				wheelRay.ForceShapecastUpdate();
 			}
 
@@ -141,41 +182,50 @@ public partial class Car : RigidBody3D
 		EngineSound.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
 	}
 
-	private void ProcessSuspension(CarWheel wheelRay)
+	private void ProcessSuspension(CarWheel wheel)
 	{
-		var springLength = wheelRay.TargetPosition.Length() * wheelRay.GetClosestCollisionSafeFraction();
-		Vector3 wheelPos = (Vector3)wheelRay.WheelModel.Get("position");
+		var springLength = wheel.TargetPosition.Length() * wheel.GetClosestCollisionSafeFraction();
+		Vector3 wheelPos = (Vector3)wheel.WheelModel.Get("position");
 		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
-		wheelRay.WheelModel.Set("position", wheelPos);
+		wheel.WheelModel.Set("position", wheelPos);
 		
-		if (wheelRay.IsColliding())
+		if (wheel.IsColliding())
 		{
-			var contactPoint = wheelRay.GetCollisionPoint(0);
-			var springUpDirection = wheelRay.GlobalTransform.Basis.Y;
-			var offset = Mathf.Max(0, wheelRay.SpringRest - springLength);
-			
-			var force = wheelRay.SpringStrength * offset;
-			var worldVelocity = GetPointVelocity(contactPoint);
-			var relativeVelocity = springUpDirection.Dot(worldVelocity);
-			var dampForce = wheelRay.SpringDamping * relativeVelocity;
-			var forceVector = (force - dampForce) * springUpDirection;
-
-			var forcePositionOffset = wheelRay.GetCollisionPoint(0) - GlobalPosition;
-			ApplyForce(forceVector, forcePositionOffset);
-
-			if (DebugMode)
+			for (int i = 0; i < wheel.GetCollisionCount(); i++)
 			{
-				//DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f);
-				DebugDraw3D.DrawSphere(contactPoint, wheelRay.WheelRadius * 0.1f);
+				var contactPoint = wheel.GetCollisionPoint(i);
+				var normal = wheel.GetCollisionNormal(i);
+				
+				// doesn't work well for spherical tires
+				//if (normal.Dot(wheelRay.GlobalBasis.Y) < 0.95)
+				//	continue;
+				
+				var springUpDirection = wheel.GlobalTransform.Basis.Y;
+				var offset = Mathf.Max(0, wheel.Config.SpringRest - springLength);
+			
+				var force = wheel.Config.SpringStrength * offset;
+				var worldVelocity = GetPointVelocity(contactPoint);
+				var relativeVelocity = springUpDirection.Dot(worldVelocity);
+				var dampForce = wheel.Config.SpringDamping * relativeVelocity;
+				var forceVector = (force - dampForce) * springUpDirection;
+
+				var forcePositionOffset = wheel.GetCollisionPoint(0) - GlobalPosition;
+				ApplyForce(forceVector, forcePositionOffset);
+
+				if (DebugMode)
+				{
+					//DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f);
+					DebugDraw3D.DrawSphere(contactPoint, wheel.Config.WheelRadius * 0.1f);
+				}
 			}
 		}
 	}
 
-	void ProcessAcceleration(CarWheel wheelRay)
+	void ProcessAcceleration(CarWheel wheel)
 	{
-		var forwardDir = wheelRay.GlobalBasis.Z;
+		var forwardDir = wheel.GlobalBasis.Z;
 		var velocity = forwardDir.Dot(LinearVelocity);
-		wheelRay.WheelModel.RotateX((-velocity * (float)GetProcessDeltaTime())/wheelRay.WheelRadius);
+		wheel.WheelModel.RotateX((-velocity * (float)GetProcessDeltaTime()) / wheel.Config.WheelRadius);
 		
 		if (AcceptsInputs && (Input.IsActionPressed("throttle") || Input.IsActionPressed("brake")))
 		{
@@ -186,12 +236,12 @@ public partial class Car : RigidBody3D
 			if (velocity < 0)
 				accelerationFromCurve = 1.0f;
 			
-			var contactPoint = wheelRay.WheelModel.GlobalPosition;
+			var contactPoint = wheel.WheelModel.GlobalPosition;
 			var forceVectorForward = forwardDir * Acceleration * throttleStrength * accelerationFromCurve;
 			var forceVectorBackward = forwardDir * Acceleration * brakeStrength * accelerationFromCurve;
 			var forcePosition = contactPoint - GlobalPosition;
 			
-			if (wheelRay.IsColliding())
+			if (wheel.IsColliding())
 			{
 				if (brakeStrength < 0)
 				{
@@ -212,7 +262,7 @@ public partial class Car : RigidBody3D
 					_isReversing = false;
 				}
 
-				if (wheelRay.IsDriveWheel || _isReversing)
+				if (wheel.Config.IsDriveWheel || _isReversing)
 				{
 					ApplyForce(forceVectorForward, forcePosition);
 					ApplyForce(forceVectorBackward, forcePosition);
@@ -226,9 +276,9 @@ public partial class Car : RigidBody3D
 		}
 	}
 	
-	void SteeringRotation(double delta, CarWheel wheelRay)
+	void SteeringRotation(double delta, CarWheel wheel)
 	{
-		if (wheelRay.IsSteerWheel)
+		if (wheel.Config.IsSteeringWheel)
 		{
 			float targetSteering = 0;
 			if (AcceptsInputs)
@@ -238,73 +288,83 @@ public partial class Car : RigidBody3D
 					
 					targetSteering *= SpeedSteeringCurve.SampleBaked(
 						Mathf.Clamp(
-							Mathf.Abs(wheelRay.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
+							Mathf.Abs(wheel.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
 							0, 1));
 			}
 			
 			if (targetSteering != 0)
 			{
-				var y = Mathf.MoveToward(wheelRay.Rotation.Y, targetSteering * float.DegreesToRadians(SteeringMaxDegrees), TireTurnSpeed * delta);
-				wheelRay.Rotation = new Vector3(wheelRay.Rotation.X, (float)y, wheelRay.Rotation.Z);
+				var y = Mathf.MoveToward(wheel.Rotation.Y, targetSteering * float.DegreesToRadians(SteeringBaseDegrees), TireTurnSpeed * delta);
+				wheel.Rotation = new Vector3(wheel.Rotation.X, (float)y, wheel.Rotation.Z);
 			}
 			else
 			{
-				var y = Mathf.MoveToward(wheelRay.Rotation.Y, 0, TireTurnSpeed * delta);
-				wheelRay.Rotation = new Vector3(wheelRay.Rotation.X, (float)y, wheelRay.Rotation.Z);
+				var y = Mathf.MoveToward(wheel.Rotation.Y, 0, TireTurnSpeed * delta);
+				wheel.Rotation = new Vector3(wheel.Rotation.X, (float)y, wheel.Rotation.Z);
 			}
 		}
 	}
 
-	void ProcessTraction(CarWheel wheelRay, int wheelId)
+	void ProcessTraction(CarWheel wheel, int wheelId)
 	{
-		if (wheelRay.IsColliding())
+		var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
+		
+		if (wheel.IsColliding())
 		{
-			var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
+			for (int i = 0; i < wheel.GetCollisionCount(); i++)
+			{
+				var contactPoint = wheel.GetCollisionPoint(i);
+				var normal = wheel.GetCollisionNormal(i);
+
+				if (normal.Dot(wheel.GlobalBasis.Y) < 0.95)
+					continue;
+				
+				var steerSideDirection = wheel.GlobalBasis.Z.Cross(normal).Normalized();
+				var tireVelocity = GetPointVelocity(contactPoint);
+				var steerXVelocity = steerSideDirection.Dot(tireVelocity);
+
+				var grip = Mathf.Abs(steerXVelocity / tireVelocity.Length());
+				if (tireVelocity.IsZeroApprox())
+					grip = 1;
+
+				var curveValue = wheel.Config.GripCurve?.SampleBaked(grip) ?? 1.0f;
+				var xTraction = curveValue * wheel.Config.BaseGrip;
+
+				SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
+				SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
+
+				var handbrake = _isBraking && !_isReversing;
+
+				if (handbrake || grip > SlipThreshold)
+				{
+					_isSlipping = true;
+				}
+				else if (!handbrake && grip < UnslipThreshold)
+				{
+					_isSlipping = false;
+				}
+
+				SkidMarks[wheelId].Emitting = false;
+				if (_isSlipping)
+				{
+					xTraction = SlippingTraction;
+					SkidMarks[wheelId].Emitting = true;
+				}
 			
-			var contactPoint = wheelRay.GetCollisionPoint(0);
-			var steerSideDirection = wheelRay.GlobalBasis.X;
-			var tireVelocity = GetPointVelocity(contactPoint);
-			var steerXVelocity = steerSideDirection.Dot(tireVelocity);
+				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
 
-			var grip = Mathf.Abs(steerXVelocity / tireVelocity.Length());
-			if (tireVelocity.IsZeroApprox())
-				grip = 1;
-			var xTraction = wheelRay.GripCurve.SampleBaked(grip);
-
-			SkidMarks[wheelId].GlobalPosition = wheelRay.GetCollisionPoint(0) + Vector3.Up * 0.01f;
-			SkidMarks[wheelId].LookAt(wheelRay.GlobalPosition + LinearVelocity);
-
-			var handbrake = _isBraking && !_isReversing;
-
-			if (handbrake || grip > SlipThreshold)
-			{
-				_isSlipping = true;
-			}
-			else if (!handbrake && grip < UnslipThreshold)
-			{
-				_isSlipping = false;
-			}
-
-			SkidMarks[wheelId].Emitting = false;
-			if (_isSlipping)
-			{
-				xTraction = SlippingTraction;
-				SkidMarks[wheelId].Emitting = true;
-			}
+				var fVelocity = -wheel.GlobalBasis.Z.Dot(tireVelocity);
+				var zTraction = 0.05f;
+				var zForce = wheel.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
 			
-			var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
-
-			var fVelocity = -wheelRay.GlobalBasis.Z.Dot(tireVelocity);
-			var zTraction = 0.05f;
-			var zForce = wheelRay.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
-			
-			var forcePos = contactPoint - GlobalPosition;
-			ApplyForce(xForce, forcePos);
-			ApplyForce(zForce, forcePos);
-			if (DebugMode)
-			{
-				DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
-				DebugDraw3D.DrawArrowRay(contactPoint, zForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
+				var forcePos = contactPoint - GlobalPosition;
+				ApplyForce(xForce, forcePos);
+				ApplyForce(zForce, forcePos);
+				if (DebugMode)
+				{
+					DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
+					DebugDraw3D.DrawArrowRay(contactPoint, zForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
+				}
 			}
 		}
 		else
