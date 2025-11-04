@@ -6,28 +6,16 @@ namespace racingGame;
 
 public partial class MainMenu : Control
 {
-	[Export] public Control CampMenu;
-
 	public string CampTracksPath = "res://tracks/";
+	public string UserTracksPath = "user://tracks/";
 	[Export] public FileDialog MenuFileDialog;
+	
+	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
 
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
-
-		var trackList = LoadCampTracksList();
-
-		foreach (var trackPath in trackList)
-		{
-			var trackMeta = GameManager.Singleton.GetTrackMetadata(CampTracksPath + trackPath);
-			var button = new Button();
-			button.CustomMinimumSize = 64 * Vector2.One;
-			button.Text = trackMeta["TrackName"];
-			button.Pressed += () => OpenTrack(CampTracksPath + trackPath).Forget();
-
-			TrackContainer.AddChild(button);
-		}
 	}
 
 	public override void _Process(double delta)
@@ -36,7 +24,8 @@ public partial class MainMenu : Control
 
 	public void OnPlayButtonPressed()
 	{
-		CampMenu.Show();
+		FillTrackContainer(CampTracksPath);
+		TrackListPanel.Show();
 	}
 
 	public void OnEditorButtonPressed()
@@ -46,7 +35,8 @@ public partial class MainMenu : Control
 
 	public void OnLoadButtonPressed()
 	{
-		MenuFileDialog.Show();
+		FillTrackContainer(UserTracksPath);
+		TrackListPanel.Show();
 	}
 
 	public void OnSettingsButtonPressed()
@@ -59,16 +49,11 @@ public partial class MainMenu : Control
 		GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
 		GetTree().Quit();
 	}
-
-	public void OnMenuFileDialogFileSelected(string path)
+	
+	public void OnTrackListBackButton()
 	{
-		MenuFileDialog.Hide();
-		OpenTrack(path).Forget();
-	}
-
-	public void OnCampBackButton()
-	{
-		CampMenu.Hide();
+		TrackListPanel.Hide();
+		TrackContainer.DestroyAllChildren();
 	}
 
 	private async GDTaskVoid OpenEditor()
@@ -95,9 +80,27 @@ public partial class MainMenu : Control
 
 		Visible = true;
 	}
-
-	private IOrderedEnumerable<string> LoadCampTracksList()
+	
+	private void FillTrackContainer(string basePath)
 	{
-		return ResourceLoader.ListDirectory(CampTracksPath).ToList().Order();
+		var trackList = LoadTrackList(basePath);
+		
+		foreach (var trackPath in trackList)
+		{
+			var trackMeta = GameManager.Singleton.GetTrackMetadata(basePath + trackPath);
+			if (trackMeta.ContainsKey("AuthorTime") && trackMeta["AuthorTime"] != "0")
+			{
+				var button = new Button();
+				button.CustomMinimumSize = 64 * Vector2.One;
+				button.Text = trackMeta["TrackName"];
+				button.Pressed += () => OpenTrack(basePath + trackPath).Forget();
+
+				TrackContainer.AddChild(button);
+			}
+		}
+	}
+	private IOrderedEnumerable<string> LoadTrackList(string path)
+	{
+		return ResourceLoader.ListDirectory(path).ToList().Order();
 	}
 }
