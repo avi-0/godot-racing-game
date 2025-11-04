@@ -88,7 +88,7 @@ public partial class MainMenu : Control
 		foreach (var trackPath in trackList)
 		{
 			var trackMeta = GameManager.Singleton.GetTrackMetadata(basePath + trackPath);
-			if (trackMeta["AuthorTime"] != "0")
+			if (trackMeta.ContainsKey("AuthorTime") && trackMeta["AuthorTime"] != "0")
 			{
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
