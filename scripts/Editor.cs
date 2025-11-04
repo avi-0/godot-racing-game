@@ -284,6 +284,8 @@ public partial class Editor : Control
 
 		UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 
+		InvalidateTrack();
+		
 		_cursor = null;
 		CreateCursor();
 	}
@@ -387,7 +389,8 @@ public partial class Editor : Control
 	{
 		TrackNode.RemoveChild(block);
 		block.QueueFree();
-
+		InvalidateTrack();
+		
 		if (_hoveredBlock == block)
 			_hoveredBlock = null;
 	}
@@ -537,6 +540,11 @@ public partial class Editor : Control
 
 	private void CloseTrack()
 	{
+	}
+
+	private void InvalidateTrack()
+	{
+		GameManager.Singleton.CurrentTrackMeta["AuthorTime"] = "0";
 	}
 
 	private enum Mode

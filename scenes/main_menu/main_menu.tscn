@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=6 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
-[ext_resource type="Theme" uid="uid://d0edsagec8yv6" path="res://scenes/editor/editor_theme.tres" id="3_ob46e"]
 [ext_resource type="Texture2D" uid="uid://du74tb2gnkhxk" path="res://assets/mashinkilogo.png" id="3_uqeha"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
@@ -11,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("CampMenu", "MenuFileDialog", "TrackContainer")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("MenuFileDialog", "TrackListPanel", "TrackContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,9 +20,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
-CampMenu = NodePath("CampMenu")
-MenuFileDialog = NodePath("MenuFileDialog")
-TrackContainer = NodePath("CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/trackGC")
+MenuFileDialog = NodePath("")
+TrackListPanel = NodePath("TrackListPanel")
+TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/MarginContainer/VBoxContainer/trackGC")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -89,25 +88,7 @@ size_flags_vertical = 3
 text = "Exit
 "
 
-[node name="MenuFileDialog" type="FileDialog" parent="."]
-transparent_bg = true
-oversampling_override = 1.0
-title = "Open a File"
-initial_position = 1
-size = Vector2i(640, 664)
-transparent = true
-theme = ExtResource("3_ob46e")
-file_mode = 0
-display_mode = 1
-access = 1
-root_subfolder = "tracks/"
-filters = PackedStringArray("*.tk.tscn;Track Files;application/x-godot-resource")
-hidden_files_toggle_enabled = false
-file_filter_toggle_enabled = false
-favorites_enabled = false
-recent_list_enabled = false
-
-[node name="CampMenu" type="Control" parent="."]
+[node name="TrackListPanel" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -116,7 +97,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CampMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,21 +105,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="CampMenu/MarginContainer"]
+[node name="Panel" type="PanelContainer" parent="TrackListPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CampMenu/MarginContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CampMenu/MarginContainer/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="trackGC" type="GridContainer" parent="CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="trackGC" type="GridContainer" parent="TrackListPanel/MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 5
 
-[node name="BackButton" type="Button" parent="CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 shortcut = SubResource("Shortcut_wu84c")
@@ -149,5 +130,4 @@ text = "Back"
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
-[connection signal="file_selected" from="MenuFileDialog" to="." method="OnMenuFileDialogFileSelected"]
-[connection signal="pressed" from="CampMenu/MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton" to="." method="OnCampBackButton"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton" to="." method="OnTrackListBackButton"]
