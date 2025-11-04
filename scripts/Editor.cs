@@ -278,8 +278,14 @@ public partial class Editor : Control
 		}
 
 		_cursor.SetMaterialOverlay(null);
-		_cursor.Reparent(TrackNode);
+
+		var transform = _cursor.GlobalTransform;
+		_cursor.GetParent().RemoveChild(_cursor);
+		TrackNode.AddChild(_cursor, forceReadableName: true);
+		_cursor.GlobalTransform = transform;
+		
 		_cursor.Owner = TrackNode;
+		
 		ConnectBlockSignals(_cursor);
 
 		UiSoundPlayer.Singleton.BlockPlacedSound.Play();

@@ -18,8 +18,8 @@ point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 5.5539856), 0.0, -37.221794, 0, 0, Vector2(0.3163636, 2.2373576), -1.6001269, -1.6001269, 0, 0, Vector2(0.5159574, 1.8360901), -2.7739823, -2.7739823, 0, 0, Vector2(1, 1), -0.9904156, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 8), 0.0, -18.3019, 0, 0, Vector2(0.24468084, 4.3769383), -13.008701, -13.008701, 0, 0, Vector2(1, 1), -0.9904156, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_xv7xt"]
 _limits = [1.0, 2.0, 0.0, 1.0]
@@ -28,19 +28,19 @@ point_count = 2
 
 [sub_resource type="Resource" id="Resource_x43s4"]
 script = ExtResource("2_glvfi")
-SpringStrength = 6000.0
+SpringStrength = 8000.0
 SpringDamping = 500.0
 SpringRest = 0.15
 OverExtend = 0.05
 WheelRadius = 0.21
 IsSteeringWheel = true
-BaseGrip = 0.5
+BaseGrip = 0.55
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="Resource" id="Resource_cn2cu"]
 script = ExtResource("2_glvfi")
 IsDriveWheel = true
-BaseGrip = 0.6
+BaseGrip = 0.65
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x43s4"]
@@ -84,11 +84,10 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 300
 MaxSpeed = 30
-SteeringBaseDegrees = 5
+SteeringBaseDegrees = 4
 SlippingTraction = 0.15
 SlipThreshold = 0.8
 UnslipThreshold = 0.8
-DebugMode = true
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")
