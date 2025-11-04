@@ -262,7 +262,8 @@ public partial class Car : RigidBody3D
 			var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
 			
 			var contactPoint = wheelRay.GetCollisionPoint(0);
-			var steerSideDirection = wheelRay.GlobalBasis.X;
+			var normal = wheelRay.GetCollisionNormal(0);
+			var steerSideDirection = wheelRay.GlobalBasis.Z.Cross(normal).Normalized();
 			var tireVelocity = GetPointVelocity(contactPoint);
 			var steerXVelocity = steerSideDirection.Dot(tireVelocity);
 
