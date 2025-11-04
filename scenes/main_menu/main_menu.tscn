@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("MenuFileDialog", "TrackListPanel", "TrackContainer")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("TrackListPanel", "TrackContainer", "GarageWindow", "GarageTextureRect", "GarageViewport", "GarageContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,9 +20,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
-MenuFileDialog = NodePath("")
 TrackListPanel = NodePath("TrackListPanel")
 TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/MarginContainer/VBoxContainer/trackGC")
+GarageWindow = NodePath("GarageWindow")
+GarageTextureRect = NodePath("GarageWindow/Panel/GarageTexture")
+GarageViewport = NodePath("GarageWindow/SubViewport")
+GarageContainer = NodePath("GarageWindow/Panel/Panel/ScrollContainer/HFlowContainer")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -68,6 +71,12 @@ text = "Campaign"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Play Local Map
+"
+
+[node name="GarageButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Garage
 "
 
 [node name="EditorButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -125,9 +134,79 @@ size_flags_horizontal = 4
 shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
 
+[node name="GarageWindow" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ekxnf")
+
+[node name="Panel" type="Panel" parent="GarageWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GarageTexture" type="TextureRect" parent="GarageWindow/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GarageWindow/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1539.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GarageWindow/Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="GarageWindow/Panel/Panel/ScrollContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="GarageWindow/Panel/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -102.5
+offset_top = -91.0
+offset_right = 102.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+shortcut = SubResource("Shortcut_wu84c")
+text = "Back"
+
+[node name="SubViewport" type="SubViewport" parent="GarageWindow"]
+size = Vector2i(1920, 1080)
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton" to="." method="OnTrackListBackButton"]
+[connection signal="pressed" from="GarageWindow/Panel/Panel/BackButton" to="." method="OnGarageButton"]

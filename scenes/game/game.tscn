@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=25 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_kp23o"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_5jirj"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ctqoofbnioxhi" path="res://scripts/GameModeController.cs" id="5_otnwt"]
 [ext_resource type="Theme" uid="uid://cqn7x347w3gke" path="res://scenes/game/hud_theme.tres" id="6_3xj4h"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="7_5v6r0"]
+[ext_resource type="PackedScene" uid="uid://crc2q38d8anpl" path="res://scenes/cars/thedriftcar.tscn" id="8_3xj4h"]
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor/editor.tscn" id="8_uyinl"]
 [ext_resource type="AudioStream" uid="uid://b0givguxksht0" path="res://assets/audio/music/StayInsideMe.mp3" id="9_3xj4h"]
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu/main_menu.tscn" id="9_10c2w"]
@@ -74,6 +75,7 @@ RaceStartSound = SubResource("Resource_uyinl")
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "MusicPlayer", "PauseMenu", "PbLabel", "RaceUi", "SettingsMenu", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "TrackNode")]
 script = ExtResource("3_vaxfo")
+CarScene = ExtResource("8_3xj4h")
 CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
 FinishPanel = NodePath("RaceUI/FinishPanel")
 FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")

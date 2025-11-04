@@ -12,7 +12,14 @@ public partial class MainMenu : Control
 	
 	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
+	[Export] public Control GarageWindow;
+	[Export] public TextureRect GarageTextureRect;
+	[Export] public SubViewport GarageViewport;
+	[Export] public Container GarageContainer;
 
+	private Car _loadedCar;
+	private IOrderedEnumerable<string> _carList;
+	
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
@@ -20,6 +27,10 @@ public partial class MainMenu : Control
 
 	public override void _Process(double delta)
 	{
+		if (GarageWindow.Visible)
+		{
+			GarageTextureRect.Texture = GarageViewport.GetTexture();
+		}
 	}
 
 	public void OnPlayButtonPressed()
@@ -37,6 +48,45 @@ public partial class MainMenu : Control
 	{
 		FillTrackContainer(UserTracksPath);
 		TrackListPanel.Show();
+	}
+
+	public void OnGarageButton()
+	{
+		GarageWindow.Visible = !GarageWindow.Visible;
+		GarageViewport.Size = DisplayServer.WindowGetSize();
+		
+		if (GarageWindow.Visible)
+		{
+			_carList = GameManager.Singleton.LoadCarList();
+			
+			LoadGarageCar(GameManager.CarsPath + _carList.First());
+			
+			foreach (var car in _carList)
+			{
+				var button = new Button();
+				button.CustomMinimumSize = 64 * Vector2.One;
+				button.Text = car;
+				button.Pressed += () => LoadGarageCar(GameManager.CarsPath + car);
+
+				GarageContainer.AddChild(button);
+			}
+		}
+		else
+		{
+			GarageContainer.DestroyAllChildren();
+			_loadedCar.QueueFree();
+			_loadedCar = null;
+		}
+	}
+
+	private void LoadGarageCar(string path)
+	{
+		GarageViewport.DestroyAllChildren();
+		_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
+		GarageViewport.AddChild(_loadedCar);
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+		_loadedCar.OrbitCamera.CameraStickBase.RotationDegrees = new Vector3(0, 215, 0);
+		_loadedCar.OrbitCamera.Camera.SetFov(80);
 	}
 
 	public void OnSettingsButtonPressed()

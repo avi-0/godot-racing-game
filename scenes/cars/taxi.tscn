@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=4 uid="uid://lejlxkwbedup"]
+[gd_scene load_steps=33 format=4 uid="uid://lejlxkwbedup"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_denii"]
 [ext_resource type="Texture2D" uid="uid://daf5s5qv3u3b2" path="res://assets/kenney/carkit/Textures/colormap.png" id="2_gnjh2"]
+[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_sw6ji"]
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/CarWheel.cs" id="3_sw6ji"]
 [ext_resource type="Curve" uid="uid://cxhyv7al6iqul" path="res://scenes/cars_extras/curves/taxi_rear.tres" id="4_vwi5m"]
 [ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="5_denii"]
@@ -18,12 +19,38 @@ point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 8), 0.0, -37.221794, 0, 0, Vector2(0.22872339, 3.0594616), -8.123794, -8.123794, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 6.383143), 0.0, -14.701177, 0, 0, Vector2(0.22872339, 3.0594616), -8.123794, -8.123794, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_vwi5m"]
 _data = [Vector2(0.120000005, 0.058314323), 0.0, 0.0, 0, 0, Vector2(0.6036364, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_0wjsq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Resource" id="Resource_lce11"]
+script = ExtResource("2_sw6ji")
+SpringStrength = 6000.0
+SpringDamping = 150.0
+SpringRest = 0.15
+OverExtend = 0.1
+WheelRadius = 0.26
+IsDriveWheel = true
+IsSteeringWheel = true
+GripCurve = SubResource("Curve_0wjsq")
+metadata/_custom_type_script = "uid://dkdi4r3choyux"
+
+[sub_resource type="Resource" id="Resource_lml1i"]
+script = ExtResource("2_sw6ji")
+SpringStrength = 6000.0
+SpringDamping = 130.0
+SpringRest = 0.16
+OverExtend = 0.1
+WheelRadius = 0.26
+GripCurve = ExtResource("4_vwi5m")
+metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_denii"]
 points = PackedVector3Array(0.75, 0.64989233, 0.5477927, 0.54987276, 0.64989233, 1.2748629, 0.649863, 0.24988742, 1.2247945, 0.75, 0.5499902, 0.5477927, 0.75, 0.64989233, 0.44765568, 0.4498825, 1.1499314, 0.2107724, -0.55001956, 0.64989233, 1.2748629, 0.124951065, 0.17496084, 1.3747307, 0.54987276, 0.24988742, 1.3249315, 0.6206441, 0.24988742, 1.2955903, 0.04992169, 1.35, 0.07483363, 0.649863, 0.049951058, 1.2247945, 0.75, 0.5499902, 0.44765568, 0.649863, 0.24988742, -1.2250636, 0.649863, 0.42564115, -1.0107918, 0.649863, 0.4877496, -0.9300361, 0.649863, 0.5266004, -0.8360903, 0.4498825, 1.1499314, -0.57121176, -0.75, 0.64989233, 0.5477927, -0.6500098, 0.24988742, 1.2247945, -0.6207909, 0.24988742, 1.2955903, -0.55001956, 0.24988742, 1.3249315, -0.12509787, 0.17496084, 1.3747307, -0.050068498, 1.35, 0.07483363, -0.45002937, 1.1499314, 0.2107724, 0.17487276, 0.12487764, 1.3747307, 0.54987276, 0.049951058, 1.3249315, 0.6206441, 0.049951058, 1.2955903, 0.04992169, 1.35, -0.425044, 0.124951065, 0, 1.3747307, 0.649863, 0.049951058, -1.2250636, 0.6206441, 0.24988742, -1.2958593, 0.54987276, 0.5499902, -1.3252006, 0.45986688, 1.0999804, -0.6452378, -0.75, 0.64989233, 0.44765568, -0.75, 0.5499902, 0.5477927, -0.6500098, 0.049951058, 1.2247945, -0.6207909, 0.049951058, 1.2955903, -0.55001956, 0.049951058, 1.3249315, -0.17501956, 0.12487764, 1.3747307, -0.050068498, 1.35, -0.425044, -0.45002937, 1.1499314, -0.57121176, 0.17487276, 0.049951058, 1.3747307, -0.12509787, 0, 1.3747307, 0.124951065, 0, -1.3749999, 0.6206441, 0.049951058, -1.2958593, 0.54987276, 0.049951058, -1.3252006, 0.17487276, 0.12487764, -1.3749999, 0.124951065, 0.17496084, -1.3749999, -0.55001956, 0.5499902, -1.3252006, -0.75, 0.5499902, 0.44765568, -0.6500098, 0.5266004, -0.8360903, -0.6500098, 0.4877496, -0.9300361, -0.6500098, 0.42564115, -1.0107918, -0.6500098, 0.24988742, -1.2250636, -0.6500098, 0.049951058, -1.2250636, -0.17501956, 0.049951058, 1.3747307, -0.46001372, 1.0999804, -0.6452378, -0.12509787, 0, -1.3749999, 0.17487276, 0.049951058, -1.3749999, -0.12509787, 0.17496084, -1.3749999, -0.17501956, 0.12487764, -1.3749999, -0.55001956, 0.049951058, -1.3252006, -0.6207909, 0.24988742, -1.2958593, -0.6207909, 0.049951058, -1.2958593, -0.17501956, 0.049951058, -1.3749999)
@@ -207,14 +234,6 @@ shadow_mesh = SubResource("ArrayMesh_iusih")
 [sub_resource type="SphereShape3D" id="SphereShape3D_sw6ji"]
 radius = 0.21
 
-[sub_resource type="Curve" id="Curve_sw6ji"]
-_data = [Vector2(0, 0.7512926), 0.0, -0.47388864, 0, 0]
-point_count = 1
-
-[sub_resource type="Curve" id="Curve_0wjsq"]
-_data = [Vector2(0, 0.7512926), 0.0, -0.47388864, 0, 0]
-point_count = 1
-
 [sub_resource type="Gradient" id="Gradient_hcdi7"]
 colors = PackedColorArray(0, 0, 0, 0.87058824, 0, 0, 0, 0.28627452)
 
@@ -235,7 +254,7 @@ size = Vector2(0.1, 0.3)
 orientation = 1
 
 [node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "Wheels", "SkidMarks", "EngineSound")]
-mass = 90.0
+mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.05, 0.1)
@@ -246,12 +265,12 @@ script = ExtResource("1_denii")
 OrbitCamera = NodePath("OrbitCamera")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
-Acceleration = 155
+Acceleration = 180
 MaxSpeed = 25
 BrakingSpeedMultiplier = 0.7
 ReverseSpeedMultiplier = 0.4
 TireTurnSpeed = 1.0
-SteeringMaxDegrees = 6
+SteeringBaseDegrees = 5
 SlippingTraction = 0.15
 SlipThreshold = 0.3
 UnslipThreshold = 0.4
@@ -259,6 +278,8 @@ AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_vwi5m")
 EngineSound = NodePath("EngineSoundPlayer")
+FrontWheelConfig = SubResource("Resource_lce11")
+RearWheelConfig = SubResource("Resource_lml1i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -297,14 +318,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, 0.47616428)
 shape = SubResource("SphereShape3D_sw6ji")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_sw6ji")
-SpringStrength = 5000
-SpringDamping = 100.0
-SpringRest = 0.18
-OverExtend = 0.1
-WheelRadius = 0.26
-IsDriveWheel = true
-IsSteerWheel = true
-GripCurve = SubResource("Curve_sw6ji")
+IsFrontWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.09549509, -0.107789755, 0.053891957)
@@ -315,14 +329,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, 0.47616428
 shape = SubResource("SphereShape3D_sw6ji")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_sw6ji")
-SpringStrength = 5000
-SpringDamping = 100.0
-SpringRest = 0.18
-OverExtend = 0.1
-WheelRadius = 0.26
-IsDriveWheel = true
-IsSteerWheel = true
-GripCurve = SubResource("Curve_0wjsq")
+IsFrontWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.094999984, -0.107789755, 0.053891957)
@@ -333,12 +340,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, -0.45746768
 shape = SubResource("SphereShape3D_sw6ji")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_sw6ji")
-SpringStrength = 5000
-SpringDamping = 100.0
-SpringRest = 0.18
-OverExtend = 0.1
-WheelRadius = 0.26
-GripCurve = ExtResource("4_vwi5m")
+IsRearWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.09549509, -0.107789755, -0.07626128)
@@ -349,12 +351,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, -0.4574676
 shape = SubResource("SphereShape3D_sw6ji")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_sw6ji")
-SpringStrength = 5000
-SpringDamping = 100.0
-SpringRest = 0.18
-OverExtend = 0.1
-WheelRadius = 0.26
-GripCurve = ExtResource("4_vwi5m")
+IsRearWheel = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.094999984, -0.107789755, -0.07626128)
