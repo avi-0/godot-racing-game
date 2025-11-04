@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=19 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_micox"]
 [ext_resource type="PackedScene" uid="uid://biodx1fq5tguf" path="res://assets/kenney/carkit/sedan-sports.glb" id="2_g5cig"]
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/CarWheel.cs" id="3_hcdi7"]
+[ext_resource type="Curve" uid="uid://ldx8yjfmml3t" path="res://scenes/cars_extras/curves/driftcar_fronttiregrip_curve.tres" id="4_g5cig"]
 [ext_resource type="Curve" uid="uid://c213x6eax80ca" path="res://scenes/cars_extras/curves/driftcar_reartiresgrip_curve.tres" id="5_g5cig"]
 [ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="6_g5cig"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="6_xv7xt"]
@@ -18,8 +19,8 @@ point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 8), 0.0, -37.221794, 0, 0, Vector2(0.22872339, 3.0594616), -8.123794, -8.123794, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 8), 0.0, -37.221794, 0, 0, Vector2(0.21542554, 3.8123055), -11.204828, -11.204828, 0, 0, Vector2(0.5159574, 1.8360901), -2.7739823, -2.7739823, 0, 0, Vector2(1, 1), -0.9904156, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Curve" id="Curve_xv7xt"]
 _limits = [1.0, 2.0, 0.0, 1.0]
@@ -57,7 +58,7 @@ collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0.3, 0)
+center_of_mass = Vector3(0, 0.1, 0)
 continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
@@ -65,8 +66,8 @@ script = ExtResource("1_micox")
 OrbitCamera = NodePath("OrbitCamera")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
-Acceleration = 200
-MaxSpeed = 20
+Acceleration = 300
+MaxSpeed = 30
 TireTurnSpeed = 8.0
 SteeringMaxDegrees = 5
 SlippingTraction = 0.15
@@ -108,7 +109,7 @@ SpringRest = 0.15
 OverExtend = 0.1
 WheelRadius = 0.21
 IsSteerWheel = true
-GripCurve = ExtResource("5_g5cig")
+GripCurve = ExtResource("4_g5cig")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.085, 0, 0)
@@ -125,7 +126,7 @@ SpringRest = 0.15
 OverExtend = 0.1
 WheelRadius = 0.21
 IsSteerWheel = true
-GripCurve = ExtResource("5_g5cig")
+GripCurve = ExtResource("4_g5cig")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)

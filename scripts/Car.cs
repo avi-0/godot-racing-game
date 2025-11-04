@@ -261,7 +261,7 @@ public partial class Car : RigidBody3D
 		{
 			var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
 			
-			var contactPoint = wheelRay.WheelModel.GlobalPosition;
+			var contactPoint = wheelRay.GetCollisionPoint(0);
 			var steerSideDirection = wheelRay.GlobalBasis.X;
 			var tireVelocity = GetPointVelocity(contactPoint);
 			var steerXVelocity = steerSideDirection.Dot(tireVelocity);
@@ -298,13 +298,13 @@ public partial class Car : RigidBody3D
 			var zTraction = 0.05f;
 			var zForce = wheelRay.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
 			
-			var forcePos = wheelRay.WheelModel.GlobalPosition - GlobalPosition;
+			var forcePos = contactPoint - GlobalPosition;
 			ApplyForce(xForce, forcePos);
 			ApplyForce(zForce, forcePos);
 			if (DebugMode)
 			{
-				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, xForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
-				DebugDraw3D.DrawArrowRay(wheelRay.GlobalPosition, zForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
+				DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
+				DebugDraw3D.DrawArrowRay(contactPoint, zForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
 			}
 		}
 		else

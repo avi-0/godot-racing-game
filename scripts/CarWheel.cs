@@ -18,6 +18,8 @@ public partial class CarWheel : ShapeCast3D
 	[Export] public Curve GripCurve;
 
 	public Node3D WheelModel;
+
+	public bool IsSlipping = false;
 	
 	public override void _Ready()
 	{
