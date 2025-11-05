@@ -282,9 +282,12 @@ public partial class Car : RigidBody3D
 					_isReversing = false;
 				}
 
-				if (wheel.Config.IsDriveWheel || _isReversing)
+				if (wheel.Config.IsDriveWheel || (_isBraking && !_isReversing))
 				{
-					ApplyForce(forceVectorForward, forcePosition);
+					if (wheel.Config.IsDriveWheel)
+					{
+						ApplyForce(forceVectorForward, forcePosition);
+					}
 					ApplyForce(forceVectorBackward, forcePosition);
 					if (DebugMode)
 					{
