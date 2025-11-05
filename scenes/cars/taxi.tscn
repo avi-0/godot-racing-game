@@ -253,7 +253,7 @@ material = SubResource("StandardMaterial3D_xv7xt")
 size = Vector2(0.1, 0.3)
 orientation = 1
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "Wheels", "SkidMarks", "EngineSound")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "Wheels", "SkidMarks", "EngineSound")]
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
@@ -263,6 +263,7 @@ linear_damp_mode = 1
 linear_damp = 0.25
 script = ExtResource("1_denii")
 OrbitCamera = NodePath("OrbitCamera")
+FrontCamera = NodePath("FrontCamera")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 180
@@ -401,3 +402,6 @@ draw_pass_1 = SubResource("QuadMesh_g5cig")
 stream = ExtResource("5_denii")
 bus = &"enginesounds"
 playback_type = 1
+
+[node name="FrontCamera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.742467, 0.44939327)

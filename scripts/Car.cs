@@ -10,7 +10,9 @@ public partial class Car : RigidBody3D
 	[Signal]
 	public delegate void RestartRequestedEventHandler();
 
-	[ExportCategory("Camera")] [Export] public OrbitCamera OrbitCamera;
+	[ExportCategory("Cameras")] 
+	[Export] public OrbitCamera OrbitCamera;
+	[Export] public Camera3D FrontCamera;
 	
 	[ExportCategory("Node Arrays")]
 	[Export] public CarWheel[] Wheels;
@@ -119,6 +121,24 @@ public partial class Car : RigidBody3D
 			OrbitCamera.UpdateYaw((float) delta, LinearVelocity);
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("camera_switch"))
+		{
+			if (OrbitCamera.Camera.Current)
+			{
+				OrbitCamera.Camera.Current = false;
+				FrontCamera.Current = true;
+			}
+			else
+			{
+				FrontCamera.Current = false;
+				OrbitCamera.Camera.Current = true;
+			}
+			GetViewport().SetInputAsHandled();
+		}
+	}
+	
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (!IsLocallyControlled)
