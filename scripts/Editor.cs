@@ -245,7 +245,9 @@ public partial class Editor : Control
 		_cursor = BlockScene.Instantiate<Block>();
 
 		AddChild(_cursor);
-		_cursor.RotateY(-float.DegreesToRadians(90) * _rotation);
+		_cursor.RotateY(-Single.Pi * _rotation / 2);
+		_cursor.Transform = _cursor.Transform.Rounded();
+		
 		_cursor.SetMaterialOverlay(BlockHighlightMaterial);
 	}
 
@@ -305,7 +307,9 @@ public partial class Editor : Control
 
 	private void RotateCursor()
 	{
-		_cursor.RotateY(-float.DegreesToRadians(90));
+		_cursor.RotateY(-Single.Pi / 2);
+		_cursor.Transform = _cursor.Transform.Rounded();
+		
 		_cursor.GlobalRotationDegrees = _cursor.GlobalRotationDegrees.Round();
 
 		_rotation = (_rotation + 1) % 4;
