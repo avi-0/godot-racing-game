@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Newtonsoft.Json;
 
 namespace racingGame;
 
@@ -26,8 +27,6 @@ public partial class GameManager : Node
 	[Export] public PackedScene CarScene;
 	[Export] public Label CheckPointLabel;
 
-	public Dictionary<string, string> CurrentTrackMeta;
-
 	[Export] public PanelContainer FinishPanel;
 	[Export] public Label FinishTimeLabel;
 	[Export] public Label LapsLabel;
@@ -45,9 +44,7 @@ public partial class GameManager : Node
 	[Export] public Label TimeLabel;
 	[Export] public Label TrackInfoLabel;
 
-	[Export] public Node3D TrackNode;
-
-	[Export(PropertyHint.FilePath)] public string TrackTemplatePath;
+	[Export] public Track Track;
 
 	public override void _Ready()
 	{
@@ -116,7 +113,6 @@ public partial class GameManager : Node
 
 		_localPlayerId = -1;
 		GameModeController.CurrentGameMode.KillGame();
-		//CurrentTrackMeta = null;
 
 		MusicPlayer.Stop();
 	}
@@ -154,26 +150,37 @@ public partial class GameManager : Node
 
 	private Transform3D GetStartPoint()
 	{
-		foreach (var block in TrackNode.FindChildren("*", "Block", false).Cast<Block>())
+		foreach (var block in Track.FindChildren("*", "Block", false).Cast<Block>())
 			if (block.IsStart)
 				return block.SpawnPoint;
 
 		return Transform3D.Identity;
 	}
 
+	public void OpenTrack(string path)
+	{
+		GD.Print($"Opening track at {path}");
+
+		var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+		var text = file.GetAsText();
+		var data = JsonConvert.DeserializeObject<TrackData>(text);
+
+		Track.Load(data);
+
+		GameModeController.CurrentGameMode.InitTrack(Track);
+		GD.Print("Track UID: " + GetLoadedTrackUid());
+	}
+	
 	public void SaveTrack(string path)
 	{
 		GD.Print($"Saving track as {path}");
-
-		foreach (var key in CurrentTrackMeta.Keys) TrackNode.SetMeta(key, CurrentTrackMeta[key]);
-		TrackNode.SetMeta("TrackUID", Guid.NewGuid().ToString());
+		
 		GD.Print($"New Track UID: {GetLoadedTrackUid()}");
 
-		foreach (var child in TrackNode.GetChildren()) child.Owner = TrackNode;
+		var text = JsonConvert.SerializeObject(Track.Save());
 
-		var scene = new PackedScene();
-		GD.Print($"Packing: {scene.Pack(TrackNode)}");
-		GD.Print($"Saving: {ResourceSaver.Save(scene, path)}");
+		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
+		file.StoreString(text);
 	}
 
 	public IOrderedEnumerable<string> LoadCarList()
@@ -181,42 +188,21 @@ public partial class GameManager : Node
 		return ResourceLoader.ListDirectory(CarsPath).ToList().Order();
 	}
 
-	public Dictionary<string, string> GetTrackMetadata(string path)
+	public TrackOptions GetTrackOptions(string path)
 	{
-		var returnList = new Dictionary<string, string>();
-
-		var scenestate = ResourceLoader.Load<PackedScene>(path, cacheMode: ResourceLoader.CacheMode.Ignore).GetState();
-		for (var propertyId = 0; propertyId < scenestate.GetNodePropertyCount(0); propertyId++)
+		try
 		{
-			string propertyName = scenestate.GetNodePropertyName(0, propertyId);
-			if (propertyName.Contains("metadata/"))
-			{
-				propertyName = propertyName.Replace("metadata/", "");
-				returnList.Add(propertyName, (string)scenestate.GetNodePropertyValue(0, propertyId));
-				GD.Print(propertyName + " " + returnList[propertyName]);
-			}
+			var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+			var text = file.GetAsText();
+			GD.Print(text);
+			var data = JsonConvert.DeserializeObject<TrackData>(text);
+
+			return data.Options;
 		}
-
-		return returnList;
-	}
-
-	public void OpenTrack(string path)
-	{
-		GD.Print($"Opening track at {path}");
-
-		CurrentTrackMeta = GetTrackMetadata(path);
-
-		var scene = ResourceLoader.Load<PackedScene>(path, cacheMode: ResourceLoader.CacheMode.Ignore);
-		var newTrackNode = scene.Instantiate<Node3D>();
-
-		TrackNode.AddSibling(newTrackNode);
-		TrackNode.GetParent().RemoveChild(TrackNode);
-		TrackNode.QueueFree();
-		TrackNode = newTrackNode;
-		TrackNode.Name = "Track";
-
-		GameModeController.CurrentGameMode.InitTrack(TrackNode);
-		GD.Print("Track UID: " + GetLoadedTrackUid());
+		catch
+		{
+			return null;
+		}
 	}
 
 	public void OnFinishButtonPressed()
@@ -228,7 +214,7 @@ public partial class GameManager : Node
 
 	public void NewTrack()
 	{
-		OpenTrack(TrackTemplatePath);
+		Track.Load(new TrackData());
 	}
 
 	private float GuessResolutionScaling()
@@ -244,6 +230,6 @@ public partial class GameManager : Node
 
 	public string GetLoadedTrackUid()
 	{
-		return CurrentTrackMeta["TrackUID"];
+		return Track.Options.Uid;
 	}
 }

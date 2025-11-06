@@ -87,12 +87,15 @@ public partial class MainMenu : Control
 		
 		foreach (var trackPath in trackList)
 		{
-			var trackMeta = GameManager.Singleton.GetTrackMetadata(basePath + trackPath);
-			if (trackMeta.ContainsKey("AuthorTime") && trackMeta["AuthorTime"] != "0")
+			var options = GameManager.Singleton.GetTrackOptions(basePath + trackPath);
+			if (options == null)
+				continue;
+			
+			if (options.AuthorTime > 0)
 			{
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
-				button.Text = trackMeta["TrackName"];
+				button.Text = options.Name;
 				button.Pressed += () => OpenTrack(basePath + trackPath).Forget();
 
 				TrackContainer.AddChild(button);
@@ -101,6 +104,8 @@ public partial class MainMenu : Control
 	}
 	private IOrderedEnumerable<string> LoadTrackList(string path)
 	{
-		return ResourceLoader.ListDirectory(path).ToList().Order();
+		return ResourceLoader.ListDirectory(path)
+			.Where(filePath => filePath.EndsWith(".tk.json"))
+			.ToList().Order();
 	}
 }

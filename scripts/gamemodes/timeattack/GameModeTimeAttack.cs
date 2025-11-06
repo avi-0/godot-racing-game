@@ -64,25 +64,20 @@ public class GameModeTimeAttack : IGameMode
 		}
 	}
 
-	public void InitTrack(Node3D trackNode)
+	public void InitTrack(Track track)
 	{
-		_currentTrack = new TimeAttackMap(GameManager.Singleton.CurrentTrackMeta["TrackUID"], trackNode);
+		_currentTrack = new TimeAttackMap(track);
 		_players = new List<TimeAttackPlayer>();
 
-		if (_currentTrack.TrackUid == "0")
+		if (track.Options.Uid == "0")
 			_inEditor = true;
 		else
 			_inEditor = false;
 
-		if (GameManager.Singleton.CurrentTrackMeta.ContainsKey("AuthorTime"))
-			_currentTrack.AuthorTime = GameManager.Singleton.CurrentTrackMeta["AuthorTime"].ToInt();
-		else
-			_currentTrack.AuthorTime = 0;
-
-		GameManager.Singleton.SelectCarScene(GameManager.Singleton.CurrentTrackMeta["CarType"]);
+		GameManager.Singleton.SelectCarScene(track.Options.CarType);
 
 		var blockCount = 0;
-		foreach (var block in trackNode.FindChildren("*", "Block", false).Cast<Block>())
+		foreach (var block in track.FindChildren("*", "Block", false).Cast<Block>())
 		{
 			block.BlockId = blockCount;
 			blockCount++;
@@ -99,14 +94,8 @@ public class GameModeTimeAttack : IGameMode
 		}
 
 		GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
-
-		_currentTrack.MapType = GameManager.Singleton.CurrentTrackMeta["MapType"];
-		_currentTrack.TrackName = GameManager.Singleton.CurrentTrackMeta["TrackName"];
-		_currentTrack.AuthorName = GameManager.Singleton.CurrentTrackMeta["AuthorName"];
-		GameModeController.Utils.SetTrackInfo(_currentTrack.TrackName, _currentTrack.AuthorName);
-
-		_currentTrack.LapsCount = GameManager.Singleton.CurrentTrackMeta["LapsCount"].ToInt();
-		GameModeController.Utils.SetLapsCount(0, _currentTrack.LapsCount);
+		GameModeController.Utils.SetTrackInfo(_currentTrack.Track.Options.Name, _currentTrack.Track.Options.AuthorName);
+		GameModeController.Utils.SetLapsCount(0, _currentTrack.Track.Options.Laps);
 	}
 
 	public int SpawnPlayer(bool localPlayer, Car playerCar)
@@ -122,9 +111,9 @@ public class GameModeTimeAttack : IGameMode
 		{
 			TimeSpan loadedPb;
 			if (!_inEditor)
-				loadedPb = GameModeController.Utils.LoadUserPb(_currentTrack.TrackUid);
+				loadedPb = GameModeController.Utils.LoadUserPb(_currentTrack.Track.Options.Uid);
 			else
-				loadedPb = new TimeSpan(0, 0, 0, 0, _currentTrack.AuthorTime);
+				loadedPb = new TimeSpan(0, 0, 0, 0, _currentTrack.Track.Options.AuthorTime);
 
 			if (loadedPb != TimeSpan.Zero)
 			{
@@ -175,10 +164,10 @@ public class GameModeTimeAttack : IGameMode
 		{
 			player.LapsDone++;
 
-			if (player.LapsDone < _currentTrack.LapsCount)
+			if (player.LapsDone < _currentTrack.Track.Options.Laps)
 			{
 				player.CheckPointsCollected = new List<int>();
-				GameModeController.Utils.SetLapsCount(player.LapsDone, _currentTrack.LapsCount);
+				GameModeController.Utils.SetLapsCount(player.LapsDone, _currentTrack.Track.Options.Laps);
 				GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
 			}
 			else
@@ -238,7 +227,6 @@ public class GameModeTimeAttack : IGameMode
 
 	private void SetAuthorTime(int ms)
 	{
-		_currentTrack.AuthorTime = ms;
-		GameManager.Singleton.CurrentTrackMeta["AuthorTime"] = ms.ToString();
+		_currentTrack.Track.Options.AuthorTime = ms;
 	}
 }
