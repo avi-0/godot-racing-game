@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://vm6lfckmiut8"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://vm6lfckmiut8"]
 
-[ext_resource type="PackedScene" uid="uid://blroigpns2odr" path="res://assets/kenney/cityroads/road/road-slant-high.glb" id="1_c5iiw"]
-[ext_resource type="PackedScene" uid="uid://dj1ifkj7h1sk3" path="res://blocks/road/_scenes/road-slant-high.tscn" id="1_fouoi"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_y4e61"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-slant-high.png" id="3_gkls5"]
+[ext_resource type="Texture2D" uid="uid://dtq5y1rgh3aue" path="res://blocks/road/_images/road-slant-high.png" id="1_c5iiw"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_qx64i"]
 
 [resource]
-script = ExtResource("2_y4e61")
-SourceScene = ExtResource("1_c5iiw")
-Scene = ExtResource("1_fouoi")
-ThumbnailTexture = ExtResource("3_gkls5")
+script = ExtResource("1_qx64i")
+ScenePath = "res://blocks/road/_scenes/road-slant-high.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-slant-high.glb"
+ThumbnailTexture = ExtResource("1_c5iiw")

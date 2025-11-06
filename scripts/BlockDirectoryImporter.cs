@@ -20,11 +20,10 @@ public partial class BlockDirectoryImporter : Resource
 		foreach (var path in GetModelPaths(SourcePath + "/"))
 		{
 			var modelPath = SourcePath.PathJoin(path);
-			var model = ResourceLoader.Load<PackedScene>(modelPath);
 			var recordPath = ResourcePath.GetBaseDir().PathJoin(path.GetBaseName() + ".tres");
 
 			var record = new BlockRecord();
-			record.SourceScene = model;
+			record.SourceScenePath = modelPath;
 			record.TakeOverPath(recordPath);
 
 			ResourceSaver.Singleton.Save(record);

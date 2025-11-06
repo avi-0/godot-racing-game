@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://nyjag2wdvc5f"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://nyjag2wdvc5f"]
 
-[ext_resource type="PackedScene" uid="uid://d0ux2ke51gom6" path="res://assets/kenney/cityroads/road/road-curve-intersection-barrier_M.glb" id="1_26qcs"]
-[ext_resource type="PackedScene" uid="uid://kf8v38ww05xy" path="res://blocks/road/_scenes/road-curve-intersection-barrier_M.tscn" id="1_58iyw"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_hqy7b"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-curve-intersection-barrier_M.png" id="3_yrgru"]
+[ext_resource type="Texture2D" uid="uid://d03hl0qv0pwk3" path="res://blocks/road/_images/road-curve-intersection-barrier_M.png" id="1_26qcs"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_y3c83"]
 
 [resource]
-script = ExtResource("2_hqy7b")
-SourceScene = ExtResource("1_26qcs")
-Scene = ExtResource("1_58iyw")
-ThumbnailTexture = ExtResource("3_yrgru")
+script = ExtResource("1_y3c83")
+ScenePath = "res://blocks/road/_scenes/road-curve-intersection-barrier_M.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-curve-intersection-barrier_M.glb"
+ThumbnailTexture = ExtResource("1_26qcs")

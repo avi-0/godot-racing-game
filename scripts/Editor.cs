@@ -16,11 +16,6 @@ public partial class Editor : Control
 
 	public static Editor Singleton;
 
-	// this thing is used to ensure loaded blocks are kept in memory
-	// so that ResourceLoader's cache doesn't remove them
-	// aka it leaks memory :)
-	private readonly Dictionary<string, Resource> _blockCache = new();
-
 	private string _blockDirectory;
 	private float _cellHeight = 1;
 	private float _cellSize = 8;
@@ -83,7 +78,7 @@ public partial class Editor : Control
 
 	[Export] public Button SaveButton;
 
-	private Node3D TrackNode => GameManager.Singleton.TrackNode;
+	private Track Track => GameManager.Singleton.Track;
 
 	private float YLevelRounded => _cellHeight * float.Round(_yLevel / _cellHeight);
 
@@ -175,10 +170,9 @@ public partial class Editor : Control
 		{
 			CloseTrack();
 			GameManager.Singleton.OpenTrack(path);
-			GameManager.Singleton.CurrentTrackMeta["TrackUID"] = "0";
 			SetupOptions();
 
-			foreach (var block in TrackNode.FindChildren("*", "Block").Cast<Block>()) ConnectBlockSignals(block);
+			foreach (var block in Track.FindChildren("*", "Block").Cast<Block>()) ConnectBlockSignals(block);
 		}
 		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
 		{
@@ -195,7 +189,8 @@ public partial class Editor : Control
 	{
 		IsRunning = false;
 
-		GameModeController.CurrentGameMode.InitTrack(TrackNode);
+		Track.Options.Uid = "0";
+		GameModeController.CurrentGameMode.InitTrack(Track);
 		GameManager.Singleton.Play();
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
 
@@ -216,12 +211,7 @@ public partial class Editor : Control
 	{
 		return GetBlockPaths(BlockPath, dirPath)
 			.Order()
-			.Select(path =>
-			{
-				var res = ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord");
-				_blockCache[path] = res;
-				return res;
-			})
+			.Select(path => ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord"))
 			.Where(resource => resource is BlockRecord)
 			.Cast<BlockRecord>();
 	}
@@ -281,10 +271,10 @@ public partial class Editor : Control
 
 		var transform = _cursor.GlobalTransform;
 		_cursor.GetParent().RemoveChild(_cursor);
-		TrackNode.AddChild(_cursor, forceReadableName: true);
+		Track.AddChild(_cursor, forceReadableName: true);
 		_cursor.GlobalTransform = transform;
 		
-		_cursor.Owner = TrackNode;
+		_cursor.Owner = Track;
 		
 		ConnectBlockSignals(_cursor);
 
@@ -393,7 +383,7 @@ public partial class Editor : Control
 
 	private void EraseBlock(Block block)
 	{
-		TrackNode.RemoveChild(block);
+		Track.RemoveChild(block);
 		block.QueueFree();
 		InvalidateTrack();
 		
@@ -413,7 +403,7 @@ public partial class Editor : Control
 
 	private Block GetBlockAtPosition(Vector3 pos)
 	{
-		foreach (var block in TrackNode.GetChildren().Cast<Block>())
+		foreach (var block in Track.GetChildren().Cast<Block>())
 			if (block.GlobalPosition.IsEqualApprox(pos))
 				return block;
 
@@ -422,7 +412,7 @@ public partial class Editor : Control
 
 	private void OnBlockButtonPressed(BlockRecord blockRecord)
 	{
-		BlockScene = blockRecord.Scene;
+		BlockScene = ResourceLoader.Load<PackedScene>(blockRecord.ScenePath);
 
 		CreateCursor();
 	}
@@ -486,18 +476,18 @@ public partial class Editor : Control
 
 		var trackName = OptionsTree.CreateItem(root);
 		trackName.SetText(0, "TrackName");
-		trackName.SetText(1, GameManager.Singleton.CurrentTrackMeta["TrackName"]);
+		trackName.SetText(1, Track.Options.Name);
 		trackName.SetEditable(1, true);
 
 		var authorName = OptionsTree.CreateItem(root);
 		authorName.SetText(0, "AuthorName");
-		authorName.SetText(1, GameManager.Singleton.CurrentTrackMeta["AuthorName"]);
+		authorName.SetText(1, Track.Options.AuthorName);
 		authorName.SetEditable(1, true);
 
 		var mapType = OptionsTree.CreateItem(root);
-		mapType.SetText(0, "MapType");
+		mapType.SetText(0, "TrackType");
 		mapType.SetCellMode(1, TreeItem.TreeCellMode.Range);
-		mapType.SetText(1, GameManager.Singleton.CurrentTrackMeta["MapType"]);
+		mapType.SetText(1, Track.Options.TrackType);
 		mapType.SetEditable(1, true);
 
 		var carType = OptionsTree.CreateItem(root);
@@ -510,9 +500,9 @@ public partial class Editor : Control
 		carType.SetEditable(1, true);
 
 		var lapsCount = OptionsTree.CreateItem(root);
-		lapsCount.SetText(0, "LapsCount");
+		lapsCount.SetText(0, "Laps");
 		lapsCount.SetCellMode(1, TreeItem.TreeCellMode.Range);
-		lapsCount.SetRange(1, GameManager.Singleton.CurrentTrackMeta["LapsCount"].ToInt());
+		lapsCount.SetRange(1, Track.Options.Laps);
 		lapsCount.SetEditable(1, true);
 	}
 
@@ -524,22 +514,22 @@ public partial class Editor : Control
 		switch (editedItem.GetText(0))
 		{
 			case "TrackName":
-				GameManager.Singleton.CurrentTrackMeta["TrackName"] = editedItem.GetText(editedColumn);
+				Track.Options.Name = editedItem.GetText(editedColumn);
 				break;
 			case "AuthorName":
-				GameManager.Singleton.CurrentTrackMeta["AuthorName"] = editedItem.GetText(editedColumn);
+				Track.Options.AuthorName = editedItem.GetText(editedColumn);
 				break;
-			case "MapType":
-				GameManager.Singleton.CurrentTrackMeta["MapType"] = editedItem.GetText(editedColumn);
+			case "TrackType":
+				Track.Options.TrackType = editedItem.GetText(editedColumn);
 				break;
 			case "CarType":
-				GameManager.Singleton.CurrentTrackMeta["CarType"] =
+				Track.Options.CarType =
 					editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
-				GD.Print(GameManager.Singleton.CurrentTrackMeta["CarType"]);
+				GD.Print(Track.Options.CarType);
 				break;
-			case "LapsCount":
-				GameManager.Singleton.CurrentTrackMeta["LapsCount"] =
-					editedItem.GetRange(editedColumn).ToString(CultureInfo.InvariantCulture);
+			case "Laps":
+				Track.Options.Laps =
+					(int) editedItem.GetRange(editedColumn);
 				break;
 		}
 	}
@@ -550,7 +540,7 @@ public partial class Editor : Control
 
 	private void InvalidateTrack()
 	{
-		GameManager.Singleton.CurrentTrackMeta["AuthorTime"] = "0";
+		Track.Options.AuthorTime = 0;
 	}
 
 	private enum Mode

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://cq18prs01foir"]
 
-[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_ariit"]
-[ext_resource type="Material" uid="uid://dbxc174mn5qum" path="res://assets/kenney/citysuburban/materials/colormap.tres" id="2_wtwic"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_o02ct"]
+[ext_resource type="Material" uid="uid://dbxc174mn5qum" path="res://assets/kenney/citysuburban/materials/colormap.tres" id="2_hy3l6"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6yawh"]
 _surfaces = [{
@@ -27,7 +27,7 @@ _surfaces = [{
 "index_count": 72,
 "index_data": PackedByteArray("DgACAAoACgASAA4AEwAUAA8ADwAVABMAFgAXAAAAAAAYABYAGQAaABsAGwABABkAHAAdAB4AHgAfABwABQADAAsACwAEAAUAEAAHAAgACAAgABAAIQAiABEAEQAjACEAJAAlAAkACQAmACQAJwAoACkAKQANACcAKgArACwALAAtACoADAAGAC4ALgAvAAwA"),
 "lods": [0.010409984, PackedByteArray("DgACAAoAAgAOAAEADgAKAA8ADwABAA4AAAAPAAoADwAAAAEABQADAAsACwAEAAUAAwAFAAwADAAGAAMAEAAHAAgABwAQAA0AEAAIABEAEQANABAACQARAAgAEQAJAA0A"), 0.01386555, PackedByteArray("AgAKAAAAAAABAAIABQADAAsACwAEAAUAAwAFAAwADAAGAAMABwAIAAkACQANAAcA"), 0.05934719, PackedByteArray("AAABAAIAAwAEAAUABQAGAAMABwAIAAkA")],
-"material": ExtResource("2_wtwic"),
+"material": ExtResource("2_hy3l6"),
 "name": "colormap",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -37,11 +37,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6yawh")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e6gdu"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_22d4t"]
 data = PackedVector3Array(-0.06, 0.01, -0.089999996, -0.07, 0, -0.099999994, 0.07, 0, -0.099999994, 0.07, 0, -0.099999994, 0.06, 0.01, -0.089999996, -0.06, 0.01, -0.089999996, -0.06, 0.01, -0.089999996, 0.06, 0.01, -0.089999996, 0.06, 0.01, -0.01, 0.06, 0.01, -0.01, -0.06, 0.01, -0.01, -0.06, 0.01, -0.089999996, 0.06, 0.01, -0.089999996, 0.07, 0, -0.099999994, 0.07, 0, 0, 0.07, 0, 0, 0.06, 0.01, -0.01, 0.06, 0.01, -0.089999996, -0.07, 0, -0.099999994, -0.06, 0.01, -0.089999996, -0.06, 0.01, -0.01, -0.06, 0.01, -0.01, -0.07, 0, 0, -0.07, 0, -0.099999994, 0.06, 0.01, -0.01, 0.07, 0, 0, -0.07, 0, 0, -0.07, 0, 0, -0.06, 0.01, -0.01, 0.06, 0.01, -0.01, -0.07, 0, 0, 0.07, 0, 0, 0.07, 0, -0.099999994, 0.07, 0, -0.099999994, -0.07, 0, -0.099999994, -0.07, 0, 0, -0.06, 0.01, 0.01, -0.07, 0, 0, 0.07, 0, 0, 0.07, 0, 0, 0.06, 0.01, 0.01, -0.06, 0.01, 0.01, -0.06, 0.01, 0.01, 0.06, 0.01, 0.01, 0.06, 0.01, 0.089999996, 0.06, 0.01, 0.089999996, -0.06, 0.01, 0.089999996, -0.06, 0.01, 0.01, 0.06, 0.01, 0.01, 0.07, 0, 0, 0.07, 0, 0.099999994, 0.07, 0, 0.099999994, 0.06, 0.01, 0.089999996, 0.06, 0.01, 0.01, -0.07, 0, 0, -0.06, 0.01, 0.01, -0.06, 0.01, 0.089999996, -0.06, 0.01, 0.089999996, -0.07, 0, 0.099999994, -0.07, 0, 0, 0.06, 0.01, 0.089999996, 0.07, 0, 0.099999994, -0.07, 0, 0.099999994, -0.07, 0, 0.099999994, -0.06, 0.01, 0.089999996, 0.06, 0.01, 0.089999996, -0.07, 0, 0.099999994, 0.07, 0, 0.099999994, 0.07, 0, 0, 0.07, 0, 0, -0.07, 0, 0, -0.07, 0, 0.099999994)
 
 [node name="path-stones-short" type="Node3D"]
-script = ExtResource("1_ariit")
+script = ExtResource("1_o02ct")
 
 [node name="path-stones-short2" type="Node3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
@@ -53,4 +53,4 @@ skeleton = NodePath("")
 [node name="path-stones-short_col" type="StaticBody3D" parent="path-stones-short2/path-stones-short"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="path-stones-short2/path-stones-short/path-stones-short_col"]
-shape = SubResource("ConcavePolygonShape3D_e6gdu")
+shape = SubResource("ConcavePolygonShape3D_22d4t")

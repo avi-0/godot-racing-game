@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dg7f8wtf1guit"]
+
+[ext_resource type="Texture2D" path="res://blocks/road/_images/road-slant-curve-barrier_4.png" id="1_3bw88"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_4uvsf"]
+
+[resource]
+script = ExtResource("1_4uvsf")
+ScenePath = "res://blocks/road/_scenes/road-slant-curve-barrier_4.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-slant-curve-barrier_4.glb"
+ThumbnailTexture = ExtResource("1_3bw88")

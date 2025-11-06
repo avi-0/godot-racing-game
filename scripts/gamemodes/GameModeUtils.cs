@@ -47,7 +47,7 @@ public class GameModeUtils
 
 		if (!isEditor)
 		{
-			var at = GameManager.Singleton.CurrentTrackMeta["AuthorTime"].ToInt();
+			var at = GameManager.Singleton.Track.Options.AuthorTime;
 			if (finishTime.TotalMilliseconds <= at)
 				GameManager.Singleton.FinishTimeLabel.Text += "\nDiamond Medal!!!!";
 			else if (finishTime.TotalMilliseconds <= GetGoldFromAt(at))

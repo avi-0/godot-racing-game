@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bto7fjet3m3r6"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bto7fjet3m3r6"]
 
-[ext_resource type="PackedScene" uid="uid://1wko6qdscbq1" path="res://blocks/deco/commercial/_scenes/detail-parasol-b.tscn" id="1_ar4yu"]
-[ext_resource type="PackedScene" uid="uid://dutgrpgabceca" path="res://assets/kenney/citycommercial/detail-parasol-b.glb" id="1_x0lij"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_1j70c"]
-[ext_resource type="Texture2D" uid="uid://b2xnibp5yql5w" path="res://blocks/deco/commercial/_images/detail-parasol-b.png" id="3_nre6h"]
+[ext_resource type="Texture2D" uid="uid://b2xnibp5yql5w" path="res://blocks/deco/commercial/_images/detail-parasol-b.png" id="1_55u3u"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_vk6m7"]
 
 [resource]
-script = ExtResource("2_1j70c")
-SourceScene = ExtResource("1_x0lij")
-Scene = ExtResource("1_ar4yu")
-ThumbnailTexture = ExtResource("3_nre6h")
+script = ExtResource("1_vk6m7")
+ScenePath = "res://blocks/deco/commercial/_scenes/detail-parasol-b.tscn"
+SourceScenePath = "res://assets/kenney/citycommercial/detail-parasol-b.glb"
+ThumbnailTexture = ExtResource("1_55u3u")

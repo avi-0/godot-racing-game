@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dq2ortv551yvx"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dq2ortv551yvx"]
 
-[ext_resource type="PackedScene" uid="uid://dniif22a1bkw6" path="res://blocks/road/_scenes/road-slant-curve.tscn" id="1_ea4qk"]
-[ext_resource type="PackedScene" uid="uid://cnkn3hwt75a23" path="res://assets/kenney/cityroads/road/road-slant-curve.glb" id="1_igt0a"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_wvpdu"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-slant-curve.png" id="3_6b2ob"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_db1t8"]
+[ext_resource type="Texture2D" uid="uid://ld7s1b57482s" path="res://blocks/road/_images/road-slant-curve.png" id="1_igt0a"]
 
 [resource]
-script = ExtResource("2_wvpdu")
-SourceScene = ExtResource("1_igt0a")
-Scene = ExtResource("1_ea4qk")
-ThumbnailTexture = ExtResource("3_6b2ob")
+script = ExtResource("1_db1t8")
+ScenePath = "res://blocks/road/_scenes/road-slant-curve.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-slant-curve.glb"
+ThumbnailTexture = ExtResource("1_igt0a")

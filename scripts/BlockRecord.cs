@@ -9,8 +9,8 @@ namespace racingGame;
 [Tool]
 public partial class BlockRecord : Resource
 {
-	[Export] public PackedScene Scene;
-	[Export] public PackedScene SourceScene;
+	[Export(PropertyHint.File)] public string ScenePath;
+	[Export(PropertyHint.File)] public string SourceScenePath;
 
 	[Export] public Texture2D ThumbnailTexture;
 
@@ -29,7 +29,7 @@ public partial class BlockRecord : Resource
 		var camera = root.GetNode<Camera3D>("Camera3D");
 
 		var node = new Block();
-		node.Name = SourceScene.ResourcePath.GetFile().GetBaseName();
+		node.Name = SourceScenePath.GetFile().GetBaseName();
 		modelBase.AddChild(node);
 
 		// this adds the node to the EDITED scene, not actually needed but lets us see the node in the editor
@@ -39,7 +39,8 @@ public partial class BlockRecord : Resource
 
 		// editing
 
-		var model = SourceScene.Instantiate<Node3D>();
+		var sourceScene = ResourceLoader.Load<PackedScene>(SourceScenePath);
+		var model = sourceScene.Instantiate<Node3D>();
 		node.AddChild(model);
 		model.Owner = node;
 		model.SceneFilePath = ""; // break off the instance relationship so we can edit nodes freely
@@ -80,7 +81,7 @@ public partial class BlockRecord : Resource
 		DirAccess.MakeDirRecursiveAbsolute(packedScene.ResourcePath.GetBaseDir());
 		ResourceSaver.Singleton.Save(packedScene);
 
-		Scene = packedScene;
+		ScenePath = packedScene.ResourcePath;
 		DirAccess.MakeDirRecursiveAbsolute(ResourcePath.GetBaseDir());
 		ResourceSaver.Singleton.Save(this);
 

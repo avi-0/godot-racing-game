@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cgpc7nabf5wn8"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cgpc7nabf5wn8"]
 
-[ext_resource type="PackedScene" uid="uid://c8yufhg2j7swf" path="res://blocks/deco/suburban/_scenes/fence-low.tscn" id="1_2xms1"]
-[ext_resource type="PackedScene" uid="uid://dgbx0m3x6s12p" path="res://assets/kenney/citysuburban/fence-low.glb" id="1_b45f4"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_lkgno"]
-[ext_resource type="Texture2D" uid="uid://dmlox4au6spad" path="res://blocks/deco/suburban/_images/fence-low.png" id="3_eupht"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_55cof"]
+[ext_resource type="Texture2D" uid="uid://dmlox4au6spad" path="res://blocks/deco/suburban/_images/fence-low.png" id="1_63clx"]
 
 [resource]
-script = ExtResource("2_lkgno")
-SourceScene = ExtResource("1_b45f4")
-Scene = ExtResource("1_2xms1")
-ThumbnailTexture = ExtResource("3_eupht")
+script = ExtResource("1_55cof")
+ScenePath = "res://blocks/deco/suburban/_scenes/fence-low.tscn"
+SourceScenePath = "res://assets/kenney/citysuburban/fence-low.glb"
+ThumbnailTexture = ExtResource("1_63clx")

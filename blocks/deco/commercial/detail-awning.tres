@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bbks38ekiawct"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bbks38ekiawct"]
 
-[ext_resource type="PackedScene" uid="uid://bu43dpay874h" path="res://blocks/deco/commercial/_scenes/detail-awning.tscn" id="1_8tyvh"]
-[ext_resource type="PackedScene" uid="uid://bsm1ovfwve0qk" path="res://assets/kenney/citycommercial/detail-awning.glb" id="1_wqjp8"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_xdfut"]
-[ext_resource type="Texture2D" uid="uid://q0c48tneiu1g" path="res://blocks/deco/commercial/_images/detail-awning.png" id="3_dflhl"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_4o4lw"]
+[ext_resource type="Texture2D" uid="uid://q0c48tneiu1g" path="res://blocks/deco/commercial/_images/detail-awning.png" id="1_th00b"]
 
 [resource]
-script = ExtResource("2_xdfut")
-SourceScene = ExtResource("1_wqjp8")
-Scene = ExtResource("1_8tyvh")
-ThumbnailTexture = ExtResource("3_dflhl")
+script = ExtResource("1_4o4lw")
+ScenePath = "res://blocks/deco/commercial/_scenes/detail-awning.tscn"
+SourceScenePath = "res://assets/kenney/citycommercial/detail-awning.glb"
+ThumbnailTexture = ExtResource("1_th00b")

@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dof0o4n8nso8k"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dof0o4n8nso8k"]
 
-[ext_resource type="PackedScene" uid="uid://b0t65p61w54" path="res://blocks/road/_scenes/road-crossroad-line.tscn" id="1_llcel"]
-[ext_resource type="PackedScene" uid="uid://di6uectq44ibi" path="res://assets/kenney/cityroads/road/road-crossroad-line.glb" id="1_np8ov"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_ryxx1"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-crossroad-line.png" id="3_7qecm"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_en3yc"]
+[ext_resource type="Texture2D" uid="uid://c4n14afa3fhmv" path="res://blocks/road/_images/road-crossroad-line.png" id="1_np8ov"]
 
 [resource]
-script = ExtResource("2_ryxx1")
-SourceScene = ExtResource("1_np8ov")
-Scene = ExtResource("1_llcel")
-ThumbnailTexture = ExtResource("3_7qecm")
+script = ExtResource("1_en3yc")
+ScenePath = "res://blocks/road/_scenes/road-crossroad-line.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-crossroad-line.glb"
+ThumbnailTexture = ExtResource("1_np8ov")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=26 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_kp23o"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_5jirj"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://b0givguxksht0" path="res://assets/audio/music/StayInsideMe.mp3" id="9_3xj4h"]
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu/main_menu.tscn" id="9_10c2w"]
 [ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/main_menu/pause_menu.tscn" id="10_pg2xm"]
+[ext_resource type="PackedScene" uid="uid://ywlk133yau03" path="res://scenes/game/track_template.tscn" id="11_5v6r0"]
 [ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/main_menu/settings_menu.tscn" id="11_gc57s"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
@@ -73,7 +74,7 @@ RaceStartSound = SubResource("Resource_uyinl")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "MusicPlayer", "PauseMenu", "PbLabel", "RaceUi", "SettingsMenu", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "TrackNode")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "MusicPlayer", "PauseMenu", "PbLabel", "RaceUi", "SettingsMenu", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "Track")]
 script = ExtResource("3_vaxfo")
 CarScene = ExtResource("8_3xj4h")
 CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
@@ -89,7 +90,7 @@ SpeedLabel = NodePath("RaceUI/SpeedLabel")
 StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
 TimeLabel = NodePath("RaceUI/TimeLabel")
 TrackInfoLabel = NodePath("RaceUI/TrackInfo")
-TrackNode = NodePath("Track")
+Track = NodePath("Track")
 TrackTemplatePath = "res://scenes/game/track_template.tscn"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="GameManager"]
@@ -101,7 +102,7 @@ parameters/looping = false
 [node name="GameMode" type="Node" parent="GameManager"]
 script = ExtResource("5_otnwt")
 
-[node name="Track" type="Node3D" parent="GameManager"]
+[node name="Track" parent="GameManager" instance=ExtResource("11_5v6r0")]
 
 [node name="RaceUI" type="Control" parent="GameManager"]
 visible = false

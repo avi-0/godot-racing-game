@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cl6tha62d10w1"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cl6tha62d10w1"]
 
-[ext_resource type="PackedScene" uid="uid://chvshnpx3160x" path="res://assets/kenney/cityroads/deco/construction-cone.glb" id="1_dhny0"]
-[ext_resource type="PackedScene" uid="uid://h2sflxky20kk" path="res://blocks/deco/_scenes/construction-cone.tscn" id="1_iumip"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_21633"]
-[ext_resource type="Texture2D" path="res://blocks/deco/_images/construction-cone.png" id="3_qmv6a"]
+[ext_resource type="Texture2D" uid="uid://d2ogcb7a8c16s" path="res://blocks/deco/_images/construction-cone.png" id="1_dhny0"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_yvp6l"]
 
 [resource]
-script = ExtResource("2_21633")
-SourceScene = ExtResource("1_dhny0")
-Scene = ExtResource("1_iumip")
-ThumbnailTexture = ExtResource("3_qmv6a")
+script = ExtResource("1_yvp6l")
+ScenePath = "res://blocks/deco/_scenes/construction-cone.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/deco/construction-cone.glb"
+ThumbnailTexture = ExtResource("1_dhny0")

@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot;
+using Newtonsoft.Json;
 
 namespace racingGame;
 
@@ -52,5 +53,24 @@ public partial class Block : Node3D
 	{
 		foreach (var child in FindChildren("*", "MeshInstance3D").Cast<MeshInstance3D>())
 			child.MaterialOverlay = material;
+	}
+
+	public BlockPlacementData Save()
+	{
+		var data = new BlockPlacementData();
+		data.Transform = Transform;
+		data.SceneFilePath = SceneFilePath;
+
+		return data;
+	}
+
+	public static Block Load(BlockPlacementData data)
+	{
+		var scene = ResourceLoader.Load<PackedScene>(data.SceneFilePath);
+		var instance = scene.Instantiate<Block>();
+
+		instance.Transform = data.Transform;
+
+		return instance;
 	}
 }
