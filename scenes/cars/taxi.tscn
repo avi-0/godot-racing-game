@@ -78,6 +78,7 @@ size = Vector2(0.1, 0.3)
 orientation = 1
 
 [node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "Wheels", "SkidMarks", "EngineSound")]
+collision_layer = 2
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
