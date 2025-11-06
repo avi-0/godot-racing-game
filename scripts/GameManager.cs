@@ -160,12 +160,8 @@ public partial class GameManager : Node
 	public void OpenTrack(string path)
 	{
 		GD.Print($"Opening track at {path}");
-
-		var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-		var text = file.GetAsText();
-		var data = JsonConvert.DeserializeObject<TrackData>(text);
-
-		Track.Load(data);
+		
+		Track.Load(Jz.Load<TrackData>(path));
 
 		GameModeController.CurrentGameMode.InitTrack(Track);
 		GD.Print("Track UID: " + GetLoadedTrackUid());
@@ -174,13 +170,12 @@ public partial class GameManager : Node
 	public void SaveTrack(string path)
 	{
 		GD.Print($"Saving track as {path}");
+
+		Track.Options.Uid = Guid.NewGuid().ToString();
 		
 		GD.Print($"New Track UID: {GetLoadedTrackUid()}");
-
-		var text = JsonConvert.SerializeObject(Track.Save());
-
-		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-		file.StoreString(text);
+		
+		Jz.Save(path, Track.Save());
 	}
 
 	public IOrderedEnumerable<string> LoadCarList()
@@ -192,15 +187,13 @@ public partial class GameManager : Node
 	{
 		try
 		{
-			var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-			var text = file.GetAsText();
-			GD.Print(text);
-			var data = JsonConvert.DeserializeObject<TrackData>(text);
+			var data = Jz.Load<TrackData>(path);
 
 			return data.Options;
 		}
-		catch
+		catch (Exception e)
 		{
+			GD.PushError(e);
 			return null;
 		}
 	}

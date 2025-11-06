@@ -73,6 +73,7 @@ public class GameModeTimeAttack : IGameMode
 			_inEditor = true;
 		else
 			_inEditor = false;
+		GD.Print(_inEditor);
 
 		GameManager.Singleton.SelectCarScene(track.Options.CarType);
 
@@ -227,6 +228,7 @@ public class GameModeTimeAttack : IGameMode
 
 	private void SetAuthorTime(int ms)
 	{
+		GD.Print(ms);
 		_currentTrack.Track.Options.AuthorTime = ms;
 	}
 }

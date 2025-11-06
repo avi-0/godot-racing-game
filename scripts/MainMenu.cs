@@ -88,6 +88,8 @@ public partial class MainMenu : Control
 		foreach (var trackPath in trackList)
 		{
 			var options = GameManager.Singleton.GetTrackOptions(basePath + trackPath);
+			GD.Print(options);
+			
 			if (options == null)
 				continue;
 			
@@ -104,8 +106,9 @@ public partial class MainMenu : Control
 	}
 	private IOrderedEnumerable<string> LoadTrackList(string path)
 	{
-		return ResourceLoader.ListDirectory(path)
-			.Where(filePath => filePath.EndsWith(".tk.json"))
+		return DirAccess.Open(path)
+			.GetFiles()
+			.Where(file => file.EndsWith(".tk.jz"))
 			.ToList().Order();
 	}
 }

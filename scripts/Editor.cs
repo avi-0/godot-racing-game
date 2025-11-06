@@ -194,6 +194,7 @@ public partial class Editor : Control
 	{
 		IsRunning = false;
 
+		Track.Options.Uid = "0";
 		GameModeController.CurrentGameMode.InitTrack(Track);
 		GameManager.Singleton.Play();
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
@@ -297,7 +298,6 @@ public partial class Editor : Control
 
 	private void ConnectBlockSignals(Block block)
 	{
-		GD.Print(block);
 		block.ChildMouseEntered += OnBlockMouseEntered;
 	}
 
