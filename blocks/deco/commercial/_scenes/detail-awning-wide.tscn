@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://cwfls70cuaw4b"]
 
-[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_v7mav"]
-[ext_resource type="Material" uid="uid://chxgmwga2x4lh" path="res://assets/kenney/citycommercial/materials/colormap.tres" id="2_e1kac"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_dx45r"]
+[ext_resource type="Material" uid="uid://chxgmwga2x4lh" path="res://assets/kenney/citycommercial/materials/colormap.tres" id="2_yctif"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_thqnd"]
 _surfaces = [{
@@ -27,7 +27,7 @@ _surfaces = [{
 "index_count": 120,
 "index_data": PackedByteArray("AQAwADEAMQAAAAEAMgAzADQANAA1ADIANgA3ADgAOAA5ADYAAwA6ADsAOwACAAMAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAAQwBEAEAAQwBFAEQARgBHAEgASABJAEYASQBKAEYASgBLAEYABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwA"),
 "lods": [0.2097768, PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwA")],
-"material": ExtResource("2_e1kac"),
+"material": ExtResource("2_yctif"),
 "name": "colormap",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -37,11 +37,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_thqnd")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kutbs"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jpo8r"]
 data = PackedVector3Array(-0.39999998, 0.37, 0.2479, -0.39999998, 0.33159998, 0.12, -0.39999998, 0.36159998, 0.12, -0.39999998, 0.36159998, 0.12, -0.39999998, 0.39999998, 0.2479, -0.39999998, 0.37, 0.2479, -0.38, 0.3556, 0.099999994, -0.38, 0.3256, 0.099999994, 0.38, 0.3256, 0.099999994, 0.38, 0.3256, 0.099999994, 0.38, 0.3556, 0.099999994, -0.38, 0.3556, 0.099999994, 0.38, 0.3556, 0.099999994, 0.38, 0.3256, 0.099999994, 0.39999998, 0.33159998, 0.12, 0.39999998, 0.33159998, 0.12, 0.39999998, 0.36159998, 0.12, 0.38, 0.3556, 0.099999994, 0.39999998, 0.39999998, 0.2479, 0.39999998, 0.36159998, 0.12, 0.39999998, 0.33159998, 0.12, 0.39999998, 0.33159998, 0.12, 0.39999998, 0.37, 0.2479, 0.39999998, 0.39999998, 0.2479, -0.39999998, 0.33159998, 0.12, -0.38, 0.3256, 0.099999994, -0.38, 0.3556, 0.099999994, -0.38, 0.3556, 0.099999994, -0.39999998, 0.36159998, 0.12, -0.39999998, 0.33159998, 0.12, 0.38, 0.3556, 0.099999994, 0.39999998, 0.36159998, 0.12, 0.39999998, 0.39999998, 0.2479, 0.39999998, 0.39999998, 0.2479, -0.39999998, 0.39999998, 0.2479, 0.38, 0.3556, 0.099999994, -0.39999998, 0.39999998, 0.2479, -0.38, 0.3556, 0.099999994, 0.38, 0.3556, 0.099999994, -0.39999998, 0.39999998, 0.2479, -0.39999998, 0.36159998, 0.12, -0.38, 0.3556, 0.099999994, -0.39999998, 0.37, 0.2479, 0.39999998, 0.37, 0.2479, 0.39999998, 0.33159998, 0.12, 0.39999998, 0.33159998, 0.12, 0.38, 0.3256, 0.099999994, -0.39999998, 0.37, 0.2479, 0.38, 0.3256, 0.099999994, -0.38, 0.3256, 0.099999994, -0.39999998, 0.37, 0.2479, -0.38, 0.3256, 0.099999994, -0.39999998, 0.33159998, 0.12, -0.39999998, 0.37, 0.2479, 0.39999998, 0.39999998, 0.2479, 0.39999998, 0.37, 0.2479, -0.39999998, 0.37, 0.2479, -0.39999998, 0.37, 0.2479, -0.39999998, 0.39999998, 0.2479, 0.39999998, 0.39999998, 0.2479, 0.34, 0.34, 0.1479, 0.34, 0, 0.1479, 0.37, 0, 0.1479, 0.37, 0, 0.1479, 0.37, 0.34, 0.1479, 0.34, 0.34, 0.1479, 0.34, 0, 0.1779, 0.37, 0, 0.1779, 0.37, 0, 0.1479, 0.37, 0, 0.1479, 0.34, 0, 0.1479, 0.34, 0, 0.1779, 0.37, 0.34899998, 0.1779, 0.37, 0.34, 0.1479, 0.37, 0, 0.1479, 0.37, 0, 0.1479, 0.37, 0, 0.1779, 0.37, 0.34899998, 0.1779, 0.34, 0, 0.1779, 0.34, 0, 0.1479, 0.34, 0.34, 0.1479, 0.34, 0.34, 0.1479, 0.34, 0.34899998, 0.1779, 0.34, 0, 0.1779, 0.37, 0.34899998, 0.1779, 0.37, 0, 0.1779, 0.34, 0, 0.1779, 0.34, 0, 0.1779, 0.34, 0.34899998, 0.1779, 0.37, 0.34899998, 0.1779, -0.34, 0.34899998, 0.1779, -0.34, 0, 0.1779, -0.37, 0, 0.1779, -0.37, 0, 0.1779, -0.37, 0.34899998, 0.1779, -0.34, 0.34899998, 0.1779, -0.34, 0.34899998, 0.1779, -0.34, 0.34, 0.1479, -0.34, 0, 0.1479, -0.34, 0, 0.1479, -0.34, 0, 0.1779, -0.34, 0.34899998, 0.1779, -0.37, 0, 0.1779, -0.37, 0, 0.1479, -0.37, 0.34, 0.1479, -0.37, 0.34, 0.1479, -0.37, 0.34899998, 0.1779, -0.37, 0, 0.1779, -0.37, 0.34, 0.1479, -0.37, 0, 0.1479, -0.34, 0, 0.1479, -0.34, 0, 0.1479, -0.34, 0.34, 0.1479, -0.37, 0.34, 0.1479, -0.37, 0, 0.1779, -0.34, 0, 0.1779, -0.34, 0, 0.1479, -0.34, 0, 0.1479, -0.37, 0, 0.1479, -0.37, 0, 0.1779)
 
 [node name="detail-awning-wide" type="Node3D"]
-script = ExtResource("1_v7mav")
+script = ExtResource("1_dx45r")
 
 [node name="detail-awning-wide2" type="Node3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
@@ -53,4 +53,4 @@ skeleton = NodePath("")
 [node name="detail-awning-wide_col" type="StaticBody3D" parent="detail-awning-wide2/detail-awning-wide"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="detail-awning-wide2/detail-awning-wide/detail-awning-wide_col"]
-shape = SubResource("ConcavePolygonShape3D_kutbs")
+shape = SubResource("ConcavePolygonShape3D_jpo8r")

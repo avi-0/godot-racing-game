@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://fx5otwp3oy1e"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://fx5otwp3oy1e"]
 
-[ext_resource type="PackedScene" uid="uid://bjd02m3hp8ri4" path="res://blocks/road/_scenes/road-driveway-double-barrier.tscn" id="1_eodpc"]
-[ext_resource type="PackedScene" uid="uid://4d4v6oojfvf3" path="res://assets/kenney/cityroads/road/road-driveway-double-barrier.glb" id="1_gk8vw"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_tjaud"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-driveway-double-barrier.png" id="3_my0cs"]
+[ext_resource type="Texture2D" uid="uid://dnprgnhw1nt0r" path="res://blocks/road/_images/road-driveway-double-barrier.png" id="1_gk8vw"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_o8v3g"]
 
 [resource]
-script = ExtResource("2_tjaud")
-SourceScene = ExtResource("1_gk8vw")
-Scene = ExtResource("1_eodpc")
-ThumbnailTexture = ExtResource("3_my0cs")
+script = ExtResource("1_o8v3g")
+ScenePath = "res://blocks/road/_scenes/road-driveway-double-barrier.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-driveway-double-barrier.glb"
+ThumbnailTexture = ExtResource("1_gk8vw")

@@ -16,11 +16,6 @@ public partial class Editor : Control
 
 	public static Editor Singleton;
 
-	// this thing is used to ensure loaded blocks are kept in memory
-	// so that ResourceLoader's cache doesn't remove them
-	// aka it leaks memory :)
-	private readonly Dictionary<string, Resource> _blockCache = new();
-
 	private string _blockDirectory;
 	private float _cellHeight = 1;
 	private float _cellSize = 8;
@@ -216,12 +211,7 @@ public partial class Editor : Control
 	{
 		return GetBlockPaths(BlockPath, dirPath)
 			.Order()
-			.Select(path =>
-			{
-				var res = ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord");
-				_blockCache[path] = res;
-				return res;
-			})
+			.Select(path => ResourceLoader.Load(BlockPath.PathJoin(path), "BlockRecord"))
 			.Where(resource => resource is BlockRecord)
 			.Cast<BlockRecord>();
 	}
@@ -422,7 +412,7 @@ public partial class Editor : Control
 
 	private void OnBlockButtonPressed(BlockRecord blockRecord)
 	{
-		BlockScene = blockRecord.Scene;
+		BlockScene = ResourceLoader.Load<PackedScene>(blockRecord.ScenePath);
 
 		CreateCursor();
 	}

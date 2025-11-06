@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bym03ysjoqycl"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bym03ysjoqycl"]
 
-[ext_resource type="PackedScene" uid="uid://c0qb8cnvsmu6f" path="res://blocks/deco/industrial/_scenes/building-m.tscn" id="1_1c03t"]
-[ext_resource type="PackedScene" uid="uid://mgvwq02q7xw3" path="res://assets/kenney/cityindustrial/building-m.glb" id="1_ukdoa"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_r40si"]
-[ext_resource type="Texture2D" uid="uid://fnrgiu4qa45o" path="res://blocks/deco/industrial/_images/building-m.png" id="3_y1k31"]
+[ext_resource type="Texture2D" uid="uid://fnrgiu4qa45o" path="res://blocks/deco/industrial/_images/building-m.png" id="1_epe2f"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_fjwtp"]
 
 [resource]
-script = ExtResource("2_r40si")
-SourceScene = ExtResource("1_ukdoa")
-Scene = ExtResource("1_1c03t")
-ThumbnailTexture = ExtResource("3_y1k31")
+script = ExtResource("1_fjwtp")
+ScenePath = "res://blocks/deco/industrial/_scenes/building-m.tscn"
+SourceScenePath = "res://assets/kenney/cityindustrial/building-m.glb"
+ThumbnailTexture = ExtResource("1_epe2f")

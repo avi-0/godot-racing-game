@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://vrbnday1v1ad"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://vrbnday1v1ad"]
 
-[ext_resource type="PackedScene" uid="uid://xta0lsn7sfvc" path="res://blocks/deco/_scenes/light-curved.tscn" id="1_85750"]
-[ext_resource type="PackedScene" uid="uid://dnjk1c18khxxg" path="res://assets/kenney/cityroads/deco/light-curved.glb" id="1_qjab1"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_r5ife"]
-[ext_resource type="Texture2D" path="res://blocks/deco/_images/light-curved.png" id="3_pgr2l"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_d1x1b"]
+[ext_resource type="Texture2D" uid="uid://dh4tmmw0bjndx" path="res://blocks/deco/_images/light-curved.png" id="1_qjab1"]
 
 [resource]
-script = ExtResource("2_r5ife")
-SourceScene = ExtResource("1_qjab1")
-Scene = ExtResource("1_85750")
-ThumbnailTexture = ExtResource("3_pgr2l")
+script = ExtResource("1_d1x1b")
+ScenePath = "res://blocks/deco/_scenes/light-curved.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/deco/light-curved.glb"
+ThumbnailTexture = ExtResource("1_qjab1")

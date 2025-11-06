@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://1gxbjqj3b1x6"]
 
-[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_gd2pf"]
-[ext_resource type="Material" uid="uid://dbxc174mn5qum" path="res://assets/kenney/citysuburban/materials/colormap.tres" id="2_88gxj"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_4untg"]
+[ext_resource type="Material" uid="uid://dbxc174mn5qum" path="res://assets/kenney/citysuburban/materials/colormap.tres" id="2_y4ogw"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hnk65"]
 _surfaces = [{
@@ -25,7 +25,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
-"material": ExtResource("2_88gxj"),
+"material": ExtResource("2_y4ogw"),
 "name": "colormap",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -35,11 +35,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hnk65")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a5810"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xlkvj"]
 data = PackedVector3Array(-0.099999994, 0, 0.099999994, 0.099999994, 0, 0.099999994, 0.099999994, 0, -0.099999994, 0.099999994, 0, -0.099999994, -0.099999994, 0, -0.099999994, -0.099999994, 0, 0.099999994, -0.07, 0.01, -0.099999994, 0.07, 0.01, -0.099999994, 0.07, 0.01, 0.099999994, 0.07, 0.01, 0.099999994, -0.07, 0.01, 0.099999994, -0.07, 0.01, -0.099999994, 0.07, 0.01, 0.099999994, 0.099999994, 0, 0.099999994, -0.099999994, 0, 0.099999994, -0.099999994, 0, 0.099999994, -0.07, 0.01, 0.099999994, 0.07, 0.01, 0.099999994, -0.099999994, 0, -0.099999994, 0.099999994, 0, -0.099999994, 0.07, 0.01, -0.099999994, 0.07, 0.01, -0.099999994, -0.07, 0.01, -0.099999994, -0.099999994, 0, -0.099999994, -0.099999994, 0, -0.099999994, -0.07, 0.01, -0.099999994, -0.07, 0.01, 0.099999994, -0.07, 0.01, 0.099999994, -0.099999994, 0, 0.099999994, -0.099999994, 0, -0.099999994, 0.07, 0.01, -0.099999994, 0.099999994, 0, -0.099999994, 0.099999994, 0, 0.099999994, 0.099999994, 0, 0.099999994, 0.07, 0.01, 0.099999994, 0.07, 0.01, -0.099999994)
 
 [node name="path-short" type="Node3D"]
-script = ExtResource("1_gd2pf")
+script = ExtResource("1_4untg")
 
 [node name="path-short2" type="Node3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
@@ -51,4 +51,4 @@ skeleton = NodePath("")
 [node name="path-short_col" type="StaticBody3D" parent="path-short2/path-short"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="path-short2/path-short/path-short_col"]
-shape = SubResource("ConcavePolygonShape3D_a5810")
+shape = SubResource("ConcavePolygonShape3D_xlkvj")

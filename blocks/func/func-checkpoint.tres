@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b6446frgwarp5"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b6446frgwarp5"]
 
-[ext_resource type="PackedScene" uid="uid://8mkr0ji0x7ak" path="res://assets/kenney/cityroads/func/func-checkpoint.glb" id="1_6ykw7"]
-[ext_resource type="PackedScene" uid="uid://dn4n4cqytmsni" path="res://blocks/func/_scenes/func-checkpoint.tscn" id="1_vxd6u"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_r482k"]
-[ext_resource type="Texture2D" uid="uid://c6echahbhtayp" path="res://blocks/func/_images/func-checkpoint.png" id="3_vkg10"]
+[ext_resource type="Texture2D" uid="uid://c6echahbhtayp" path="res://blocks/func/_images/func-checkpoint.png" id="1_6ykw7"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_emjjj"]
 
 [resource]
-script = ExtResource("2_r482k")
-SourceScene = ExtResource("1_6ykw7")
-Scene = ExtResource("1_vxd6u")
-ThumbnailTexture = ExtResource("3_vkg10")
+script = ExtResource("1_emjjj")
+ScenePath = "res://blocks/func/_scenes/func-checkpoint.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/func/func-checkpoint.glb"
+ThumbnailTexture = ExtResource("1_6ykw7")

@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bnypx1nd113hv"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bnypx1nd113hv"]
 
-[ext_resource type="PackedScene" uid="uid://bee6d0g85vstx" path="res://assets/kenney/cityroads/road/road-intersection-barrier.glb" id="1_c2dfg"]
-[ext_resource type="PackedScene" uid="uid://dp3xk6psjvvap" path="res://blocks/road/_scenes/road-intersection-barrier.tscn" id="1_ko35v"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_bdefw"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-intersection-barrier.png" id="3_es8gn"]
+[ext_resource type="Texture2D" uid="uid://c6aq6lk4lj0hd" path="res://blocks/road/_images/road-intersection-barrier.png" id="1_c2dfg"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_uyrtw"]
 
 [resource]
-script = ExtResource("2_bdefw")
-SourceScene = ExtResource("1_c2dfg")
-Scene = ExtResource("1_ko35v")
-ThumbnailTexture = ExtResource("3_es8gn")
+script = ExtResource("1_uyrtw")
+ScenePath = "res://blocks/road/_scenes/road-intersection-barrier.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-intersection-barrier.glb"
+ThumbnailTexture = ExtResource("1_c2dfg")

@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://bvp32py0cjwek"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bvp32py0cjwek"]
 
-[ext_resource type="PackedScene" uid="uid://c1uuprq880hrn" path="res://blocks/deco/_scenes/light-square-cross.tscn" id="1_jmw0s"]
-[ext_resource type="PackedScene" uid="uid://cku5xa8uavvu5" path="res://assets/kenney/cityroads/deco/light-square-cross.glb" id="1_kq3s3"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_8omvy"]
-[ext_resource type="Texture2D" path="res://blocks/deco/_images/light-square-cross.png" id="3_n757a"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_a1art"]
+[ext_resource type="Texture2D" uid="uid://mfougkk76t4w" path="res://blocks/deco/_images/light-square-cross.png" id="1_kq3s3"]
 
 [resource]
-script = ExtResource("2_8omvy")
-SourceScene = ExtResource("1_kq3s3")
-Scene = ExtResource("1_jmw0s")
-ThumbnailTexture = ExtResource("3_n757a")
+script = ExtResource("1_a1art")
+ScenePath = "res://blocks/deco/_scenes/light-square-cross.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/deco/light-square-cross.glb"
+ThumbnailTexture = ExtResource("1_kq3s3")

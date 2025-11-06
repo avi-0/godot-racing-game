@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://b7gy5br30qppc"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b7gy5br30qppc"]
 
-[ext_resource type="PackedScene" uid="uid://ciwc6u42drcrg" path="res://blocks/road/_scenes/road-side-exit.tscn" id="1_6cqu8"]
-[ext_resource type="PackedScene" uid="uid://i0ulnahedq7g" path="res://assets/kenney/cityroads/road/road-side-exit.glb" id="1_rvgks"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_au3vm"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-side-exit.png" id="3_qn2vu"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_djccf"]
+[ext_resource type="Texture2D" uid="uid://k1eomf2uslqj" path="res://blocks/road/_images/road-side-exit.png" id="1_rvgks"]
 
 [resource]
-script = ExtResource("2_au3vm")
-SourceScene = ExtResource("1_rvgks")
-Scene = ExtResource("1_6cqu8")
-ThumbnailTexture = ExtResource("3_qn2vu")
+script = ExtResource("1_djccf")
+ScenePath = "res://blocks/road/_scenes/road-side-exit.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-side-exit.glb"
+ThumbnailTexture = ExtResource("1_rvgks")

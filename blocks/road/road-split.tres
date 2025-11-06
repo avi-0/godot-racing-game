@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://cd7gri286m5i8"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cd7gri286m5i8"]
 
-[ext_resource type="PackedScene" uid="uid://6hu0kwga00um" path="res://assets/kenney/cityroads/road/road-split.glb" id="1_8eeki"]
-[ext_resource type="PackedScene" uid="uid://bex4t1wtik3g2" path="res://blocks/road/_scenes/road-split.tscn" id="1_135ac"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_fi0cm"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-split.png" id="3_g7tap"]
+[ext_resource type="Texture2D" uid="uid://cm8tuqa4g5nox" path="res://blocks/road/_images/road-split.png" id="1_8eeki"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_kgfen"]
 
 [resource]
-script = ExtResource("2_fi0cm")
-SourceScene = ExtResource("1_8eeki")
-Scene = ExtResource("1_135ac")
-ThumbnailTexture = ExtResource("3_g7tap")
+script = ExtResource("1_kgfen")
+ScenePath = "res://blocks/road/_scenes/road-split.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-split.glb"
+ThumbnailTexture = ExtResource("1_8eeki")

@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://wu4qtb5f4us5"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://wu4qtb5f4us5"]
 
-[ext_resource type="PackedScene" uid="uid://cfnq2v773gju0" path="res://assets/kenney/cityroads/road/road-curve-pavement.glb" id="1_ggmva"]
-[ext_resource type="PackedScene" uid="uid://bwu56nua5u3xj" path="res://blocks/road/_scenes/road-curve-pavement.tscn" id="1_y28r8"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_tuj00"]
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-curve-pavement.png" id="3_rjt7h"]
+[ext_resource type="Texture2D" uid="uid://b2xho7llpeg5j" path="res://blocks/road/_images/road-curve-pavement.png" id="1_ggmva"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_iyvcp"]
 
 [resource]
-script = ExtResource("2_tuj00")
-SourceScene = ExtResource("1_ggmva")
-Scene = ExtResource("1_y28r8")
-ThumbnailTexture = ExtResource("3_rjt7h")
+script = ExtResource("1_iyvcp")
+ScenePath = "res://blocks/road/_scenes/road-curve-pavement.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-curve-pavement.glb"
+ThumbnailTexture = ExtResource("1_ggmva")

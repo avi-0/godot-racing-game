@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://pkdsrv8c5vaa"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://pkdsrv8c5vaa"]
 
-[ext_resource type="PackedScene" uid="uid://ccsm6b1q5cpqk" path="res://assets/kenney/cityroads/platform/tile-slant.glb" id="1_iialo"]
-[ext_resource type="PackedScene" uid="uid://bringed0ha1k8" path="res://blocks/platform/_scenes/tile-slant.tscn" id="1_yks0q"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_kwnvm"]
-[ext_resource type="Texture2D" path="res://blocks/platform/_images/tile-slant.png" id="3_sqhxp"]
+[ext_resource type="Texture2D" uid="uid://cuq88o35luokb" path="res://blocks/platform/_images/tile-slant.png" id="1_iialo"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_l63au"]
 
 [resource]
-script = ExtResource("2_kwnvm")
-SourceScene = ExtResource("1_iialo")
-Scene = ExtResource("1_yks0q")
-ThumbnailTexture = ExtResource("3_sqhxp")
+script = ExtResource("1_l63au")
+ScenePath = "res://blocks/platform/_scenes/tile-slant.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/platform/tile-slant.glb"
+ThumbnailTexture = ExtResource("1_iialo")

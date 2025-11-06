@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=5 format=3 uid="uid://dm583dr1ekie6"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dm583dr1ekie6"]
 
-[ext_resource type="PackedScene" uid="uid://cyy11x3j5ftv8" path="res://blocks/func/_scenes/func-start.tscn" id="1_85qrl"]
-[ext_resource type="PackedScene" uid="uid://bdpwgv5l0b5h3" path="res://assets/kenney/cityroads/func/func-start.glb" id="1_di4i8"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="2_v5fkh"]
-[ext_resource type="Texture2D" path="res://blocks/func/_images/func-start.png" id="3_jltck"]
+[ext_resource type="Texture2D" uid="uid://db4e1m20np1ng" path="res://blocks/func/_images/func-start.png" id="1_di4i8"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_fygx7"]
 
 [resource]
-script = ExtResource("2_v5fkh")
-SourceScene = ExtResource("1_di4i8")
-Scene = ExtResource("1_85qrl")
-ThumbnailTexture = ExtResource("3_jltck")
+script = ExtResource("1_fygx7")
+ScenePath = "res://blocks/func/_scenes/func-start.tscn"
+SourceScenePath = "res://assets/kenney/cityroads/func/func-start.glb"
+ThumbnailTexture = ExtResource("1_di4i8")
