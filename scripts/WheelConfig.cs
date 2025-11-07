@@ -19,4 +19,5 @@ public partial class WheelConfig : Resource
 	[ExportCategory("Grip")]
 	[Export] public float BaseGrip = 1.0f;
 	[Export] public Curve GripCurve;
+	[Export] public bool FullLoseGripOnSlip = false;
 }

@@ -10,7 +10,9 @@ public partial class Car : RigidBody3D
 	[Signal]
 	public delegate void RestartRequestedEventHandler();
 
-	[ExportCategory("Camera")] [Export] public OrbitCamera OrbitCamera;
+	[ExportCategory("Cameras")] 
+	[Export] public OrbitCamera OrbitCamera;
+	[Export] public Camera3D FrontCamera;
 	
 	[ExportCategory("Node Arrays")]
 	[Export] public CarWheel[] Wheels;
@@ -50,6 +52,8 @@ public partial class Car : RigidBody3D
 	private bool _isBraking = false;
 
 	private bool _isSlipping = false;
+
+	private float _targetSteering;
 	
 	private bool _isLocallyControlled = true;
 	public bool IsLocallyControlled
@@ -119,6 +123,24 @@ public partial class Car : RigidBody3D
 			OrbitCamera.UpdateYaw((float) delta, LinearVelocity);
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("camera_switch"))
+		{
+			if (OrbitCamera.Camera.Current)
+			{
+				OrbitCamera.Camera.Current = false;
+				FrontCamera.Current = true;
+			}
+			else
+			{
+				FrontCamera.Current = false;
+				OrbitCamera.Camera.Current = true;
+			}
+			GetViewport().SetInputAsHandled();
+		}
+	}
+	
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (!IsLocallyControlled)
@@ -262,9 +284,12 @@ public partial class Car : RigidBody3D
 					_isReversing = false;
 				}
 
-				if (wheel.Config.IsDriveWheel || _isReversing)
+				if (wheel.Config.IsDriveWheel || (_isBraking && !_isReversing))
 				{
-					ApplyForce(forceVectorForward, forcePosition);
+					if (wheel.Config.IsDriveWheel)
+					{
+						ApplyForce(forceVectorForward, forcePosition);
+					}
 					ApplyForce(forceVectorBackward, forcePosition);
 					if (DebugMode)
 					{
@@ -280,21 +305,21 @@ public partial class Car : RigidBody3D
 	{
 		if (wheel.Config.IsSteeringWheel)
 		{
-			float targetSteering = 0;
+			_targetSteering = 0;
 			if (AcceptsInputs)
 			{
-					targetSteering += Input.GetActionStrength("steer_left");
-					targetSteering -= Input.GetActionStrength("steer_right");
+					_targetSteering += Input.GetActionStrength("steer_left");
+					_targetSteering -= Input.GetActionStrength("steer_right");
 					
-					targetSteering *= SpeedSteeringCurve.SampleBaked(
+					_targetSteering *= SpeedSteeringCurve.SampleBaked(
 						Mathf.Clamp(
 							Mathf.Abs(wheel.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
 							0, 1));
 			}
 			
-			if (targetSteering != 0)
+			if (_targetSteering != 0)
 			{
-				var y = Mathf.MoveToward(wheel.Rotation.Y, targetSteering * float.DegreesToRadians(SteeringBaseDegrees), TireTurnSpeed * delta);
+				var y = Mathf.MoveToward(wheel.Rotation.Y, _targetSteering * float.DegreesToRadians(SteeringBaseDegrees), TireTurnSpeed * delta);
 				wheel.Rotation = new Vector3(wheel.Rotation.X, (float)y, wheel.Rotation.Z);
 			}
 			else
@@ -349,6 +374,11 @@ public partial class Car : RigidBody3D
 				{
 					xTraction = SlippingTraction;
 					SkidMarks[wheelId].Emitting = true;
+					
+					if (wheel.Config.FullLoseGripOnSlip && tireVelocity.Length() > 2 && _targetSteering != 0)
+					{
+						xTraction = 0;
+					}
 				}
 			
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
