@@ -284,7 +284,7 @@ public partial class Car : RigidBody3D
 
 				if (wheel.Config.IsDriveWheel || (_isBraking && !_isReversing))
 				{
-					if (wheel.Config.IsDriveWheel)
+					if (wheel.Config.IsDriveWheel && !(_isSlipping && wheel.Config.FullLoseGripOnSlip))
 					{
 						ApplyForce(forceVectorForward, forcePosition);
 					}
@@ -372,6 +372,11 @@ public partial class Car : RigidBody3D
 				{
 					xTraction = SlippingTraction;
 					SkidMarks[wheelId].Emitting = true;
+					
+					if (wheel.Config.FullLoseGripOnSlip && tireVelocity.Length() > 2)
+					{
+						xTraction = 0;
+					}
 				}
 			
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
