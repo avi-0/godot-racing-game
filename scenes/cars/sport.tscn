@@ -18,7 +18,7 @@ point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 8), 0.0, -18.3019, 0, 0, Vector2(0.13090909, 2.071526), -2.9020495, -2.9020495, 0, 0, Vector2(1, 1.5523977), -0.34810984, 0.0, 0, 0]
+_data = [Vector2(0, 6.9635525), 0.0, 3.0042944, 0, 0, Vector2(0.19636363, 2.9835987), -8.0477, -8.0477, 0, 0, Vector2(1, 1), -0.34810984, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_xv7xt"]
@@ -28,14 +28,14 @@ point_count = 3
 
 [sub_resource type="Resource" id="Resource_x43s4"]
 script = ExtResource("2_dg6r6")
-SpringStrength = 10000.0
+SpringStrength = 9000.0
 SpringDamping = 300.0
-SpringRest = 0.15
+SpringRest = 0.1
 OverExtend = 0.0
 WheelRadius = 0.21
 IsDriveWheel = true
 IsSteeringWheel = true
-BaseGrip = 0.7
+BaseGrip = 0.45
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="Curve" id="Curve_dg6r6"]
@@ -46,11 +46,11 @@ point_count = 2
 script = ExtResource("2_dg6r6")
 SpringStrength = 10000.0
 SpringDamping = 300.0
-SpringRest = 0.17
+SpringRest = 0.12
 OverExtend = 0.0
 WheelRadius = 0.21
 IsDriveWheel = true
-BaseGrip = 0.4
+BaseGrip = 0.35
 GripCurve = SubResource("Curve_dg6r6")
 FullLoseGripOnSlip = true
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
@@ -96,16 +96,15 @@ OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
-Acceleration = 130
+Acceleration = 120
 MaxSpeed = 70
 BrakingSpeedMultiplier = 0.8
 ReverseSpeedMultiplier = 0.2
-TireTurnSpeed = 1.0
-SteeringBaseDegrees = 5
-SlippingTraction = 0.5
-SlipThreshold = 0.14
+TireTurnSpeed = 1.5
+SteeringBaseDegrees = 4
+SlippingTraction = 0.3
+SlipThreshold = 0.35
 UnslipThreshold = 1.6
-DebugMode = true
 AccelerationCurve = SubResource("Curve_qtbni")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")

@@ -52,6 +52,8 @@ public partial class Car : RigidBody3D
 	private bool _isBraking = false;
 
 	private bool _isSlipping = false;
+
+	private float _targetSteering;
 	
 	private bool _isLocallyControlled = true;
 	public bool IsLocallyControlled
@@ -284,7 +286,7 @@ public partial class Car : RigidBody3D
 
 				if (wheel.Config.IsDriveWheel || (_isBraking && !_isReversing))
 				{
-					if (wheel.Config.IsDriveWheel && !(_isSlipping && wheel.Config.FullLoseGripOnSlip))
+					if (wheel.Config.IsDriveWheel)
 					{
 						ApplyForce(forceVectorForward, forcePosition);
 					}
@@ -303,21 +305,21 @@ public partial class Car : RigidBody3D
 	{
 		if (wheel.Config.IsSteeringWheel)
 		{
-			float targetSteering = 0;
+			_targetSteering = 0;
 			if (AcceptsInputs)
 			{
-					targetSteering += Input.GetActionStrength("steer_left");
-					targetSteering -= Input.GetActionStrength("steer_right");
+					_targetSteering += Input.GetActionStrength("steer_left");
+					_targetSteering -= Input.GetActionStrength("steer_right");
 					
-					targetSteering *= SpeedSteeringCurve.SampleBaked(
+					_targetSteering *= SpeedSteeringCurve.SampleBaked(
 						Mathf.Clamp(
 							Mathf.Abs(wheel.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
 							0, 1));
 			}
 			
-			if (targetSteering != 0)
+			if (_targetSteering != 0)
 			{
-				var y = Mathf.MoveToward(wheel.Rotation.Y, targetSteering * float.DegreesToRadians(SteeringBaseDegrees), TireTurnSpeed * delta);
+				var y = Mathf.MoveToward(wheel.Rotation.Y, _targetSteering * float.DegreesToRadians(SteeringBaseDegrees), TireTurnSpeed * delta);
 				wheel.Rotation = new Vector3(wheel.Rotation.X, (float)y, wheel.Rotation.Z);
 			}
 			else
@@ -373,7 +375,7 @@ public partial class Car : RigidBody3D
 					xTraction = SlippingTraction;
 					SkidMarks[wheelId].Emitting = true;
 					
-					if (wheel.Config.FullLoseGripOnSlip && tireVelocity.Length() > 2)
+					if (wheel.Config.FullLoseGripOnSlip && tireVelocity.Length() > 2 && _targetSteering != 0)
 					{
 						xTraction = 0;
 					}
