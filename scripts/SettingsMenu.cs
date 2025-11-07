@@ -83,8 +83,7 @@ public partial class SettingsMenu : Control
 
 		if (_settings.WindowMode == 1)
 		{
-			window.Mode = Window.ModeEnum.Windowed;
-			CallDeferred(MethodName.SetWindowSize);
+			window.Mode = Window.ModeEnum.Maximized;
 		}
 		else if (_settings.WindowMode == 2)
 			window.Mode = Window.ModeEnum.ExclusiveFullscreen;
@@ -119,12 +118,5 @@ public partial class SettingsMenu : Control
 	{
 		UpdateSettingsFromUi();
 		ApplySoundSettings();
-	}
-
-	private void SetWindowSize()
-	{
-		var window = GetWindow();
-		var screenSize = DisplayServer.ScreenGetSize(window.CurrentScreen);
-		window.Size = screenSize / 2;
 	}
 }

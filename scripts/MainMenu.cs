@@ -13,7 +13,6 @@ public partial class MainMenu : Control
 	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
 	[Export] public Control GarageWindow;
-	[Export] public TextureRect GarageTextureRect;
 	[Export] public SubViewport GarageViewport;
 	[Export] public Container GarageContainer;
 
@@ -23,14 +22,6 @@ public partial class MainMenu : Control
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
-	}
-
-	public override void _Process(double delta)
-	{
-		if (GarageWindow.Visible)
-		{
-			GarageTextureRect.Texture = GarageViewport.GetTexture();
-		}
 	}
 
 	public void OnPlayButtonPressed()
