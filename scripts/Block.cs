@@ -1,6 +1,5 @@
 using System.Linq;
 using Godot;
-using Newtonsoft.Json;
 
 namespace racingGame;
 
@@ -13,6 +12,8 @@ public partial class Block : Node3D
 	[Signal]
 	public delegate void ChildMouseEnteredEventHandler(Block block);
 
+	public BlockRecord Record;
+	
 	public int BlockId = 0;
 	[Export] public bool IsCheckpoint = false;
 	[Export] public bool IsFinish = false;
@@ -58,16 +59,16 @@ public partial class Block : Node3D
 	public BlockPlacementData Save()
 	{
 		var data = new BlockPlacementData();
-		data.Transform = Transform;
-		data.SceneFilePath = SceneFilePath;
+		data.Transform = Transform.Rounded();
+		data.BlockRecordPath = ResourceUid.PathToUid(Record.ResourcePath);
 
 		return data;
 	}
 
 	public static Block Load(BlockPlacementData data)
 	{
-		var scene = ResourceLoader.Load<PackedScene>(data.SceneFilePath);
-		var instance = scene.Instantiate<Block>();
+		var record = ResourceLoader.Load<BlockRecord>(data.BlockRecordPath);
+		var instance = record.Instantiate();
 
 		instance.Transform = data.Transform;
 

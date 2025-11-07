@@ -7,6 +7,6 @@ public class BlockPlacementData
 {
 	[JsonConverter(typeof(Transform3DConverter))]
 	public Transform3D Transform;
-	
-	public string SceneFilePath;
+
+	public string BlockRecordPath;
 }

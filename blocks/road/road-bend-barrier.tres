@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_ex480")
 ScenePath = "res://blocks/road/_scenes/road-bend-barrier.tscn"
-SourceScenePath = "uid://cumnem2ti8b0d"
+SourceScenePath = "res://assets/kenney/cityroads/road/road-bend-barrier.glb"
 ThumbnailTexture = ExtResource("1_w2kdc")

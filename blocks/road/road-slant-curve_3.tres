@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b6dng7vs7tu35"]
 
-[ext_resource type="Texture2D" path="res://blocks/road/_images/road-slant-curve_3.png" id="1_hqosr"]
+[ext_resource type="Texture2D" uid="uid://x4v771nsuati" path="res://blocks/road/_images/road-slant-curve_3.png" id="1_hqosr"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_qck7j"]
 
 [resource]

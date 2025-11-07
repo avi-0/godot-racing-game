@@ -14,6 +14,15 @@ public partial class BlockRecord : Resource
 
 	[Export] public Texture2D ThumbnailTexture;
 
+	public Block Instantiate()
+	{
+		var scene = ResourceLoader.Load<PackedScene>(ScenePath);
+		var block = scene.Instantiate<Block>();
+		block.Record = this;
+
+		return block;
+	}
+
 #if TOOLS
 	[ExportToolButton("Generate from source")]
 	public Callable GenerateButton => Callable.From(() => GenerateScene().Forget());

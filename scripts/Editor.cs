@@ -40,7 +40,7 @@ public partial class Editor : Control
 
 	[Export] public GridContainer BlockListContainer;
 
-	[Export] public PackedScene BlockScene;
+	[Export] public BlockRecord CurrentBlockRecord;
 
 	[Export] public Camera3D Camera;
 
@@ -244,7 +244,7 @@ public partial class Editor : Control
 	{
 		_cursor?.QueueFree();
 
-		_cursor = BlockScene.Instantiate<Block>();
+		_cursor = CurrentBlockRecord.Instantiate();
 
 		AddChild(_cursor);
 		_cursor.RotateY(-Single.Pi * _rotation / 2);
@@ -418,7 +418,7 @@ public partial class Editor : Control
 
 	private void OnBlockButtonPressed(BlockRecord blockRecord)
 	{
-		BlockScene = ResourceLoader.Load<PackedScene>(blockRecord.ScenePath);
+		CurrentBlockRecord = blockRecord;
 
 		CreateCursor();
 	}

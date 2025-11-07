@@ -79,22 +79,20 @@ public static class Jz
 
 	public static void SaveJz<T>(string path, T data)
 	{
-		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-
-		var text = JsonConvert.SerializeObject(data);
-		GD.Print(text);
-		var bytes = System.Text.Encoding.UTF8.GetBytes(text);
-		GD.Print(bytes.Length);
-		
-		using var outStream = new MemoryStream();
-		using (var gzipStream = new GZipStream(outStream, CompressionMode.Compress))
+		using (var file = FileAccess.Open(path, FileAccess.ModeFlags.Write))
 		{
-			gzipStream.Write(bytes, 0, bytes.Length);
+			var text = JsonConvert.SerializeObject(data, Formatting.Indented);
+			var bytes = System.Text.Encoding.UTF8.GetBytes(text);
+		
+			using var outStream = new MemoryStream();
+			using (var gzipStream = new GZipStream(outStream, CompressionMode.Compress))
+			{
+				gzipStream.Write(bytes, 0, bytes.Length);
+			}
+
+			var compressedBytes = outStream.ToArray();
+
+			file.StoreBuffer(compressedBytes);
 		}
-
-		var compressedBytes = outStream.ToArray();
-		GD.Print(compressedBytes.Length);
-
-		file.StoreBuffer(compressedBytes);
 	}
 }
