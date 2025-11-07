@@ -62,6 +62,9 @@ public partial class Car : RigidBody3D
 		set
 		{
 			OrbitCamera.Camera.Current = value;
+
+			Input.MouseMode = value ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible;
+			
 			_isLocallyControlled = value;
 		}
 	}
@@ -71,8 +74,6 @@ public partial class Car : RigidBody3D
 	
 	public override void _Ready()
 	{
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-
 		EngineSound.Play();
 
 		_wheelCount = Wheels.Length;

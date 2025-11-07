@@ -24,7 +24,7 @@ TrackListPanel = NodePath("TrackListPanel")
 TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/MarginContainer/VBoxContainer/trackGC")
 GarageWindow = NodePath("GarageWindow")
 GarageViewport = NodePath("GarageWindow/SubViewportContainer/SubViewport")
-GarageContainer = NodePath("GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HFlowContainer")
+GarageContainer = NodePath("GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -97,7 +97,6 @@ text = "Exit
 "
 
 [node name="TrackListPanel" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -157,6 +156,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="GarageWindow/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(1921, 1080)
+render_target_update_mode = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="GarageWindow"]
 layout_mode = 1
@@ -179,7 +179,7 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="HFlowContainer" type="HFlowContainer" parent="GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="GarageWindow/PanelContainer/MarginContainer/VBoxContainer"]

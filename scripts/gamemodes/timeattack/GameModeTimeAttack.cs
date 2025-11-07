@@ -123,6 +123,8 @@ public class GameModeTimeAttack : IGameMode
 			}
 		}
 
+		player.PlayerCar.IsLocallyControlled = true;
+
 		playerCar.PlayerId = playerId;
 		_players[playerId] = player;
 		return playerId;
