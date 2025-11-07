@@ -22,15 +22,20 @@ public partial class SettingsMenu : Control
 	public override void _Ready()
 	{
 		LoadSettings();
+		UpdateUiFromSettings();
+		ApplySettings();
 
-		SoundSlider.ValueChanged += _ => ApplySoundSettings();
-		MusicSlider.ValueChanged += _ => ApplySoundSettings();
+		SoundSlider.ValueChanged += _ => OnSoundSettingChanged();
+		MusicSlider.ValueChanged += _ => OnSoundSettingChanged();
 	}
 
 	private void LoadSettings()
 	{
 		_settings = Jz.Load<GameSettings>(SettingsFilePath) ?? new GameSettings();
-
+	}
+	
+	private void UpdateUiFromSettings()
+	{
 		TDrs.Value = _settings.RenderScale;
 		Aa.Selected = _settings.Antialiasing;
 		Vsync.Selected = _settings.Vsync;
@@ -39,19 +44,27 @@ public partial class SettingsMenu : Control
 
 		SoundSlider.Value = _settings.SfxLevel;
 		MusicSlider.Value = _settings.MusicLevel;
+	}
+	
+	private void UpdateSettingsFromUi()
+	{
+		_settings.RenderScale = TDrs.Value;
+		_settings.Antialiasing = Aa.Selected;
+		_settings.Vsync = Vsync.Selected;
+		_settings.WindowMode = WinMode.Selected;
+		_settings.ShadowQuality = Shadowq.Selected;
 
-		ApplySettings();
+		_settings.SfxLevel = SoundSlider.Value;
+		_settings.MusicLevel = MusicSlider.Value;
 	}
 
 	private void ApplySettings()
 	{
 		var viewport = GetViewport();
 		var window = GetWindow();
-
-		_settings.RenderScale = TDrs.Value;
+		
 		viewport.Scaling3DScale = (float)_settings.RenderScale * 0.01f;
 		
-		_settings.Antialiasing = Aa.Selected;
 		viewport.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Disabled;
 		viewport.UseTaa = false;
 		viewport.Msaa3D = Viewport.Msaa.Disabled;
@@ -66,18 +79,18 @@ public partial class SettingsMenu : Control
 		else if (_settings.Antialiasing == 5)
 			viewport.Msaa3D = Viewport.Msaa.Msaa8X;
 		
-		_settings.Vsync = Vsync.Selected;
 		DisplayServer.WindowSetVsyncMode((DisplayServer.VSyncMode)_settings.Vsync);
-		
-		_settings.WindowMode = WinMode.Selected;
+
 		if (_settings.WindowMode == 1)
+		{
 			window.Mode = Window.ModeEnum.Windowed;
+			CallDeferred(MethodName.SetWindowSize);
+		}
 		else if (_settings.WindowMode == 2)
 			window.Mode = Window.ModeEnum.ExclusiveFullscreen;
 		else
 			window.Mode = Window.ModeEnum.Fullscreen;
-
-		_settings.ShadowQuality = Shadowq.Selected;
+		
 		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)_settings.ShadowQuality);
 
 		ApplySoundSettings();
@@ -85,9 +98,6 @@ public partial class SettingsMenu : Control
 
 	private void ApplySoundSettings()
 	{
-		_settings.SfxLevel = SoundSlider.Value;
-		_settings.MusicLevel = MusicSlider.Value;
-		
 		AudioServer.SetBusVolumeDb(1, (float)Mathf.LinearToDb(_settings.SfxLevel * 0.01f));
 		AudioServer.SetBusVolumeDb(2, (float)Mathf.LinearToDb(_settings.MusicLevel * 0.01f));
 	}
@@ -99,8 +109,22 @@ public partial class SettingsMenu : Control
 
 	public void OnBackButton()
 	{
+		UpdateSettingsFromUi();
 		ApplySettings();
 		SaveSettings();
 		Hide();
+	}
+
+	private void OnSoundSettingChanged()
+	{
+		UpdateSettingsFromUi();
+		ApplySoundSettings();
+	}
+
+	private void SetWindowSize()
+	{
+		var window = GetWindow();
+		var screenSize = DisplayServer.ScreenGetSize(window.CurrentScreen);
+		window.Size = screenSize / 2;
 	}
 }
