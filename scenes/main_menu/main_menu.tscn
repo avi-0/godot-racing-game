@@ -152,11 +152,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GarageWindow/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+size = Vector2i(1921, 1080)
 
 [node name="PanelContainer" type="PanelContainer" parent="GarageWindow"]
 layout_mode = 1

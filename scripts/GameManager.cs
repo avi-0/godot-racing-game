@@ -214,7 +214,7 @@ public partial class GameManager : Node
 	{
 		if (OS.HasFeature("windows"))
 		{
-			var height = DisplayServer.WindowGetSize().Y;
+			var height = DisplayServer.ScreenGetSize().Y;
 			return height / 1080.0f;
 		}
 

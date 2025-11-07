@@ -89,6 +89,8 @@ public partial class Editor : Control
 		{
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
 			Visible = value;
+			
+			EditorViewport.MatchViewport(GetViewport());
 
 			if (value)
 				CreateCursor();

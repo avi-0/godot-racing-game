@@ -48,6 +48,8 @@ public partial class MainMenu : Control
 		
 		if (GarageWindow.Visible)
 		{
+			GarageViewport.MatchViewport(GetViewport());
+			
 			_carList = GameManager.Singleton.LoadCarList();
 			
 			LoadGarageCar(GameManager.CarsPath + _carList.First());
