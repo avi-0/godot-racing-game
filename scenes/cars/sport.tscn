@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://7kidcw5bufnv"]
+[gd_scene load_steps=22 format=3 uid="uid://7kidcw5bufnv"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_qtbni"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_dg6r6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/CarWheel.cs" id="4_xknhn"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="5_8lcft"]
 [ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="6_yrqru"]
+[ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_dg6r6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.5
@@ -81,7 +82,7 @@ material = SubResource("StandardMaterial3D_xv7xt")
 size = Vector2(0.1, 0.3)
 orientation = 1
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "Wheels", "SkidMarks", "EngineSound")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound")]
 collision_layer = 2
 mass = 35.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -94,6 +95,7 @@ linear_damp = 0.25
 script = ExtResource("1_qtbni")
 OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
+HeadLight = NodePath("Headlights")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 120
@@ -222,5 +224,8 @@ playback_type = 1
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, -5.614962e-10, 0.9999794, 0.0064227674, 8.742097e-08, 0.0064227674, -0.9999794, 0, 0.34432578, 0.6439826)
+
+[node name="Headlights" parent="." instance=ExtResource("7_dg6r6")]
+transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -1.7358442e-08, 0.9437144, 0.3307615, 1.2652278e-07, 0.3307615, -0.9437144, 0, 0.18840224, 0.9434164)
 
 [editable path="race-future"]

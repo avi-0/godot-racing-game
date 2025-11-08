@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://prmd3hbgb20k"]
+
+[node name="Headlights" type="SpotLight3D"]
+transform = Transform3D(-1, -8.5721615e-15, -8.742277e-08, -4.8919073e-08, 0.8287838, 0.5595691, 7.2454554e-08, 0.5595691, -0.8287838, 0, 0, 0)
+visible = false
+light_color = Color(0.99999994, 0.83251643, 0.6193089, 1)
+light_energy = 7.0
+light_indirect_energy = 2.0
+shadow_enabled = true
+spot_range = 5.1142716
+spot_angle = 58.928856

@@ -14,6 +14,9 @@ public partial class Car : RigidBody3D
 	[Export] public OrbitCamera OrbitCamera;
 	[Export] public Camera3D FrontCamera;
 	
+	[ExportCategory("Light")]
+	[Export] public SpotLight3D HeadLight;
+	
 	[ExportCategory("Node Arrays")]
 	[Export] public CarWheel[] Wheels;
 	[Export] public GpuParticles3D[] SkidMarks;
@@ -138,6 +141,11 @@ public partial class Car : RigidBody3D
 				FrontCamera.Current = false;
 				OrbitCamera.Camera.Current = true;
 			}
+			GetViewport().SetInputAsHandled();
+		}
+		else if(@event.IsActionPressed("lights_switch"))
+		{
+			HeadLight.Visible = !HeadLight.Visible;
 			GetViewport().SetInputAsHandled();
 		}
 	}

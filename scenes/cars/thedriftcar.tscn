@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=21 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_micox"]
 [ext_resource type="PackedScene" uid="uid://biodx1fq5tguf" path="res://assets/kenney/carkit/sedan-sports.glb" id="2_g5cig"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/CarWheel.cs" id="3_hcdi7"]
 [ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="6_g5cig"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="6_xv7xt"]
+[ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.0
@@ -69,7 +70,7 @@ material = SubResource("StandardMaterial3D_xv7xt")
 size = Vector2(0.1, 0.3)
 orientation = 1
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "Wheels", "SkidMarks", "EngineSound")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -81,6 +82,7 @@ linear_damp = 0.25
 script = ExtResource("1_micox")
 OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
+HeadLight = NodePath("Headlights")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 300
@@ -206,5 +208,8 @@ playback_type = 1
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.7072577, 0.25065678)
+
+[node name="Headlights" parent="." instance=ExtResource("7_g5cig")]
+transform = Transform3D(-1, 2.546744e-08, -1.2514288e-07, -4.8919077e-08, 0.82878387, 0.5595691, 1.1796716e-07, 0.5595691, -0.82878387, 0, 0.46993336, 0.8842214)
 
 [editable path="sedan-sports"]

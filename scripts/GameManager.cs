@@ -207,6 +207,7 @@ public partial class GameManager : Node
 
 	public void NewTrack()
 	{
+		Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", 10.0f);
 		Track.Load(new TrackData());
 	}
 
