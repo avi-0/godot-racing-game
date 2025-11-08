@@ -17,8 +17,9 @@ public partial class Editor : Control
 	public static Editor Singleton;
 
 	private string _blockDirectory;
-	private float _cellHeight = 1;
-	private float _cellSize = 8;
+	private Transform3D _grid = new(Basis.Identity, Vector3.Zero);
+	private float _gridScale = 8.0f;
+	private float _gridHeightScale = 1.0f;
 
 	private Block _cursor;
 
@@ -77,10 +78,13 @@ public partial class Editor : Control
 	[Export] public Button QuitButton;
 
 	[Export] public Button SaveButton;
+	
+	const int GridMeshSize = 100;
+
+	[Export]
+	public ImmediateMesh GridMesh;
 
 	private Track Track => GameManager.Singleton.Track;
-
-	private float YLevelRounded => _cellHeight * float.Round(_yLevel / _cellHeight);
 
 	public bool IsRunning
 	{
@@ -90,7 +94,7 @@ public partial class Editor : Control
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
 			Visible = value;
 			
-			EditorViewport.MatchViewport(GetViewport());
+			EditorViewport.MatchViewport(GetViewport(), aa: false);
 
 			if (value)
 				CreateCursor();
@@ -154,9 +158,9 @@ public partial class Editor : Control
 	{
 		setting = int.Clamp(setting, -3, 3);
 		_gridSizeSetting = setting;
-		_cellSize = Mathf.Pow(2, setting);
-		_cellHeight = float.Min(_cellSize, 2f);
-		GridSizeLabel.Text = _cellSize.ToString(CultureInfo.InvariantCulture);
+		_gridScale = Mathf.Pow(2, setting);
+		_gridHeightScale = float.Min(_gridScale, 2f);
+		GridSizeLabel.Text = _gridScale.ToString(CultureInfo.InvariantCulture);
 	}
 
 	private void ConfirmNewDialogOnConfirmed()
@@ -222,7 +226,7 @@ public partial class Editor : Control
 	{
 		UpdateCamera((float)delta);
 
-		_cursor.GlobalPosition = GetGridMousePosition();
+		_cursor.GlobalPosition = GetWorldMousePosition();
 		_cursor.Visible = true;
 
 		if (_hoveredBlock != null && !IsInstanceValid(_hoveredBlock)) _hoveredBlock = null;
@@ -238,6 +242,30 @@ public partial class Editor : Control
 		if (_mode == Mode.Normal)
 			if (_hoveredBlock != null)
 				_hoveredBlock.SetMaterialOverlay(null);
+
+		DrawGrid();
+	}
+
+	private void DrawGrid()
+	{
+		GridMesh.ClearSurfaces();
+		GridMesh.SurfaceBegin(Mesh.PrimitiveType.Lines);
+
+		var center = GetGridMousePosition(8, 1);
+		var scale = new Vector3(8, 1, 8);
+
+		for (int i = -GridMeshSize; i < GridMeshSize; i++)
+		{
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(i + 0.5f, 0, -GridMeshSize + 0.5f)));
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(i + 0.5f, 0, GridMeshSize - 0.5f)));
+		}
+		for (int i = -GridMeshSize; i < GridMeshSize; i++)
+		{
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(-GridMeshSize + 0.5f, 0, i + 0.5f)));
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(GridMeshSize - 0.5f, 0, i + 0.5f)));
+		}
+		
+		GridMesh.SurfaceEnd();
 	}
 
 	private void CreateCursor()
@@ -333,24 +361,34 @@ public partial class Editor : Control
 			Camera.GlobalPosition += delta * CameraSpeed * Vector3.Down;
 	}
 
-	private Vector2 ProjectMousePosition()
+	private Vector3 ProjectMousePosition()
 	{
-		var plane = new Plane(Vector3.Up, new Vector3(0, YLevelRounded, 0));
+		
 		var mousePosition = EditorViewport.GetMousePosition();
-		var from = Camera.ProjectRayOrigin(mousePosition);
-		var dir = Camera.ProjectRayNormal(mousePosition);
+		var toGrid = _grid.AffineInverse();
+		var from = toGrid * Camera.ProjectRayOrigin(mousePosition);
+		var dir = toGrid * Camera.ProjectRayNormal(mousePosition);
+		
+		var plane = new Plane(Vector3.Up, new Vector3(0, _gridHeightScale * GetYLevelRounded(_gridHeightScale), 0));
 		var intersection = plane.IntersectsRay(from, dir) ?? Vector3.Zero;
 
-		return new Vector2(intersection.X, intersection.Z);
+		return new Vector3(intersection.X, _gridHeightScale * GetYLevelRounded(_gridHeightScale), intersection.Z);
 	}
 
-	private Vector3 GetGridMousePosition()
+	private float GetYLevelRounded(float heightScale)
+	{
+		return float.Round(_yLevel / heightScale);
+	}
+
+	private Vector3 GetGridMousePosition(float scale, float heightScale)
 	{
 		var pos = ProjectMousePosition();
-		return new Vector3(
-			_cellSize * float.Round(pos.X / _cellSize),
-			YLevelRounded,
-			_cellSize * float.Round(pos.Y / _cellSize));
+		return new Vector3(scale, heightScale, scale) * new Vector3(float.Round(pos.X / scale), GetYLevelRounded(heightScale), float.Round(pos.Z / scale));
+	}
+
+	private Vector3 GetWorldMousePosition()
+	{
+		return _grid * GetGridMousePosition(_gridScale, _gridHeightScale);
 	}
 
 	public void ViewportInput(InputEvent @event)
@@ -370,14 +408,14 @@ public partial class Editor : Control
 
 				if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
 				{
-					_yLevel -= _cellHeight;
-					Camera.GlobalPosition += _cellHeight * Vector3.Down;
+					_yLevel -= _gridHeightScale;
+					Camera.GlobalPosition += _gridHeightScale * Vector3.Down;
 				}
 
 				if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
 				{
-					_yLevel += _cellHeight;
-					Camera.GlobalPosition += _cellHeight * Vector3.Up;
+					_yLevel += _gridHeightScale;
+					Camera.GlobalPosition += _gridHeightScale * Vector3.Up;
 				}
 			}
 
