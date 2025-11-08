@@ -65,6 +65,9 @@ public partial class Editor : Control
 	
 	[Export]
 	public Button PickButton;
+	
+	[Export]
+	public Button GridPickButton;
 
 	[Export] public FileDialog FileDialog;
 
@@ -87,11 +90,14 @@ public partial class Editor : Control
 	[Export] public Button SaveButton;
 	
 	const int GridMeshSize = 100;
+	
+	[Export]
+	public MeshInstance3D GridMeshInstance;
 
 	[Export]
 	public ImmediateMesh GridMesh;
 
-	private float _rotationStep = float.DegreesToRadians(15);
+	private float _rotationStep = float.DegreesToRadians(5);
 
 	private Track Track => GameManager.Singleton.Track;
 
@@ -101,6 +107,8 @@ public partial class Editor : Control
 		set
 		{
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
+			
+			GridMeshInstance.Visible = value;
 			Visible = value;
 
 			if (Visible)
@@ -140,6 +148,7 @@ public partial class Editor : Control
 
 		EraseButton.Toggled += on => { _mode = on ? Mode.Erase : Mode.Normal; };
 		PickButton.Toggled += on => { _mode = on ? Mode.Pick : Mode.Normal; };
+		GridPickButton.Toggled += on => { _mode = on ? Mode.GridPick : Mode.Normal; };
 
 		SetGridSizeSetting(3);
 		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
@@ -242,22 +251,19 @@ public partial class Editor : Control
 
 		if (_hoveredBlock != null && !IsInstanceValid(_hoveredBlock)) _hoveredBlock = null;
 
-		if (_mode == Mode.Erase)
+		if (_mode == Mode.Erase || _mode == Mode.Pick || _mode == Mode.GridPick)
 		{
 			_cursor.Visible = false;
 
 			if (_hoveredBlock != null)
-				_hoveredBlock.SetMaterialOverlay(BlockEraseHighlightMaterial);
+			{
+				if (_mode == Mode.Erase)
+					_hoveredBlock.SetMaterialOverlay(BlockEraseHighlightMaterial);
+				else
+					_hoveredBlock.SetMaterialOverlay(BlockHighlightMaterial);
+			}
 		}
-
-		if (_mode == Mode.Pick)
-		{
-			_cursor.Visible = false;
-
-			if (_hoveredBlock != null)
-				_hoveredBlock.SetMaterialOverlay(BlockHighlightMaterial);
-		}
-
+		
 		if (_mode == Mode.Normal)
 			if (_hoveredBlock != null)
 				_hoveredBlock.SetMaterialOverlay(null);
@@ -294,8 +300,9 @@ public partial class Editor : Control
 		_cursor = CurrentBlockRecord.Instantiate();
 
 		AddChild(_cursor);
-		_cursor.RotateY(-Single.Pi * _rotation / 2);
-		_cursor.Transform = _cursor.Transform.Rounded();
+		_cursor.Basis = _grid.Basis;
+		_cursor.RotateObjectLocal(Vector3.Up, -Single.Pi * _rotation / 2);
+		//_cursor.Transform = _cursor.Transform.Rounded();
 		
 		_cursor.SetMaterialOverlay(BlockHighlightMaterial);
 	}
@@ -358,10 +365,8 @@ public partial class Editor : Control
 
 	private void RotateCursor()
 	{
-		_cursor.RotateY(-Single.Pi / 2);
-		_cursor.Transform = _cursor.Transform.Rounded();
-		
-		_cursor.GlobalRotationDegrees = _cursor.GlobalRotationDegrees.Round();
+		_cursor.RotateObjectLocal(Vector3.Up, -Single.Pi / 2);
+		//_cursor.Transform = _cursor.Transform.Rounded();
 
 		_rotation = (_rotation + 1) % 4;
 	}
@@ -384,11 +389,10 @@ public partial class Editor : Control
 
 	private Vector3 ProjectMousePosition()
 	{
-		
 		var mousePosition = EditorViewport.GetMousePosition();
 		var toGrid = _grid.AffineInverse();
 		var from = toGrid * Camera.ProjectRayOrigin(mousePosition);
-		var dir = toGrid * Camera.ProjectRayNormal(mousePosition);
+		var dir = toGrid.Basis * Camera.ProjectRayNormal(mousePosition);
 		
 		var plane = new Plane(Vector3.Up, new Vector3(0, _gridHeightScale * GetYLevelRounded(_gridHeightScale), 0));
 		var intersection = plane.IntersectsRay(from, dir) ?? Vector3.Zero;
@@ -425,6 +429,8 @@ public partial class Editor : Control
 				EraseButton.SetPressed(keyEvent.Pressed);
 			else if (keyEvent.PhysicalKeycode == Key.Ctrl)
 				PickButton.SetPressed(keyEvent.Pressed);
+			else if (keyEvent.PhysicalKeycode == Key.G)
+				GridPickButton.SetPressed(keyEvent.Pressed);
 		}
 
 		if (_mode == Mode.Normal)
@@ -438,13 +444,13 @@ public partial class Editor : Control
 				if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
 				{
 					_yLevel -= _gridHeightScale;
-					Camera.GlobalPosition += _gridHeightScale * Vector3.Down;
+					Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Down);
 				}
 
 				if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
 				{
 					_yLevel += _gridHeightScale;
-					Camera.GlobalPosition += _gridHeightScale * Vector3.Up;
+					Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Up);
 				}
 			}
 			
@@ -462,6 +468,8 @@ public partial class Editor : Control
 				RotateCursor(Vector3.Left, -_rotationStep);
 			if (@event.IsActionPressed("editor_reset_rotation"))
 				_cursor.Basis = Basis.Identity;
+			if (@event.IsActionPressed("editor_reset_grid"))
+				_grid = Transform3D.Identity;
 		}
 
 		if (_mode == Mode.Erase)
@@ -477,7 +485,13 @@ public partial class Editor : Control
 				if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.IsPressed())
 					PickHoveredBlock();
 		}
-			
+		
+		if (_mode == Mode.GridPick)
+		{
+			if (@event is InputEventMouseButton mouseEvent)
+				if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.IsPressed())
+					GridPickHoveredBlock();
+		}
 	}
 
 	private void RotateCursor(Vector3 axis, float angle, bool local = true)
@@ -519,6 +533,19 @@ public partial class Editor : Control
 			_cursor.Basis = _hoveredBlock.Basis;
 			
 			UiSoundPlayer.Singleton.BlockPlacedSound.Play();
+
+			_mode = Mode.Normal;
+		}
+	}
+	
+	private void GridPickHoveredBlock()
+	{
+		if (_hoveredBlock != null)
+		{
+			_grid = _hoveredBlock.Transform;
+			_yLevel = 0;
+			
+			_mode = Mode.Normal;
 		}
 	}
 
@@ -669,5 +696,6 @@ public partial class Editor : Control
 		Normal,
 		Erase,
 		Pick,
+		GridPick,
 	}
 }
