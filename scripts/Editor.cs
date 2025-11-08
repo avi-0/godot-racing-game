@@ -54,6 +54,9 @@ public partial class Editor : Control
 	[Export] public Container DirectoryListContainer;
 
 	[Export] public PackedScene EditorBlockButtonScene;
+	
+	[Export]
+	public SubViewportContainer EditorViewportContainer;
 
 	[Export] public EditorViewport EditorViewport;
 
@@ -84,6 +87,8 @@ public partial class Editor : Control
 	[Export]
 	public ImmediateMesh GridMesh;
 
+	private float _rotationStep = float.DegreesToRadians(15);
+
 	private Track Track => GameManager.Singleton.Track;
 
 	public bool IsRunning
@@ -93,8 +98,9 @@ public partial class Editor : Control
 		{
 			ProcessMode = value ? ProcessModeEnum.Inherit : ProcessModeEnum.Disabled;
 			Visible = value;
-			
-			EditorViewport.MatchViewport(GetViewport(), aa: false);
+
+			if (Visible)
+				EditorViewport.MatchViewport(GetViewport(), aa: false);
 
 			if (value)
 				CreateCursor();
@@ -301,6 +307,7 @@ public partial class Editor : Control
 
 		_cursor.SetMaterialOverlay(null);
 
+		var orientation = _cursor.Basis;
 		var transform = _cursor.GlobalTransform;
 		_cursor.GetParent().RemoveChild(_cursor);
 		Track.AddChild(_cursor, forceReadableName: true);
@@ -316,6 +323,7 @@ public partial class Editor : Control
 		
 		_cursor = null;
 		CreateCursor();
+		_cursor.Basis = orientation;
 	}
 
 	private void ConnectBlockSignals(Block block)
@@ -395,11 +403,14 @@ public partial class Editor : Control
 	{
 		if (!IsRunning)
 			return;
+		
+		EditorViewportContainer.GrabFocus();
 
 		if (@event is InputEventKey keyEvent && keyEvent.PhysicalKeycode == Key.X)
 			EraseButton.SetPressed(keyEvent.Pressed);
 
 		if (_mode == Mode.Normal)
+		{
 			if (@event is InputEventMouseButton mouseEvent && mouseEvent.IsPressed())
 			{
 				if (mouseEvent.ButtonIndex == MouseButton.Left) PlaceCursorBlock();
@@ -418,11 +429,38 @@ public partial class Editor : Control
 					Camera.GlobalPosition += _gridHeightScale * Vector3.Up;
 				}
 			}
+			
+			if (@event.IsActionPressed("editor_yawplus", allowEcho: true))
+				RotateCursor(Vector3.Up, _rotationStep, false);
+			if (@event.IsActionPressed("editor_yawminus", allowEcho: true))
+				RotateCursor(Vector3.Up, -_rotationStep, false);
+			if (@event.IsActionPressed("editor_pitchplus", allowEcho: true))
+				RotateCursor(Vector3.Forward, _rotationStep);
+			if (@event.IsActionPressed("editor_pitchminus", allowEcho: true))
+				RotateCursor(Vector3.Forward, -_rotationStep);
+			if (@event.IsActionPressed("editor_rollplus", allowEcho: true))
+				RotateCursor(Vector3.Left, _rotationStep);
+			if (@event.IsActionPressed("editor_rollminus", allowEcho: true))
+				RotateCursor(Vector3.Left, -_rotationStep);
+			if (@event.IsActionPressed("editor_reset_rotation"))
+				_cursor.Basis = Basis.Identity;
+		}
+			
 
 		if (_mode == Mode.Erase)
 			if (@event is InputEventMouseButton mouseEvent)
 				if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.IsPressed())
 					EraseHoveredBlock();
+	}
+
+	private void RotateCursor(Vector3 axis, float angle, bool local = true)
+	{
+		if (local)
+			_cursor.RotateObjectLocal(axis, angle);
+		else
+			_cursor.Rotate(axis, angle);
+		
+		_cursor.Transform = _cursor.Transform.Orthonormalized();
 	}
 
 	private void EraseBlock(Block block)

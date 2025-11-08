@@ -68,14 +68,13 @@ unicode = 50
 events = [SubResource("InputEventKey_kvuet")]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oljq2"]
-render_priority = 100
 transparency = 1
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 0, 0, 0.5019608)
+albedo_color = Color(0, 0, 0, 0.3764706)
 point_size = 2.0
 
-[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewport", "EraseButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton")]
+[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,6 +93,7 @@ ConfirmNewDialog = NodePath("ConfirmNewDialog")
 ConfirmQuitDialog = NodePath("ConfirmQuitDialog")
 DirectoryListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/DirectoryListContainer")
 EditorBlockButtonScene = ExtResource("6_j8y2p")
+EditorViewportContainer = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer")
 EditorViewport = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport")
 EraseButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/EraseButton")
 FileDialog = NodePath("FileDialog")
