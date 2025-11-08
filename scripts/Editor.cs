@@ -60,7 +60,11 @@ public partial class Editor : Control
 
 	[Export] public EditorViewport EditorViewport;
 
-	[Export] public Button EraseButton;
+	[Export]
+	public Button EraseButton;
+	
+	[Export]
+	public Button PickButton;
 
 	[Export] public FileDialog FileDialog;
 
@@ -135,6 +139,7 @@ public partial class Editor : Control
 		FileDialog.FileSelected += FileDialogOnFileSelected;
 
 		EraseButton.Toggled += on => { _mode = on ? Mode.Erase : Mode.Normal; };
+		PickButton.Toggled += on => { _mode = on ? Mode.Pick : Mode.Normal; };
 
 		SetGridSizeSetting(3);
 		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
@@ -245,6 +250,14 @@ public partial class Editor : Control
 				_hoveredBlock.SetMaterialOverlay(BlockEraseHighlightMaterial);
 		}
 
+		if (_mode == Mode.Pick)
+		{
+			_cursor.Visible = false;
+
+			if (_hoveredBlock != null)
+				_hoveredBlock.SetMaterialOverlay(BlockHighlightMaterial);
+		}
+
 		if (_mode == Mode.Normal)
 			if (_hoveredBlock != null)
 				_hoveredBlock.SetMaterialOverlay(null);
@@ -262,13 +275,13 @@ public partial class Editor : Control
 
 		for (int i = -GridMeshSize; i < GridMeshSize; i++)
 		{
-			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(i + 0.5f, 0, -GridMeshSize + 0.5f)));
-			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(i + 0.5f, 0, GridMeshSize - 0.5f)));
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(i + 0.5f, 0.05f, -GridMeshSize + 0.5f)));
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(i + 0.5f, 0.05f, GridMeshSize - 0.5f)));
 		}
 		for (int i = -GridMeshSize; i < GridMeshSize; i++)
 		{
-			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(-GridMeshSize + 0.5f, 0, i + 0.5f)));
-			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(GridMeshSize - 0.5f, 0, i + 0.5f)));
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(-GridMeshSize + 0.5f, 0.05f, i + 0.5f)));
+			GridMesh.SurfaceAddVertex(_grid * (center + scale * new Vector3(GridMeshSize - 0.5f, 0.05f, i + 0.5f)));
 		}
 		
 		GridMesh.SurfaceEnd();
@@ -406,8 +419,13 @@ public partial class Editor : Control
 		
 		EditorViewportContainer.GrabFocus();
 
-		if (@event is InputEventKey keyEvent && keyEvent.PhysicalKeycode == Key.X)
-			EraseButton.SetPressed(keyEvent.Pressed);
+		if (@event is InputEventKey keyEvent)
+		{
+			if (keyEvent.PhysicalKeycode == Key.X)
+				EraseButton.SetPressed(keyEvent.Pressed);
+			else if (keyEvent.PhysicalKeycode == Key.Ctrl)
+				PickButton.SetPressed(keyEvent.Pressed);
+		}
 
 		if (_mode == Mode.Normal)
 		{
@@ -445,12 +463,21 @@ public partial class Editor : Control
 			if (@event.IsActionPressed("editor_reset_rotation"))
 				_cursor.Basis = Basis.Identity;
 		}
-			
 
 		if (_mode == Mode.Erase)
+		{
 			if (@event is InputEventMouseButton mouseEvent)
 				if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.IsPressed())
 					EraseHoveredBlock();
+		}
+		
+		if (_mode == Mode.Pick)
+		{
+			if (@event is InputEventMouseButton mouseEvent)
+				if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.IsPressed())
+					PickHoveredBlock();
+		}
+			
 	}
 
 	private void RotateCursor(Vector3 axis, float angle, bool local = true)
@@ -480,6 +507,18 @@ public partial class Editor : Control
 			EraseBlock(_hoveredBlock);
 
 			UiSoundPlayer.Singleton.BlockErasedSound.Play();
+		}
+	}
+	
+	private void PickHoveredBlock()
+	{
+		if (_hoveredBlock != null)
+		{
+			CurrentBlockRecord = _hoveredBlock.Record;
+			CreateCursor();
+			_cursor.Basis = _hoveredBlock.Basis;
+			
+			UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 		}
 	}
 
@@ -628,6 +667,7 @@ public partial class Editor : Control
 	private enum Mode
 	{
 		Normal,
-		Erase
+		Erase,
+		Pick,
 	}
 }
