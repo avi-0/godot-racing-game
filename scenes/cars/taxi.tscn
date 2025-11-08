@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://lejlxkwbedup"]
+[gd_scene load_steps=23 format=3 uid="uid://lejlxkwbedup"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_denii"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_sw6ji"]
@@ -7,6 +7,7 @@
 [ext_resource type="Curve" uid="uid://cxhyv7al6iqul" path="res://scenes/cars_extras/curves/taxi_rear.tres" id="4_vwi5m"]
 [ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="5_denii"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="5_lce11"]
+[ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="8_0wjsq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.1
@@ -23,7 +24,7 @@ _data = [Vector2(0, 6.383143), 0.0, -14.701177, 0, 0, Vector2(0.22872339, 3.0594
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_vwi5m"]
-_data = [Vector2(0.120000005, 0.058314323), 0.0, 0.0, 0, 0, Vector2(0.6036364, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.10181819, 0.50250566), 0.0, 0.0, 0, 0, Vector2(0.39636362, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_0wjsq"]
@@ -77,7 +78,7 @@ material = SubResource("StandardMaterial3D_xv7xt")
 size = Vector2(0.1, 0.3)
 orientation = 1
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "Wheels", "SkidMarks", "EngineSound")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound")]
 collision_layer = 2
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -89,12 +90,13 @@ linear_damp = 0.25
 script = ExtResource("1_denii")
 OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
+HeadLight = NodePath("Headlights")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 180
 MaxSpeed = 25
 BrakingSpeedMultiplier = 0.7
-ReverseSpeedMultiplier = 0.4
+ReverseSpeedMultiplier = 1.0
 TireTurnSpeed = 1.0
 SteeringBaseDegrees = 5
 SlippingTraction = 0.15
@@ -217,5 +219,8 @@ playback_type = 1
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.742467, 0.44939327)
+
+[node name="Headlights" parent="." instance=ExtResource("8_0wjsq")]
+transform = Transform3D(-1, 2.546744e-08, -1.2514288e-07, -4.8919077e-08, 0.82878387, 0.5595691, 1.1796716e-07, 0.5595691, -0.82878387, 0, 0.46993336, 0.8842214)
 
 [editable path="taxi"]

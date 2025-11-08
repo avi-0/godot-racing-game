@@ -604,7 +604,7 @@ public partial class Editor : Control
 
 			DirectoryListContainer.AddChild(button);
 		}
-
+		
 		foreach (var record in GetBlockRecords(path))
 		{
 			var button = EditorBlockButtonScene.Instantiate<Button>();
@@ -652,6 +652,13 @@ public partial class Editor : Control
 		lapsCount.SetCellMode(1, TreeItem.TreeCellMode.Range);
 		lapsCount.SetRange(1, Track.Options.Laps);
 		lapsCount.SetEditable(1, true);
+		
+		var dayTime = OptionsTree.CreateItem(root);
+		dayTime.SetText(0, "DayTime");
+		dayTime.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		dayTime.SetRange(1, Track.Options.StartDayTime);
+		dayTime.SetRangeConfig(1, 1, 24, 1, false);
+		dayTime.SetEditable(1, true);
 	}
 
 	public void OptionEdited()
@@ -678,6 +685,10 @@ public partial class Editor : Control
 			case "Laps":
 				Track.Options.Laps =
 					(int) editedItem.GetRange(editedColumn);
+				break;
+			case "DayTime":
+				Track.Options.StartDayTime = (int)editedItem.GetRange(editedColumn);
+				Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", (float)Track.Options.StartDayTime);
 				break;
 		}
 	}

@@ -9,4 +9,5 @@ public class TrackOptions
 	public string CarType = "thedriftcar.tscn";
 	public int Laps = 0;
 	public int AuthorTime = 0;
+	public int StartDayTime = 10;
 }

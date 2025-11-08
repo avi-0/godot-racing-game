@@ -97,6 +97,8 @@ public class GameModeTimeAttack : IGameMode
 		GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
 		GameModeController.Utils.SetTrackInfo(_currentTrack.Track.Options.Name, _currentTrack.Track.Options.AuthorName);
 		GameModeController.Utils.SetLapsCount(0, _currentTrack.Track.Options.Laps);
+		
+		_currentTrack.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", (float)_currentTrack.Track.Options.StartDayTime);
 	}
 
 	public int SpawnPlayer(bool localPlayer, Car playerCar)
@@ -125,6 +127,11 @@ public class GameModeTimeAttack : IGameMode
 
 		player.PlayerCar.IsLocallyControlled = true;
 
+		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
+		{
+			player.PlayerCar.HeadLight.Visible = true;
+		}
+		
 		playerCar.PlayerId = playerId;
 		_players[playerId] = player;
 		return playerId;
@@ -145,6 +152,11 @@ public class GameModeTimeAttack : IGameMode
 		{
 			GameModeController.Utils.UpdateLocalRaceTime(TimeSpan.Zero);
 			GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
+		}
+		
+		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
+		{
+			player.PlayerCar.HeadLight.Visible = true;
 		}
 
 		playerCar.PlayerId = playerId;
