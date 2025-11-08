@@ -33,6 +33,7 @@ public partial class Car : RigidBody3D
 	[Export] public float SlippingTraction = 0.1f;
 	[Export] public float SlipThreshold = 0.5f;
 	[Export] public float UnslipThreshold = 0.5f;
+	[Export] public float WheelZFriction = 0.05f;
 	
 	[ExportCategory("Debug")]
 	[Export] public bool DebugMode = false;
@@ -367,7 +368,7 @@ public partial class Car : RigidBody3D
 				SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
 				SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
 
-				var handbrake = _isBraking && !_isReversing;
+				var handbrake = (_isBraking && !_isReversing) || !AcceptsInputs;
 
 				if (handbrake || grip > SlipThreshold)
 				{
@@ -393,7 +394,7 @@ public partial class Car : RigidBody3D
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
 
 				var fVelocity = -wheel.GlobalBasis.Z.Dot(tireVelocity);
-				var zTraction = 0.05f;
+				var zTraction = WheelZFriction;
 				var zForce = wheel.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
 			
 				var forcePos = contactPoint - GlobalPosition;

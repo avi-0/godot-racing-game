@@ -24,7 +24,7 @@ _data = [Vector2(0, 6.383143), 0.0, -14.701177, 0, 0, Vector2(0.22872339, 3.0594
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_vwi5m"]
-_data = [Vector2(0.120000005, 0.058314323), 0.0, 0.0, 0, 0, Vector2(0.6036364, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.10181819, 0.50250566), 0.0, 0.0, 0, 0, Vector2(0.39636362, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_0wjsq"]
@@ -96,7 +96,7 @@ SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUPartic
 Acceleration = 180
 MaxSpeed = 25
 BrakingSpeedMultiplier = 0.7
-ReverseSpeedMultiplier = 0.4
+ReverseSpeedMultiplier = 1.0
 TireTurnSpeed = 1.0
 SteeringBaseDegrees = 5
 SlippingTraction = 0.15
