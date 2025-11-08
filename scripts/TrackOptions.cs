@@ -1,3 +1,5 @@
+using Godot;
+
 namespace racingGame;
 
 public class TrackOptions
@@ -10,4 +12,5 @@ public class TrackOptions
 	public int Laps = 0;
 	public int AuthorTime = 0;
 	public int StartDayTime = 10;
+	public string PreviewImage = "";
 }

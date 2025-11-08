@@ -5,17 +5,9 @@ namespace racingGame;
 
 public class GameModeUtils
 {
-	//----//
-
-	//PLAYER SAVES//
 	private const string SavePbPath = "user://userdata.mdat";
-	//----//
-
-	//--UI--//
-
 	private int _startTime = -1;
-
-	//--GAMEMODE SELECTION--//
+	
 	public void TimeAttack()
 	{
 		GameModeController.CurrentGameMode = new GameModeTimeAttack();
@@ -121,7 +113,16 @@ public class GameModeUtils
 		SetLapsCount(0, 0);
 		SetTrackInfo("", "");
 	}
-	//----//
+
+	public string TakePreviewScreenshot()
+	{
+		GameManager.Singleton.SetGameUiVisiblity(false);
+		Image img = GameManager.Singleton.GetViewport().GetTexture().GetImage();
+		GameManager.Singleton.SetGameUiVisiblity(true);
+		
+		img.Resize(1280, 720, Image.Interpolation.Bilinear);
+		return Marshalls.RawToBase64(img.SaveJpgToBuffer());
+	}
 
 	//TRACK INFO
 	public int GetGoldFromAt(int ms)

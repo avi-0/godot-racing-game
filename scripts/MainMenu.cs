@@ -141,7 +141,17 @@ public partial class MainMenu : Control
 				button.CustomMinimumSize = 64 * Vector2.One;
 				button.Text = options.Name;
 				button.Pressed += () => OpenTrack(basePath + trackPath).Forget();
-
+				
+				Image image = new Image();
+				if (image.LoadJpgFromBuffer(Marshalls.Base64ToRaw(options.PreviewImage)) != Error.Ok)
+				{
+					image = Image.CreateEmpty(1280, 720, true, Image.Format.Rgb8);
+				}
+				
+				image.Resize(320, 240, Image.Interpolation.Lanczos);
+				
+				button.SetButtonIcon(ImageTexture.CreateFromImage(image));
+				
 				TrackContainer.AddChild(button);
 			}
 		}
