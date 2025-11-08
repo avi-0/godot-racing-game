@@ -319,16 +319,14 @@ public partial class Editor : Control
 
 	private void PlaceCursorBlock()
 	{
-		if (Input.IsKeyPressed(Key.Shift))
-		{
-			var existingBlock = GetBlockAtPosition(_cursor.GlobalPosition);
-			if (existingBlock != null) EraseBlock(existingBlock);
-		}
+		var existingBlock = GetExactlyMatchingBlock(_cursor);
+		if (existingBlock != null)
+			return;
 
 		_cursor.SetMaterialOverlay(null);
 
 		var orientation = _cursor.Basis;
-		var transform = _cursor.GlobalTransform;
+		var transform = _cursor.GlobalTransform.Rounded();
 		_cursor.GetParent().RemoveChild(_cursor);
 		Track.AddChild(_cursor, forceReadableName: true);
 		_cursor.GlobalTransform = transform;
@@ -549,10 +547,10 @@ public partial class Editor : Control
 		}
 	}
 
-	private Block GetBlockAtPosition(Vector3 pos)
+	private Block GetExactlyMatchingBlock(Block block)
 	{
-		foreach (var block in Track.GetChildren().Cast<Block>())
-			if (block.GlobalPosition.IsEqualApprox(pos))
+		foreach (var other in Track.GetChildren().Where(node => node is Block).Cast<Block>())
+			if (other.Record == block.Record && other.Transform.IsEqualApprox(block.Transform))
 				return block;
 
 		return null;
