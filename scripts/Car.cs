@@ -24,8 +24,7 @@ public partial class Car : RigidBody3D
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
 	[Export] public int MaxSpeed = 100;
-	[Export] public float BrakingSpeedMultiplier = 0.3f;
-	[Export] public float ReverseSpeedMultiplier = 0.5f;
+	[Export] public float BrakingStrengthMultiplier = 1.0f;
 
 	[ExportCategory("Steering and Drifting")]
 	[Export] public float TireTurnSpeed = 2.0f;
@@ -52,6 +51,7 @@ public partial class Car : RigidBody3D
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;
+	private bool _isAccelerating = false;
 	private bool _isReversing = false;
 	private bool _isBraking = false;
 
@@ -169,6 +169,20 @@ public partial class Car : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		_isAccelerating = false;
+		_isReversing = false;
+		var velocity = GlobalBasis.Z.Dot(LinearVelocity);
+		if (velocity >= 0)
+		{
+			_isAccelerating = Input.GetActionStrength("throttle") > 0;
+			_isBraking = Input.GetActionStrength("brake") > 0;
+		}
+		else
+		{
+			_isReversing = Input.GetActionStrength("brake") > 0;
+			_isBraking = Input.GetActionStrength("throttle") > 0;
+		}
+		
 		var wheelId = 0;
 		foreach (var wheelRay in Wheels)
 		{
@@ -259,57 +273,51 @@ public partial class Car : RigidBody3D
 	void ProcessAcceleration(CarWheel wheel)
 	{
 		var forwardDir = wheel.GlobalBasis.Z;
-		var velocity = forwardDir.Dot(LinearVelocity);
+		var carForwardDir = GlobalBasis.Z;
+		var velocity = carForwardDir.Dot(LinearVelocity);
 		wheel.WheelModel.RotateX((-velocity * (float)GetProcessDeltaTime()) / wheel.Config.WheelRadius);
 		
-		if (AcceptsInputs && (Input.IsActionPressed("throttle") || Input.IsActionPressed("brake")))
-		{
-			var throttleStrength = Input.GetActionStrength("throttle");
-			var brakeStrength = -Input.GetActionStrength("brake");
-			
-			var accelerationFromCurve = AccelerationCurve.SampleBaked(Mathf.Clamp(velocity / MaxSpeed, 0, 1));
-			if (velocity < 0)
-				accelerationFromCurve = 1.0f;
-			
-			var contactPoint = wheel.WheelModel.GlobalPosition;
-			var forceVectorForward = forwardDir * Acceleration * throttleStrength * accelerationFromCurve;
-			var forceVectorBackward = forwardDir * Acceleration * brakeStrength * accelerationFromCurve;
-			var forcePosition = contactPoint - GlobalPosition;
-			
-			if (wheel.IsColliding())
-			{
-				if (brakeStrength < 0)
-				{
-					if (velocity > 0)
-					{
-						forceVectorBackward *= BrakingSpeedMultiplier;
-						_isBraking = true;
-					}
-					else
-					{
-						forceVectorBackward *= ReverseSpeedMultiplier;
-						_isReversing = true;
-					}
-				}
-				else
-				{
-					_isBraking = false;
-					_isReversing = false;
-				}
+		var forwardStrength = Input.GetActionStrength("throttle");
+		var backStrength = -Input.GetActionStrength("brake");
+		
+		var accelerationFromCurve = AccelerationCurve.SampleBaked(Mathf.Clamp(velocity / MaxSpeed, 0, 1));
+		if (velocity < 0)
+			accelerationFromCurve = 1.0f;
 
-				if (wheel.Config.IsDriveWheel || (_isBraking && !_isReversing))
-				{
-					if (wheel.Config.IsDriveWheel)
-					{
-						ApplyForce(forceVectorForward, forcePosition);
-					}
-					ApplyForce(forceVectorBackward, forcePosition);
-					if (DebugMode)
-					{
-						DebugDraw3D.DrawArrowRay(contactPoint, forceVectorForward / Mass, 0.5f, Color.Color8(0, 255, 0), arrow_size: 0.1f);
-						DebugDraw3D.DrawArrowRay(contactPoint, forceVectorBackward / Mass, 0.5f, Color.Color8(255, 000, 0), arrow_size: 0.1f);
-					}
-				}
+		float accelerationStrength = 0;
+		if (velocity >= 0)
+			accelerationStrength = forwardStrength;
+		else
+			accelerationStrength = backStrength;
+
+		float brakeStrength = 0;
+		if (_isBraking)
+		{
+			if (velocity >= 0)
+				brakeStrength = backStrength;
+			else
+				brakeStrength = forwardStrength;
+		}
+		
+		if (!AcceptsInputs)
+			brakeStrength = -float.Sign(velocity);
+		
+		var contactPoint = wheel.WheelModel.GlobalPosition;
+		var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;
+		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier * accelerationFromCurve;
+		var forcePosition = contactPoint - GlobalPosition;
+		
+		if (wheel.IsColliding())
+		{
+			if (wheel.Config.IsDriveWheel)
+			{
+				ApplyForce(accelerationForce, forcePosition);
+			}
+			ApplyForce(brakingForce, forcePosition);
+			if (DebugMode)
+			{
+				DebugDraw3D.DrawArrowRay(contactPoint, accelerationForce / Mass, 0.5f, Color.Color8(0, 255, 0), arrow_size: 0.1f);
+				DebugDraw3D.DrawArrowRay(contactPoint, brakingForce / Mass, 0.5f, Color.Color8(255, 000, 0), arrow_size: 0.1f);
 			}
 		}
 	}
@@ -371,7 +379,7 @@ public partial class Car : RigidBody3D
 				SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
 				SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
 
-				var handbrake = (_isBraking && !_isReversing) || !AcceptsInputs;
+				var handbrake = _isBraking && _isAccelerating;
 
 				if (handbrake || grip > SlipThreshold)
 				{
