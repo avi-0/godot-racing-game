@@ -29,7 +29,7 @@ point_count = 3
 
 [sub_resource type="Resource" id="Resource_x43s4"]
 script = ExtResource("2_dg6r6")
-SpringStrength = 9000.0
+SpringStrength = 12500.0
 SpringDamping = 300.0
 SpringRest = 0.1
 OverExtend = 0.0
@@ -45,7 +45,7 @@ point_count = 2
 
 [sub_resource type="Resource" id="Resource_cn2cu"]
 script = ExtResource("2_dg6r6")
-SpringStrength = 10000.0
+SpringStrength = 13500.0
 SpringDamping = 300.0
 SpringRest = 0.12
 OverExtend = 0.0
