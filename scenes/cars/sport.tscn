@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://7kidcw5bufnv"]
+[gd_scene load_steps=22 format=3 uid="uid://dok0if2iog0no"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_qtbni"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_dg6r6"]
@@ -98,10 +98,8 @@ FrontCamera = NodePath("FrontCamera")
 HeadLight = NodePath("Headlights")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
-Acceleration = 120
+Acceleration = 480
 MaxSpeed = 70
-BrakingSpeedMultiplier = 0.8
-ReverseSpeedMultiplier = 0.8
 TireTurnSpeed = 1.5
 SteeringBaseDegrees = 4
 SlippingTraction = 0.3

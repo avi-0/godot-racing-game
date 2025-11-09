@@ -10,7 +10,7 @@ public static class Transform3DExtensions
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				transform[i, j] = Mathf.Snapped(transform[i, j], 1e-7f);
+				transform[i, j] = Mathf.Snapped(transform[i, j], 1e-6f);
 			}
 		}
 

@@ -77,7 +77,8 @@ public partial class MainMenu : Control
 		GarageViewport.DestroyAllChildren();
 		_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
 		GarageViewport.AddChild(_loadedCar);
-		_loadedCar.OrbitCamera.CameraStickBase.RotationDegrees = new Vector3(0, 215, 0);
+		_loadedCar.OrbitCamera.Yaw = float.DegreesToRadians(215);
+		_loadedCar.OrbitCamera.Pitch = float.DegreesToRadians(30);
 		_loadedCar.OrbitCamera.Camera.SetFov(80);
 	}
 
