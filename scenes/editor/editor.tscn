@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c1rq5irkqaorb"]
+[gd_scene load_steps=47 format=3 uid="uid://c1rq5irkqaorb"]
 
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://scenes/editor/block_erase_material.tres" id="3_j8y2p"]
@@ -19,6 +19,13 @@
 [ext_resource type="Texture2D" uid="uid://vygocfmovio6" path="res://assets/godot-icons/ColorPick.svg" id="16_j530m"]
 [ext_resource type="Texture2D" uid="uid://ckprvp4bgfutw" path="res://assets/godot-icons/Eraser.svg" id="17_0u1f5"]
 [ext_resource type="Texture2D" uid="uid://ca758t2j8e6pe" path="res://assets/godot-icons/Grid.svg" id="17_ja8tm"]
+[ext_resource type="Texture2D" uid="uid://bglab3jdofb8v" path="res://assets/godot-icons/ArrowUp.svg" id="18_r6jol"]
+[ext_resource type="Texture2D" uid="uid://bt5vr3ak4ke7f" path="res://assets/godot-icons/ArrowDown.svg" id="19_lt3wf"]
+[ext_resource type="Texture2D" uid="uid://o18qias6mh1j" path="res://assets/godot-icons/Reload.svg" id="19_svbvx"]
+[ext_resource type="Texture2D" uid="uid://ca05t2km7k6wu" path="res://assets/godot-icons/ArrowLeft.svg" id="20_hx1gb"]
+[ext_resource type="Texture2D" uid="uid://cun1gpfdo6crq" path="res://assets/godot-icons/ArrowRight.svg" id="21_x7r7a"]
+[ext_resource type="Texture2D" uid="uid://b6ltfpf1w283y" path="res://assets/godot-icons/RotateLeft.svg" id="22_a3vti"]
+[ext_resource type="Texture2D" uid="uid://b37xxcyqpre2y" path="res://assets/godot-icons/RotateRight.svg" id="23_2hgrc"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_oljq2"]
 
@@ -73,13 +80,25 @@ events = [SubResource("InputEventKey_kvuet")]
 [sub_resource type="ButtonGroup" id="ButtonGroup_ja8tm"]
 allow_unpress = true
 
+[sub_resource type="InputEventAction" id="InputEventAction_hx1gb"]
+action = &"editor_reset_rotation"
+
+[sub_resource type="Shortcut" id="Shortcut_x7r7a"]
+events = [SubResource("InputEventAction_hx1gb")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_svbvx"]
+action = &"editor_reset_grid"
+
+[sub_resource type="Shortcut" id="Shortcut_b8rj3"]
+events = [SubResource("InputEventAction_svbvx")]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oljq2"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 0.2509804)
 point_size = 2.0
 
-[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "PickButton", "GridPickButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton", "GridMeshInstance")]
+[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "PickButton", "GridPickButton", "ResetGridButton", "YawPlusButton", "YawMinusButton", "PitchPlusButton", "PitchMinusButton", "RollPlusButton", "RollMinusButton", "ResetRotationButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton", "GridMeshInstance")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,7 +112,6 @@ BlockHighlightMaterial = ExtResource("4_o435n")
 BlockListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer")
 CurrentBlockRecord = ExtResource("5_oljq2")
 Camera = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/OrbitCamera")
-CameraSpeed = 48.0
 ConfirmNewDialog = NodePath("ConfirmNewDialog")
 ConfirmQuitDialog = NodePath("ConfirmQuitDialog")
 DirectoryListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/DirectoryListContainer")
@@ -103,6 +121,14 @@ EditorViewport = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrappe
 EraseButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/EraseButton")
 PickButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/PickButton")
 GridPickButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/GridButton")
+ResetGridButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton")
+YawPlusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonCCW")
+YawMinusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonCW")
+PitchPlusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonUp")
+PitchMinusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonDown")
+RollPlusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonLeft")
+RollMinusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonRight")
+ResetRotationButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetRotationButton")
 FileDialog = NodePath("FileDialog")
 GridSizeDecButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/DecreaseButton")
 GridSizeIncButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/IncreaseButton")
@@ -257,6 +283,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 71.0
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -264,6 +291,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="ToolContainer" type="VBoxContainer" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 theme = ExtResource("14_5tdu1")
 
 [node name="EraseButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
@@ -288,6 +316,58 @@ text = "Pick
 "
 icon = ExtResource("16_j530m")
 
+[node name="HSeparator" type="HSeparator" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
+layout_mode = 2
+
+[node name="ResetGridButton3" type="GridContainer" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Reset grid."
+columns = 2
+
+[node name="ButtonUp" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3"]
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("18_r6jol")
+
+[node name="ButtonDown" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3"]
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("19_lt3wf")
+
+[node name="ButtonLeft" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3"]
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("20_hx1gb")
+
+[node name="ButtonRight" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3"]
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("21_x7r7a")
+
+[node name="ButtonCCW" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3"]
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("22_a3vti")
+
+[node name="ButtonCW" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3"]
+layout_mode = 2
+action_mode = 0
+icon = ExtResource("23_2hgrc")
+
+[node name="ResetRotationButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Reset rotation."
+action_mode = 0
+shortcut = SubResource("Shortcut_x7r7a")
+text = "Reset
+"
+icon = ExtResource("19_svbvx")
+
+[node name="HSeparator2" type="HSeparator" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
+layout_mode = 2
+
 [node name="GridButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -299,6 +379,16 @@ button_group = SubResource("ButtonGroup_ja8tm")
 text = "Set Grid
 "
 icon = ExtResource("17_ja8tm")
+
+[node name="ResetGridButton" type="Button" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Reset grid."
+action_mode = 0
+shortcut = SubResource("Shortcut_b8rj3")
+text = "Reset
+"
+icon = ExtResource("19_svbvx")
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/HSplitContainer"]
 layout_mode = 2

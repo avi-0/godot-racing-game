@@ -121,7 +121,8 @@ public class GameModeUtils
 		GameManager.Singleton.SetGameUiVisiblity(true);
 		
 		img.Resize(1280, 720, Image.Interpolation.Bilinear);
-		return Marshalls.RawToBase64(img.SaveJpgToBuffer());
+		var buffer = img.SaveJpgToBuffer();
+		return Marshalls.RawToBase64(buffer);
 	}
 
 	//TRACK INFO

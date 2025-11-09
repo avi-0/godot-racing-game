@@ -35,6 +35,8 @@ public partial class Editor : Control
 
 	private float _yLevel = 0;
 
+	private bool _mouseOverViewport = false;
+
 	[Export] public Material BlockEraseHighlightMaterial;
 
 	[Export] public Material BlockHighlightMaterial;
@@ -66,6 +68,30 @@ public partial class Editor : Control
 	
 	[Export]
 	public Button GridPickButton;
+	
+	[Export]
+	public Button ResetGridButton;
+	
+	[Export]
+	public Button YawPlusButton;
+	
+	[Export]
+	public Button YawMinusButton;
+	
+	[Export]
+	public Button PitchPlusButton;
+	
+	[Export]
+	public Button PitchMinusButton;
+	
+	[Export]
+	public Button RollPlusButton;
+	
+	[Export]
+	public Button RollMinusButton;
+	
+	[Export]
+	public Button ResetRotationButton;
 
 	[Export] public FileDialog FileDialog;
 
@@ -126,6 +152,9 @@ public partial class Editor : Control
 		Singleton = this;
 
 		EditorViewport.Input += ViewportInput;
+		EditorViewportContainer.MouseEntered += () => _mouseOverViewport = true;
+		EditorViewportContainer.MouseExited += () => _mouseOverViewport = false;
+		
 		Camera.Pitch = float.DegreesToRadians(45);
 		Camera.Yaw = float.DegreesToRadians(180);
 		Camera.Radius = 48;
@@ -150,6 +179,14 @@ public partial class Editor : Control
 		EraseButton.Toggled += on => { _mode = on ? Mode.Erase : Mode.Normal; };
 		PickButton.Toggled += on => { _mode = on ? Mode.Pick : Mode.Normal; };
 		GridPickButton.Toggled += on => { _mode = on ? Mode.GridPick : Mode.Normal; };
+		ResetGridButton.Pressed += () => _grid = Transform3D.Identity;
+		YawPlusButton.Pressed += YawPlusButtonOnPressed;
+		YawMinusButton.Pressed += YawMinusButtonOnPressed;
+		PitchPlusButton.Pressed += PitchPlusButtonOnPressed;
+		PitchMinusButton.Pressed += PitchMinusButtonOnPressed;
+		RollPlusButton.Pressed += RollPlusButtonOnPressed;
+		RollMinusButton.Pressed += RollMinusButtonOnPressed;
+		ResetRotationButton.Pressed += () => _cursor.Basis = Basis.Identity;
 
 		SetGridSizeSetting(3);
 		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
@@ -164,6 +201,36 @@ public partial class Editor : Control
 		SetDirectory("/").Forget();
 
 		OptionsTree.ItemEdited += OptionEdited;
+	}
+
+	private void RollMinusButtonOnPressed()
+	{
+		RotateCursor(Vector3.Left, -_rotationStep);
+	}
+
+	private void RollPlusButtonOnPressed()
+	{
+		RotateCursor(Vector3.Left, _rotationStep);
+	}
+
+	private void PitchMinusButtonOnPressed()
+	{
+		RotateCursor(Vector3.Forward, -_rotationStep);
+	}
+
+	private void PitchPlusButtonOnPressed()
+	{
+		RotateCursor(Vector3.Forward, _rotationStep);
+	}
+
+	private void YawMinusButtonOnPressed()
+	{
+		RotateCursor(Vector3.Up, -_rotationStep, false);
+	}
+
+	private void YawPlusButtonOnPressed()
+	{
+		RotateCursor(Vector3.Up, _rotationStep, false);
 	}
 
 	private void HSplitContainerOnDragged(long offset)
@@ -198,6 +265,7 @@ public partial class Editor : Control
 			CloseTrack();
 			GameManager.Singleton.OpenTrack(path);
 			SetupOptions();
+			_grid = Transform3D.Identity;
 
 			foreach (var block in Track.FindChildren("*", "Block").Cast<Block>()) ConnectBlockSignals(block);
 		}
@@ -335,6 +403,7 @@ public partial class Editor : Control
 		_cursor.Owner = Track;
 		
 		ConnectBlockSignals(_cursor);
+		_hoveredBlock = _cursor;
 
 		UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 
@@ -389,6 +458,9 @@ public partial class Editor : Control
 	private Vector3 ProjectMousePosition()
 	{
 		var mousePosition = EditorViewport.GetMousePosition();
+		if (!_mouseOverViewport)
+			mousePosition = EditorViewport.Size / 2;
+		
 		var camera = EditorViewport.GetCamera3D();
 		
 		var toGrid = _grid.AffineInverse();
@@ -460,21 +532,19 @@ public partial class Editor : Control
 			}
 			
 			if (@event.IsActionPressed("editor_yawplus", allowEcho: true))
-				RotateCursor(Vector3.Up, _rotationStep, false);
+				YawPlusButtonOnPressed();
 			if (@event.IsActionPressed("editor_yawminus", allowEcho: true))
-				RotateCursor(Vector3.Up, -_rotationStep, false);
+				YawMinusButtonOnPressed();
 			if (@event.IsActionPressed("editor_pitchplus", allowEcho: true))
-				RotateCursor(Vector3.Forward, _rotationStep);
+				PitchPlusButtonOnPressed();
 			if (@event.IsActionPressed("editor_pitchminus", allowEcho: true))
-				RotateCursor(Vector3.Forward, -_rotationStep);
+				PitchMinusButtonOnPressed();
 			if (@event.IsActionPressed("editor_rollplus", allowEcho: true))
-				RotateCursor(Vector3.Left, _rotationStep);
+				RollPlusButtonOnPressed();
 			if (@event.IsActionPressed("editor_rollminus", allowEcho: true))
-				RotateCursor(Vector3.Left, -_rotationStep);
+				RollMinusButtonOnPressed();
 			if (@event.IsActionPressed("editor_reset_rotation"))
 				_cursor.Basis = Basis.Identity;
-			if (@event.IsActionPressed("editor_reset_grid"))
-				_grid = Transform3D.Identity;
 
 			if (@event is InputEventMouseMotion mouseMotionEvent
 				&& mouseMotionEvent.GetModifiersMask() == KeyModifierMask.MaskAlt
@@ -546,7 +616,7 @@ public partial class Editor : Control
 			
 			UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 
-			_mode = Mode.Normal;
+			PickButton.SetPressed(false);
 		}
 	}
 	
@@ -556,8 +626,8 @@ public partial class Editor : Control
 		{
 			_grid = _hoveredBlock.Transform;
 			_yLevel = 0;
-			
-			_mode = Mode.Normal;
+
+			GridPickButton.SetPressed(false);
 		}
 	}
 
