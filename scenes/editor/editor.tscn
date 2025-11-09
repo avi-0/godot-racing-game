@@ -98,7 +98,7 @@ shading_mode = 0
 albedo_color = Color(0, 0, 0, 0.2509804)
 point_size = 2.0
 
-[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "PickButton", "GridPickButton", "ResetGridButton", "YawPlusButton", "YawMinusButton", "PitchPlusButton", "PitchMinusButton", "RollPlusButton", "RollMinusButton", "ResetRotationButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton", "GridMeshInstance")]
+[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "PickButton", "GridPickButton", "ResetGridButton", "RotationStepButton", "YawPlusButton", "YawMinusButton", "PitchPlusButton", "PitchMinusButton", "RollPlusButton", "RollMinusButton", "ResetRotationButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton", "GridMeshInstance")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -122,6 +122,7 @@ EraseButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/C
 PickButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/PickButton")
 GridPickButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/GridButton")
 ResetGridButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton")
+RotationStepButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/RotationStepButton")
 YawPlusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonCCW")
 YawMinusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonCW")
 PitchPlusButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer/ResetGridButton3/ButtonUp")
@@ -318,6 +319,18 @@ icon = ExtResource("16_j530m")
 
 [node name="HSeparator" type="HSeparator" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
 layout_mode = 2
+
+[node name="RotationStepButton" type="OptionButton" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "5°"
+popup/item_0/id = 0
+popup/item_1/text = "1/4"
+popup/item_1/id = 1
+popup/item_2/text = "1/2"
+popup/item_2/id = 2
 
 [node name="ResetGridButton3" type="GridContainer" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/Control/MarginContainer/ToolContainer"]
 layout_mode = 2

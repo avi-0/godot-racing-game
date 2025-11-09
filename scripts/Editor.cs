@@ -73,6 +73,9 @@ public partial class Editor : Control
 	public Button ResetGridButton;
 	
 	[Export]
+	public OptionButton RotationStepButton;
+	
+	[Export]
 	public Button YawPlusButton;
 	
 	[Export]
@@ -122,6 +125,7 @@ public partial class Editor : Control
 	public ImmediateMesh GridMesh;
 
 	private float _rotationStep = float.DegreesToRadians(5);
+	private bool _rotationShiftOrigin = false;
 
 	private Track Track => GameManager.Singleton.Track;
 
@@ -187,6 +191,7 @@ public partial class Editor : Control
 		RollPlusButton.Pressed += RollPlusButtonOnPressed;
 		RollMinusButton.Pressed += RollMinusButtonOnPressed;
 		ResetRotationButton.Pressed += () => _cursor.Basis = Basis.Identity;
+		RotationStepButton.ItemSelected += RotationStepButtonOnItemSelected;
 
 		SetGridSizeSetting(3);
 		GridSizeDecButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting - 1); };
@@ -203,24 +208,43 @@ public partial class Editor : Control
 		OptionsTree.ItemEdited += OptionEdited;
 	}
 
+	private void RotationStepButtonOnItemSelected(long index)
+	{
+		if (index == 0)
+		{
+			_rotationStep = float.DegreesToRadians(5);
+			_rotationShiftOrigin = false;
+		} 
+		else if (index == 1)
+		{
+			_rotationStep = float.Atan(2.0f / 8.0f);
+			_rotationShiftOrigin = true;
+		}
+		else if (index == 2)
+		{
+			_rotationStep = float.Atan(4.0f / 8.0f);
+			_rotationShiftOrigin = true;
+		}
+	}
+
 	private void RollMinusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Forward, -_rotationStep);
+		RotateCursor(Vector3.Forward, -_rotationStep, origin: Vector3.Left * 4);
 	}
 
 	private void RollPlusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Forward, _rotationStep);
+		RotateCursor(Vector3.Forward, _rotationStep, origin: Vector3.Left * 4);
 	}
 
 	private void PitchMinusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Right, -_rotationStep);
+		RotateCursor(Vector3.Right, -_rotationStep, origin: Vector3.Back * 4);
 	}
 
 	private void PitchPlusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Right, _rotationStep);
+		RotateCursor(Vector3.Right, _rotationStep, origin: Vector3.Back * 4);
 	}
 
 	private void YawMinusButtonOnPressed()
@@ -575,25 +599,51 @@ public partial class Editor : Control
 		}
 	}
 
-	private void RotateCursor(Vector3 axis, float angle, bool local = true)
+	private void RotateCursor(Vector3 axis, float angle, bool local = true, Vector3 origin = default)
 	{
-		var forward = Camera.CameraStickBase.GlobalBasis.X.Cross(Vector3.Up);
-		var directions = new List<Vector3> { _cursor.Basis.X, -_cursor.Basis.X, _cursor.Basis.Z, -_cursor.Basis.Z };
-		var forwardBasisVector = directions.MinBy(vector => vector.DistanceTo(forward));
-		var forwardBasis = new Basis(_cursor.Basis.Y.Cross(forwardBasisVector), _cursor.Basis.Y, forwardBasisVector)
-			.Orthonormalized();
-		axis = _cursor.Basis.Inverse() * forwardBasis * axis;
-
 		if (local)
 		{
-			_cursor.RotateObjectLocal(axis, angle);
+			// оставь надежду, всяк сюда входящий
+			var oldOrigin = _cursor.GlobalPosition;
+			
+			var forward = Camera.CameraStickBase.GlobalBasis.X.Cross(Vector3.Up);
+			var directions = new List<Vector3> { _cursor.GlobalBasis.X, -_cursor.GlobalBasis.X, _cursor.GlobalBasis.Z, -_cursor.GlobalBasis.Z };
+			var basisZ = directions.MinBy(vector => vector.DistanceTo(forward));
+			var basisX = _cursor.GlobalBasis.Y.Cross(basisZ);
+			
+			var forwardTransform = new Transform3D(
+					basisX,
+					_cursor.GlobalBasis.Y,
+					basisZ,
+					Vector3.Zero)
+				.Orthonormalized();
+			
+			var shift = _rotationShiftOrigin ? -origin : Vector3.Zero;
+			var shiftTransform = new Transform3D(Basis.Identity, shift);
+
+			var transform = new Transform3D(_cursor.GlobalBasis.Inverse(), Vector3.Zero) * forwardTransform *
+			                shiftTransform;
+
+			_cursor.GlobalTransform = _cursor.GlobalTransform * transform *
+			                    (new Transform3D(new Basis(axis, angle), Vector3.Zero)) *
+			                    transform.Inverse();
+			
+			_cursor.GlobalTransform = _cursor.GlobalTransform.Orthonormalized();
+
+			GD.Print($"{oldOrigin} => {_cursor.GlobalPosition}");
+			
+			if (_rotationShiftOrigin)
+			{
+				_grid = _cursor.GlobalTransform;
+				_yLevel = 0;
+			}
 		}
 		else
 		{
 			_cursor.Rotate(axis, angle);
 		}
 		
-		_cursor.Transform = _cursor.Transform.Orthonormalized();
+		//_cursor.Transform = _cursor.Transform.Orthonormalized();
 	}
 
 	private void EraseBlock(Block block)
@@ -622,7 +672,7 @@ public partial class Editor : Control
 		{
 			CurrentBlockRecord = _hoveredBlock.Record;
 			CreateCursor();
-			_cursor.Basis = _hoveredBlock.Basis;
+			_cursor.GlobalBasis = _hoveredBlock.GlobalBasis;
 			
 			UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 
@@ -634,8 +684,9 @@ public partial class Editor : Control
 	{
 		if (_hoveredBlock != null)
 		{
-			_grid = _hoveredBlock.Transform;
+			_grid = _hoveredBlock.GlobalTransform;
 			_yLevel = 0;
+			_cursor.GlobalBasis = _hoveredBlock.GlobalBasis;
 
 			GridPickButton.SetPressed(false);
 		}
