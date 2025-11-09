@@ -477,8 +477,8 @@ public partial class Editor : Control
 				_grid = Transform3D.Identity;
 
 			if (@event is InputEventMouseMotion mouseMotionEvent
-			    && mouseMotionEvent.GetModifiersMask() == KeyModifierMask.MaskAlt
-			    && mouseMotionEvent.ButtonMask == MouseButtonMask.Left)
+				&& mouseMotionEvent.GetModifiersMask() == KeyModifierMask.MaskAlt
+				&& mouseMotionEvent.ButtonMask == MouseButtonMask.Left)
 			{
 				Camera.RotateCamera(mouseMotionEvent.ScreenRelative / EditorViewport.Size.Y);
 			}

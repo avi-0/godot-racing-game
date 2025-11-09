@@ -117,7 +117,7 @@ public partial class GameManager : Node
 		MusicPlayer.Stop();
 	}
 
-	private void SetGameUiVisiblity(bool visible)
+	public void SetGameUiVisiblity(bool visible)
 	{
 		RaceUi.Visible = visible;
 
