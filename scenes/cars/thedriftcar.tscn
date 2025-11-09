@@ -13,13 +13,13 @@ friction = 0.0
 bounce = 0.1
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
-_limits = [1.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 2.6287487), 0.0, 0.0, 0, 0, Vector2(0.24202128, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.9834538), 0.0, 0.0, 0, 0]
-point_count = 3
+_limits = [1.0, 1.5633919, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.5823911, 0, 0, Vector2(1, 1.5633919), 0.6769448, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve" id="Curve_wofr7"]
-_limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 8), 0.0, -18.3019, 0, 0, Vector2(0.24468084, 4.3769383), -13.008701, -13.008701, 0, 0, Vector2(1, 1), -0.9904156, 0.0, 0, 0]
+_limits = [1.0, 16.0, 0.0, 1.0]
+_data = [Vector2(0, 16), 0.0, -54.825523, 0, 0, Vector2(0.24202129, 5.7931204), -20.885908, -20.885908, 0, 0, Vector2(1, 1), -1.1852672, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_xv7xt"]
@@ -87,7 +87,7 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 600
 MaxSpeed = 30
-SteeringBaseDegrees = 4
+SteeringBaseDegrees = 3
 SlippingTraction = 0.15
 SlipThreshold = 0.8
 UnslipThreshold = 0.8
