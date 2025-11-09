@@ -24,7 +24,8 @@ public partial class Car : RigidBody3D
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
 	[Export] public int MaxSpeed = 100;
-	[Export] public float BrakingStrengthMultiplier = 1.0f;
+	[Export] public float BrakingStrengthMultiplier = 0.5f;
+	[Export] public float ReversingStrengthMultiplier = 0.5f;
 
 	[ExportCategory("Steering and Drifting")]
 	[Export] public float TireTurnSpeed = 2.0f;
@@ -51,6 +52,7 @@ public partial class Car : RigidBody3D
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;
+	private int _driveWheelCount;
 	private bool _isAccelerating = false;
 	private bool _isReversing = false;
 	private bool _isBraking = false;
@@ -86,6 +88,13 @@ public partial class Car : RigidBody3D
 		_wheelCount = Wheels.Length;
 
 		SetupWheels();
+
+		_driveWheelCount = 0;
+		foreach (var wheel in Wheels)
+		{
+			if (wheel.Config.IsDriveWheel)
+				_driveWheelCount++;
+		}
 	}
 
 	private void SetupWheels()
@@ -279,6 +288,11 @@ public partial class Car : RigidBody3D
 		
 		var forwardStrength = Input.GetActionStrength("throttle");
 		var backStrength = -Input.GetActionStrength("brake");
+		if (!AcceptsInputs)
+		{
+			forwardStrength = 0;
+			backStrength = 0;
+		}
 		
 		var accelerationFromCurve = AccelerationCurve.SampleBaked(Mathf.Clamp(velocity / MaxSpeed, 0, 1));
 		if (velocity < 0)
@@ -288,7 +302,7 @@ public partial class Car : RigidBody3D
 		if (velocity >= 0)
 			accelerationStrength = forwardStrength;
 		else
-			accelerationStrength = backStrength;
+			accelerationStrength = backStrength * ReversingStrengthMultiplier;
 
 		float brakeStrength = 0;
 		if (_isBraking)
@@ -311,9 +325,9 @@ public partial class Car : RigidBody3D
 		{
 			if (wheel.Config.IsDriveWheel)
 			{
-				ApplyForce(accelerationForce, forcePosition);
+				ApplyForce(accelerationForce / _driveWheelCount, forcePosition);
 			}
-			ApplyForce(brakingForce, forcePosition);
+			ApplyForce(brakingForce / _wheelCount, forcePosition);
 			if (DebugMode)
 			{
 				DebugDraw3D.DrawArrowRay(contactPoint, accelerationForce / Mass, 0.5f, Color.Color8(0, 255, 0), arrow_size: 0.1f);
