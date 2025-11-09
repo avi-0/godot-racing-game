@@ -205,22 +205,22 @@ public partial class Editor : Control
 
 	private void RollMinusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Left, -_rotationStep);
+		RotateCursor(Vector3.Forward, -_rotationStep);
 	}
 
 	private void RollPlusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Left, _rotationStep);
+		RotateCursor(Vector3.Forward, _rotationStep);
 	}
 
 	private void PitchMinusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Forward, -_rotationStep);
+		RotateCursor(Vector3.Right, -_rotationStep);
 	}
 
 	private void PitchPlusButtonOnPressed()
 	{
-		RotateCursor(Vector3.Forward, _rotationStep);
+		RotateCursor(Vector3.Right, _rotationStep);
 	}
 
 	private void YawMinusButtonOnPressed()
@@ -434,7 +434,6 @@ public partial class Editor : Control
 	private void RotateCursor()
 	{
 		_cursor.RotateObjectLocal(Vector3.Up, -Single.Pi / 2);
-		//_cursor.Transform = _cursor.Transform.Rounded();
 
 		_rotation = (_rotation + 1) % 4;
 	}
@@ -578,10 +577,21 @@ public partial class Editor : Control
 
 	private void RotateCursor(Vector3 axis, float angle, bool local = true)
 	{
+		var forward = Camera.CameraStickBase.GlobalBasis.X.Cross(Vector3.Up);
+		var directions = new List<Vector3> { _cursor.Basis.X, -_cursor.Basis.X, _cursor.Basis.Z, -_cursor.Basis.Z };
+		var forwardBasisVector = directions.MinBy(vector => vector.DistanceTo(forward));
+		var forwardBasis = new Basis(_cursor.Basis.Y.Cross(forwardBasisVector), _cursor.Basis.Y, forwardBasisVector)
+			.Orthonormalized();
+		axis = _cursor.Basis.Inverse() * forwardBasis * axis;
+
 		if (local)
+		{
 			_cursor.RotateObjectLocal(axis, angle);
+		}
 		else
+		{
 			_cursor.Rotate(axis, angle);
+		}
 		
 		_cursor.Transform = _cursor.Transform.Orthonormalized();
 	}
