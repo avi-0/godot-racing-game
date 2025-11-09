@@ -47,6 +47,13 @@ public static class Jz
 	private static T LoadJson<T>(string path)
 	{
 		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+		var error = FileAccess.GetOpenError();
+		if (error != Error.Ok)
+		{
+			GD.PushError(error);
+			return default;
+		}
+		
 		var text = file.GetAsText();
 		
 		return JsonConvert.DeserializeObject<T>(text);
@@ -55,6 +62,11 @@ public static class Jz
 	private static void SaveJson<T>(string path, T data)
 	{
 		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
+		var error = FileAccess.GetOpenError();
+		if (error != Error.Ok)
+		{
+			GD.PushError(error);
+		}
 		
 		var text = JsonConvert.SerializeObject(data, Formatting.Indented);
 
@@ -64,6 +76,14 @@ public static class Jz
 	public static T LoadJz<T>(string path)
 	{
 		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+		var error = FileAccess.GetOpenError();
+		if (error != Error.Ok)
+		{
+			GD.PushError(error);
+			return default;
+		}
+		
+		
 		var bytes = file.GetBuffer((long) file.GetLength());
 			
 		using var memoryStream = new MemoryStream(bytes);
@@ -81,6 +101,13 @@ public static class Jz
 	{
 		using (var file = FileAccess.Open(path, FileAccess.ModeFlags.Write))
 		{
+			var error = FileAccess.GetOpenError();
+			if (error != Error.Ok)
+			{
+				GD.PushError(error);
+				return;
+			}
+			
 			var text = JsonConvert.SerializeObject(data, Formatting.Indented);
 			var bytes = System.Text.Encoding.UTF8.GetBytes(text);
 		
