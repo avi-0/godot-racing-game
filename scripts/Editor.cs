@@ -43,9 +43,7 @@ public partial class Editor : Control
 
 	[Export] public BlockRecord CurrentBlockRecord;
 
-	[Export] public Camera3D Camera;
-
-	[Export] public float CameraSpeed;
+	[Export] public OrbitCamera Camera;
 
 	[Export] public ConfirmationDialog ConfirmNewDialog;
 
@@ -128,6 +126,9 @@ public partial class Editor : Control
 		Singleton = this;
 
 		EditorViewport.Input += ViewportInput;
+		Camera.Pitch = float.DegreesToRadians(45);
+		Camera.Yaw = float.DegreesToRadians(180);
+		Camera.Radius = 48;
 
 		QuitButton.Pressed += () => ConfirmQuitDialog.Show();
 		OpenButton.Pressed += () =>
@@ -372,25 +373,27 @@ public partial class Editor : Control
 	private void UpdateCamera(float delta)
 	{
 		if (Input.IsActionPressed("editor_left"))
-			Camera.GlobalPosition += delta * CameraSpeed * Vector3.Left;
+			Camera.GlobalPosition += delta * Camera.Radius * Camera.CameraStickBase.GlobalBasis.X;
 		if (Input.IsActionPressed("editor_right"))
-			Camera.GlobalPosition += delta * CameraSpeed * Vector3.Right;
+			Camera.GlobalPosition -= delta * Camera.Radius * Camera.CameraStickBase.GlobalBasis.X;
 		if (Input.IsActionPressed("editor_forward"))
-			Camera.GlobalPosition += delta * CameraSpeed * Vector3.Forward;
+			Camera.GlobalPosition += delta * Camera.Radius * Camera.CameraStickBase.GlobalBasis.X.Cross(Vector3.Up);
 		if (Input.IsActionPressed("editor_back"))
-			Camera.GlobalPosition += delta * CameraSpeed * Vector3.Back;
+			Camera.GlobalPosition -= delta * Camera.Radius * Camera.CameraStickBase.GlobalBasis.X.Cross(Vector3.Up);
 		if (Input.IsActionPressed("editor_up"))
-			Camera.GlobalPosition += delta * CameraSpeed * Vector3.Up;
+			Camera.GlobalPosition += delta * Camera.Radius * Vector3.Up;
 		if (Input.IsActionPressed("editor_down"))
-			Camera.GlobalPosition += delta * CameraSpeed * Vector3.Down;
+			Camera.GlobalPosition += delta * Camera.Radius * Vector3.Down;
 	}
 
 	private Vector3 ProjectMousePosition()
 	{
 		var mousePosition = EditorViewport.GetMousePosition();
+		var camera = EditorViewport.GetCamera3D();
+		
 		var toGrid = _grid.AffineInverse();
-		var from = toGrid * Camera.ProjectRayOrigin(mousePosition);
-		var dir = toGrid.Basis * Camera.ProjectRayNormal(mousePosition);
+		var from = toGrid * camera.ProjectRayOrigin(mousePosition);
+		var dir = toGrid.Basis * camera.ProjectRayNormal(mousePosition);
 		
 		var plane = new Plane(Vector3.Up, new Vector3(0, _gridHeightScale * GetYLevelRounded(_gridHeightScale), 0));
 		var intersection = plane.IntersectsRay(from, dir) ?? Vector3.Zero;
@@ -433,23 +436,27 @@ public partial class Editor : Control
 
 		if (_mode == Mode.Normal)
 		{
-			if (@event is InputEventMouseButton mouseEvent && mouseEvent.IsPressed())
+			if (@event.IsActionPressed("editor_left_click", exactMatch: true))
+				PlaceCursorBlock();
+			if (@event.IsActionPressed("editor_right_click", exactMatch: true))
+				RotateCursor();
+			if (@event.IsActionPressed("editor_go_down", exactMatch: true))
 			{
-				if (mouseEvent.ButtonIndex == MouseButton.Left) PlaceCursorBlock();
-
-				if (mouseEvent.ButtonIndex == MouseButton.Right) RotateCursor();
-
-				if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
-				{
-					_yLevel -= _gridHeightScale;
-					Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Down);
-				}
-
-				if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
-				{
-					_yLevel += _gridHeightScale;
-					Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Up);
-				}
+				_yLevel -= _gridHeightScale;
+				Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Down);
+			}
+			if (@event.IsActionPressed("editor_go_up", exactMatch: true))
+			{
+				_yLevel += _gridHeightScale;
+				Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Up);
+			}
+			if (@event.IsActionPressed("editor_zoom_in", exactMatch: true))
+			{
+				Camera.Radius = Math.Max(8, Camera.Radius - 3);
+			}
+			if (@event.IsActionPressed("editor_zoom_out", exactMatch: true))
+			{
+				Camera.Radius += 3;
 			}
 			
 			if (@event.IsActionPressed("editor_yawplus", allowEcho: true))
@@ -468,6 +475,13 @@ public partial class Editor : Control
 				_cursor.Basis = Basis.Identity;
 			if (@event.IsActionPressed("editor_reset_grid"))
 				_grid = Transform3D.Identity;
+
+			if (@event is InputEventMouseMotion mouseMotionEvent
+			    && mouseMotionEvent.GetModifiersMask() == KeyModifierMask.MaskAlt
+			    && mouseMotionEvent.ButtonMask == MouseButtonMask.Left)
+			{
+				Camera.RotateCamera(mouseMotionEvent.ScreenRelative / EditorViewport.Size.Y);
+			}
 		}
 
 		if (_mode == Mode.Erase)

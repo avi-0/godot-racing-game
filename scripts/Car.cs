@@ -80,6 +80,9 @@ public partial class Car : RigidBody3D
 	{
 		EngineSound.Play();
 
+		OrbitCamera.Radius = 3.5f;
+		OrbitCamera.Pitch = float.DegreesToRadians(30);
+
 		_wheelCount = Wheels.Length;
 
 		SetupWheels();
@@ -125,7 +128,7 @@ public partial class Car : RigidBody3D
 		_mouseSensitivity = 1.0f * 0.25f * 2 * Mathf.Pi / DisplayServer.ScreenGetSize().Y;
 		
 		if (LinearVelocity.Slide(Vector3.Up).Length() > 5.0f)
-			OrbitCamera.UpdateYaw((float) delta, LinearVelocity);
+			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
 	}
 
 	public override void _Input(InputEvent @event)

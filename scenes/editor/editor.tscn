@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c1rq5irkqaorb"]
+[gd_scene load_steps=36 format=3 uid="uid://c1rq5irkqaorb"]
 
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://scenes/editor/block_erase_material.tres" id="3_j8y2p"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://d4wjoyefkgcw" path="res://scripts/TreePopupFix.cs" id="9_j8y2p"]
 [ext_resource type="Texture2D" uid="uid://kedovh6u17wl" path="res://assets/godot-icons/Save.svg" id="9_sdh1e"]
 [ext_resource type="Theme" uid="uid://g7t3ddg3tu7f" path="res://scenes/editor/tool_panel_theme.tres" id="14_5tdu1"]
+[ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="14_tg17e"]
 [ext_resource type="Texture2D" uid="uid://vygocfmovio6" path="res://assets/godot-icons/ColorPick.svg" id="16_j530m"]
 [ext_resource type="Texture2D" uid="uid://ckprvp4bgfutw" path="res://assets/godot-icons/Eraser.svg" id="17_0u1f5"]
 [ext_resource type="Texture2D" uid="uid://ca758t2j8e6pe" path="res://assets/godot-icons/Grid.svg" id="17_ja8tm"]
@@ -75,7 +76,7 @@ allow_unpress = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oljq2"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0, 0, 0, 0.3764706)
+albedo_color = Color(0, 0, 0, 0.2509804)
 point_size = 2.0
 
 [node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "PickButton", "GridPickButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton", "GridMeshInstance")]
@@ -91,7 +92,7 @@ BlockEraseHighlightMaterial = ExtResource("3_j8y2p")
 BlockHighlightMaterial = ExtResource("4_o435n")
 BlockListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer")
 CurrentBlockRecord = ExtResource("5_oljq2")
-Camera = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/EditorCamera")
+Camera = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/OrbitCamera")
 CameraSpeed = 48.0
 ConfirmNewDialog = NodePath("ConfirmNewDialog")
 ConfirmQuitDialog = NodePath("ConfirmQuitDialog")
@@ -242,11 +243,7 @@ size = Vector2i(1571, 1008)
 render_target_update_mode = 4
 script = ExtResource("7_74j0u")
 
-[node name="EditorCamera" type="Camera3D" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport"]
-physics_interpolation_mode = 2
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 24, 0)
-current = true
-fov = 80.0
+[node name="OrbitCamera" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport" instance=ExtResource("14_tg17e")]
 
 [node name="Control" type="Control" parent="EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper"]
 layout_mode = 1
