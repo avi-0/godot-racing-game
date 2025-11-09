@@ -14,8 +14,8 @@ bounce = 0.6
 
 [sub_resource type="Curve" id="Curve_qtbni"]
 _limits = [1.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.79636365, 4), 0.0, 0.0, 0, 0, Vector2(1, 3.4314353), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1.9922554), 0.0, 37.867313, 0, 0, Vector2(0.08363637, 1.4414582), 0.0, 0.0, 0, 0, Vector2(0.79636365, 4), 0.0, 0.0, 0, 0, Vector2(1, 3.4314353), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Curve" id="Curve_wofr7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
@@ -91,20 +91,21 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.1, 0.1)
 continuous_cd = true
 linear_damp_mode = 1
-linear_damp = 0.25
 script = ExtResource("1_qtbni")
 OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
 HeadLight = NodePath("Headlights")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
-Acceleration = 480
+Acceleration = 205
 MaxSpeed = 70
+BrakingStrengthMultiplier = 2.0
 TireTurnSpeed = 1.5
 SteeringBaseDegrees = 4
 SlippingTraction = 0.3
 SlipThreshold = 0.35
 UnslipThreshold = 1.6
+WheelZFriction = 0.02
 AccelerationCurve = SubResource("Curve_qtbni")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")
