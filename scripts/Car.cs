@@ -56,6 +56,7 @@ public partial class Car : RigidBody3D
 	private bool _isAccelerating = false;
 	private bool _isReversing = false;
 	private bool _isBraking = false;
+	private bool _hasCompressedWheel = false;
 
 	private bool _isSlipping = false;
 
@@ -191,31 +192,42 @@ public partial class Car : RigidBody3D
 			_isReversing = Input.GetActionStrength("brake") > 0;
 			_isBraking = Input.GetActionStrength("throttle") > 0;
 		}
-		
-		var wheelId = 0;
-		foreach (var wheelRay in Wheels)
+
+		_hasCompressedWheel = false;
+		foreach (var wheel in Wheels)
 		{
-			SteeringRotation(delta, wheelRay);
+			SteeringRotation(delta, wheel);
 
 			// ебаный хак
 			// проблема: если ShapeCast уже коллайдится в начальной позиции,
 			// он репортит расстояние как будто бы он растягивается на полную дистанцию
 			// => сначала чекнем нулевой вектор и только потом дадим какой надо
-			wheelRay.TargetPosition = new Vector3();
-			wheelRay.ForceShapecastUpdate();
-			if (!wheelRay.IsColliding())
+			wheel.TargetPosition = new Vector3();
+			wheel.ForceShapecastUpdate();
+			if (!wheel.IsColliding())
 			{
-				wheelRay.TargetPosition = new Vector3(wheelRay.TargetPosition.X, -(wheelRay.Config.SpringRest + wheelRay.Config.OverExtend), wheelRay.TargetPosition.Z);
-				wheelRay.ForceShapecastUpdate();
+				wheel.TargetPosition = new Vector3(wheel.TargetPosition.X, -(wheel.Config.SpringRest + wheel.Config.OverExtend), wheel.TargetPosition.Z);
+				wheel.ForceShapecastUpdate();
 			}
 
-			ProcessSuspension(wheelRay);
-			ProcessAcceleration(wheelRay);
-			ProcessTraction(wheelRay, wheelId);
-
-			wheelId++;
+			ProcessSuspension(wheel);
 		}
 
+		// ускорение и повороты - только если есть хотя бы одно колесо,
+		// которое прижато к земле (т.е. подвеска сжата, а не растянута)
+		// чтобы когда тачка уже в воздухе, она не поворачивала от лёгкого задева колесом
+		if (_hasCompressedWheel)
+		{
+			var wheelId = 0;
+			foreach (var wheel in Wheels)
+			{
+				ProcessAcceleration(wheel);
+				ProcessTraction(wheel, wheelId);
+
+				wheelId++;
+			}
+		}
+		
 		ProcessEngineSound();
 
 		GameManager.Singleton.SpeedLabel.Text = ((int)Mathf.Round(LinearVelocity.Length() * 10)).ToString();
@@ -260,6 +272,8 @@ public partial class Car : RigidBody3D
 				
 				var springUpDirection = wheel.GlobalTransform.Basis.Y;
 				var offset = Mathf.Max(0, wheel.Config.SpringRest - springLength);
+				if (offset > 0)
+					_hasCompressedWheel = true;
 			
 				var force = wheel.Config.SpringStrength * offset;
 				var worldVelocity = GetPointVelocity(contactPoint);
