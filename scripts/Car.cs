@@ -446,8 +446,8 @@ public partial class Car : RigidBody3D
 				var zForce = wheel.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
 			
 				var forcePos = contactPoint - GlobalPosition;
-				ApplyForce(xForce, forcePos);
-				ApplyForce(zForce, forcePos);
+				ApplyForce(xForce / wheel.GetCollisionCount(), forcePos);
+				ApplyForce(zForce / wheel.GetCollisionCount(), forcePos);
 				if (DebugMode)
 				{
 					DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
