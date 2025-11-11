@@ -628,10 +628,6 @@ public partial class Editor : Control
 			                    (new Transform3D(new Basis(axis, angle), Vector3.Zero)) *
 			                    transform.Inverse();
 			
-			_cursor.GlobalTransform = _cursor.GlobalTransform.Orthonormalized();
-
-			GD.Print($"{oldOrigin} => {_cursor.GlobalPosition}");
-			
 			if (_rotationShiftOrigin)
 			{
 				_grid = _cursor.GlobalTransform;
@@ -640,10 +636,10 @@ public partial class Editor : Control
 		}
 		else
 		{
-			_cursor.Rotate(axis, angle);
+			_cursor.Rotate(_grid.Basis * axis, angle);
 		}
 		
-		//_cursor.Transform = _cursor.Transform.Orthonormalized();
+		_cursor.GlobalTransform = _cursor.GlobalTransform.Orthonormalized();
 	}
 
 	private void EraseBlock(Block block)
