@@ -118,45 +118,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35000002, 0.37431684, 0.680
 [node name="wheel-front-right" parent="sedan-sports" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35000002, 0.37431684, 0.68023473)
 
-[node name="WheelFL" type="ShapeCast3D" parent="."]
+[node name="WheelFL" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, 0.47616428)
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
 IsFrontWheel = true
+WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.085, 0, 0)
 remote_path = NodePath("../../sedan-sports/wheel-front-left")
 
-[node name="WheelFR" type="ShapeCast3D" parent="."]
+[node name="WheelFR" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, 0.47616428)
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
 IsFrontWheel = true
+WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)
 remote_path = NodePath("../../sedan-sports/wheel-front-right")
 
-[node name="WheelBL" type="ShapeCast3D" parent="."]
+[node name="WheelBL" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, -0.45746768)
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
 IsRearWheel = true
+WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.085, 0, 0)
 remote_path = NodePath("../../sedan-sports/wheel-back-left")
 
-[node name="WheelBR" type="ShapeCast3D" parent="."]
+[node name="WheelBR" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, -0.45746768)
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("3_hcdi7")
 IsRearWheel = true
+WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)

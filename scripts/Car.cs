@@ -255,9 +255,9 @@ public partial class Car : RigidBody3D
 	private void ProcessSuspension(CarWheel wheel)
 	{
 		var springLength = wheel.TargetPosition.Length() * wheel.GetClosestCollisionSafeFraction();
-		Vector3 wheelPos = (Vector3)wheel.WheelModel.Get("position");
+		Vector3 wheelPos = wheel.WheelModel.Position;
 		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
-		wheel.WheelModel.Set("position", wheelPos);
+		wheel.WheelModel.Position = wheelPos;
 		
 		if (wheel.IsColliding())
 		{
