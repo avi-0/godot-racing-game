@@ -87,6 +87,7 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 600
 MaxSpeed = 30
+BrakingStrengthMultiplier = 0.3
 SteeringBaseDegrees = 3
 SlippingTraction = 0.15
 SlipThreshold = 0.8
