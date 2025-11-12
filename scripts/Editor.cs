@@ -912,9 +912,9 @@ public partial class Editor : Control
 
 	private async GDTaskVoid ThumbnailConfirmButtonOnPressed()
 	{
-		await TakeScreenshot();
-
 		Track.Options.PreviewCameraPosition = ScreenshotCamera.Save();
+		
+		await TakeScreenshot();
 		
 		ScreenshotUi.Visible = false;
 		ScreenshotCamera.Active = false;
