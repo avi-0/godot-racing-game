@@ -874,7 +874,6 @@ public partial class Editor : Control
 			case "CarType":
 				Track.Options.CarType =
 					editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
-				GD.Print(Track.Options.CarType);
 				break;
 			case "Laps":
 				Track.Options.Laps =

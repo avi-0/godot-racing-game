@@ -131,7 +131,6 @@ public partial class MainMenu : Control
 		foreach (var trackPath in trackList)
 		{
 			var options = GameManager.Singleton.GetTrackOptions(basePath + trackPath);
-			GD.Print(options);
 			
 			if (options == null)
 				continue;
