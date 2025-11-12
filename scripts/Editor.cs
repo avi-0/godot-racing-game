@@ -675,11 +675,11 @@ public partial class Editor : Control
 			var shiftTransform = new Transform3D(Basis.Identity, shift);
 
 			var transform = new Transform3D(_cursor.GlobalBasis.Inverse(), Vector3.Zero) * forwardTransform *
-			                shiftTransform;
+							shiftTransform;
 
 			_cursor.GlobalTransform = _cursor.GlobalTransform * transform *
-			                    (new Transform3D(new Basis(axis, angle), Vector3.Zero)) *
-			                    transform.Inverse();
+								(new Transform3D(new Basis(axis, angle), Vector3.Zero)) *
+								transform.Inverse();
 			
 			if (_rotationShiftOrigin)
 			{
