@@ -28,6 +28,14 @@ public partial class Editor : Control
 	private Block _hoveredBlock;
 
 	private bool _isRunning = true;
+	
+	private enum Mode
+	{
+		Normal,
+		Erase,
+		Pick,
+		GridPick,
+	}
 
 	private Mode _mode = Mode.Normal;
 
@@ -116,6 +124,32 @@ public partial class Editor : Control
 
 	[Export] public Button SaveButton;
 	
+	[Export]
+	public Button SetThumbnailButton;
+
+	[Export]
+	public Control ScreenshotUi;
+	
+	[Export]
+	public SubViewportContainer ScreenshotViewportContainer;
+
+	[Export]
+	public SubViewport ScreenshotViewport;
+
+	[Export]
+	public FreeCamera ScreenshotCamera;
+
+	[Export]
+	public Button ThumbnailConfirmButton;
+	
+	[Export]
+	public Button ThumbnailCancelButton;
+
+	[Export]
+	public TextureRect ThumbnailTextureRect;
+
+	private bool _takingScreenshot = false;
+	
 	const int GridMeshSize = 100;
 	
 	[Export]
@@ -178,7 +212,7 @@ public partial class Editor : Control
 
 		ConfirmNewDialog.Confirmed += ConfirmNewDialogOnConfirmed;
 		ConfirmQuitDialog.Confirmed += ConfirmQuitDialogOnConfirmed;
-		FileDialog.FileSelected += FileDialogOnFileSelected;
+		FileDialog.FileSelected += (path) => FileDialogOnFileSelected(path).Forget();
 
 		EraseButton.Toggled += on => { _mode = on ? Mode.Erase : Mode.Normal; };
 		PickButton.Toggled += on => { _mode = on ? Mode.Pick : Mode.Normal; };
@@ -198,6 +232,10 @@ public partial class Editor : Control
 		GridSizeIncButton.Pressed += () => { SetGridSizeSetting(_gridSizeSetting + 1); };
 
 		HSplitContainer.Dragged += HSplitContainerOnDragged;
+		
+		SetThumbnailButton.Pressed += SetThumbnailButtonOnPressed;
+		ThumbnailConfirmButton.Pressed += () => ThumbnailConfirmButtonOnPressed().Forget();
+		ThumbnailCancelButton.Pressed += ThumbnailCancelButtonOnPressed;
 
 		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
 
@@ -282,7 +320,7 @@ public partial class Editor : Control
 		SetupOptions();
 	}
 
-	private void FileDialogOnFileSelected(string path)
+	private async GDTaskVoid FileDialogOnFileSelected(string path)
 	{
 		if (FileDialog.FileMode == FileDialog.FileModeEnum.OpenFile)
 		{
@@ -295,6 +333,7 @@ public partial class Editor : Control
 		}
 		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
 		{
+			await TakeScreenshot();
 			GameManager.Singleton.SaveTrack(path);
 		}
 	}
@@ -337,7 +376,21 @@ public partial class Editor : Control
 
 	public override void _Process(double delta)
 	{
-		UpdateCamera((float)delta);
+		if (ScreenshotUi.Visible || _takingScreenshot)
+		{
+			_cursor.Visible = false;
+		}
+		else
+		{
+			_cursor.Visible = true;
+			ProcessEditor((float) delta);
+		}
+			
+	}
+
+	public void ProcessEditor(float delta)
+	{
+		UpdateCamera(delta);
 
 		_cursor.GlobalPosition = GetWorldMousePosition();
 		_cursor.Visible = true;
@@ -798,6 +851,8 @@ public partial class Editor : Control
 		dayTime.SetRange(1, Track.Options.StartDayTime);
 		dayTime.SetRangeConfig(1, 1, 24, 1, false);
 		dayTime.SetEditable(1, true);
+
+		LoadScreenshot();
 	}
 
 	public void OptionEdited()
@@ -840,12 +895,68 @@ public partial class Editor : Control
 	{
 		Track.Options.AuthorTime = 0;
 	}
-
-	private enum Mode
+	
+	private void SetThumbnailButtonOnPressed()
 	{
-		Normal,
-		Erase,
-		Pick,
-		GridPick,
+		ScreenshotUi.Visible = true;
+		ScreenshotCamera.Active = true;
+		
+		ScreenshotCamera.Load(Track.Options.PreviewCameraPosition);
+	}
+	
+	private void ThumbnailCancelButtonOnPressed()
+	{
+		ScreenshotUi.Visible = false;
+		ScreenshotCamera.Active = false;
+	}
+
+	private async GDTaskVoid ThumbnailConfirmButtonOnPressed()
+	{
+		await TakeScreenshot();
+
+		Track.Options.PreviewCameraPosition = ScreenshotCamera.Save();
+		
+		ScreenshotUi.Visible = false;
+		ScreenshotCamera.Active = false;
+	}
+
+	private async GDTask TakeScreenshot()
+	{
+		_cursor.Visible = false;
+		_takingScreenshot = true;
+		ScreenshotCamera.Load(Track.Options.PreviewCameraPosition);
+		
+		ScreenshotViewportContainer.Stretch = false;
+		ScreenshotViewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
+		ScreenshotViewport.Size = new Vector2I(512, 512);
+		
+		await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+		Image img = ScreenshotViewport.GetTexture().GetImage();
+
+		ScreenshotViewportContainer.Stretch = true;
+
+		_cursor.Visible = true;
+		_takingScreenshot = false;
+		
+		img.Resize(512, 512, Image.Interpolation.Bilinear);
+		var buffer = img.SaveJpgToBuffer();
+		Track.Options.PreviewImage = Marshalls.RawToBase64(buffer);
+		
+		LoadScreenshot();
+	}
+
+	private void LoadScreenshot()
+	{
+		var image = new Image();
+		if (Track.Options.PreviewImage == "")
+		{
+			ThumbnailTextureRect.Texture = null;
+			return;
+		}
+		
+		if (image.LoadJpgFromBuffer(Marshalls.Base64ToRaw(Track.Options.PreviewImage)) == Error.Ok)
+		{
+			ThumbnailTextureRect.Texture = ImageTexture.CreateFromImage(image);
+		}
 	}
 }

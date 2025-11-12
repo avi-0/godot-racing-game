@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c1rq5irkqaorb"]
+[gd_scene load_steps=51 format=3 uid="uid://c1rq5irkqaorb"]
 
 [ext_resource type="Script" uid="uid://biv5ncp5iinu5" path="res://scripts/Editor.cs" id="1_5lcyj"]
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://scenes/editor/block_erase_material.tres" id="3_j8y2p"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://cun1gpfdo6crq" path="res://assets/godot-icons/ArrowRight.svg" id="21_x7r7a"]
 [ext_resource type="Texture2D" uid="uid://b6ltfpf1w283y" path="res://assets/godot-icons/RotateLeft.svg" id="22_a3vti"]
 [ext_resource type="Texture2D" uid="uid://b37xxcyqpre2y" path="res://assets/godot-icons/RotateRight.svg" id="23_2hgrc"]
+[ext_resource type="PackedScene" uid="uid://dblxw5ex5dr68" path="res://scenes/editor/free_camera.tscn" id="27_x7r7a"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_oljq2"]
 
@@ -92,13 +93,27 @@ action = &"editor_reset_grid"
 [sub_resource type="Shortcut" id="Shortcut_b8rj3"]
 events = [SubResource("InputEventAction_svbvx")]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7r7a"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_detail = 5
+
+[sub_resource type="InputEventAction" id="InputEventAction_x7r7a"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_a3vti"]
+events = [SubResource("InputEventAction_x7r7a")]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oljq2"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 0.2509804)
 point_size = 2.0
 
-[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "PickButton", "GridPickButton", "ResetGridButton", "RotationStepButton", "YawPlusButton", "YawMinusButton", "PitchPlusButton", "PitchMinusButton", "RollPlusButton", "RollMinusButton", "ResetRotationButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton", "GridMeshInstance")]
+[node name="Editor" type="Control" node_paths=PackedStringArray("BlockListContainer", "Camera", "ConfirmNewDialog", "ConfirmQuitDialog", "DirectoryListContainer", "EditorViewportContainer", "EditorViewport", "EraseButton", "PickButton", "GridPickButton", "ResetGridButton", "RotationStepButton", "YawPlusButton", "YawMinusButton", "PitchPlusButton", "PitchMinusButton", "RollPlusButton", "RollMinusButton", "ResetRotationButton", "FileDialog", "GridSizeDecButton", "GridSizeIncButton", "GridSizeLabel", "HSplitContainer", "OpenButton", "OptionsTree", "PlayButton", "QuitButton", "SaveButton", "SetThumbnailButton", "ScreenshotUi", "ScreenshotViewportContainer", "ScreenshotViewport", "ScreenshotCamera", "ThumbnailConfirmButton", "ThumbnailCancelButton", "ThumbnailTextureRect", "GridMeshInstance")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,10 +151,18 @@ GridSizeIncButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginConta
 GridSizeLabel = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer2/HBoxContainer/LineEdit")
 HSplitContainer = NodePath("EditorUI/HSplitContainer")
 OpenButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/OpenButton")
-OptionsTree = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/Tree")
+OptionsTree = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer/MarginContainer/Tree")
 PlayButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/PlayButton")
 QuitButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/QuitButton")
 SaveButton = NodePath("EditorUI/HSplitContainer/VBoxContainer/MarginContainer/HBoxContainer/SaveButton")
+SetThumbnailButton = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer/SetThumbnailButton")
+ScreenshotUi = NodePath("EditorUI/ScreenshotUI")
+ScreenshotViewportContainer = NodePath("EditorUI/ScreenshotUI/MarginContainer/AspectRatioContainer/SubViewportContainer")
+ScreenshotViewport = NodePath("EditorUI/ScreenshotUI/MarginContainer/AspectRatioContainer/SubViewportContainer/SubViewport")
+ScreenshotCamera = NodePath("EditorUI/ScreenshotUI/MarginContainer/AspectRatioContainer/SubViewportContainer/SubViewport/FreeCamera")
+ThumbnailConfirmButton = NodePath("EditorUI/ScreenshotUI/MarginContainer/MarginContainer/VBoxContainer/ConfirmButton")
+ThumbnailCancelButton = NodePath("EditorUI/ScreenshotUI/MarginContainer/MarginContainer/VBoxContainer/CancelButton")
+ThumbnailTextureRect = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer/PreviewImage")
 GridMeshInstance = NodePath("GridMesh")
 GridMesh = SubResource("ImmediateMesh_oljq2")
 
@@ -486,16 +509,103 @@ layout_mode = 2
 [node name="Options" type="MarginContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 9
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 metadata/_tab_index = 1
 
-[node name="Tree" type="Tree" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options"]
+layout_mode = 2
+
+[node name="PreviewImage" type="TextureRect" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+
+[node name="SetThumbnailButton" type="Button" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Set Preview Image"
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tree" type="Tree" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer/MarginContainer"]
 layout_mode = 2
 columns = 2
 hide_root = true
 script = ExtResource("9_j8y2p")
+
+[node name="ScreenshotUI" type="Control" parent="EditorUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EditorUI/ScreenshotUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x7r7a")
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/ScreenshotUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="EditorUI/ScreenshotUI/MarginContainer"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="EditorUI/ScreenshotUI/MarginContainer/AspectRatioContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="EditorUI/ScreenshotUI/MarginContainer/AspectRatioContainer/SubViewportContainer"]
+handle_input_locally = false
+screen_space_aa = 2
+size = Vector2i(2, 2)
+render_target_update_mode = 0
+
+[node name="FreeCamera" parent="EditorUI/ScreenshotUI/MarginContainer/AspectRatioContainer/SubViewportContainer/SubViewport" instance=ExtResource("27_x7r7a")]
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/ScreenshotUI/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="HBoxContainer" parent="EditorUI/ScreenshotUI/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="EditorUI/ScreenshotUI/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Confirm"
+
+[node name="CancelButton" type="Button" parent="EditorUI/ScreenshotUI/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_a3vti")
+text = "Cancel"
 
 [node name="ConfirmNewDialog" type="ConfirmationDialog" parent="."]
 oversampling_override = 1.0
@@ -555,6 +665,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GridMesh" type="MeshInstance3D" parent="."]
+layers = 2
 material_override = SubResource("StandardMaterial3D_oljq2")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_oljq2")

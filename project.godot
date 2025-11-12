@@ -226,6 +226,8 @@ editor_zoom_out={
 
 [layer_names]
 
+3d_render/layer_1="default"
+3d_render/layer_2="editor_overlays"
 3d_physics/layer_1="blocks"
 3d_physics/layer_2="cars"
 

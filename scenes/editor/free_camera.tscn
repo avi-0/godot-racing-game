@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dblxw5ex5dr68"]
+
+[ext_resource type="Script" uid="uid://e8mqqmamgd36" path="res://scripts/FreeCamera.cs" id="1_jcsjh"]
+
+[node name="FreeCamera" type="Node3D" node_paths=PackedStringArray("Camera")]
+script = ExtResource("1_jcsjh")
+Camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+cull_mask = 1048573
