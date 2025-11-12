@@ -3,10 +3,10 @@
 [node name="Headlights" type="SpotLight3D"]
 transform = Transform3D(-1, -8.5721615e-15, -8.742277e-08, -4.8919073e-08, 0.8287838, 0.5595691, 7.2454554e-08, 0.5595691, -0.8287838, 0, 0, 0)
 visible = false
-light_color = Color(1, 0.9533333, 0.65, 1)
-light_energy = 10.0
+light_color = Color(0.9, 0.96666664, 1, 1)
+light_energy = 15.0
 light_indirect_energy = 2.0
 shadow_enabled = true
-spot_range = 10.0
-spot_attenuation = 0.2
+spot_range = 20.0
+spot_attenuation = 0.5
 spot_angle = 55.0
