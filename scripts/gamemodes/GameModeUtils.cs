@@ -114,17 +114,6 @@ public class GameModeUtils
 		SetTrackInfo("", "");
 	}
 
-	public string TakePreviewScreenshot()
-	{
-		GameManager.Singleton.SetGameUiVisiblity(false);
-		Image img = GameManager.Singleton.GetViewport().GetTexture().GetImage();
-		GameManager.Singleton.SetGameUiVisiblity(true);
-		
-		img.Resize(1280, 720, Image.Interpolation.Bilinear);
-		var buffer = img.SaveJpgToBuffer();
-		return Marshalls.RawToBase64(buffer);
-	}
-
 	//TRACK INFO
 	public int GetGoldFromAt(int ms)
 	{

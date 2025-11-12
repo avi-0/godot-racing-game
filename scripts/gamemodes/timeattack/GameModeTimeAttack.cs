@@ -57,15 +57,6 @@ public class GameModeTimeAttack : IGameMode
 				{
 					player.CurrentRaceTime = DateTime.Now.Subtract(player.RaceStartTime);
 					if (player.LocalPlayer) GameModeController.Utils.UpdateLocalRaceTime(player.CurrentRaceTime);
-					
-					if (_inEditor && player.LocalPlayer)
-					{
-						if (_currentTrack.Track.Options.PreviewImage == "" || GD.RandRange(1,1000) == 500)
-						{
-							GD.Print("Saving preview image...");
-							_currentTrack.Track.Options.PreviewImage = GameModeController.Utils.TakePreviewScreenshot();
-						}
-					}
 				}
 			}
 

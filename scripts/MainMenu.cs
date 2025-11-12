@@ -146,10 +146,10 @@ public partial class MainMenu : Control
 				Image image = new Image();
 				if (image.LoadJpgFromBuffer(Marshalls.Base64ToRaw(options.PreviewImage)) != Error.Ok)
 				{
-					image = Image.CreateEmpty(1280, 720, true, Image.Format.Rgb8);
+					image = Image.CreateEmpty(512, 512, true, Image.Format.Rgb8);
 				}
 				
-				image.Resize(320, 240, Image.Interpolation.Lanczos);
+				image.Resize(320, 320, Image.Interpolation.Lanczos);
 				
 				button.SetButtonIcon(ImageTexture.CreateFromImage(image));
 				
