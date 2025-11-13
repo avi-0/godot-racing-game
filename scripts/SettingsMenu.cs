@@ -20,6 +20,14 @@ public partial class SettingsMenu : Control
 
 	[Export] public OptionButton WinMode;
 
+	[Export] public Button ThrottleKB;
+	[Export] public Button BrakeKB;
+	[Export] public Button LeftKB;
+	[Export] public Button RightKB;
+	[Export] public Button RestartKB;
+	[Export] public Button CameraKB;
+	[Export] public Button LightsKB;
+
 	public override void _Ready()
 	{
 		LoadSettings();
@@ -46,6 +54,30 @@ public partial class SettingsMenu : Control
 
 		SoundSlider.Value = _settings.SfxLevel;
 		MusicSlider.Value = _settings.MusicLevel;
+
+		ThrottleKB.Text = GetActionButtons("throttle");
+		BrakeKB.Text = GetActionButtons("brake");
+		LeftKB.Text = GetActionButtons("steer_left");
+		RightKB.Text = GetActionButtons("steer_right");
+		CameraKB.Text = GetActionButtons("camera_switch");
+		LightsKB.Text = GetActionButtons("lights_switch");
+	}
+
+	private string GetActionButtons(string actionEventName)
+	{
+		var retrunString = "";
+
+		foreach (InputEvent inputEvent in InputMap.ActionGetEvents(actionEventName))
+		{
+			if (retrunString != "")
+			{
+				retrunString += ", ";
+			}
+
+			retrunString += inputEvent.AsText().Replace("(Physical)", "").Trim();
+		}
+		
+		return retrunString;
 	}
 	
 	private void UpdateSettingsFromUi()

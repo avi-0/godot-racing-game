@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Fractural.Tasks;
 using Godot;
@@ -140,8 +141,18 @@ public partial class MainMenu : Control
 			{
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
-				button.Text = options.Name;
+				button.Text = options.Name + "\n" + options.CarType.Split(".")[0].ToUpper();
+					
+				var loadedPb = GameModeController.Utils.LoadUserPb(options.Uid);
+				if (loadedPb != TimeSpan.Zero)
+				{
+					button.Text += "\n" + loadedPb.ToString("mm") + ":" + loadedPb.ToString("ss") + "." + loadedPb.ToString("fff");
+					button.Text += "\n" + GameModeController.Utils.GetMedalFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime);
+				}
+				
 				button.Pressed += () => OpenTrack(basePath + trackPath).Forget();
+
+				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
 				
 				Image image = new Image();
 				if (image.LoadJpgFromBuffer(Marshalls.Base64ToRaw(options.PreviewImage)) != Error.Ok)
