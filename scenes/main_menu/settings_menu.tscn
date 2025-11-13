@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "ScaleMode", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,7 @@ grow_vertical = 2
 theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
 Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/aaopt")
+ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/scaletypeopt")
 MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
 SettingsFilePath = "user://settings.json"
 Shadowq = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/sqopt")
@@ -82,6 +83,21 @@ value = 100.0
 tick_count = 16
 ticks_on_borders = true
 ticks_position = 3
+
+[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+text = "3D Scaling Mode"
+
+[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Bilinear"
+popup/item_0/id = 0
+popup/item_1/text = "FSR 1.0"
+popup/item_1/id = 1
+popup/item_2/text = "FSR 2.2"
+popup/item_2/id = 2
 
 [node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
 layout_mode = 2

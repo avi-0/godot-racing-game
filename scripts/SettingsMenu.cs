@@ -7,7 +7,8 @@ public partial class SettingsMenu : Control
 	private GameSettings _settings;
 
 	[Export] public OptionButton Aa;
-
+	[Export] public OptionButton ScaleMode;
+	
 	[Export] public Slider MusicSlider;
 
 	[Export] public string SettingsFilePath;
@@ -37,6 +38,7 @@ public partial class SettingsMenu : Control
 	private void UpdateUiFromSettings()
 	{
 		TDrs.Value = _settings.RenderScale;
+		ScaleMode.Selected = _settings.ScaleMode;
 		Aa.Selected = _settings.Antialiasing;
 		Vsync.Selected = _settings.Vsync;
 		WinMode.Selected = _settings.WindowMode;
@@ -49,6 +51,7 @@ public partial class SettingsMenu : Control
 	private void UpdateSettingsFromUi()
 	{
 		_settings.RenderScale = TDrs.Value;
+		_settings.ScaleMode = ScaleMode.Selected;
 		_settings.Antialiasing = Aa.Selected;
 		_settings.Vsync = Vsync.Selected;
 		_settings.WindowMode = WinMode.Selected;
@@ -62,6 +65,8 @@ public partial class SettingsMenu : Control
 	{
 		var viewport = GetViewport();
 		var window = GetWindow();
+
+		viewport.SetScaling3DMode((Viewport.Scaling3DModeEnum)_settings.ScaleMode);
 		
 		viewport.Scaling3DScale = (float)_settings.RenderScale * 0.01f;
 		

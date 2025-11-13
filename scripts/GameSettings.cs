@@ -6,6 +6,7 @@ namespace racingGame;
 public class GameSettings
 {
 	public double RenderScale = 100;
+	public int ScaleMode = 1;
 	public int Antialiasing = 0;
 	public int Vsync = 1;
 	public int WindowMode = 2;
