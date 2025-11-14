@@ -9,6 +9,11 @@ namespace racingGame;
 
 public static class Jz
 {
+	public static JsonSerializerSettings Settings = new JsonSerializerSettings()
+	{
+		TypeNameHandling = TypeNameHandling.Auto,
+	};
+	
 	public static T Load<T>(string path)
 	{
 		try
@@ -56,7 +61,7 @@ public static class Jz
 		
 		var text = file.GetAsText();
 		
-		return JsonConvert.DeserializeObject<T>(text);
+		return JsonConvert.DeserializeObject<T>(text, Settings);
 	}
 	
 	private static void SaveJson<T>(string path, T data)
@@ -68,7 +73,7 @@ public static class Jz
 			GD.PushError(error);
 		}
 		
-		var text = JsonConvert.SerializeObject(data, Formatting.Indented);
+		var text = JsonConvert.SerializeObject(data, Formatting.Indented, Settings);
 
 		file.StoreString(text);
 	}
@@ -94,7 +99,7 @@ public static class Jz
 		var decompressedBytes = outStream.ToArray();
 		var text = System.Text.Encoding.UTF8.GetString(decompressedBytes);
 		
-		return JsonConvert.DeserializeObject<T>(text);
+		return JsonConvert.DeserializeObject<T>(text, Settings);
 	}
 
 	public static void SaveJz<T>(string path, T data)
@@ -108,7 +113,7 @@ public static class Jz
 				return;
 			}
 			
-			var text = JsonConvert.SerializeObject(data, Formatting.Indented);
+			var text = JsonConvert.SerializeObject(data, Formatting.Indented, Settings);
 			var bytes = System.Text.Encoding.UTF8.GetBytes(text);
 		
 			using var outStream = new MemoryStream();

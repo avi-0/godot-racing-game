@@ -1,9 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 namespace racingGame;
 
 public partial class SettingsMenu : Control
 {
+	public readonly List<string> ConfigurableActions = new()
+	{
+		"throttle",
+		"brake",
+		"steer_left",
+		"steer_right",
+	};
+	
 	private GameSettings _settings;
 
 	[Export] public OptionButton Aa;
@@ -91,6 +102,26 @@ public partial class SettingsMenu : Control
 
 		_settings.SfxLevel = SoundSlider.Value;
 		_settings.MusicLevel = MusicSlider.Value;
+
+		UpdateSettingsFromInputMap();
+	}
+
+	private void UpdateSettingsFromInputMap()
+	{
+		_settings.InputMap = new();
+		foreach (var actionName in ConfigurableActions)
+		{
+			_settings.InputMap[actionName] = InputMap
+				.ActionGetEvents(actionName)
+				.Select(@event => InputEventData.Save(@event))
+				.Where(data => data != null)
+				.ToList();
+		}
+	}
+
+	private void UpdateInputMapFromSettings()
+	{
+		throw new NotImplementedException();
 	}
 
 	private void ApplySettings()
