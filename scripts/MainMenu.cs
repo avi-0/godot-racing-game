@@ -44,7 +44,6 @@ public partial class MainMenu : Control
 	public void OnGarageButton()
 	{
 		GarageWindow.Visible = !GarageWindow.Visible;
-		GarageViewport.Size = DisplayServer.WindowGetSize();
 		
 		if (GarageWindow.Visible)
 		{

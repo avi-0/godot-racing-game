@@ -137,7 +137,7 @@ public partial class Car : RigidBody3D
 	{
 		_mouseSensitivity = 1.0f * 0.25f * 2 * Mathf.Pi / DisplayServer.ScreenGetSize().Y;
 		
-		if (LinearVelocity.Slide(Vector3.Up).Length() > 5.0f)
+		if (LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
 			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
 	}
 
