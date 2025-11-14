@@ -7,12 +7,15 @@ namespace racingGame;
 
 public partial class SettingsMenu : Control
 {
-	public readonly List<string> ConfigurableActions = new()
+	public readonly List<StringName> ConfigurableActions = new()
 	{
-		"throttle",
-		"brake",
-		"steer_left",
-		"steer_right",
+		InputActionNames.Forward,
+		InputActionNames.Back,
+		InputActionNames.Left,
+		InputActionNames.Right,
+		InputActionNames.Restart,
+		InputActionNames.CycleCamera,
+		InputActionNames.ToggleLights,
 	};
 	
 	private GameSettings _settings;
@@ -65,30 +68,6 @@ public partial class SettingsMenu : Control
 
 		SoundSlider.Value = _settings.SfxLevel;
 		MusicSlider.Value = _settings.MusicLevel;
-
-		ThrottleKB.Text = GetActionButtons("throttle");
-		BrakeKB.Text = GetActionButtons("brake");
-		LeftKB.Text = GetActionButtons("steer_left");
-		RightKB.Text = GetActionButtons("steer_right");
-		CameraKB.Text = GetActionButtons("camera_switch");
-		LightsKB.Text = GetActionButtons("lights_switch");
-	}
-
-	private string GetActionButtons(string actionEventName)
-	{
-		var retrunString = "";
-
-		foreach (InputEvent inputEvent in InputMap.ActionGetEvents(actionEventName))
-		{
-			if (retrunString != "")
-			{
-				retrunString += ", ";
-			}
-
-			retrunString += inputEvent.AsText().Replace("(Physical)", "").Trim();
-		}
-		
-		return retrunString;
 	}
 	
 	private void UpdateSettingsFromUi()

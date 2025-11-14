@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://m1qpnrxiyo34"]
+[gd_scene load_steps=7 format=3 uid="uid://m1qpnrxiyo34"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_cr101"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/SettingsMenu.cs" id="2_wswnh"]
 [ext_resource type="Theme" uid="uid://bsps78iirgjnp" path="res://scenes/main_menu/controls_menu_theme.tres" id="3_7upf4"]
+[ext_resource type="Script" uid="uid://bqqa0tfwkhmp0" path="res://scripts/KeyboardRemapButton.cs" id="4_2jsdb"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_cr101"]
 action = &"ui_cancel"
@@ -28,13 +29,13 @@ SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabC
 TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/3drsslider")
 Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/vsyncopt")
 WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/winopt")
-ThrottleKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/throttle_kb")
-BrakeKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/brake_kb")
-LeftKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/left_kb")
-RightKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/right_kb")
-RestartKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/restart_kb")
-CameraKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/camera_kb")
-LightsKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/lights_kb")
+ThrottleKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/throttle_kb")
+BrakeKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/brake_kb")
+LeftKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/left_kb")
+RightKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/right_kb")
+RestartKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/restart_kb")
+CameraKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/camera_kb")
+LightsKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/lights_kb")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -61,9 +62,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Graphics" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -217,110 +219,124 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="Controls" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
+text = "Left click a setting to add a new bind. Right click to remove all bindings."
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("3_7upf4")
 columns = 3
 
-[node name="Control" type="Control" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Control" type="Control" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Keyboard" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Keyboard" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Keyboard"
 horizontal_alignment = 1
 
-[node name="Controller" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Controller" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Controller"
 horizontal_alignment = 1
 
-[node name="Throttle" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Throttle" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Throttle"
 
-[node name="throttle_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="throttle_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "W"
+autowrap_mode = 3
+script = ExtResource("4_2jsdb")
+Action = &"game_forward"
 
-[node name="Button2" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Button2" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Brake" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Brake" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Brake/Reverse"
 
-[node name="brake_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="brake_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "S, Space"
+script = ExtResource("4_2jsdb")
+Action = &"game_back"
 
-[node name="Button4" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Button4" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Left" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Left" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Left"
 
-[node name="left_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="left_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "A"
+script = ExtResource("4_2jsdb")
+Action = &"game_left"
 
-[node name="Button6" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Button6" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Right" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Right" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Right"
 
-[node name="right_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="right_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "D"
+script = ExtResource("4_2jsdb")
+Action = &"game_right"
 
-[node name="Button8" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Button8" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Restart" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Restart" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Restart"
 
-[node name="restart_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="restart_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "R"
+script = ExtResource("4_2jsdb")
+Action = &"game_restart"
 
-[node name="Button10" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Button10" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Switch Camera"
 
-[node name="camera_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="camera_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "C"
+script = ExtResource("4_2jsdb")
+Action = &"game_cycle_camera"
 
-[node name="Button12" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Button12" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Car Headlights"
 
-[node name="lights_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="lights_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "L"
+script = ExtResource("4_2jsdb")
+Action = &"game_car_lights"
 
-[node name="Button14" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="Button14" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]

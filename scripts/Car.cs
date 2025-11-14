@@ -140,10 +140,17 @@ public partial class Car : RigidBody3D
 		if (LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
 			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
 	}
-
-	public override void _Input(InputEvent @event)
+	
+	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event.IsActionPressed("camera_switch"))
+		if (!IsLocallyControlled)
+			return;
+		
+		if (@event.IsActionPressed("ui_cancel"))
+			EmitSignalPauseRequested();
+		else if (@event.IsActionPressed(InputActionNames.Restart))
+			EmitSignalRestartRequested();
+		else if (@event.IsActionPressed(InputActionNames.CycleCamera))
 		{
 			if (OrbitCamera.Camera.Current)
 			{
@@ -157,23 +164,10 @@ public partial class Car : RigidBody3D
 			}
 			GetViewport().SetInputAsHandled();
 		}
-		else if(@event.IsActionPressed("lights_switch"))
+		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{
 			HeadLight.Visible = !HeadLight.Visible;
 			GetViewport().SetInputAsHandled();
-		}
-	}
-	
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (!IsLocallyControlled)
-			return;
-
-		if (@event is InputEventKey keyEvent && keyEvent.IsPressed())
-		{
-			if (keyEvent.PhysicalKeycode == Key.Escape)
-				EmitSignalPauseRequested();
-			else if (keyEvent.PhysicalKeycode == Key.R) EmitSignalRestartRequested();
 		}
 	}
 
@@ -184,13 +178,13 @@ public partial class Car : RigidBody3D
 		var velocity = GlobalBasis.Z.Dot(LinearVelocity);
 		if (velocity >= 0)
 		{
-			_isAccelerating = Input.GetActionStrength("throttle") > 0;
-			_isBraking = Input.GetActionStrength("brake") > 0;
+			_isAccelerating = Input.GetActionStrength("game_forward") > 0;
+			_isBraking = Input.GetActionStrength("game_back") > 0;
 		}
 		else
 		{
-			_isReversing = Input.GetActionStrength("brake") > 0;
-			_isBraking = Input.GetActionStrength("throttle") > 0;
+			_isReversing = Input.GetActionStrength("game_back") > 0;
+			_isBraking = Input.GetActionStrength("game_forward") > 0;
 		}
 
 		_hasCompressedWheel = false;
@@ -241,7 +235,7 @@ public partial class Car : RigidBody3D
 	private void ProcessEngineSound()
 	{
 		var engineSoundTarget = 0.5f;
-		if (Input.IsActionPressed("throttle") || Input.IsActionPressed("brake"))
+		if (Input.IsActionPressed(InputActionNames.Forward) || Input.IsActionPressed(InputActionNames.Back))
 			engineSoundTarget = 1.0f;
 		
 		EngineSound.VolumeDb = Mathf.LinearToDb(
@@ -309,8 +303,8 @@ public partial class Car : RigidBody3D
 		var velocity = carForwardDir.Dot(LinearVelocity);
 		wheel.WheelModel.RotateX((-velocity * (float)GetProcessDeltaTime()) / wheel.Config.WheelRadius);
 		
-		var forwardStrength = Input.GetActionStrength("throttle");
-		var backStrength = -Input.GetActionStrength("brake");
+		var forwardStrength = Input.GetActionStrength(InputActionNames.Forward);
+		var backStrength = -Input.GetActionStrength(InputActionNames.Back);
 		if (!AcceptsInputs)
 		{
 			forwardStrength = 0;
@@ -366,8 +360,8 @@ public partial class Car : RigidBody3D
 			_targetSteering = 0;
 			if (AcceptsInputs)
 			{
-					_targetSteering += Input.GetActionStrength("steer_left");
-					_targetSteering -= Input.GetActionStrength("steer_right");
+					_targetSteering += Input.GetActionStrength(InputActionNames.Left);
+					_targetSteering -= Input.GetActionStrength(InputActionNames.Right);
 					
 					_targetSteering *= SpeedSteeringCurve.SampleBaked(
 						Mathf.Clamp(
