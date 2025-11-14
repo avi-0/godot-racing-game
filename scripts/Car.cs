@@ -49,6 +49,9 @@ public partial class Car : RigidBody3D
 	[ExportCategory("Wheel Setup")] 
 	[Export] public WheelConfig FrontWheelConfig;
 	[Export] public WheelConfig RearWheelConfig;
+
+	[ExportCategory("Extras")] 
+	[Export] private MeshInstance3D PlayerName3D;
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;
@@ -480,5 +483,40 @@ public partial class Car : RigidBody3D
 	{
 		var velocity = Basis.Z.Dot(LinearVelocity);
 		return Mathf.Clamp(velocity / MaxSpeed, -1, 1);
+	}
+
+	public void SetPlayerName(string name)
+	{
+		name = name.Trim().Normalize();
+		if (name.Length > 10) {name = name.Substring(0, 10);}
+
+		void setFontSize(int size)
+		{
+			PlayerName3D.Mesh.Set("font_size", size);
+		}
+		
+		setFontSize(10);
+		switch (name.Length)
+		{
+			case 4:
+				setFontSize(8);
+				break;
+			case 5:
+				setFontSize(6);
+				break;
+			case 6:
+				setFontSize(5);
+				break;
+			case 7:
+			case 8:
+			case 9:
+			case 10:
+			case 11:
+			case 12:
+				setFontSize(4);
+				break;
+		}
+		
+		PlayerName3D.Mesh.Set("text", name);
 	}
 }

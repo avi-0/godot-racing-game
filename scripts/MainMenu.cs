@@ -16,6 +16,7 @@ public partial class MainMenu : Control
 	[Export] public Control GarageWindow;
 	[Export] public SubViewport GarageViewport;
 	[Export] public Container GarageContainer;
+	[Export] public LineEdit PlayerNameText;
 
 	private Car _loadedCar;
 	private IOrderedEnumerable<string> _carList;
@@ -63,6 +64,8 @@ public partial class MainMenu : Control
 
 				GarageContainer.AddChild(button);
 			}
+
+			PlayerNameText.Text = GameManager.Singleton.SettingsMenu.GetLocalPlayerName();
 		}
 		else
 		{
@@ -111,6 +114,9 @@ public partial class MainMenu : Control
 		Visible = false;
 
 		GameManager.Singleton.NewTrack();
+
+		GameManager.Singleton.Track.Options.AuthorName = GameManager.Singleton.SettingsMenu.GetLocalPlayerName();
+		
 		Editor.Singleton.IsRunning = true;
 		Editor.Singleton.SetupOptions();
 
@@ -179,5 +185,12 @@ public partial class MainMenu : Control
 			.GetFiles()
 			.Where(file => file.EndsWith(".tk.jz"))
 			.ToList().Order();
+	}
+
+	public void OnPlayerSetNewName(string newName)
+	{
+		GD.Print("New Name " + newName);
+		_loadedCar.SetPlayerName(newName);
+		GameManager.Singleton.SettingsMenu.SetLocalPlayerName(newName);
 	}
 }

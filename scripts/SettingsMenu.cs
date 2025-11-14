@@ -156,4 +156,15 @@ public partial class SettingsMenu : Control
 		UpdateSettingsFromUi();
 		ApplySoundSettings();
 	}
+
+	public string GetLocalPlayerName()
+	{
+		return _settings.PlayerName;
+	}
+
+	public void SetLocalPlayerName(string name)
+	{
+		_settings.PlayerName = name;
+		SaveSettings();
+	}
 }

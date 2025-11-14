@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=23 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_micox"]
 [ext_resource type="PackedScene" uid="uid://biodx1fq5tguf" path="res://assets/kenney/carkit/sedan-sports.glb" id="2_g5cig"]
@@ -70,7 +70,17 @@ material = SubResource("StandardMaterial3D_xv7xt")
 size = Vector2(0.1, 0.3)
 orientation = 1
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5cig"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_glvfi"]
+material = SubResource("StandardMaterial3D_g5cig")
+text = "CAR"
+font_size = 10
+uppercase = true
+depth = 0.0
+
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound", "PlayerName3D")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -98,6 +108,7 @@ SpeedToPitchCurve = SubResource("Curve_xv7xt")
 EngineSound = NodePath("EngineSoundPlayer")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
+PlayerName3D = NodePath("PlayerName3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -216,5 +227,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="Headlights" parent="." instance=ExtResource("7_g5cig")]
 transform = Transform3D(-1, 2.546744e-08, -1.2514288e-07, -4.8919077e-08, 0.82878387, 0.5595691, 1.1796716e-07, 0.5595691, -0.82878387, 0, 0.46993336, 0.8842214)
+
+[node name="PlayerName3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.17, -0.91048336)
+mesh = SubResource("TextMesh_glvfi")
 
 [editable path="sedan-sports"]
