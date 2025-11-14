@@ -148,7 +148,7 @@ public partial class GameManager : Node
 		Play();
 	}
 
-	private Transform3D GetStartPoint()
+	public Transform3D GetStartPoint()
 	{
 		foreach (var block in Track.FindChildren("*", "Block", false).Cast<Block>())
 			if (block.IsStart)

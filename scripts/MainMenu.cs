@@ -81,6 +81,13 @@ public partial class MainMenu : Control
 		_loadedCar.OrbitCamera.Yaw = float.DegreesToRadians(215);
 		_loadedCar.OrbitCamera.Pitch = float.DegreesToRadians(30);
 		_loadedCar.OrbitCamera.Camera.SetFov(80);
+		
+		var newStartPos = new Transform3D();
+		newStartPos.Origin = GameManager.Singleton.GetStartPoint().Origin;
+		_loadedCar.GlobalTransform = newStartPos;
+		
+		GameManager.Singleton.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", 12);
+		
 	}
 
 	public void OnSettingsButtonPressed()
