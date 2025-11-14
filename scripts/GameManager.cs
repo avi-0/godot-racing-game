@@ -38,7 +38,7 @@ public partial class GameManager : Node
 
 	[Export] public Control RaceUi;
 
-	[Export] public Control SettingsMenu;
+	[Export] public SettingsMenu SettingsMenu;
 	[Export] public Label SpeedLabel;
 	[Export] public Label StartTimerLabel;
 	[Export] public Label TimeLabel;
@@ -81,7 +81,10 @@ public partial class GameManager : Node
 
 		_localCar.RestartRequested += LocalCarOnRestartRequested;
 		_localCar.PauseRequested += LocalCarOnPauseRequested;
-
+		
+		GD.Print(SettingsMenu.GetLocalPlayerName());
+		_localCar.SetPlayerName(SettingsMenu.GetLocalPlayerName());
+		
 		_isPlaying = true;
 
 		if (_localPlayerId == -1)

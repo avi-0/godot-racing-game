@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://lejlxkwbedup"]
+[gd_scene load_steps=25 format=3 uid="uid://lejlxkwbedup"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_denii"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_sw6ji"]
@@ -78,7 +78,17 @@ material = SubResource("StandardMaterial3D_xv7xt")
 size = Vector2(0.1, 0.3)
 orientation = 1
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wjsq"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_lce11"]
+material = SubResource("StandardMaterial3D_0wjsq")
+text = "CAR"
+font_size = 10
+uppercase = true
+depth = 0.0
+
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound", "PlayerName3D")]
 collision_layer = 2
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -106,6 +116,7 @@ SpeedToPitchCurve = SubResource("Curve_vwi5m")
 EngineSound = NodePath("EngineSoundPlayer")
 FrontWheelConfig = SubResource("Resource_lce11")
 RearWheelConfig = SubResource("Resource_lml1i")
+PlayerName3D = NodePath("PlayerName3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -224,5 +235,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="Headlights" parent="." instance=ExtResource("8_0wjsq")]
 transform = Transform3D(-1, 2.546744e-08, -1.2514288e-07, -4.8919077e-08, 0.82878387, 0.5595691, 1.1796716e-07, 0.5595691, -0.82878387, 0, 0.46993336, 0.8842214)
+
+[node name="PlayerName3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.17, -0.98019916)
+mesh = SubResource("TextMesh_lce11")
 
 [editable path="taxi"]

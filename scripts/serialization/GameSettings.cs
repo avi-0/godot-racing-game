@@ -14,6 +14,6 @@ public class GameSettings
 	public int ShadowQuality = 2;
 	public double SfxLevel = 50;
 	public double MusicLevel = 50;
-
+	public string PlayerName = "Player";
 	public Dictionary<string, List<InputEventData>> InputMap = new();
 }

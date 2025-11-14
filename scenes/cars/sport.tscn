@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dok0if2iog0no"]
+[gd_scene load_steps=24 format=3 uid="uid://dok0if2iog0no"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_qtbni"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_dg6r6"]
@@ -82,7 +82,17 @@ material = SubResource("StandardMaterial3D_xv7xt")
 size = Vector2(0.1, 0.3)
 orientation = 1
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5cig"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_dg6r6"]
+material = SubResource("StandardMaterial3D_g5cig")
+text = "CAR"
+font_size = 10
+uppercase = true
+depth = 0.0
+
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound", "PlayerName3D")]
 collision_layer = 2
 mass = 35.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -112,6 +122,7 @@ SpeedToPitchCurve = SubResource("Curve_xv7xt")
 EngineSound = NodePath("EngineSoundPlayer")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
+PlayerName3D = NodePath("PlayerName3D")
 
 [node name="race-future" parent="." instance=ExtResource("3_qtbni")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
@@ -230,5 +241,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, -5.614962e-10, 0.9999794, 0.006422
 
 [node name="Headlights" parent="." instance=ExtResource("7_dg6r6")]
 transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -1.7358442e-08, 0.9437144, 0.3307615, 1.2652278e-07, 0.3307615, -0.9437144, 0, 0.18840224, 0.9434164)
+
+[node name="PlayerName3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.20571952, -0.9311651)
+mesh = SubResource("TextMesh_dg6r6")
 
 [editable path="race-future"]
