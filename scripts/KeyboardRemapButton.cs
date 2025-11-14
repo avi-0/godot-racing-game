@@ -1,79 +1,41 @@
-using Godot;
 using System;
 using System.Linq;
+using Godot;
+using Godot.Collections;
 
-public partial class KeyboardRemapButton : Button
+namespace racingGame;
+
+public partial class KeyboardRemapButton : RemapButton
 {
-	[Export] public StringName Action;
-
-	private bool _isRemapping = false;
-	
-	public override void _Ready()
+	public override string FormatMappings(Array<InputEvent> events)
 	{
-		LoadFromInputMap();
-	}
-
-	private void OnPressed(MouseButton mouseButton)
-	{
-		if (mouseButton == MouseButton.Right)
-		{
-			InputMap.ActionEraseEvents(Action);
-			LoadFromInputMap();
-			
-			_isRemapping = false;
-
-			return;
-		}
-		
-		if (!_isRemapping)
-		{
-			_isRemapping = true;
-
-			Text = "Press key...";
-		}
-		else
-		{
-			_isRemapping = false;
-			LoadFromInputMap();
-		}
-	}
-
-	private void LoadFromInputMap()
-	{
-		Text = String.Join(", ", InputMap
-			.ActionGetEvents(Action)
+		return String.Join(", ", events
 			.Where(@event => @event is InputEventKey)
 			.Cast<InputEventKey>()
 			.Select(keyEvent => DisplayServer.KeyboardGetKeycodeFromPhysical(keyEvent.PhysicalKeycode)));
-		
-		// prevents button from collapsing due to zero lines of text
-		if (Text == "")
-			Text = " ";
 	}
-
-	public override void _Input(InputEvent @event)
+	
+	public override bool TryRemapEvent(InputEvent @event)
 	{
-		if (_isRemapping)
+		if (@event is InputEventKey keyEvent)
 		{
-			if (@event is InputEventKey keyEvent)
-			{
-				var settingEvent = new InputEventKey();
-				settingEvent.PhysicalKeycode = keyEvent.PhysicalKeycode;
+			var settingEvent = new InputEventKey();
+			settingEvent.PhysicalKeycode = keyEvent.PhysicalKeycode;
 				
-				InputMap.ActionAddEvent(Action, settingEvent);
-				
-				LoadFromInputMap();
+			InputMap.ActionAddEvent(Action, settingEvent);
 
-				_isRemapping = false;
-			}
+			return true;
 		}
+
+		return false;
 	}
 
-	public override void _GuiInput(InputEvent @event)
+	public override void EraseMappings()
 	{
-		if (@event is InputEventMouseButton mouseButtonEvent && mouseButtonEvent.IsPressed())
+		foreach (var @event in InputMap.ActionGetEvents(Action))
 		{
-			OnPressed(mouseButtonEvent.ButtonIndex);
+			if (@event is InputEventKey)
+				InputMap.ActionEraseEvent(Action, @event);
 		}
 	}
 }

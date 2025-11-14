@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://m1qpnrxiyo34"]
+[gd_scene load_steps=8 format=3 uid="uid://m1qpnrxiyo34"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_cr101"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/SettingsMenu.cs" id="2_wswnh"]
 [ext_resource type="Theme" uid="uid://bsps78iirgjnp" path="res://scenes/main_menu/controls_menu_theme.tres" id="3_7upf4"]
 [ext_resource type="Script" uid="uid://bqqa0tfwkhmp0" path="res://scripts/KeyboardRemapButton.cs" id="4_2jsdb"]
+[ext_resource type="Script" uid="uid://1uq1ee3c3fje" path="res://scripts/JoypadRemapButton.cs" id="5_t0huu"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_cr101"]
 action = &"ui_cancel"
@@ -264,8 +265,10 @@ autowrap_mode = 3
 script = ExtResource("4_2jsdb")
 Action = &"game_forward"
 
-[node name="Button2" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
+[node name="throttle_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_forward"
 
 [node name="Brake" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -276,8 +279,10 @@ layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_back"
 
-[node name="Button4" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
+[node name="brake_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_back"
 
 [node name="Left" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -288,8 +293,10 @@ layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_left"
 
-[node name="Button6" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
+[node name="left_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_left"
 
 [node name="Right" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -300,8 +307,10 @@ layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_right"
 
-[node name="Button8" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
+[node name="right_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_right"
 
 [node name="Restart" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -312,8 +321,10 @@ layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_restart"
 
-[node name="Button10" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
+[node name="restart_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_restart"
 
 [node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -324,8 +335,10 @@ layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_cycle_camera"
 
-[node name="Button12" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
+[node name="camera_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_cycle_camera"
 
 [node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -336,8 +349,10 @@ layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_car_lights"
 
-[node name="Button14" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
+[node name="lights_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_car_lights"
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
