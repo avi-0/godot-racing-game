@@ -61,10 +61,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 2
+current_tab = 0
 
 [node name="Graphics" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -218,6 +217,7 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="Controls" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
