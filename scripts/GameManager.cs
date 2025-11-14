@@ -24,6 +24,8 @@ public partial class GameManager : Node
 
 	private int _localPlayerId = -1;
 
+	public bool DirectionalShadowsEnabled = true;
+
 	[Export] public PackedScene CarScene;
 	[Export] public Label CheckPointLabel;
 
@@ -166,10 +168,17 @@ public partial class GameManager : Node
 		
 		Track.Load(Jz.Load<TrackData>(path));
 
+		ApplyShadowSettings();
+
 		GameModeController.CurrentGameMode.InitTrack(Track);
 		GD.Print("Track UID: " + GetLoadedTrackUid());
 	}
-	
+
+	public void ApplyShadowSettings()
+	{
+		GetTree().SetGroup("light_directional_shadow", "shadow_enabled", DirectionalShadowsEnabled);
+	}
+
 	public void SaveTrack(string path)
 	{
 		GD.Print($"Saving track as {path}");

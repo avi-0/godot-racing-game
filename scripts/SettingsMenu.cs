@@ -17,22 +17,33 @@ public partial class SettingsMenu : Control
 		InputActionNames.CycleCamera,
 		InputActionNames.ToggleLights,
 	};
+
+	public readonly List<int> ShadowAtlasSizes = new()
+	{
+		0,
+		256,
+		512,
+		1024,
+		2048,
+		4096,
+		8192,
+		16384,
+	};
 	
 	private GameSettings _settings;
 
-	[Export] public OptionButton Aa;
-	[Export] public OptionButton ScaleMode;
-	
-	[Export] public Slider MusicSlider;
-
 	[Export] public string SettingsFilePath;
-	[Export] public OptionButton Shadowq;
-	[Export] public Slider SoundSlider;
-
+	
 	[Export] public Slider TDrs;
-	[Export] public OptionButton Vsync;
-
+	[Export] public OptionButton ScaleMode;
 	[Export] public OptionButton WinMode;
+	[Export] public OptionButton Aa;
+	[Export] public OptionButton Vsync;
+	[Export] public OptionButton ShadowFilterQuality;
+	[Export] public OptionButton ShadowAtlasSize;
+	
+	[Export] public Slider SoundSlider;
+	[Export] public Slider MusicSlider;
 
 	[Export] public GridContainer ControlsContainer;
 
@@ -42,10 +53,6 @@ public partial class SettingsMenu : Control
 
 	public override void _Ready()
 	{
-		LoadSettings();
-		UpdateUiFromSettings();
-		ApplySettings();
-
 		SoundSlider.DragEnded += _ => OnSoundSettingChanged();
 		MusicSlider.DragEnded += _ => OnSoundSettingChanged();
 
@@ -65,6 +72,16 @@ public partial class SettingsMenu : Control
 			UpdateSettingsFromInputMap();
 			UpdateUiFromSettings();
 		};
+
+		foreach (var size in ShadowAtlasSizes)
+		{
+			var text = size == 0 ? "None" : size.ToString();
+			ShadowAtlasSize.AddItem(text, size);
+		}
+		
+		LoadSettings();
+		UpdateUiFromSettings();
+		ApplySettings();
 	}
 
 	private void LoadSettings()
@@ -79,7 +96,8 @@ public partial class SettingsMenu : Control
 		Aa.Selected = _settings.Graphics.Antialiasing;
 		Vsync.Selected = _settings.Graphics.Vsync;
 		WinMode.Selected = _settings.Graphics.WindowMode;
-		Shadowq.Selected = _settings.Graphics.ShadowQuality;
+		ShadowFilterQuality.Selected = _settings.Graphics.ShadowFilterQuality;
+		ShadowAtlasSize.Selected = ShadowAtlasSize.GetItemIndex(_settings.Graphics.ShadowAtlasSize);
 
 		SoundSlider.Value = _settings.Sound.SfxLevel;
 		MusicSlider.Value = _settings.Sound.MusicLevel;
@@ -101,7 +119,8 @@ public partial class SettingsMenu : Control
 		_settings.Graphics.Antialiasing = Aa.Selected;
 		_settings.Graphics.Vsync = Vsync.Selected;
 		_settings.Graphics.WindowMode = WinMode.Selected;
-		_settings.Graphics.ShadowQuality = Shadowq.Selected;
+		_settings.Graphics.ShadowFilterQuality = ShadowFilterQuality.Selected;
+		_settings.Graphics.ShadowAtlasSize = ShadowAtlasSize.GetSelectedId();
 
 		_settings.Sound.SfxLevel = SoundSlider.Value;
 		_settings.Sound.MusicLevel = MusicSlider.Value;
@@ -171,7 +190,16 @@ public partial class SettingsMenu : Control
 		else
 			window.Mode = Window.ModeEnum.Fullscreen;
 		
-		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)_settings.Graphics.ShadowQuality);
+		// Positional Shadows можно отключить, выставив им atlas size = 0
+		viewport.PositionalShadowAtlasSize = _settings.Graphics.ShadowAtlasSize;
+		
+		// Directional Shadows - нельзя, обходим отдельно
+		RenderingServer.DirectionalShadowAtlasSetSize(int.Max(256, _settings.Graphics.ShadowAtlasSize), true);
+		GameManager.Singleton.DirectionalShadowsEnabled = _settings.Graphics.ShadowAtlasSize != 0;
+		
+		RenderingServer.PositionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)_settings.Graphics.ShadowFilterQuality);
+		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)_settings.Graphics.ShadowFilterQuality);
+		GameManager.Singleton.ApplyShadowSettings();
 
 		ApplySoundSettings();
 	}

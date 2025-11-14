@@ -32,13 +32,13 @@ sun_energy = 1.5
 wind_direction = 2.35619451204804
 metadata/_custom_type_script = "uid://deo0gxkmk2ahd"
 
-[node name="SunLight" type="DirectionalLight3D" parent="Sky3D"]
+[node name="SunLight" type="DirectionalLight3D" parent="Sky3D" groups=["light_directional_shadow"]]
 transform = Transform3D(0, -0.5542859, 0.83232635, -0.5854001, 0.6748041, 0.44938427, -0.8107446, -0.48724392, -0.324479, 0.83232635, 0.44938427, -0.324479)
 light_color = Color(0.99797535, 0.9517126, 0.9285306, 1)
 light_energy = 1.5
 shadow_enabled = true
 
-[node name="MoonLight" type="DirectionalLight3D" parent="Sky3D"]
+[node name="MoonLight" type="DirectionalLight3D" parent="Sky3D" groups=["light_directional_shadow"]]
 transform = Transform3D(0, -0.71860963, -0.69541365, 0.60077465, 0.55592644, -0.5744698, 0.7994184, -0.4177869, 0.4317225, -0.69541365, -0.5744698, 0.4317225)
 light_color = Color(0.572549, 0.776471, 0.956863, 1)
 light_energy = 0.0

@@ -12,7 +12,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "ScaleMode", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowFilterQuality", "ShadowAtlasSize", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,15 +21,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
-Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/aaopt")
-ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/scaletypeopt")
-MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer/musicslider")
 SettingsFilePath = "user://settings.json"
-Shadowq = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/sqopt")
-SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer/soundslider")
 TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/3drsslider")
-Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/vsyncopt")
+ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/scaletypeopt")
 WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/winopt")
+Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/aaopt")
+Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/vsyncopt")
+ShadowFilterQuality = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/shadow_filter_quality_opt")
+ShadowAtlasSize = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/shadow_atlas_opt")
+SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer/soundslider")
+MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer/musicslider")
 ControlsContainer = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer")
 ResetGraphicsButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/ResetButton")
 ResetSoundButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/ResetButton")
@@ -159,15 +160,15 @@ popup/item_1/id = 1
 popup/item_2/text = "Exclusive"
 popup/item_2/id = 2
 
-[node name="shadowquality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
+[node name="shadow_filter_quality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
-text = "Shadow Quality"
+text = "Shadow Filter Quality"
 
-[node name="sqopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
+[node name="shadow_filter_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 2
 item_count = 6
-popup/item_0/text = "Potato"
+popup/item_0/text = "Hard Only"
 popup/item_0/id = 0
 popup/item_1/text = "Very Low"
 popup/item_1/id = 1
@@ -179,6 +180,13 @@ popup/item_4/text = "High"
 popup/item_4/id = 4
 popup/item_5/text = "Ultra"
 popup/item_5/id = 5
+
+[node name="shadow_atlas" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
+layout_mode = 2
+text = "Shadow Atlas Size"
+
+[node name="shadow_atlas_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
+layout_mode = 2
 
 [node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
 layout_mode = 2

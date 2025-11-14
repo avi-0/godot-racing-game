@@ -52,6 +52,7 @@ import/blender/enabled=false
 start_point=""
 finish_hitbox=""
 checkpoint_hitbox=""
+light_directional_shadow=""
 
 [importer_defaults]
 

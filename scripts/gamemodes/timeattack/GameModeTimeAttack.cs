@@ -98,6 +98,7 @@ public class GameModeTimeAttack : IGameMode
 		GameModeController.Utils.SetLapsCount(0, _currentTrack.Track.Options.Laps);
 		
 		_currentTrack.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", (float)_currentTrack.Track.Options.StartDayTime);
+		GameManager.Singleton.ApplyShadowSettings(); // FIXME: Sky3D слишком умный епт
 	}
 
 	public int SpawnPlayer(bool localPlayer, Car playerCar)
