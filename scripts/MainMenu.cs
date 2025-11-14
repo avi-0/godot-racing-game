@@ -81,7 +81,7 @@ public partial class MainMenu : Control
 		_loadedCar.OrbitCamera.Pitch = float.DegreesToRadians(30);
 		_loadedCar.OrbitCamera.Camera.SetFov(80);
 		
-		var newStartPos = new Transform3D();
+		var newStartPos = Transform3D.Identity;
 		newStartPos.Origin = GameManager.Singleton.GetStartPoint().Origin;
 		_loadedCar.GlobalTransform = newStartPos;
 		
