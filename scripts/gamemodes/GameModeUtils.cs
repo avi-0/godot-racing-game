@@ -130,6 +130,28 @@ public class GameModeUtils
 		return Mathf.FloorToInt(ms * 2.0);
 	}
 
+	public string GetMedalFromTime(int timeMs, int atMs)
+	{
+		if (timeMs < atMs)
+		{
+			return "Diamond Medal";
+		}
+		if (timeMs < GetGoldFromAt(atMs))
+		{
+			return "Gold Medal";
+		}
+		if (timeMs < GetSilverFromAt(atMs))
+		{
+			return "Silver Medal";
+		}
+		if (timeMs < GetBronzeFromAt(atMs))
+		{
+			return "Bronze Medal";
+		}
+		
+		return "No Medal";
+	}
+
 	public void SaveUserPb(TimeSpan time, string trackUid)
 	{
 		if (time == TimeSpan.Zero || trackUid == "0") return;

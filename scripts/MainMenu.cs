@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Fractural.Tasks;
 using Godot;
@@ -79,6 +80,13 @@ public partial class MainMenu : Control
 		_loadedCar.OrbitCamera.Yaw = float.DegreesToRadians(215);
 		_loadedCar.OrbitCamera.Pitch = float.DegreesToRadians(30);
 		_loadedCar.OrbitCamera.Camera.SetFov(80);
+		
+		var newStartPos = new Transform3D();
+		newStartPos.Origin = GameManager.Singleton.GetStartPoint().Origin;
+		_loadedCar.GlobalTransform = newStartPos;
+		
+		GameManager.Singleton.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", 12);
+		
 	}
 
 	public void OnSettingsButtonPressed()
@@ -138,8 +146,18 @@ public partial class MainMenu : Control
 			{
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
-				button.Text = options.Name;
+				button.Text = options.Name + "\n" + options.CarType.Split(".")[0].ToUpper();
+					
+				var loadedPb = GameModeController.Utils.LoadUserPb(options.Uid);
+				if (loadedPb != TimeSpan.Zero)
+				{
+					button.Text += "\n" + loadedPb.ToString("mm") + ":" + loadedPb.ToString("ss") + "." + loadedPb.ToString("fff");
+					button.Text += "\n" + GameModeController.Utils.GetMedalFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime);
+				}
+				
 				button.Pressed += () => OpenTrack(basePath + trackPath).Forget();
+
+				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
 				
 				Image image = new Image();
 				if (image.LoadJpgFromBuffer(Marshalls.Base64ToRaw(options.PreviewImage)) != Error.Ok)

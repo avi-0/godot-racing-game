@@ -7,7 +7,8 @@ public partial class SettingsMenu : Control
 	private GameSettings _settings;
 
 	[Export] public OptionButton Aa;
-
+	[Export] public OptionButton ScaleMode;
+	
 	[Export] public Slider MusicSlider;
 
 	[Export] public string SettingsFilePath;
@@ -18,6 +19,14 @@ public partial class SettingsMenu : Control
 	[Export] public OptionButton Vsync;
 
 	[Export] public OptionButton WinMode;
+
+	[Export] public Button ThrottleKB;
+	[Export] public Button BrakeKB;
+	[Export] public Button LeftKB;
+	[Export] public Button RightKB;
+	[Export] public Button RestartKB;
+	[Export] public Button CameraKB;
+	[Export] public Button LightsKB;
 
 	public override void _Ready()
 	{
@@ -37,6 +46,7 @@ public partial class SettingsMenu : Control
 	private void UpdateUiFromSettings()
 	{
 		TDrs.Value = _settings.RenderScale;
+		ScaleMode.Selected = _settings.ScaleMode;
 		Aa.Selected = _settings.Antialiasing;
 		Vsync.Selected = _settings.Vsync;
 		WinMode.Selected = _settings.WindowMode;
@@ -44,11 +54,36 @@ public partial class SettingsMenu : Control
 
 		SoundSlider.Value = _settings.SfxLevel;
 		MusicSlider.Value = _settings.MusicLevel;
+
+		ThrottleKB.Text = GetActionButtons("throttle");
+		BrakeKB.Text = GetActionButtons("brake");
+		LeftKB.Text = GetActionButtons("steer_left");
+		RightKB.Text = GetActionButtons("steer_right");
+		CameraKB.Text = GetActionButtons("camera_switch");
+		LightsKB.Text = GetActionButtons("lights_switch");
+	}
+
+	private string GetActionButtons(string actionEventName)
+	{
+		var retrunString = "";
+
+		foreach (InputEvent inputEvent in InputMap.ActionGetEvents(actionEventName))
+		{
+			if (retrunString != "")
+			{
+				retrunString += ", ";
+			}
+
+			retrunString += inputEvent.AsText().Replace("(Physical)", "").Trim();
+		}
+		
+		return retrunString;
 	}
 	
 	private void UpdateSettingsFromUi()
 	{
 		_settings.RenderScale = TDrs.Value;
+		_settings.ScaleMode = ScaleMode.Selected;
 		_settings.Antialiasing = Aa.Selected;
 		_settings.Vsync = Vsync.Selected;
 		_settings.WindowMode = WinMode.Selected;
@@ -62,6 +97,8 @@ public partial class SettingsMenu : Control
 	{
 		var viewport = GetViewport();
 		var window = GetWindow();
+
+		viewport.SetScaling3DMode((Viewport.Scaling3DModeEnum)_settings.ScaleMode);
 		
 		viewport.Scaling3DScale = (float)_settings.RenderScale * 0.01f;
 		

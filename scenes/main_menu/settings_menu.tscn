@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "ScaleMode", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode", "ThrottleKB", "BrakeKB", "LeftKB", "RightKB", "RestartKB", "CameraKB", "LightsKB")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,7 @@ grow_vertical = 2
 theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
 Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/aaopt")
+ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/scaletypeopt")
 MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
 SettingsFilePath = "user://settings.json"
 Shadowq = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/sqopt")
@@ -27,6 +28,13 @@ SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabC
 TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/3drsslider")
 Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/vsyncopt")
 WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/winopt")
+ThrottleKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/throttle_kb")
+BrakeKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/brake_kb")
+LeftKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/left_kb")
+RightKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/right_kb")
+RestartKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/restart_kb")
+CameraKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/camera_kb")
+LightsKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer/lights_kb")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -53,9 +61,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Graphics" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -82,6 +91,21 @@ value = 100.0
 tick_count = 16
 ticks_on_borders = true
 ticks_position = 3
+
+[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+text = "3D Scaling Mode"
+
+[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Bilinear"
+popup/item_0/id = 0
+popup/item_1/text = "FSR 1.0"
+popup/item_1/id = 1
+popup/item_2/text = "FSR 2.2"
+popup/item_2/id = 2
 
 [node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
 layout_mode = 2
@@ -194,7 +218,6 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="Controls" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -227,7 +250,7 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Throttle"
 
-[node name="Button" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="throttle_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
 layout_mode = 2
 text = "W"
 
@@ -238,7 +261,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Brake/Reverse"
 
-[node name="Button3" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="brake_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
 layout_mode = 2
 text = "S, Space"
 
@@ -249,7 +272,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Left"
 
-[node name="Button5" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="left_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
 layout_mode = 2
 text = "A"
 
@@ -260,7 +283,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Right"
 
-[node name="Button7" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="right_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
 layout_mode = 2
 text = "D"
 
@@ -271,11 +294,33 @@ layout_mode = 2
 layout_mode = 2
 text = "Restart"
 
-[node name="Button9" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+[node name="restart_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
 layout_mode = 2
 text = "R"
 
 [node name="Button10" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+
+[node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "Switch Camera"
+
+[node name="camera_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "C"
+
+[node name="Button12" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+
+[node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "Car Headlights"
+
+[node name="lights_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
+layout_mode = 2
+text = "L"
+
+[node name="Button14" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/GridContainer"]
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
