@@ -11,11 +11,17 @@ public abstract partial class RemapButton : Button
 
 	private bool _isRemapping = false;
 
-	public abstract bool TryRemapEvent(InputEvent @event);
+	protected abstract bool TryRemapEvent(InputEvent @event);
 
-	public abstract string FormatMappings(Array<InputEvent> events);
+	protected abstract string FormatMappings(Array<InputEvent> events);
 
-	public abstract void EraseMappings();
+	protected abstract void EraseMappings();
+	
+	protected virtual string GetRemappingPrompt()
+	{
+		return $"{FormatMappings(InputMap
+			.ActionGetEvents(Action))}, Press key...";
+	}
 	
 	public override void _Ready()
 	{
@@ -36,7 +42,7 @@ public abstract partial class RemapButton : Button
 			
 			_isRemapping = true;
 
-			Text = "Press key...";
+			Text = GetRemappingPrompt();
 		}
 		else
 		{
@@ -45,7 +51,7 @@ public abstract partial class RemapButton : Button
 		}
 	}
 
-	private void LoadFromInputMap()
+	public void LoadFromInputMap()
 	{
 		Text = FormatMappings(InputMap
 			.ActionGetEvents(Action));

@@ -8,7 +8,7 @@ namespace racingGame;
 
 public partial class JoypadRemapButton : RemapButton
 {
-	public override string FormatMappings(Array<InputEvent> events)
+	protected override string FormatMappings(Array<InputEvent> events)
 	{
 		return String.Join(", ", events
 			.SelectMany<InputEvent, string>(@event =>
@@ -59,8 +59,8 @@ public partial class JoypadRemapButton : RemapButton
 				return [];
 			}));
 	}
-	
-	public override bool TryRemapEvent(InputEvent @event)
+
+	protected override bool TryRemapEvent(InputEvent @event)
 	{
 		if (@event is InputEventJoypadMotion joypadMotionEvent && float.Abs(joypadMotionEvent.AxisValue) > 0.8)
 		{
@@ -69,6 +69,7 @@ public partial class JoypadRemapButton : RemapButton
 			settingEvent.Axis = joypadMotionEvent.Axis;
 			settingEvent.AxisValue = float.Sign(joypadMotionEvent.AxisValue);
 			
+			EraseMappings();
 			InputMap.ActionAddEvent(Action, settingEvent);
 
 			return true;
@@ -81,6 +82,7 @@ public partial class JoypadRemapButton : RemapButton
 			settingEvent.ButtonIndex = joypadButtonEvent.ButtonIndex;
 			settingEvent.Pressed = true;
 			
+			EraseMappings();
 			InputMap.ActionAddEvent(Action, settingEvent);
 
 			return true;
@@ -88,8 +90,8 @@ public partial class JoypadRemapButton : RemapButton
 		
 		return false;
 	}
-	
-	public override void EraseMappings()
+
+	protected override void EraseMappings()
 	{
 		foreach (var @event in InputMap.ActionGetEvents(Action))
 		{
@@ -97,4 +99,7 @@ public partial class JoypadRemapButton : RemapButton
 				InputMap.ActionEraseEvent(Action, @event);
 		}
 	}
+
+	protected override string GetRemappingPrompt()
+		=> "Press key...";
 }

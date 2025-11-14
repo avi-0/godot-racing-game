@@ -7,15 +7,15 @@ namespace racingGame;
 
 public partial class KeyboardRemapButton : RemapButton
 {
-	public override string FormatMappings(Array<InputEvent> events)
+	protected override string FormatMappings(Array<InputEvent> events)
 	{
 		return String.Join(", ", events
 			.Where(@event => @event is InputEventKey)
 			.Cast<InputEventKey>()
 			.Select(keyEvent => DisplayServer.KeyboardGetKeycodeFromPhysical(keyEvent.PhysicalKeycode)));
 	}
-	
-	public override bool TryRemapEvent(InputEvent @event)
+
+	protected override bool TryRemapEvent(InputEvent @event)
 	{
 		if (@event is InputEventKey keyEvent)
 		{
@@ -30,7 +30,7 @@ public partial class KeyboardRemapButton : RemapButton
 		return false;
 	}
 
-	public override void EraseMappings()
+	protected override void EraseMappings()
 	{
 		foreach (var @event in InputMap.ActionGetEvents(Action))
 		{

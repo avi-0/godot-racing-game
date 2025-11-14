@@ -12,7 +12,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "ScaleMode", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode", "ThrottleKB", "BrakeKB", "LeftKB", "RightKB", "RestartKB", "CameraKB", "LightsKB")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "ScaleMode", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode", "ControlsContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,13 +30,7 @@ SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabC
 TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/3drsslider")
 Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/vsyncopt")
 WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/winopt")
-ThrottleKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/throttle_kb")
-BrakeKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/brake_kb")
-LeftKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/left_kb")
-RightKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/right_kb")
-RestartKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/restart_kb")
-CameraKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/camera_kb")
-LightsKB = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer/lights_kb")
+ControlsContainer = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -233,7 +227,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
 layout_mode = 2
-text = "Left click a setting to add a new bind. Right click to remove all bindings."
+text = "Left click to add a new bind. Right click to remove all bindings."
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
 layout_mode = 2
@@ -328,7 +322,7 @@ Action = &"game_restart"
 
 [node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Switch Camera"
+text = "Cycle Camera"
 
 [node name="camera_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -342,7 +336,7 @@ Action = &"game_cycle_camera"
 
 [node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Car Headlights"
+text = "Toggle Headlights"
 
 [node name="lights_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer"]
 layout_mode = 2

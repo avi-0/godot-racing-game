@@ -34,13 +34,7 @@ public partial class SettingsMenu : Control
 
 	[Export] public OptionButton WinMode;
 
-	[Export] public Button ThrottleKB;
-	[Export] public Button BrakeKB;
-	[Export] public Button LeftKB;
-	[Export] public Button RightKB;
-	[Export] public Button RestartKB;
-	[Export] public Button CameraKB;
-	[Export] public Button LightsKB;
+	[Export] public GridContainer ControlsContainer;
 
 	public override void _Ready()
 	{
@@ -68,6 +62,15 @@ public partial class SettingsMenu : Control
 
 		SoundSlider.Value = _settings.SfxLevel;
 		MusicSlider.Value = _settings.MusicLevel;
+
+		UpdateInputMapFromSettings();
+		foreach (var control in ControlsContainer.GetChildren())
+		{
+			if (control is RemapButton button)
+			{
+				button.LoadFromInputMap();
+			}
+		}
 	}
 	
 	private void UpdateSettingsFromUi()
@@ -100,7 +103,17 @@ public partial class SettingsMenu : Control
 
 	private void UpdateInputMapFromSettings()
 	{
-		throw new NotImplementedException();
+		foreach (var actionName in ConfigurableActions)
+		{
+			if (_settings.InputMap.ContainsKey(actionName))
+			{
+				InputMap.ActionEraseEvents(actionName);
+				foreach (var @event in _settings.InputMap[actionName])
+				{
+					InputMap.ActionAddEvent(actionName, @event.Load());
+				}
+			}
+		}
 	}
 
 	private void ApplySettings()
