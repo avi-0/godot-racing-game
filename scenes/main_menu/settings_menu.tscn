@@ -12,7 +12,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "ScaleMode", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode", "ControlsContainer")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Aa", "ScaleMode", "MusicSlider", "Shadowq", "SoundSlider", "TDrs", "Vsync", "WinMode", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,16 +21,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
-Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/aaopt")
-ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/scaletypeopt")
-MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
+Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/aaopt")
+ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/scaletypeopt")
+MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer/musicslider")
 SettingsFilePath = "user://settings.json"
-Shadowq = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/sqopt")
-SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/soundslider")
-TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/3drsslider")
-Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/vsyncopt")
-WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer/winopt")
+Shadowq = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/sqopt")
+SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer/soundslider")
+TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/3drsslider")
+Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/vsyncopt")
+WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer/winopt")
 ControlsContainer = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/GridContainer")
+ResetGraphicsButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/ResetButton")
+ResetSoundButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/ResetButton")
+ResetControlsButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ResetButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -57,27 +60,31 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 2
+current_tab = 0
 
 [node name="Graphics" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="GraphicsSettingsContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 columns = 2
 
-[node name="3drenderscale" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="3drenderscale" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "3D Render Scale"
 
-[node name="3drsslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="3drsslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -88,11 +95,11 @@ tick_count = 16
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "3D Scaling Mode"
 
-[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -103,11 +110,11 @@ popup/item_1/id = 1
 popup/item_2/text = "FSR 2.2"
 popup/item_2/id = 2
 
-[node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "Anti-Aliasing"
 
-[node name="aaopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="aaopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 0
 item_count = 6
@@ -124,11 +131,11 @@ popup/item_4/id = 4
 popup/item_5/text = "MSAA 8X"
 popup/item_5/id = 5
 
-[node name="vsync" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="vsync" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "V-Sync"
 
-[node name="vsyncopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="vsyncopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 1
 item_count = 2
@@ -137,11 +144,11 @@ popup/item_0/id = 0
 popup/item_1/text = "ON"
 popup/item_1/id = 1
 
-[node name="winmode" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="winmode" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "Window Mode"
 
-[node name="winopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="winopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 2
 item_count = 3
@@ -152,11 +159,11 @@ popup/item_1/id = 1
 popup/item_2/text = "Exclusive"
 popup/item_2/id = 2
 
-[node name="shadowquality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="shadowquality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "Shadow Quality"
 
-[node name="sqopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GridContainer"]
+[node name="sqopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 2
 item_count = 6
@@ -173,25 +180,35 @@ popup/item_4/id = 4
 popup/item_5/text = "Ultra"
 popup/item_5/id = 5
 
+[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Reset to Default"
+
 [node name="Sound" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 columns = 2
 
-[node name="sound" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="sound" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Sound Volume"
 
-[node name="soundslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="soundslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -200,11 +217,11 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="music" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="music" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Music Volume"
 
-[node name="musicslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="musicslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -213,7 +230,13 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
+[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Reset to Default"
+
 [node name="Controls" type="TabBar" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -224,13 +247,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
 
 [node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
 layout_mode = 2
-text = "Left click to add a new bind. Right click to remove all bindings."
+text = "Left click to add a new binding. Right click to remove all bindings."
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("3_7upf4")
 columns = 3
 
@@ -347,6 +372,11 @@ Action = &"game_car_lights"
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_car_lights"
+
+[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Reset to Default"
 
 [node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2

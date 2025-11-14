@@ -30,6 +30,9 @@ public abstract partial class RemapButton : Button
 
 	private void OnPressed(MouseButton mouseButton)
 	{
+		if (mouseButton != MouseButton.Left && mouseButton != MouseButton.Right)
+			return;
+		
 		if (!_isRemapping)
 		{
 			if (mouseButton == MouseButton.Right)

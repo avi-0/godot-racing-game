@@ -6,14 +6,24 @@ namespace racingGame;
 
 public class GameSettings
 {
-	public double RenderScale = 100;
-	public int ScaleMode = 1;
-	public int Antialiasing = 0;
-	public int Vsync = 1;
-	public int WindowMode = 2;
-	public int ShadowQuality = 2;
-	public double SfxLevel = 50;
-	public double MusicLevel = 50;
+	public GraphicsSettings Graphics = new();
+	public SoundSettings Sound = new();
 	public string PlayerName = "Player";
 	public Dictionary<string, List<InputEventData>> InputMap = new();
+
+	public class GraphicsSettings
+	{
+		public double RenderScale = 100;
+		public int ScaleMode = 1;
+		public int Antialiasing = 0;
+		public int Vsync = 1;
+		public int WindowMode = 2;
+		public int ShadowQuality = 2;
+	}
+
+	public class SoundSettings
+	{
+		public double SfxLevel = 50;
+		public double MusicLevel = 50;
+	}
 }
