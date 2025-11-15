@@ -84,7 +84,6 @@ public partial class GameManager : Node
 		_localCar.RestartRequested += LocalCarOnRestartRequested;
 		_localCar.PauseRequested += LocalCarOnPauseRequested;
 		
-		GD.Print(SettingsMenu.GetLocalPlayerName());
 		_localCar.SetPlayerName(SettingsMenu.GetLocalPlayerName());
 		
 		_isPlaying = true;
