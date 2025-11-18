@@ -57,6 +57,17 @@ public class GameModeTimeAttack : IGameMode
 				{
 					player.CurrentRaceTime = DateTime.Now.Subtract(player.RaceStartTime);
 					if (player.LocalPlayer) GameModeController.Utils.UpdateLocalRaceTime(player.CurrentRaceTime);
+
+					var ms = (int)player.CurrentRaceTime.TotalMilliseconds;
+					var datanow = new CarPositionData(player.PlayerCar.Position, player.PlayerCar.Rotation);
+					player.GhostRecording.AddFrame(ms, datanow);
+
+					if (player.LocalPlayer && !player.PBGhost.Empty)
+					{
+						var data = player.PBGhost.GetFrame((int)player.CurrentRaceTime.TotalMilliseconds);
+						player.PlayerGhostCar.Position = data.Position;
+						player.PlayerGhostCar.Rotation = data.Rotation;
+					}
 				}
 			}
 
@@ -109,7 +120,7 @@ public class GameModeTimeAttack : IGameMode
 
 		player.SpawnTime = DateTime.Now;
 		player.CheckPointsCollected = new List<int>();
-
+		
 		if (player.LocalPlayer)
 		{
 			TimeSpan loadedPb;
@@ -140,18 +151,33 @@ public class GameModeTimeAttack : IGameMode
 	public void RespawnPlayer(int playerId, Car playerCar)
 	{
 		var player = _players[playerId];
-
+		
 		player.PlayerCar = playerCar;
 		player.SpawnTime = DateTime.Now;
 		player.RaceStartTime = new DateTime();
 		player.CheckPointsCollected = new List<int>();
 		player.LapsDone = 0;
 		player.InGame = true;
-
+		player.GhostRecording = new Ghost();
+		
 		if (player.LocalPlayer)
 		{
 			GameModeController.Utils.UpdateLocalRaceTime(TimeSpan.Zero);
 			GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
+
+			if (player.PlayerGhostCar != null)
+			{
+				player.PlayerGhostCar.QueueFree();
+				player.PlayerGhostCar = null;
+			}
+			if (!player.PBGhost.Empty)
+			{
+				player.PlayerGhostCar = GameManager.Singleton.CreateCar();
+				player.PlayerGhostCar.IsLocallyControlled = false;
+				player.PlayerGhostCar.IsGhost = true;
+				player.PlayerGhostCar.Position = player.PlayerCar.Position;
+				//player.PlayerGhostCar.SetPlayerName(player.PBGhost.PlayerName); // почемуто ставит имя обоям машинам
+			}
 		}
 		
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
@@ -166,12 +192,21 @@ public class GameModeTimeAttack : IGameMode
 	public void KillGame()
 	{
 		_running = false;
+		foreach (TimeAttackPlayer player in _players)
+		{
+			if (player.PlayerGhostCar != null)
+			{
+				player.PlayerGhostCar.QueueFree();
+			}
+		}
 		_players = null;
 		GameModeController.Utils.UnloadLocalStats();
 	}
 
 	private void PlayerAttemptFinish(Car playerCar, int blockId)
 	{
+		if (playerCar.IsGhost) {return;}
+		
 		var playerId = playerCar.PlayerId;
 		var player = _players[playerId];
 
@@ -198,6 +233,8 @@ public class GameModeTimeAttack : IGameMode
 
 	private void PlayerEnterCheckPoint(Car playerCar, int blockId)
 	{
+		if (playerCar.IsGhost) {return;}
+		
 		var player = _players[playerCar.PlayerId];
 
 		if (!player.CheckPointsCollected.Contains(blockId))
@@ -233,6 +270,8 @@ public class GameModeTimeAttack : IGameMode
 
 				if (_inEditor) SetAuthorTime((int)player.CurrentRaceTime.TotalMilliseconds);
 			}
+
+			player.PBGhost = player.GhostRecording;
 		}
 
 		GameModeController.Utils.OpenFinishWindow(player.CurrentRaceTime, isPb, _inEditor);

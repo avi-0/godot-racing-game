@@ -51,7 +51,9 @@ public partial class Car : RigidBody3D
 	[Export] public WheelConfig RearWheelConfig;
 
 	[ExportCategory("Extras")] 
-	[Export] private MeshInstance3D PlayerName3D;
+	[Export] private protected MeshInstance3D PlayerName3D;
+
+	public bool IsGhost = false;
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;

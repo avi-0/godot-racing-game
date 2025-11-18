@@ -76,8 +76,7 @@ public partial class GameManager : Node
 			_localCar.QueueFree();
 		}
 
-		_localCar = CarScene.Instantiate<Car>();
-		AddChild(_localCar);
+		_localCar = CreateCar();
 		_localCar.GlobalTransform = GetStartPoint();
 		_localCar.Started();
 
@@ -97,6 +96,13 @@ public partial class GameManager : Node
 
 		if (!MusicPlayer.IsPlaying())
 			MusicPlayer.Play();
+	}
+
+	public Car CreateCar()
+	{
+		var car = CarScene.Instantiate<Car>();
+		AddChild(car);
+		return car;
 	}
 
 	public void Stop()
