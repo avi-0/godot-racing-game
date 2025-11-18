@@ -149,7 +149,7 @@ public partial class Car : RigidBody3D
 		if (!IsLocallyControlled)
 			return;
 		
-		if (@event.IsActionPressed("ui_cancel"))
+		if (@event.IsActionPressed(InputActionNames.Pause))
 			EmitSignalPauseRequested();
 		else if (@event.IsActionPressed(InputActionNames.Restart))
 			EmitSignalRestartRequested();

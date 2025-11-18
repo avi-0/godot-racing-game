@@ -239,4 +239,10 @@ public partial class SettingsMenu : Control
 		_settings.PlayerName = name;
 		SaveSettings();
 	}
+
+	public void OnVisibilityChanged()
+	{
+		if (Visible)
+			TDrs.GrabFocus();
+	}
 }

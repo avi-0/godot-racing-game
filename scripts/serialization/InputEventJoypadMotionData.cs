@@ -13,6 +13,8 @@ public class InputEventJoypadMotionData : InputEventData
 		joypadMotionEvent.Axis = Axis;
 		joypadMotionEvent.AxisValue = Value;
 
+		joypadMotionEvent.Device = -1;
+
 		return joypadMotionEvent;
 	}
 

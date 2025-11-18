@@ -11,4 +11,5 @@ public static class InputActionNames
 	public static readonly StringName Restart = new("game_restart");
 	public static readonly StringName CycleCamera = new("game_cycle_camera");
 	public static readonly StringName ToggleLights = new("game_car_lights");
+	public static readonly StringName Pause = new("game_pause");
 }

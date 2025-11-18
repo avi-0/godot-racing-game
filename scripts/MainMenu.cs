@@ -10,7 +10,9 @@ public partial class MainMenu : Control
 	public string CampTracksPath = "res://tracks/";
 	public string UserTracksPath = "user://tracks/";
 	[Export] public FileDialog MenuFileDialog;
-	
+
+	[Export] public Button PlayButton;
+	[Export] public Button SettingsButton;
 	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
 	[Export] public Control GarageWindow;
@@ -20,14 +22,22 @@ public partial class MainMenu : Control
 
 	private Car _loadedCar;
 	private IOrderedEnumerable<string> _carList;
+
+	private Control _hadFocus;
 	
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
+
+		SettingsButton.Pressed += () => OnSettingsButtonPressed().Forget();
+		
+		PlayButton.CallDeferred("grab_focus");
 	}
 
 	public void OnPlayButtonPressed()
 	{
+		_hadFocus = GetViewport().GuiGetFocusOwner();
+		
 		FillTrackContainer(CampTracksPath);
 		TrackListPanel.Show();
 	}
@@ -39,6 +49,8 @@ public partial class MainMenu : Control
 
 	public void OnLoadButtonPressed()
 	{
+		_hadFocus = GetViewport().GuiGetFocusOwner();
+		
 		FillTrackContainer(UserTracksPath);
 		TrackListPanel.Show();
 	}
@@ -65,6 +77,9 @@ public partial class MainMenu : Control
 				GarageContainer.AddChild(button);
 			}
 
+			_hadFocus = GetViewport().GuiGetFocusOwner();
+			GarageContainer.GetChild<Control>(0).GrabFocus();
+
 			PlayerNameText.Text = GameManager.Singleton.SettingsMenu.GetLocalPlayerName();
 		}
 		else
@@ -72,6 +87,8 @@ public partial class MainMenu : Control
 			GarageContainer.DestroyAllChildren();
 			_loadedCar.QueueFree();
 			_loadedCar = null;
+			
+			_hadFocus.GrabFocus();
 		}
 	}
 
@@ -92,9 +109,14 @@ public partial class MainMenu : Control
 		
 	}
 
-	public void OnSettingsButtonPressed()
+	public async GDTaskVoid OnSettingsButtonPressed()
 	{
+		_hadFocus = GetViewport().GuiGetFocusOwner();
+		
 		GameManager.Singleton.SettingsMenu.Show();
+		await GDTask.ToSignal(GameManager.Singleton.SettingsMenu, CanvasItem.SignalName.Hidden);
+		
+		_hadFocus.GrabFocus();
 	}
 
 	public void OnExitButtonPressed()
@@ -106,11 +128,12 @@ public partial class MainMenu : Control
 	public void OnTrackListBackButton()
 	{
 		TrackListPanel.Hide();
-		TrackContainer.DestroyAllChildren();
+		_hadFocus.GrabFocus();
 	}
 
 	private async GDTaskVoid OpenEditor()
 	{
+		_hadFocus = GetViewport().GuiGetFocusOwner();
 		Visible = false;
 
 		GameManager.Singleton.NewTrack();
@@ -123,10 +146,12 @@ public partial class MainMenu : Control
 		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
 
 		Visible = true;
+		_hadFocus.GrabFocus();
 	}
 
 	private async GDTaskVoid OpenTrack(string path)
 	{
+		_hadFocus = GetViewport().GuiGetFocusOwner();
 		Visible = false;
 
 		GameManager.Singleton.OpenTrack(path);
@@ -135,10 +160,12 @@ public partial class MainMenu : Control
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
 
 		Visible = true;
+		_hadFocus.GrabFocus();
 	}
 	
 	private void FillTrackContainer(string basePath)
 	{
+		TrackContainer.DestroyAllChildren();
 		var trackList = LoadTrackList(basePath);
 		
 		foreach (var trackPath in trackList)
@@ -178,6 +205,10 @@ public partial class MainMenu : Control
 				TrackContainer.AddChild(button);
 			}
 		}
+
+		var first = TrackContainer.GetChild(0) as Control;
+		if (first != null)
+			first.GrabFocus();
 	}
 	private IOrderedEnumerable<string> LoadTrackList(string path)
 	{

@@ -1,17 +1,20 @@
+using Fractural.Tasks;
 using Godot;
 
 namespace racingGame;
 
 public partial class PauseMenu : Control
 {
-	// Called when the node enters the scene tree for the first time.
+	[Export] public Button ResumeButton;
+	[Export] public Button SettingsButton;
+	[Export] public Button ExitButton;
+	
 	public override void _Ready()
 	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+		ResumeButton.Pressed += OnResumeButton;
+		SettingsButton.Pressed += () => OnSettingsButton().Forget();
+		ExitButton.Pressed += OnExitButton;
+		VisibilityChanged += OnVisibilityChanged;
 	}
 
 	public void OnResumeButton()
@@ -20,14 +23,24 @@ public partial class PauseMenu : Control
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
-	public void OnSettingsButton()
+	public async GDTaskVoid OnSettingsButton()
 	{
 		GameManager.Singleton.SettingsMenu.Show();
+		
+		await GDTask.ToSignal(GameManager.Singleton.SettingsMenu, CanvasItem.SignalName.Hidden);
+		
+		SettingsButton.GrabFocus();
 	}
 
 	public void OnExitButton()
 	{
 		Hide();
 		GameManager.Singleton.Stop();
+	}
+
+	public void OnVisibilityChanged()
+	{
+		if (Visible)
+			ResumeButton.GrabFocus();
 	}
 }

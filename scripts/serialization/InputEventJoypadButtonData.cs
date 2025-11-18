@@ -11,6 +11,8 @@ public class InputEventJoypadButtonData : InputEventData
 		var joypadButtonEvent = new InputEventJoypadButton();
 		joypadButtonEvent.ButtonIndex = ButtonIndex;
 
+		joypadButtonEvent.Device = -1;
+
 		return joypadButtonEvent;
 	}
 
