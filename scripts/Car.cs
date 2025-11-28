@@ -19,7 +19,7 @@ public partial class Car : RigidBody3D
 	
 	[ExportCategory("Node Arrays")]
 	[Export] public CarWheel[] Wheels;
-	[Export] public GpuParticles3D[] SkidMarks;
+	//[Export] public GpuParticles3D[] SkidMarks;
 	
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
@@ -410,8 +410,8 @@ public partial class Car : RigidBody3D
 				var curveValue = wheel.Config.GripCurve?.SampleBaked(grip) ?? 1.0f;
 				var xTraction = curveValue * wheel.Config.BaseGrip;
 
-				SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
-				SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
+				//SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
+				//SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
 
 				var handbrake = _isBraking && _isAccelerating;
 
@@ -423,17 +423,20 @@ public partial class Car : RigidBody3D
 				{
 					_isSlipping = false;
 				}
-
-				SkidMarks[wheelId].Emitting = false;
+				
 				if (_isSlipping)
 				{
 					xTraction = SlippingTraction;
-					SkidMarks[wheelId].Emitting = true;
+					wheel.Slide(contactPoint + normal * 0.01f, GetPointVelocity(contactPoint));
 					
 					if (wheel.Config.FullLoseGripOnSlip && tireVelocity.Length() > 2 && _targetSteering != 0)
 					{
 						xTraction = 0;
 					}
+				}
+				else
+				{
+					wheel.StopSliding();
 				}
 			
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
@@ -454,7 +457,7 @@ public partial class Car : RigidBody3D
 		}
 		else
 		{
-			SkidMarks[wheelId].Emitting = false;
+			wheel.StopSliding();
 		}
 	}
 

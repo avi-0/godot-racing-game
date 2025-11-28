@@ -1,13 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://rcirugm2el6u"]
+[gd_scene load_steps=6 format=3 uid="uid://rcirugm2el6u"]
 
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/CarWheel.cs" id="1_c8yof"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wofr7"]
 radius = 0.21
 
-[node name="Wheel" type="ShapeCast3D" node_paths=PackedStringArray("WheelModel")]
+[sub_resource type="Curve" id="Curve_c8yof"]
+bake_resolution = 512
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.064805, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8yof"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 0.5882353)
+metallic_specular = 0.0
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_c8yof"]
+
+[node name="Wheel" type="ShapeCast3D" node_paths=PackedStringArray("WheelModel", "SkidmarkMeshInstance")]
 shape = SubResource("SphereShape3D_wofr7")
 target_position = Vector3(0, 0, 0)
 script = ExtResource("1_c8yof")
 IsFrontWheel = true
 WheelModel = NodePath("")
+SkidmarkMeshInstance = NodePath("SkidmarkMesh")
+SkidmarkOpacityCurve = SubResource("Curve_c8yof")
+
+[node name="SkidmarkMesh" type="MeshInstance3D" parent="."]
+top_level = true
+material_override = SubResource("StandardMaterial3D_c8yof")
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_c8yof")
