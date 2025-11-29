@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=16 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_micox"]
 [ext_resource type="PackedScene" uid="uid://biodx1fq5tguf" path="res://assets/kenney/carkit/sedan-sports.glb" id="2_g5cig"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_glvfi"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_glvfi"]
-[ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="6_g5cig"]
-[ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="6_xv7xt"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
+[ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.0
@@ -57,7 +56,7 @@ font_size = 10
 uppercase = true
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "EngineSound", "PlayerName3D")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -67,9 +66,10 @@ continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
 script = ExtResource("1_micox")
-OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
 HeadLight = NodePath("Headlights")
+CarCommon = NodePath("CarCommon")
+Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 Acceleration = 600
 MaxSpeed = 30
@@ -81,10 +81,8 @@ UnslipThreshold = 0.8
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")
-EngineSound = NodePath("EngineSoundPlayer")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
-PlayerName3D = NodePath("PlayerName3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -145,12 +143,7 @@ SkidmarkWidth = 0.1
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)
 remote_path = NodePath("../../sedan-sports/wheel-back-right")
 
-[node name="OrbitCamera" parent="." instance=ExtResource("6_xv7xt")]
-
-[node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("6_g5cig")
-bus = &"enginesounds"
-playback_type = 1
+[node name="CarCommon" parent="." instance=ExtResource("8_glvfi")]
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.7072577, 0.25065678)
@@ -158,7 +151,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="Headlights" parent="." instance=ExtResource("7_g5cig")]
 transform = Transform3D(-1, 2.546744e-08, -1.2514288e-07, -4.8919077e-08, 0.82878387, 0.5595691, 1.1796716e-07, 0.5595691, -0.82878387, 0, 0.46993336, 0.8842214)
 
-[node name="PlayerName3D" type="MeshInstance3D" parent="."]
+[node name="Nameplate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.17, -0.91048336)
 mesh = SubResource("TextMesh_glvfi")
 

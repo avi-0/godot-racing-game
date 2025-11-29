@@ -10,16 +10,12 @@ public partial class Car : RigidBody3D
 	[Signal]
 	public delegate void RestartRequestedEventHandler();
 
-	[ExportCategory("Cameras")] 
-	[Export] public OrbitCamera OrbitCamera;
+	[ExportCategory("Components")] 
 	[Export] public Camera3D FrontCamera;
-	
-	[ExportCategory("Light")]
 	[Export] public SpotLight3D HeadLight;
-	
-	[ExportCategory("Node Arrays")]
+	[Export] public CarCommon CarCommon;
+	[Export] public MeshInstance3D Nameplate;
 	[Export] public CarWheel[] Wheels;
-	//[Export] public GpuParticles3D[] SkidMarks;
 	
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
@@ -43,15 +39,11 @@ public partial class Car : RigidBody3D
 	[Export] public Curve SpeedSteeringCurve;
 	[Export] public Curve SpeedToPitchCurve;
 
-	[ExportCategory("Engine")]
-	[Export] public AudioStreamPlayer3D EngineSound;
-
 	[ExportCategory("Wheel Setup")] 
 	[Export] public WheelConfig FrontWheelConfig;
 	[Export] public WheelConfig RearWheelConfig;
 
-	[ExportCategory("Extras")] 
-	[Export] private MeshInstance3D PlayerName3D;
+	[ExportCategory("Extras")]
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;
@@ -60,9 +52,7 @@ public partial class Car : RigidBody3D
 	private bool _isReversing = false;
 	private bool _isBraking = false;
 	private bool _hasCompressedWheel = false;
-
 	private bool _isSlipping = false;
-
 	private float _targetSteering;
 	
 	private bool _isLocallyControlled = true;
@@ -81,10 +71,13 @@ public partial class Car : RigidBody3D
 	
 	public int PlayerId;
 	public bool AcceptsInputs { get; set; } = false;
+
+	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
+	public AudioStreamPlayer3D EngineSoundPlayer => CarCommon.EngineSoundPlayer;
 	
 	public override void _Ready()
 	{
-		EngineSound.Play();
+		EngineSoundPlayer.Play();
 
 		OrbitCamera.Radius = 3.5f;
 		OrbitCamera.Pitch = float.DegreesToRadians(30);
@@ -239,12 +232,12 @@ public partial class Car : RigidBody3D
 		if (Input.IsActionPressed(InputActionNames.Forward) || Input.IsActionPressed(InputActionNames.Back))
 			engineSoundTarget = 1.0f;
 		
-		EngineSound.VolumeDb = Mathf.LinearToDb(
-			Mathf.MoveToward(Mathf.DbToLinear(EngineSound.VolumeDb), engineSoundTarget, 2 * (float)GetPhysicsProcessDeltaTime())
+		EngineSoundPlayer.VolumeDb = Mathf.LinearToDb(
+			Mathf.MoveToward(Mathf.DbToLinear(EngineSoundPlayer.VolumeDb), engineSoundTarget, 2 * (float)GetPhysicsProcessDeltaTime())
 		);
 		
 		var speediness = GetSpeediness();
-		EngineSound.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
+		EngineSoundPlayer.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
 	}
 
 	private void ProcessSuspension(CarWheel wheel)
@@ -487,7 +480,7 @@ public partial class Car : RigidBody3D
 
 		void setFontSize(int size)
 		{
-			PlayerName3D.Mesh.Set("font_size", size);
+			Nameplate.Mesh.Set("font_size", size);
 		}
 		
 		setFontSize(10);
@@ -512,6 +505,6 @@ public partial class Car : RigidBody3D
 				break;
 		}
 		
-		PlayerName3D.Mesh.Set("text", name);
+		Nameplate.Mesh.Set("text", name);
 	}
 }

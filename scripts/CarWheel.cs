@@ -14,7 +14,7 @@ public partial class CarWheel : ShapeCast3D
 	[Export] 
 	public Node3D WheelModel;
 	[Export]
-	public float SkidmarkWidth;
+	public float SkidmarkWidth = 0.1f;
 	
 	[ExportCategory("Builtin")]
 	[Export]
