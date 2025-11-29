@@ -55,14 +55,13 @@ public partial class Car : RigidBody3D
 	private bool _isSlipping = false;
 	private float _targetSteering;
 	
-	private bool _isLocallyControlled = true;
+	private bool _isLocallyControlled = false;
 	public bool IsLocallyControlled
 	{
 		get => _isLocallyControlled;
 		set
 		{
-			OrbitCamera.Camera.Current = value;
-
+			EngineSoundPlayer.Playing = value;
 			Input.MouseMode = value ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible;
 			
 			_isLocallyControlled = value;
@@ -77,8 +76,6 @@ public partial class Car : RigidBody3D
 	
 	public override void _Ready()
 	{
-		EngineSoundPlayer.Play();
-
 		OrbitCamera.Radius = 3.5f;
 		OrbitCamera.Pitch = float.DegreesToRadians(30);
 

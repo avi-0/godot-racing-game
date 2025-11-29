@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "GarageWindow", "GarageViewport", "GarageContainer", "PlayerNameText")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "GarageWindow", "GarageNode", "GarageContainer", "PlayerNameText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,80 +20,72 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
-PlayButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/PlayButton")
-SettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
+PlayButton = NodePath("MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton")
+SettingsButton = NodePath("MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
 TrackListPanel = NodePath("TrackListPanel")
 TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/MarginContainer/ScrollContainer/trackGC")
+MainMenuContainer = NodePath("MainMenuContainer")
 GarageWindow = NodePath("GarageWindow")
-GarageViewport = NodePath("GarageWindow/SubViewportContainer/SubViewport")
+GarageNode = NodePath("Garage")
 GarageContainer = NodePath("GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 PlayerNameText = NodePath("GarageWindow/PlayerNameLineEdit")
+DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MainMenuContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -736.5
-offset_top = 24.0
-offset_right = 736.5
-offset_bottom = 320.0
-grow_horizontal = 2
-texture = ExtResource("3_uqeha")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -154.5
-offset_top = -200.5
-offset_right = 154.5
-offset_bottom = 200.5
-grow_horizontal = 2
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 526.0
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainMenuContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+texture = ExtResource("3_uqeha")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Campaign"
 
-[node name="LoadButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LoadButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Play Local Map
 "
 
-[node name="GarageButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="GarageButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Garage
 "
 
-[node name="EditorButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="EditorButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Editor
 "
 
-[node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Settings
 "
 
-[node name="ExitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Exit
@@ -149,20 +141,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="GarageWindow"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="GarageWindow/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(1921, 1080)
-render_target_update_mode = 0
-
 [node name="PanelContainer" type="PanelContainer" parent="GarageWindow"]
 layout_mode = 1
 anchors_preset = 9
@@ -212,11 +190,13 @@ middle_mouse_paste_enabled = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
+[node name="Garage" type="Node3D" parent="."]
+
+[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
+[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/MarginContainer/BackButton" to="." method="OnTrackListBackButton"]
 [connection signal="pressed" from="GarageWindow/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]
 [connection signal="text_changed" from="GarageWindow/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]

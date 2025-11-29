@@ -110,6 +110,7 @@ public class GameModeTimeAttack : IGameMode
 		player.SpawnTime = DateTime.Now;
 		player.CheckPointsCollected = new List<int>();
 
+		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
 		if (player.LocalPlayer)
 		{
 			TimeSpan loadedPb;
@@ -124,8 +125,6 @@ public class GameModeTimeAttack : IGameMode
 				GameModeController.Utils.UpdateLocalPb(player.PbTime);
 			}
 		}
-
-		player.PlayerCar.IsLocallyControlled = true;
 
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
 		{
@@ -148,6 +147,7 @@ public class GameModeTimeAttack : IGameMode
 		player.LapsDone = 0;
 		player.InGame = true;
 
+		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
 		if (player.LocalPlayer)
 		{
 			GameModeController.Utils.UpdateLocalRaceTime(TimeSpan.Zero);

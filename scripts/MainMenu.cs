@@ -15,21 +15,36 @@ public partial class MainMenu : Control
 	[Export] public Button SettingsButton;
 	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
+	[Export] public Control MainMenuContainer;
 	[Export] public Control GarageWindow;
-	[Export] public SubViewport GarageViewport;
+	[Export] public Node3D GarageNode;
 	[Export] public Container GarageContainer;
 	[Export] public LineEdit PlayerNameText;
 
+	[Export(PropertyHint.FilePath)] public string DefaultCarPath;
+
 	private Car _loadedCar;
 	private IOrderedEnumerable<string> _carList;
-
 	private Control _hadFocus;
+
+	public bool IsVisible
+	{
+		get => Visible;
+		set
+		{
+			Visible = value;
+			GarageNode.Visible = value;
+		}
+	}
 	
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
 
 		SettingsButton.Pressed += () => OnSettingsButtonPressed().Forget();
+		
+		_carList = GameManager.Singleton.LoadCarList();
+		LoadGarageCar(DefaultCarPath);
 		
 		PlayButton.CallDeferred("grab_focus");
 	}
@@ -61,11 +76,7 @@ public partial class MainMenu : Control
 		
 		if (GarageWindow.Visible)
 		{
-			GarageViewport.MatchViewport(GetViewport());
-			
-			_carList = GameManager.Singleton.LoadCarList();
-			
-			LoadGarageCar(GameManager.CarsPath + _carList.First());
+			MainMenuContainer.Visible = false;
 			
 			foreach (var car in _carList)
 			{
@@ -84,29 +95,32 @@ public partial class MainMenu : Control
 		}
 		else
 		{
-			GarageContainer.DestroyAllChildren();
-			_loadedCar.QueueFree();
-			_loadedCar = null;
+			MainMenuContainer.Visible = true;
 			
-			_hadFocus.GrabFocus();
+			GarageContainer.DestroyAllChildren();
+			
+			if (_hadFocus != null)
+				_hadFocus.GrabFocus();
 		}
 	}
 
 	private void LoadGarageCar(string path)
 	{
-		GarageViewport.DestroyAllChildren();
+		GarageNode.DestroyAllChildren();
 		_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
-		GarageViewport.AddChild(_loadedCar);
-		_loadedCar.OrbitCamera.Yaw = float.DegreesToRadians(215);
+		GarageNode.AddChild(_loadedCar);
+		
+		UpdateGarageCar();
+	}
+
+	private void UpdateGarageCar()
+	{
+		_loadedCar.GlobalTransform = GameManager.Singleton.GetStartPoint();
+		_loadedCar.ResetPhysicsInterpolation();
+		
+		_loadedCar.OrbitCamera.Yaw = _loadedCar.Rotation.Y + float.DegreesToRadians(225);
 		_loadedCar.OrbitCamera.Pitch = float.DegreesToRadians(30);
 		_loadedCar.OrbitCamera.Camera.SetFov(80);
-		
-		var newStartPos = Transform3D.Identity;
-		newStartPos.Origin = GameManager.Singleton.GetStartPoint().Origin;
-		_loadedCar.GlobalTransform = newStartPos;
-		
-		GameManager.Singleton.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", 12);
-		
 	}
 
 	public async GDTaskVoid OnSettingsButtonPressed()
@@ -134,7 +148,7 @@ public partial class MainMenu : Control
 	private async GDTaskVoid OpenEditor()
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
-		Visible = false;
+		IsVisible = false;
 
 		GameManager.Singleton.NewTrack();
 
@@ -145,21 +159,23 @@ public partial class MainMenu : Control
 
 		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
 
-		Visible = true;
+		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
 
 	private async GDTaskVoid OpenTrack(string path)
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
-		Visible = false;
+		IsVisible = false;
 
 		GameManager.Singleton.OpenTrack(path);
 		GameManager.Singleton.Play();
 
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
-
-		Visible = true;
+		
+		
+		IsVisible = true;
+		UpdateGarageCar();
 		_hadFocus.GrabFocus();
 	}
 	
