@@ -155,15 +155,13 @@ public partial class Car : RigidBody3D
 			EmitSignalRestartRequested();
 		else if (@event.IsActionPressed(InputActionNames.CycleCamera))
 		{
-			if (OrbitCamera.Camera.Current)
+			if (GameManager.Singleton.CameraMode == GameManager.CarCameraMode.Orbit)
 			{
-				OrbitCamera.Camera.Current = false;
-				FrontCamera.Current = true;
+				GameManager.Singleton.CameraMode = GameManager.CarCameraMode.Front;
 			}
 			else
 			{
-				FrontCamera.Current = false;
-				OrbitCamera.Camera.Current = true;
+				GameManager.Singleton.CameraMode = GameManager.CarCameraMode.Orbit;
 			}
 			GetViewport().SetInputAsHandled();
 		}

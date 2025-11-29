@@ -8,24 +8,13 @@ namespace racingGame;
 
 public partial class GameManager : Node
 {
-	[Signal]
-	public delegate void StoppedPlayingEventHandler();
-
-	// constants that hui znaet where they should be
-	public const int BlockLayer = 1;
-	public const int CarLayer = 2;
-
-	public const string CarsPath = "res://scenes/cars/";
-	public static GameManager Singleton;
-
-	private bool _isPlaying = false;
-
-	private Car _localCar = null;
-
-	private int _localPlayerId = -1;
-
-	public bool DirectionalShadowsEnabled = true;
-
+	public enum CarCameraMode
+	{
+		Orbit,
+		Front,
+	}
+	
+	
 	[Export] public PackedScene CarScene;
 	[Export] public Label CheckPointLabel;
 
@@ -48,6 +37,37 @@ public partial class GameManager : Node
 
 	[Export] public Track Track;
 
+	[Export] public Camera3D Camera;
+	
+	
+	[Signal]
+	public delegate void StoppedPlayingEventHandler();
+	
+
+	// constants that hui znaet where they should be
+	public const int BlockLayer = 1;
+	public const int CarLayer = 2;
+	public const string CarsPath = "res://scenes/cars/";
+	public static GameManager Singleton;
+	private bool _isPlaying = false;
+	private Car _localCar = null;
+	private int _localPlayerId = -1;
+	public bool DirectionalShadowsEnabled = true;
+	public CarCameraMode CameraMode = CarCameraMode.Orbit;
+
+	private Camera3D TargetCamera
+	{
+		get
+		{
+			if (CameraMode == CarCameraMode.Orbit)
+				return _localCar?.OrbitCamera.Camera;
+			if (CameraMode == CarCameraMode.Front)
+				return _localCar?.FrontCamera;
+
+			return null;
+		}
+	}
+	
 	public override void _Ready()
 	{
 		Singleton = this;
@@ -57,8 +77,10 @@ public partial class GameManager : Node
 		NewTrack();
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
+		Camera.Current = TargetCamera != null;
+		Camera.Match(TargetCamera);
 	}
 
 	public void SelectCarScene(string scenePath)
