@@ -139,7 +139,7 @@ public partial class GameManager : Node
 		}
 	}
 
-	private void LocalCarOnRestartRequested()
+	public void LocalCarOnRestartRequested()
 	{
 		Play();
 	}
@@ -199,13 +199,6 @@ public partial class GameManager : Node
 			GD.PushError(e);
 			return null;
 		}
-	}
-
-	public void OnFinishButtonPressed()
-	{
-		PlayerViewport.FinishPanel.Hide();
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-		LocalCarOnRestartRequested();
 	}
 
 	public void NewTrack()

@@ -3,134 +3,61 @@ using Godot;
 
 namespace racingGame;
 
-public class GameModeUtils
+public static class GameModeUtils
 {
 	private const string SavePbPath = "user://userdata.mdat";
-	private int _startTime = -1;
 	
-	public void TimeAttack()
+	public static void TimeAttack()
 	{
 		GameModeController.CurrentGameMode = new GameModeTimeAttack();
 	}
 
-	public void UpdateLocalRaceTime(TimeSpan raceTime)
-	{
-		GameManager.Singleton.PlayerViewport.TimeLabel.Text =
-			raceTime.ToString("mm") + ":" + raceTime.ToString("ss") + "." + raceTime.ToString("fff");
-	}
+	public static string FormatRaceTime(TimeSpan raceTime)
+		=> $"{raceTime:mm}:{raceTime:ss}.{raceTime:fff}";
 
-	public void UpdateLocalPb(TimeSpan newPb)
-	{
-		GameManager.Singleton.PlayerViewport.PbLabel.Text =
-			"PB: " + newPb.ToString("mm") + ":" + newPb.ToString("ss") + "." + newPb.ToString("fff");
-	}
+	public static string FormatPbTime(TimeSpan raceTime)
+		=> $"PB: {raceTime:mm}:{raceTime:ss}.{raceTime:fff}";
 
-	public void OpenFinishWindow(TimeSpan finishTime, bool isPb, bool isEditor)
-	{
-		GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text = "Race Time: " + finishTime.ToString("mm") + ":" +
-		                                                            finishTime.ToString("ss") + "." + finishTime.ToString("fff");
-		if (isPb)
-		{
-			if (!isEditor)
-				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nPersonal Best!!!";
-			else
-				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nNew Author Time!!!";
-		}
-
-		if (!isEditor)
-		{
-			var at = GameManager.Singleton.Track.Options.AuthorTime;
-			if (finishTime.TotalMilliseconds <= at)
-				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nDiamond Medal!!!!";
-			else if (finishTime.TotalMilliseconds <= GetGoldFromAt(at))
-				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nGold Medal!!!";
-			else if (finishTime.TotalMilliseconds <= GetSilverFromAt(at))
-				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nSilver Medal!!";
-			else if (finishTime.TotalMilliseconds <= GetBronzeFromAt(at))
-				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nBronze Medal!";
-		}
-
-		GameManager.Singleton.PlayerViewport.FinishPanel.Show();
-		Input.MouseMode = Input.MouseModeEnum.Visible;
-	}
-
-	public void SetStartTimer(int time, bool playSound = true)
-	{
-		if (_startTime != time)
-		{
-			_startTime = time;
-
-			if (playSound)
-			{
-				if (time == 0)
-					UiSoundPlayer.Singleton.RaceStartSound.Play();
-				else
-					UiSoundPlayer.Singleton.RaceCountDownSound.Play();
-			}
-		}
-
-		if (time > 0)
-		{
-			GameManager.Singleton.PlayerViewport.StartTimerLabel.Show();
-			GameManager.Singleton.PlayerViewport.StartTimerLabel.Text = time.ToString();
-		}
-		else
-		{
-			GameManager.Singleton.PlayerViewport.StartTimerLabel.Hide();
-		}
-	}
-
-	public void SetCheckPointCount(int current, int total)
+	public static string FormatCheckPointCount(int current, int total)
 	{
 		if (total == 0)
-			GameManager.Singleton.PlayerViewport.CheckPointLabel.Text = "";
-		else
-			GameManager.Singleton.PlayerViewport.CheckPointLabel.Text = current + "/" + total;
+			return "";
+		
+		return current + "/" + total;
 	}
 
-	public void SetLapsCount(int current, int total)
+	public static string FormatLapsCount(int current, int total)
 	{
 		if (total == 0)
-			GameManager.Singleton.PlayerViewport.LapsLabel.Text = "";
-		else
-			GameManager.Singleton.PlayerViewport.LapsLabel.Text = $"Lap {current + 1}/{total}";
+			return "";
+		
+		return $"Lap {current + 1}/{total}";
 	}
 
-	public void SetTrackInfo(string trackName, string authorName)
+	public static string FormatTrackInfo(string trackName, string authorName)
 	{
 		if (trackName != "")
-			GameManager.Singleton.PlayerViewport.TrackInfoLabel.Text = trackName + " by " + authorName;
-		else
-			GameManager.Singleton.PlayerViewport.TrackInfoLabel.Text = "";
-	}
+			return $"{trackName} by {authorName}";
 
-	public void UnloadLocalStats()
-	{
-		GameManager.Singleton.PlayerViewport.PbLabel.Text = "PB: ";
-		UpdateLocalRaceTime(TimeSpan.Zero);
-		SetStartTimer(0, false);
-		SetCheckPointCount(0, 0);
-		SetLapsCount(0, 0);
-		SetTrackInfo("", "");
+		return "";
 	}
-
-	//TRACK INFO
-	public int GetGoldFromAt(int ms)
+	
+	public static int GetGoldFromAt(int ms)
 	{
 		return Mathf.FloorToInt(ms * 1.2);
 	}
 
-	public int GetSilverFromAt(int ms)
+	public static int GetSilverFromAt(int ms)
 	{
 		return Mathf.FloorToInt(ms * 1.6);
 	}
 
-	public int GetBronzeFromAt(int ms)
+	public static int GetBronzeFromAt(int ms)
 	{
 		return Mathf.FloorToInt(ms * 2.0);
 	}
 
-	public string GetMedalFromTime(int timeMs, int atMs)
+	public static string GetMedalFromTime(int timeMs, int atMs)
 	{
 		if (timeMs < atMs)
 		{
@@ -152,7 +79,7 @@ public class GameModeUtils
 		return "No Medal";
 	}
 
-	public void SaveUserPb(TimeSpan time, string trackUid)
+	public static void SaveUserPb(TimeSpan time, string trackUid)
 	{
 		if (time == TimeSpan.Zero || trackUid == "0") return;
 
@@ -162,7 +89,7 @@ public class GameModeUtils
 		config.SaveEncrypted(SavePbPath, "sosal?".Sha256Buffer());
 	}
 
-	public TimeSpan LoadUserPb(string trackUid)
+	public static TimeSpan LoadUserPb(string trackUid)
 	{
 		var config = new ConfigFile();
 		var err = config.LoadEncrypted(SavePbPath, "sosal?".Sha256Buffer());

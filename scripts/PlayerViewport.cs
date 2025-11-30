@@ -18,6 +18,7 @@ public partial class PlayerViewport : SubViewport
 
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
 	public Car Car;
+	public int StartTimerSeconds = -1;
 
 	private bool _active = false;
 
@@ -64,6 +65,10 @@ public partial class PlayerViewport : SubViewport
 
 	public override void _Process(double delta)
 	{
+		if (Active && Car != null)
+		{
+			GameModeController.CurrentGameMode.UpdateHud(this);
+		}
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -80,5 +85,12 @@ public partial class PlayerViewport : SubViewport
 			}
 			GetViewport().SetInputAsHandled();
 		}
+	}
+	
+	public void OnFinishButtonPressed()
+	{
+		FinishPanel.Hide();
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+		GameManager.Singleton.LocalCarOnRestartRequested();
 	}
 }

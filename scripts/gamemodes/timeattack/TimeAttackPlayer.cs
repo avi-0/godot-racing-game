@@ -20,6 +20,10 @@ public struct TimeAttackPlayer
 
 	public Car PlayerCar { get; set; }
 
+	public bool HasFinished = false;
+	public TimeSpan LastFinishTime;
+	public int StartTimerSeconds = -1;
+
 	public TimeAttackPlayer(int playerId, bool localPlayer, Car playerCar)
 	{
 		PlayerId = playerId;

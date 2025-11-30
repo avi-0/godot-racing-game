@@ -36,27 +36,26 @@ public class GameModeTimeAttack : IGameMode
 					var timeSinceStartMs = DateTime.Now.Subtract(player.SpawnTime).TotalMilliseconds;
 					if (timeSinceStartMs > 1500)
 					{
-						GameModeController.Utils.SetStartTimer(0);
+						player.StartTimerSeconds = 0;
 						player.PlayerCar.AcceptsInputs = true;
 						player.RaceStartTime = DateTime.Now;
 					}
 					else if (timeSinceStartMs > 1000)
 					{
-						GameModeController.Utils.SetStartTimer(1);
+						player.StartTimerSeconds = 1;
 					}
 					else if (timeSinceStartMs > 500)
 					{
-						GameModeController.Utils.SetStartTimer(2);
+						player.StartTimerSeconds = 2;
 					}
 					else
 					{
-						GameModeController.Utils.SetStartTimer(3);
+						player.StartTimerSeconds = 3;
 					}
 				}
 				else
 				{
 					player.CurrentRaceTime = DateTime.Now.Subtract(player.RaceStartTime);
-					if (player.LocalPlayer) GameModeController.Utils.UpdateLocalRaceTime(player.CurrentRaceTime);
 				}
 			}
 
@@ -92,10 +91,6 @@ public class GameModeTimeAttack : IGameMode
 				block.CarEntered += PlayerAttemptFinish;
 			}
 		}
-
-		GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
-		GameModeController.Utils.SetTrackInfo(_currentTrack.Track.Options.Name, _currentTrack.Track.Options.AuthorName);
-		GameModeController.Utils.SetLapsCount(0, _currentTrack.Track.Options.Laps);
 		
 		_currentTrack.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", (float)_currentTrack.Track.Options.StartDayTime);
 		GameManager.Singleton.ApplyShadowSettings(); // FIXME: Sky3D слишком умный епт
@@ -115,14 +110,13 @@ public class GameModeTimeAttack : IGameMode
 		{
 			TimeSpan loadedPb;
 			if (!_inEditor)
-				loadedPb = GameModeController.Utils.LoadUserPb(_currentTrack.Track.Options.Uid);
+				loadedPb = GameModeUtils.LoadUserPb(_currentTrack.Track.Options.Uid);
 			else
 				loadedPb = new TimeSpan(0, 0, 0, 0, _currentTrack.Track.Options.AuthorTime);
 
 			if (loadedPb != TimeSpan.Zero)
 			{
 				player.PbTime = loadedPb;
-				GameModeController.Utils.UpdateLocalPb(player.PbTime);
 			}
 		}
 
@@ -146,13 +140,9 @@ public class GameModeTimeAttack : IGameMode
 		player.CheckPointsCollected = new List<int>();
 		player.LapsDone = 0;
 		player.InGame = true;
+		player.HasFinished = false;
 
 		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
-		if (player.LocalPlayer)
-		{
-			GameModeController.Utils.UpdateLocalRaceTime(TimeSpan.Zero);
-			GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
-		}
 		
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
 		{
@@ -167,7 +157,6 @@ public class GameModeTimeAttack : IGameMode
 	{
 		_running = false;
 		_players = null;
-		GameModeController.Utils.UnloadLocalStats();
 	}
 
 	private void PlayerAttemptFinish(Car playerCar, int blockId)
@@ -182,8 +171,6 @@ public class GameModeTimeAttack : IGameMode
 			if (player.LapsDone < _currentTrack.Track.Options.Laps)
 			{
 				player.CheckPointsCollected = new List<int>();
-				GameModeController.Utils.SetLapsCount(player.LapsDone, _currentTrack.Track.Options.Laps);
-				GameModeController.Utils.SetCheckPointCount(0, _currentTrack.CheckPointCount);
 			}
 			else
 			{
@@ -205,8 +192,6 @@ public class GameModeTimeAttack : IGameMode
 			player.CheckPointsCollected.Add(blockId);
 			if (player.LocalPlayer)
 			{
-				GameModeController.Utils.SetCheckPointCount(player.CheckPointsCollected.Count,
-					_currentTrack.CheckPointCount);
 				UiSoundPlayer.Singleton.CheckpointCollectedSound.Play();
 			}
 		}
@@ -228,14 +213,14 @@ public class GameModeTimeAttack : IGameMode
 			player.PbTime = player.CurrentRaceTime;
 			if (player.LocalPlayer)
 			{
-				GameModeController.Utils.UpdateLocalPb(player.PbTime);
-				GameModeController.Utils.SaveUserPb(player.PbTime, GameManager.Singleton.GetLoadedTrackUid());
+				GameModeUtils.SaveUserPb(player.PbTime, GameManager.Singleton.GetLoadedTrackUid());
 
 				if (_inEditor) SetAuthorTime((int)player.CurrentRaceTime.TotalMilliseconds);
 			}
 		}
 
-		GameModeController.Utils.OpenFinishWindow(player.CurrentRaceTime, isPb, _inEditor);
+		player.HasFinished = true;
+		player.LastFinishTime = player.CurrentRaceTime;
 
 		return player;
 	}
@@ -243,5 +228,68 @@ public class GameModeTimeAttack : IGameMode
 	private void SetAuthorTime(int ms)
 	{
 		_currentTrack.Track.Options.AuthorTime = ms;
+	}
+
+	public void UpdateHud(PlayerViewport viewport)
+	{
+		var player = _players[viewport.Car.PlayerId];
+
+		viewport.TrackInfoLabel.Text = GameModeUtils.FormatTrackInfo(_currentTrack.Track.Options.Name, _currentTrack.Track.Options.AuthorName);
+		viewport.TimeLabel.Text = GameModeUtils.FormatRaceTime(player.CurrentRaceTime);
+		viewport.PbLabel.Text = GameModeUtils.FormatPbTime(player.PbTime);
+		viewport.CheckPointLabel.Text = GameModeUtils.FormatCheckPointCount(player.CheckPointsCollected.Count,
+			_currentTrack.CheckPointCount);
+		viewport.LapsLabel.Text = GameModeUtils.FormatLapsCount(player.LapsDone, _currentTrack.Track.Options.Laps);
+
+		if (player.HasFinished && !viewport.FinishPanel.Visible)
+		{
+			var isPb = player.LastFinishTime == player.PbTime;
+			
+			viewport.FinishTimeLabel.Text = $"Race Time: {player.LastFinishTime:mm}:{player.LastFinishTime:ss}.{player.LastFinishTime:fff}";
+			
+			if (isPb)
+			{
+				if (!_inEditor)
+					viewport.FinishTimeLabel.Text += "\nPersonal Best!!!";
+				else
+					viewport.FinishTimeLabel.Text += "\nNew Author Time!!!";
+			}
+
+			if (!_inEditor)
+			{
+				var at = GameManager.Singleton.Track.Options.AuthorTime;
+				if (player.LastFinishTime.TotalMilliseconds <= at)
+					viewport.FinishTimeLabel.Text += "\nAuthor Medal!!!!";
+				else if (player.LastFinishTime.TotalMilliseconds <= GameModeUtils.GetGoldFromAt(at))
+					viewport.FinishTimeLabel.Text += "\nGold Medal!!!";
+				else if (player.LastFinishTime.TotalMilliseconds <= GameModeUtils.GetSilverFromAt(at))
+					viewport.FinishTimeLabel.Text += "\nSilver Medal!!";
+				else if (player.LastFinishTime.TotalMilliseconds <= GameModeUtils.GetBronzeFromAt(at))
+					viewport.FinishTimeLabel.Text += "\nBronze Medal!";
+			}
+
+			viewport.FinishPanel.Show();
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		
+		if (viewport.StartTimerSeconds != player.StartTimerSeconds)
+		{
+			viewport.StartTimerSeconds = player.StartTimerSeconds;
+			
+			if (viewport.StartTimerSeconds == 0)
+				UiSoundPlayer.Singleton.RaceStartSound.Play();
+			else
+				UiSoundPlayer.Singleton.RaceCountDownSound.Play();
+		}
+
+		if (viewport.StartTimerSeconds > 0)
+		{
+			viewport.StartTimerLabel.Show();
+			viewport.StartTimerLabel.Text = viewport.StartTimerSeconds.ToString();
+		}
+		else
+		{
+			viewport.StartTimerLabel.Hide();
+		}
 	}
 }

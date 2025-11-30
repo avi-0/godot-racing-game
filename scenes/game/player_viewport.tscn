@@ -132,6 +132,7 @@ text = "Laps: 0/0"
 horizontal_alignment = 2
 
 [node name="FinishPanel" type="PanelContainer" parent="RaceUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,3 +171,5 @@ top_level = true
 doppler_tracking = 2
 current = true
 fov = 80.0
+
+[connection signal="pressed" from="RaceUI/FinishPanel/MarginContainer/VBoxContainer/Button" to="." method="OnFinishButtonPressed"]

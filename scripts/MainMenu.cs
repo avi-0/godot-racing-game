@@ -207,11 +207,11 @@ public partial class MainMenu : Control
 				button.CustomMinimumSize = 64 * Vector2.One;
 				button.Text = options.Name + "\n" + options.CarType.Split(".")[0].ToUpper();
 					
-				var loadedPb = GameModeController.Utils.LoadUserPb(options.Uid);
+				var loadedPb = GameModeUtils.LoadUserPb(options.Uid);
 				if (loadedPb != TimeSpan.Zero)
 				{
 					button.Text += "\n" + loadedPb.ToString("mm") + ":" + loadedPb.ToString("ss") + "." + loadedPb.ToString("fff");
-					button.Text += "\n" + GameModeController.Utils.GetMedalFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime);
+					button.Text += "\n" + GameModeUtils.GetMedalFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime);
 				}
 				
 				button.Pressed += () => OpenTrack(basePath + trackPath).Forget();

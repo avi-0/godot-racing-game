@@ -11,4 +11,6 @@ public interface IGameMode
 	int SpawnPlayer(bool localPlayer, Car playerCar);
 	void RespawnPlayer(int playerId, Car playerCar);
 	void KillGame();
+
+	void UpdateHud(PlayerViewport viewport);
 }
