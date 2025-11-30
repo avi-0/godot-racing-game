@@ -17,7 +17,8 @@ public partial class MainMenu : Control
 	[Export] public GridContainer TrackContainer;
 	[Export] public Control MainMenuContainer;
 	[Export] public Control GarageWindow;
-	[Export] public Node3D GarageNode;
+	[Export] public SubViewportContainer GarageViewportContainer;
+	[Export] public SubViewport GarageViewport;
 	[Export] public Container GarageContainer;
 	[Export] public LineEdit PlayerNameText;
 
@@ -33,7 +34,8 @@ public partial class MainMenu : Control
 		set
 		{
 			Visible = value;
-			GarageNode.Visible = value;
+			GarageViewportContainer.Visible = value;
+			_loadedCar.Visible = value;
 		}
 	}
 	
@@ -106,11 +108,13 @@ public partial class MainMenu : Control
 
 	private void LoadGarageCar(string path)
 	{
-		GarageNode.DestroyAllChildren();
+		GarageViewport.DestroyAllChildren();
 		_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
-		GarageNode.AddChild(_loadedCar);
+		GarageViewport.AddChild(_loadedCar);
 		
 		UpdateGarageCar();
+		
+		GarageViewport.MatchViewport(GetViewport());
 	}
 
 	private void UpdateGarageCar()
@@ -129,6 +133,8 @@ public partial class MainMenu : Control
 		
 		GameManager.Singleton.SettingsMenu.Show();
 		await GDTask.ToSignal(GameManager.Singleton.SettingsMenu, CanvasItem.SignalName.Hidden);
+		
+		GarageViewport.MatchViewport(GetViewport());
 		
 		_hadFocus.GrabFocus();
 	}

@@ -44,8 +44,7 @@ public partial class Car : RigidBody3D
 	[Export] public WheelConfig RearWheelConfig;
 
 	[ExportCategory("Extras")]
-	
-	private float _mouseSensitivity;
+		
 	private int _wheelCount;
 	private int _driveWheelCount;
 	private bool _isAccelerating = false;
@@ -107,7 +106,7 @@ public partial class Car : RigidBody3D
 			if (RearWheelConfig.OverExtend < 0)
 				RearWheelConfig.OverExtend = FrontWheelConfig.OverExtend;
 			if (RearWheelConfig.WheelRadius < 0)
-				RearWheelConfig.WheelRadius = RearWheelConfig.WheelRadius;
+				RearWheelConfig.WheelRadius = FrontWheelConfig.WheelRadius;
 			if (RearWheelConfig.BaseGrip < 0)
 				RearWheelConfig.BaseGrip = FrontWheelConfig.BaseGrip;
 			if (RearWheelConfig.GripCurve == null)
@@ -128,10 +127,6 @@ public partial class Car : RigidBody3D
 
 	public override void _Process(double delta)
 	{
-		_mouseSensitivity = 1.0f * 0.25f * 2 * Mathf.Pi / DisplayServer.ScreenGetSize().Y;
-		
-		if (LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
-			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
 	}
 	
 	public override void _UnhandledInput(InputEvent @event)
@@ -143,18 +138,6 @@ public partial class Car : RigidBody3D
 			EmitSignalPauseRequested();
 		else if (@event.IsActionPressed(InputActionNames.Restart))
 			EmitSignalRestartRequested();
-		else if (@event.IsActionPressed(InputActionNames.CycleCamera))
-		{
-			if (GameManager.Singleton.CameraMode == GameManager.CarCameraMode.Orbit)
-			{
-				GameManager.Singleton.CameraMode = GameManager.CarCameraMode.Front;
-			}
-			else
-			{
-				GameManager.Singleton.CameraMode = GameManager.CarCameraMode.Orbit;
-			}
-			GetViewport().SetInputAsHandled();
-		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{
 			HeadLight.Visible = !HeadLight.Visible;
@@ -215,8 +198,9 @@ public partial class Car : RigidBody3D
 		
 		ProcessEngineSound();
 
-		GameManager.Singleton.SpeedLabel.Text = ((int)Mathf.Round(LinearVelocity.Length() * 10)).ToString();
-
+		if (LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
+			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
+		
 		if (DebugMode)
 		{
 			DebugDraw3D.DrawArrowRay(GlobalPosition, LinearVelocity, 0.5f, Color.Color8(255, 255, 255), arrow_size: 0.1f);

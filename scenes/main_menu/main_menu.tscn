@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "GarageWindow", "GarageNode", "GarageContainer", "PlayerNameText")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageContainer", "PlayerNameText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,10 +26,25 @@ TrackListPanel = NodePath("TrackListPanel")
 TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/MarginContainer/ScrollContainer/trackGC")
 MainMenuContainer = NodePath("MainMenuContainer")
 GarageWindow = NodePath("GarageWindow")
-GarageNode = NodePath("Garage")
+GarageViewportContainer = NodePath("GarageViewportContainer")
+GarageViewport = NodePath("GarageViewportContainer/GarageViewport")
 GarageContainer = NodePath("GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 PlayerNameText = NodePath("GarageWindow/PlayerNameLineEdit")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
+
+[node name="GarageViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="GarageViewport" type="SubViewport" parent="GarageViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1921, 1080)
+render_target_update_mode = 4
 
 [node name="MainMenuContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -189,8 +204,6 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
-
-[node name="Garage" type="Node3D" parent="."]
 
 [connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]

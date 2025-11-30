@@ -16,29 +16,12 @@ public partial class GameManager : Node
 	
 	
 	[Export] public PackedScene CarScene;
-	[Export] public Label CheckPointLabel;
-
-	[Export] public PanelContainer FinishPanel;
-	[Export] public Label FinishTimeLabel;
-	[Export] public Label LapsLabel;
-
 	[Export] public AudioStreamPlayer MusicPlayer;
-
-	[Export] public Control PauseMenu;
-	[Export] public Label PbLabel;
-
-	[Export] public Control RaceUi;
-
-	[Export] public SettingsMenu SettingsMenu;
-	[Export] public Label SpeedLabel;
-	[Export] public Label StartTimerLabel;
-	[Export] public Label TimeLabel;
-	[Export] public Label TrackInfoLabel;
-
 	[Export] public Track Track;
-
-	[Export] public Camera3D Camera;
-	
+	[Export] public SettingsMenu SettingsMenu;
+	[Export] public Control RaceUi;
+	[Export] public Control PauseMenu;
+	[Export] public PlayerViewport PlayerViewport;
 	
 	[Signal]
 	public delegate void StoppedPlayingEventHandler();
@@ -53,20 +36,9 @@ public partial class GameManager : Node
 	private Car _localCar = null;
 	private int _localPlayerId = -1;
 	public bool DirectionalShadowsEnabled = true;
-	public CarCameraMode CameraMode = CarCameraMode.Orbit;
+	
 
-	private Camera3D TargetCamera
-	{
-		get
-		{
-			if (CameraMode == CarCameraMode.Orbit)
-				return _localCar?.OrbitCamera.Camera;
-			if (CameraMode == CarCameraMode.Front)
-				return _localCar?.FrontCamera;
-
-			return null;
-		}
-	}
+	
 	
 	public override void _Ready()
 	{
@@ -77,12 +49,6 @@ public partial class GameManager : Node
 		NewTrack();
 	}
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Camera.Current = TargetCamera != null;
-		Camera.Match(TargetCamera);
-	}
-
 	public void SelectCarScene(string scenePath)
 	{
 		CarScene = GD.Load<PackedScene>(CarsPath + scenePath);
@@ -90,8 +56,6 @@ public partial class GameManager : Node
 
 	public void Play()
 	{
-		SetGameUiVisiblity(true);
-
 		if (_localCar != null)
 		{
 			RemoveChild(_localCar);
@@ -120,6 +84,8 @@ public partial class GameManager : Node
 
 		if (!MusicPlayer.IsPlaying())
 			MusicPlayer.Play();
+		
+		SetGameUiVisiblity(true);
 	}
 
 	public void Stop()
@@ -147,8 +113,9 @@ public partial class GameManager : Node
 	public void SetGameUiVisiblity(bool visible)
 	{
 		RaceUi.Visible = visible;
-
-		FinishPanel.Hide();
+		PlayerViewport.MatchViewport(GetViewport());
+		PlayerViewport.Active = visible;
+		PlayerViewport.Car = _localCar;
 	}
 
 	public bool IsPlaying()
@@ -234,7 +201,7 @@ public partial class GameManager : Node
 
 	public void OnFinishButtonPressed()
 	{
-		FinishPanel.Hide();
+		PlayerViewport.FinishPanel.Hide();
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		LocalCarOnRestartRequested();
 	}
