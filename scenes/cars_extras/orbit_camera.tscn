@@ -24,5 +24,4 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.7
 [node name="Camera3D" type="Camera3D" parent="CameraStickBase/CameraStick"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 doppler_tracking = 2
-current = true
 fov = 80.0

@@ -10,16 +10,12 @@ public partial class Car : RigidBody3D
 	[Signal]
 	public delegate void RestartRequestedEventHandler();
 
-	[ExportCategory("Cameras")] 
-	[Export] public OrbitCamera OrbitCamera;
+	[ExportCategory("Components")] 
 	[Export] public Camera3D FrontCamera;
-	
-	[ExportCategory("Light")]
 	[Export] public SpotLight3D HeadLight;
-	
-	[ExportCategory("Node Arrays")]
+	[Export] public CarCommon CarCommon;
+	[Export] public MeshInstance3D Nameplate;
 	[Export] public CarWheel[] Wheels;
-	[Export] public GpuParticles3D[] SkidMarks;
 	
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
@@ -43,36 +39,28 @@ public partial class Car : RigidBody3D
 	[Export] public Curve SpeedSteeringCurve;
 	[Export] public Curve SpeedToPitchCurve;
 
-	[ExportCategory("Engine")]
-	[Export] public AudioStreamPlayer3D EngineSound;
-
 	[ExportCategory("Wheel Setup")] 
 	[Export] public WheelConfig FrontWheelConfig;
 	[Export] public WheelConfig RearWheelConfig;
 
-	[ExportCategory("Extras")] 
-	[Export] private MeshInstance3D PlayerName3D;
-	
-	private float _mouseSensitivity;
+	[ExportCategory("Extras")]
+		
 	private int _wheelCount;
 	private int _driveWheelCount;
 	private bool _isAccelerating = false;
 	private bool _isReversing = false;
 	private bool _isBraking = false;
 	private bool _hasCompressedWheel = false;
-
 	private bool _isSlipping = false;
-
 	private float _targetSteering;
 	
-	private bool _isLocallyControlled = true;
+	private bool _isLocallyControlled = false;
 	public bool IsLocallyControlled
 	{
 		get => _isLocallyControlled;
 		set
 		{
-			OrbitCamera.Camera.Current = value;
-
+			EngineSoundPlayer.Playing = value;
 			Input.MouseMode = value ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible;
 			
 			_isLocallyControlled = value;
@@ -81,11 +69,12 @@ public partial class Car : RigidBody3D
 	
 	public int PlayerId;
 	public bool AcceptsInputs { get; set; } = false;
+
+	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
+	public AudioStreamPlayer3D EngineSoundPlayer => CarCommon.EngineSoundPlayer;
 	
 	public override void _Ready()
 	{
-		EngineSound.Play();
-
 		OrbitCamera.Radius = 3.5f;
 		OrbitCamera.Pitch = float.DegreesToRadians(30);
 
@@ -117,7 +106,7 @@ public partial class Car : RigidBody3D
 			if (RearWheelConfig.OverExtend < 0)
 				RearWheelConfig.OverExtend = FrontWheelConfig.OverExtend;
 			if (RearWheelConfig.WheelRadius < 0)
-				RearWheelConfig.WheelRadius = RearWheelConfig.WheelRadius;
+				RearWheelConfig.WheelRadius = FrontWheelConfig.WheelRadius;
 			if (RearWheelConfig.BaseGrip < 0)
 				RearWheelConfig.BaseGrip = FrontWheelConfig.BaseGrip;
 			if (RearWheelConfig.GripCurve == null)
@@ -138,10 +127,6 @@ public partial class Car : RigidBody3D
 
 	public override void _Process(double delta)
 	{
-		_mouseSensitivity = 1.0f * 0.25f * 2 * Mathf.Pi / DisplayServer.ScreenGetSize().Y;
-		
-		if (LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
-			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
 	}
 	
 	public override void _UnhandledInput(InputEvent @event)
@@ -153,20 +138,6 @@ public partial class Car : RigidBody3D
 			EmitSignalPauseRequested();
 		else if (@event.IsActionPressed(InputActionNames.Restart))
 			EmitSignalRestartRequested();
-		else if (@event.IsActionPressed(InputActionNames.CycleCamera))
-		{
-			if (OrbitCamera.Camera.Current)
-			{
-				OrbitCamera.Camera.Current = false;
-				FrontCamera.Current = true;
-			}
-			else
-			{
-				FrontCamera.Current = false;
-				OrbitCamera.Camera.Current = true;
-			}
-			GetViewport().SetInputAsHandled();
-		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{
 			HeadLight.Visible = !HeadLight.Visible;
@@ -227,8 +198,9 @@ public partial class Car : RigidBody3D
 		
 		ProcessEngineSound();
 
-		GameManager.Singleton.SpeedLabel.Text = ((int)Mathf.Round(LinearVelocity.Length() * 10)).ToString();
-
+		if (LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
+			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
+		
 		if (DebugMode)
 		{
 			DebugDraw3D.DrawArrowRay(GlobalPosition, LinearVelocity, 0.5f, Color.Color8(255, 255, 255), arrow_size: 0.1f);
@@ -241,12 +213,12 @@ public partial class Car : RigidBody3D
 		if (Input.IsActionPressed(InputActionNames.Forward) || Input.IsActionPressed(InputActionNames.Back))
 			engineSoundTarget = 1.0f;
 		
-		EngineSound.VolumeDb = Mathf.LinearToDb(
-			Mathf.MoveToward(Mathf.DbToLinear(EngineSound.VolumeDb), engineSoundTarget, 2 * (float)GetPhysicsProcessDeltaTime())
+		EngineSoundPlayer.VolumeDb = Mathf.LinearToDb(
+			Mathf.MoveToward(Mathf.DbToLinear(EngineSoundPlayer.VolumeDb), engineSoundTarget, 2 * (float)GetPhysicsProcessDeltaTime())
 		);
 		
 		var speediness = GetSpeediness();
-		EngineSound.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
+		EngineSoundPlayer.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
 	}
 
 	private void ProcessSuspension(CarWheel wheel)
@@ -410,8 +382,8 @@ public partial class Car : RigidBody3D
 				var curveValue = wheel.Config.GripCurve?.SampleBaked(grip) ?? 1.0f;
 				var xTraction = curveValue * wheel.Config.BaseGrip;
 
-				SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
-				SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
+				//SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
+				//SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
 
 				var handbrake = _isBraking && _isAccelerating;
 
@@ -423,17 +395,20 @@ public partial class Car : RigidBody3D
 				{
 					_isSlipping = false;
 				}
-
-				SkidMarks[wheelId].Emitting = false;
+				
 				if (_isSlipping)
 				{
 					xTraction = SlippingTraction;
-					SkidMarks[wheelId].Emitting = true;
+					wheel.Slide(contactPoint + normal * 0.01f, GetPointVelocity(contactPoint));
 					
 					if (wheel.Config.FullLoseGripOnSlip && tireVelocity.Length() > 2 && _targetSteering != 0)
 					{
 						xTraction = 0;
 					}
+				}
+				else
+				{
+					wheel.StopSliding();
 				}
 			
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
@@ -454,7 +429,7 @@ public partial class Car : RigidBody3D
 		}
 		else
 		{
-			SkidMarks[wheelId].Emitting = false;
+			wheel.StopSliding();
 		}
 	}
 
@@ -486,7 +461,7 @@ public partial class Car : RigidBody3D
 
 		void setFontSize(int size)
 		{
-			PlayerName3D.Mesh.Set("font_size", size);
+			Nameplate.Mesh.Set("font_size", size);
 		}
 		
 		setFontSize(10);
@@ -511,6 +486,6 @@ public partial class Car : RigidBody3D
 				break;
 		}
 		
-		PlayerName3D.Mesh.Set("text", name);
+		Nameplate.Mesh.Set("text", name);
 	}
 }

@@ -1,12 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=16 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_micox"]
 [ext_resource type="PackedScene" uid="uid://biodx1fq5tguf" path="res://assets/kenney/carkit/sedan-sports.glb" id="2_g5cig"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_glvfi"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_glvfi"]
-[ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="6_g5cig"]
-[ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="6_xv7xt"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
+[ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.0
@@ -47,26 +46,6 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x43s4"]
 points = PackedVector3Array(0.65, 0.24996082, 1.1249853, 0.6206049, 0.24996082, 1.1956245, 0.65, 0.049936373, 1.1249853, 0.65, 0.42571455, 0.96074283, 0.5499804, 0.24996082, 1.2248286, 0.6206049, 0.049936373, 1.1956245, 0.5499804, 0.4499853, 1.1749068, 0.12496084, 0, 1.275, 0.65, 0.049936373, -1.1252348, 0.65, 0.4877398, 0.8798698, 0.12496084, 0.17491679, 1.275, 0.17497063, 0.12498041, 1.275, 0.5499804, 0.049936373, 1.2248286, -0.55010766, 0.4499853, 1.1749068, 0.5499804, 0.5999804, 0.9247993, 0.17497063, 0.049936373, 1.275, -0.1250881, 0, 1.275, 0.12496084, 0, -1.275, 0.6206049, 0.049936373, -1.1958741, 0.65, 0.24996082, -1.1252348, 0.65, 0.5267032, 0.78576744, -0.1250881, 0.17491679, 1.275, -0.6207322, 0.24996082, 1.1956245, -0.55010766, 0.24996082, 1.2248286, -0.55010766, 0.5999804, 0.9247993, -0.65, 0.4877398, 0.8798698, -0.65, 0.42571455, 0.96074283, 0.65, 0.64991677, 0.44779754, 0.44996083, 0.9499999, 0.17497551, -0.17509788, 0.049936373, 1.275, -0.55010766, 0.049936373, 1.2248286, -0.6207322, 0.049936373, 1.1956245, -0.65, 0.049936373, 1.1249853, -0.1250881, 0, -1.275, 0.17497063, 0.049936373, -1.275, 0.5499804, 0.049936373, -1.2250783, 0.6206049, 0.24996082, -1.1958741, 0.5499804, 0.4499853, -1.2250783, 0.65, 0.42571455, -0.91082126, -0.17509788, 0.12498041, 1.275, -0.65, 0.24996082, 1.1249853, -0.65, 0.64991677, 0.44779754, -0.65, 0.5267032, 0.78576744, -0.45008808, 0.9499999, 0.17497551, 0.65, 0.64991677, 0.34770453, 0.44996083, 0.9499999, -0.52517617, -0.65, 0.049936373, -1.1252348, -0.6207322, 0.049936373, -1.1958741, -0.55010766, 0.049936373, -1.2250783, -0.17509788, 0.049936373, -1.275, 0.17497063, 0.12498041, -1.275, 0.12496084, 0.17491679, -1.275, -0.55010766, 0.4499853, -1.2250783, 0.5499804, 0.64991677, -0.82520556, 0.65, 0.4877398, -0.8301977, -0.65, 0.64991677, 0.34770453, -0.45008808, 0.9499999, -0.52517617, 0.65, 0.53990793, -0.6350039, 0.65, 0.5267032, -0.7360953, -0.65, 0.24996082, -1.1252348, -0.6207322, 0.24996082, -1.1958741, -0.17509788, 0.12498041, -1.275, -0.1250881, 0.17491679, -1.275, -0.65, 0.42571455, -0.91082126, -0.65, 0.4877398, -0.8301977, -0.55010766, 0.64991677, -0.82520556, -0.65, 0.53990793, -0.6350039, -0.65, 0.5267032, -0.7360953)
 
-[sub_resource type="Gradient" id="Gradient_hcdi7"]
-offsets = PackedFloat32Array(0, 0.026845638)
-colors = PackedColorArray(0, 0, 0, 0.87058824, 0, 0, 0, 0.28627452)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yi0kw"]
-gradient = SubResource("Gradient_hcdi7")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wofr7"]
-gravity = Vector3(0, 0, 0)
-color_ramp = SubResource("GradientTexture1D_yi0kw")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xv7xt"]
-transparency = 1
-vertex_color_use_as_albedo = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_g5cig"]
-material = SubResource("StandardMaterial3D_xv7xt")
-size = Vector2(0.1, 0.3)
-orientation = 1
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5cig"]
 albedo_color = Color(0, 0, 0, 1)
 
@@ -77,7 +56,7 @@ font_size = 10
 uppercase = true
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound", "PlayerName3D")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -87,11 +66,11 @@ continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
 script = ExtResource("1_micox")
-OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
 HeadLight = NodePath("Headlights")
+CarCommon = NodePath("CarCommon")
+Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
-SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 600
 MaxSpeed = 30
 BrakingStrengthMultiplier = 0.3
@@ -102,10 +81,8 @@ UnslipThreshold = 0.8
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")
-EngineSound = NodePath("EngineSoundPlayer")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
-PlayerName3D = NodePath("PlayerName3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -129,6 +106,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35000002, 0.37428573, 0.68
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, 0.47616428)
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.085, 0, 0)
@@ -137,6 +115,7 @@ remote_path = NodePath("../../sedan-sports/wheel-front-left")
 [node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.262, 0.476)
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)
@@ -147,6 +126,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, -0.45746768
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.085, 0, 0)
@@ -157,55 +137,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, -0.4574676
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.085, 0, 0)
 remote_path = NodePath("../../sedan-sports/wheel-back-right")
 
-[node name="SkidMarks" type="Node3D" parent="."]
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="GPUParticles3D4" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="OrbitCamera" parent="." instance=ExtResource("6_xv7xt")]
-
-[node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("6_g5cig")
-bus = &"enginesounds"
-playback_type = 1
+[node name="CarCommon" parent="." instance=ExtResource("8_glvfi")]
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.7072577, 0.25065678)
@@ -213,10 +151,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="Headlights" parent="." instance=ExtResource("7_g5cig")]
 transform = Transform3D(-1, 2.546744e-08, -1.2514288e-07, -4.8919077e-08, 0.82878387, 0.5595691, 1.1796716e-07, 0.5595691, -0.82878387, 0, 0.46993336, 0.8842214)
 
-[node name="PlayerName3D" type="MeshInstance3D" parent="."]
+[node name="Nameplate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.17, -0.91048336)
 mesh = SubResource("TextMesh_glvfi")
 
 [editable path="sedan-sports"]
 [editable path="WheelFL"]
-[editable path="WheelFR"]

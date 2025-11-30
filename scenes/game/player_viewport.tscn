@@ -1,0 +1,173 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1yh8684bxiy8"]
+
+[ext_resource type="Theme" uid="uid://cqn7x347w3gke" path="res://scenes/game/hud_theme.tres" id="1_7nque"]
+[ext_resource type="Script" uid="uid://bqo10ua034t21" path="res://scripts/PlayerViewport.cs" id="1_hc2ln"]
+[ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="2_hc2ln"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_a7dvw"]
+events = [SubResource("InputEventAction_vtaks")]
+
+[node name="PlayerViewport" type="SubViewport" node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "PbLabel", "RaceUi", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "Camera")]
+handle_input_locally = false
+audio_listener_enable_3d = true
+render_target_update_mode = 4
+script = ExtResource("1_hc2ln")
+CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
+FinishPanel = NodePath("RaceUI/FinishPanel")
+FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")
+LapsLabel = NodePath("RaceUI/LapsLabel")
+PbLabel = NodePath("RaceUI/PersonalBest")
+RaceUi = NodePath("RaceUI")
+SpeedLabel = NodePath("RaceUI/SpeedLabel")
+StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
+TimeLabel = NodePath("RaceUI/TimeLabel")
+TrackInfoLabel = NodePath("RaceUI/TrackInfo")
+Camera = NodePath("Camera")
+
+[node name="RaceUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7nque")
+
+[node name="TimeLabel" type="Label" parent="RaceUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -248.0
+offset_top = -132.0
+offset_right = 254.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 96
+text = "00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SpeedLabel" type="Label" parent="RaceUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -168.0
+offset_right = 264.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 96
+text = "0"
+vertical_alignment = 2
+
+[node name="TrackInfo" type="Label" parent="RaceUI"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 1336.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 28
+text = "TrackName"
+
+[node name="PersonalBest" type="Label" parent="RaceUI"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 36.0
+offset_right = 1336.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 48
+text = "PB: "
+
+[node name="StartTimerLabel" type="Label" parent="RaceUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -265.75
+offset_right = 230.0
+offset_bottom = 265.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "3
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckPointLabel" type="Label" parent="RaceUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -160.0
+offset_right = 39.0
+offset_bottom = -101.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "0/0"
+vertical_alignment = 1
+
+[node name="LapsLabel" type="Label" parent="RaceUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -224.0
+offset_right = -16.0
+offset_bottom = 67.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Laps: 0/0"
+horizontal_alignment = 2
+
+[node name="FinishPanel" type="PanelContainer" parent="RaceUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -378.0
+offset_top = -264.0
+offset_right = 378.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hc2ln")
+
+[node name="MarginContainer" type="MarginContainer" parent="RaceUI/FinishPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RaceUI/FinishPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FinishTimeLabel" type="Label" parent="RaceUI/FinishPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Race Time: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="RaceUI/FinishPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_a7dvw")
+text = "Ok"
+
+[node name="Camera" type="Camera3D" parent="."]
+top_level = true
+doppler_tracking = 2
+current = true
+fov = 80.0

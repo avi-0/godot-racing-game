@@ -1,12 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://lejlxkwbedup"]
+[gd_scene load_steps=18 format=3 uid="uid://lejlxkwbedup"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_denii"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_sw6ji"]
-[ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/CarWheel.cs" id="3_sw6ji"]
 [ext_resource type="PackedScene" uid="uid://cabfsl4hd2o5y" path="res://assets/kenney/carkit/taxi.glb" id="4_sw6ji"]
 [ext_resource type="Curve" uid="uid://cxhyv7al6iqul" path="res://scenes/cars_extras/curves/taxi_rear.tres" id="4_vwi5m"]
-[ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="5_denii"]
-[ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="5_lce11"]
+[ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="5_0wjsq"]
+[ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="6_sw6ji"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="8_0wjsq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
@@ -56,28 +55,6 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_denii"]
 points = PackedVector3Array(0.75, 0.64989233, 0.5477927, 0.54987276, 0.64989233, 1.2748629, 0.649863, 0.24988742, 1.2247945, 0.75, 0.5499902, 0.5477927, 0.75, 0.64989233, 0.44765568, 0.4498825, 1.1499314, 0.2107724, -0.55001956, 0.64989233, 1.2748629, 0.124951065, 0.17496084, 1.3747307, 0.54987276, 0.24988742, 1.3249315, 0.6206441, 0.24988742, 1.2955903, 0.04992169, 1.35, 0.07483363, 0.649863, 0.049951058, 1.2247945, 0.75, 0.5499902, 0.44765568, 0.649863, 0.24988742, -1.2250636, 0.649863, 0.42564115, -1.0107918, 0.649863, 0.4877496, -0.9300361, 0.649863, 0.5266004, -0.8360903, 0.4498825, 1.1499314, -0.57121176, -0.75, 0.64989233, 0.5477927, -0.6500098, 0.24988742, 1.2247945, -0.6207909, 0.24988742, 1.2955903, -0.55001956, 0.24988742, 1.3249315, -0.12509787, 0.17496084, 1.3747307, -0.050068498, 1.35, 0.07483363, -0.45002937, 1.1499314, 0.2107724, 0.17487276, 0.12487764, 1.3747307, 0.54987276, 0.049951058, 1.3249315, 0.6206441, 0.049951058, 1.2955903, 0.04992169, 1.35, -0.425044, 0.124951065, 0, 1.3747307, 0.649863, 0.049951058, -1.2250636, 0.6206441, 0.24988742, -1.2958593, 0.54987276, 0.5499902, -1.3252006, 0.45986688, 1.0999804, -0.6452378, -0.75, 0.64989233, 0.44765568, -0.75, 0.5499902, 0.5477927, -0.6500098, 0.049951058, 1.2247945, -0.6207909, 0.049951058, 1.2955903, -0.55001956, 0.049951058, 1.3249315, -0.17501956, 0.12487764, 1.3747307, -0.050068498, 1.35, -0.425044, -0.45002937, 1.1499314, -0.57121176, 0.17487276, 0.049951058, 1.3747307, -0.12509787, 0, 1.3747307, 0.124951065, 0, -1.3749999, 0.6206441, 0.049951058, -1.2958593, 0.54987276, 0.049951058, -1.3252006, 0.17487276, 0.12487764, -1.3749999, 0.124951065, 0.17496084, -1.3749999, -0.55001956, 0.5499902, -1.3252006, -0.75, 0.5499902, 0.44765568, -0.6500098, 0.5266004, -0.8360903, -0.6500098, 0.4877496, -0.9300361, -0.6500098, 0.42564115, -1.0107918, -0.6500098, 0.24988742, -1.2250636, -0.6500098, 0.049951058, -1.2250636, -0.17501956, 0.049951058, 1.3747307, -0.46001372, 1.0999804, -0.6452378, -0.12509787, 0, -1.3749999, 0.17487276, 0.049951058, -1.3749999, -0.12509787, 0.17496084, -1.3749999, -0.17501956, 0.12487764, -1.3749999, -0.55001956, 0.049951058, -1.3252006, -0.6207909, 0.24988742, -1.2958593, -0.6207909, 0.049951058, -1.2958593, -0.17501956, 0.049951058, -1.3749999)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_sw6ji"]
-radius = 0.21
-
-[sub_resource type="Gradient" id="Gradient_hcdi7"]
-colors = PackedColorArray(0, 0, 0, 0.87058824, 0, 0, 0, 0.28627452)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yi0kw"]
-gradient = SubResource("Gradient_hcdi7")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wofr7"]
-gravity = Vector3(0, 0, 0)
-color_ramp = SubResource("GradientTexture1D_yi0kw")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xv7xt"]
-transparency = 1
-vertex_color_use_as_albedo = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_g5cig"]
-material = SubResource("StandardMaterial3D_xv7xt")
-size = Vector2(0.1, 0.3)
-orientation = 1
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wjsq"]
 albedo_color = Color(0, 0, 0, 1)
 
@@ -88,7 +65,7 @@ font_size = 10
 uppercase = true
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("OrbitCamera", "FrontCamera", "HeadLight", "Wheels", "SkidMarks", "EngineSound", "PlayerName3D")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
 collision_layer = 2
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -98,11 +75,11 @@ continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
 script = ExtResource("1_denii")
-OrbitCamera = NodePath("OrbitCamera")
 FrontCamera = NodePath("FrontCamera")
 HeadLight = NodePath("Headlights")
+CarCommon = NodePath("CarCommon")
+Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
-SkidMarks = [NodePath("SkidMarks/GPUParticles3D"), NodePath("SkidMarks/GPUParticles3D2"), NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 Acceleration = 360
 MaxSpeed = 25
 TireTurnSpeed = 1.0
@@ -113,10 +90,8 @@ UnslipThreshold = 0.4
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_vwi5m")
-EngineSound = NodePath("EngineSoundPlayer")
 FrontWheelConfig = SubResource("Resource_lce11")
 RearWheelConfig = SubResource("Resource_lml1i")
-PlayerName3D = NodePath("PlayerName3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -126,7 +101,7 @@ shape = SubResource("ConvexPolygonShape3D_denii")
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 
 [node name="wheel-front-right" parent="taxi" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33571434, 0.22033148, 0.7572232)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3357143, 0.21999998, 0.7571429)
 
 [node name="wheel-front-left" parent="taxi" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33500704, 0.22033148, 0.7572232)
@@ -137,98 +112,47 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33571434, 0.22033148, -0.7
 [node name="wheel-back-left" parent="taxi" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33500704, 0.22033148, -0.76246995)
 
-[node name="WheelFL" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
+[node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, 0.47616428)
-shape = SubResource("SphereShape3D_sw6ji")
-target_position = Vector3(0, 0, 0)
-script = ExtResource("3_sw6ji")
-IsFrontWheel = true
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.09549509, -0.107789755, 0.053891957)
 remote_path = NodePath("../../taxi/wheel-front-left")
 
-[node name="WheelFR" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, 0.47616428)
-shape = SubResource("SphereShape3D_sw6ji")
-target_position = Vector3(0, 0, 0)
-script = ExtResource("3_sw6ji")
-IsFrontWheel = true
+[node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.262, 0.476)
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.094999984, -0.107789755, 0.053891957)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.095, -0.108, 0.054)
 remote_path = NodePath("../../taxi/wheel-front-right")
 
-[node name="WheelBL" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
+[node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, -0.45746768)
-shape = SubResource("SphereShape3D_sw6ji")
-target_position = Vector3(0, 0, 0)
-script = ExtResource("3_sw6ji")
+IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.09549509, -0.107789755, -0.07626128)
 remote_path = NodePath("../../taxi/wheel-back-left")
 
-[node name="WheelBR" type="ShapeCast3D" parent="." node_paths=PackedStringArray("WheelModel")]
+[node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, -0.45746768)
-shape = SubResource("SphereShape3D_sw6ji")
-target_position = Vector3(0, 0, 0)
-script = ExtResource("3_sw6ji")
+IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.094999984, -0.107789755, -0.07626128)
 remote_path = NodePath("../../taxi/wheel-back-right")
 
-[node name="SkidMarks" type="Node3D" parent="."]
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="GPUParticles3D4" type="GPUParticles3D" parent="SkidMarks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.034647346)
-emitting = false
-amount = 150
-lifetime = 1.5
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_wofr7")
-draw_pass_1 = SubResource("QuadMesh_g5cig")
-
-[node name="OrbitCamera" parent="." instance=ExtResource("5_lce11")]
-
-[node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_denii")
-bus = &"enginesounds"
-playback_type = 1
+[node name="CarCommon" parent="." instance=ExtResource("6_sw6ji")]
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.742467, 0.44939327)
@@ -236,7 +160,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="Headlights" parent="." instance=ExtResource("8_0wjsq")]
 transform = Transform3D(-1, 2.546744e-08, -1.2514288e-07, -4.8919077e-08, 0.82878387, 0.5595691, 1.1796716e-07, 0.5595691, -0.82878387, 0, 0.46993336, 0.8842214)
 
-[node name="PlayerName3D" type="MeshInstance3D" parent="."]
+[node name="Nameplate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.17, -0.98019916)
 mesh = SubResource("TextMesh_lce11")
 

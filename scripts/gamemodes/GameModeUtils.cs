@@ -15,42 +15,42 @@ public class GameModeUtils
 
 	public void UpdateLocalRaceTime(TimeSpan raceTime)
 	{
-		GameManager.Singleton.TimeLabel.Text =
+		GameManager.Singleton.PlayerViewport.TimeLabel.Text =
 			raceTime.ToString("mm") + ":" + raceTime.ToString("ss") + "." + raceTime.ToString("fff");
 	}
 
 	public void UpdateLocalPb(TimeSpan newPb)
 	{
-		GameManager.Singleton.PbLabel.Text =
+		GameManager.Singleton.PlayerViewport.PbLabel.Text =
 			"PB: " + newPb.ToString("mm") + ":" + newPb.ToString("ss") + "." + newPb.ToString("fff");
 	}
 
 	public void OpenFinishWindow(TimeSpan finishTime, bool isPb, bool isEditor)
 	{
-		GameManager.Singleton.FinishTimeLabel.Text = "Race Time: " + finishTime.ToString("mm") + ":" +
-		                                             finishTime.ToString("ss") + "." + finishTime.ToString("fff");
+		GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text = "Race Time: " + finishTime.ToString("mm") + ":" +
+		                                                            finishTime.ToString("ss") + "." + finishTime.ToString("fff");
 		if (isPb)
 		{
 			if (!isEditor)
-				GameManager.Singleton.FinishTimeLabel.Text += "\nPersonal Best!!!";
+				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nPersonal Best!!!";
 			else
-				GameManager.Singleton.FinishTimeLabel.Text += "\nNew Author Time!!!";
+				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nNew Author Time!!!";
 		}
 
 		if (!isEditor)
 		{
 			var at = GameManager.Singleton.Track.Options.AuthorTime;
 			if (finishTime.TotalMilliseconds <= at)
-				GameManager.Singleton.FinishTimeLabel.Text += "\nDiamond Medal!!!!";
+				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nDiamond Medal!!!!";
 			else if (finishTime.TotalMilliseconds <= GetGoldFromAt(at))
-				GameManager.Singleton.FinishTimeLabel.Text += "\nGold Medal!!!";
+				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nGold Medal!!!";
 			else if (finishTime.TotalMilliseconds <= GetSilverFromAt(at))
-				GameManager.Singleton.FinishTimeLabel.Text += "\nSilver Medal!!";
+				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nSilver Medal!!";
 			else if (finishTime.TotalMilliseconds <= GetBronzeFromAt(at))
-				GameManager.Singleton.FinishTimeLabel.Text += "\nBronze Medal!";
+				GameManager.Singleton.PlayerViewport.FinishTimeLabel.Text += "\nBronze Medal!";
 		}
 
-		GameManager.Singleton.FinishPanel.Show();
+		GameManager.Singleton.PlayerViewport.FinishPanel.Show();
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
@@ -71,42 +71,42 @@ public class GameModeUtils
 
 		if (time > 0)
 		{
-			GameManager.Singleton.StartTimerLabel.Show();
-			GameManager.Singleton.StartTimerLabel.Text = time.ToString();
+			GameManager.Singleton.PlayerViewport.StartTimerLabel.Show();
+			GameManager.Singleton.PlayerViewport.StartTimerLabel.Text = time.ToString();
 		}
 		else
 		{
-			GameManager.Singleton.StartTimerLabel.Hide();
+			GameManager.Singleton.PlayerViewport.StartTimerLabel.Hide();
 		}
 	}
 
 	public void SetCheckPointCount(int current, int total)
 	{
 		if (total == 0)
-			GameManager.Singleton.CheckPointLabel.Text = "";
+			GameManager.Singleton.PlayerViewport.CheckPointLabel.Text = "";
 		else
-			GameManager.Singleton.CheckPointLabel.Text = current + "/" + total;
+			GameManager.Singleton.PlayerViewport.CheckPointLabel.Text = current + "/" + total;
 	}
 
 	public void SetLapsCount(int current, int total)
 	{
 		if (total == 0)
-			GameManager.Singleton.LapsLabel.Text = "";
+			GameManager.Singleton.PlayerViewport.LapsLabel.Text = "";
 		else
-			GameManager.Singleton.LapsLabel.Text = $"Lap {current + 1}/{total}";
+			GameManager.Singleton.PlayerViewport.LapsLabel.Text = $"Lap {current + 1}/{total}";
 	}
 
 	public void SetTrackInfo(string trackName, string authorName)
 	{
 		if (trackName != "")
-			GameManager.Singleton.TrackInfoLabel.Text = trackName + " by " + authorName;
+			GameManager.Singleton.PlayerViewport.TrackInfoLabel.Text = trackName + " by " + authorName;
 		else
-			GameManager.Singleton.TrackInfoLabel.Text = "";
+			GameManager.Singleton.PlayerViewport.TrackInfoLabel.Text = "";
 	}
 
 	public void UnloadLocalStats()
 	{
-		GameManager.Singleton.PbLabel.Text = "PB: ";
+		GameManager.Singleton.PlayerViewport.PbLabel.Text = "PB: ";
 		UpdateLocalRaceTime(TimeSpan.Zero);
 		SetStartTimer(0, false);
 		SetCheckPointCount(0, 0);

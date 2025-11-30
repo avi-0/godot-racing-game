@@ -14,6 +14,7 @@ public partial class OrbitCamera : Node3D
 
 	public float Pitch
 	{
+		get => CameraStickBase.Rotation.X;
 		set =>
 			CameraStickBase.Rotation = new Vector3(
 				value,
@@ -23,6 +24,7 @@ public partial class OrbitCamera : Node3D
 
 	public float Yaw
 	{
+		get => CameraStickBase.Rotation.Y;
 		set =>
 			CameraStickBase.Rotation = new Vector3(
 				CameraStickBase.Rotation.X,
