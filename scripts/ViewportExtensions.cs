@@ -7,6 +7,7 @@ public static class ViewportExtensions
 	public static void MatchViewport(this Viewport viewport, Viewport baseViewport, bool aa = true)
 	{
 		viewport.Scaling3DScale = baseViewport.Scaling3DScale;
+		viewport.Scaling3DMode = baseViewport.Scaling3DMode;
 
 		if (aa)
 		{

@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageContainer", "PlayerNameText")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +28,8 @@ MainMenuContainer = NodePath("MainMenuContainer")
 GarageWindow = NodePath("GarageWindow")
 GarageViewportContainer = NodePath("GarageViewportContainer")
 GarageViewport = NodePath("GarageViewportContainer/GarageViewport")
+GarageNode = NodePath("GarageViewportContainer/GarageViewport/GarageNode")
+GarageCameraBase = NodePath("GarageViewportContainer/GarageViewport/CameraBase")
 GarageContainer = NodePath("GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 PlayerNameText = NodePath("GarageWindow/PlayerNameLineEdit")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
@@ -46,18 +48,34 @@ handle_input_locally = false
 size = Vector2i(1921, 1080)
 render_target_update_mode = 4
 
+[node name="CameraBase" type="Node3D" parent="GarageViewportContainer/GarageViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="GarageViewportContainer/GarageViewport/CameraBase"]
+transform = Transform3D(0.33630645, -0.32587957, 0.8835726, -1.3893482e-08, 0.9382215, 0.3460352, -0.9417527, -0.11637389, 0.3155299, 1.66627, 1.5004501, 2.4788918)
+current = true
+fov = 80.0
+
+[node name="GarageNode" type="Node3D" parent="GarageViewportContainer/GarageViewport"]
+
 [node name="MainMenuContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = -1
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_right = 526.0
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="MainMenuContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="TextureRect" type="TextureRect" parent="MainMenuContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 texture = ExtResource("3_uqeha")
-expand_mode = 3
+expand_mode = 2
 stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenuContainer"]

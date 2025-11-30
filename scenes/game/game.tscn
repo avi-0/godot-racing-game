@@ -67,7 +67,7 @@ RaceStartSound = SubResource("Resource_uyinl")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("MusicPlayer", "Track", "SettingsMenu", "RaceUi", "PauseMenu", "PlayerViewport")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("MusicPlayer", "Track", "SettingsMenu", "RaceUi", "PauseMenu", "PlayerViewport", "MainMenu")]
 script = ExtResource("3_vaxfo")
 CarScene = ExtResource("8_3xj4h")
 MusicPlayer = NodePath("MusicPlayer")
@@ -76,6 +76,7 @@ SettingsMenu = NodePath("../SettingsMenu")
 RaceUi = NodePath("PlayerViewportContainer")
 PauseMenu = NodePath("../PauseMenu")
 PlayerViewport = NodePath("PlayerViewportContainer/PlayerViewport")
+MainMenu = NodePath("../MainMenu")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("9_3xj4h")

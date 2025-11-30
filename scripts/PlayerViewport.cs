@@ -44,10 +44,15 @@ public partial class PlayerViewport : SubViewport
 			return null;
 		}
 	}
+	
+
+	private void OnViewportSettingsChanged()
+	{
+		this.MatchViewport(GameManager.Singleton.RootViewport);
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		GD.Print($"{Active} {Car}");
 		if (!Active || Car == null)
 			return;
 		

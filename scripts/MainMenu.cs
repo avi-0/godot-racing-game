@@ -19,6 +19,8 @@ public partial class MainMenu : Control
 	[Export] public Control GarageWindow;
 	[Export] public SubViewportContainer GarageViewportContainer;
 	[Export] public SubViewport GarageViewport;
+	[Export] public Node3D GarageNode;
+	[Export] public Node3D GarageCameraBase;
 	[Export] public Container GarageContainer;
 	[Export] public LineEdit PlayerNameText;
 
@@ -35,7 +37,7 @@ public partial class MainMenu : Control
 		{
 			Visible = value;
 			GarageViewportContainer.Visible = value;
-			_loadedCar.Visible = value;
+			GarageNode.Visible = value;
 		}
 	}
 	
@@ -49,6 +51,11 @@ public partial class MainMenu : Control
 		LoadGarageCar(DefaultCarPath);
 		
 		PlayButton.CallDeferred("grab_focus");
+	}
+
+	private void OnViewportSettingsChanged()
+	{
+		GarageViewport.MatchViewport(GameManager.Singleton.RootViewport);
 	}
 
 	public void OnPlayButtonPressed()
@@ -108,34 +115,30 @@ public partial class MainMenu : Control
 
 	private void LoadGarageCar(string path)
 	{
-		GarageViewport.DestroyAllChildren();
+		GarageNode.DestroyAllChildren();
 		_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
-		GarageViewport.AddChild(_loadedCar);
+		GarageNode.AddChild(_loadedCar);
 		
 		UpdateGarageCar();
-		
-		GarageViewport.MatchViewport(GetViewport());
 	}
 
 	private void UpdateGarageCar()
 	{
 		_loadedCar.GlobalTransform = GameManager.Singleton.GetStartPoint();
 		_loadedCar.ResetPhysicsInterpolation();
-		
-		_loadedCar.OrbitCamera.Yaw = _loadedCar.Rotation.Y + float.DegreesToRadians(225);
-		_loadedCar.OrbitCamera.Pitch = float.DegreesToRadians(30);
-		_loadedCar.OrbitCamera.Camera.SetFov(80);
+
+		GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
 	}
 
 	public async GDTaskVoid OnSettingsButtonPressed()
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
+		MainMenuContainer.Visible = false;
 		
 		GameManager.Singleton.SettingsMenu.Show();
 		await GDTask.ToSignal(GameManager.Singleton.SettingsMenu, CanvasItem.SignalName.Hidden);
-		
-		GarageViewport.MatchViewport(GetViewport());
-		
+
+		MainMenuContainer.Visible = true;
 		_hadFocus.GrabFocus();
 	}
 

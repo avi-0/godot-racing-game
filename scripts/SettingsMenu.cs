@@ -55,6 +55,11 @@ public partial class SettingsMenu : Control
 	{
 		SoundSlider.DragEnded += _ => OnSoundSettingChanged();
 		MusicSlider.DragEnded += _ => OnSoundSettingChanged();
+		TDrs.DragEnded += _ => OnGraphicsSettingChanged();
+		foreach (var optionButton in new List<OptionButton> {ScaleMode, WinMode, Aa, Vsync, ShadowFilterQuality, ShadowAtlasSize})
+		{
+			optionButton.ItemSelected += _ => OnGraphicsSettingChanged();
+		}
 
 		ResetGraphicsButton.Pressed += () =>
 		{
@@ -158,6 +163,18 @@ public partial class SettingsMenu : Control
 
 	private void ApplySettings()
 	{
+		ApplyGraphicsSettings();
+		ApplySoundSettings();
+	}
+
+	private void ApplySoundSettings()
+	{
+		AudioServer.SetBusVolumeDb(1, (float)Mathf.LinearToDb(_settings.Sound.SfxLevel * 0.01f));
+		AudioServer.SetBusVolumeDb(2, (float)Mathf.LinearToDb(_settings.Sound.MusicLevel * 0.01f));
+	}
+	
+	private void ApplyGraphicsSettings()
+	{
 		var viewport = GetViewport();
 		var window = GetWindow();
 
@@ -201,13 +218,7 @@ public partial class SettingsMenu : Control
 		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)_settings.Graphics.ShadowFilterQuality);
 		GameManager.Singleton.ApplyShadowSettings();
 
-		ApplySoundSettings();
-	}
-
-	private void ApplySoundSettings()
-	{
-		AudioServer.SetBusVolumeDb(1, (float)Mathf.LinearToDb(_settings.Sound.SfxLevel * 0.01f));
-		AudioServer.SetBusVolumeDb(2, (float)Mathf.LinearToDb(_settings.Sound.MusicLevel * 0.01f));
+		GameManager.Singleton.NotifyViewportSettingsChanged();
 	}
 
 	private void SaveSettings()
@@ -221,6 +232,12 @@ public partial class SettingsMenu : Control
 		ApplySettings();
 		SaveSettings();
 		Hide();
+	}
+
+	private void OnGraphicsSettingChanged()
+	{
+		UpdateSettingsFromUi();
+		ApplyGraphicsSettings();
 	}
 
 	private void OnSoundSettingChanged()

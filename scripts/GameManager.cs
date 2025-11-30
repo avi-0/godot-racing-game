@@ -22,6 +22,7 @@ public partial class GameManager : Node
 	[Export] public Control RaceUi;
 	[Export] public Control PauseMenu;
 	[Export] public PlayerViewport PlayerViewport;
+	[Export] public MainMenu MainMenu;
 	
 	[Signal]
 	public delegate void StoppedPlayingEventHandler();
@@ -36,14 +37,16 @@ public partial class GameManager : Node
 	private Car _localCar = null;
 	private int _localPlayerId = -1;
 	public bool DirectionalShadowsEnabled = true;
-	
+
+	public Viewport RootViewport;
 
 	
 	
 	public override void _Ready()
 	{
 		Singleton = this;
-
+		
+		RootViewport = GetViewport();
 		GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
 
 		NewTrack();
@@ -113,7 +116,6 @@ public partial class GameManager : Node
 	public void SetGameUiVisiblity(bool visible)
 	{
 		RaceUi.Visible = visible;
-		PlayerViewport.MatchViewport(GetViewport());
 		PlayerViewport.Active = visible;
 		PlayerViewport.Car = _localCar;
 	}
@@ -226,5 +228,11 @@ public partial class GameManager : Node
 	public string GetLoadedTrackUid()
 	{
 		return Track.Options.Uid;
+	}
+
+	public void NotifyViewportSettingsChanged()
+	{
+		PlayerViewport.MatchViewport(RootViewport);
+		MainMenu.GarageViewport.MatchViewport(RootViewport);
 	}
 }
