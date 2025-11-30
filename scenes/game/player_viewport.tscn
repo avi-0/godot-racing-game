@@ -13,7 +13,6 @@ events = [SubResource("InputEventAction_vtaks")]
 [node name="PlayerViewport" type="SubViewport" node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "PbLabel", "RaceUi", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "Camera")]
 handle_input_locally = false
 audio_listener_enable_3d = true
-render_target_update_mode = 4
 script = ExtResource("1_hc2ln")
 CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
 FinishPanel = NodePath("RaceUI/FinishPanel")

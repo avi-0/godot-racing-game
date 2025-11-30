@@ -151,7 +151,8 @@ public partial class MainMenu : Control
 	public void OnTrackListBackButton()
 	{
 		TrackListPanel.Hide();
-		_hadFocus.GrabFocus();
+		if (_hadFocus != null)
+			_hadFocus.GrabFocus();
 	}
 
 	private async GDTaskVoid OpenEditor()

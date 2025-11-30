@@ -23,15 +23,15 @@ script = ExtResource("1_bqqt6")
 PlayButton = NodePath("MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton")
 SettingsButton = NodePath("MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
 TrackListPanel = NodePath("TrackListPanel")
-TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/MarginContainer/ScrollContainer/trackGC")
+TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer/trackGC")
 MainMenuContainer = NodePath("MainMenuContainer")
 GarageWindow = NodePath("GarageWindow")
 GarageViewportContainer = NodePath("GarageViewportContainer")
 GarageViewport = NodePath("GarageViewportContainer/GarageViewport")
 GarageNode = NodePath("GarageViewportContainer/GarageViewport/GarageNode")
 GarageCameraBase = NodePath("GarageViewportContainer/GarageViewport/CameraBase")
-GarageContainer = NodePath("GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
-PlayerNameText = NodePath("GarageWindow/PlayerNameLineEdit")
+GarageContainer = NodePath("GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer")
+PlayerNameText = NodePath("GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
 [node name="GarageViewportContainer" type="SubViewportContainer" parent="."]
@@ -144,18 +144,29 @@ grow_vertical = 2
 [node name="Panel" type="PanelContainer" parent="TrackListPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TrackListPanel/MarginContainer/Panel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="trackGC" type="GridContainer" parent="TrackListPanel/MarginContainer/Panel/MarginContainer/ScrollContainer"]
-clip_contents = true
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="trackGC" type="GridContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+
+[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -163,7 +174,6 @@ shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
 
 [node name="GarageWindow" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,45 +184,31 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 
-[node name="PanelContainer" type="PanelContainer" parent="GarageWindow"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 332.0
-offset_bottom = -32.0
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 1080.0
 
-[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GarageWindow/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/PanelContainer/MarginContainer"]
+[node name="PlayerSettingsPanel" type="PanelContainer" parent="GarageWindow/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GarageWindow/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="GarageWindow/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-shortcut = SubResource("Shortcut_wu84c")
-text = "Back"
 
-[node name="PlayerNameLineEdit" type="LineEdit" parent="GarageWindow"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -406.0
-offset_bottom = 91.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 64
+[node name="Label" type="Label" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player name"
+
+[node name="PlayerNameLineEdit" type="LineEdit" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Player"
 placeholder_text = "Player Name"
 max_length = 10
@@ -223,11 +219,40 @@ middle_mouse_paste_enabled = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
 
+[node name="BackButton" type="Button" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+shortcut = SubResource("Shortcut_wu84c")
+text = "Back"
+
+[node name="PanelContainer" type="PanelContainer" parent="GarageWindow/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
 [connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
 [connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
 [connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
-[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/MarginContainer/BackButton" to="." method="OnTrackListBackButton"]
-[connection signal="pressed" from="GarageWindow/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]
-[connection signal="text_changed" from="GarageWindow/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/VBoxContainer/MarginContainer/BackButton" to="." method="OnTrackListBackButton"]
+[connection signal="text_changed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]
+[connection signal="pressed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]

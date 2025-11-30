@@ -209,6 +209,7 @@ GridContainer/constants/h_separation = 32
 GridContainer/constants/v_separation = 32
 HBoxContainer/constants/separation = 12
 Label/font_sizes/font_size = 28
+LineEdit/font_sizes/font_size = 28
 MarginContainer/constants/margin_bottom = 24
 MarginContainer/constants/margin_left = 24
 MarginContainer/constants/margin_right = 24
