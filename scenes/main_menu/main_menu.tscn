@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://du74tb2gnkhxk" path="res://assets/mashinkilogo.png" id="3_uqeha"]
-[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/PixelPerfectSubViewportContainer.cs" id="3_wem23"]
+[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/CustomSubViewportContainer.cs" id="3_wem23"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
 action = &"ui_cancel"
@@ -35,15 +35,16 @@ GarageContainer = NodePath("GarageWindow/MarginContainer/HBoxContainer/PanelCont
 PlayerNameText = NodePath("GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
-[node name="GarageViewportContainer" type="SubViewportContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
+[node name="GarageViewportContainer" type="Container" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
+focus_mode = 1
 script = ExtResource("3_wem23")
+Stretch = true
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="GarageViewport" type="SubViewport" parent="GarageViewportContainer"]
 handle_input_locally = false
@@ -60,8 +61,7 @@ fov = 80.0
 [node name="GarageNode" type="Node3D" parent="GarageViewportContainer/GarageViewport"]
 
 [node name="MainMenuContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 0
 anchor_right = 0.5
 anchor_bottom = 1.0
 grow_vertical = 2
@@ -128,8 +128,7 @@ text = "Exit
 
 [node name="TrackListPanel" type="Control" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 15
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -177,8 +176,7 @@ text = "Back"
 
 [node name="GarageWindow" type="Control" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 15
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0

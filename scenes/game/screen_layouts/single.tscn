@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b1yh8684bxiy8" path="res://scenes/game/player_viewport.tscn" id="1_cxtvq"]
 [ext_resource type="Script" uid="uid://lx8jjvvs00lo" path="res://scripts/ScreenLayout.cs" id="1_pu5fa"]
-[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/PixelPerfectSubViewportContainer.cs" id="2_ca3p8"]
+[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/CustomSubViewportContainer.cs" id="2_ca3p8"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("PlayerViewports")]
 layout_mode = 3
@@ -14,15 +14,17 @@ grow_vertical = 2
 script = ExtResource("1_pu5fa")
 PlayerViewports = [NodePath("SingleplayerScreenLayout/PlayerViewport")]
 
-[node name="SingleplayerScreenLayout" type="SubViewportContainer" parent="."]
+[node name="SingleplayerScreenLayout" type="Container" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
+focus_mode = 1
 script = ExtResource("2_ca3p8")
+Stretch = true
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport" parent="SingleplayerScreenLayout" instance=ExtResource("1_cxtvq")]
 handle_input_locally = false

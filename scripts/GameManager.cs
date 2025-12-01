@@ -57,7 +57,7 @@ public partial class GameManager : Node
 		RootViewport.Disable3D = true;
 		GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
 		
-		SetScreenLayout(SplitScreen3HLayout);
+		SetScreenLayout(SplitScreen4Layout);
 
 		NewTrack();
 	}

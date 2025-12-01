@@ -17,7 +17,7 @@ public partial class MainMenu : Control
 	[Export] public GridContainer TrackContainer;
 	[Export] public Control MainMenuContainer;
 	[Export] public Control GarageWindow;
-	[Export] public SubViewportContainer GarageViewportContainer;
+	[Export] public CustomSubViewportContainer GarageViewportContainer;
 	[Export] public SubViewport GarageViewport;
 	[Export] public Node3D GarageNode;
 	[Export] public Node3D GarageCameraBase;

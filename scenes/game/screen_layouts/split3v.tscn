@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lx8jjvvs00lo" path="res://scripts/ScreenLayout.cs" id="1_2qbdx"]
 [ext_resource type="PackedScene" uid="uid://b1yh8684bxiy8" path="res://scenes/game/player_viewport.tscn" id="2_igok8"]
-[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/PixelPerfectSubViewportContainer.cs" id="2_srwpu"]
+[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/CustomSubViewportContainer.cs" id="2_srwpu"]
 
 [node name="HBoxContainer" type="HBoxContainer" node_paths=PackedStringArray("PlayerViewports")]
 anchors_preset = 15
@@ -14,12 +14,13 @@ theme_override_constants/separation = 0
 script = ExtResource("1_2qbdx")
 PlayerViewports = [NodePath("SubViewportContainer/PlayerViewport1"), NodePath("VBoxContainer/SubViewportContainer2/PlayerViewport2"), NodePath("VBoxContainer/SubViewportContainer3/PlayerViewport3")]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="Container" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_srwpu")
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport1" parent="SubViewportContainer" instance=ExtResource("2_igok8")]
 handle_input_locally = false
@@ -31,24 +32,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="VBoxContainer"]
+[node name="SubViewportContainer2" type="Container" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_srwpu")
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport2" parent="VBoxContainer/SubViewportContainer2" instance=ExtResource("2_igok8")]
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
-[node name="SubViewportContainer3" type="SubViewportContainer" parent="VBoxContainer"]
+[node name="SubViewportContainer3" type="Container" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_srwpu")
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport3" parent="VBoxContainer/SubViewportContainer3" instance=ExtResource("2_igok8")]
 handle_input_locally = false

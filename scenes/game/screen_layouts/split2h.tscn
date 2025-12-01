@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://uyuauf375jpc"]
 
 [ext_resource type="Script" uid="uid://lx8jjvvs00lo" path="res://scripts/ScreenLayout.cs" id="1_n32b7"]
-[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/PixelPerfectSubViewportContainer.cs" id="2_h03c1"]
+[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/CustomSubViewportContainer.cs" id="2_h03c1"]
 [ext_resource type="PackedScene" uid="uid://b1yh8684bxiy8" path="res://scenes/game/player_viewport.tscn" id="2_m2qjh"]
 
 [node name="GridContainer" type="VBoxContainer" node_paths=PackedStringArray("PlayerViewports")]
@@ -14,24 +14,28 @@ theme_override_constants/separation = 0
 script = ExtResource("1_n32b7")
 PlayerViewports = [NodePath("SubViewportContainer/PlayerViewport1"), NodePath("SubViewportContainer2/PlayerViewport2")]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="Container" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_h03c1")
+Stretch = true
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport1" parent="SubViewportContainer" instance=ExtResource("2_m2qjh")]
 handle_input_locally = false
 size = Vector2i(1920, 540)
 render_target_update_mode = 4
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer2" type="Container" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_h03c1")
+Stretch = true
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport2" parent="SubViewportContainer2" instance=ExtResource("2_m2qjh")]
 handle_input_locally = false

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lx8jjvvs00lo" path="res://scripts/ScreenLayout.cs" id="1_e4rp4"]
 [ext_resource type="PackedScene" uid="uid://b1yh8684bxiy8" path="res://scenes/game/player_viewport.tscn" id="1_o5rbc"]
-[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/PixelPerfectSubViewportContainer.cs" id="2_b7nrn"]
+[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/CustomSubViewportContainer.cs" id="2_b7nrn"]
 
 [node name="GridContainer" type="GridContainer" node_paths=PackedStringArray("PlayerViewports")]
 anchors_preset = 15
@@ -16,48 +16,52 @@ columns = 2
 script = ExtResource("1_e4rp4")
 PlayerViewports = [NodePath("SubViewportContainer/PlayerViewport1"), NodePath("SubViewportContainer2/PlayerViewport2"), NodePath("SubViewportContainer3/PlayerViewport3"), NodePath("SubViewportContainer4/PlayerViewport4")]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="Container" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_b7nrn")
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport1" parent="SubViewportContainer" instance=ExtResource("1_o5rbc")]
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer2" type="Container" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_b7nrn")
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport2" parent="SubViewportContainer2" instance=ExtResource("1_o5rbc")]
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
-[node name="SubViewportContainer3" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer3" type="Container" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_b7nrn")
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport3" parent="SubViewportContainer3" instance=ExtResource("1_o5rbc")]
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
-[node name="SubViewportContainer4" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer4" type="Container" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
+focus_mode = 1
 script = ExtResource("2_b7nrn")
+metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport4" parent="SubViewportContainer4" instance=ExtResource("1_o5rbc")]
 handle_input_locally = false
