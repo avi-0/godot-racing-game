@@ -45,7 +45,21 @@ public partial class PlayerViewport : SubViewport
 			return null;
 		}
 	}
-	
+
+
+	public override void _Ready()
+	{
+		SizeChanged += OnSizeChanged;
+		OnSizeChanged();
+	}
+
+	private void OnSizeChanged()
+	{
+		var size = (Vector2) Size;
+		size *= Math.Max(1920f / size.X, 1080f / size.Y);
+		Size2DOverride = (Vector2I) size.Round();
+		Size2DOverrideStretch = true;
+	}
 
 	private void OnViewportSettingsChanged()
 	{

@@ -19,10 +19,16 @@ public partial class GameManager : Node
 	[Export] public AudioStreamPlayer MusicPlayer;
 	[Export] public Track Track;
 	[Export] public SettingsMenu SettingsMenu;
-	[Export] public Control RaceUi;
 	[Export] public Control PauseMenu;
-	[Export] public PlayerViewport PlayerViewport;
 	[Export] public MainMenu MainMenu;
+
+	[ExportCategory("Screen Layouts")]
+	[Export] public PackedScene SingleplayerScreenLayout;
+	[Export] public PackedScene SplitScreen2HLayout;
+	[Export] public PackedScene SplitScreen2VLayout;
+	[Export] public PackedScene SplitScreen3HLayout;
+	[Export] public PackedScene SplitScreen3VLayout;
+	[Export] public PackedScene SplitScreen4Layout;
 	
 	[Signal]
 	public delegate void StoppedPlayingEventHandler();
@@ -39,6 +45,7 @@ public partial class GameManager : Node
 	public bool DirectionalShadowsEnabled = true;
 
 	public Viewport RootViewport;
+	private ScreenLayout _screenLayout;
 
 	
 	
@@ -47,9 +54,31 @@ public partial class GameManager : Node
 		Singleton = this;
 		
 		RootViewport = GetViewport();
+		RootViewport.Disable3D = true;
 		GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
+		
+		SetScreenLayout(SplitScreen3HLayout);
 
 		NewTrack();
+	}
+
+	public void SetScreenLayout(PackedScene layoutScene)
+	{
+		if (_screenLayout != null)
+		{
+			RemoveChild(_screenLayout);
+			_screenLayout.QueueFree();
+		}
+
+		_screenLayout = layoutScene.Instantiate<ScreenLayout>();
+		AddChild(_screenLayout);
+		
+		foreach (var viewport in _screenLayout.PlayerViewports)
+		{
+			viewport.MatchViewport(RootViewport);
+		}
+		
+		SetViewportsActive(false);
 	}
 
 	public void SelectCarScene(string scenePath)
@@ -88,12 +117,12 @@ public partial class GameManager : Node
 		if (!MusicPlayer.IsPlaying())
 			MusicPlayer.Play();
 		
-		SetGameUiVisiblity(true);
+		SetViewportsActive(true);
 	}
 
 	public void Stop()
 	{
-		SetGameUiVisiblity(false);
+		SetViewportsActive(false);
 
 		if (_localCar != null)
 		{
@@ -113,11 +142,14 @@ public partial class GameManager : Node
 		MusicPlayer.Stop();
 	}
 
-	public void SetGameUiVisiblity(bool visible)
+	public void SetViewportsActive(bool visible)
 	{
-		RaceUi.Visible = visible;
-		PlayerViewport.Active = visible;
-		PlayerViewport.Car = _localCar;
+		_screenLayout.Visible = visible;
+		foreach (var viewport in _screenLayout.PlayerViewports)
+		{
+			viewport.Active = visible;
+			viewport.Car = _localCar;
+		}
 	}
 
 	public bool IsPlaying()
@@ -225,7 +257,10 @@ public partial class GameManager : Node
 
 	public void NotifyViewportSettingsChanged()
 	{
-		PlayerViewport.MatchViewport(RootViewport);
+		foreach (var viewport in _screenLayout.PlayerViewports)
+		{
+			viewport.MatchViewport(RootViewport);
+		}
 		MainMenu.GarageViewport.MatchViewport(RootViewport);
 	}
 }

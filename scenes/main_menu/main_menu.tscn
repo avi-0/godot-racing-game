@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=7 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://du74tb2gnkhxk" path="res://assets/mashinkilogo.png" id="3_uqeha"]
+[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/PixelPerfectSubViewportContainer.cs" id="3_wem23"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
 action = &"ui_cancel"
@@ -42,6 +43,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
+script = ExtResource("3_wem23")
 
 [node name="GarageViewport" type="SubViewport" parent="GarageViewportContainer"]
 handle_input_locally = false

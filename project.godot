@@ -54,6 +54,10 @@ finish_hitbox=""
 checkpoint_hitbox=""
 light_directional_shadow=""
 
+[gui]
+
+theme/default_font_generate_mipmaps=true
+
 [importer_defaults]
 
 texture={
