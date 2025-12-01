@@ -72,6 +72,8 @@ public partial class Car : RigidBody3D
 
 	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
 	public AudioStreamPlayer3D EngineSoundPlayer => CarCommon.EngineSoundPlayer;
+
+	private CarInputs _inputs = new();
 	
 	public override void _Ready()
 	{
@@ -125,24 +127,24 @@ public partial class Car : RigidBody3D
 		}
 	}
 
-	public override void _Process(double delta)
+	public void SetInputs(CarInputs inputs)
 	{
+		_inputs = inputs;
 	}
-	
-	public override void _UnhandledInput(InputEvent @event)
+
+	public void InputRestart()
 	{
-		if (!IsLocallyControlled)
-			return;
-		
-		if (@event.IsActionPressed(InputActionNames.Pause))
-			EmitSignalPauseRequested();
-		else if (@event.IsActionPressed(InputActionNames.Restart))
-			EmitSignalRestartRequested();
-		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
-		{
-			HeadLight.Visible = !HeadLight.Visible;
-			GetViewport().SetInputAsHandled();
-		}
+		EmitSignalRestartRequested();
+	}
+
+	public void InputPause()
+	{
+		EmitSignalPauseRequested();
+	}
+
+	public void InputToggleLights()
+	{
+		HeadLight.Visible = !HeadLight.Visible;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -152,13 +154,13 @@ public partial class Car : RigidBody3D
 		var velocity = GlobalBasis.Z.Dot(LinearVelocity);
 		if (velocity >= 0)
 		{
-			_isAccelerating = Input.GetActionStrength("game_forward") > 0;
-			_isBraking = Input.GetActionStrength("game_back") > 0;
+			_isAccelerating = _inputs.Forward > 0;
+			_isBraking = _inputs.Back > 0;
 		}
 		else
 		{
-			_isReversing = Input.GetActionStrength("game_back") > 0;
-			_isBraking = Input.GetActionStrength("game_forward") > 0;
+			_isReversing = _inputs.Back > 0;
+			_isBraking = _inputs.Forward > 0;
 		}
 
 		_hasCompressedWheel = false;
@@ -210,7 +212,7 @@ public partial class Car : RigidBody3D
 	private void ProcessEngineSound()
 	{
 		var engineSoundTarget = 0.5f;
-		if (Input.IsActionPressed(InputActionNames.Forward) || Input.IsActionPressed(InputActionNames.Back))
+		if (_inputs.Forward > 0 || _inputs.Back > 0)
 			engineSoundTarget = 1.0f;
 		
 		EngineSoundPlayer.VolumeDb = Mathf.LinearToDb(
@@ -277,9 +279,9 @@ public partial class Car : RigidBody3D
 		var carForwardDir = GlobalBasis.Z;
 		var velocity = carForwardDir.Dot(LinearVelocity);
 		wheel.WheelModel.RotateX((-velocity * (float)GetProcessDeltaTime()) / wheel.Config.WheelRadius);
-		
-		var forwardStrength = Input.GetActionStrength(InputActionNames.Forward);
-		var backStrength = -Input.GetActionStrength(InputActionNames.Back);
+
+		var forwardStrength = _inputs.Forward;
+		var backStrength = -_inputs.Back;
 		if (!AcceptsInputs)
 		{
 			forwardStrength = 0;
@@ -335,13 +337,13 @@ public partial class Car : RigidBody3D
 			_targetSteering = 0;
 			if (AcceptsInputs)
 			{
-					_targetSteering += Input.GetActionStrength(InputActionNames.Left);
-					_targetSteering -= Input.GetActionStrength(InputActionNames.Right);
-					
-					_targetSteering *= SpeedSteeringCurve.SampleBaked(
-						Mathf.Clamp(
-							Mathf.Abs(wheel.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
-							0, 1));
+				_targetSteering += _inputs.Left;
+				_targetSteering -= _inputs.Right;
+				
+				_targetSteering *= SpeedSteeringCurve.SampleBaked(
+					Mathf.Clamp(
+						Mathf.Abs(wheel.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
+						0, 1));
 			}
 			
 			if (_targetSteering != 0)

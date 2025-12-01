@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=8 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://du74tb2gnkhxk" path="res://assets/mashinkilogo.png" id="3_uqeha"]
 [ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/CustomSubViewportContainer.cs" id="3_wem23"]
+[ext_resource type="PackedScene" uid="uid://dosvoo7ovfhv0" path="res://scenes/main_menu/splitscreen_settings.tscn" id="5_wem23"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
 action = &"ui_cancel"
@@ -21,11 +22,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
-PlayButton = NodePath("MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton")
-SettingsButton = NodePath("MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
+PlayButton = NodePath("MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton")
+SettingsButton = NodePath("MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
 TrackListPanel = NodePath("TrackListPanel")
 TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer/trackGC")
-MainMenuContainer = NodePath("MainMenuContainer")
+MainMenuContainer = NodePath("MainMenu")
 GarageWindow = NodePath("GarageWindow")
 GarageViewportContainer = NodePath("GarageViewportContainer")
 GarageViewport = NodePath("GarageViewportContainer/GarageViewport")
@@ -43,7 +44,6 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 1
 script = ExtResource("3_wem23")
-Stretch = true
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="GarageViewport" type="SubViewport" parent="GarageViewportContainer"]
@@ -60,71 +60,104 @@ fov = 80.0
 
 [node name="GarageNode" type="Node3D" parent="GarageViewportContainer/GarageViewport"]
 
-[node name="MainMenuContainer" type="VBoxContainer" parent="."]
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="MainMenu"]
 layout_mode = 0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_right = 376.0
+offset_bottom = 794.0
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenuContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MainMenuContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 48
 theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
 
-[node name="TextureRect" type="TextureRect" parent="MainMenuContainer/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainMenu/MainMenuContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 texture = ExtResource("3_uqeha")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenuContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/MainMenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenuContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MainMenuContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Campaign"
 
-[node name="LoadButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LoadButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Play Local Map
 "
 
-[node name="GarageButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="GarageButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Garage
 "
 
-[node name="EditorButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="EditorButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Editor
 "
 
-[node name="SettingsButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Settings
 "
 
-[node name="ExitButton" type="Button" parent="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Exit
 "
+
+[node name="SplitscreenFoldable" type="FoldableContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -248.0
+offset_top = -297.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+folded = true
+title = "Splitscreen"
+title_alignment = 1
+title_position = 1
+
+[node name="SplitscreenSettings" parent="MainMenu/SplitscreenFoldable" instance=ExtResource("5_wem23")]
+visible = false
+layout_mode = 2
 
 [node name="TrackListPanel" type="Control" parent="."]
 visible = false
@@ -249,11 +282,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
-[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
-[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
-[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
-[connection signal="pressed" from="MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
+[connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
+[connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
+[connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
+[connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/VBoxContainer/MarginContainer/BackButton" to="." method="OnTrackListBackButton"]
 [connection signal="text_changed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]
 [connection signal="pressed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]

@@ -174,7 +174,9 @@ public partial class Editor : Control
 			Visible = value;
 
 			if (Visible)
+			{
 				EditorViewport.MatchViewport(GetViewport(), aa: false);
+			}
 
 			if (value)
 				CreateCursor();

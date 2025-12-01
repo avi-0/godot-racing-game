@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://dosvoo7ovfhv0"]
+
+[ext_resource type="Theme" uid="uid://bh8emd2rpkrv4" path="res://scenes/main_menu/splitscreen_buttons_theme.tres" id="1_65w23"]
+[ext_resource type="Script" uid="uid://dmi666a6qu287" path="res://scripts/input/SplitscreenSettings.cs" id="1_hgxec"]
+[ext_resource type="Texture2D" uid="uid://c64ru11a081wu" path="res://assets/icons/square.svg" id="2_hgxec"]
+[ext_resource type="Texture2D" uid="uid://budiwsp1nf4dh" path="res://assets/icons/grid2h.svg" id="3_08vmh"]
+[ext_resource type="Texture2D" uid="uid://cvwpobs6swww" path="res://assets/icons/grid2v.svg" id="4_wucvd"]
+[ext_resource type="Texture2D" uid="uid://1l0kxbsutvig" path="res://assets/icons/grid3h.svg" id="5_y81o3"]
+[ext_resource type="Texture2D" uid="uid://oo5jcpxhaaf" path="res://assets/icons/grid3v.svg" id="6_3eyl0"]
+[ext_resource type="Texture2D" uid="uid://csuwukvcson1q" path="res://assets/icons/grid4.svg" id="7_p5f2t"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_3ovsr"]
+
+[node name="SplitscreenSettings" type="VBoxContainer" node_paths=PackedStringArray("DevicesLabel", "JoinKeyboardButton", "LayoutSingleButton", "Layout2HButton", "Layout2VButton", "Layout3HButton", "Layout3VButton", "Layout4Button")]
+script = ExtResource("1_hgxec")
+DevicesLabel = NodePath("DevicesLabel")
+JoinKeyboardButton = NodePath("JoinKeyboardButton")
+LayoutSingleButton = NodePath("GridContainer/ButtonSingle")
+Layout2HButton = NodePath("GridContainer/Button2H")
+Layout2VButton = NodePath("GridContainer/Button2V")
+Layout3HButton = NodePath("GridContainer/Button3H")
+Layout3VButton = NodePath("GridContainer/Button3V")
+Layout4Button = NodePath("GridContainer/Button4")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_65w23")
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="ButtonSingle" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_3ovsr")
+icon = ExtResource("2_hgxec")
+flat = true
+icon_alignment = 1
+
+[node name="Button2H" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3ovsr")
+icon = ExtResource("3_08vmh")
+flat = true
+icon_alignment = 1
+
+[node name="Button2V" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3ovsr")
+icon = ExtResource("4_wucvd")
+flat = true
+icon_alignment = 1
+
+[node name="Button3H" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3ovsr")
+icon = ExtResource("5_y81o3")
+flat = true
+icon_alignment = 1
+
+[node name="Button3V" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3ovsr")
+icon = ExtResource("6_3eyl0")
+flat = true
+icon_alignment = 1
+
+[node name="Button4" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3ovsr")
+icon = ExtResource("7_p5f2t")
+flat = true
+icon_alignment = 1
+
+[node name="DevicesLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Press Start to join with a gamepad."
+autowrap_mode = 2
+
+[node name="JoinKeyboardButton" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Join Keyboard"

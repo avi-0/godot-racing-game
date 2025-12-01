@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=29 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/UiSoundPlayer.cs" id="1_kp23o"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_5jirj"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cl3hcvkocitf8" path="res://scenes/game/screen_layouts/single.tscn" id="12_3xj4h"]
 [ext_resource type="PackedScene" uid="uid://b0jr1ye67yedr" path="res://scenes/game/screen_layouts/split3h.tscn" id="12_pg2xm"]
 [ext_resource type="PackedScene" uid="uid://b5s34pkx4d4or" path="res://scenes/game/screen_layouts/split3v.tscn" id="13_gc57s"]
+[ext_resource type="Script" uid="uid://bo73w7eogypft" path="res://scripts/InputManager.cs" id="18_8b66f"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
 script = ExtResource("3_5jirj")
@@ -97,6 +98,9 @@ parameters/looping = false
 script = ExtResource("5_otnwt")
 
 [node name="Track" parent="GameManager" instance=ExtResource("11_5v6r0")]
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("18_8b66f")
 
 [node name="Editor" parent="." instance=ExtResource("8_uyinl")]
 visible = false

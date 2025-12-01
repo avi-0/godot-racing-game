@@ -15,11 +15,13 @@ public partial class PlayerViewport : SubViewport
 	[Export] public Label TimeLabel;
 	[Export] public Label TrackInfoLabel;
 	[Export] public Camera3D Camera;
-
+	[Export] public int LocalPlayerId = 0;
+	
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
 	public Car Car;
 	public int StartTimerSeconds = -1;
 
+	private CarInputs _inputs;
 	private bool _active = false;
 
 	public bool Active
@@ -71,6 +73,8 @@ public partial class PlayerViewport : SubViewport
 		if (!Active || Car == null)
 			return;
 		
+		UpdateCarInputs();
+		
 		SpeedLabel.Text = ((int)Mathf.Round(Car.LinearVelocity.Length() * 10)).ToString();
 		
 		Camera.Current = TargetCamera != null;
@@ -87,7 +91,26 @@ public partial class PlayerViewport : SubViewport
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event.IsActionPressed(InputActionNames.CycleCamera))
+		if (!InputManager.Singleton.InputEventMatchesPlayer(@event, LocalPlayerId))
+			return;
+
+		if (@event.IsAction(InputActionNames.Forward, true))
+		{
+			_inputs.Forward = @event.GetActionStrength(InputActionNames.Forward, true);
+		} 
+		else if (@event.IsAction(InputActionNames.Back, true))
+		{
+			_inputs.Back = @event.GetActionStrength(InputActionNames.Back, true);
+		} 
+		else if (@event.IsAction(InputActionNames.Left, true))
+		{
+			_inputs.Left = @event.GetActionStrength(InputActionNames.Left, true);
+		} 
+		else if (@event.IsAction(InputActionNames.Right, true))
+		{
+			_inputs.Right = @event.GetActionStrength(InputActionNames.Right, true);
+		} 
+		else if (@event.IsActionPressed(InputActionNames.CycleCamera))
 		{
 			if (CameraMode == GameManager.CarCameraMode.Orbit)
 			{
@@ -97,11 +120,31 @@ public partial class PlayerViewport : SubViewport
 			{
 				CameraMode = GameManager.CarCameraMode.Orbit;
 			}
-			GetViewport().SetInputAsHandled();
+			SetInputAsHandled();
+		}
+		else if (@event.IsActionPressed(InputActionNames.Restart))
+		{
+			Car.InputRestart();
+			SetInputAsHandled();
+		}
+		else if (@event.IsActionPressed(InputActionNames.Pause))
+		{
+			Car.InputPause();
+			SetInputAsHandled();
+		}
+		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
+		{
+			Car.InputToggleLights();
+			SetInputAsHandled();
 		}
 	}
-	
-	public void OnFinishButtonPressed()
+
+	private void UpdateCarInputs()
+	{
+		Car.SetInputs(_inputs);
+	}
+
+	private void OnFinishButtonPressed()
 	{
 		FinishPanel.Hide();
 		Input.MouseMode = Input.MouseModeEnum.Captured;

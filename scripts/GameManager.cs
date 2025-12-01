@@ -29,24 +29,26 @@ public partial class GameManager : Node
 	[Export] public PackedScene SplitScreen3HLayout;
 	[Export] public PackedScene SplitScreen3VLayout;
 	[Export] public PackedScene SplitScreen4Layout;
+	public PackedScene CurrentScreenLayout;
 	
 	[Signal]
 	public delegate void StoppedPlayingEventHandler();
 	
 
+	public static GameManager Singleton;
+	
 	// constants that hui znaet where they should be
 	public const int BlockLayer = 1;
 	public const int CarLayer = 2;
 	public const string CarsPath = "res://scenes/cars/";
-	public static GameManager Singleton;
+	
 	private bool _isPlaying = false;
-	private Car _localCar = null;
-	private int _localPlayerId = -1;
+	private List<Car> _localCars = new();
+	private Dictionary<Car, int> _localPlayerIds = new();
 	public bool DirectionalShadowsEnabled = true;
 
 	public Viewport RootViewport;
 	private ScreenLayout _screenLayout;
-
 	
 	
 	public override void _Ready()
@@ -57,13 +59,17 @@ public partial class GameManager : Node
 		RootViewport.Disable3D = true;
 		GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
 		
-		SetScreenLayout(SplitScreen4Layout);
+		SetScreenLayout(SingleplayerScreenLayout);
 
 		NewTrack();
 	}
 
 	public void SetScreenLayout(PackedScene layoutScene)
 	{
+		if (CurrentScreenLayout == layoutScene)
+			return;
+		CurrentScreenLayout = layoutScene;
+		
 		if (_screenLayout != null)
 		{
 			RemoveChild(_screenLayout);
@@ -88,30 +94,39 @@ public partial class GameManager : Node
 
 	public void Play()
 	{
-		if (_localCar != null)
+		foreach (var car in _localCars)
 		{
-			RemoveChild(_localCar);
-			_localCar.QueueFree();
+			RemoveChild(car);
+			car.QueueFree();
+			
+			_localCars = new();
 		}
 
-		_localCar = CarScene.Instantiate<Car>();
-		AddChild(_localCar);
-		_localCar.GlobalTransform = GetStartPoint();
-		_localCar.Started();
+		_localPlayerIds = new();
+		foreach (var viewport in _screenLayout.PlayerViewports)
+		{
+			var car = CarScene.Instantiate<Car>();
+			_localCars.Add(car);
+			
+			AddChild(car);
+			car.GlobalTransform = GetStartPoint();
+			car.Started();
 
-		_localCar.RestartRequested += LocalCarOnRestartRequested;
-		_localCar.PauseRequested += LocalCarOnPauseRequested;
+			car.RestartRequested += LocalCarOnRestartRequested;
+			car.PauseRequested += LocalCarOnPauseRequested;
 		
-		GD.Print(SettingsMenu.GetLocalPlayerName());
-		_localCar.SetPlayerName(SettingsMenu.GetLocalPlayerName());
+			car.SetPlayerName(SettingsMenu.GetLocalPlayerName());
+			
+			if (!_localPlayerIds.ContainsKey(car))
+				_localPlayerIds[car] = GameModeController.CurrentGameMode.SpawnPlayer(true, car);
+			else
+				GameModeController.CurrentGameMode.RespawnPlayer(_localPlayerIds[car], car);
+
+			viewport.Car = car;
+		}
 		
 		_isPlaying = true;
-
-		if (_localPlayerId == -1)
-			_localPlayerId = GameModeController.CurrentGameMode.SpawnPlayer(true, _localCar);
-		else
-			GameModeController.CurrentGameMode.RespawnPlayer(_localPlayerId, _localCar);
-
+		
 		GameModeController.CurrentGameMode.Running(true);
 
 		if (!MusicPlayer.IsPlaying())
@@ -123,20 +138,20 @@ public partial class GameManager : Node
 	public void Stop()
 	{
 		SetViewportsActive(false);
-
-		if (_localCar != null)
+		
+		foreach (var car in _localCars)
 		{
-			RemoveChild(_localCar);
-			_localCar.QueueFree();
+			RemoveChild(car);
+			car.QueueFree();
 
-			_localCar = null;
+			_localCars = new();
 		}
 
 		_isPlaying = false;
 
 		EmitSignalStoppedPlaying();
 
-		_localPlayerId = -1;
+		_localPlayerIds = new();
 		GameModeController.CurrentGameMode.KillGame();
 
 		MusicPlayer.Stop();
@@ -148,7 +163,6 @@ public partial class GameManager : Node
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
 			viewport.Active = visible;
-			viewport.Car = _localCar;
 		}
 	}
 

@@ -20,7 +20,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 1
 script = ExtResource("2_m2qjh")
-Stretch = true
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport1" parent="SubViewportContainer" instance=ExtResource("2_h03c1")]
@@ -34,10 +33,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 1
 script = ExtResource("2_m2qjh")
-Stretch = true
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="PlayerViewport2" parent="SubViewportContainer2" instance=ExtResource("2_h03c1")]
 handle_input_locally = false
 size = Vector2i(960, 1080)
 render_target_update_mode = 4
+LocalPlayerId = 1

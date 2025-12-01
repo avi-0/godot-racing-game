@@ -41,6 +41,7 @@ metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 4
+LocalPlayerId = 1
 
 [node name="SubViewportContainer3" type="Container" parent="."]
 layout_mode = 2
@@ -54,6 +55,7 @@ metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 4
+LocalPlayerId = 2
 
 [node name="SubViewportContainer4" type="Container" parent="."]
 layout_mode = 2
@@ -67,3 +69,4 @@ metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 handle_input_locally = false
 size = Vector2i(960, 540)
 render_target_update_mode = 4
+LocalPlayerId = 4
