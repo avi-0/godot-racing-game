@@ -12,7 +12,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +27,7 @@ SettingsButton = NodePath("MainMenu/MainMenuContainer/PanelContainer/MarginConta
 TrackListPanel = NodePath("TrackListPanel")
 TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer/trackGC")
 MainMenuContainer = NodePath("MainMenu")
+SplitscreenFoldableContainer = NodePath("MainMenu/SplitscreenFoldable")
 GarageWindow = NodePath("GarageWindow")
 GarageViewportContainer = NodePath("GarageViewportContainer")
 GarageViewport = NodePath("GarageViewportContainer/GarageViewport")

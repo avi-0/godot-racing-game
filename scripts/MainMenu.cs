@@ -16,6 +16,7 @@ public partial class MainMenu : Control
 	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
 	[Export] public Control MainMenuContainer;
+	[Export] public FoldableContainer SplitscreenFoldableContainer;
 	[Export] public Control GarageWindow;
 	[Export] public CustomSubViewportContainer GarageViewportContainer;
 	[Export] public SubViewport GarageViewport;
@@ -46,6 +47,7 @@ public partial class MainMenu : Control
 		Editor.Singleton.IsRunning = false;
 
 		SettingsButton.Pressed += () => OnSettingsButtonPressed().Forget();
+		SplitscreenFoldableContainer.Hidden += () => SplitscreenFoldableContainer.Folded = true;
 		
 		_carList = GameManager.Singleton.LoadCarList();
 		LoadGarageCar(DefaultCarPath);

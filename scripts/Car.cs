@@ -251,22 +251,15 @@ public partial class Car : RigidBody3D
 				var relativeVelocity = springUpDirection.Dot(worldVelocity);
 				var dampForce = wheel.Config.SpringDamping * relativeVelocity;
 				var susForce = (force - dampForce);
-				var forceVector = susForce * springUpDirection;
-
-				var forcePositionOffset = wheel.GetCollisionPoint(0) - GlobalPosition;
-
-				if (Math.Abs(GetLinearVelocity().Length()) < 5.0) // чтобы с наклонных поверхностей не скатывало
-				{
-					var susP = GlobalBasis.Y * susForce;
-					forceVector.Z -= susP.Z * GlobalBasis.Y.Dot(Vector3.Up);
-					forceVector.X -= susP.X * GlobalBasis.Y.Dot(Vector3.Up);
-				}
+				var forceVector = susForce * normal / wheel.GetCollisionCount();
+				
+				var forcePositionOffset = wheel.GlobalPosition - GlobalPosition;
 				
 				ApplyForce(forceVector, forcePositionOffset);
 
 				if (DebugMode)
 				{
-					//DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f);
+					DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f, arrow_size: 0.1f);
 					DebugDraw3D.DrawSphere(contactPoint, wheel.Config.WheelRadius * 0.1f);
 				}
 			}
@@ -307,8 +300,8 @@ public partial class Car : RigidBody3D
 				brakeStrength = forwardStrength;
 		}
 		
-		if (!AcceptsInputs)
-			brakeStrength = -float.Sign(velocity);
+		//if (!AcceptsInputs)
+		//	brakeStrength = -float.Sign(velocity);
 		
 		var contactPoint = wheel.WheelModel.GlobalPosition;
 		var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;

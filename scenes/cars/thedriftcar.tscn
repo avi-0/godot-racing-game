@@ -58,6 +58,7 @@ depth = 0.0
 
 [node name="Car" type="RigidBody3D" node_paths=PackedStringArray("FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
 collision_layer = 2
+collision_mask = 3
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
