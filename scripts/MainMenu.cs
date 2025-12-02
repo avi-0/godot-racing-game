@@ -115,21 +115,20 @@ public partial class MainMenu : Control
 		}
 	}
 
-	private void LoadGarageCar(string path)
+	private void LoadGarageCar(string? path = null)
 	{
 		GarageNode.DestroyAllChildren();
-		_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
-		GarageNode.AddChild(_loadedCar);
+		_loadedCar = null;
+		if (path != null)
+		{
+			_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
+			GarageNode.AddChild(_loadedCar);
 		
-		UpdateGarageCar();
-	}
+			_loadedCar.GlobalTransform = GameManager.Singleton.GetStartPoint();
+			_loadedCar.ResetPhysicsInterpolation();
 
-	private void UpdateGarageCar()
-	{
-		_loadedCar.GlobalTransform = GameManager.Singleton.GetStartPoint();
-		_loadedCar.ResetPhysicsInterpolation();
-
-		GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
+			GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
+		}
 	}
 
 	public async GDTaskVoid OnSettingsButtonPressed()
@@ -161,6 +160,7 @@ public partial class MainMenu : Control
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		IsVisible = false;
+		LoadGarageCar();
 
 		GameManager.Singleton.NewTrack();
 
@@ -171,6 +171,7 @@ public partial class MainMenu : Control
 
 		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
 
+		LoadGarageCar(GameManager.CarsPath + GameManager.Singleton.Track.Options.CarType);
 		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
@@ -179,15 +180,15 @@ public partial class MainMenu : Control
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		IsVisible = false;
+		LoadGarageCar();
 
 		GameManager.Singleton.OpenTrack(path);
 		GameManager.Singleton.Play();
 
 		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
 		
-		
+		LoadGarageCar(GameManager.CarsPath + GameManager.Singleton.Track.Options.CarType);
 		IsVisible = true;
-		UpdateGarageCar();
 		_hadFocus.GrabFocus();
 	}
 	
