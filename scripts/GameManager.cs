@@ -101,6 +101,8 @@ public partial class GameManager : Node
 			
 			_localCars = new();
 		}
+		
+		GameModeController.CurrentGameMode.InitTrack(Track);
 
 		_localPlayerIds = new();
 		foreach (var viewport in _screenLayout.PlayerViewports)
