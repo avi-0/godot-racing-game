@@ -135,6 +135,13 @@ public partial class GameManager : Node
 		SetViewportsActive(true);
 	}
 
+	public Car CreateCar()
+	{
+		var car = CarScene.Instantiate<Car>();
+		AddChild(car);
+		return car;
+	}
+
 	public void Stop()
 	{
 		SetViewportsActive(false);

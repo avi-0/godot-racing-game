@@ -19,11 +19,15 @@ public struct TimeAttackPlayer
 	public TimeSpan PbTime { get; set; }
 
 	public Car PlayerCar { get; set; }
+	public Car PlayerGhostCar { get; set; }
 
 	public bool HasFinished = false;
 	public TimeSpan LastFinishTime;
 	public int StartTimerSeconds = -1;
 
+	public Ghost PBGhost { get; set; } = new Ghost();
+	public Ghost GhostRecording { get; set; } = new Ghost();
+	
 	public TimeAttackPlayer(int playerId, bool localPlayer, Car playerCar)
 	{
 		PlayerId = playerId;

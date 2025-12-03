@@ -12,7 +12,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +35,8 @@ GarageNode = NodePath("GarageViewportContainer/GarageViewport/GarageNode")
 GarageCameraBase = NodePath("GarageViewportContainer/GarageViewport/CameraBase")
 GarageContainer = NodePath("GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer")
 PlayerNameText = NodePath("GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit")
+CampaignControl = NodePath("CampaignPanel")
+CampaignContainer = NodePath("CampaignPanel/MarginContainer/Panel/ScrollContainer/CampaignContainer")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
 [node name="GarageViewportContainer" type="Container" parent="."]
@@ -159,6 +161,56 @@ title_position = 1
 [node name="SplitscreenSettings" parent="MainMenu/SplitscreenFoldable" instance=ExtResource("5_wem23")]
 visible = false
 layout_mode = 2
+
+[node name="CampaignPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CampaignPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CampaignPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CampaignPanel/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CampaignContainer" type="GridContainer" parent="CampaignPanel/MarginContainer/Panel/ScrollContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="BackButton" type="Button" parent="CampaignPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -51.5
+offset_top = -55.0
+offset_right = 51.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+shortcut = SubResource("Shortcut_wu84c")
+text = "Back"
 
 [node name="TrackListPanel" type="Control" parent="."]
 visible = false

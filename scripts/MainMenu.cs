@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Fractural.Tasks;
 using Godot;
@@ -24,7 +25,9 @@ public partial class MainMenu : Control
 	[Export] public Node3D GarageCameraBase;
 	[Export] public Container GarageContainer;
 	[Export] public LineEdit PlayerNameText;
-
+	[Export] public Control CampaignControl;
+	[Export] public Container CampaignContainer;
+	
 	[Export(PropertyHint.FilePath)] public string DefaultCarPath;
 
 	private Car _loadedCar;
@@ -42,6 +45,8 @@ public partial class MainMenu : Control
 		}
 	}
 	
+	private List<Campaign> _campaigns = new List<Campaign>();
+	
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
@@ -51,6 +56,9 @@ public partial class MainMenu : Control
 		
 		_carList = GameManager.Singleton.LoadCarList();
 		LoadGarageCar(DefaultCarPath);
+		
+		AddCampaign("Tutorial", "tutorial");
+		AddCampaign("Main Campaign", "main");
 		
 		PlayButton.CallDeferred("grab_focus");
 	}
@@ -64,8 +72,21 @@ public partial class MainMenu : Control
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		
-		FillTrackContainer(CampTracksPath);
-		TrackListPanel.Show();
+		foreach (Campaign campaign in _campaigns)
+		{
+			var button = new Button();
+			button.CustomMinimumSize = 64 * Vector2.One;
+			button.Text = campaign.Name;
+			button.Pressed += () =>
+			{
+				FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/");
+				TrackListPanel.Show();
+			};
+
+			CampaignContainer.AddChild(button);		
+		}
+	
+		CampaignControl.Show();
 	}
 
 	public void OnEditorButtonPressed()
@@ -249,8 +270,18 @@ public partial class MainMenu : Control
 
 	public void OnPlayerSetNewName(string newName)
 	{
-		GD.Print("New Name " + newName);
 		_loadedCar.SetPlayerName(newName);
 		GameManager.Singleton.SettingsMenu.SetLocalPlayerName(newName);
+	}
+
+	public void OnCampaignBack()
+	{
+		CampaignControl.Hide();
+		CampaignContainer.DestroyAllChildren();
+	}
+
+	private void AddCampaign(string campaignName, string directoryName)
+	{
+		_campaigns.Add(new Campaign(campaignName, directoryName));
 	}
 }
