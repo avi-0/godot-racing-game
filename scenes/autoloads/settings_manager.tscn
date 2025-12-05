@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cohjkofisepds"]
+
+[ext_resource type="Script" uid="uid://cdapll822v1bl" path="res://scripts/SettingsManager.cs" id="1_ac4rg"]
+
+[node name="SettingsManager" type="Node"]
+script = ExtResource("1_ac4rg")
+SettingsFilePath = "user://settings.json"

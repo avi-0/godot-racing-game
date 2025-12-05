@@ -162,7 +162,7 @@ public partial class Editor : Control
 	private float _rotationStep = float.DegreesToRadians(5);
 	private bool _rotationShiftOrigin = false;
 
-	private Track Track => GameManager.Singleton.Track;
+	private Track Track => GameManager.Instance.Track;
 
 	public bool IsRunning
 	{
@@ -319,7 +319,7 @@ public partial class Editor : Control
 	private void ConfirmNewDialogOnConfirmed()
 	{
 		CloseTrack();
-		GameManager.Singleton.NewTrack();
+		GameManager.Instance.NewTrack();
 		SetupOptions();
 	}
 
@@ -328,7 +328,7 @@ public partial class Editor : Control
 		if (FileDialog.FileMode == FileDialog.FileModeEnum.OpenFile)
 		{
 			CloseTrack();
-			GameManager.Singleton.OpenTrack(path);
+			GameManager.Instance.OpenTrack(path);
 			SetupOptions();
 			_grid = Transform3D.Identity;
 
@@ -337,7 +337,7 @@ public partial class Editor : Control
 		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
 		{
 			await TakeScreenshot();
-			GameManager.Singleton.SaveTrack(path);
+			GameManager.Instance.SaveTrack(path);
 		}
 	}
 
@@ -352,8 +352,8 @@ public partial class Editor : Control
 
 		Track.Options.Uid = "0";
 		GameModeController.CurrentGameMode.InitTrack(Track);
-		GameManager.Singleton.Play();
-		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
+		GameManager.Instance.Play();
+		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 
 		IsRunning = true;
 	}
@@ -837,7 +837,7 @@ public partial class Editor : Control
 		carType.SetText(0, "CarType");
 		carType.SetCellMode(1, TreeItem.TreeCellMode.Range);
 
-		var paths = GameManager.Singleton.LoadCarList();
+		var paths = GameManager.Instance.LoadCarList();
 		foreach (var carPath in paths) carType.SetText(1, carType.GetText(1) + carPath + ",");
 		carType.SetText(1, carType.GetText(1).Trim(','));
 		carType.SetEditable(1, true);

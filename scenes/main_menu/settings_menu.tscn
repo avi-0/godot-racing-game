@@ -12,7 +12,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowFilterQuality", "ShadowAtlasSize", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowFilterQuality", "ShadowAtlasSize", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton", "BackButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
-SettingsFilePath = "user://settings.json"
 TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/3drsslider")
 ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/scaletypeopt")
 WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/winopt")
@@ -35,11 +34,12 @@ ControlsContainer = NodePath("MarginContainer/Panel/MarginContainer/VBoxContaine
 ResetGraphicsButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ResetButton")
 ResetSoundButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/ResetButton")
 ResetControlsButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/ResetButton")
+BackButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -379,4 +379,3 @@ shortcut = SubResource("Shortcut_wswnh")
 text = "Back"
 
 [connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]
-[connection signal="pressed" from="MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton" to="." method="OnBackButton"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dj6oje4umktpq"]
+[gd_scene load_steps=6 format=3 uid="uid://dj6oje4umktpq"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_myx47"]
 [ext_resource type="Script" uid="uid://omuaqht0le35" path="res://scripts/ui/PauseMenu.cs" id="2_myx47"]
+[ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/main_menu/settings_menu.tscn" id="3_gqsfd"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_myx47"]
 action = &"ui_cancel"
@@ -9,8 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_kukqi"]
 events = [SubResource("InputEventAction_myx47")]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("ResumeButton", "SettingsButton", "ExitButton")]
-visible = false
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("ResumeButton", "SettingsButton", "ExitButton", "SettingsMenu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +22,7 @@ script = ExtResource("2_myx47")
 ResumeButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/ResumeButton")
 SettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
 ExitButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/ExitButton")
+SettingsMenu = NodePath("SettingsMenu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -43,8 +44,9 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="ResumeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 2
+shortcut_context = NodePath("../../..")
 shortcut = SubResource("Shortcut_kukqi")
 text = "Resume
 "
@@ -57,3 +59,7 @@ text = "Settings
 [node name="ExitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("3_gqsfd")]
+visible = false
+layout_mode = 1

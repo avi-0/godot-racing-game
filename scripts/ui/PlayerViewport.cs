@@ -54,6 +54,13 @@ public partial class PlayerViewport : SubViewport
 	{
 		SizeChanged += OnSizeChanged;
 		OnSizeChanged();
+
+		GameManager.Instance.ViewportSettingsChanged += OnViewportSettingsChanged;
+	}
+
+	public override void _ExitTree()
+	{
+		GameManager.Instance.ViewportSettingsChanged -= OnViewportSettingsChanged;
 	}
 
 	private void OnSizeChanged()
@@ -66,7 +73,7 @@ public partial class PlayerViewport : SubViewport
 
 	private void OnViewportSettingsChanged()
 	{
-		this.MatchViewport(GameManager.Singleton.RootViewport);
+		this.MatchViewport(GameManager.Instance.RootViewport);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -149,6 +156,6 @@ public partial class PlayerViewport : SubViewport
 	{
 		FinishPanel.Hide();
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		GameManager.Singleton.LocalCarOnRestartRequested();
+		GameManager.Instance.LocalCarOnRestartRequested();
 	}
 }

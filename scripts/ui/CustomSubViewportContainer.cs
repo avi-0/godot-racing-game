@@ -216,11 +216,13 @@ public partial class CustomSubViewportContainer : Container
 
 			case NotificationFocusEnter:
 				// If focused, send InputEvent to the SubViewport before the Gui-Input stage.
+				GD.Print("focused");
 				SetProcessInput(true);
 				SetProcessUnhandledInput(false);
 				break;
 
 			case NotificationFocusExit:
+				GD.Print("unfocused");
 				// A different Control has focus and should receive Gui-Input before the InputEvent is sent to the SubViewport.
 				SetProcessInput(false);
 				SetProcessUnhandledInput(true);

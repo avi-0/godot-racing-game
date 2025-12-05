@@ -85,7 +85,7 @@ public class GameModeTimeAttack : IGameMode
 		else
 			_inEditor = false;
 
-		GameManager.Singleton.SelectCarScene(track.Options.CarType);
+		GameManager.Instance.SelectCarScene(track.Options.CarType);
 
 		var blockCount = 0;
 		foreach (var block in track.FindChildren("*", "Block", false).Cast<Block>())
@@ -105,7 +105,7 @@ public class GameModeTimeAttack : IGameMode
 		}
 		
 		_currentTrack.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", (float)_currentTrack.Track.Options.StartDayTime);
-		GameManager.Singleton.ApplyShadowSettings(); // FIXME: Sky3D слишком умный епт
+		GameManager.Instance.ApplyShadowSettings(); // FIXME: Sky3D слишком умный епт
 	}
 
 	public int SpawnPlayer(bool localPlayer, Car playerCar)
@@ -166,7 +166,7 @@ public class GameModeTimeAttack : IGameMode
 			}
 			if (!player.PBGhost.Empty)
 			{
-				player.PlayerGhostCar = GameManager.Singleton.CreateCar();
+				player.PlayerGhostCar = GameManager.Instance.CreateCar();
 				player.PlayerGhostCar.IsLocallyControlled = false;
 				player.PlayerGhostCar.IsGhost = true;
 				player.PlayerGhostCar.Position = player.PlayerCar.Position;
@@ -254,7 +254,7 @@ public class GameModeTimeAttack : IGameMode
 			player.PbTime = player.CurrentRaceTime;
 			if (player.LocalPlayer)
 			{
-				GameModeUtils.SaveUserPb(player.PbTime, GameManager.Singleton.GetLoadedTrackUid());
+				GameModeUtils.SaveUserPb(player.PbTime, GameManager.Instance.GetLoadedTrackUid());
 
 				if (_inEditor) SetAuthorTime((int)player.CurrentRaceTime.TotalMilliseconds);
 			}
@@ -300,7 +300,7 @@ public class GameModeTimeAttack : IGameMode
 
 			if (!_inEditor)
 			{
-				var at = GameManager.Singleton.Track.Options.AuthorTime;
+				var at = GameManager.Instance.Track.Options.AuthorTime;
 				if (player.LastFinishTime.TotalMilliseconds <= at)
 					viewport.FinishTimeLabel.Text += "\nAuthor Medal!!!!";
 				else if (player.LastFinishTime.TotalMilliseconds <= GameModeUtils.GetGoldFromAt(at))

@@ -8,6 +8,7 @@ public partial class PauseMenu : Control
 	[Export] public Button ResumeButton;
 	[Export] public Button SettingsButton;
 	[Export] public Button ExitButton;
+	[Export] public SettingsMenu SettingsMenu;
 	
 	public override void _Ready()
 	{
@@ -25,9 +26,9 @@ public partial class PauseMenu : Control
 
 	public async GDTaskVoid OnSettingsButton()
 	{
-		GameManager.Singleton.SettingsMenu.Show();
+		SettingsMenu.Show();
 		
-		await GDTask.ToSignal(GameManager.Singleton.SettingsMenu, CanvasItem.SignalName.Hidden);
+		await GDTask.ToSignal(SettingsMenu, CanvasItem.SignalName.Hidden);
 		
 		SettingsButton.GrabFocus();
 	}
@@ -35,12 +36,20 @@ public partial class PauseMenu : Control
 	public void OnExitButton()
 	{
 		Hide();
-		GameManager.Singleton.Stop();
+		GameManager.Instance.Stop();
 	}
 
 	public void OnVisibilityChanged()
 	{
 		if (Visible)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+			
 			ResumeButton.GrabFocus();
+		}
+		else
+		{
+			Input.MouseMode = Input.MouseModeEnum.Hidden;
+		}
 	}
 }

@@ -18,7 +18,6 @@ PlayerViewports = [NodePath("SubViewportContainer/PlayerViewport1"), NodePath("H
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 1
 script = ExtResource("2_mr4fu")
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
@@ -36,7 +35,6 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 1
 script = ExtResource("2_mr4fu")
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
@@ -52,7 +50,6 @@ LocalPlayerId = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 1
 script = ExtResource("2_mr4fu")
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 

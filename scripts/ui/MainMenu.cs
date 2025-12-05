@@ -12,10 +12,10 @@ public partial class MainMenu : Control
 {
 	public string CampTracksPath = "res://tracks/";
 	public string UserTracksPath = "user://tracks/";
-	[Export] public FileDialog MenuFileDialog;
 
 	[Export] public Button PlayButton;
 	[Export] public Button SettingsButton;
+	[Export] public Control SettingsMenu;
 	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
 	[Export] public Control MainMenuContainer;
@@ -47,16 +47,17 @@ public partial class MainMenu : Control
 		}
 	}
 	
-	private List<Campaign> _campaigns = new List<Campaign>();
+	private List<Campaign> _campaigns = new();
 	
 	public override void _Ready()
 	{
 		Editor.Singleton.IsRunning = false;
 
+		GameManager.Instance.ViewportSettingsChanged += OnViewportSettingsChanged;
 		SettingsButton.Pressed += () => OnSettingsButtonPressed().Forget();
 		SplitscreenFoldableContainer.Hidden += () => SplitscreenFoldableContainer.Folded = true;
 		
-		_carList = GameManager.Singleton.LoadCarList();
+		_carList = GameManager.Instance.LoadCarList();
 		LoadGarageCar(DefaultCarPath);
 		
 		AddCampaign("Tutorial", "tutorial");
@@ -65,9 +66,14 @@ public partial class MainMenu : Control
 		PlayButton.CallDeferred("grab_focus");
 	}
 
+	public override void _ExitTree()
+	{
+		GameManager.Instance.ViewportSettingsChanged -= OnViewportSettingsChanged;
+	}
+
 	private void OnViewportSettingsChanged()
 	{
-		GarageViewport.MatchViewport(GameManager.Singleton.RootViewport);
+		GarageViewport.MatchViewport(GameManager.Instance.RootViewport);
 	}
 
 	public void OnPlayButtonPressed()
@@ -125,7 +131,7 @@ public partial class MainMenu : Control
 			_hadFocus = GetViewport().GuiGetFocusOwner();
 			GarageContainer.GetChild<Control>(0).GrabFocus();
 
-			PlayerNameText.Text = GameManager.Singleton.SettingsMenu.GetLocalPlayerName();
+			PlayerNameText.Text = SettingsManager.Instance.GetLocalPlayerName();
 		}
 		else
 		{
@@ -147,7 +153,7 @@ public partial class MainMenu : Control
 			_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
 			GarageNode.AddChild(_loadedCar);
 		
-			_loadedCar.GlobalTransform = GameManager.Singleton.GetStartPoint();
+			_loadedCar.GlobalTransform = GameManager.Instance.GetStartPoint();
 			_loadedCar.ResetPhysicsInterpolation();
 
 			GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
@@ -159,8 +165,8 @@ public partial class MainMenu : Control
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		MainMenuContainer.Visible = false;
 		
-		GameManager.Singleton.SettingsMenu.Show();
-		await GDTask.ToSignal(GameManager.Singleton.SettingsMenu, CanvasItem.SignalName.Hidden);
+		SettingsMenu.Show();
+		await GDTask.ToSignal(SettingsMenu, CanvasItem.SignalName.Hidden);
 
 		MainMenuContainer.Visible = true;
 		_hadFocus.GrabFocus();
@@ -185,16 +191,16 @@ public partial class MainMenu : Control
 		IsVisible = false;
 		LoadGarageCar();
 
-		GameManager.Singleton.NewTrack();
+		GameManager.Instance.NewTrack();
 
-		GameManager.Singleton.Track.Options.AuthorName = GameManager.Singleton.SettingsMenu.GetLocalPlayerName();
+		GameManager.Instance.Track.Options.AuthorName = SettingsManager.Instance.GetLocalPlayerName();
 		
 		Editor.Singleton.IsRunning = true;
 		Editor.Singleton.SetupOptions();
 
 		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
 
-		LoadGarageCar(GameManager.CarsPath + GameManager.Singleton.Track.Options.CarType);
+		LoadGarageCar(GameManager.CarsPath + GameManager.Instance.Track.Options.CarType);
 		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
@@ -205,12 +211,12 @@ public partial class MainMenu : Control
 		IsVisible = false;
 		LoadGarageCar();
 
-		GameManager.Singleton.OpenTrack(path);
-		GameManager.Singleton.Play();
+		GameManager.Instance.OpenTrack(path);
+		GameManager.Instance.Play();
 
-		await GDTask.ToSignal(GameManager.Singleton, GameManager.SignalName.StoppedPlaying);
+		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 		
-		LoadGarageCar(GameManager.CarsPath + GameManager.Singleton.Track.Options.CarType);
+		LoadGarageCar(GameManager.CarsPath + GameManager.Instance.Track.Options.CarType);
 		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
@@ -222,7 +228,7 @@ public partial class MainMenu : Control
 		
 		foreach (var trackPath in trackList)
 		{
-			var options = GameManager.Singleton.GetTrackOptions(basePath + trackPath);
+			var options = GameManager.Instance.GetTrackOptions(basePath + trackPath);
 			
 			if (options == null)
 				continue;
@@ -273,7 +279,7 @@ public partial class MainMenu : Control
 	public void OnPlayerSetNewName(string newName)
 	{
 		_loadedCar.SetPlayerName(newName);
-		GameManager.Singleton.SettingsMenu.SetLocalPlayerName(newName);
+		SettingsManager.Instance.SetLocalPlayerName(newName);
 	}
 
 	public void OnCampaignBack()

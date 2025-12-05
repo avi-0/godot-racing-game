@@ -18,7 +18,6 @@ PlayerViewports = [NodePath("SubViewportContainer/PlayerViewport1"), NodePath("S
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 1
 script = ExtResource("2_m2qjh")
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
@@ -31,7 +30,6 @@ render_target_update_mode = 4
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_mode = 1
 script = ExtResource("2_m2qjh")
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 

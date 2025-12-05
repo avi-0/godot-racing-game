@@ -19,9 +19,8 @@ public partial class GameManager : Node
 	[Export] public PackedScene CarScene;
 	[Export] public AudioStreamPlayer MusicPlayer;
 	[Export] public Track Track;
-	[Export] public SettingsMenu SettingsMenu;
 	[Export] public Control PauseMenu;
-	[Export] public MainMenu MainMenu;
+	[Export] public Control ScreenLayoutSlot;
 
 	[ExportCategory("Screen Layouts")]
 	[Export] public PackedScene SingleplayerScreenLayout;
@@ -34,9 +33,12 @@ public partial class GameManager : Node
 	
 	[Signal]
 	public delegate void StoppedPlayingEventHandler();
+
+	[Signal]
+	public delegate void ViewportSettingsChangedEventHandler();
 	
 
-	public static GameManager Singleton;
+	public static GameManager Instance;
 	
 	// constants that hui znaet where they should be
 	public const int BlockLayer = 1;
@@ -54,7 +56,7 @@ public partial class GameManager : Node
 	
 	public override void _Ready()
 	{
-		Singleton = this;
+		Instance = this;
 		
 		RootViewport = GetViewport();
 		RootViewport.Disable3D = true;
@@ -73,12 +75,12 @@ public partial class GameManager : Node
 		
 		if (_screenLayout != null)
 		{
-			RemoveChild(_screenLayout);
+			ScreenLayoutSlot.RemoveChild(_screenLayout);
 			_screenLayout.QueueFree();
 		}
 
 		_screenLayout = layoutScene.Instantiate<ScreenLayout>();
-		AddChild(_screenLayout);
+		ScreenLayoutSlot.AddChild(_screenLayout);
 		
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
@@ -118,7 +120,7 @@ public partial class GameManager : Node
 			car.RestartRequested += LocalCarOnRestartRequested;
 			car.PauseRequested += LocalCarOnPauseRequested;
 		
-			car.SetPlayerName(SettingsMenu.GetLocalPlayerName());
+			car.SetPlayerName(SettingsManager.Instance.GetLocalPlayerName());
 			
 			if (!_localPlayerIds.ContainsKey(car))
 				_localPlayerIds[car] = GameModeController.CurrentGameMode.SpawnPlayer(true, car);
@@ -183,15 +185,9 @@ public partial class GameManager : Node
 
 	private void LocalCarOnPauseRequested()
 	{
-		if (PauseMenu.Visible)
-		{
-			PauseMenu.Hide();
-			Input.MouseMode = Input.MouseModeEnum.Captured;
-		}
-		else
+		if (!PauseMenu.Visible)
 		{
 			PauseMenu.Show();
-			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 	}
 
@@ -281,10 +277,6 @@ public partial class GameManager : Node
 
 	public void NotifyViewportSettingsChanged()
 	{
-		foreach (var viewport in _screenLayout.PlayerViewports)
-		{
-			viewport.MatchViewport(RootViewport);
-		}
-		MainMenu.GarageViewport.MatchViewport(RootViewport);
+		EmitSignalViewportSettingsChanged();
 	}
 }

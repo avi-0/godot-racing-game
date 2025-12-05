@@ -32,12 +32,12 @@ public partial class SplitscreenSettings : Control
 			Layout4Button,
 		};
 		_layouts = new();
-		_layouts[LayoutSingleButton] = GameManager.Singleton.SingleplayerScreenLayout;
-		_layouts[Layout2HButton] = GameManager.Singleton.SplitScreen2HLayout;
-		_layouts[Layout2VButton] = GameManager.Singleton.SplitScreen2VLayout;
-		_layouts[Layout3HButton] = GameManager.Singleton.SplitScreen3HLayout;
-		_layouts[Layout3VButton] = GameManager.Singleton.SplitScreen3VLayout;
-		_layouts[Layout4Button] = GameManager.Singleton.SplitScreen4Layout;
+		_layouts[LayoutSingleButton] = GameManager.Instance.SingleplayerScreenLayout;
+		_layouts[Layout2HButton] = GameManager.Instance.SplitScreen2HLayout;
+		_layouts[Layout2VButton] = GameManager.Instance.SplitScreen2VLayout;
+		_layouts[Layout3HButton] = GameManager.Instance.SplitScreen3HLayout;
+		_layouts[Layout3VButton] = GameManager.Instance.SplitScreen3VLayout;
+		_layouts[Layout4Button] = GameManager.Instance.SplitScreen4Layout;
 		
 		foreach (var button in _layoutButtons)
 		{
@@ -51,7 +51,7 @@ public partial class SplitscreenSettings : Control
 	{
 		if (toggledOn)
 		{
-			GameManager.Singleton.SetScreenLayout(_layouts[button]);
+			GameManager.Instance.SetScreenLayout(_layouts[button]);
 		}
 	}
 
@@ -108,7 +108,7 @@ public partial class SplitscreenSettings : Control
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (GameManager.Singleton.IsPlaying())
+		if (GameManager.Instance.IsPlaying())
 			return;
 		
 		if (@event.IsActionPressed("game_pause"))
