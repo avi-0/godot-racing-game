@@ -21,13 +21,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cr101")
 script = ExtResource("2_wswnh")
-TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/3drsslider")
-ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/scaletypeopt")
-WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/winopt")
-Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/aaopt")
-Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/vsyncopt")
-ShadowFilterQuality = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/shadow_filter_quality_opt")
-ShadowAtlasSize = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer/shadow_atlas_opt")
+TDrs = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/3drsslider")
+ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/scaletypeopt")
+WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/winopt")
+Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/aaopt")
+Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/vsyncopt")
+ShadowFilterQuality = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/shadow_filter_quality_opt")
+ShadowAtlasSize = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/shadow_atlas_opt")
 SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/soundslider")
 MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
 ControlsContainer = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer")
@@ -65,19 +65,26 @@ current_tab = 0
 
 [node name="Graphics" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 32
 metadata/_tab_index = 0
 
-[node name="GraphicsSettingsContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GraphicsSettingsContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="3drenderscale" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="3drenderscale" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "3D Render Scale"
 
-[node name="3drsslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="3drsslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -88,11 +95,11 @@ tick_count = 16
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "3D Scaling Mode"
 
-[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -103,11 +110,11 @@ popup/item_1/id = 1
 popup/item_2/text = "FSR 2.2"
 popup/item_2/id = 2
 
-[node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "Anti-Aliasing"
 
-[node name="aaopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="aaopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 0
 item_count = 6
@@ -124,11 +131,11 @@ popup/item_4/id = 4
 popup/item_5/text = "MSAA 8X"
 popup/item_5/id = 5
 
-[node name="vsync" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="vsync" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "V-Sync"
 
-[node name="vsyncopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="vsyncopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 1
 item_count = 2
@@ -137,11 +144,11 @@ popup/item_0/id = 0
 popup/item_1/text = "ON"
 popup/item_1/id = 1
 
-[node name="winmode" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="winmode" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "Window Mode"
 
-[node name="winopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="winopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 2
 item_count = 3
@@ -152,11 +159,11 @@ popup/item_1/id = 1
 popup/item_2/text = "Exclusive"
 popup/item_2/id = 2
 
-[node name="shadow_filter_quality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="shadow_filter_quality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "Shadow Filter Quality"
 
-[node name="shadow_filter_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="shadow_filter_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 2
 item_count = 6
@@ -173,11 +180,11 @@ popup/item_4/id = 4
 popup/item_5/text = "Ultra"
 popup/item_5/id = 5
 
-[node name="shadow_atlas" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="shadow_atlas" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 text = "Shadow Atlas Size"
 
-[node name="shadow_atlas_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/GraphicsSettingsContainer"]
+[node name="shadow_atlas_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 
 [node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]

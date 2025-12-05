@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://quenom6jkxmi"]
+[gd_scene load_steps=16 format=3 uid="uid://quenom6jkxmi"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/ui/UiSoundPlayer.cs" id="1_kp23o"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_5jirj"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://c1rq5irkqaorb" path="res://scenes/editor/editor.tscn" id="8_uyinl"]
 [ext_resource type="PackedScene" uid="uid://c5ka32jnsmy0s" path="res://scenes/main_menu/main_menu.tscn" id="9_10c2w"]
 [ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/main_menu/settings_menu.tscn" id="11_gc57s"]
-[ext_resource type="Script" uid="uid://bo73w7eogypft" path="res://scripts/input/InputManager.cs" id="18_8b66f"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
 script = ExtResource("3_5jirj")
@@ -60,9 +59,6 @@ RaceCountDownSound = SubResource("Resource_5v6r0")
 RaceStartSound = SubResource("Resource_uyinl")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UISoundPlayer"]
-
-[node name="InputManager" type="Node" parent="."]
-script = ExtResource("18_8b66f")
 
 [node name="Editor" parent="." instance=ExtResource("8_uyinl")]
 visible = false

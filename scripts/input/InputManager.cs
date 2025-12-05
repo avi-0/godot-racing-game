@@ -5,7 +5,7 @@ namespace racingGame;
 
 public partial class InputManager : Node
 {
-	public static InputManager Singleton;
+	public static InputManager Instance;
 
 	[Signal]
 	public delegate void DevicesChangedEventHandler();
@@ -17,7 +17,7 @@ public partial class InputManager : Node
 
 	public override void _EnterTree()
 	{
-		Singleton = this;
+		Instance = this;
 	}
 
 	public static IInputDevice GetDevice(InputEvent @event)

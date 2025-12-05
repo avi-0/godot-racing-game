@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload.cs"
 GameManager="*res://scenes/autoloads/game_manager.tscn"
 SettingsManager="*res://scenes/autoloads/settings_manager.tscn"
+InputManager="*res://scripts/input/InputManager.cs"
 
 [debug_draw_3d]
 

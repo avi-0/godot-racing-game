@@ -99,7 +99,7 @@ public partial class PlayerViewport : SubViewport
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (!InputManager.Singleton.InputEventMatchesPlayer(@event, LocalPlayerId))
+		if (!InputManager.Instance.InputEventMatchesPlayer(@event, LocalPlayerId))
 			return;
 
 		if (@event.IsAction(InputActionNames.Forward, true))
@@ -155,7 +155,7 @@ public partial class PlayerViewport : SubViewport
 	private void OnFinishButtonPressed()
 	{
 		FinishPanel.Hide();
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		Input.MouseMode = Input.MouseModeEnum.Hidden;
 		GameManager.Instance.LocalCarOnRestartRequested();
 	}
 }

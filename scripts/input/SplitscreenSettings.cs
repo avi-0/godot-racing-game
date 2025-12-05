@@ -19,7 +19,7 @@ public partial class SplitscreenSettings : Control
 	
 	public override void _Ready()
 	{
-		InputManager.Singleton.DevicesChanged += OnDevicesChanged;
+		InputManager.Instance.DevicesChanged += OnDevicesChanged;
 		JoinKeyboardButton.Pressed += JoinKeyboardButtonOnPressed;
 
 		_layoutButtons = new()
@@ -57,17 +57,17 @@ public partial class SplitscreenSettings : Control
 
 	private void JoinKeyboardButtonOnPressed()
 	{
-		InputManager.Singleton.ToggleDevice(new InputDeviceKeyboard());
+		InputManager.Instance.ToggleDevice(new InputDeviceKeyboard());
 	}
 
 	private void OnDevicesChanged()
 	{
-		GD.Print($"[{string.Join(", ", InputManager.Singleton.Devices)}]");
+		GD.Print($"[{string.Join(", ", InputManager.Instance.Devices)}]");
 
 		DevicesLabel.Text = "Players:\n";
-		if (InputManager.Singleton.Devices.Count > 0)
+		if (InputManager.Instance.Devices.Count > 0)
 		{
-			var names = InputManager.Singleton.Devices
+			var names = InputManager.Instance.Devices
 				.Select((device, i) => $"  {i + 1} {device.Name}");
 			DevicesLabel.Text += string.Join("\n", names);
 		}
@@ -76,7 +76,7 @@ public partial class SplitscreenSettings : Control
 			DevicesLabel.Text += "  None";
 		}
 
-		var numDevices = Math.Clamp(InputManager.Singleton.Devices.Count, 1, 4);
+		var numDevices = Math.Clamp(InputManager.Instance.Devices.Count, 1, 4);
 		foreach (var button in _layoutButtons)
 		{
 			button.Disabled = true;
@@ -116,7 +116,7 @@ public partial class SplitscreenSettings : Control
 			var device = InputManager.GetDevice(@event);
 			if (device != null && device is not InputDeviceKeyboard)
 			{
-				InputManager.Singleton.ToggleDevice(device);
+				InputManager.Instance.ToggleDevice(device);
 			}
 		}
 	}

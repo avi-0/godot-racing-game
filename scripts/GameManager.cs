@@ -172,6 +172,12 @@ public partial class GameManager : Node
 	public void SetViewportsActive(bool visible)
 	{
 		_screenLayout.Visible = visible;
+
+		if (!visible)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
 			viewport.Active = visible;
