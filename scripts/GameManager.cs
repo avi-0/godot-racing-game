@@ -47,7 +47,6 @@ public partial class GameManager : Node
 	private bool _isPlaying = false;
 	private List<Car> _localCars = new();
 	private Dictionary<Car, int> _localPlayerIds = new();
-	public bool DirectionalShadowsEnabled = true;
 
 	public Viewport RootViewport;
 	private ScreenLayout _screenLayout;

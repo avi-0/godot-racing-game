@@ -21,11 +21,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 GdTaskPlayerLoopAutoload="*res://addons/GDTask/Autoload/GDTaskPlayerLoopAutoload.cs"
+SettingsManager="*res://scenes/autoloads/settings_manager.tscn"
 GameManager="*res://scenes/autoloads/game_manager.tscn"
 InputManager="*res://scripts/input/InputManager.cs"
 UiSoundPlayer="*res://scenes/autoloads/ui_sound_player.tscn"
 TrackManager="*res://scenes/autoloads/track_manager.tscn"
-SettingsManager="*res://scenes/autoloads/settings_manager.tscn"
 
 [debug_draw_3d]
 

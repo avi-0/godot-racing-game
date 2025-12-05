@@ -28,6 +28,9 @@ public partial class SettingsManager : Node
 	};
 	
 	
+	public bool DirectionalShadowsEnabled => Settings.Graphics.ShadowAtlasSize != 0;
+	
+	
 	public override void _Ready()
 	{
 		Instance = this;
@@ -136,12 +139,14 @@ public partial class SettingsManager : Node
 		
 		// Directional Shadows - нельзя, обходим отдельно
 		RenderingServer.DirectionalShadowAtlasSetSize(int.Max(256, Settings.Graphics.ShadowAtlasSize), true);
-		GameManager.Instance.DirectionalShadowsEnabled = Settings.Graphics.ShadowAtlasSize != 0;
 		
 		RenderingServer.PositionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)Settings.Graphics.ShadowFilterQuality);
 		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)Settings.Graphics.ShadowFilterQuality);
-		TrackManager.Instance.UpdateShadowsEnabled();
+		
+		if (TrackManager.Instance != null)
+			TrackManager.Instance.UpdateShadowsEnabled();
 
-		GameManager.Instance.NotifyViewportSettingsChanged();
+		if (GameManager.Instance != null)
+			GameManager.Instance.NotifyViewportSettingsChanged();
 	}
 }

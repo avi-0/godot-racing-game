@@ -16,7 +16,7 @@ public partial class Track : Node3D
 	{
 		TimeOfDay.Set("current_time", Options.StartDayTime);
 		TimeOfDay.Call("_update_celestial_coords"); // make sure to reenable shadows as needed
-		if (!GameManager.Instance.DirectionalShadowsEnabled)
+		if (!SettingsManager.Instance.DirectionalShadowsEnabled)
 		{
 			Sun.ShadowEnabled = false;
 			Moon.ShadowEnabled = false;
