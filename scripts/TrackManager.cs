@@ -35,7 +35,7 @@ public partial class TrackManager : Node
 		
 		Track.Load(Jz.Load<TrackData>(path));
 
-		ApplyShadowSettings();
+		UpdateShadowsEnabled();
 
 		GameModeController.CurrentGameMode.InitTrack(Track);
 		GD.Print("Track UID: " + GetLoadedTrackUid());
@@ -69,7 +69,6 @@ public partial class TrackManager : Node
 
 	public void NewTrack()
 	{
-		Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", 10.0f);
 		Track.Load(new TrackData());
 	}
 	
@@ -78,8 +77,8 @@ public partial class TrackManager : Node
 		return Track.Options.Uid;
 	}
 	
-	public void ApplyShadowSettings()
+	public void UpdateShadowsEnabled()
 	{
-		GetTree().SetGroup("light_directional_shadow", "shadow_enabled", GameManager.Instance.DirectionalShadowsEnabled);
+		Track.UpdateLighting();
 	}
 }

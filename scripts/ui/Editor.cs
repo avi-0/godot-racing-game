@@ -880,7 +880,7 @@ public partial class Editor : Control
 				break;
 			case "DayTime":
 				Track.Options.StartDayTime = (int)editedItem.GetRange(editedColumn);
-				Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", (float)Track.Options.StartDayTime);
+				Track.UpdateLighting();
 				break;
 		}
 	}

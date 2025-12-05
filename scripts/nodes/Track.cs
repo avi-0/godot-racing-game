@@ -6,7 +6,22 @@ namespace racingGame;
 
 public partial class Track : Node3D
 {
+	[Export] public Node TimeOfDay;
+	[Export] public DirectionalLight3D Sun;
+	[Export] public DirectionalLight3D Moon;
+	
 	public TrackOptions Options = new();
+
+	public void UpdateLighting()
+	{
+		TimeOfDay.Set("current_time", Options.StartDayTime);
+		TimeOfDay.Call("_update_celestial_coords"); // make sure to reenable shadows as needed
+		if (!GameManager.Instance.DirectionalShadowsEnabled)
+		{
+			Sun.ShadowEnabled = false;
+			Moon.ShadowEnabled = false;
+		}
+	}
 	
 	public TrackData Save()
 	{
@@ -46,5 +61,7 @@ public partial class Track : Node3D
 		}
 
 		Options = data.Options;
+		
+		UpdateLighting();
 	}
 }

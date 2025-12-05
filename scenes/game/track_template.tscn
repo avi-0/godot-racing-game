@@ -9,9 +9,12 @@
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1stiv"]
 
-[node name="Track" type="Node3D"]
+[node name="Track" type="Node3D" node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon")]
 physics_interpolation_mode = 2
 script = ExtResource("1_enrm2")
+TimeOfDay = NodePath("Sky3D/TimeOfDay")
+Sun = NodePath("Sky3D/SunLight")
+Moon = NodePath("Sky3D/MoonLight")
 metadata/TrackUID = "0"
 metadata/TrackName = "New Track"
 metadata/AuthorName = "Anonymous"
@@ -26,6 +29,7 @@ metadata/AuthorTime = "0"
 environment = ExtResource("3_i06yk")
 camera_attributes = SubResource("CameraAttributesPractical_1stiv")
 script = ExtResource("10_gj4c4")
+lights_enabled = null
 fog_enabled = false
 editor_time_enabled = false
 game_time_enabled = false
@@ -33,13 +37,13 @@ sun_energy = 1.5
 wind_direction = 2.35619451204804
 metadata/_custom_type_script = "uid://deo0gxkmk2ahd"
 
-[node name="SunLight" type="DirectionalLight3D" parent="Sky3D" groups=["light_directional_shadow"]]
+[node name="SunLight" type="DirectionalLight3D" parent="Sky3D"]
 transform = Transform3D(0, -0.5542859, 0.83232635, -0.5854001, 0.6748041, 0.44938427, -0.8107446, -0.48724392, -0.324479, 0.83232635, 0.44938427, -0.324479)
 light_color = Color(0.99797535, 0.9517126, 0.9285306, 1)
 light_energy = 1.5
 shadow_enabled = true
 
-[node name="MoonLight" type="DirectionalLight3D" parent="Sky3D" groups=["light_directional_shadow"]]
+[node name="MoonLight" type="DirectionalLight3D" parent="Sky3D"]
 transform = Transform3D(0, -0.71860963, -0.69541365, 0.60077465, 0.55592644, -0.5744698, 0.7994184, -0.4177869, 0.4317225, -0.69541365, -0.5744698, 0.4317225)
 light_color = Color(0.572549, 0.776471, 0.956863, 1)
 light_energy = 0.0

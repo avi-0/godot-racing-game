@@ -103,9 +103,6 @@ public class GameModeTimeAttack : IGameMode
 				block.CarEntered += PlayerAttemptFinish;
 			}
 		}
-		
-		_currentTrack.Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", (float)_currentTrack.Track.Options.StartDayTime);
-		TrackManager.Instance.ApplyShadowSettings(); // FIXME: Sky3D слишком умный епт
 	}
 
 	public int SpawnPlayer(bool localPlayer, Car playerCar)

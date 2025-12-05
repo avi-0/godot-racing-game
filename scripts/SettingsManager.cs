@@ -140,7 +140,7 @@ public partial class SettingsManager : Node
 		
 		RenderingServer.PositionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)Settings.Graphics.ShadowFilterQuality);
 		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)Settings.Graphics.ShadowFilterQuality);
-		TrackManager.Instance.ApplyShadowSettings();
+		TrackManager.Instance.UpdateShadowsEnabled();
 
 		GameManager.Instance.NotifyViewportSettingsChanged();
 	}
