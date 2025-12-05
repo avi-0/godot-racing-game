@@ -26,6 +26,7 @@ metadata/AuthorTime = "0"
 environment = ExtResource("3_i06yk")
 camera_attributes = SubResource("CameraAttributesPractical_1stiv")
 script = ExtResource("10_gj4c4")
+fog_enabled = false
 editor_time_enabled = false
 game_time_enabled = false
 sun_energy = 1.5
@@ -53,6 +54,7 @@ moon_azimuth = -4.1568055
 moon_altitude = -2.1827526
 moon_size = 0.03
 atm_day_tint = Color(0.7539982, 0.88494706, 0.99999994, 1)
+fog_visible = false
 wind_direction = 2.35619451204804
 
 [node name="TimeOfDay" type="Node" parent="Sky3D"]
