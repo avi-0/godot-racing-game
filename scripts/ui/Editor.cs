@@ -160,7 +160,7 @@ public partial class Editor : Control
 	private float _rotationStep = float.DegreesToRadians(5);
 	private bool _rotationShiftOrigin = false;
 
-	private Track Track => GameManager.Instance.Track;
+	private Track Track => TrackManager.Instance.Track;
 
 	public bool IsRunning
 	{
@@ -315,7 +315,7 @@ public partial class Editor : Control
 	private void ConfirmNewDialogOnConfirmed()
 	{
 		CloseTrack();
-		GameManager.Instance.NewTrack();
+		TrackManager.Instance.NewTrack();
 		SetupOptions();
 	}
 
@@ -324,7 +324,7 @@ public partial class Editor : Control
 		if (FileDialog.FileMode == FileDialog.FileModeEnum.OpenFile)
 		{
 			CloseTrack();
-			GameManager.Instance.OpenTrack(path);
+			TrackManager.Instance.OpenTrack(path);
 			SetupOptions();
 			_grid = Transform3D.Identity;
 
@@ -333,7 +333,7 @@ public partial class Editor : Control
 		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
 		{
 			await TakeScreenshot();
-			GameManager.Instance.SaveTrack(path);
+			TrackManager.Instance.SaveTrack(path);
 		}
 	}
 

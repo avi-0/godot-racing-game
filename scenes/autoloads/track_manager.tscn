@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://h2rtfcni83w4"]
+
+[ext_resource type="Script" uid="uid://dtgsr50lq1qbi" path="res://scripts/TrackManager.cs" id="1_qsppu"]
+[ext_resource type="PackedScene" uid="uid://ywlk133yau03" path="res://scenes/game/track_template.tscn" id="1_ul83l"]
+
+[node name="TrackManager" type="Node" node_paths=PackedStringArray("Track")]
+script = ExtResource("1_qsppu")
+Track = NodePath("Track")
+
+[node name="Track" parent="." instance=ExtResource("1_ul83l")]

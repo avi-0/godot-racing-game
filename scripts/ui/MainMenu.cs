@@ -154,7 +154,7 @@ public partial class MainMenu : Control
 			_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
 			GarageNode.AddChild(_loadedCar);
 		
-			_loadedCar.GlobalTransform = GameManager.Instance.GetStartPoint();
+			_loadedCar.GlobalTransform = TrackManager.Instance.GetStartPoint();
 			_loadedCar.ResetPhysicsInterpolation();
 
 			GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
@@ -192,16 +192,16 @@ public partial class MainMenu : Control
 		IsVisible = false;
 		LoadGarageCar();
 
-		GameManager.Instance.NewTrack();
+		TrackManager.Instance.NewTrack();
 
-		GameManager.Instance.Track.Options.AuthorName = SettingsManager.Instance.GetLocalPlayerName();
+		TrackManager.Instance.Track.Options.AuthorName = SettingsManager.Instance.GetLocalPlayerName();
 		
 		Editor.IsRunning = true;
 		Editor.SetupOptions();
 
 		await GDTask.ToSignal(Editor, Editor.SignalName.Exited);
 
-		LoadGarageCar(GameManager.CarsPath + GameManager.Instance.Track.Options.CarType);
+		LoadGarageCar(GameManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
@@ -212,12 +212,12 @@ public partial class MainMenu : Control
 		IsVisible = false;
 		LoadGarageCar();
 
-		GameManager.Instance.OpenTrack(path);
+		TrackManager.Instance.OpenTrack(path);
 		GameManager.Instance.Play();
 
 		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 		
-		LoadGarageCar(GameManager.CarsPath + GameManager.Instance.Track.Options.CarType);
+		LoadGarageCar(GameManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
@@ -229,7 +229,7 @@ public partial class MainMenu : Control
 		
 		foreach (var trackPath in trackList)
 		{
-			var options = GameManager.Instance.GetTrackOptions(basePath + trackPath);
+			var options = TrackManager.Instance.GetTrackOptions(basePath + trackPath);
 			
 			if (options == null)
 				continue;

@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Newtonsoft.Json;
 using racingGame.data;
 
 namespace racingGame;
 
 public partial class GameManager : Node
 {
+	public static GameManager Instance;
+	
+	
 	public enum CarCameraMode
 	{
 		Orbit,
@@ -18,7 +20,6 @@ public partial class GameManager : Node
 	
 	[Export] public PackedScene CarScene;
 	[Export] public AudioStreamPlayer MusicPlayer;
-	[Export] public Track Track;
 	[Export] public Control PauseMenu;
 	[Export] public Control ScreenLayoutSlot;
 
@@ -37,8 +38,6 @@ public partial class GameManager : Node
 	[Signal]
 	public delegate void ViewportSettingsChangedEventHandler();
 	
-
-	public static GameManager Instance;
 	
 	// constants that hui znaet where they should be
 	public const int BlockLayer = 1;
@@ -63,8 +62,6 @@ public partial class GameManager : Node
 		GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
 		
 		SetScreenLayout(SingleplayerScreenLayout);
-
-		NewTrack();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -114,7 +111,7 @@ public partial class GameManager : Node
 			_localCars = new();
 		}
 		
-		GameModeController.CurrentGameMode.InitTrack(Track);
+		GameModeController.CurrentGameMode.InitTrack(TrackManager.Instance.Track);
 
 		_localPlayerIds = new();
 		foreach (var viewport in _screenLayout.PlayerViewports)
@@ -123,7 +120,7 @@ public partial class GameManager : Node
 			_localCars.Add(car);
 			
 			AddChild(car);
-			car.GlobalTransform = GetStartPoint();
+			car.GlobalTransform = TrackManager.Instance.GetStartPoint();
 			car.Started();
 
 			car.RestartRequested += LocalCarOnRestartRequested;
@@ -210,67 +207,9 @@ public partial class GameManager : Node
 		Play();
 	}
 
-	public Transform3D GetStartPoint()
-	{
-		foreach (var block in Track.FindChildren("*", "Block", false).Cast<Block>())
-			if (block.IsStart)
-				return block.SpawnPoint;
-
-		return Transform3D.Identity;
-	}
-
-	public void OpenTrack(string path)
-	{
-		GD.Print($"Opening track at {path}");
-		
-		Track.Load(Jz.Load<TrackData>(path));
-
-		ApplyShadowSettings();
-
-		GameModeController.CurrentGameMode.InitTrack(Track);
-		GD.Print("Track UID: " + GetLoadedTrackUid());
-	}
-
-	public void ApplyShadowSettings()
-	{
-		GetTree().SetGroup("light_directional_shadow", "shadow_enabled", DirectionalShadowsEnabled);
-	}
-
-	public void SaveTrack(string path)
-	{
-		GD.Print($"Saving track as {path}");
-
-		Track.Options.Uid = Guid.NewGuid().ToString();
-		
-		GD.Print($"New Track UID: {GetLoadedTrackUid()}");
-		
-		Jz.Save(path, Track.Save());
-	}
-
 	public IOrderedEnumerable<string> LoadCarList()
 	{
 		return ResourceLoader.ListDirectory(CarsPath).ToList().Order();
-	}
-
-	public TrackOptions GetTrackOptions(string path)
-	{
-		try
-		{
-			var data = Jz.Load<TrackData>(path);
-
-			return data.Options;
-		}
-		catch (Exception e)
-		{
-			GD.PushError(e);
-			return null;
-		}
-	}
-
-	public void NewTrack()
-	{
-		Track.GetNode("Sky3D").GetNode("TimeOfDay").Set("current_time", 10.0f);
-		Track.Load(new TrackData());
 	}
 
 	private float GuessResolutionScaling()
@@ -282,11 +221,6 @@ public partial class GameManager : Node
 		}
 
 		return DisplayServer.ScreenGetScale(); // only works on macOS and Linux
-	}
-
-	public string GetLoadedTrackUid()
-	{
-		return Track.Options.Uid;
 	}
 
 	public void NotifyViewportSettingsChanged()
