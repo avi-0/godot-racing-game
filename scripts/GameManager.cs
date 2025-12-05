@@ -99,11 +99,10 @@ public partial class GameManager : Node
 		
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
-			var car = CarManager.Instance.CreatePlayerCar();
-			
-			car.RestartRequested += LocalCarOnRestartRequested;
+			var id = Guid.NewGuid();
+			GameModeController.CurrentGameMode.AddPlayer(id);
 
-			viewport.Car = car;
+			viewport.PlayerId = id;
 		}
 		
 		_isPlaying = true;

@@ -16,9 +16,8 @@ public partial class CarManager : Node
 	[Export] public PackedScene CarScene;
 	
 	
-	private List<Car> _localCars = new();
-	private Dictionary<Car, int> _localPlayerIds = new();
-	
+	private List<Car> _cars = new();
+	private Dictionary<Guid, Car> _playerCarsById = new();
 	
 	
 	public override void _Ready()
@@ -45,32 +44,44 @@ public partial class CarManager : Node
 
 	public void Clear()
 	{
-		foreach (var car in _localCars)
+		foreach (var car in _cars)
 		{
 			RemoveChild(car);
 			car.QueueFree();
 			
-			_localCars = new();
+			_cars = new();
 		}
 		
-		_localPlayerIds = new();
+		_playerCarsById = new();
 	}
 
-	public Car CreatePlayerCar()
+	public Car GetPlayerCarById(Guid id)
+		=> _playerCarsById.GetValueOrDefault(id);
+
+	public void DestroyPlayerCar(Guid id)
 	{
+		if (_playerCarsById.GetValueOrDefault(id) is Car car)
+		{
+			RemoveChild(car);
+			_cars.Remove(car);
+			
+			car.QueueFree();
+		}
+	}
+
+	public Car CreatePlayerCar(Guid id)
+	{
+		DestroyPlayerCar(id);
+		
 		var car = CarScene.Instantiate<Car>();
-		_localCars.Add(car);
+		_cars.Add(car);
+		_playerCarsById[id] = car;
 			
 		AddChild(car);
 		car.GlobalTransform = TrackManager.Instance.GetStartPoint();
 		car.Started();
 		
 		car.SetPlayerName(SettingsManager.Instance.GetLocalPlayerName());
-			
-		if (!_localPlayerIds.ContainsKey(car))
-			_localPlayerIds[car] = GameModeController.CurrentGameMode.SpawnPlayer(true, car);
-		else
-			GameModeController.CurrentGameMode.RespawnPlayer(_localPlayerIds[car], car);
 
 		return car;
 	}

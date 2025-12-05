@@ -20,7 +20,7 @@ public partial class PlayerViewport : SubViewport
 	[Export] public int LocalPlayerId = 0;
 	
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
-	public Car Car;
+	public Guid PlayerId;
 	public int StartTimerSeconds = -1;
 
 	private CarInputs _inputs;
@@ -49,6 +49,9 @@ public partial class PlayerViewport : SubViewport
 			return null;
 		}
 	}
+
+
+	public Car Car => CarManager.Instance.GetPlayerCarById(PlayerId);
 
 
 	public override void _Ready()
@@ -133,7 +136,7 @@ public partial class PlayerViewport : SubViewport
 		}
 		else if (@event.IsActionPressed(InputActionNames.Restart))
 		{
-			Car.InputRestart();
+			GameModeController.CurrentGameMode.RestartPlayer(PlayerId);
 			SetInputAsHandled();
 		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
@@ -152,6 +155,6 @@ public partial class PlayerViewport : SubViewport
 	{
 		FinishPanel.Hide();
 		Input.MouseMode = Input.MouseModeEnum.Hidden;
-		GameManager.Instance.LocalCarOnRestartRequested();
+		GameModeController.CurrentGameMode.RestartPlayer(PlayerId);
 	}
 }

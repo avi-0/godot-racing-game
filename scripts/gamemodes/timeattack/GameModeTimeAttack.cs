@@ -10,7 +10,7 @@ public class GameModeTimeAttack : IGameMode
 {
 	private TimeAttackMap _currentTrack;
 	private bool _inEditor = false;
-	private IList<TimeAttackPlayer> _players;
+	private Dictionary<Guid, TimeAttackPlayer> _players;
 
 	private bool _running = false;
 
@@ -26,7 +26,7 @@ public class GameModeTimeAttack : IGameMode
 
 	public void Tick()
 	{
-		for (var playerId = 0; playerId < _players.Count; playerId++)
+		foreach (var playerId in _players.Keys)
 		{
 			var player = _players[playerId];
 
@@ -78,7 +78,7 @@ public class GameModeTimeAttack : IGameMode
 	public void InitTrack(Track track)
 	{
 		_currentTrack = new TimeAttackMap(track);
-		_players = new List<TimeAttackPlayer>();
+		_players = new();
 
 		if (track.Options.Uid == "0")
 			_inEditor = true;
@@ -105,14 +105,24 @@ public class GameModeTimeAttack : IGameMode
 		}
 	}
 
-	public int SpawnPlayer(bool localPlayer, Car playerCar)
+	public void AddPlayer(Guid id)
 	{
-		var playerId = _players.Count;
-		_players.Add(new TimeAttackPlayer(playerId, localPlayer, playerCar));
-		var player = _players[playerId];
+		RestartPlayer(id);
+	}
 
+	public void RestartPlayer(Guid id)
+	{
+		CarManager.Instance.CreatePlayerCar(id);
+		
+		var player = new TimeAttackPlayer(id, true);
+		
 		player.SpawnTime = DateTime.Now;
+		player.RaceStartTime = new DateTime();
 		player.CheckPointsCollected = new List<int>();
+		player.LapsDone = 0;
+		player.InGame = true;
+		player.HasFinished = false;
+		player.GhostRecording = new Ghost();
 
 		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
 		if (player.LocalPlayer)
@@ -127,35 +137,7 @@ public class GameModeTimeAttack : IGameMode
 			{
 				player.PbTime = loadedPb;
 			}
-		}
-
-		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
-		{
-			player.PlayerCar.HeadLight.Visible = true;
-		}
-		
-		playerCar.PlayerId = playerId;
-		_players[playerId] = player;
-		return playerId;
-	}
-
-	public void RespawnPlayer(int playerId, Car playerCar)
-	{
-		var player = _players[playerId];
-		
-		player.PlayerCar = playerCar;
-		player.SpawnTime = DateTime.Now;
-		player.RaceStartTime = new DateTime();
-		player.CheckPointsCollected = new List<int>();
-		player.LapsDone = 0;
-		player.InGame = true;
-		player.HasFinished = false;
-		player.GhostRecording = new Ghost();
-
-		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
-		
-		if (player.LocalPlayer)
-		{
+			
 			if (player.PlayerGhostCar != null)
 			{
 				player.PlayerGhostCar.QueueFree();
@@ -170,20 +152,20 @@ public class GameModeTimeAttack : IGameMode
 				//player.PlayerGhostCar.SetPlayerName(player.PBGhost.PlayerName); // почемуто ставит имя обоям машинам
 			}
 		}
-		
+
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
 		{
 			player.PlayerCar.HeadLight.Visible = true;
 		}
 
-		playerCar.PlayerId = playerId;
-		_players[playerId] = player;
+		player.PlayerCar.PlayerId = id;
+		_players[id] = player;
 	}
 
 	public void KillGame()
 	{
 		_running = false;
-		foreach (TimeAttackPlayer player in _players)
+		foreach (TimeAttackPlayer player in _players.Values)
 		{
 			if (player.PlayerGhostCar != null)
 			{
@@ -272,7 +254,7 @@ public class GameModeTimeAttack : IGameMode
 
 	public void UpdateHud(PlayerViewport viewport)
 	{
-		var player = _players[viewport.Car.PlayerId];
+		var player = _players[viewport.PlayerId];
 
 		viewport.TrackInfoLabel.Text = GameModeUtils.FormatTrackInfo(_currentTrack.Track.Options.Name, _currentTrack.Track.Options.AuthorName);
 		viewport.TimeLabel.Text = GameModeUtils.FormatRaceTime(player.CurrentRaceTime);

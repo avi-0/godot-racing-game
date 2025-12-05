@@ -6,7 +6,7 @@ namespace racingGame;
 
 public struct TimeAttackPlayer
 {
-	public int PlayerId { get; init; }
+	public Guid PlayerId { get; init; }
 
 	public bool LocalPlayer { get; set; } = false;
 	public bool InGame { get; set; } = true;
@@ -18,8 +18,7 @@ public struct TimeAttackPlayer
 	public DateTime SpawnTime { get; set; }
 	public TimeSpan CurrentRaceTime { get; set; }
 	public TimeSpan PbTime { get; set; }
-
-	public Car PlayerCar { get; set; }
+	
 	public Car PlayerGhostCar { get; set; }
 
 	public bool HasFinished = false;
@@ -28,11 +27,12 @@ public struct TimeAttackPlayer
 
 	public Ghost PBGhost { get; set; } = new Ghost();
 	public Ghost GhostRecording { get; set; } = new Ghost();
+
+	public Car PlayerCar => CarManager.Instance.GetPlayerCarById(PlayerId);
 	
-	public TimeAttackPlayer(int playerId, bool localPlayer, Car playerCar)
+	public TimeAttackPlayer(Guid playerId, bool localPlayer)
 	{
 		PlayerId = playerId;
 		LocalPlayer = localPlayer;
-		PlayerCar = playerCar;
 	}
 }

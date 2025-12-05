@@ -70,7 +70,7 @@ public partial class Car : RigidBody3D
 		}
 	}
 	
-	public int PlayerId;
+	public Guid PlayerId;
 	public bool AcceptsInputs { get; set; } = false;
 
 	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
