@@ -85,7 +85,7 @@ public class GameModeTimeAttack : IGameMode
 		else
 			_inEditor = false;
 
-		GameManager.Instance.SelectCarScene(track.Options.CarType);
+		CarManager.Instance.SelectCarScene(track.Options.CarType);
 
 		var blockCount = 0;
 		foreach (var block in track.FindChildren("*", "Block", false).Cast<Block>())
@@ -163,7 +163,7 @@ public class GameModeTimeAttack : IGameMode
 			}
 			if (!player.PBGhost.Empty)
 			{
-				player.PlayerGhostCar = GameManager.Instance.CreateCar();
+				player.PlayerGhostCar = CarManager.Instance.CreateCar();
 				player.PlayerGhostCar.IsLocallyControlled = false;
 				player.PlayerGhostCar.IsGhost = true;
 				player.PlayerGhostCar.Position = player.PlayerCar.Position;

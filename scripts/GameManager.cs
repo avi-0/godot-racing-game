@@ -18,7 +18,6 @@ public partial class GameManager : Node
 	}
 	
 	
-	[Export] public PackedScene CarScene;
 	[Export] public AudioStreamPlayer MusicPlayer;
 	[Export] public Control PauseMenu;
 	[Export] public Control ScreenLayoutSlot;
@@ -42,11 +41,8 @@ public partial class GameManager : Node
 	// constants that hui znaet where they should be
 	public const int BlockLayer = 1;
 	public const int CarLayer = 2;
-	public const string CarsPath = "res://scenes/cars/";
 	
 	private bool _isPlaying = false;
-	private List<Car> _localCars = new();
-	private Dictionary<Car, int> _localPlayerIds = new();
 
 	public Viewport RootViewport;
 	private ScreenLayout _screenLayout;
@@ -95,41 +91,17 @@ public partial class GameManager : Node
 		SetViewportsActive(false);
 	}
 
-	public void SelectCarScene(string scenePath)
-	{
-		CarScene = GD.Load<PackedScene>(CarsPath + scenePath);
-	}
-
 	public void Play()
 	{
-		foreach (var car in _localCars)
-		{
-			RemoveChild(car);
-			car.QueueFree();
-			
-			_localCars = new();
-		}
+		CarManager.Instance.Clear();
 		
 		GameModeController.CurrentGameMode.InitTrack(TrackManager.Instance.Track);
-
-		_localPlayerIds = new();
+		
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
-			var car = CarScene.Instantiate<Car>();
-			_localCars.Add(car);
+			var car = CarManager.Instance.CreatePlayerCar();
 			
-			AddChild(car);
-			car.GlobalTransform = TrackManager.Instance.GetStartPoint();
-			car.Started();
-
 			car.RestartRequested += LocalCarOnRestartRequested;
-		
-			car.SetPlayerName(SettingsManager.Instance.GetLocalPlayerName());
-			
-			if (!_localPlayerIds.ContainsKey(car))
-				_localPlayerIds[car] = GameModeController.CurrentGameMode.SpawnPlayer(true, car);
-			else
-				GameModeController.CurrentGameMode.RespawnPlayer(_localPlayerIds[car], car);
 
 			viewport.Car = car;
 		}
@@ -144,30 +116,16 @@ public partial class GameManager : Node
 		SetViewportsActive(true);
 	}
 
-	public Car CreateCar()
-	{
-		var car = CarScene.Instantiate<Car>();
-		AddChild(car);
-		return car;
-	}
-
 	public void Stop()
 	{
 		SetViewportsActive(false);
 		
-		foreach (var car in _localCars)
-		{
-			RemoveChild(car);
-			car.QueueFree();
-
-			_localCars = new();
-		}
+		CarManager.Instance.Clear();
 
 		_isPlaying = false;
 
 		EmitSignalStoppedPlaying();
-
-		_localPlayerIds = new();
+		
 		GameModeController.CurrentGameMode.KillGame();
 
 		MusicPlayer.Stop();
@@ -204,11 +162,6 @@ public partial class GameManager : Node
 	public void LocalCarOnRestartRequested()
 	{
 		Play();
-	}
-
-	public IOrderedEnumerable<string> LoadCarList()
-	{
-		return ResourceLoader.ListDirectory(CarsPath).ToList().Order();
 	}
 
 	private float GuessResolutionScaling()

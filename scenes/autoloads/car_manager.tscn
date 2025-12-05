@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqo1qfo7ff5p0"]
+
+[ext_resource type="Script" uid="uid://byb4ns3dcrrth" path="res://scripts/CarManager.cs" id="1_b5muo"]
+
+[node name="CarManager" type="Node"]
+script = ExtResource("1_b5muo")

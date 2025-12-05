@@ -833,7 +833,7 @@ public partial class Editor : Control
 		carType.SetText(0, "CarType");
 		carType.SetCellMode(1, TreeItem.TreeCellMode.Range);
 
-		var paths = GameManager.Instance.LoadCarList();
+		var paths = CarManager.Instance.LoadCarList();
 		foreach (var carPath in paths) carType.SetText(1, carType.GetText(1) + carPath + ",");
 		carType.SetText(1, carType.GetText(1).Trim(','));
 		carType.SetEditable(1, true);

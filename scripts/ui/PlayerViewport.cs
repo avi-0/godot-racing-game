@@ -1,7 +1,8 @@
-using Godot;
 using System;
-using racingGame;
+using Godot;
 using racingGame.data;
+
+namespace racingGame;
 
 public partial class PlayerViewport : SubViewport
 {

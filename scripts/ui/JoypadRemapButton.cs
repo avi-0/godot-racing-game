@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Array = Godot.Collections.Array;
 
 namespace racingGame;
 

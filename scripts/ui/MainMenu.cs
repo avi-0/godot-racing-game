@@ -58,7 +58,7 @@ public partial class MainMenu : Control
 		SettingsButton.Pressed += () => OnSettingsButtonPressed().Forget();
 		SplitscreenFoldableContainer.Hidden += () => SplitscreenFoldableContainer.Folded = true;
 		
-		_carList = GameManager.Instance.LoadCarList();
+		_carList = CarManager.Instance.LoadCarList();
 		LoadGarageCar(DefaultCarPath);
 		
 		AddCampaign("Tutorial", "tutorial");
@@ -124,7 +124,7 @@ public partial class MainMenu : Control
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
 				button.Text = car;
-				button.Pressed += () => LoadGarageCar(GameManager.CarsPath + car);
+				button.Pressed += () => LoadGarageCar(CarManager.CarsPath + car);
 
 				GarageContainer.AddChild(button);
 			}
@@ -201,7 +201,7 @@ public partial class MainMenu : Control
 
 		await GDTask.ToSignal(Editor, Editor.SignalName.Exited);
 
-		LoadGarageCar(GameManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
+		LoadGarageCar(CarManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
@@ -217,7 +217,7 @@ public partial class MainMenu : Control
 
 		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 		
-		LoadGarageCar(GameManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
+		LoadGarageCar(CarManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
 		_hadFocus.GrabFocus();
 	}
