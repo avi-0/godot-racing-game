@@ -1,0 +1,56 @@
+[gd_scene load_steps=13 format=3 uid="uid://dlbr8yolvk5gj"]
+
+[ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/ui/UiSoundPlayer.cs" id="1_vb3yo"]
+[ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_xms1e"]
+[ext_resource type="Script" uid="uid://bl5cpfcp361n1" path="res://scripts/ui/UiSound.cs" id="3_kqb5d"]
+[ext_resource type="AudioStream" uid="uid://cbh2o7irh5lmy" path="res://assets/audio/ui/switch_004.ogg" id="4_1s1fn"]
+[ext_resource type="AudioStream" uid="uid://c11gwvvxqgkr" path="res://assets/audio/ui/select_001.ogg" id="5_jis51"]
+[ext_resource type="AudioStream" uid="uid://b2kvcbs1acbcs" path="res://assets/audio/ui/toggle_002.ogg" id="6_fwclh"]
+
+[sub_resource type="Resource" id="Resource_ftsea"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("2_xms1e")
+PitchScale = 0.8
+VolumeDb = -3.0
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_vaxfo"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("2_xms1e")
+VolumeDb = -3.0
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_10c2w"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("4_1s1fn")
+PitchScale = 1.122
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_otnwt"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("4_1s1fn")
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_5v6r0"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("5_jis51")
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_uyinl"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("6_fwclh")
+PitchScale = 0.6
+VolumeDb = -6.0
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[node name="UISoundPlayer" type="Node" node_paths=PackedStringArray("Player")]
+script = ExtResource("1_vb3yo")
+BlockErasedSound = SubResource("Resource_ftsea")
+BlockPlacedSound = SubResource("Resource_vaxfo")
+CheckpointCollectedSound = SubResource("Resource_10c2w")
+LapFinishedSound = SubResource("Resource_otnwt")
+Player = NodePath("AudioStreamPlayer")
+RaceCountDownSound = SubResource("Resource_5v6r0")
+RaceStartSound = SubResource("Resource_uyinl")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -7,8 +7,6 @@ namespace racingGame;
 public partial class Car : RigidBody3D
 {
 	[Signal]
-	public delegate void PauseRequestedEventHandler();
-	[Signal]
 	public delegate void RestartRequestedEventHandler();
 
 	[ExportCategory("Components")] 
@@ -140,11 +138,6 @@ public partial class Car : RigidBody3D
 	public void InputRestart()
 	{
 		EmitSignalRestartRequested();
-	}
-
-	public void InputPause()
-	{
-		EmitSignalPauseRequested();
 	}
 
 	public void InputToggleLights()

@@ -135,11 +135,6 @@ public partial class PlayerViewport : SubViewport
 			Car.InputRestart();
 			SetInputAsHandled();
 		}
-		else if (@event.IsActionPressed(InputActionNames.Pause))
-		{
-			Car.InputPause();
-			SetInputAsHandled();
-		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{
 			Car.InputToggleLights();

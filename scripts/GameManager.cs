@@ -67,6 +67,15 @@ public partial class GameManager : Node
 		NewTrack();
 	}
 
+	public override void _UnhandledInput(InputEvent @event)
+	{ 
+		if (@event.IsActionPressed(InputActionNames.Pause))
+		{
+			RootViewport.SetInputAsHandled();
+			OnPause();
+		}
+	}
+
 	public void SetScreenLayout(PackedScene layoutScene)
 	{
 		if (CurrentScreenLayout == layoutScene)
@@ -118,7 +127,6 @@ public partial class GameManager : Node
 			car.Started();
 
 			car.RestartRequested += LocalCarOnRestartRequested;
-			car.PauseRequested += LocalCarOnPauseRequested;
 		
 			car.SetPlayerName(SettingsManager.Instance.GetLocalPlayerName());
 			
@@ -189,7 +197,7 @@ public partial class GameManager : Node
 		return _isPlaying;
 	}
 
-	private void LocalCarOnPauseRequested()
+	private void OnPause()
 	{
 		if (!PauseMenu.Visible)
 		{
