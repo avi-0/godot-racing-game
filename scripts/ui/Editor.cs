@@ -15,8 +15,6 @@ public partial class Editor : Control
 
 	public const string BlockPath = "res://blocks/";
 
-	public static Editor Singleton;
-
 	private string _blockDirectory;
 	private Transform3D _grid = new(Basis.Identity, Vector3.Zero);
 	private float _gridScale = 8.0f;
@@ -190,8 +188,6 @@ public partial class Editor : Control
 
 	public override void _Ready()
 	{
-		Singleton = this;
-
 		EditorViewport.Input += ViewportInput;
 		EditorViewportContainer.MouseEntered += () => _mouseOverViewport = true;
 		EditorViewportContainer.MouseExited += () => _mouseOverViewport = false;

@@ -29,6 +29,7 @@ public partial class MainMenu : Control
 	[Export] public LineEdit PlayerNameText;
 	[Export] public Control CampaignControl;
 	[Export] public Container CampaignContainer;
+	[Export] public Editor Editor;
 	
 	[Export(PropertyHint.FilePath)] public string DefaultCarPath;
 
@@ -51,7 +52,7 @@ public partial class MainMenu : Control
 	
 	public override void _Ready()
 	{
-		Editor.Singleton.IsRunning = false;
+		Editor.IsRunning = false;
 
 		GameManager.Instance.ViewportSettingsChanged += OnViewportSettingsChanged;
 		SettingsButton.Pressed += () => OnSettingsButtonPressed().Forget();
@@ -195,10 +196,10 @@ public partial class MainMenu : Control
 
 		GameManager.Instance.Track.Options.AuthorName = SettingsManager.Instance.GetLocalPlayerName();
 		
-		Editor.Singleton.IsRunning = true;
-		Editor.Singleton.SetupOptions();
+		Editor.IsRunning = true;
+		Editor.SetupOptions();
 
-		await GDTask.ToSignal(Editor.Singleton, Editor.SignalName.Exited);
+		await GDTask.ToSignal(Editor, Editor.SignalName.Exited);
 
 		LoadGarageCar(GameManager.CarsPath + GameManager.Instance.Track.Options.CarType);
 		IsVisible = true;

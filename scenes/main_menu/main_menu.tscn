@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=9 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/ui/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://du74tb2gnkhxk" path="res://assets/mashinkilogo.png" id="3_uqeha"]
 [ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/ui/CustomSubViewportContainer.cs" id="3_wem23"]
 [ext_resource type="PackedScene" uid="uid://dosvoo7ovfhv0" path="res://scenes/main_menu/splitscreen_settings.tscn" id="5_wem23"]
+[ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/main_menu/settings_menu.tscn" id="6_3ovsr"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
 action = &"ui_cancel"
@@ -12,7 +13,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +25,7 @@ theme = ExtResource("1_ekxnf")
 script = ExtResource("1_bqqt6")
 PlayButton = NodePath("MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton")
 SettingsButton = NodePath("MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
+SettingsMenu = NodePath("SettingsMenu")
 TrackListPanel = NodePath("TrackListPanel")
 TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer/trackGC")
 MainMenuContainer = NodePath("MainMenu")
@@ -334,6 +336,12 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="SettingsMenu" parent="." instance=ExtResource("6_3ovsr")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
 
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]

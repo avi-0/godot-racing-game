@@ -384,5 +384,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 shortcut = SubResource("Shortcut_wswnh")
 text = "Back"
-
-[connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]

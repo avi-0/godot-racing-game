@@ -40,6 +40,8 @@ public partial class SettingsMenu : Control
 
 	public override void _Ready()
 	{
+		VisibilityChanged += OnVisibilityChanged;
+		
 		SoundSlider.DragEnded += _ => OnSoundSettingChanged();
 		MusicSlider.DragEnded += _ => OnSoundSettingChanged();
 		TDrs.DragEnded += _ => OnGraphicsSettingChanged();
