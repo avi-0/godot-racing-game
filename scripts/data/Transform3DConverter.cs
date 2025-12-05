@@ -3,7 +3,7 @@ using Godot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace racingGame;
+namespace racingGame.data;
 
 public class Transform3DConverter : JsonConverter<Transform3D>
 {

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0jr1ye67yedr"]
 
-[ext_resource type="Script" uid="uid://lx8jjvvs00lo" path="res://scripts/ScreenLayout.cs" id="1_q7yym"]
-[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/CustomSubViewportContainer.cs" id="2_mr4fu"]
+[ext_resource type="Script" uid="uid://lx8jjvvs00lo" path="res://scripts/ui/ScreenLayout.cs" id="1_q7yym"]
+[ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/ui/CustomSubViewportContainer.cs" id="2_mr4fu"]
 [ext_resource type="PackedScene" uid="uid://b1yh8684bxiy8" path="res://scenes/game/player_viewport.tscn" id="2_qtk0u"]
 
 [node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("PlayerViewports")]

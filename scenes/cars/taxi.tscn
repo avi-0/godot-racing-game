@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://lejlxkwbedup"]
 
-[ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_denii"]
-[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_sw6ji"]
+[ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_denii"]
+[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_sw6ji"]
 [ext_resource type="PackedScene" uid="uid://cabfsl4hd2o5y" path="res://assets/kenney/carkit/taxi.glb" id="4_sw6ji"]
 [ext_resource type="Curve" uid="uid://cxhyv7al6iqul" path="res://scenes/cars_extras/curves/taxi_rear.tres" id="4_vwi5m"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="5_0wjsq"]

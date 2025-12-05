@@ -5,7 +5,7 @@ using Godot;
 using Newtonsoft.Json;
 using FileAccess = Godot.FileAccess;
 
-namespace racingGame;
+namespace racingGame.data;
 
 public static class Jz
 {

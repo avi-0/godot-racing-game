@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dok0if2iog0no"]
 
-[ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_qtbni"]
-[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_dg6r6"]
+[ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_qtbni"]
+[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_dg6r6"]
 [ext_resource type="PackedScene" uid="uid://csskae458c73v" path="res://assets/kenney/carkit/race-future.glb" id="3_qtbni"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_dg6r6"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="5_qtbni"]

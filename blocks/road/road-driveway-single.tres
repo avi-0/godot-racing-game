@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://beqrpfwot12c0"]
 
 [ext_resource type="Texture2D" uid="uid://db75l863njrga" path="res://blocks/road/_images/road-driveway-single.png" id="1_50ovq"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_jvfr1"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_jvfr1"]
 
 [resource]
 script = ExtResource("1_jvfr1")

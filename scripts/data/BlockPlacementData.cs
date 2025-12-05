@@ -1,7 +1,7 @@
 using Godot;
 using Newtonsoft.Json;
 
-namespace racingGame;
+namespace racingGame.data;
 
 public class BlockPlacementData
 {

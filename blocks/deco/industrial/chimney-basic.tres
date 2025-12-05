@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dy7ln5ytcha7v"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_efycx"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_efycx"]
 [ext_resource type="Texture2D" uid="uid://ddk51femf34n4" path="res://blocks/deco/industrial/_images/chimney-basic.png" id="1_pjsbq"]
 
 [resource]

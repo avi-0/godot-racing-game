@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dyq1bmpbbvyc3"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_tj3sc"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_tj3sc"]
 [ext_resource type="Texture2D" uid="uid://bmed8jqdtcgby" path="res://blocks/road/_images/road-bend-sidewalk.png" id="1_wfngo"]
 
 [resource]

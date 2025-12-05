@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://m1qpnrxiyo34"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_cr101"]
-[ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/SettingsMenu.cs" id="2_wswnh"]
+[ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/ui/SettingsMenu.cs" id="2_wswnh"]
 [ext_resource type="Theme" uid="uid://bsps78iirgjnp" path="res://scenes/main_menu/controls_menu_theme.tres" id="3_7upf4"]
-[ext_resource type="Script" uid="uid://bqqa0tfwkhmp0" path="res://scripts/KeyboardRemapButton.cs" id="4_2jsdb"]
-[ext_resource type="Script" uid="uid://1uq1ee3c3fje" path="res://scripts/JoypadRemapButton.cs" id="5_t0huu"]
+[ext_resource type="Script" uid="uid://bqqa0tfwkhmp0" path="res://scripts/ui/KeyboardRemapButton.cs" id="4_2jsdb"]
+[ext_resource type="Script" uid="uid://1uq1ee3c3fje" path="res://scripts/ui/JoypadRemapButton.cs" id="5_t0huu"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_cr101"]
 action = &"ui_cancel"

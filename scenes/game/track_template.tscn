@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ywlk133yau03"]
 
-[ext_resource type="Script" uid="uid://c1tvycuj08dj6" path="res://scripts/Track.cs" id="1_enrm2"]
+[ext_resource type="Script" uid="uid://c1tvycuj08dj6" path="res://scripts/nodes/Track.cs" id="1_enrm2"]
 [ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/game/track_base.tscn" id="2_h2pho"]
 [ext_resource type="Environment" uid="uid://ctnutos5v0lkx" path="res://scenes/game/track_template_environment.tres" id="3_i06yk"]
 [ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="10_gj4c4"]

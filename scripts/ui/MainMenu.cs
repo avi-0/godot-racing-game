@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Fractural.Tasks;
 using Godot;
+using racingGame.data;
+using racingGame.extensions;
 
 namespace racingGame;
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://cmfa8jnk288i4"]
 
-[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_0wlum"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_0wlum"]
 [ext_resource type="Texture2D" uid="uid://upfjsham8f1m" path="res://assets/kenney/cityroads/road/road-slant-curve_4_colormap.png" id="2_ypl20"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uohxu"]

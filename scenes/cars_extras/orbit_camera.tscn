@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://du0u6oshpc0ql"]
 
-[ext_resource type="Script" uid="uid://docw30sum6w5" path="res://scripts/OrbitCamera.cs" id="1_pn1ox"]
+[ext_resource type="Script" uid="uid://docw30sum6w5" path="res://scripts/nodes/OrbitCamera.cs" id="1_pn1ox"]
 
 [node name="OrbitCamera" type="Node3D" node_paths=PackedStringArray("Camera", "CameraStick", "CameraStickBase")]
 script = ExtResource("1_pn1ox")

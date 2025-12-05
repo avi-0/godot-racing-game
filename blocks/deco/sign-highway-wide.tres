@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://5fwlqa22cg3i"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_p5qor"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_p5qor"]
 [ext_resource type="Texture2D" uid="uid://ch7gn2efpackq" path="res://blocks/deco/_images/sign-highway-wide.png" id="1_rfauq"]
 
 [resource]

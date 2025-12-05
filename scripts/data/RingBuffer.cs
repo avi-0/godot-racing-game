@@ -1,6 +1,4 @@
-using System;
-
-namespace racingGame;
+namespace racingGame.data;
 
 public class RingBuffer<T>(int capacity)
 {

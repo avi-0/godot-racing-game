@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using racingGame.data;
 
 namespace racingGame;
 

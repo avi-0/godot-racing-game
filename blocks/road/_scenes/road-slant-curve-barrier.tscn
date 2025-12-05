@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://ckircknxu06au"]
 
-[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/Block.cs" id="1_jnc5l"]
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_jnc5l"]
 [ext_resource type="Material" uid="uid://f07og64j5abt" path="res://assets/kenney/cityroads/materials/colormap.009.tres" id="2_v7kvm"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_g6u3l"]

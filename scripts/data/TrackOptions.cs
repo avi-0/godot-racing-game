@@ -1,4 +1,4 @@
-namespace racingGame;
+namespace racingGame.data;
 
 public class TrackOptions
 {

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://chnfx6s5yw0dn"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_kgaea"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_kgaea"]
 [ext_resource type="Texture2D" uid="uid://dd7vv0oakvw5f" path="res://blocks/deco/commercial/_images/detail-overhang.png" id="1_oywf7"]
 
 [resource]

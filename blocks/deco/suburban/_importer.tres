@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockDirectoryImporter" load_steps=2 format=3 uid="uid://cntm4ypqdaxcl"]
 
-[ext_resource type="Script" uid="uid://d0mlqj4pey0s3" path="res://scripts/BlockDirectoryImporter.cs" id="1_ouvum"]
+[ext_resource type="Script" uid="uid://d0mlqj4pey0s3" path="res://scripts/resources/BlockDirectoryImporter.cs" id="1_ouvum"]
 
 [resource]
 script = ExtResource("1_ouvum")

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dcmlel4a0vhw2"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_f2pyk"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_f2pyk"]
 [ext_resource type="Texture2D" uid="uid://dvtye2eqpidkc" path="res://blocks/deco/commercial/_images/building-skyscraper-b.png" id="1_r6b1l"]
 
 [resource]

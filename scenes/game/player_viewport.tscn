@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1yh8684bxiy8"]
 
 [ext_resource type="Theme" uid="uid://cqn7x347w3gke" path="res://scenes/game/hud_theme.tres" id="1_7nque"]
-[ext_resource type="Script" uid="uid://bqo10ua034t21" path="res://scripts/PlayerViewport.cs" id="1_hc2ln"]
+[ext_resource type="Script" uid="uid://bqo10ua034t21" path="res://scripts/ui/PlayerViewport.cs" id="1_hc2ln"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="2_hc2ln"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_vtaks"]

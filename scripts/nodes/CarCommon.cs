@@ -1,5 +1,7 @@
 using Godot;
 
+namespace racingGame;
+
 public partial class CarCommon : Node3D
 {
 	[Export] public OrbitCamera OrbitCamera;

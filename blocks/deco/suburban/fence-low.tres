@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cgpc7nabf5wn8"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_55cof"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_55cof"]
 [ext_resource type="Texture2D" uid="uid://dmlox4au6spad" path="res://blocks/deco/suburban/_images/fence-low.png" id="1_63clx"]
 
 [resource]

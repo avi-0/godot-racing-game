@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cnp46g02pd64y"]
 
 [ext_resource type="Texture2D" uid="uid://yatu7xi5yje2" path="res://blocks/platform/_images/tile-high.png" id="1_0yi3r"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_73hb2"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_73hb2"]
 
 [resource]
 script = ExtResource("1_73hb2")

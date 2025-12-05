@@ -1,6 +1,6 @@
 using Godot;
 
-namespace racingGame;
+namespace racingGame.extensions;
 
 public static class NodeExtensions
 {

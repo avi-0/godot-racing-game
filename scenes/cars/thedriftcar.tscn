@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://crc2q38d8anpl"]
 
-[ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/Car.cs" id="1_micox"]
+[ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_micox"]
 [ext_resource type="PackedScene" uid="uid://biodx1fq5tguf" path="res://assets/kenney/carkit/sedan-sports.glb" id="2_g5cig"]
-[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/WheelConfig.cs" id="2_glvfi"]
+[ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_glvfi"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_glvfi"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]

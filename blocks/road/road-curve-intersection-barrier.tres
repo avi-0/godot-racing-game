@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bxvijuavewtuf"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_gfhiw"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_gfhiw"]
 [ext_resource type="Texture2D" uid="uid://do1l2icsxxv0w" path="res://blocks/road/_images/road-curve-intersection-barrier.png" id="1_suuxf"]
 
 [resource]

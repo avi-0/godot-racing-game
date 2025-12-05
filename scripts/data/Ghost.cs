@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace racingGame;
+namespace racingGame.data;
 
 public class Ghost
 {

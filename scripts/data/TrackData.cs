@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace racingGame;
+namespace racingGame.data;
 
 public class TrackData
 {

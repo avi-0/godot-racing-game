@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bj28nvgd7c14d"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_hoe1q"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_hoe1q"]
 [ext_resource type="Texture2D" uid="uid://67qa5io00etb" path="res://blocks/deco/industrial/_images/detail-tank.png" id="1_r041m"]
 
 [resource]

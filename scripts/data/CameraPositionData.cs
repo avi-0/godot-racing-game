@@ -1,6 +1,6 @@
 using Godot;
 
-namespace racingGame;
+namespace racingGame.data;
 
 public class CameraPositionData
 {

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1a2se6oqams7"]
 
-[ext_resource type="Script" uid="uid://dqnmdk4ouatc4" path="res://scripts/CarCommon.cs" id="1_qexnt"]
+[ext_resource type="Script" uid="uid://dqnmdk4ouatc4" path="res://scripts/nodes/CarCommon.cs" id="1_qexnt"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="2_84gro"]
 [ext_resource type="AudioStream" uid="uid://pg86qjlo7cjf" path="res://assets/audio/carsfx-1.wav" id="3_3mehs"]
 

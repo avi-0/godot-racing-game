@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using racingGame.data;
 
 namespace racingGame;
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dof0o4n8nso8k"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/BlockRecord.cs" id="1_en3yc"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_en3yc"]
 [ext_resource type="Texture2D" uid="uid://c4n14afa3fhmv" path="res://blocks/road/_images/road-crossroad-line.png" id="1_np8ov"]
 
 [resource]

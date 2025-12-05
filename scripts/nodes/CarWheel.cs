@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using racingGame;
+using racingGame.data;
 
 public partial class CarWheel : ShapeCast3D
 {
