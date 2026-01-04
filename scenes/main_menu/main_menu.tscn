@@ -13,7 +13,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +39,7 @@ GarageContainer = NodePath("GarageWindow/MarginContainer/HBoxContainer/PanelCont
 PlayerNameText = NodePath("GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit")
 CampaignControl = NodePath("CampaignPanel")
 CampaignContainer = NodePath("CampaignPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer/CampaignContainer")
+CarDescLabel = NodePath("GarageWindow/MarginContainer/HBoxContainer/MarginContainer/Panel/CarDescriptionLabel")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
 [node name="GarageViewportContainer" type="Container" parent="."]
@@ -336,6 +337,24 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(350, 300)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Panel" type="Panel" parent="GarageWindow/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CarDescriptionLabel" type="RichTextLabel" parent="GarageWindow/MarginContainer/HBoxContainer/MarginContainer/Panel"]
+layout_mode = 0
+offset_right = 302.0
+offset_bottom = 240.0
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
 
 [node name="SettingsMenu" parent="." instance=ExtResource("6_3ovsr")]
 visible = false

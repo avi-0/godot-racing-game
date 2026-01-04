@@ -30,6 +30,7 @@ public partial class MainMenu : Control
 	[Export] public Control CampaignControl;
 	[Export] public Container CampaignContainer;
 	[Export] public Editor Editor;
+	[Export] public RichTextLabel CarDescLabel;
 	
 	[Export(PropertyHint.FilePath)] public string DefaultCarPath;
 
@@ -123,7 +124,7 @@ public partial class MainMenu : Control
 			{
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
-				button.Text = car;
+				button.Text = GD.Load<PackedScene>(CarManager.CarsPath + car).Instantiate<Car>().CarName;
 				button.Pressed += () => LoadGarageCar(CarManager.CarsPath + car);
 
 				GarageContainer.AddChild(button);
@@ -157,7 +158,11 @@ public partial class MainMenu : Control
 			_loadedCar.GlobalTransform = TrackManager.Instance.GetStartPoint();
 			_loadedCar.ResetPhysicsInterpolation();
 
+			_loadedCar.InputToggleLights();
+			
 			GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
+			
+			CarDescLabel.Text = _loadedCar.CarDescription;
 		}
 	}
 
@@ -238,7 +243,7 @@ public partial class MainMenu : Control
 			{
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
-				button.Text = options.Name + "\n" + options.CarType.Split(".")[0].ToUpper();
+				button.Text = options.Name + "\n" + GD.Load<PackedScene>(CarManager.CarsPath + options.CarType).Instantiate<Car>().CarName;
 					
 				var loadedPb = GameModeUtils.LoadUserPb(options.Uid);
 				if (loadedPb != TimeSpan.Zero)

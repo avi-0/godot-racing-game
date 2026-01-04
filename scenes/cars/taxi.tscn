@@ -92,6 +92,8 @@ SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_vwi5m")
 FrontWheelConfig = SubResource("Resource_lce11")
 RearWheelConfig = SubResource("Resource_lml1i")
+CarName = "Taxi"
+CarDescription = "Straight from the busy and narrow city streets! It's great at hard corners and tight hairpins but i wouldn't take it to a drag race if i were you."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
@@ -115,7 +117,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33500704, 0.22033148, -0.76
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, 0.47616428)
 WheelModel = NodePath("RemoteTransform3D")
-SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.09549509, -0.107789755, 0.053891957)
@@ -124,7 +125,6 @@ remote_path = NodePath("../../taxi/wheel-front-left")
 [node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.262, 0.476)
 WheelModel = NodePath("RemoteTransform3D")
-SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.095, -0.108, 0.054)
@@ -135,7 +135,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.26202178, -0.45746768
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
-SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.09549509, -0.107789755, -0.07626128)
@@ -146,7 +145,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.26202178, -0.4574676
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
-SkidmarkWidth = 0.1
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.094999984, -0.107789755, -0.07626128)

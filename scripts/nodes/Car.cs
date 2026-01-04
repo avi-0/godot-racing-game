@@ -44,6 +44,10 @@ public partial class Car : RigidBody3D
 
 	[ExportCategory("Extras")] 
 	[Export] private protected MeshInstance3D PlayerName3D;
+	
+	[ExportCategory("Descriptions")]
+	[Export] public string CarName = "Default";
+	[Export] public string CarDescription = "No Description";
 
 	public bool IsGhost = false;
 	
