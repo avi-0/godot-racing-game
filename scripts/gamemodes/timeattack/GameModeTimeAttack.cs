@@ -115,15 +115,20 @@ public class GameModeTimeAttack : IGameMode
 		CarManager.Instance.CreatePlayerCar(id);
 		
 		var player = new TimeAttackPlayer(id, true);
-		
+		if (_players.ContainsKey(id))
+		{
+			player = _players[id];
+		}
+
 		player.SpawnTime = DateTime.Now;
 		player.RaceStartTime = new DateTime();
+		player.CurrentRaceTime = TimeSpan.Zero;
 		player.CheckPointsCollected = new List<int>();
 		player.LapsDone = 0;
 		player.InGame = true;
 		player.HasFinished = false;
 		player.GhostRecording = new Ghost();
-
+		
 		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
 		if (player.LocalPlayer)
 		{
@@ -149,6 +154,7 @@ public class GameModeTimeAttack : IGameMode
 				player.PlayerGhostCar.IsLocallyControlled = false;
 				player.PlayerGhostCar.IsGhost = true;
 				player.PlayerGhostCar.Position = player.PlayerCar.Position;
+				player.PlayerGhostCar.Rotation = player.PlayerCar.Rotation;
 				//player.PlayerGhostCar.SetPlayerName(player.PBGhost.PlayerName); // почемуто ставит имя обоям машинам
 			}
 		}
