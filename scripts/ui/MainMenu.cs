@@ -18,6 +18,8 @@ public partial class MainMenu : Control
 	[Export] public Control SettingsMenu;
 	[Export] public Control TrackListPanel;
 	[Export] public GridContainer TrackContainer;
+	[Export] public TextureRect TrackListImage;
+	[Export] public RichTextLabel TrackListLabel;
 	[Export] public Control MainMenuContainer;
 	[Export] public FoldableContainer SplitscreenFoldableContainer;
 	[Export] public Control GarageWindow;
@@ -38,6 +40,8 @@ public partial class MainMenu : Control
 	private IOrderedEnumerable<string> _carList;
 	private Control _hadFocus;
 
+	private string TrackListSelectedTrackPath = "";
+	
 	public bool IsVisible
 	{
 		get => Visible;
@@ -231,6 +235,8 @@ public partial class MainMenu : Control
 	{
 		TrackContainer.DestroyAllChildren();
 		var trackList = LoadTrackList(basePath);
+
+		bool first = true;
 		
 		foreach (var trackPath in trackList)
 		{
@@ -243,16 +249,7 @@ public partial class MainMenu : Control
 			{
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
-				button.Text = options.Name + "\n" + GD.Load<PackedScene>(CarManager.CarsPath + options.CarType).Instantiate<Car>().CarName;
-					
-				var loadedPb = GameModeUtils.LoadUserPb(options.Uid);
-				if (loadedPb != TimeSpan.Zero)
-				{
-					button.Text += "\n" + loadedPb.ToString("mm") + ":" + loadedPb.ToString("ss") + "." + loadedPb.ToString("fff");
-					button.Text += "\n" + GameModeUtils.GetMedalFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime);
-				}
-				
-				button.Pressed += () => OpenTrack(basePath + trackPath).Forget();
+				button.Text = options.Name;
 
 				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
 				
@@ -261,18 +258,24 @@ public partial class MainMenu : Control
 				{
 					image = Image.CreateEmpty(512, 512, true, Image.Format.Rgb8);
 				}
+
+				Image icon = new Image();
+				icon.CopyFrom(image);
+				icon.Resize(128, 128, Image.Interpolation.Cubic);
+				button.SetButtonIcon(ImageTexture.CreateFromImage(icon));
 				
-				image.Resize(320, 320, Image.Interpolation.Lanczos);
-				
-				button.SetButtonIcon(ImageTexture.CreateFromImage(image));
+				button.Pressed += () => TrackListSelectTrack(basePath, trackPath, options, image);
 				
 				TrackContainer.AddChild(button);
+				
+				if (first)
+				{
+					first = false;
+					TrackListSelectTrack(basePath, trackPath, options, image);
+					button.GrabFocus();
+				}
 			}
 		}
-
-		var first = TrackContainer.GetChild(0) as Control;
-		if (first != null)
-			first.GrabFocus();
 	}
 	private IOrderedEnumerable<string> LoadTrackList(string path)
 	{
@@ -280,6 +283,28 @@ public partial class MainMenu : Control
 			.GetFiles()
 			.Where(file => file.EndsWith(".tk.jz"))
 			.ToList().Order();
+	}
+
+	private void TrackListSelectTrack(string basePath, string trackPath, TrackOptions options, Image image)
+	{
+		TrackListLabel.Text = options.Name + "\n" + GD.Load<PackedScene>(CarManager.CarsPath + options.CarType).Instantiate<Car>().CarName;
+		
+		image.Resize(320, 320, Image.Interpolation.Lanczos);
+		TrackListImage.SetTexture(ImageTexture.CreateFromImage(image));
+		
+		var loadedPb = GameModeUtils.LoadUserPb(options.Uid);
+		if (loadedPb != TimeSpan.Zero)
+		{
+			TrackListLabel.Text += "\n" + loadedPb.ToString("mm") + ":" + loadedPb.ToString("ss") + "." + loadedPb.ToString("fff");
+			TrackListLabel.Text += "\n" + GameModeUtils.GetMedalFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime);
+		}
+		
+		TrackListSelectedTrackPath = basePath + trackPath;
+	}
+
+	public void TrackListOnPlayTrackButtonPressed()
+	{
+		OpenTrack(TrackListSelectedTrackPath).Forget();
 	}
 
 	public void OnPlayerSetNewName(string newName)

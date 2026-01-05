@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=11 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/ui/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
@@ -13,7 +13,14 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel")]
+[sub_resource type="Gradient" id="Gradient_3ovsr"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5seab"]
+gradient = SubResource("Gradient_3ovsr")
+width = 320
+height = 320
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "TrackListImage", "TrackListLabel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +34,9 @@ PlayButton = NodePath("MainMenu/MainMenuContainer/PanelContainer/MarginContainer
 SettingsButton = NodePath("MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
 SettingsMenu = NodePath("SettingsMenu")
 TrackListPanel = NodePath("TrackListPanel")
-TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer/trackGC")
+TrackContainer = NodePath("TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer/trackGC")
+TrackListImage = NodePath("TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2/TrackImage")
+TrackListLabel = NodePath("TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2/TrackDesc")
 MainMenuContainer = NodePath("MainMenu")
 SplitscreenFoldableContainer = NodePath("MainMenu/SplitscreenFoldable")
 GarageWindow = NodePath("GarageWindow")
@@ -214,9 +223,16 @@ text = "Back"
 
 [node name="TrackListPanel" type="Control" parent="."]
 visible = false
-anchors_preset = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.5
+offset_top = -490.0
+offset_right = 909.5
+offset_bottom = 490.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -227,38 +243,69 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="TrackListPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TrackListPanel/MarginContainer/Panel"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="trackGC" type="GridContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="trackGC" type="GridContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 
-[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/VBoxContainer/MarginContainer"]
+[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
+
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TrackImage" type="TextureRect" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_5seab")
+
+[node name="TrackDesc" type="RichTextLabel" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 42
+text = "Track Description"
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Play"
 
 [node name="GarageWindow" type="Control" parent="."]
 visible = false
@@ -368,6 +415,7 @@ anchor_right = 0.5
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="pressed" from="CampaignPanel/MarginContainer/Panel/VBoxContainer/MarginContainer/BackButton" to="." method="OnCampaignBack"]
-[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/VBoxContainer/MarginContainer/BackButton" to="." method="OnTrackListBackButton"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/BackButton" to="." method="OnTrackListBackButton"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2/Button" to="." method="TrackListOnPlayTrackButtonPressed"]
 [connection signal="text_changed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]
 [connection signal="pressed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]
