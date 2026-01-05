@@ -488,6 +488,11 @@ public partial class Car : RigidBody3D
 	{
 		IsGhost = ghost;
 
+		if (ghost)
+		{
+			SetPlayerName("Ghost");
+		}
+		
 		foreach (MeshInstance3D mesh in CarModel.GetChildren())
 		{
 			if (ghost)

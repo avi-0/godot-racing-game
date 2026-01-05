@@ -50,6 +50,7 @@ points = PackedVector3Array(0.65, 0.24996082, 1.1249853, 0.6206049, 0.24996082, 
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_glvfi"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_g5cig")
 text = "CAR"
 font_size = 10
