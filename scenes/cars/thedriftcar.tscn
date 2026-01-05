@@ -56,7 +56,7 @@ font_size = 10
 uppercase = true
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -66,6 +66,7 @@ continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
 script = ExtResource("1_micox")
+CarModel = NodePath("sedan-sports")
 FrontCamera = NodePath("FrontCamera")
 HeadLight = NodePath("Headlights")
 CarCommon = NodePath("CarCommon")

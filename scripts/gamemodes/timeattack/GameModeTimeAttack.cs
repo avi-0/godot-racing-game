@@ -152,7 +152,7 @@ public class GameModeTimeAttack : IGameMode
 			{
 				player.PlayerGhostCar = CarManager.Instance.CreateCar();
 				player.PlayerGhostCar.IsLocallyControlled = false;
-				player.PlayerGhostCar.IsGhost = true;
+				player.PlayerGhostCar.SetGhost(true);
 				player.PlayerGhostCar.Position = player.PlayerCar.Position;
 				player.PlayerGhostCar.Rotation = player.PlayerCar.Rotation;
 				//player.PlayerGhostCar.SetPlayerName(player.PBGhost.PlayerName); // почемуто ставит имя обоям машинам
@@ -243,9 +243,20 @@ public class GameModeTimeAttack : IGameMode
 
 				if (_inEditor) SetAuthorTime((int)player.CurrentRaceTime.TotalMilliseconds);
 			}
-
-			player.PBGhost = player.GhostRecording;
 		}
+
+		//Ghost Saving
+		if (player.PBGhost.Empty || player.CurrentRaceTime < player.PBGhost.RaceTime)
+		{
+			player.PBGhost = player.GhostRecording;
+			player.PBGhost.RaceTime = player.CurrentRaceTime;
+
+			if (isPb)
+			{
+				//Save ghost to user data somehow
+			}
+		}
+		//--
 
 		player.HasFinished = true;
 		player.LastFinishTime = player.CurrentRaceTime;

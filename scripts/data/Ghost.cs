@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
@@ -8,6 +9,7 @@ public class Ghost
 {
     public string PlayerName = "Ghost";
     public bool Empty = true;
+    public TimeSpan RaceTime = TimeSpan.Zero;
 
     private List<GhostFrame> _frames = new List<GhostFrame>();
     

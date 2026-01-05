@@ -10,6 +10,7 @@ public partial class Car : RigidBody3D
 	public delegate void RestartRequestedEventHandler();
 
 	[ExportCategory("Components")] 
+	[Export] public Node3D CarModel;
 	[Export] public Camera3D FrontCamera;
 	[Export] public SpotLight3D HeadLight;
 	[Export] public CarCommon CarCommon;
@@ -41,9 +42,6 @@ public partial class Car : RigidBody3D
 	[ExportCategory("Wheel Setup")] 
 	[Export] public WheelConfig FrontWheelConfig;
 	[Export] public WheelConfig RearWheelConfig;
-
-	[ExportCategory("Extras")] 
-	[Export] private protected MeshInstance3D PlayerName3D;
 	
 	[ExportCategory("Descriptions")]
 	[Export] public string CarName = "Default";
@@ -484,5 +482,23 @@ public partial class Car : RigidBody3D
 		}
 		
 		Nameplate.Mesh.Set("text", name);
+	}
+
+	public void SetGhost(bool ghost)
+	{
+		IsGhost = ghost;
+
+		foreach (MeshInstance3D mesh in CarModel.GetChildren())
+		{
+			if (ghost)
+			{
+				mesh.SetMaterialOverride(ResourceLoader.Load<Material>("res://materials/ghost_car.tres"));
+			}
+			else
+			{
+				mesh.SetMaterialOverride(null);		
+			}
+		}
+
 	}
 }
