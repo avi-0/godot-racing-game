@@ -40,6 +40,11 @@ public class GameModeTimeAttack : IGameMode
 						player.StartTimerSeconds = 0;
 						player.PlayerCar.AcceptsInputs = true;
 						player.RaceStartTime = DateTime.Now;
+
+						if (player.LocalPlayer && player.PlayerGhostCar != null)
+						{
+							player.PlayerGhostCar.Visible = true;
+						}
 					}
 					else if (timeSinceStartMs > 1000)
 					{
@@ -128,6 +133,7 @@ public class GameModeTimeAttack : IGameMode
 		player.InGame = true;
 		player.HasFinished = false;
 		player.GhostRecording = new Ghost();
+		player.RespawnPoint = new Transform3D();
 		
 		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
 		if (player.LocalPlayer)
@@ -155,7 +161,7 @@ public class GameModeTimeAttack : IGameMode
 				player.PlayerGhostCar.SetGhost(true);
 				player.PlayerGhostCar.Position = player.PlayerCar.Position;
 				player.PlayerGhostCar.Rotation = player.PlayerCar.Rotation;
-				//player.PlayerGhostCar.SetPlayerName(player.PBGhost.PlayerName); // почемуто ставит имя обоям машинам
+				player.PlayerGhostCar.Visible = false;
 			}
 		}
 
@@ -166,6 +172,14 @@ public class GameModeTimeAttack : IGameMode
 
 		player.PlayerCar.PlayerId = id;
 		_players[id] = player;
+	}
+
+	public void RespawnPlayer(Guid id)
+	{
+		if (_players[id].RespawnPoint != new Transform3D())
+		{
+			_players[id].PlayerCar.TeleportToPoint(_players[id].RespawnPoint);
+		}
 	}
 
 	public void KillGame()
@@ -195,12 +209,13 @@ public class GameModeTimeAttack : IGameMode
 			if (player.LapsDone < _currentTrack.Track.Options.Laps)
 			{
 				player.CheckPointsCollected = new List<int>();
+				player.RespawnPoint = TrackManager.Instance.GetStartPoint();
 			}
 			else
 			{
 				player = PlayerFinished(player);
 			}
-
+			
 			UiSoundPlayer.Singleton.LapFinishedSound.Play();
 		}
 
@@ -220,6 +235,8 @@ public class GameModeTimeAttack : IGameMode
 			{
 				UiSoundPlayer.Singleton.CheckpointCollectedSound.Play();
 			}
+			
+			player.RespawnPoint = player.PlayerCar.GetTransform(); // потом поменять на block.SpawnPoint (ещё вопрос как адекватно получать block из blockid)
 		}
 
 		_players[playerCar.PlayerId] = player;

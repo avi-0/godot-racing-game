@@ -504,6 +504,12 @@ public partial class Car : RigidBody3D
 				mesh.SetMaterialOverride(null);		
 			}
 		}
+	}
 
+	public void TeleportToPoint(Transform3D point)
+	{
+		SetTransform(point.Orthonormalized());
+		LinearVelocity = new Vector3(0, 0, 0);
+		AngularVelocity = new Vector3(0, 0, 0);
 	}
 }

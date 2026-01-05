@@ -68,6 +68,22 @@ public partial class GameManager : Node
 		}
 	}
 
+	public override void _Notification(int what)
+	{
+		//ALT TABBED perf limits
+		if (what == NotificationApplicationFocusIn)
+		{
+			OS.LowProcessorUsageMode = false;
+			Engine.MaxFps = 0;
+		}
+		else if (what == NotificationApplicationFocusOut)
+		{
+			OS.LowProcessorUsageMode = true;
+			Engine.MaxFps = 20;
+		}
+		//--
+	}
+
 	public void SetScreenLayout(PackedScene layoutScene)
 	{
 		if (CurrentScreenLayout == layoutScene)

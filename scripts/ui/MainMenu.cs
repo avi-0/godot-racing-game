@@ -89,7 +89,7 @@ public partial class MainMenu : Control
 		foreach (Campaign campaign in _campaigns)
 		{
 			var button = new Button();
-			button.CustomMinimumSize = 64 * Vector2.One;
+			button.CustomMinimumSize = 256 * Vector2.One;
 			button.Text = campaign.Name;
 			button.Pressed += () =>
 			{

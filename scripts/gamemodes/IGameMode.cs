@@ -11,6 +11,7 @@ public interface IGameMode
 	void InitTrack(Track track);
 	void AddPlayer(Guid id);
 	void RestartPlayer(Guid id);
+	void RespawnPlayer(Guid id);
 	void KillGame();
 
 	void UpdateHud(PlayerViewport viewport);

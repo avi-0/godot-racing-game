@@ -23,6 +23,7 @@ public partial class SettingsManager : Node
 		InputActionNames.Left,
 		InputActionNames.Right,
 		InputActionNames.Restart,
+		InputActionNames.Respawn,
 		InputActionNames.CycleCamera,
 		InputActionNames.ToggleLights,
 	};

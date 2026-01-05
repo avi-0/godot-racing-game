@@ -346,6 +346,20 @@ layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_restart"
 
+[node name="Respawn" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+text = "Respawn"
+
+[node name="respawn_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("4_2jsdb")
+Action = &"game_respawn"
+
+[node name="respawn_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_game_respawn"
+
 [node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
 layout_mode = 2
 text = "Cycle Camera"

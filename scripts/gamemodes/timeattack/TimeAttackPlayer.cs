@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 using racingGame.data;
 
 namespace racingGame;
@@ -29,6 +30,8 @@ public struct TimeAttackPlayer
 	public Ghost GhostRecording { get; set; } = new Ghost();
 
 	public Car PlayerCar => CarManager.Instance.GetPlayerCarById(PlayerId);
+
+	public Transform3D RespawnPoint = new Transform3D();
 	
 	public TimeAttackPlayer(Guid playerId, bool localPlayer)
 	{

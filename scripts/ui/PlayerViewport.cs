@@ -139,6 +139,10 @@ public partial class PlayerViewport : SubViewport
 			GameModeController.CurrentGameMode.RestartPlayer(PlayerId);
 			SetInputAsHandled();
 		}
+		else if (@event.IsActionPressed(InputActionNames.Respawn))
+		{
+			GameModeController.CurrentGameMode.RespawnPlayer(PlayerId);
+		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{
 			Car.InputToggleLights();
