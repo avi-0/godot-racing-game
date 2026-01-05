@@ -11,7 +11,7 @@ public partial class GameModeController : Node
 		GameModeUtils.TimeAttack();
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (CurrentGameMode.Running()) CurrentGameMode.Tick();
 	}
