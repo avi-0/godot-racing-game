@@ -539,6 +539,11 @@ columns = 2
 hide_root = true
 script = ExtResource("9_j8y2p")
 
+[node name="BakeGIButton" type="Button" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Bake Lighting"
+
 [node name="ScreenshotUI" type="Control" parent="EditorUI"]
 visible = false
 layout_mode = 1
@@ -669,5 +674,7 @@ layers = 2
 material_override = SubResource("StandardMaterial3D_oljq2")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_oljq2")
+
+[connection signal="pressed" from="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer/BakeGIButton" to="." method="OnBakeLighting"]
 
 [editable path="EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer/EditorBlockButton"]

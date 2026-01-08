@@ -957,4 +957,9 @@ public partial class Editor : Control
 			ThumbnailTextureRect.Texture = ImageTexture.CreateFromImage(image);
 		}
 	}
+
+	public void OnBakeLighting()
+	{
+		Track.TrackVoxelGI.Bake();
+	}
 }

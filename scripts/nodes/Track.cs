@@ -9,6 +9,7 @@ public partial class Track : Node3D
 	[Export] public Node TimeOfDay;
 	[Export] public DirectionalLight3D Sun;
 	[Export] public DirectionalLight3D Moon;
+	[Export] public VoxelGI TrackVoxelGI;
 	
 	public TrackOptions Options = new();
 
