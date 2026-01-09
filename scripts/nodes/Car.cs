@@ -181,6 +181,7 @@ public partial class Car : RigidBody3D
 			}
 
 			ProcessSuspension(wheel);
+			ProcessSpecialBlocks(wheel);
 		}
 
 		// ускорение и повороты - только если есть хотя бы одно колесо,
@@ -425,6 +426,43 @@ public partial class Car : RigidBody3D
 		else
 		{
 			wheel.StopSliding();
+		}
+	}
+
+	private void ProcessSpecialBlocks(CarWheel wheel)
+	{
+		if (wheel.IsColliding())
+		{
+			for (int collider = 0; collider < wheel.GetCollisionCount(); collider++)
+			{
+				Object collidingObject = wheel.GetCollider(collider);
+				if (collidingObject is StaticBody3D && (collidingObject as StaticBody3D).GetOwner() is Block)
+				{
+					Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
+					if (block.IsBooster)
+					{
+						var forcePosition = wheel.WheelModel.GlobalPosition - GlobalPosition;
+						var force = block.GlobalBasis.X * 100;
+						ApplyForce(force, forcePosition);
+						//if (DebugMode)
+						{
+							DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(245, 73, 39),
+								arrow_size: 0.1f);
+						}
+					}
+					else if (block.IsBumper)
+					{
+						var forcePosition = GlobalPosition;
+						var force = block.GlobalBasis.Y * 150;
+						ApplyForce(force, forcePosition);
+						//if (DebugMode)
+						{
+							DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
+								arrow_size: 0.1f);
+						}
+					}
+				}
+			}
 		}
 	}
 
