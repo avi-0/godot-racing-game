@@ -23,6 +23,6 @@ public class GameSettings
 	public class SoundSettings
 	{
 		public double SfxLevel = 50;
-		public double MusicLevel = 50;
+		public double MusicLevel = 40;
 	}
 }

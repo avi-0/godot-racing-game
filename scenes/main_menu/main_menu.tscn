@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=13 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/ui/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
@@ -20,7 +20,13 @@ gradient = SubResource("Gradient_3ovsr")
 width = 320
 height = 320
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "TrackListImage", "TrackListLabel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel")]
+[sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_3ovsr"]
+events = [SubResource("InputEventAction_vtaks")]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "TrackListImage", "TrackListLabel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel", "CreditsPanel", "FolderButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,6 +55,8 @@ PlayerNameText = NodePath("GarageWindow/MarginContainer/HBoxContainer/PlayerSett
 CampaignControl = NodePath("CampaignPanel")
 CampaignContainer = NodePath("CampaignPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer/CampaignContainer")
 CarDescLabel = NodePath("GarageWindow/MarginContainer/HBoxContainer/MarginContainer/Panel/CarDescriptionLabel")
+CreditsPanel = NodePath("CreditsPanel")
+FolderButton = NodePath("TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/FolderButton")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
 [node name="GarageViewportContainer" type="Container" parent="."]
@@ -145,6 +153,11 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Settings
 "
+
+[node name="CreditsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Credits"
 
 [node name="ExitButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -276,12 +289,25 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 
-[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
+
+[node name="FolderButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Open Tracks Folder
+"
 
 [node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer"]
 layout_mode = 2
@@ -409,13 +435,90 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -35.0
+offset_right = 218.0
+offset_bottom = -1.0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Pre-Alpha 0.1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -378.0
+offset_top = -264.0
+offset_right = 378.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ekxnf")
+
+[node name="MarginContainer" type="MarginContainer" parent="CreditsPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CreditsPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+texture = ExtResource("3_uqeha")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CreditsPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 64
+theme_override_font_sizes/italics_font_size = 48
+bbcode_enabled = true
+text = "[b]Mashinki[/b]
+
+[i]Avi[/i]
+Lead Developer, Game Concept, Game Design, Programming, UI, Art, Sounds
+
+[i]Avondale[/i]
+Game Design, Programming, Level Design, UI
+
+
+Models borrowed from kenney
+Music by Vlad Annenkov"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CreditsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_3ovsr")
+text = "Ok"
+
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
+[connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/CreditsButton" to="." method="OnCredits"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="pressed" from="CampaignPanel/MarginContainer/Panel/VBoxContainer/MarginContainer/BackButton" to="." method="OnCampaignBack"]
-[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/BackButton" to="." method="OnTrackListBackButton"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="OnTrackListBackButton"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/FolderButton" to="." method="OnFolderButton"]
 [connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2/Button" to="." method="TrackListOnPlayTrackButtonPressed"]
 [connection signal="text_changed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]
 [connection signal="pressed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]
+[connection signal="pressed" from="CreditsPanel/MarginContainer/VBoxContainer/Button" to="." method="OnExitCredits"]

@@ -86,6 +86,7 @@ SpeedToPitchCurve = SubResource("Curve_xv7xt")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
 CarName = "Drift Car"
+CarDescription = "This was just a reasonably priced family car, before some kid turned it into this drift monster."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)

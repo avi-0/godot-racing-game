@@ -100,7 +100,7 @@ SpeedToPitchCurve = SubResource("Curve_xv7xt")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
 CarName = "Sport"
-CarDescription = "The future of race cars!"
+CarDescription = "The future of race cars! Fast on the straights and around corners, this beast can do anything! If you have the skill to handle it.."
 
 [node name="race-future" parent="." instance=ExtResource("3_qtbni")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)

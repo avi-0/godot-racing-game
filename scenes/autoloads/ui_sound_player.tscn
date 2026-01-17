@@ -54,3 +54,5 @@ RaceCountDownSound = SubResource("Resource_5v6r0")
 RaceStartSound = SubResource("Resource_uyinl")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 2.0
+bus = &"GameSounds"

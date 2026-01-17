@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using racingGame.data;
 
 namespace racingGame;
@@ -79,6 +80,8 @@ public partial class Car : RigidBody3D
 	public AudioStreamPlayer3D EngineSoundPlayer => CarCommon.EngineSoundPlayer;
 
 	private CarInputs _inputs = new();
+
+	private Stack<float> _speedStack = new();
 	
 	public override void _Ready()
 	{
@@ -94,6 +97,18 @@ public partial class Car : RigidBody3D
 		{
 			if (wheel.Config.IsDriveWheel)
 				_driveWheelCount++;
+		}
+
+		ContactMonitor = true;
+		MaxContactsReported = 5;
+		BodyEntered += Bonk;
+		{
+			
+		}
+
+		for (int i = 0; i < 5; i++)
+		{
+			_speedStack.Push(0);
 		}
 	}
 
@@ -208,7 +223,15 @@ public partial class Car : RigidBody3D
 		{
 			DebugDraw3D.DrawArrowRay(GlobalPosition, LinearVelocity, 0.5f, Color.Color8(255, 255, 255), arrow_size: 0.1f);
 		}
-}
+
+		// хз почемуто не работает
+		//int fov = 80 + (int)Math.Floor(GetLinearVelocity().Length());
+		//OrbitCamera.Camera.SetFov(fov);
+		//FrontCamera.SetFov(fov);
+		
+		_speedStack.Pop();
+		_speedStack.Push(LinearVelocity.Length());
+	}
 
 	private void ProcessEngineSound()
 	{
@@ -525,10 +548,11 @@ public partial class Car : RigidBody3D
 	public void SetGhost(bool ghost)
 	{
 		IsGhost = ghost;
-
+		IsLocallyControlled = false;
+		
 		if (ghost)
 		{
-			SetPlayerName("Ghost");
+			SetPlayerName("");
 		}
 		
 		foreach (MeshInstance3D mesh in CarModel.GetChildren())
@@ -549,5 +573,25 @@ public partial class Car : RigidBody3D
 		SetTransform(point.Orthonormalized());
 		LinearVelocity = new Vector3(0, 0, 0);
 		AngularVelocity = new Vector3(0, 0, 0);
+	}
+
+	public void Bonk(Node node)
+	{
+		if (!IsGhost)
+		{
+			float avgSpeed = 0;
+			for (int i = 0; i < 5; i++)
+			{
+				float peek = _speedStack.Pop();
+				avgSpeed += peek;
+				_speedStack.Push(peek);
+			}
+			avgSpeed /= 5;
+
+			if (avgSpeed > 5)
+			{
+				CarCommon.CarSoundPlayer.Play();
+			}
+		}
 	}
 }

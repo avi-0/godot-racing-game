@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://bpq4vg8oqdowm"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_eti5j"]
-[ext_resource type="Material" uid="uid://ds2tnd45lhtof" path="res://assets/kenney/cityroads/materials/colormap.tres" id="2_kqf1t"]
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_eti5j"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lqmys"]
 _surfaces = [{
@@ -25,7 +25,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
-"material": ExtResource("2_kqf1t"),
+"material": ExtResource("2_eti5j"),
 "name": "colormap",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

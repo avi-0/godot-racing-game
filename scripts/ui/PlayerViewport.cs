@@ -50,7 +50,6 @@ public partial class PlayerViewport : SubViewport
 		}
 	}
 
-
 	public Car Car => CarManager.Instance.GetPlayerCarById(PlayerId);
 
 
@@ -87,7 +86,7 @@ public partial class PlayerViewport : SubViewport
 		
 		UpdateCarInputs();
 		
-		SpeedLabel.Text = ((int)Mathf.Round(Car.LinearVelocity.Length() * 10)).ToString();
+		SpeedLabel.Text = ((int)Mathf.Round(Car.LinearVelocity.Length() * 8)).ToString();
 		
 		Camera.Current = TargetCamera != null;
 		Camera.Match(TargetCamera);
@@ -142,6 +141,7 @@ public partial class PlayerViewport : SubViewport
 		else if (@event.IsActionPressed(InputActionNames.Respawn))
 		{
 			GameModeController.CurrentGameMode.RespawnPlayer(PlayerId);
+			SetInputAsHandled();
 		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{

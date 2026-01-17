@@ -7,6 +7,7 @@ public class TrackOptions
 	public string AuthorName = "Anonymous";
 	public string TrackType = "TimeAttack";
 	public string CarType = "thedriftcar.tscn";
+	public string Message = "";
 	public int Laps = 0;
 	public int AuthorTime = 0;
 	public int StartDayTime = 10;

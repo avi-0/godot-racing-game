@@ -21,7 +21,9 @@ public partial class GameManager : Node
 	[Export] public AudioStreamPlayer MusicPlayer;
 	[Export] public Control PauseMenu;
 	[Export] public Control ScreenLayoutSlot;
-
+	[Export] public PanelContainer MOTDPanel;
+	[Export] public Label MOTDLabel;
+	
 	[ExportCategory("Screen Layouts")]
 	[Export] public PackedScene SingleplayerScreenLayout;
 	[Export] public PackedScene SplitScreen2HLayout;
@@ -57,6 +59,8 @@ public partial class GameManager : Node
 		GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
 		
 		SetScreenLayout(SingleplayerScreenLayout);
+		
+		MusicPlayer.Finished += PlayNextSong;
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -119,16 +123,26 @@ public partial class GameManager : Node
 			GameModeController.CurrentGameMode.AddPlayer(id);
 
 			viewport.PlayerId = id;
+
+			if (TrackManager.Instance.Track.Options.Message != "")
+			{
+				MOTDLabel.Text = TrackManager.Instance.Track.Options.Message;
+				MOTDPanel.Show();
+				Input.MouseMode = Input.MouseModeEnum.Visible;
+			}
+			else
+			{
+				MOTDPanel.Hide();
+			}
 		}
 		
 		_isPlaying = true;
 		
 		GameModeController.CurrentGameMode.Running(true);
 
-		if (!MusicPlayer.IsPlaying())
-			MusicPlayer.Play();
-		
 		SetViewportsActive(true);
+		
+		PlayNextSong();
 	}
 
 	public void Stop()
@@ -193,5 +207,20 @@ public partial class GameManager : Node
 	public void NotifyViewportSettingsChanged()
 	{
 		EmitSignalViewportSettingsChanged();
+	}
+	
+	private void OnMOTDButtonPressed()
+	{
+		MOTDPanel.Hide();
+		Input.MouseMode = Input.MouseModeEnum.Hidden;
+	}
+
+	public void PlayNextSong()
+	{
+		if (!MusicPlayer.IsPlaying())
+		{
+			MusicPlayer.Play();
+			GD.Print(MusicPlayer.Stream.GetName());
+		}		
 	}
 }

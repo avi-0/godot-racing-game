@@ -408,10 +408,16 @@ public partial class Editor : Control
 					_hoveredBlock.SetMaterialOverlay(BlockHighlightMaterial);
 			}
 		}
-		
-		if (_mode == Mode.Normal)
+		else if (_mode == Mode.Normal)
+		{
 			if (_hoveredBlock != null)
 				_hoveredBlock.SetMaterialOverlay(null);
+
+			if (EditorViewportContainer.HasFocus() && Input.IsActionPressed("editor_left_spam"))
+			{
+				PlaceCursorBlock();
+			}
+		}
 
 		DrawGrid();
 	}

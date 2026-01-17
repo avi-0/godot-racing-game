@@ -98,7 +98,7 @@ CarName = "Taxi"
 CarDescription = "Straight from the busy and narrow city streets! It's great at hard corners and tight hairpins but i wouldn't take it to a drag race if i were you."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.105000004, -0.0175)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.13199587, -0.0175)
 shape = SubResource("ConvexPolygonShape3D_denii")
 
 [node name="taxi" parent="." instance=ExtResource("4_sw6ji")]

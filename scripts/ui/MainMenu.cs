@@ -33,6 +33,8 @@ public partial class MainMenu : Control
 	[Export] public Container CampaignContainer;
 	[Export] public Editor Editor;
 	[Export] public RichTextLabel CarDescLabel;
+	[Export] public PanelContainer CreditsPanel;
+	[Export] public Button FolderButton;
 	
 	[Export(PropertyHint.FilePath)] public string DefaultCarPath;
 
@@ -101,6 +103,8 @@ public partial class MainMenu : Control
 		}
 	
 		CampaignControl.Show();
+		
+		FolderButton.Visible = false;
 	}
 
 	public void OnEditorButtonPressed()
@@ -114,6 +118,8 @@ public partial class MainMenu : Control
 		
 		FillTrackContainer(UserTracksPath);
 		TrackListPanel.Show();
+
+		FolderButton.Visible = true;
 	}
 
 	public void OnGarageButton()
@@ -322,5 +328,22 @@ public partial class MainMenu : Control
 	private void AddCampaign(string campaignName, string directoryName)
 	{
 		_campaigns.Add(new Campaign(campaignName, directoryName));
+	}
+
+	public void OnCredits()
+	{
+		MainMenuContainer.Visible = false;
+		CreditsPanel.Show();
+	}
+
+	public void OnExitCredits()
+	{
+		MainMenuContainer.Visible = true;
+		CreditsPanel.Hide();
+	}
+
+	public void OnFolderButton()
+	{
+		OS.ShellOpen(ProjectSettings.GlobalizePath(UserTracksPath));
 	}
 }

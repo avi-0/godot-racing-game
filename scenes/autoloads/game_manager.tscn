@@ -1,8 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://blho4jw07g2ca"]
+[gd_scene load_steps=29 format=3 uid="uid://blho4jw07g2ca"]
 
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="1_sg2ap"]
-[ext_resource type="AudioStream" uid="uid://b0givguxksht0" path="res://assets/audio/music/StayInsideMe.mp3" id="2_1iheu"]
-[ext_resource type="PackedScene" uid="uid://crc2q38d8anpl" path="res://scenes/cars/thedriftcar.tscn" id="2_hfmqv"]
 [ext_resource type="PackedScene" uid="uid://cl3hcvkocitf8" path="res://scenes/game/screen_layouts/single.tscn" id="3_ipbon"]
 [ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/main_menu/pause_menu.tscn" id="4_0dy6r"]
 [ext_resource type="PackedScene" uid="uid://uyuauf375jpc" path="res://scenes/game/screen_layouts/split2h.tscn" id="4_vcmnf"]
@@ -10,14 +8,55 @@
 [ext_resource type="PackedScene" uid="uid://b0jr1ye67yedr" path="res://scenes/game/screen_layouts/split3h.tscn" id="6_3tn54"]
 [ext_resource type="PackedScene" uid="uid://b5s34pkx4d4or" path="res://scenes/game/screen_layouts/split3v.tscn" id="7_bk7ps"]
 [ext_resource type="PackedScene" uid="uid://bf1a3bcmnxdee" path="res://scenes/game/screen_layouts/split4.tscn" id="8_wxytc"]
+[ext_resource type="AudioStream" uid="uid://054k4e7tv88r" path="res://assets/audio/music/thudcore.mp3" id="9_0ykio"]
 [ext_resource type="Script" uid="uid://ctqoofbnioxhi" path="res://scripts/GameModeController.cs" id="9_vcmnf"]
+[ext_resource type="AudioStream" uid="uid://csno6oab1aw24" path="res://assets/audio/music/massdrive.mp3" id="10_3tn54"]
+[ext_resource type="AudioStream" uid="uid://b6sbyns1nuf26" path="res://assets/audio/music/rise_of_titans.mp3" id="11_hl4aq"]
+[ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="11_ipbon"]
+[ext_resource type="AudioStream" uid="uid://bjhpvlvlb38gs" path="res://assets/audio/music/broken_monolith.mp3" id="12_sv3c3"]
+[ext_resource type="AudioStream" uid="uid://covwrb303168s" path="res://assets/audio/music/beachside_rebels.mp3" id="13_b80ve"]
+[ext_resource type="AudioStream" uid="uid://5mrbucah84lm" path="res://assets/audio/music/catching_the_wind.mp3" id="14_fi0b8"]
+[ext_resource type="AudioStream" uid="uid://q6cj1y4rsm7d" path="res://assets/audio/music/adrenaline_riot.mp3.mp3" id="15_yhu66"]
+[ext_resource type="AudioStream" uid="uid://ccuu5y1dcovdv" path="res://assets/audio/music/stone_veil.mp3" id="16_xngh2"]
+[ext_resource type="AudioStream" uid="uid://cyu06gq0msvnt" path="res://assets/audio/music/ocean_pulse.mp3" id="17_qiq7k"]
+[ext_resource type="AudioStream" uid="uid://b2q1q5ommjnb" path="res://assets/audio/music/raw_voltage.mp3" id="18_5ce74"]
+[ext_resource type="AudioStream" uid="uid://1tw8snd2p8m1" path="res://assets/audio/music/shadow_riot.mp3" id="19_jl4q2"]
+[ext_resource type="AudioStream" uid="uid://md4bnqrnrsr0" path="res://assets/audio/music/storm_breed.mp3" id="20_5m4ix"]
+[ext_resource type="AudioStream" uid="uid://dshojtd40t1cx" path="res://assets/audio/music/speed_racing.mp3" id="21_iwgf7"]
+[ext_resource type="AudioStream" uid="uid://4xiky6k8jlrc" path="res://assets/audio/music/frozen_strike.mp3" id="22_7mtld"]
+[ext_resource type="AudioStream" uid="uid://bwfcrih73lhqa" path="res://assets/audio/music/full_throttle.mp3" id="23_rf5wm"]
 
-[node name="GameManager" type="Node" node_paths=PackedStringArray("MusicPlayer", "PauseMenu", "ScreenLayoutSlot")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hn362"]
+streams_count = 15
+stream_0/stream = ExtResource("9_0ykio")
+stream_1/stream = ExtResource("10_3tn54")
+stream_2/stream = ExtResource("16_xngh2")
+stream_3/stream = ExtResource("17_qiq7k")
+stream_4/stream = ExtResource("18_5ce74")
+stream_5/stream = ExtResource("19_jl4q2")
+stream_6/stream = ExtResource("20_5m4ix")
+stream_7/stream = ExtResource("21_iwgf7")
+stream_8/stream = ExtResource("22_7mtld")
+stream_9/stream = ExtResource("23_rf5wm")
+stream_10/stream = ExtResource("11_hl4aq")
+stream_11/stream = ExtResource("12_sv3c3")
+stream_12/stream = ExtResource("13_b80ve")
+stream_13/stream = ExtResource("14_fi0b8")
+stream_14/stream = ExtResource("15_yhu66")
+
+[sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_vcmnf"]
+events = [SubResource("InputEventAction_vtaks")]
+
+[node name="GameManager" type="Node" node_paths=PackedStringArray("MusicPlayer", "PauseMenu", "ScreenLayoutSlot", "MOTDPanel", "MOTDLabel")]
 script = ExtResource("1_sg2ap")
-CarScene = ExtResource("2_hfmqv")
-MusicPlayer = NodePath("AudioStreamPlayer3D")
+MusicPlayer = NodePath("AudioStreamPlayer")
 PauseMenu = NodePath("PauseMenu")
 ScreenLayoutSlot = NodePath("Control")
+MOTDPanel = NodePath("MOTDPanel")
+MOTDLabel = NodePath("MOTDPanel/MarginContainer/VBoxContainer/MOTDLabel")
 SingleplayerScreenLayout = ExtResource("3_ipbon")
 SplitScreen2HLayout = ExtResource("4_vcmnf")
 SplitScreen2VLayout = ExtResource("5_0ykio")
@@ -28,8 +67,8 @@ SplitScreen4Layout = ExtResource("8_wxytc")
 [node name="GameModeController" type="Node" parent="."]
 script = ExtResource("9_vcmnf")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_1iheu")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_hn362")
 bus = &"Music"
 
 [node name="Control" type="Control" parent="."]
@@ -42,3 +81,40 @@ grow_vertical = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_0dy6r")]
 visible = false
+
+[node name="MOTDPanel" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -378.0
+offset_top = -264.0
+offset_right = 378.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_ipbon")
+
+[node name="MarginContainer" type="MarginContainer" parent="MOTDPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MOTDPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MOTDLabel" type="Label" parent="MOTDPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="MOTDPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_vcmnf")
+text = "Ok"
+
+[connection signal="pressed" from="MOTDPanel/MarginContainer/VBoxContainer/Button" to="." method="OnMOTDButtonPressed"]
