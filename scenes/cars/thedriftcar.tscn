@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
-friction = 0.0
-bounce = 0.1
+friction = 0.5
+bounce = 0.05
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
 _limits = [1.0, 1.5633919, 0.0, 1.0]
@@ -76,6 +76,7 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 Acceleration = 600
 MaxSpeed = 30
 BrakingStrengthMultiplier = 0.3
+ReleaseDebuff = true
 SteeringBaseDegrees = 3
 SlippingTraction = 0.15
 SlipThreshold = 0.8

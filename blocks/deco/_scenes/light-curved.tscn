@@ -54,3 +54,14 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="light-curved2/light-curved/light-curved_col"]
 shape = SubResource("ConcavePolygonShape3D_6rvwx")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="light-curved2"]
+transform = Transform3D(0.125, 0, 0, 0, -5.4639235e-09, 0.125, 0, -0.125, -5.4639235e-09, -0.0011972487, 0.6321527, -0.17267708)
+light_color = Color(1, 0.78672886, 0.6556143, 1)
+light_energy = 7.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 3.0
+light_size = 0.5
+shadow_enabled = true
+spot_range = 9.295933
+spot_angle = 66.74555

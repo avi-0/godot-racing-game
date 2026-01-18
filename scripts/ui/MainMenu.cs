@@ -95,7 +95,7 @@ public partial class MainMenu : Control
 			button.Text = campaign.Name;
 			button.Pressed += () =>
 			{
-				FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/");
+				FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/", true);
 				TrackListPanel.Show();
 			};
 
@@ -116,7 +116,7 @@ public partial class MainMenu : Control
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		
-		FillTrackContainer(UserTracksPath);
+		FillTrackContainer(UserTracksPath, false);
 		TrackListPanel.Show();
 
 		FolderButton.Visible = true;
@@ -237,12 +237,14 @@ public partial class MainMenu : Control
 		_hadFocus.GrabFocus();
 	}
 	
-	private void FillTrackContainer(string basePath)
+	private void FillTrackContainer(string basePath, bool isCampaign)
 	{
 		TrackContainer.DestroyAllChildren();
 		var trackList = LoadTrackList(basePath);
-
-		bool first = true;
+		
+		int trackID = 0;
+		int silverMedals = 0;
+		int goldMedals = 0;
 		
 		foreach (var trackPath in trackList)
 		{
@@ -253,6 +255,8 @@ public partial class MainMenu : Control
 			
 			if (options.AuthorTime > 0)
 			{
+				trackID++;
+				
 				var button = new Button();
 				button.CustomMinimumSize = 64 * Vector2.One;
 				button.Text = options.Name;
@@ -269,14 +273,56 @@ public partial class MainMenu : Control
 				icon.CopyFrom(image);
 				icon.Resize(128, 128, Image.Interpolation.Cubic);
 				button.SetButtonIcon(ImageTexture.CreateFromImage(icon));
+
+				bool canPlay = true;
 				
-				button.Pressed += () => TrackListSelectTrack(basePath, trackPath, options, image);
+				if (isCampaign)
+				{
+					var loadedPb = GameModeUtils.LoadUserPb(options.Uid);
+					if (loadedPb != TimeSpan.Zero)
+					{
+						if (loadedPb.TotalMilliseconds < GameModeUtils.GetGoldFromAt(options.AuthorTime))
+						{
+							goldMedals++;
+							silverMedals++;
+						}
+						else if (loadedPb.TotalMilliseconds < GameModeUtils.GetSilverFromAt(options.AuthorTime))
+						{
+							silverMedals++;
+						}
+					}
+					
+					if (trackID > 5 && trackID == trackList.Count())
+					{
+						if (goldMedals < trackList.Count() - 1)
+						{
+							canPlay = false;
+							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://assets/img/gold_lock.png").GetImage();
+							lockImage.Resize(128, 128, Image.Interpolation.Cubic);
+							button.SetButtonIcon(ImageTexture.CreateFromImage(lockImage));
+						}
+					}
+					else if (trackID > 3 )
+					{
+						if (silverMedals < trackID / 2)
+						{
+							canPlay = false;
+							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://assets/img/silver_lock.png").GetImage();
+							lockImage.Resize(128, 128, Image.Interpolation.Cubic);
+							button.SetButtonIcon(ImageTexture.CreateFromImage(lockImage));
+						}
+					}
+				}
+
+				if (canPlay)
+				{
+					button.Pressed += () => TrackListSelectTrack(basePath, trackPath, options, image);
+				}
 				
 				TrackContainer.AddChild(button);
 				
-				if (first)
+				if (trackID == 1)
 				{
-					first = false;
 					TrackListSelectTrack(basePath, trackPath, options, image);
 					button.GrabFocus();
 				}
@@ -310,6 +356,7 @@ public partial class MainMenu : Control
 
 	public void TrackListOnPlayTrackButtonPressed()
 	{
+		OnTrackListBackButton();
 		OpenTrack(TrackListSelectedTrackPath).Forget();
 	}
 
