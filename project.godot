@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="mashinki"
-config/version="a0.1.1"
+config/version="0.1.1"
 run/main_scene="uid://quenom6jkxmi"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 boot_splash/fullsize=false

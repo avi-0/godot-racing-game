@@ -6,6 +6,6 @@ public partial class VersionLabel : Label
 {
 	public override void _Ready()
 	{
-		Text = ProjectSettings.GetSetting("application/config/version").ToString();
+		Text = "a" + ProjectSettings.GetSetting("application/config/version");
 	}
 }
