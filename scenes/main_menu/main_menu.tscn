@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=14 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/ui/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/ui/CustomSubViewportContainer.cs" id="3_wem23"]
 [ext_resource type="PackedScene" uid="uid://dosvoo7ovfhv0" path="res://scenes/main_menu/splitscreen_settings.tscn" id="5_wem23"]
 [ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/main_menu/settings_menu.tscn" id="6_3ovsr"]
+[ext_resource type="Script" uid="uid://b7ipowkkivsaj" path="res://scripts/ui/VersionLabel.cs" id="7_5seab"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_bqqt6"]
 action = &"ui_cancel"
@@ -440,16 +441,15 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -52.0
-offset_top = -35.0
-offset_right = 218.0
-offset_bottom = -1.0
+offset_left = 8.0
+offset_top = -34.0
+offset_right = 278.0
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "Pre-Alpha 0.1"
-horizontal_alignment = 1
+text = "[version]"
 vertical_alignment = 1
+script = ExtResource("7_5seab")
 
 [node name="CreditsPanel" type="PanelContainer" parent="."]
 visible = false

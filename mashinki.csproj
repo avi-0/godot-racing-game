@@ -8,6 +8,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Folder Include="scenes\cars\"/>
+        <Folder Include="scenes\main_menu\" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
