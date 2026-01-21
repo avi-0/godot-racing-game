@@ -325,8 +325,6 @@ public class GameModeTimeAttack : IGameMode
 			}
 
 			viewport.FinishPanel.Show();
-			viewport.FinishPanel.FocusMode = Control.FocusModeEnum.All;
-			viewport.FinishPanel.GrabFocus();
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 		
