@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://ciumv2v8f577m"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b2fx1wshnffdb"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/HalfBanked/HalfBankedRight-Turn-BiSlopeUp/Turn-HalfBankedRight-BiSlopeUp-Up1-Left/_images/road-Turn-HalfBankedRight-BiSlopeUp-Up1-Left-Size1.png" id="1_7cvpb"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_ue5ty"]
+[ext_resource type="Texture2D" uid="uid://bchbu3rjsdvou" path="res://blocks/v2/road/HalfBanked/HalfBankedRight-Turn-BiSlopeUp/Turn-HalfBankedRight-BiSlopeUp-Up1-Left/_images/road-Turn-HalfBankedRight-BiSlopeUp-Up1-Left-Size1.png" id="1_7cvpb"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_et1wo"]
 
 [resource]
-script = ExtResource("2_ue5ty")
+script = ExtResource("1_et1wo")
 ScenePath = "res://blocks/v2/road/HalfBanked/HalfBankedRight-Turn-BiSlopeUp/Turn-HalfBankedRight-BiSlopeUp-Up1-Left/_scenes/road-Turn-HalfBankedRight-BiSlopeUp-Up1-Left-Size1.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/HalfBanked/HalfBankedRight-Turn-BiSlopeUp/Turn-HalfBankedRight-BiSlopeUp-Up1-Left/road-Turn-HalfBankedRight-BiSlopeUp-Up1-Left-Size1.glb"
 ThumbnailTexture = ExtResource("1_7cvpb")

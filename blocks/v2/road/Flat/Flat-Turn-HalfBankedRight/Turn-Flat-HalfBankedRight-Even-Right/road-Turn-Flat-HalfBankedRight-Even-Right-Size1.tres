@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b2gs5b1uljbww"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dsu3odan882ea"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Flat/Flat-Turn-HalfBankedRight/Turn-Flat-HalfBankedRight-Even-Right/_images/road-Turn-Flat-HalfBankedRight-Even-Right-Size1.png" id="1_qj8yy"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_oqqfo"]
+[ext_resource type="Texture2D" uid="uid://b13hm8ekd46s0" path="res://blocks/v2/road/Flat/Flat-Turn-HalfBankedRight/Turn-Flat-HalfBankedRight-Even-Right/_images/road-Turn-Flat-HalfBankedRight-Even-Right-Size1.png" id="1_qj8yy"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_y4prm"]
 
 [resource]
-script = ExtResource("2_oqqfo")
+script = ExtResource("1_y4prm")
 ScenePath = "res://blocks/v2/road/Flat/Flat-Turn-HalfBankedRight/Turn-Flat-HalfBankedRight-Even-Right/_scenes/road-Turn-Flat-HalfBankedRight-Even-Right-Size1.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/Flat/Flat-Turn-HalfBankedRight/Turn-Flat-HalfBankedRight-Even-Right/road-Turn-Flat-HalfBankedRight-Even-Right-Size1.glb"
 ThumbnailTexture = ExtResource("1_qj8yy")

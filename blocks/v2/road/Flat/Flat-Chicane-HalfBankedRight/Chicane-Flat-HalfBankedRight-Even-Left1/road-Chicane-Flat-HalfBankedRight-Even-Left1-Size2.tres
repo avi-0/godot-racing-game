@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dkph31siwqua"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://t6qj4otwgd8d"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Flat/Flat-Chicane-HalfBankedRight/Chicane-Flat-HalfBankedRight-Even-Left1/_images/road-Chicane-Flat-HalfBankedRight-Even-Left1-Size2.png" id="1_sjg17"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_jjv6u"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_s2ax3"]
+[ext_resource type="Texture2D" uid="uid://2mtwqbm25yt7" path="res://blocks/v2/road/Flat/Flat-Chicane-HalfBankedRight/Chicane-Flat-HalfBankedRight-Even-Left1/_images/road-Chicane-Flat-HalfBankedRight-Even-Left1-Size2.png" id="1_sjg17"]
 
 [resource]
-script = ExtResource("2_jjv6u")
+script = ExtResource("1_s2ax3")
 ScenePath = "res://blocks/v2/road/Flat/Flat-Chicane-HalfBankedRight/Chicane-Flat-HalfBankedRight-Even-Left1/_scenes/road-Chicane-Flat-HalfBankedRight-Even-Left1-Size2.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/Flat/Flat-Chicane-HalfBankedRight/Chicane-Flat-HalfBankedRight-Even-Left1/road-Chicane-Flat-HalfBankedRight-Even-Left1-Size2.glb"
 ThumbnailTexture = ExtResource("1_sjg17")

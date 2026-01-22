@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://duopnn6b15d08"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://7xcjero1qaxv"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Flat/Flat-Turn-Flat/Turn-Flat-Flat-Up1-Right/_images/road-Turn-Flat-Flat-Up1-Right-Size3.png" id="1_5mjsa"]
+[ext_resource type="Texture2D" uid="uid://cgb0faqyumg8s" path="res://blocks/v2/road/Flat/Flat-Turn-Flat/Turn-Flat-Flat-Up1-Right/_images/road-Turn-Flat-Flat-Up1-Right-Size3.png" id="1_5mjsa"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_ttuxy"]
 
 [resource]

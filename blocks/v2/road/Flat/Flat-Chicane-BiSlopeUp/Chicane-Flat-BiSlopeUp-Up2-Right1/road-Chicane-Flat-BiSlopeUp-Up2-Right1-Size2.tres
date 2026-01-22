@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b00a3ri1v7rll"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cqbbk8rb2lqps"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Flat/Flat-Chicane-BiSlopeUp/Chicane-Flat-BiSlopeUp-Up2-Right1/_images/road-Chicane-Flat-BiSlopeUp-Up2-Right1-Size2.png" id="1_hwtbh"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_kroxx"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_dqy5a"]
+[ext_resource type="Texture2D" uid="uid://b4rjwdqvc212v" path="res://blocks/v2/road/Flat/Flat-Chicane-BiSlopeUp/Chicane-Flat-BiSlopeUp-Up2-Right1/_images/road-Chicane-Flat-BiSlopeUp-Up2-Right1-Size2.png" id="1_hwtbh"]
 
 [resource]
-script = ExtResource("2_kroxx")
+script = ExtResource("1_dqy5a")
 ScenePath = "res://blocks/v2/road/Flat/Flat-Chicane-BiSlopeUp/Chicane-Flat-BiSlopeUp-Up2-Right1/_scenes/road-Chicane-Flat-BiSlopeUp-Up2-Right1-Size2.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/Flat/Flat-Chicane-BiSlopeUp/Chicane-Flat-BiSlopeUp-Up2-Right1/road-Chicane-Flat-BiSlopeUp-Up2-Right1-Size2.glb"
 ThumbnailTexture = ExtResource("1_hwtbh")

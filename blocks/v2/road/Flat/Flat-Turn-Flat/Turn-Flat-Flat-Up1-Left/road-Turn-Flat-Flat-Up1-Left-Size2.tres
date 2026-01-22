@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://ci84kn3aiorb0"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b14frbw3qoxft"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Flat/Flat-Turn-Flat/Turn-Flat-Flat-Up1-Left/_images/road-Turn-Flat-Flat-Up1-Left-Size2.png" id="1_4huk1"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_lhobg"]
+[ext_resource type="Texture2D" uid="uid://fgcy6jd4uvjf" path="res://blocks/v2/road/Flat/Flat-Turn-Flat/Turn-Flat-Flat-Up1-Left/_images/road-Turn-Flat-Flat-Up1-Left-Size2.png" id="1_4huk1"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_t55um"]
 
 [resource]
-script = ExtResource("2_lhobg")
+script = ExtResource("1_t55um")
 ScenePath = "res://blocks/v2/road/Flat/Flat-Turn-Flat/Turn-Flat-Flat-Up1-Left/_scenes/road-Turn-Flat-Flat-Up1-Left-Size2.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/Flat/Flat-Turn-Flat/Turn-Flat-Flat-Up1-Left/road-Turn-Flat-Flat-Up1-Left-Size2.glb"
 ThumbnailTexture = ExtResource("1_4huk1")

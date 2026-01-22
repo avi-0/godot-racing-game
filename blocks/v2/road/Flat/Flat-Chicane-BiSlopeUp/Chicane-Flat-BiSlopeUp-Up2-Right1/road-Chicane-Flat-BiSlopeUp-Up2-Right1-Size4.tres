@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cvwbgosw5ay6d"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dmvio68220txq"]
 
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_bxjir"]
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Flat/Flat-Chicane-BiSlopeUp/Chicane-Flat-BiSlopeUp-Up2-Right1/_images/road-Chicane-Flat-BiSlopeUp-Up2-Right1-Size4.png" id="1_vkogb"]
+[ext_resource type="Texture2D" uid="uid://c3a5600r8w8wl" path="res://blocks/v2/road/Flat/Flat-Chicane-BiSlopeUp/Chicane-Flat-BiSlopeUp-Up2-Right1/_images/road-Chicane-Flat-BiSlopeUp-Up2-Right1-Size4.png" id="1_vkogb"]
 
 [resource]
 script = ExtResource("1_bxjir")

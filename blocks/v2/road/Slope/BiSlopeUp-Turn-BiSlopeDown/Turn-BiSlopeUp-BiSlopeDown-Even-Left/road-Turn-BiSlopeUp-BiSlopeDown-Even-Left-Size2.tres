@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dkhydb6bdyfd3"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bsokp6k6ks4r8"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Slope/BiSlopeUp-Turn-BiSlopeDown/Turn-BiSlopeUp-BiSlopeDown-Even-Left/_images/road-Turn-BiSlopeUp-BiSlopeDown-Even-Left-Size2.png" id="1_nea38"]
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_e7hxu"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_i4pj1"]
+[ext_resource type="Texture2D" uid="uid://cvsas5li05vtt" path="res://blocks/v2/road/Slope/BiSlopeUp-Turn-BiSlopeDown/Turn-BiSlopeUp-BiSlopeDown-Even-Left/_images/road-Turn-BiSlopeUp-BiSlopeDown-Even-Left-Size2.png" id="1_nea38"]
 
 [resource]
-script = ExtResource("2_e7hxu")
+script = ExtResource("1_i4pj1")
 ScenePath = "res://blocks/v2/road/Slope/BiSlopeUp-Turn-BiSlopeDown/Turn-BiSlopeUp-BiSlopeDown-Even-Left/_scenes/road-Turn-BiSlopeUp-BiSlopeDown-Even-Left-Size2.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/Slope/BiSlopeUp-Turn-BiSlopeDown/Turn-BiSlopeUp-BiSlopeDown-Even-Left/road-Turn-BiSlopeUp-BiSlopeDown-Even-Left-Size2.glb"
 ThumbnailTexture = ExtResource("1_nea38")

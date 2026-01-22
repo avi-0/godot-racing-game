@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dyimogq3goo32"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://wdajm5wffhso"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/Flat/Flat-Straight-HalfBankedRight/Straight-Flat-HalfBankedRight-Even-Center/_images/road-Straight-Flat-HalfBankedRight-Even-Center-Size3.png" id="1_5kdiw"]
+[ext_resource type="Texture2D" uid="uid://w6hmk5fsxafs" path="res://blocks/v2/road/Flat/Flat-Straight-HalfBankedRight/Straight-Flat-HalfBankedRight-Even-Center/_images/road-Straight-Flat-HalfBankedRight-Even-Center-Size3.png" id="1_5kdiw"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_lqsxt"]
 
 [resource]

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://je67jb42q3s2"]
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cohe171kkkpt3"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/HalfBanked/HalfBankedRight-Chicane-HalfBankedLeft/Chicane-HalfBankedRight-HalfBankedLeft-Even-Right1/_images/road-Chicane-HalfBankedRight-HalfBankedLeft-Even-Right1-Size4.png" id="1_dko1a"]
+[ext_resource type="Texture2D" uid="uid://d2g48roqxvbs3" path="res://blocks/v2/road/HalfBanked/HalfBankedRight-Chicane-HalfBankedLeft/Chicane-HalfBankedRight-HalfBankedLeft-Even-Right1/_images/road-Chicane-HalfBankedRight-HalfBankedLeft-Even-Right1-Size4.png" id="1_dko1a"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_pwvhu"]
 
 [resource]
