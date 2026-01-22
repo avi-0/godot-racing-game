@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 
 namespace racingGame;
@@ -42,3 +43,4 @@ public partial class SceneImportScript : EditorScenePostImport
 		}
 	}
 }
+#endif
