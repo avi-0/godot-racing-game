@@ -52,17 +52,17 @@ events = [SubResource("InputEventAction_vtaks")]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("MusicPlayer", "PauseMenu", "ScreenLayoutSlot", "MOTDPanel", "MOTDLabel")]
 script = ExtResource("1_sg2ap")
-MusicPlayer = NodePath("AudioStreamPlayer")
-PauseMenu = NodePath("PauseMenu")
-ScreenLayoutSlot = NodePath("Control")
-MOTDPanel = NodePath("MOTDPanel")
-MOTDLabel = NodePath("MOTDPanel/MarginContainer/VBoxContainer/MOTDLabel")
 SingleplayerScreenLayout = ExtResource("3_ipbon")
 SplitScreen2HLayout = ExtResource("4_vcmnf")
 SplitScreen2VLayout = ExtResource("5_0ykio")
 SplitScreen3HLayout = ExtResource("6_3tn54")
 SplitScreen3VLayout = ExtResource("7_bk7ps")
 SplitScreen4Layout = ExtResource("8_wxytc")
+MusicPlayer = NodePath("AudioStreamPlayer")
+PauseMenu = NodePath("PauseMenu")
+ScreenLayoutSlot = NodePath("Control")
+MOTDPanel = NodePath("MOTDPanel")
+MOTDLabel = NodePath("MOTDPanel/MarginContainer/VBoxContainer/MOTDLabel")
 
 [node name="GameModeController" type="Node" parent="."]
 script = ExtResource("9_vcmnf")

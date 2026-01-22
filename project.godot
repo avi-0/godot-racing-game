@@ -91,6 +91,10 @@ texture={
 "roughness/mode": 0,
 "roughness/src_normal": ""
 }
+scene={
+&"gltf/embedded_image_handling": 3,
+&"import_script/path": "uid://h052wrvg8kgh"
+}
 
 [input]
 
