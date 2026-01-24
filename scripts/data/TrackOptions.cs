@@ -12,5 +12,6 @@ public class TrackOptions
 	public int AuthorTime = 0;
 	public int StartDayTime = 10;
 	public string PreviewImage = "";
+	public bool Fog = false;
 	public CameraPositionData PreviewCameraPosition = new();
 }

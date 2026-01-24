@@ -22,6 +22,7 @@ CarSoundPlayer = NodePath("AudioStreamPlayer")
 
 [node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamWAV_84gro")
+attenuation_model = 3
 bus = &"enginesounds"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

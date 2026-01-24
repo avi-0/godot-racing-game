@@ -22,6 +22,8 @@ public partial class Track : Node3D
 			Sun.ShadowEnabled = false;
 			Moon.ShadowEnabled = false;
 		}
+		
+		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
 	}
 	
 	public TrackData Save()
