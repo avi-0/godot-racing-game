@@ -38,6 +38,7 @@ public partial class CarManager : Node
 	public Car CreateCar()
 	{
 		var car = CarScene.Instantiate<Car>();
+		car.SetSkin(0);
 		AddChild(car);
 		return car;
 	}
@@ -83,6 +84,15 @@ public partial class CarManager : Node
 		
 		car.SetPlayerName(SettingsManager.Instance.GetLocalPlayerName());
 
+		if (SettingsManager.Instance.Settings.SelectedSkins.ContainsKey(car.CarName) && SettingsManager.Instance.Settings.SelectedSkins[car.CarName] > 0 && car.Skins[SettingsManager.Instance.Settings.SelectedSkins[car.CarName]] != null)
+		{
+			car.SetSkin(SettingsManager.Instance.Settings.SelectedSkins[car.CarName]);
+		}
+		else
+		{
+			car.SetSkin(0);
+		}
+		
 		return car;
 	}
 }

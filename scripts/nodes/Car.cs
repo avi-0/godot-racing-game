@@ -49,6 +49,9 @@ public partial class Car : RigidBody3D
 	[Export] public string CarName = "Default";
 	[Export] public string CarDescription = "No Description";
 
+	[ExportCategory("Skins")]
+	[Export] public Material[] Skins;
+	
 	public bool IsGhost = false;
 	
 	private float _mouseSensitivity;
@@ -602,6 +605,15 @@ public partial class Car : RigidBody3D
 			{
 				CarCommon.CarSoundPlayer.Play();
 			}
+		}
+	}
+
+	public void SetSkin(int id)
+	{
+		if (Skins != null && Skins.Length > 0 && Skins[id] != null)
+		{
+			MeshInstance3D mesh = (MeshInstance3D)CarModel.GetChildren()[0];
+			mesh.SetMaterialOverride(Skins[id]);
 		}
 	}
 }

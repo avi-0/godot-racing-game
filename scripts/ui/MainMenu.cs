@@ -35,6 +35,7 @@ public partial class MainMenu : Control
 	[Export] public RichTextLabel CarDescLabel;
 	[Export] public PanelContainer CreditsPanel;
 	[Export] public Button FolderButton;
+	[Export] public OptionButton SkinButton;
 	
 	[Export(PropertyHint.FilePath)] public string DefaultCarPath;
 
@@ -72,6 +73,13 @@ public partial class MainMenu : Control
 		AddCampaign("Main Campaign", "main");
 		
 		PlayButton.CallDeferred("grab_focus");
+		
+		SkinButton.ItemSelected += (index) =>
+		{
+			_loadedCar.SetSkin((int)index);
+			SettingsManager.Instance.Settings.SelectedSkins[_loadedCar.CarName] = (int)index;
+			SettingsManager.Instance.SaveSettings();
+		};
 	}
 
 	public override void _ExitTree()
@@ -173,6 +181,32 @@ public partial class MainMenu : Control
 			GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
 			
 			CarDescLabel.Text = _loadedCar.CarDescription;
+
+			if (_loadedCar.Skins != null && _loadedCar.Skins.Length > 0)
+			{
+				SkinButton.Clear();
+
+				for (int skin = 0; skin < _loadedCar.Skins.Length; skin++)
+				{
+					SkinButton.AddItem(skin.ToString(), skin);
+				}
+				
+				SkinButton.Show();
+				
+				if (SettingsManager.Instance.Settings.SelectedSkins.ContainsKey(_loadedCar.CarName) && SettingsManager.Instance.Settings.SelectedSkins[_loadedCar.CarName] > 0 && _loadedCar.Skins[SettingsManager.Instance.Settings.SelectedSkins[_loadedCar.CarName]] != null)
+				{
+					_loadedCar.SetSkin(SettingsManager.Instance.Settings.SelectedSkins[_loadedCar.CarName]);
+					SkinButton.Selected = SettingsManager.Instance.Settings.SelectedSkins[_loadedCar.CarName];
+				}
+				else
+				{
+					_loadedCar.SetSkin(0);
+				}
+			}
+			else
+			{
+				SkinButton.Hide();
+			}
 		}
 	}
 
