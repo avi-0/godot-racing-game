@@ -23,7 +23,8 @@ public partial class Car : RigidBody3D
 	[Export] public int MaxSpeed = 100;
 	[Export] public float BrakingStrengthMultiplier = 0.5f;
 	[Export] public float ReversingStrengthMultiplier = 0.5f;
-
+	[Export] public bool ReleaseDebuff = false;
+	
 	[ExportCategory("Steering and Drifting")]
 	[Export] public float TireTurnSpeed = 2.0f;
 	[Export(PropertyHint.None, "degrees")] public int SteeringBaseDegrees = 25;
@@ -59,6 +60,8 @@ public partial class Car : RigidBody3D
 	private bool _hasCompressedWheel = false;
 	private bool _isSlipping = false;
 	private float _targetSteering;
+	
+	private float _defaultDamp = 0;
 	
 	private bool _isLocallyControlled = false;
 	public bool IsLocallyControlled
@@ -110,6 +113,8 @@ public partial class Car : RigidBody3D
 		{
 			_speedStack.Push(0);
 		}
+
+		_defaultDamp = LinearDamp;
 	}
 
 	private void SetupWheels()
@@ -303,6 +308,12 @@ public partial class Car : RigidBody3D
 		{
 			forwardStrength = 0;
 			backStrength = 0;
+		}
+		
+		//костыль против наскарности дрифткара
+		if (forwardStrength == 0 && ReleaseDebuff && velocity > 10)
+		{
+			forwardStrength = 0.7f;
 		}
 		
 		var accelerationFromCurve = AccelerationCurve.SampleBaked(Mathf.Clamp(velocity / MaxSpeed, 0, 1));
@@ -548,7 +559,6 @@ public partial class Car : RigidBody3D
 	public void SetGhost(bool ghost)
 	{
 		IsGhost = ghost;
-		IsLocallyControlled = false;
 		
 		if (ghost)
 		{

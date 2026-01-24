@@ -857,6 +857,12 @@ public partial class Editor : Control
 		dayTime.SetRangeConfig(1, 1, 24, 1, false);
 		dayTime.SetEditable(1, true);
 
+		var fog = OptionsTree.CreateItem(root);
+		fog.SetText(0, "Fog");
+		fog.SetCellMode(1, TreeItem.TreeCellMode.Check);
+		fog.SetRange(1, 0);
+		fog.SetEditable(1, true);
+
 		LoadScreenshot();
 	}
 
@@ -886,6 +892,10 @@ public partial class Editor : Control
 				break;
 			case "DayTime":
 				Track.Options.StartDayTime = (int)editedItem.GetRange(editedColumn);
+				Track.UpdateLighting();
+				break;
+			case "Fog":
+				Track.Options.Fog = editedItem.IsChecked(1);
 				Track.UpdateLighting();
 				break;
 		}
