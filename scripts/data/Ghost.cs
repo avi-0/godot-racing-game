@@ -11,19 +11,19 @@ public class Ghost
     public bool Empty = true;
     public TimeSpan RaceTime = TimeSpan.Zero;
 
-    private List<GhostFrame> _frames = new List<GhostFrame>();
+    public List<GhostFrame> Frames = new List<GhostFrame>();
     
     public void AddFrame(int raceTime, CarPositionData data)
     {
         Empty = false;
-        _frames.Add(new GhostFrame(raceTime, data));
+        Frames.Add(new GhostFrame(raceTime, data));
     }
 
     public CarPositionData GetFrame(int raceTime)
     {
-        var returnFrame = _frames.First();
+        var returnFrame = Frames.First();
         int closestTime = 0;
-        foreach (GhostFrame frame in _frames)
+        foreach (GhostFrame frame in Frames)
         {
             if (Mathf.Abs(frame.RaceTime - raceTime) < Mathf.Abs(closestTime - raceTime))
             {

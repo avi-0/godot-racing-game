@@ -139,14 +139,26 @@ public class GameModeTimeAttack : IGameMode
 		if (player.LocalPlayer)
 		{
 			TimeSpan loadedPb;
+			Ghost loadedGhost;
 			if (!_inEditor)
+			{
 				loadedPb = GameModeUtils.LoadUserPb(_currentTrack.Track.Options.Uid);
+				loadedGhost = GameModeUtils.LoadUserGhost(_currentTrack.Track.Options.Uid);
+			}
 			else
+			{
 				loadedPb = new TimeSpan(0, 0, 0, 0, _currentTrack.Track.Options.AuthorTime);
+				loadedGhost = new Ghost();
+			}
 
 			if (loadedPb != TimeSpan.Zero)
 			{
 				player.PbTime = loadedPb;
+			}
+
+			if (player.PBGhost.Empty && !loadedGhost.Empty)
+			{
+				player.PBGhost = loadedGhost;
 			}
 			
 			if (player.PlayerGhostCar != null)
@@ -268,10 +280,7 @@ public class GameModeTimeAttack : IGameMode
 			player.PBGhost = player.GhostRecording;
 			player.PBGhost.RaceTime = player.CurrentRaceTime;
 
-			if (isPb)
-			{
-				//Save ghost to user data somehow
-			}
+			GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid());
 		}
 		//--
 

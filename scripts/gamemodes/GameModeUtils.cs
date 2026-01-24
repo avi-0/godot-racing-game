@@ -1,11 +1,15 @@
 using System;
+using System.Text;
 using Godot;
+using Newtonsoft.Json;
+using racingGame.data;
 
 namespace racingGame;
 
 public static class GameModeUtils
 {
 	private const string SavePbPath = "user://userdata.mdat";
+	private const string SaveGhostPath = "user://ghosts.mdat";
 	
 	public static void TimeAttack()
 	{
@@ -89,6 +93,16 @@ public static class GameModeUtils
 		config.SaveEncrypted(SavePbPath, "sosal?".Sha256Buffer());
 	}
 
+	public static void SaveUserGhost(Ghost ghost, string trackUid)
+	{
+		if (ghost.Empty) return;
+		
+		var config = new ConfigFile();
+		config.LoadEncrypted(SaveGhostPath, "mimimi".Sha256Buffer());
+		config.SetValue("Ghosts", trackUid, Convert.ToBase64String(Encoding.Default.GetBytes(JsonConvert.SerializeObject(ghost, Formatting.Indented, Jz.Settings))));
+		config.SaveEncrypted(SaveGhostPath, "mimimi".Sha256Buffer());
+	}
+
 	public static TimeSpan LoadUserPb(string trackUid)
 	{
 		var config = new ConfigFile();
@@ -100,6 +114,24 @@ public static class GameModeUtils
 		}
 
 		return TimeSpan.Zero;
+	}
+
+	public static Ghost LoadUserGhost(string trackUid)
+	{
+		var config = new ConfigFile();
+		var err = config.LoadEncrypted(SaveGhostPath, "mimimi".Sha256Buffer());
+		if (err == Error.Ok)
+		{
+			string ghostString = (string)config.GetValue("Ghosts", trackUid, 0);
+			if (ghostString.Length > 1)
+			{
+				string json = Encoding.Default.GetString(Convert.FromBase64String(ghostString));
+
+				return JsonConvert.DeserializeObject<Ghost>(json);
+			}
+		}
+
+		return new Ghost();
 	}
 	//----//
 }
