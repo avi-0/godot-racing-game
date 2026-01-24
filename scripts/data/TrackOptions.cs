@@ -13,5 +13,6 @@ public class TrackOptions
 	public int StartDayTime = 10;
 	public string PreviewImage = "";
 	public bool Fog = false;
+	public bool Rain = false;
 	public CameraPositionData PreviewCameraPosition = new();
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ywlk133yau03"]
+[gd_scene load_steps=14 format=3 uid="uid://ywlk133yau03"]
 
 [ext_resource type="Script" uid="uid://c1tvycuj08dj6" path="res://scripts/nodes/Track.cs" id="1_enrm2"]
 [ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/game/track_base.tscn" id="2_h2pho"]
 [ext_resource type="Environment" uid="uid://ctnutos5v0lkx" path="res://scenes/game/track_template_environment.tres" id="3_i06yk"]
+[ext_resource type="Texture2D" uid="uid://x8r8ys4xlecm" path="res://assets/img/Circle.png" id="7_qfxy4"]
 [ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="10_gj4c4"]
 [ext_resource type="Script" uid="uid://b4tkplvh7fq40" path="res://addons/sky_3d/src/SkyDome.gd" id="11_aprr0"]
 [ext_resource type="Script" uid="uid://cjmkcj8hwm7ts" path="res://addons/sky_3d/src/TimeOfDay.gd" id="12_2inyt"]
@@ -11,13 +12,45 @@
 
 [sub_resource type="VoxelGIData" id="VoxelGIData_i06yk"]
 
-[node name="Track" type="Node3D" node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon", "TrackVoxelGI")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_myyg0"]
+emission_shape = 3
+emission_box_extents = Vector3(50, 0.5, 50)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+color = Color(0.81614345, 0.85428035, 0.87795407, 1)
+collision_mode = 1
+collision_friction = 0.1
+collision_bounce = 0.01
+
+[sub_resource type="Curve" id="Curve_hb6dr"]
+_limits = [0.0, 0.1, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.08163266, 0.038545452), 0.38315782, 0.38315782, 0, 0, Vector2(1, 0), 0.0072184745, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bytw"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("7_qfxy4")
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_dhj8a"]
+material = SubResource("StandardMaterial3D_6bytw")
+size = 0.2
+sections = 3
+curve = SubResource("Curve_hb6dr")
+
+[node name="Track" type="Node3D" node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon", "TrackVoxelGI", "RainParticles")]
 physics_interpolation_mode = 2
 script = ExtResource("1_enrm2")
 TimeOfDay = NodePath("Sky3D/TimeOfDay")
 Sun = NodePath("Sky3D/SunLight")
 Moon = NodePath("Sky3D/MoonLight")
 TrackVoxelGI = NodePath("VoxelGI")
+RainParticles = NodePath("GPUParticles3D_Rain")
 metadata/TrackUID = "0"
 metadata/TrackName = "New Track"
 metadata/AuthorName = "Anonymous"
@@ -78,3 +111,15 @@ utc = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28134155, 50.98694, -14.77356)
 size = Vector3(539.6785, 105.90259, 557.66724)
 data = SubResource("VoxelGIData_i06yk")
+
+[node name="GPUParticles3D_Rain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.924017, 0)
+visible = false
+amount = 3000
+lifetime = 2.0
+randomness = 0.9
+visibility_aabb = AABB(-10, -10, -10, 20, 30, 20)
+trail_enabled = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_myyg0")
+draw_pass_1 = SubResource("RibbonTrailMesh_dhj8a")

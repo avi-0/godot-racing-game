@@ -862,6 +862,12 @@ public partial class Editor : Control
 		fog.SetCellMode(1, TreeItem.TreeCellMode.Check);
 		fog.SetRange(1, 0);
 		fog.SetEditable(1, true);
+		
+		var rain = OptionsTree.CreateItem(root);
+		rain.SetText(0, "Rain");
+		rain.SetCellMode(1, TreeItem.TreeCellMode.Check);
+		rain.SetRange(1, 0);
+		rain.SetEditable(1, true);	
 
 		LoadScreenshot();
 	}
@@ -896,6 +902,10 @@ public partial class Editor : Control
 				break;
 			case "Fog":
 				Track.Options.Fog = editedItem.IsChecked(1);
+				Track.UpdateLighting();
+				break;
+			case "Rain":
+				Track.Options.Rain = editedItem.IsChecked(1);
 				Track.UpdateLighting();
 				break;
 		}

@@ -21,3 +21,7 @@ mesh = SubResource("BoxMesh_ynqis")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ynqis")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.413452, -1.0843506, 0.82089233)
+size = Vector3(516.11743, 2.345459, 524.51385)

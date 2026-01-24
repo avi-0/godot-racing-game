@@ -88,6 +88,8 @@ public partial class Car : RigidBody3D
 	private CarInputs _inputs = new();
 
 	private Stack<float> _speedStack = new();
+
+	private RayCast3D _rayCastUp;
 	
 	public override void _Ready()
 	{
@@ -108,9 +110,6 @@ public partial class Car : RigidBody3D
 		ContactMonitor = true;
 		MaxContactsReported = 5;
 		BodyEntered += Bonk;
-		{
-			
-		}
 
 		for (int i = 0; i < 5; i++)
 		{
@@ -239,6 +238,41 @@ public partial class Car : RigidBody3D
 		
 		_speedStack.Pop();
 		_speedStack.Push(LinearVelocity.Length());
+		
+		//RAIN
+		if (TrackManager.Instance.Track.Options.Rain)
+		{
+			TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(GlobalPosition.X, TrackManager.Instance.Track.RainParticles.GlobalPosition.Y, GlobalPosition.Z));
+			
+			if (_rayCastUp == null)
+			{
+				_rayCastUp = new RayCast3D();
+				_rayCastUp.SetTargetPosition(new Vector3(0,10,0));
+				_rayCastUp.SetEnabled(true);
+				_rayCastUp.SetCollisionMask(1);
+				AddChild(_rayCastUp);
+			}
+			
+			//using raycast up to see if theres something above the car so the rain needs to stop
+			//rain will still be going under blocks in the distance, but its up to map makers to use rain correctly, cant do much more with gpuparticles
+			if(_rayCastUp.IsColliding())
+			{
+				var collidingObject = _rayCastUp.GetCollider();
+				if (!(collidingObject is StaticBody3D && (collidingObject as StaticBody3D).GetOwner() is Block) || (!(collidingObject as StaticBody3D).GetOwner<Block>().IsStart && !(collidingObject as StaticBody3D).GetOwner<Block>().IsCheckpoint))
+				{
+					TrackManager.Instance.Track.RainParticles.Visible = false;
+				}
+			}
+			else
+			{
+				TrackManager.Instance.Track.RainParticles.Visible = true;
+			}
+			
+			GD.Print(_rayCastUp.IsColliding());
+			
+			_rayCastUp.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y+1.5f, GlobalPosition.Z);
+		}
+		//--
 	}
 
 	private void ProcessEngineSound()

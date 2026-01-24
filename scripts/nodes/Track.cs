@@ -10,6 +10,7 @@ public partial class Track : Node3D
 	[Export] public DirectionalLight3D Sun;
 	[Export] public DirectionalLight3D Moon;
 	[Export] public VoxelGI TrackVoxelGI;
+	[Export] public GpuParticles3D RainParticles;
 	
 	public TrackOptions Options = new();
 
@@ -24,6 +25,7 @@ public partial class Track : Node3D
 		}
 		
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
+		RainParticles.Visible = Options.Rain;
 	}
 	
 	public TrackData Save()
