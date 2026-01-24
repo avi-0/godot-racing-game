@@ -540,6 +540,7 @@ hide_root = true
 script = ExtResource("9_j8y2p")
 
 [node name="BakeGIButton" type="Button" parent="EditorUI/HSplitContainer/MarginContainer/TabContainer/Options/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 text = "Bake Lighting"
