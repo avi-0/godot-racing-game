@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://b61t67064apb2"]
+
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_7rgvj"]
+[ext_resource type="Texture2D" uid="uid://dnwlvcdjiu5c1" path="res://blocks/v2/road/HalfBanked/HalfBankedRight-Straight-HalfBankedRight/Straight-HalfBankedRight-HalfBankedRight-Even-Center/_images/road-Straight-HalfBankedRight-HalfBankedRight-Even-Center-Size2.png" id="1_t3mxu"]
+
+[resource]
+script = ExtResource("1_7rgvj")
+ScenePath = "res://blocks/v2/road/HalfBanked/HalfBankedRight-Straight-HalfBankedRight/Straight-HalfBankedRight-HalfBankedRight-Even-Center/_scenes/road-Straight-HalfBankedRight-HalfBankedRight-Even-Center-Size2.tscn"
+SourceScenePath = "res://assets/cartopia/blocks/road/HalfBanked/HalfBankedRight-Straight-HalfBankedRight/Straight-HalfBankedRight-HalfBankedRight-Even-Center/road-Straight-HalfBankedRight-HalfBankedRight-Even-Center-Size2.glb"
+ThumbnailTexture = ExtResource("1_t3mxu")

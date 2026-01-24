@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://d134ygcw73jym"]
+
+[ext_resource type="Texture2D" uid="uid://b5d0twnrvtadi" path="res://blocks/v2/road/Flat/Flat-Chicane-BiSlopeDown/Chicane-Flat-BiSlopeDown-Down1-Right1/_images/road-Chicane-Flat-BiSlopeDown-Down1-Right1-Size4.png" id="1_a4pto"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_cut6p"]
+
+[resource]
+script = ExtResource("1_cut6p")
+ScenePath = "res://blocks/v2/road/Flat/Flat-Chicane-BiSlopeDown/Chicane-Flat-BiSlopeDown-Down1-Right1/_scenes/road-Chicane-Flat-BiSlopeDown-Down1-Right1-Size4.tscn"
+SourceScenePath = "res://assets/cartopia/blocks/road/Flat/Flat-Chicane-BiSlopeDown/Chicane-Flat-BiSlopeDown-Down1-Right1/road-Chicane-Flat-BiSlopeDown-Down1-Right1-Size4.glb"
+ThumbnailTexture = ExtResource("1_a4pto")

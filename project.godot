@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="mashinki"
-config/version="0.1"
+config/name="cartopia"
+config/version="0.1.1"
 run/main_scene="uid://quenom6jkxmi"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 boot_splash/fullsize=false
@@ -90,6 +90,10 @@ texture={
 "process/size_limit": 0,
 "roughness/mode": 0,
 "roughness/src_normal": ""
+}
+scene={
+&"gltf/embedded_image_handling": 3,
+&"import_script/path": "uid://h052wrvg8kgh"
 }
 
 [input]

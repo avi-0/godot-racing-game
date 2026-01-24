@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cyiau8ugntqe7"]
+
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_syasb"]
+[ext_resource type="Texture2D" uid="uid://he0lubfybdtt" path="res://blocks/v2/road/HalfBanked/HalfBankedLeft-Chicane-BiSlopeUp/Chicane-HalfBankedLeft-BiSlopeUp-Up2-Left1/_images/road-Chicane-HalfBankedLeft-BiSlopeUp-Up2-Left1-Size4.png" id="1_twlq2"]
+
+[resource]
+script = ExtResource("1_syasb")
+ScenePath = "res://blocks/v2/road/HalfBanked/HalfBankedLeft-Chicane-BiSlopeUp/Chicane-HalfBankedLeft-BiSlopeUp-Up2-Left1/_scenes/road-Chicane-HalfBankedLeft-BiSlopeUp-Up2-Left1-Size4.tscn"
+SourceScenePath = "res://assets/cartopia/blocks/road/HalfBanked/HalfBankedLeft-Chicane-BiSlopeUp/Chicane-HalfBankedLeft-BiSlopeUp-Up2-Left1/road-Chicane-HalfBankedLeft-BiSlopeUp-Up2-Left1-Size4.glb"
+ThumbnailTexture = ExtResource("1_twlq2")

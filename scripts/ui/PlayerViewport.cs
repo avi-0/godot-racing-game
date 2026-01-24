@@ -52,28 +52,6 @@ public partial class PlayerViewport : SubViewport
 
 	public Car Car => CarManager.Instance.GetPlayerCarById(PlayerId);
 
-
-	public override void _Ready()
-	{
-		SizeChanged += OnSizeChanged;
-		OnSizeChanged();
-
-		GameManager.Instance.ViewportSettingsChanged += OnViewportSettingsChanged;
-	}
-
-	public override void _ExitTree()
-	{
-		GameManager.Instance.ViewportSettingsChanged -= OnViewportSettingsChanged;
-	}
-
-	private void OnSizeChanged()
-	{
-		var size = (Vector2) Size;
-		size *= Math.Max(1920f / size.X, 1080f / size.Y);
-		Size2DOverride = (Vector2I) size.Round();
-		Size2DOverrideStretch = true;
-	}
-
 	private void OnViewportSettingsChanged()
 	{
 		this.MatchViewport(GameManager.Instance.RootViewport);
