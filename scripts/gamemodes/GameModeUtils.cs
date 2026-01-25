@@ -10,6 +10,21 @@ public static class GameModeUtils
 {
 	private const string SavePbPath = "user://userdata.mdat";
 	private const string SaveGhostPath = "user://ghosts.mdat";
+
+	public const int MEDAL_NONE = 0;
+	public const int MEDAL_BRONZE = 1;
+	public const int MEDAL_SILVER = 2;
+	public const int MEDAL_GOLD = 3;
+	public const int MEDAL_AUTHOR = 4;
+	public const int MEDAL_MAX = 4;
+
+	public static readonly string[] MEDAL_NAME = {
+		"No Medal",
+		"Bronze Medal",
+		"Silver Medal",
+		"Gold Medal",
+		"Author Medal",
+	};
 	
 	public static void TimeAttack()
 	{
@@ -18,6 +33,9 @@ public static class GameModeUtils
 
 	public static string FormatRaceTime(TimeSpan raceTime)
 		=> $"{raceTime:mm}:{raceTime:ss}.{raceTime:fff}";
+	
+	public static string FormatRaceTime(int raceTimeMS)
+		=> FormatRaceTime(new TimeSpan(0, 0, 0, 0, raceTimeMS));
 
 	public static string FormatPbTime(TimeSpan raceTime)
 		=> $"PB: {raceTime:mm}:{raceTime:ss}.{raceTime:fff}";
@@ -63,24 +81,29 @@ public static class GameModeUtils
 
 	public static string GetMedalFromTime(int timeMs, int atMs)
 	{
+		return MEDAL_NAME[GetMedalIdFromTime(timeMs, atMs)];
+	}
+
+	public static int GetMedalIdFromTime(int timeMs, int atMs)
+	{
 		if (timeMs < atMs)
 		{
-			return "Diamond Medal";
+			return MEDAL_AUTHOR;
 		}
 		if (timeMs < GetGoldFromAt(atMs))
 		{
-			return "Gold Medal";
+			return MEDAL_GOLD;
 		}
 		if (timeMs < GetSilverFromAt(atMs))
 		{
-			return "Silver Medal";
+			return MEDAL_SILVER;
 		}
 		if (timeMs < GetBronzeFromAt(atMs))
 		{
-			return "Bronze Medal";
+			return MEDAL_BRONZE;
 		}
-		
-		return "No Medal";
+
+		return MEDAL_NONE;
 	}
 
 	public static void SaveUserPb(TimeSpan time, string trackUid)

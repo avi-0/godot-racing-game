@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using racingGame.data;
+using racingGame.extensions;
 
 namespace racingGame;
 
@@ -13,6 +14,8 @@ public class GameModeTimeAttack : IGameMode
 	private Dictionary<Guid, TimeAttackPlayer> _players;
 
 	private bool _running = false;
+
+	private bool _hasAuthor = false;
 
 	public void Running(bool running)
 	{
@@ -110,8 +113,42 @@ public class GameModeTimeAttack : IGameMode
 		}
 	}
 
-	public void AddPlayer(Guid id)
+	public void AddPlayer(Guid id, bool localPlayer, bool isHost, string playerName)
 	{
+		var player = new TimeAttackPlayer(id, true);
+		player.IsHost = isHost;
+		player.PlayerName = playerName;
+		player.LocalPlayer = localPlayer;
+
+		if (player.LocalPlayer)
+		{
+			TimeSpan loadedPb = new TimeSpan();
+			Ghost loadedGhost = new Ghost();
+			if (!_inEditor)
+			{
+				if (!GameManager.Instance.IsSplitScreen || player.IsHost)
+				{
+					loadedPb = GameModeUtils.LoadUserPb(_currentTrack.Track.Options.Uid);
+					loadedGhost = GameModeUtils.LoadUserGhost(_currentTrack.Track.Options.Uid);
+				}
+			}
+			else
+			{
+				loadedPb = new TimeSpan(0, 0, 0, 0, _currentTrack.Track.Options.AuthorTime);
+			}
+
+			if (loadedPb != TimeSpan.Zero)
+			{
+				player.PbTime = loadedPb;
+			}
+
+			if (!loadedGhost.Empty)
+			{
+				player.PBGhost = loadedGhost;
+			}
+		}
+
+		_players[id] = player;
 		RestartPlayer(id);
 	}
 
@@ -119,11 +156,7 @@ public class GameModeTimeAttack : IGameMode
 	{
 		CarManager.Instance.CreatePlayerCar(id);
 		
-		var player = new TimeAttackPlayer(id, true);
-		if (_players.ContainsKey(id))
-		{
-			player = _players[id];
-		}
+		var player = _players[id];
 
 		player.SpawnTime = DateTime.Now;
 		player.RaceStartTime = new DateTime();
@@ -138,29 +171,6 @@ public class GameModeTimeAttack : IGameMode
 		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
 		if (player.LocalPlayer)
 		{
-			TimeSpan loadedPb;
-			Ghost loadedGhost;
-			if (!_inEditor)
-			{
-				loadedPb = GameModeUtils.LoadUserPb(_currentTrack.Track.Options.Uid);
-				loadedGhost = GameModeUtils.LoadUserGhost(_currentTrack.Track.Options.Uid);
-			}
-			else
-			{
-				loadedPb = new TimeSpan(0, 0, 0, 0, _currentTrack.Track.Options.AuthorTime);
-				loadedGhost = new Ghost();
-			}
-
-			if (loadedPb != TimeSpan.Zero)
-			{
-				player.PbTime = loadedPb;
-			}
-
-			if (player.PBGhost.Empty && !loadedGhost.Empty)
-			{
-				player.PBGhost = loadedGhost;
-			}
-			
 			if (player.PlayerGhostCar != null)
 			{
 				player.PlayerGhostCar.QueueFree();
@@ -205,6 +215,7 @@ public class GameModeTimeAttack : IGameMode
 			}
 		}
 		_players = null;
+		_hasAuthor = false;
 	}
 
 	private void PlayerAttemptFinish(Car playerCar, int blockId)
@@ -266,7 +277,7 @@ public class GameModeTimeAttack : IGameMode
 			isPb = true;
 
 			player.PbTime = player.CurrentRaceTime;
-			if (player.LocalPlayer)
+			if (player.LocalPlayer && (!GameManager.Instance.IsSplitScreen || player.IsHost))
 			{
 				GameModeUtils.SaveUserPb(player.PbTime, TrackManager.Instance.GetLoadedTrackUid());
 
@@ -280,7 +291,10 @@ public class GameModeTimeAttack : IGameMode
 			player.PBGhost = player.GhostRecording;
 			player.PBGhost.RaceTime = player.CurrentRaceTime;
 
-			GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid());
+			if (player.LocalPlayer && (!GameManager.Instance.IsSplitScreen || player.IsHost))
+			{
+				GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid());
+			}
 		}
 		//--
 
@@ -299,13 +313,94 @@ public class GameModeTimeAttack : IGameMode
 	{
 		var player = _players[viewport.PlayerId];
 
+		//Track Info
 		viewport.TrackInfoLabel.Text = GameModeUtils.FormatTrackInfo(_currentTrack.Track.Options.Name, _currentTrack.Track.Options.AuthorName);
+		//--
+		
+		//Race Stats
 		viewport.TimeLabel.Text = GameModeUtils.FormatRaceTime(player.CurrentRaceTime);
-		viewport.PbLabel.Text = GameModeUtils.FormatPbTime(player.PbTime);
 		viewport.CheckPointLabel.Text = GameModeUtils.FormatCheckPointCount(player.CheckPointsCollected.Count,
 			_currentTrack.CheckPointCount);
 		viewport.LapsLabel.Text = GameModeUtils.FormatLapsCount(player.LapsDone, _currentTrack.Track.Options.Laps);
+		//--
+			
+		//ScoreBoard
+		Label newLabel()
+		{
+			Label label = new Label();
+			label.AddThemeFontSizeOverride("font_size", 48);
+			label.HorizontalAlignment = HorizontalAlignment.Center;
+			label.VerticalAlignment = VerticalAlignment.Center;
+			label.Name = "Label";
+			
+			return label;
+		}
+		viewport.ScoreboardContainer.DestroyAllChildren();
 
+		if (!_inEditor && _hasAuthor)
+		{
+			var authorLabel = newLabel();
+			authorLabel.Text = "Author: " + GameModeUtils.FormatRaceTime(_currentTrack.Track.Options.AuthorTime);
+			authorLabel.Name = _currentTrack.Track.Options.AuthorTime.ToString();
+			authorLabel.AddThemeColorOverride("font_color", Colors.GreenYellow);
+			viewport.ScoreboardContainer.AddChild(authorLabel);
+		}
+		var goldLabel = newLabel();
+		goldLabel.Text = "Gold: " + GameModeUtils.FormatRaceTime(GameModeUtils.GetGoldFromAt(_currentTrack.Track.Options.AuthorTime));
+		goldLabel.Name = GameModeUtils.GetGoldFromAt(_currentTrack.Track.Options.AuthorTime).ToString();
+		goldLabel.AddThemeColorOverride("font_color", Colors.Gold);
+		viewport.ScoreboardContainer.AddChild(goldLabel);
+		var silverLabel = newLabel();
+		silverLabel.Text = "Silver: " + GameModeUtils.FormatRaceTime(GameModeUtils.GetSilverFromAt(_currentTrack.Track.Options.AuthorTime));
+		silverLabel.Name = GameModeUtils.GetSilverFromAt(_currentTrack.Track.Options.AuthorTime).ToString();
+		silverLabel.AddThemeColorOverride("font_color", Colors.Silver);
+		viewport.ScoreboardContainer.AddChild(silverLabel);
+		var bronzeLabel = newLabel();
+		bronzeLabel.Text = "Bronze: " + GameModeUtils.FormatRaceTime(GameModeUtils.GetBronzeFromAt(_currentTrack.Track.Options.AuthorTime));
+		bronzeLabel.Name = GameModeUtils.GetBronzeFromAt(_currentTrack.Track.Options.AuthorTime).ToString();
+		bronzeLabel.AddThemeColorOverride("font_color", Colors.LightCoral);
+		viewport.ScoreboardContainer.AddChild(bronzeLabel);
+		
+		foreach (var kv in _players)
+		{
+			var scoreboardPlayer = kv.Value;
+			if (scoreboardPlayer.PbTime != TimeSpan.Zero)
+			{
+				Label scoreLabel = newLabel();
+				scoreLabel.Text = scoreboardPlayer.PlayerName + ": " + GameModeUtils.FormatRaceTime(scoreboardPlayer.PbTime);
+				scoreLabel.Name = scoreboardPlayer.PbTime.TotalMilliseconds.ToString("0000");
+				if (kv.Key == viewport.PlayerId)
+				{
+					if (_inEditor)
+					{
+						scoreLabel.AddThemeColorOverride("font_color", Colors.LightGreen);
+					}
+					else
+					{
+						scoreLabel.AddThemeColorOverride("font_color", Colors.LightSkyBlue);
+					}
+				}
+				viewport.ScoreboardContainer.AddChild(scoreLabel);
+
+
+				
+				int childId =  viewport.ScoreboardContainer.GetChildCount()-1;
+				while (childId > 0 && int.Parse(viewport.ScoreboardContainer.GetChild(childId - 1).Name) > scoreboardPlayer.PbTime.TotalMilliseconds)
+				{
+					viewport.ScoreboardContainer.MoveChild(scoreLabel, childId-1);
+					childId -= 1;
+				}
+				
+				if (scoreboardPlayer.PbTime.TotalMilliseconds <= _currentTrack.Track.Options.AuthorTime)
+				{
+					_hasAuthor = true;
+				}
+			}
+		}
+		
+		//--
+		
+		//Finish Panel
 		if (player.HasFinished && !viewport.FinishPanel.Visible)
 		{
 			var isPb = player.LastFinishTime == player.PbTime;
@@ -322,21 +417,15 @@ public class GameModeTimeAttack : IGameMode
 
 			if (!_inEditor)
 			{
-				var at = TrackManager.Instance.Track.Options.AuthorTime;
-				if (player.LastFinishTime.TotalMilliseconds <= at)
-					viewport.FinishTimeLabel.Text += "\nAuthor Medal!!!!";
-				else if (player.LastFinishTime.TotalMilliseconds <= GameModeUtils.GetGoldFromAt(at))
-					viewport.FinishTimeLabel.Text += "\nGold Medal!!!";
-				else if (player.LastFinishTime.TotalMilliseconds <= GameModeUtils.GetSilverFromAt(at))
-					viewport.FinishTimeLabel.Text += "\nSilver Medal!!";
-				else if (player.LastFinishTime.TotalMilliseconds <= GameModeUtils.GetBronzeFromAt(at))
-					viewport.FinishTimeLabel.Text += "\nBronze Medal!";
+				viewport.FinishTimeLabel.Text += "\n" + GameModeUtils.GetMedalFromTime((int)player.LastFinishTime.TotalMilliseconds, TrackManager.Instance.Track.Options.AuthorTime);
 			}
 
 			viewport.FinishPanel.Show();
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
+		//--
 		
+		//Start Sound
 		if (viewport.StartTimerSeconds != player.StartTimerSeconds)
 		{
 			viewport.StartTimerSeconds = player.StartTimerSeconds;
@@ -346,7 +435,9 @@ public class GameModeTimeAttack : IGameMode
 			else
 				UiSoundPlayer.Singleton.RaceCountDownSound.Play();
 		}
+		//--
 
+		//Start CountDown
 		if (viewport.StartTimerSeconds > 0)
 		{
 			viewport.StartTimerLabel.Show();
@@ -356,5 +447,6 @@ public class GameModeTimeAttack : IGameMode
 		{
 			viewport.StartTimerLabel.Hide();
 		}
+		//--
 	}
 }

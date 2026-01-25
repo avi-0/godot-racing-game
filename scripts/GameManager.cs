@@ -43,6 +43,9 @@ public partial class GameManager : Node
 	// constants that hui znaet where they should be
 	public const int BlockLayer = 1;
 	public const int CarLayer = 2;
+
+	//more than one splirscreen screen
+	public bool IsSplitScreen = false;
 	
 	private bool _isPlaying = false;
 
@@ -68,7 +71,10 @@ public partial class GameManager : Node
 		if (@event.IsActionPressed(InputActionNames.Pause))
 		{
 			RootViewport.SetInputAsHandled();
-			OnPause();
+			if (_isPlaying)
+			{
+				OnPause();
+			}
 		}
 	}
 
@@ -116,12 +122,22 @@ public partial class GameManager : Node
 		CarManager.Instance.Clear();
 		
 		GameModeController.CurrentGameMode.InitTrack(TrackManager.Instance.Track);
+
+		IsSplitScreen = _screenLayout.PlayerViewports.Count > 1;
 		
+		bool isFirst = true;
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
 			var id = Guid.NewGuid();
-			GameModeController.CurrentGameMode.AddPlayer(id);
 
+			string name = "Player " + (viewport.LocalPlayerId + 1);
+			if (isFirst)
+			{
+				name = SettingsManager.Instance.GetLocalPlayerName();
+			}
+			GameModeController.CurrentGameMode.AddPlayer(id, true, isFirst, name);
+			isFirst = false;
+			
 			viewport.PlayerId = id;
 
 			if (TrackManager.Instance.Track.Options.Message != "")

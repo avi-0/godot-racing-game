@@ -11,10 +11,13 @@ public struct TimeAttackPlayer
 
 	public bool LocalPlayer { get; set; } = false;
 	public bool InGame { get; set; } = true;
+	public bool IsHost { get; set; } = false;
 
 	public List<int> CheckPointsCollected { get; set; }
 	public int LapsDone { get; set; } = 0;
 
+	public string PlayerName { get; set; } = "";
+	
 	public DateTime RaceStartTime { get; set; }
 	public DateTime SpawnTime { get; set; }
 	public TimeSpan CurrentRaceTime { get; set; }

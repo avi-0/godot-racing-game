@@ -10,12 +10,13 @@ public partial class PlayerViewport : SubViewport
 	[Export] public PanelContainer FinishPanel;
 	[Export] public Label FinishTimeLabel;
 	[Export] public Label LapsLabel;
-	[Export] public Label PbLabel;
+	//[Export] public Label PbLabel;
 	[Export] public Control RaceUi;
 	[Export] public Label SpeedLabel;
 	[Export] public Label StartTimerLabel;
 	[Export] public Label TimeLabel;
 	[Export] public Label TrackInfoLabel;
+	[Export] public VBoxContainer ScoreboardContainer;
 	[Export] public Camera3D Camera;
 	[Export] public int LocalPlayerId = 0;
 	
