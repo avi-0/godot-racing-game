@@ -240,7 +240,7 @@ public partial class Car : RigidBody3D
 		_speedStack.Push(LinearVelocity.Length());
 		
 		//RAIN
-		if (TrackManager.Instance.Track.Options.Rain)
+		if (_isLocallyControlled && TrackManager.Instance.Track.Options.Rain)
 		{
 			TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(GlobalPosition.X, TrackManager.Instance.Track.RainParticles.GlobalPosition.Y, GlobalPosition.Z));
 			
