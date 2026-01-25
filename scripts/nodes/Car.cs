@@ -32,6 +32,7 @@ public partial class Car : RigidBody3D
 	[Export] public float SlipThreshold = 0.5f;
 	[Export] public float UnslipThreshold = 0.5f;
 	[Export] public float WheelZFriction = 0.05f;
+	[Export] public bool SteeringAffectsCenterOfMass = false;
 	
 	[ExportCategory("Debug")]
 	[Export] public bool DebugMode = false;
@@ -65,6 +66,7 @@ public partial class Car : RigidBody3D
 	private float _targetSteering;
 	
 	private float _defaultDamp = 0;
+	private Vector3 _defaultCOM = Vector3.Zero;
 	
 	private bool _isLocallyControlled = false;
 	public bool IsLocallyControlled
@@ -117,6 +119,12 @@ public partial class Car : RigidBody3D
 		}
 
 		_defaultDamp = LinearDamp;
+		_defaultCOM = CenterOfMass;
+
+		if (!IsGhost)
+		{
+			_PhysicsProcess(60);
+		}
 	}
 
 	private void SetupWheels()
@@ -268,8 +276,6 @@ public partial class Car : RigidBody3D
 				TrackManager.Instance.Track.RainParticles.Visible = true;
 			}
 			
-			GD.Print(_rayCastUp.IsColliding());
-			
 			_rayCastUp.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y+1.5f, GlobalPosition.Z);
 		}
 		//--
@@ -410,7 +416,12 @@ public partial class Car : RigidBody3D
 						Mathf.Abs(wheel.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
 						0, 1));
 			}
-			
+
+			if (SteeringAffectsCenterOfMass)
+			{
+				CenterOfMass = new Vector3(_defaultCOM.X + (_targetSteering / 50), _defaultCOM.Y, _defaultCOM.Z);
+			}
+
 			if (_targetSteering != 0)
 			{
 				var y = Mathf.MoveToward(wheel.Rotation.Y, _targetSteering * float.DegreesToRadians(SteeringBaseDegrees), TireTurnSpeed * delta);
@@ -648,6 +659,14 @@ public partial class Car : RigidBody3D
 		{
 			MeshInstance3D mesh = (MeshInstance3D)CarModel.GetChildren()[0];
 			mesh.SetMaterialOverride(Skins[id]);
+		}
+	}
+
+	public void SetRandomSkin()
+	{
+		if (Skins != null && Skins.Length > 0)
+		{
+			SetSkin(GameManager.Instance.RNG.RandiRange(0, Skins.Length-1));			
 		}
 	}
 }

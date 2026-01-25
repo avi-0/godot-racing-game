@@ -14,6 +14,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.1
+rough = true
 bounce = 0.1
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
@@ -37,8 +38,8 @@ point_count = 1
 [sub_resource type="Resource" id="Resource_lce11"]
 script = ExtResource("2_sw6ji")
 SpringStrength = 6000.0
-SpringDamping = 150.0
-SpringRest = 0.15
+SpringDamping = 75.0
+SpringRest = 0.16
 OverExtend = 0.1
 WheelRadius = 0.26
 IsDriveWheel = true
@@ -49,7 +50,7 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 [sub_resource type="Resource" id="Resource_lml1i"]
 script = ExtResource("2_sw6ji")
 SpringStrength = 6000.0
-SpringDamping = 130.0
+SpringDamping = 75.0
 SpringRest = 0.16
 OverExtend = 0.1
 WheelRadius = 0.26
@@ -269,11 +270,14 @@ Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 Acceleration = 360
 MaxSpeed = 25
+BrakingStrengthMultiplier = 0.4
+ReversingStrengthMultiplier = 0.7
 TireTurnSpeed = 1.0
 SteeringBaseDegrees = 5
-SlippingTraction = 0.15
+SlippingTraction = 0.2
 SlipThreshold = 0.3
 UnslipThreshold = 0.4
+SteeringAffectsCenterOfMass = true
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_vwi5m")
@@ -289,6 +293,7 @@ shape = SubResource("ConvexPolygonShape3D_sw6ji")
 
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.26345325, 0.72)
+max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
@@ -297,6 +302,7 @@ remote_path = NodePath("../../Taxi/FLW")
 
 [node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.26345325, 0.72)
+max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
@@ -305,6 +311,7 @@ remote_path = NodePath("../../Taxi/FRW")
 
 [node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.26345325, -0.52)
+max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -315,6 +322,7 @@ remote_path = NodePath("../../Taxi/RLW")
 
 [node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.26345325, -0.52)
+max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")

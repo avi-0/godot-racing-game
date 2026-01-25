@@ -51,7 +51,8 @@ public partial class GameManager : Node
 
 	public Viewport RootViewport;
 	private ScreenLayout _screenLayout;
-	
+
+	public RandomNumberGenerator RNG = new RandomNumberGenerator();
 	
 	public override void _Ready()
 	{

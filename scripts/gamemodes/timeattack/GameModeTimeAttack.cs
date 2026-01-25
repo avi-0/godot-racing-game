@@ -185,6 +185,11 @@ public class GameModeTimeAttack : IGameMode
 				player.PlayerGhostCar.Rotation = player.PlayerCar.Rotation;
 				player.PlayerGhostCar.Visible = false;
 			}
+
+			if (GameManager.Instance.IsSplitScreen && !player.IsHost)
+			{
+				player.PlayerCar.SetRandomSkin();
+			}
 		}
 
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
