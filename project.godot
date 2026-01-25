@@ -27,6 +27,7 @@ UiSoundPlayer="*res://scenes/autoloads/ui_sound_player.tscn"
 GameManager="*res://scenes/autoloads/game_manager.tscn"
 TrackManager="*res://scenes/autoloads/track_manager.tscn"
 CarManager="*res://scenes/autoloads/car_manager.tscn"
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.cs"
 
 [debug_draw_3d]
 
@@ -48,7 +49,7 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sky_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/sky_3d/plugin.cfg")
 
 [filesystem]
 
