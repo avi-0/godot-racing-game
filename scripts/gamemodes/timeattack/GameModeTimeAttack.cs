@@ -408,6 +408,8 @@ public class GameModeTimeAttack : IGameMode
 		//Finish Panel
 		if (player.HasFinished && !viewport.FinishPanel.Visible)
 		{
+			if (!viewport.RaceUi.Visible) {viewport.RaceUi.Visible = true;}
+			
 			var isPb = player.LastFinishTime == player.PbTime;
 			
 			viewport.FinishTimeLabel.Text = $"Race Time: {player.LastFinishTime:mm}:{player.LastFinishTime:ss}.{player.LastFinishTime:fff}";

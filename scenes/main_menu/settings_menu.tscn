@@ -61,9 +61,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Graphics" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -193,7 +194,6 @@ size_flags_horizontal = 8
 text = "Reset to Default"
 
 [node name="Sound" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 32
 metadata/_tab_index = 1
@@ -358,7 +358,7 @@ Action = &"game_respawn"
 [node name="respawn_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
 layout_mode = 2
 script = ExtResource("5_t0huu")
-Action = &"game_game_respawn"
+Action = &"game_respawn"
 
 [node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
 layout_mode = 2
@@ -387,6 +387,20 @@ Action = &"game_car_lights"
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_car_lights"
+
+[node name="hideui" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+text = "Toggle In-Game UI"
+
+[node name="hideui_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("4_2jsdb")
+Action = &"game_hide_ui"
+
+[node name="hideui_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_hide_ui"
 
 [node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls"]
 layout_mode = 2

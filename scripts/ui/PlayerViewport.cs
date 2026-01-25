@@ -127,6 +127,11 @@ public partial class PlayerViewport : SubViewport
 			Car.InputToggleLights();
 			SetInputAsHandled();
 		}
+		else if (@event.IsActionPressed(InputActionNames.HideUI))
+		{
+			RaceUi.Visible = !RaceUi.Visible;
+			SetInputAsHandled();
+		}
 	}
 
 	private void UpdateCarInputs()
