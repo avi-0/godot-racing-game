@@ -13,7 +13,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.5
-bounce = 0.6
+rough = true
 
 [sub_resource type="Curve" id="Curve_qtbni"]
 _limits = [1.0, 4.0, 0.0, 1.0]
@@ -21,8 +21,8 @@ _data = [Vector2(0, 1.9922554), 0.0, 37.867313, 0, 0, Vector2(0.08363637, 1.4414
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_wofr7"]
-_limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 6.9635525), 0.0, 3.0042944, 0, 0, Vector2(0.19636363, 2.9835987), -8.0477, -8.0477, 0, 0, Vector2(1, 1), -0.34810984, 0.0, 0, 0]
+_limits = [0.5, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 2.2699318), 0.0, -13.468104, 0, 0, Vector2(0.058181822, 4.1799545), -12.574535, -12.574535, 0, 0, Vector2(1, 0.5), -0.34810984, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_xv7xt"]
@@ -32,10 +32,10 @@ point_count = 3
 
 [sub_resource type="Resource" id="Resource_x43s4"]
 script = ExtResource("2_dg6r6")
-SpringStrength = 12500.0
+SpringStrength = 13500.0
 SpringDamping = 300.0
-SpringRest = 0.1
-OverExtend = 0.0
+SpringRest = 0.12
+OverExtend = 0.05
 WheelRadius = 0.21
 IsDriveWheel = true
 IsSteeringWheel = true
@@ -51,12 +51,11 @@ script = ExtResource("2_dg6r6")
 SpringStrength = 13500.0
 SpringDamping = 300.0
 SpringRest = 0.12
-OverExtend = 0.0
+OverExtend = 0.05
 WheelRadius = 0.21
 IsDriveWheel = true
-BaseGrip = 0.35
+BaseGrip = 0.45
 GripCurve = SubResource("Curve_dg6r6")
-FullLoseGripOnSlip = true
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r6maj"]
@@ -264,14 +263,14 @@ HeadLight = NodePath("Headlights")
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("PlayerName3D")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
-Acceleration = 205
+Acceleration = 230
 MaxSpeed = 70
-BrakingStrengthMultiplier = 2.0
-TireTurnSpeed = 1.5
+BrakingStrengthMultiplier = 1.5
+TireTurnSpeed = 1.75
 SteeringBaseDegrees = 4
-SlippingTraction = 0.3
-SlipThreshold = 0.35
-UnslipThreshold = 1.6
+SlippingTraction = 0.2
+SlipThreshold = 0.7
+UnslipThreshold = 1.4
 WheelZFriction = 0.02
 AccelerationCurve = SubResource("Curve_qtbni")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
@@ -288,6 +287,7 @@ shape = SubResource("ConvexPolygonShape3D_r6maj")
 
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.22163354, 0.55)
+max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
@@ -296,6 +296,7 @@ remote_path = NodePath("../../Prototype_Car/FLW")
 
 [node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.22163354, 0.55)
+max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
@@ -304,6 +305,7 @@ remote_path = NodePath("../../Prototype_Car/FRW")
 
 [node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.22163354, -0.5)
+max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -314,6 +316,7 @@ remote_path = NodePath("../../Prototype_Car/RLW")
 
 [node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.22163354, -0.5)
+max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
