@@ -11,7 +11,7 @@ public class GameModeTimeAttack : IGameMode
 {
 	private TimeAttackMap _currentTrack;
 	private bool _inEditor = false;
-	private Dictionary<Guid, TimeAttackPlayer> _players;
+	private Dictionary<long, TimeAttackPlayer> _players;
 
 	private bool _running = false;
 
@@ -113,7 +113,7 @@ public class GameModeTimeAttack : IGameMode
 		}
 	}
 
-	public void AddPlayer(Guid id, bool localPlayer, bool isHost, string playerName)
+	public void AddPlayer(long id, bool localPlayer, bool isHost, string playerName)
 	{
 		var player = new TimeAttackPlayer(id, true);
 		player.IsHost = isHost;
@@ -152,7 +152,7 @@ public class GameModeTimeAttack : IGameMode
 		RestartPlayer(id);
 	}
 
-	public void RestartPlayer(Guid id)
+	public void RestartPlayer(long id)
 	{
 		CarManager.Instance.CreatePlayerCar(id);
 		
@@ -201,7 +201,7 @@ public class GameModeTimeAttack : IGameMode
 		_players[id] = player;
 	}
 
-	public void RespawnPlayer(Guid id)
+	public void RespawnPlayer(long id)
 	{
 		if (_players[id].RespawnPoint != new Transform3D())
 		{

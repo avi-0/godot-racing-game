@@ -21,7 +21,7 @@ public partial class PlayerViewport : SubViewport
 	[Export] public int LocalPlayerId = 0;
 	
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
-	public Guid PlayerId;
+	public long PlayerId;
 	public int StartTimerSeconds = -1;
 
 	private CarInputs _inputs;

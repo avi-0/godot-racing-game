@@ -129,7 +129,11 @@ public partial class GameManager : Node
 		bool isFirst = true;
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
-			var id = Guid.NewGuid();
+			long id = RNG.Randi();
+			if (MultiplayerManager.Instance.OnServer)
+			{
+				id = long.Parse(MultiplayerManager.Instance.PlayerInfo[MultiplayerManager.PLAYERINFO_PLAYERID]);
+			}
 
 			string name = "Player " + (viewport.LocalPlayerId + 1);
 			if (isFirst)

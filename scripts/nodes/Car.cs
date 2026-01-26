@@ -81,7 +81,7 @@ public partial class Car : RigidBody3D
 		}
 	}
 	
-	public Guid PlayerId;
+	public long PlayerId;
 	public bool AcceptsInputs { get; set; } = false;
 
 	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
@@ -177,8 +177,18 @@ public partial class Car : RigidBody3D
 		HeadLight.Visible = !HeadLight.Visible;
 	}
 
+	public override void _EnterTree()
+	{
+		if (MultiplayerManager.Instance.OnServer && !Multiplayer.IsServer())
+		{
+			//SetMultiplayerAuthority((int)PlayerId);
+		}
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
+		//if (!IsMultiplayerAuthority()) { return; }
+		
 		_isAccelerating = false;
 		_isReversing = false;
 		var velocity = GlobalBasis.Z.Dot(LinearVelocity);
