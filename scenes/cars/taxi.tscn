@@ -255,10 +255,25 @@ shadow_mesh = SubResource("ArrayMesh_ync2c")
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30yta"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/replication_mode = 2
+properties/2/path = NodePath("WheelFL:position")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("WheelFL:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("WheelFR:position")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath("WheelFR:rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath("Headlights:visible")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
 [node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
 collision_layer = 2

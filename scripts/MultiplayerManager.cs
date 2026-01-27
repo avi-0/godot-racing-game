@@ -1,14 +1,14 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using racingGame;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 public partial class MultiplayerManager : Node
 {
 	public static MultiplayerManager Instance;
-	
-	public bool OnServer  = false;
-	
-	public ENetMultiplayerPeer MultiplayerPeer;
+
 	
 	[Signal]
 	public delegate void ConnectedToServerEventHandler();
@@ -17,21 +17,52 @@ public partial class MultiplayerManager : Node
 	private const int PORT = 1342;
 	private const int MAX_PLAYERS = 32;
 
-	public const int SERVERINFO_TRACKPATH = 1;
-
-	public const int PLAYERINFO_PLAYERID = 1;
-	public const int PLAYERINFO_PLAYERNAME = 2;
-
-	public Godot.Collections.Dictionary<int, string> ServerInfo = new Godot.Collections.Dictionary<int, string>()
+	public struct ServerInfoStruct
 	{
-		{ SERVERINFO_TRACKPATH, "" },
-	};
+		public bool IsDedicated = false;
+		public string TrackPath;
+		public List<PlayerInfoStruct> Players = new List<PlayerInfoStruct>();
+
+		public ServerInfoStruct(string trackPath)
+		{
+			this.TrackPath = trackPath;
+		}
+
+		public string Json()
+		{
+			return JsonConvert.SerializeObject(this);
+		}
+		public ServerInfoStruct FromJson(string json)
+		{
+			return JsonConvert.DeserializeObject<ServerInfoStruct>(json);
+		}
+	}
+	public struct PlayerInfoStruct
+	{
+		public string PlayerName;
+		public long PlayerId;
+
+		public PlayerInfoStruct(long playerId, string playerName)
+		{
+			this.PlayerId = playerId;
+			this.PlayerName = playerName;
+		}
+
+		public string Json()
+		{
+			return JsonConvert.SerializeObject(this);
+		}
+		public PlayerInfoStruct FromJson(string json)
+		{
+			return JsonConvert.DeserializeObject<PlayerInfoStruct>(json);
+		}
+	}
 	
-	public Godot.Collections.Dictionary<int, string> PlayerInfo = new Godot.Collections.Dictionary<int, string>()
-	{
-		{ PLAYERINFO_PLAYERID, "" },
-		{ PLAYERINFO_PLAYERNAME, "" },
-	};	
+	public ServerInfoStruct ServerInfo;
+	public PlayerInfoStruct PlayerInfo;	
+	public ENetMultiplayerPeer MultiplayerPeer;
+	
+	public bool OnServer = false;
 	
 	public override void _Ready()
 	{
@@ -41,19 +72,47 @@ public partial class MultiplayerManager : Node
 	{
 	}
 
+	private void mprint(string msg)
+	{
+		GD.Print("MULTIPLAYERMANAGER | " + msg);
+	}
+
+	public void TerminateConnection()
+	{
+		Multiplayer.MultiplayerPeer = null;
+		OnServer = false;
+	}
+	
 	//SERVER
 	public void CreateServer(string trackPath)
 	{
-		ServerInfo[SERVERINFO_TRACKPATH] = trackPath;
+		ServerInfo = new ServerInfoStruct(trackPath);
 		MultiplayerPeer = new ENetMultiplayerPeer();
 		MultiplayerPeer.CreateServer(PORT, MAX_PLAYERS);
 		Multiplayer.MultiplayerPeer = MultiplayerPeer;
+		Multiplayer.PeerConnected += OnClientConnected;
+		Multiplayer.PeerDisconnected += OnClientDisconnected;
+		
+		PlayerInfo  = new PlayerInfoStruct(MultiplayerPeer.GetUniqueId(), SettingsManager.Instance.Settings.PlayerName);
+		ServerInfo.Players.Add(PlayerInfo);
+		
+		mprint("Host Server Info: " + ServerInfo.Json());
+		
 		OnServer = true;
 	}
 
 	public void OnClientConnected(long id)
 	{
-		RpcId(id, MethodName.SendServerInfoToClient, ServerInfo);
+		mprint(id + " connected");
+		RpcId(id, MethodName.SendServerInfoToClient, ServerInfo.Json());
+		GameModeController.CurrentGameMode.AddPlayer(id, false, false, id.ToString());
+	}
+
+	public void OnClientDisconnected(long id)
+	{
+		mprint(id + " disconnected");
+		GameModeController.CurrentGameMode.DeletePlayer(id);
+		ServerInfo.Players.Remove(ServerInfo.Players.Find(@struct => @struct.PlayerId == id));
 	}
 	//--
 
@@ -63,9 +122,8 @@ public partial class MultiplayerManager : Node
 		MultiplayerPeer = new ENetMultiplayerPeer();
 		MultiplayerPeer.CreateClient(ipAddress, PORT);
 		Multiplayer.MultiplayerPeer = MultiplayerPeer;
-		
-		PlayerInfo[PLAYERINFO_PLAYERID] = MultiplayerPeer.GetUniqueId().ToString();
-		PlayerInfo[PLAYERINFO_PLAYERNAME] = SettingsManager.Instance.Settings.PlayerName;
+		ServerInfo = new ServerInfoStruct();
+		PlayerInfo  = new PlayerInfoStruct(MultiplayerPeer.GetUniqueId(), SettingsManager.Instance.Settings.PlayerName);
 		
 		OnServer = true;
 	}
@@ -73,19 +131,29 @@ public partial class MultiplayerManager : Node
 	
 	//server to client rpcs
 	[Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = false, TransferMode = Godot.MultiplayerPeer.TransferModeEnum.Reliable)]
-	private void SendServerInfoToClient(Godot.Collections.Dictionary<int, string> info)
+	private void SendServerInfoToClient(string info)
 	{
-		ServerInfo = info;
+		mprint("Server Info: " + info);
+		ServerInfo = ServerInfo.FromJson(info);
 		EmitSignalConnectedToServer();
+
+		foreach (PlayerInfoStruct player in ServerInfo.Players)
+		{
+			GameModeController.CurrentGameMode.AddPlayer(player.PlayerId, false, false, player.PlayerName);
+		}
+
+		Rpc(MethodName.SendPlayerInfoToEveryone, PlayerInfo.Json());
 	}
 	//--
 	
 	//client to clients rpcs
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = false, TransferMode = Godot.MultiplayerPeer.TransferModeEnum.Reliable)]
-	private void SendPlayerInfoToEveryone(Godot.Collections.Dictionary<int, string> info)
+	private void SendPlayerInfoToEveryone(string info)
 	{
-		Godot.Collections.Dictionary<int, string> NewPlayerInfo = info;
-		GD.Print("New Player Name: " + NewPlayerInfo[PLAYERINFO_PLAYERNAME]);
+		PlayerInfoStruct newPlayerInfo = PlayerInfo.FromJson(info);
+		mprint("New Player Name: " + newPlayerInfo.PlayerName);
+		ServerInfo.Players.Add(newPlayerInfo);
+		GameModeController.CurrentGameMode.AddPlayer(newPlayerInfo.PlayerId, false, false, newPlayerInfo.PlayerName);
 	}
 	//--
 }

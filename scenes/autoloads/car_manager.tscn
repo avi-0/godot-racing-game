@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqo1qfo7ff5p0"]
+[gd_scene load_steps=2 format=3 uid="uid://bqo1qfo7ff5p0"]
 
 [ext_resource type="Script" uid="uid://byb4ns3dcrrth" path="res://scripts/CarManager.cs" id="1_b5muo"]
-[ext_resource type="Script" uid="uid://b6nd2aycsueag" path="res://scripts/MultiplayerSpawner.cs" id="2_tcjj3"]
 
 [node name="CarManager" type="Node"]
 script = ExtResource("1_b5muo")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
-script = ExtResource("2_tcjj3")

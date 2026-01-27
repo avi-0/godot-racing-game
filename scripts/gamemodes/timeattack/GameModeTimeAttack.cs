@@ -209,6 +209,12 @@ public class GameModeTimeAttack : IGameMode
 		}
 	}
 
+	public void DeletePlayer(long id)
+	{
+		CarManager.Instance.RemoveChild(_players[id].PlayerCar);
+		_players.Remove(id);
+	}
+	
 	public void KillGame()
 	{
 		_running = false;

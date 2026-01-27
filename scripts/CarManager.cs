@@ -73,11 +73,18 @@ public partial class CarManager : Node
 	public Car CreatePlayerCar(long id)
 	{
 		DestroyPlayerCar(id);
-		
+
 		var car = CarScene.Instantiate<Car>();
+
+		car.Name = id.ToString();
+		if (MultiplayerManager.Instance.OnServer)
+		{
+			car.SetMultiplayerAuthority((int)id);
+		}
+		
 		_cars.Add(car);
 		_playerCarsById[id] = car;
-			
+		
 		AddChild(car, true);
 		car.GlobalTransform = TrackManager.Instance.GetStartPoint();
 		car.Started();

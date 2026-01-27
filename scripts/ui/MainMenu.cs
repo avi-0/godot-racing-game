@@ -260,14 +260,14 @@ public partial class MainMenu : Control
 		_hadFocus.GrabFocus();
 	}
 
-	private async GDTaskVoid OpenTrack(string path)
+	private async GDTaskVoid OpenTrack(string path, bool host = true)
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		IsVisible = false;
 		LoadGarageCar();
 
 		TrackManager.Instance.OpenTrack(path);
-		GameManager.Instance.Play();
+		GameManager.Instance.Play(host);
 
 		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 		
@@ -478,6 +478,6 @@ public partial class MainMenu : Control
 
 		await GDTask.ToSignal(MultiplayerManager.Instance, MultiplayerManager.SignalName.ConnectedToServer);
 		
-		OpenTrack(MultiplayerManager.Instance.ServerInfo[MultiplayerManager.SERVERINFO_TRACKPATH]).Forget();
+		OpenTrack(MultiplayerManager.Instance.ServerInfo.TrackPath, false).Forget();
 	}
 }
