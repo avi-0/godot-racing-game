@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cok5acfebmyip"]
+
+[ext_resource type="Texture2D" uid="uid://dl32cd5f1y7kx" path="res://assets/cars/Textures/CHP_Tex_Veh_Land_Col2.png" id="1_h1xe8"]
+
+[resource]
+albedo_texture = ExtResource("1_h1xe8")
+texture_filter = 0

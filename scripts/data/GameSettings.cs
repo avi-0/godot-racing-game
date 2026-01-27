@@ -8,7 +8,8 @@ public class GameSettings
 	public SoundSettings Sound = new();
 	public string PlayerName = "Player";
 	public Dictionary<string, List<InputEventData>> InputMap = new();
-
+	public Dictionary<string, int> SelectedSkins = new();
+	
 	public class GraphicsSettings
 	{
 		public double RenderScale = 100;

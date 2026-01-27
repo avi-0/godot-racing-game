@@ -32,6 +32,7 @@ public partial class Car : RigidBody3D
 	[Export] public float SlipThreshold = 0.5f;
 	[Export] public float UnslipThreshold = 0.5f;
 	[Export] public float WheelZFriction = 0.05f;
+	[Export] public bool SteeringAffectsCenterOfMass = false;
 	
 	[ExportCategory("Debug")]
 	[Export] public bool DebugMode = false;
@@ -49,6 +50,9 @@ public partial class Car : RigidBody3D
 	[Export] public string CarName = "Default";
 	[Export] public string CarDescription = "No Description";
 
+	[ExportCategory("Skins")]
+	[Export] public Material[] Skins;
+	
 	public bool IsGhost = false;
 	
 	private float _mouseSensitivity;
@@ -62,6 +66,7 @@ public partial class Car : RigidBody3D
 	private float _targetSteering;
 	
 	private float _defaultDamp = 0;
+	private Vector3 _defaultCOM = Vector3.Zero;
 	
 	private bool _isLocallyControlled = false;
 	public bool IsLocallyControlled
@@ -85,6 +90,8 @@ public partial class Car : RigidBody3D
 	private CarInputs _inputs = new();
 
 	private Stack<float> _speedStack = new();
+
+	private RayCast3D _rayCastUp;
 	
 	public override void _Ready()
 	{
@@ -105,9 +112,6 @@ public partial class Car : RigidBody3D
 		ContactMonitor = true;
 		MaxContactsReported = 5;
 		BodyEntered += Bonk;
-		{
-			
-		}
 
 		for (int i = 0; i < 5; i++)
 		{
@@ -115,6 +119,12 @@ public partial class Car : RigidBody3D
 		}
 
 		_defaultDamp = LinearDamp;
+		_defaultCOM = CenterOfMass;
+
+		if (!IsGhost)
+		{
+			_PhysicsProcess(60);
+		}
 	}
 
 	private void SetupWheels()
@@ -236,6 +246,39 @@ public partial class Car : RigidBody3D
 		
 		_speedStack.Pop();
 		_speedStack.Push(LinearVelocity.Length());
+		
+		//RAIN
+		if (_isLocallyControlled && TrackManager.Instance.Track.Options.Rain)
+		{
+			TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(GlobalPosition.X, TrackManager.Instance.Track.RainParticles.GlobalPosition.Y, GlobalPosition.Z));
+			
+			if (_rayCastUp == null)
+			{
+				_rayCastUp = new RayCast3D();
+				_rayCastUp.SetTargetPosition(new Vector3(0,10,0));
+				_rayCastUp.SetEnabled(true);
+				_rayCastUp.SetCollisionMask(1);
+				AddChild(_rayCastUp);
+			}
+			
+			//using raycast up to see if theres something above the car so the rain needs to stop
+			//rain will still be going under blocks in the distance, but its up to map makers to use rain correctly, cant do much more with gpuparticles
+			if(_rayCastUp.IsColliding())
+			{
+				var collidingObject = _rayCastUp.GetCollider();
+				if (!(collidingObject is StaticBody3D && (collidingObject as StaticBody3D).GetOwner() is Block) || (!(collidingObject as StaticBody3D).GetOwner<Block>().IsStart && !(collidingObject as StaticBody3D).GetOwner<Block>().IsCheckpoint))
+				{
+					TrackManager.Instance.Track.RainParticles.Visible = false;
+				}
+			}
+			else
+			{
+				TrackManager.Instance.Track.RainParticles.Visible = true;
+			}
+			
+			_rayCastUp.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y+1.5f, GlobalPosition.Z);
+		}
+		//--
 	}
 
 	private void ProcessEngineSound()
@@ -373,7 +416,12 @@ public partial class Car : RigidBody3D
 						Mathf.Abs(wheel.GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed),
 						0, 1));
 			}
-			
+
+			if (SteeringAffectsCenterOfMass)
+			{
+				CenterOfMass = new Vector3(_defaultCOM.X + (_targetSteering / 50), _defaultCOM.Y, _defaultCOM.Z);
+			}
+
 			if (_targetSteering != 0)
 			{
 				var y = Mathf.MoveToward(wheel.Rotation.Y, _targetSteering * float.DegreesToRadians(SteeringBaseDegrees), TireTurnSpeed * delta);
@@ -602,6 +650,23 @@ public partial class Car : RigidBody3D
 			{
 				CarCommon.CarSoundPlayer.Play();
 			}
+		}
+	}
+
+	public void SetSkin(int id)
+	{
+		if (Skins != null && Skins.Length > 0 && Skins[id] != null)
+		{
+			MeshInstance3D mesh = (MeshInstance3D)CarModel.GetChildren()[0];
+			mesh.SetMaterialOverride(Skins[id]);
+		}
+	}
+
+	public void SetRandomSkin()
+	{
+		if (Skins != null && Skins.Length > 0)
+		{
+			SetSkin(GameManager.Instance.RNG.RandiRange(0, Skins.Length-1));			
 		}
 	}
 }

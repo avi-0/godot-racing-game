@@ -1,15 +1,20 @@
-[gd_scene load_steps=30 format=4 uid="uid://lejlxkwbedup"]
+[gd_scene load_steps=34 format=4 uid="uid://lejlxkwbedup"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_denii"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_sw6ji"]
+[ext_resource type="Material" uid="uid://bhqqd3h287dey" path="res://assets/cars/Textures/godot_materials/set3.tres" id="4_30yta"]
 [ext_resource type="Curve" uid="uid://cxhyv7al6iqul" path="res://scenes/cars_extras/curves/taxi_rear.tres" id="4_vwi5m"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="5_0wjsq"]
+[ext_resource type="Material" uid="uid://cok5acfebmyip" path="res://assets/cars/Textures/godot_materials/set0.tres" id="5_lj8mf"]
+[ext_resource type="Material" uid="uid://ewvvi13y2cg8" path="res://assets/cars/Textures/godot_materials/set1.tres" id="6_4mu2d"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="6_sw6ji"]
+[ext_resource type="Material" uid="uid://cxury5fss0wwx" path="res://assets/cars/Textures/godot_materials/set2.tres" id="7_filc1"]
 [ext_resource type="Texture2D" uid="uid://beji1vrloh4th" path="res://assets/cars/Textures/CHP_Tex_Veh_Land_Col1.png" id="7_sw6ji"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="8_0wjsq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.1
+rough = true
 bounce = 0.1
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
@@ -33,8 +38,8 @@ point_count = 1
 [sub_resource type="Resource" id="Resource_lce11"]
 script = ExtResource("2_sw6ji")
 SpringStrength = 6000.0
-SpringDamping = 150.0
-SpringRest = 0.15
+SpringDamping = 75.0
+SpringRest = 0.16
 OverExtend = 0.1
 WheelRadius = 0.26
 IsDriveWheel = true
@@ -45,7 +50,7 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 [sub_resource type="Resource" id="Resource_lml1i"]
 script = ExtResource("2_sw6ji")
 SpringStrength = 6000.0
-SpringDamping = 130.0
+SpringDamping = 75.0
 SpringRest = 0.16
 OverExtend = 0.1
 WheelRadius = 0.26
@@ -265,11 +270,14 @@ Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 Acceleration = 360
 MaxSpeed = 25
+BrakingStrengthMultiplier = 0.4
+ReversingStrengthMultiplier = 0.7
 TireTurnSpeed = 1.0
 SteeringBaseDegrees = 5
-SlippingTraction = 0.15
+SlippingTraction = 0.2
 SlipThreshold = 0.3
 UnslipThreshold = 0.4
+SteeringAffectsCenterOfMass = true
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_vwi5m")
@@ -277,6 +285,7 @@ FrontWheelConfig = SubResource("Resource_lce11")
 RearWheelConfig = SubResource("Resource_lml1i")
 CarName = "Taxi"
 CarDescription = "Straight from the busy and narrow city streets! It's great at hard corners and tight hairpins but i wouldn't take it to a drag race if i were you."
+Skins = Array[Material]([ExtResource("7_filc1"), ExtResource("4_30yta"), ExtResource("5_lj8mf"), ExtResource("6_4mu2d")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
@@ -284,6 +293,7 @@ shape = SubResource("ConvexPolygonShape3D_sw6ji")
 
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.26345325, 0.72)
+max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
@@ -292,6 +302,7 @@ remote_path = NodePath("../../Taxi/FLW")
 
 [node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.26345325, 0.72)
+max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
@@ -300,6 +311,7 @@ remote_path = NodePath("../../Taxi/FRW")
 
 [node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.26345325, -0.52)
+max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -310,6 +322,7 @@ remote_path = NodePath("../../Taxi/RLW")
 
 [node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.26345325, -0.52)
+max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")

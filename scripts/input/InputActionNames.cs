@@ -13,4 +13,5 @@ public static class InputActionNames
 	public static readonly StringName ToggleLights = new("game_car_lights");
 	public static readonly StringName Pause = new("game_pause");
 	public static readonly StringName Respawn = new("game_respawn");
+	public static readonly StringName HideUI = new("game_hide_ui");
 }

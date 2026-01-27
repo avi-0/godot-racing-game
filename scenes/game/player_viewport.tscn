@@ -10,7 +10,7 @@ action = &"ui_accept"
 [sub_resource type="Shortcut" id="Shortcut_a7dvw"]
 events = [SubResource("InputEventAction_vtaks")]
 
-[node name="PlayerViewport" type="SubViewport" node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "PbLabel", "RaceUi", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "Camera")]
+[node name="PlayerViewport" type="SubViewport" node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "PbLabel", "RaceUi", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "ScoreboardContainer", "Camera")]
 process_physics_priority = -100
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_3d = true
@@ -26,6 +26,7 @@ SpeedLabel = NodePath("RaceUI/SpeedLabel")
 StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
 TimeLabel = NodePath("RaceUI/TimeLabel")
 TrackInfoLabel = NodePath("RaceUI/TrackInfo")
+ScoreboardContainer = NodePath("RaceUI/Panel/Scoreboard")
 Camera = NodePath("Camera")
 
 [node name="RaceUI" type="Control" parent="."]
@@ -76,6 +77,7 @@ theme_override_font_sizes/font_size = 28
 text = "TrackName"
 
 [node name="PersonalBest" type="Label" parent="RaceUI"]
+visible = false
 layout_mode = 1
 offset_left = 16.0
 offset_top = 36.0
@@ -132,6 +134,18 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 48
 text = "Laps: 0/0"
 horizontal_alignment = 2
+
+[node name="Panel" type="PanelContainer" parent="RaceUI"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+offset_left = 16.0
+offset_top = 36.0
+offset_right = 116.0
+offset_bottom = 76.0
+
+[node name="Scoreboard" type="VBoxContainer" parent="RaceUI/Panel"]
+layout_mode = 2
+alignment = 1
 
 [node name="FinishPanel" type="PanelContainer" parent="RaceUI"]
 visible = false

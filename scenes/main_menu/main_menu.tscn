@@ -27,7 +27,7 @@ action = &"ui_accept"
 [sub_resource type="Shortcut" id="Shortcut_3ovsr"]
 events = [SubResource("InputEventAction_vtaks")]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "TrackListImage", "TrackListLabel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel", "CreditsPanel", "FolderButton")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "TrackListImage", "TrackListLabel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel", "CreditsPanel", "FolderButton", "SkinButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,6 +58,7 @@ CampaignContainer = NodePath("CampaignPanel/MarginContainer/Panel/VBoxContainer/
 CarDescLabel = NodePath("GarageWindow/MarginContainer/HBoxContainer/MarginContainer/Panel/CarDescriptionLabel")
 CreditsPanel = NodePath("CreditsPanel")
 FolderButton = NodePath("TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/FolderButton")
+SkinButton = NodePath("GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/SkinButton")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
 [node name="GarageViewportContainer" type="Container" parent="."]
@@ -382,6 +383,18 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
+
+[node name="Label2" type="Label" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select Skin"
+
+[node name="SkinButton" type="OptionButton" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+selected = 0
+item_count = 1
+popup/item_0/text = "0"
+popup/item_0/id = 0
 
 [node name="BackButton" type="Button" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
