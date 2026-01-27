@@ -10,53 +10,65 @@ public partial class JoypadRemapButton : RemapButton
 	protected override string FormatMappings(Array<InputEvent> events)
 	{
 		return String.Join(", ", events
-			.SelectMany<InputEvent, string>(@event =>
-			{
-				if (@event is InputEventJoypadMotion joypadMotionEvent)
-				{
-					string text = joypadMotionEvent.Axis switch
-					{
-						JoyAxis.LeftX => "LeftX",
-						JoyAxis.LeftY => "LeftY",
-						JoyAxis.RightX => "RightX",
-						JoyAxis.RightY => "RightY",
-						JoyAxis.TriggerLeft => "LT",
-						JoyAxis.TriggerRight => "RT",
-						_ => "[UNKNOWN]"
-					};
+			.SelectMany(FormatMapping));
+	}
 
-					text += joypadMotionEvent.AxisValue > 0 ? "+" : "-";
+	private string[] FormatMapping(InputEvent @event)
+	{
+		if (@event is InputEventJoypadMotion joypadMotionEvent)
+		{
+			string text = JoyPadMotionToString(joypadMotionEvent);
+
+			text += joypadMotionEvent.AxisValue > 0 ? "+" : "-";
 					
-					return [text];
-				}
+			return [text];
+		}
 				
-				if (@event is InputEventJoypadButton joypadButtonEvent)
-				{
-					string text = joypadButtonEvent.ButtonIndex switch
-					{
-						JoyButton.A => "A",
-						JoyButton.B => "B",
-						JoyButton.X => "X",
-						JoyButton.Y => "Y",
-						JoyButton.DpadDown => "Down",
-						JoyButton.DpadUp => "Up",
-						JoyButton.DpadLeft => "Left",
-						JoyButton.DpadRight => "Right",
-						JoyButton.Back => "Select",
-						JoyButton.Start => "Start",
-						JoyButton.Guide => "Home",
-						JoyButton.LeftShoulder => "LB",
-						JoyButton.RightShoulder => "RB",
-						JoyButton.LeftStick => "LS",
-						JoyButton.RightStick => "RS",
-						_ => "[UNKNOWN]"
-					};
+		if (@event is InputEventJoypadButton joypadButtonEvent)
+		{
+			string text = JoyPadButtonToString(joypadButtonEvent);
 
-					return [text];
-				}
+			return [text];
+		}
 
-				return [];
-			}));
+		return [];
+	}
+
+	private string JoyPadMotionToString(InputEventJoypadMotion joypadMotionEvent)
+	{
+		return joypadMotionEvent.Axis switch
+		{
+		JoyAxis.LeftX => "l_stick",
+		JoyAxis.LeftY => "r_stick",
+		JoyAxis.RightX => "l_stick",
+		JoyAxis.RightY => "r_stick",
+		JoyAxis.TriggerLeft => "lt",
+		JoyAxis.TriggerRight => "rt",
+		_ => "[UNKNOWN]"
+		};
+	}
+
+	private string JoyPadButtonToString(InputEventJoypadButton joypadButtonEvent)
+	{
+		return joypadButtonEvent.ButtonIndex switch
+		{
+			JoyButton.A => "a",
+			JoyButton.B => "b",
+			JoyButton.X => "x",
+			JoyButton.Y => "y",
+			JoyButton.DpadDown => "dpad_down",
+			JoyButton.DpadUp => "dpad_up",
+			JoyButton.DpadLeft => "dpad_left",
+			JoyButton.DpadRight => "dpad_right",
+			JoyButton.Back => "select",
+			JoyButton.Start => "start",
+			JoyButton.Guide => "Home",
+			JoyButton.LeftShoulder => "LB",
+			JoyButton.RightShoulder => "RB",
+			JoyButton.LeftStick => "l_stick_click",
+			JoyButton.RightStick => "r_stick_click",
+			_ => "[UNKNOWN]"
+		};
 	}
 
 	protected override bool TryRemapEvent(InputEvent @event)
@@ -70,7 +82,7 @@ public partial class JoypadRemapButton : RemapButton
 			
 			EraseMappings();
 			InputMap.ActionAddEvent(Action, settingEvent);
-
+			
 			return true;
 		}
 
@@ -101,4 +113,31 @@ public partial class JoypadRemapButton : RemapButton
 
 	protected override string GetRemappingPrompt()
 		=> "Press key...";
+
+	protected override bool LoadInputTextures()
+	{
+		foreach (InputEvent @event in InputMap.ActionGetEvents(Action))
+		{
+			string path = "";
+			if (@event is InputEventJoypadButton inputEventJoypadButton)
+			{
+				path = JoyPadButtonToString(inputEventJoypadButton);
+			}
+			else if (@event is InputEventJoypadMotion inputEventJoypadMotion)
+			{
+				path = JoyPadMotionToString(inputEventJoypadMotion);
+			}
+			
+			if (path != "" && path != "[UNKNOWN]")
+			{
+				ControllerIconTexture controllerIconTexture = new ControllerIconTexture();
+				controllerIconTexture.path = "joypad/" + path;
+				controllerIconTexture.force_type = ControllerIcons.EInputType.CONTROLLER;
+				SetButtonIcon(controllerIconTexture);
+				SetIconAlignment(HorizontalAlignment.Center);
+				SetExpandIcon(true);
+			}
+		}
+		return true;
+	}
 }

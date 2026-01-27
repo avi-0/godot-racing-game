@@ -25,7 +25,7 @@ public partial class SceneImportScript : EditorScenePostImport
 				var material = meshInstance.Mesh.SurfaceGetMaterial(i);
 				GD.Print(material.ResourceName);
 				
-				var replacementMaterial = ResourceLoader.Load<Material>(MaterialRootPath.PathJoin(material.ResourceName + ".material"));
+				var replacementMaterial = ResourceLoader.Load<Material>(MaterialRootPath.PathJoin(material.ResourceName + ".tres"));
 				if (replacementMaterial != null)
 				{
 					meshInstance.Mesh.SurfaceSetMaterial(i, replacementMaterial);

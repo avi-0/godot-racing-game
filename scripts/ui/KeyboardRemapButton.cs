@@ -38,4 +38,9 @@ public partial class KeyboardRemapButton : RemapButton
 				InputMap.ActionEraseEvent(Action, @event);
 		}
 	}
+
+	protected override bool LoadInputTextures()
+	{
+		return false;
+	}
 }

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://c2ahyq1mqu21f"]
 
-[ext_resource type="Texture2D" path="res://blocks/v2/road/to-tilt-left1/_images/straight2.png" id="1_jwc7q"]
+[ext_resource type="Texture2D" uid="uid://d261qaohk4de3" path="res://blocks/v2/road/to-tilt-left1/_images/straight2.png" id="1_jwc7q"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_nabs5"]
 
 [resource]
