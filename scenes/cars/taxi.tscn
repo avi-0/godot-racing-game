@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://cxury5fss0wwx" path="res://assets/cars/Textures/godot_materials/set2.tres" id="7_filc1"]
 [ext_resource type="Texture2D" uid="uid://beji1vrloh4th" path="res://assets/cars/Textures/CHP_Tex_Veh_Land_Col1.png" id="7_sw6ji"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="8_0wjsq"]
+[ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="12_lj8mf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.1
@@ -252,30 +253,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ync2c")
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30yta"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-properties/2/path = NodePath("WheelFL:position")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath("WheelFL:rotation")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath("WheelFR:position")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-properties/5/path = NodePath("WheelFR:rotation")
-properties/5/spawn = true
-properties/5/replication_mode = 2
-properties/6/path = NodePath("Headlights:visible")
-properties/6/spawn = true
-properties/6/replication_mode = 2
-
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -291,6 +269,7 @@ HeadLight = NodePath("Headlights")
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
+MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 Acceleration = 360
 MaxSpeed = 25
 BrakingStrengthMultiplier = 0.4
@@ -393,6 +372,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7272727, 0.47900587, 1.309
 mesh = SubResource("ArrayMesh_mx0uw")
 skeleton = NodePath("")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_30yta")
-visibility_update_mode = 1
+[node name="MultiplayerSynchronizer" parent="." instance=ExtResource("12_lj8mf")]

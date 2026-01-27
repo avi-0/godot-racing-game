@@ -114,7 +114,7 @@ public partial class PlayerViewport : SubViewport
 		}
 		else if (@event.IsActionPressed(InputActionNames.Restart))
 		{
-			GameModeController.CurrentGameMode.RestartPlayer(PlayerId);
+			GameModeUtils.RestartPlayer(PlayerId);
 			SetInputAsHandled();
 		}
 		else if (@event.IsActionPressed(InputActionNames.Respawn))
@@ -141,8 +141,8 @@ public partial class PlayerViewport : SubViewport
 
 	private void OnFinishButtonPressed()
 	{
+		GameModeUtils.RestartPlayer(PlayerId);
 		FinishPanel.Hide();
 		Input.MouseMode = Input.MouseModeEnum.Hidden;
-		GameModeController.CurrentGameMode.RestartPlayer(PlayerId);
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=30 format=4 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_micox"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_glvfi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://cxury5fss0wwx" path="res://assets/cars/Textures/godot_materials/set2.tres" id="6_xv7xt"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]
+[ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="10_cn2cu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.5
@@ -231,7 +232,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nagku")
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -247,6 +248,7 @@ HeadLight = NodePath("Headlights")
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
+MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 Acceleration = 600
 MaxSpeed = 30
 BrakingStrengthMultiplier = 0.25
@@ -346,5 +348,7 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 0.5265918, 1.08)
 mesh = SubResource("ArrayMesh_gv3su")
 skeleton = NodePath("")
+
+[node name="MultiplayerSynchronizer" parent="." instance=ExtResource("10_cn2cu")]
 
 [editable path="WheelFL"]

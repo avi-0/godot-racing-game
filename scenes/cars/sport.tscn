@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dok0if2iog0no"]
+[gd_scene load_steps=33 format=4 uid="uid://dok0if2iog0no"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_qtbni"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_dg6r6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://bhqqd3h287dey" path="res://assets/cars/Textures/godot_materials/set3.tres" id="6_8lcft"]
 [ext_resource type="Texture2D" uid="uid://dl32cd5f1y7kx" path="res://assets/cars/Textures/CHP_Tex_Veh_Land_Col2.png" id="6_qtbni"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_dg6r6"]
+[ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="11_yrqru"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.5
@@ -247,7 +248,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3ocps")
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 35.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -263,6 +264,7 @@ HeadLight = NodePath("Headlights")
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("PlayerName3D")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
+MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 Acceleration = 230
 MaxSpeed = 70
 BrakingStrengthMultiplier = 1.5
@@ -363,3 +365,5 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.74, 0.44326708, 1.1)
 mesh = SubResource("ArrayMesh_blpu5")
 skeleton = NodePath("")
+
+[node name="MultiplayerSynchronizer" parent="." instance=ExtResource("11_yrqru")]
