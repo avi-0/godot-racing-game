@@ -15,6 +15,8 @@ public abstract partial class RemapButton : Button
 
 	protected abstract void EraseMappings();
 	
+	protected abstract bool LoadInputTextures();
+	
 	protected virtual string GetRemappingPrompt()
 	{
 		return $"{FormatMappings(InputMap
@@ -54,12 +56,11 @@ public abstract partial class RemapButton : Button
 
 	public void LoadFromInputMap()
 	{
-		Text = FormatMappings(InputMap
-			.ActionGetEvents(Action));
-		
-		// prevents button from collapsing due to zero lines of text
-		if (Text == "")
-			Text = " ";
+		Text = " ";
+		if (!LoadInputTextures())
+		{
+			Text = FormatMappings(InputMap.ActionGetEvents(Action));
+		}
 	}
 
 	public override void _Input(InputEvent @event)
