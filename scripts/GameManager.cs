@@ -118,20 +118,23 @@ public partial class GameManager : Node
 		SetViewportsActive(false);
 	}
 
-	public void Play()
+	public void Play(bool host = true)
 	{
 		CarManager.Instance.Clear();
-		
 		GameModeController.CurrentGameMode.InitTrack(TrackManager.Instance.Track);
-
+		
 		IsSplitScreen = _screenLayout.PlayerViewports.Count > 1;
 		
 		bool isFirst = true;
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
-			var id = Guid.NewGuid();
+			long id = viewport.LocalPlayerId + 1;
+			if (MultiplayerManager.Instance.OnServer)
+			{
+				id = MultiplayerManager.Instance.PlayerInfo.PlayerId;
+			}
 
-			string name = "Player " + (viewport.LocalPlayerId + 1);
+			string name = "Player " + id;
 			if (isFirst)
 			{
 				name = SettingsManager.Instance.GetLocalPlayerName();
@@ -170,10 +173,15 @@ public partial class GameManager : Node
 
 		_isPlaying = false;
 
-		EmitSignalStoppedPlaying();
-		
 		GameModeController.CurrentGameMode.KillGame();
 
+		if (MultiplayerManager.Instance.OnServer)
+		{
+			MultiplayerManager.Instance.TerminateConnection();
+		}
+		
+		EmitSignalStoppedPlaying();
+			
 		MusicPlayer.Stop();
 	}
 

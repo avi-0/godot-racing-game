@@ -36,6 +36,10 @@ public partial class MainMenu : Control
 	[Export] public PanelContainer CreditsPanel;
 	[Export] public Button FolderButton;
 	[Export] public OptionButton SkinButton;
+	[Export] public Control MultiplayerWindow;
+	[Export] public TextureRect MultiplayerTrackImage;
+	[Export] public Label MultiplayerTrackLabel;
+	[Export] public LineEdit IPLine;
 	
 	[Export(PropertyHint.FilePath)] public string DefaultCarPath;
 
@@ -44,6 +48,7 @@ public partial class MainMenu : Control
 	private Control _hadFocus;
 
 	private string TrackListSelectedTrackPath = "";
+	public string MultiplayerSelectedTrackPath = "";
 	
 	public bool IsVisible
 	{
@@ -103,7 +108,7 @@ public partial class MainMenu : Control
 			button.Text = campaign.Name;
 			button.Pressed += () =>
 			{
-				FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/", true);
+				FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/", true, TrackListSelectTrack);
 				TrackListPanel.Show();
 			};
 
@@ -124,7 +129,7 @@ public partial class MainMenu : Control
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		
-		FillTrackContainer(UserTracksPath, false);
+		FillTrackContainer(UserTracksPath, false, TrackListSelectTrack);
 		TrackListPanel.Show();
 
 		FolderButton.Visible = true;
@@ -255,14 +260,14 @@ public partial class MainMenu : Control
 		_hadFocus.GrabFocus();
 	}
 
-	private async GDTaskVoid OpenTrack(string path)
+	private async GDTaskVoid OpenTrack(string path, bool host = true)
 	{
 		_hadFocus = GetViewport().GuiGetFocusOwner();
 		IsVisible = false;
 		LoadGarageCar();
 
 		TrackManager.Instance.OpenTrack(path);
-		GameManager.Instance.Play();
+		GameManager.Instance.Play(host);
 
 		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 		
@@ -271,9 +276,13 @@ public partial class MainMenu : Control
 		_hadFocus.GrabFocus();
 	}
 	
-	private void FillTrackContainer(string basePath, bool isCampaign)
+	private void FillTrackContainer(string basePath, bool isCampaign, Action<string, string, TrackOptions, Image> callback, bool emptyPrevious = true)
 	{
-		TrackContainer.DestroyAllChildren();
+		if (emptyPrevious)
+		{
+			TrackContainer.DestroyAllChildren();
+		}
+
 		var trackList = LoadTrackList(basePath);
 		
 		int trackID = 0;
@@ -350,7 +359,7 @@ public partial class MainMenu : Control
 
 				if (canPlay)
 				{
-					button.Pressed += () => TrackListSelectTrack(basePath, trackPath, options, image);
+					button.Pressed += () => callback(basePath, trackPath, options, image); 
 				}
 				
 				TrackContainer.AddChild(button);
@@ -426,5 +435,49 @@ public partial class MainMenu : Control
 	public void OnFolderButton()
 	{
 		OS.ShellOpen(ProjectSettings.GlobalizePath(UserTracksPath));
+	}
+
+	public void OnMultiplayerButton()
+	{
+		MultiplayerWindow.Show();
+	}
+
+	public void OnMultiplayerBack()
+	{
+		MultiplayerWindow.Hide();
+	}
+
+	public void OnHostSelectTrackButton()
+	{
+		FillTrackContainer(CampTracksPath + _campaigns[1].DirectoryName + "/" , true, HostSelectedTrack);
+		//FillTrackContainer(UserTracksPath, false, HostSelectedTrack, false);
+		TrackListPanel.Show();
+	}
+
+	public void HostSelectedTrack(string basePath, string trackPath, TrackOptions options, Image image)
+	{
+		MultiplayerTrackLabel.Text = options.Name + "\n" + GD.Load<PackedScene>(CarManager.CarsPath + options.CarType).Instantiate<Car>().CarName;
+		
+		image.Resize(160, 160, Image.Interpolation.Lanczos);
+		MultiplayerTrackImage.SetTexture(ImageTexture.CreateFromImage(image));
+		
+		MultiplayerSelectedTrackPath = basePath + trackPath;
+		
+		TrackListPanel.Hide();
+	}
+
+	public void OnHostServerButton()
+	{
+		OpenTrack(MultiplayerSelectedTrackPath).Forget();
+		MultiplayerManager.Instance.CreateServer(MultiplayerSelectedTrackPath);
+	}
+
+	public async void OnConnectToServerButton()
+	{
+		MultiplayerManager.Instance.CreateClient(IPLine.Text);
+
+		await GDTask.ToSignal(MultiplayerManager.Instance, MultiplayerManager.SignalName.ConnectedToServer);
+		
+		OpenTrack(MultiplayerManager.Instance.ServerInfo.TrackPath, false).Forget();
 	}
 }

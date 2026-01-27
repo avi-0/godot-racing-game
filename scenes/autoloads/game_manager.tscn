@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://blho4jw07g2ca"]
+[gd_scene load_steps=30 format=3 uid="uid://blho4jw07g2ca"]
 
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="1_sg2ap"]
+[ext_resource type="Script" uid="uid://bye4m0dwrdi4a" path="res://scripts/MultiplayerManager.cs" id="3_4alf3"]
 [ext_resource type="PackedScene" uid="uid://cl3hcvkocitf8" path="res://scenes/game/screen_layouts/single.tscn" id="3_ipbon"]
 [ext_resource type="PackedScene" uid="uid://dj6oje4umktpq" path="res://scenes/main_menu/pause_menu.tscn" id="4_0dy6r"]
 [ext_resource type="PackedScene" uid="uid://uyuauf375jpc" path="res://scenes/game/screen_layouts/split2h.tscn" id="4_vcmnf"]
@@ -116,5 +117,8 @@ autowrap_mode = 3
 layout_mode = 2
 shortcut = SubResource("Shortcut_vcmnf")
 text = "Ok"
+
+[node name="MultiplayerManager" type="Node" parent="."]
+script = ExtResource("3_4alf3")
 
 [connection signal="pressed" from="MOTDPanel/MarginContainer/VBoxContainer/Button" to="." method="OnMOTDButtonPressed"]

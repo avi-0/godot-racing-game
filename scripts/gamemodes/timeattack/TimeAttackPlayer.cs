@@ -7,7 +7,7 @@ namespace racingGame;
 
 public struct TimeAttackPlayer
 {
-	public Guid PlayerId { get; init; }
+	public long PlayerId { get; init; }
 
 	public bool LocalPlayer { get; set; } = false;
 	public bool InGame { get; set; } = true;
@@ -36,7 +36,7 @@ public struct TimeAttackPlayer
 
 	public Transform3D RespawnPoint = new Transform3D();
 	
-	public TimeAttackPlayer(Guid playerId, bool localPlayer)
+	public TimeAttackPlayer(long playerId, bool localPlayer)
 	{
 		PlayerId = playerId;
 		LocalPlayer = localPlayer;

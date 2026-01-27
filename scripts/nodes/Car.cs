@@ -81,7 +81,7 @@ public partial class Car : RigidBody3D
 		}
 	}
 	
-	public Guid PlayerId;
+	public long PlayerId;
 	public bool AcceptsInputs { get; set; } = false;
 
 	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
@@ -179,6 +179,8 @@ public partial class Car : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		//if ( MultiplayerManager.Instance.OnServer && !IsMultiplayerAuthority()) { return;}
+		
 		_isAccelerating = false;
 		_isReversing = false;
 		var velocity = GlobalBasis.Z.Dot(LinearVelocity);

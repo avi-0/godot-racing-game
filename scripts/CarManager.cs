@@ -17,7 +17,7 @@ public partial class CarManager : Node
 	
 	
 	private List<Car> _cars = new();
-	private Dictionary<Guid, Car> _playerCarsById = new();
+	private Dictionary<long, Car> _playerCarsById = new();
 	
 	
 	public override void _Ready()
@@ -56,10 +56,10 @@ public partial class CarManager : Node
 		_playerCarsById = new();
 	}
 
-	public Car GetPlayerCarById(Guid id)
+	public Car GetPlayerCarById(long id)
 		=> _playerCarsById.GetValueOrDefault(id);
 
-	public void DestroyPlayerCar(Guid id)
+	public void DestroyPlayerCar(long id)
 	{
 		if (_playerCarsById.GetValueOrDefault(id) is Car car)
 		{
@@ -70,15 +70,22 @@ public partial class CarManager : Node
 		}
 	}
 
-	public Car CreatePlayerCar(Guid id)
+	public Car CreatePlayerCar(long id)
 	{
 		DestroyPlayerCar(id);
-		
+
 		var car = CarScene.Instantiate<Car>();
+
+		car.Name = id.ToString();
+		if (MultiplayerManager.Instance.OnServer)
+		{
+			car.SetMultiplayerAuthority((int)id);
+		}
+		
 		_cars.Add(car);
 		_playerCarsById[id] = car;
-			
-		AddChild(car);
+		
+		AddChild(car, true);
 		car.GlobalTransform = TrackManager.Instance.GetStartPoint();
 		car.Started();
 		

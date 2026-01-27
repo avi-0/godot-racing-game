@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=16 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/ui/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
@@ -14,6 +14,19 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wu84c"]
 events = [SubResource("InputEventAction_bqqt6")]
 
+[sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_3ovsr"]
+events = [SubResource("InputEventAction_vtaks")]
+
+[sub_resource type="Gradient" id="Gradient_5seab"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4xg86"]
+gradient = SubResource("Gradient_5seab")
+width = 160
+height = 160
+
 [sub_resource type="Gradient" id="Gradient_3ovsr"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5seab"]
@@ -21,13 +34,7 @@ gradient = SubResource("Gradient_3ovsr")
 width = 320
 height = 320
 
-[sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
-action = &"ui_accept"
-
-[sub_resource type="Shortcut" id="Shortcut_3ovsr"]
-events = [SubResource("InputEventAction_vtaks")]
-
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "TrackListImage", "TrackListLabel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel", "CreditsPanel", "FolderButton", "SkinButton")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "TrackContainer", "TrackListImage", "TrackListLabel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel", "CreditsPanel", "FolderButton", "SkinButton", "MultiplayerWindow", "MultiplayerTrackImage", "MultiplayerTrackLabel", "IPLine")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,6 +66,10 @@ CarDescLabel = NodePath("GarageWindow/MarginContainer/HBoxContainer/MarginContai
 CreditsPanel = NodePath("CreditsPanel")
 FolderButton = NodePath("TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/FolderButton")
 SkinButton = NodePath("GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/SkinButton")
+MultiplayerWindow = NodePath("MultiplayerWindow")
+MultiplayerTrackImage = NodePath("MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2/MP_TrackImage")
+MultiplayerTrackLabel = NodePath("MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2/MP_TrackName")
+IPLine = NodePath("MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer/IPLine")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
 [node name="GarageViewportContainer" type="Container" parent="."]
@@ -135,8 +146,11 @@ text = "Campaign"
 [node name="LoadButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Play Local Map
-"
+text = "Local Play"
+
+[node name="MultiplayerButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Multiplayer"
 
 [node name="GarageButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -235,105 +249,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
-
-[node name="TrackListPanel" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -910.5
-offset_top = -490.0
-offset_right = 909.5
-offset_bottom = 490.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Panel" type="PanelContainer" parent="TrackListPanel/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TrackListPanel/MarginContainer/Panel"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="trackGC" type="GridContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer"]
-layout_mode = 2
-columns = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-shortcut = SubResource("Shortcut_wu84c")
-text = "Back"
-
-[node name="FolderButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Open Tracks Folder
-"
-
-[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TrackImage" type="TextureRect" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_5seab")
-
-[node name="TrackDesc" type="RichTextLabel" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 42
-text = "Track Description"
-scroll_active = false
-shortcut_keys_enabled = false
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Play"
 
 [node name="GarageWindow" type="Control" parent="."]
 visible = false
@@ -522,16 +437,213 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_3ovsr")
 text = "Ok"
 
+[node name="MultiplayerWindow" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MultiplayerWindow"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -356.0
+offset_top = -210.5
+offset_right = 356.0
+offset_bottom = 210.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MultiplayerWindow/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Connect" type="HBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer"]
+layout_mode = 2
+text = "IP Adress:"
+
+[node name="IPLine" type="LineEdit" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer"]
+layout_mode = 2
+text = "localhost"
+
+[node name="ConnectButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer"]
+layout_mode = 2
+text = "Connect
+"
+
+[node name="Host" type="HBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="HostTrackButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer"]
+layout_mode = 2
+text = "Select Track"
+
+[node name="HostButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host"]
+layout_mode = 2
+
+[node name="MP_TrackImage" type="TextureRect" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_4xg86")
+
+[node name="MP_TrackName" type="Label" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2"]
+layout_mode = 2
+text = "Track"
+
+[node name="BackButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+shortcut = SubResource("Shortcut_wu84c")
+text = "Back"
+
+[node name="TrackListPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.5
+offset_top = -490.0
+offset_right = 909.5
+offset_bottom = 490.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="PanelContainer" parent="TrackListPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TrackListPanel/MarginContainer/Panel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="trackGC" type="GridContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+shortcut = SubResource("Shortcut_wu84c")
+text = "Back"
+
+[node name="FolderButton" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Open Tracks Folder
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TrackImage" type="TextureRect" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_5seab")
+
+[node name="TrackDesc" type="RichTextLabel" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 42
+text = "Track Description"
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Play"
+
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="." method="OnLoadButtonPressed"]
+[connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/MultiplayerButton" to="." method="OnMultiplayerButton"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/GarageButton" to="." method="OnGarageButton"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/EditorButton" to="." method="OnEditorButtonPressed"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/CreditsButton" to="." method="OnCredits"]
 [connection signal="pressed" from="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="pressed" from="CampaignPanel/MarginContainer/Panel/VBoxContainer/MarginContainer/BackButton" to="." method="OnCampaignBack"]
-[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="OnTrackListBackButton"]
-[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/FolderButton" to="." method="OnFolderButton"]
-[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2/Button" to="." method="TrackListOnPlayTrackButtonPressed"]
 [connection signal="text_changed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]
 [connection signal="pressed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]
 [connection signal="pressed" from="CreditsPanel/MarginContainer/VBoxContainer/Button" to="." method="OnExitCredits"]
+[connection signal="pressed" from="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer/ConnectButton" to="." method="OnConnectToServerButton"]
+[connection signal="pressed" from="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer/HostTrackButton" to="." method="OnHostSelectTrackButton"]
+[connection signal="pressed" from="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer/HostButton" to="." method="OnHostServerButton"]
+[connection signal="pressed" from="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="OnMultiplayerBack"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="OnTrackListBackButton"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/FolderButton" to="." method="OnFolderButton"]
+[connection signal="pressed" from="TrackListPanel/MarginContainer/Panel/HBoxContainer/MarginContainer/VBoxContainer2/Button" to="." method="TrackListOnPlayTrackButtonPressed"]
