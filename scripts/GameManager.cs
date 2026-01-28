@@ -252,7 +252,7 @@ public partial class GameManager : Node
 
 	public void SyncCameraVisuals(Camera3D camera)
 	{
-		TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, TrackManager.Instance.Track.RainParticles.GlobalPosition.Y, camera.GlobalPosition.Z));
+		TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, camera.GlobalPosition.Y+10, camera.GlobalPosition.Z));
 		TrackManager.Instance.Track.WaterMesh.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, TrackManager.Instance.Track.WaterMesh.GlobalPosition.Y, camera.GlobalPosition.Z));
 	}
 }
