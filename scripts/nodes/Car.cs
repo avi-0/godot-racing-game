@@ -92,6 +92,9 @@ public partial class Car : RigidBody3D
 	private Stack<float> _speedStack = new();
 
 	private RayCast3D _rayCastUp;
+
+	private bool _frozen = false;
+	private Vector3 _frozenPosition;
 	
 	public override void _Ready()
 	{
@@ -180,6 +183,14 @@ public partial class Car : RigidBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		//if ( MultiplayerManager.Instance.OnServer && !IsMultiplayerAuthority()) { return;}
+
+		if (_frozen)
+		{
+			GlobalPosition = _frozenPosition;
+			LinearVelocity = new Vector3(0, 0, 0);
+			AngularVelocity = new Vector3(0, 0, 0);
+			return;
+		}
 		
 		_isAccelerating = false;
 		_isReversing = false;
@@ -282,7 +293,8 @@ public partial class Car : RigidBody3D
 
 		if (GetGlobalPosition().Y < GameManager.DeathY)
 		{
-			this.QueueFree();
+			_frozen = true;
+			_frozenPosition = GlobalPosition;
 		}
 	}
 
@@ -633,6 +645,7 @@ public partial class Car : RigidBody3D
 
 	public void TeleportToPoint(Transform3D point)
 	{
+		_frozen = false;
 		SetTransform(point.Orthonormalized());
 		LinearVelocity = new Vector3(0, 0, 0);
 		AngularVelocity = new Vector3(0, 0, 0);
