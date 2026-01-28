@@ -30,6 +30,8 @@ public partial class CarWheel : ShapeCast3D
 	private Vector3 _previousSkidmarkPosition;
 	private Vector3 _previousSkidmarkLeft;
 	private bool _isSliding = false;
+
+	public bool GrassContact = false;
 	
 	public override void _Ready()
 	{

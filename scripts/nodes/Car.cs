@@ -224,6 +224,8 @@ public partial class Car : RigidBody3D
 			}
 
 			ProcessSuspension(wheel);
+			
+			wheel.GrassContact = false;
 			ProcessSpecialBlocks(wheel);
 		}
 
@@ -482,7 +484,7 @@ public partial class Car : RigidBody3D
 
 				var handbrake = _isBraking && _isAccelerating;
 
-				if (handbrake || grip > SlipThreshold)
+				if (handbrake || grip > SlipThreshold || wheel.GrassContact)
 				{
 					_isSlipping = true;
 				}
@@ -535,30 +537,37 @@ public partial class Car : RigidBody3D
 			for (int collider = 0; collider < wheel.GetCollisionCount(); collider++)
 			{
 				Object collidingObject = wheel.GetCollider(collider);
-				if (collidingObject is StaticBody3D && (collidingObject as StaticBody3D).GetOwner() is Block)
+				if (collidingObject is StaticBody3D staticBody3D)
 				{
-					Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
-					if (block.IsBooster)
+					if (staticBody3D.GetOwner() is Block)
 					{
-						var forcePosition = wheel.WheelModel.GlobalPosition - GlobalPosition;
-						var force = block.GlobalBasis.X * 100;
-						ApplyForce(force, forcePosition);
-						//if (DebugMode)
+						Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
+						if (block.IsBooster)
 						{
-							DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(245, 73, 39),
-								arrow_size: 0.1f);
+							var forcePosition = wheel.WheelModel.GlobalPosition - GlobalPosition;
+							var force = block.GlobalBasis.X * 100;
+							ApplyForce(force, forcePosition);
+							//if (DebugMode)
+							{
+								DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(245, 73, 39),
+									arrow_size: 0.1f);
+							}
+						}
+						else if (block.IsBumper)
+						{
+							var forcePosition = GlobalPosition;
+							var force = block.GlobalBasis.Y * 150;
+							ApplyForce(force, forcePosition);
+							//if (DebugMode)
+							{
+								DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
+									arrow_size: 0.1f);
+							}
 						}
 					}
-					else if (block.IsBumper)
+					else if (staticBody3D.GetOwner().Name == "TrackBase")
 					{
-						var forcePosition = GlobalPosition;
-						var force = block.GlobalBasis.Y * 150;
-						ApplyForce(force, forcePosition);
-						//if (DebugMode)
-						{
-							DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
-								arrow_size: 0.1f);
-						}
+						wheel.GrassContact = true;
 					}
 				}
 			}
