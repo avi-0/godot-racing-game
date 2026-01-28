@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ywlk133yau03"]
+[gd_scene load_steps=22 format=3 uid="uid://ywlk133yau03"]
 
 [ext_resource type="Script" uid="uid://c1tvycuj08dj6" path="res://scripts/nodes/Track.cs" id="1_enrm2"]
 [ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/game/track_base.tscn" id="2_h2pho"]
@@ -46,37 +46,54 @@ sections = 3
 curve = SubResource("Curve_hb6dr")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_myyg0"]
+noise_type = 3
+seed = 1337
+fractal_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hb6dr"]
 noise = SubResource("FastNoiseLite_myyg0")
 seamless = true
 as_normal_map = true
-seamless_blend_skirt = 1.0
-bump_strength = 2.0
+bump_strength = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bytw"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6bytw"]
+noise_type = 3
+seed = 1337
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dhj8a"]
+noise = SubResource("FastNoiseLite_6bytw")
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hb6dr"]
 render_priority = 0
 shader = ExtResource("8_hb6dr")
-shader_parameter/albedo = Color(0.47058824, 1, 1, 1)
+shader_parameter/albedo = Color(0, 0.93820214, 0.9973149, 1)
 shader_parameter/texture_albedo = ExtResource("9_dhj8a")
 shader_parameter/albedo_texture_size = Vector2i(512, 512)
-shader_parameter/point_size = 1.0000000149012
+shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.0
 shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
-shader_parameter/texture_refraction = SubResource("NoiseTexture2D_hb6dr")
-shader_parameter/refraction = 0.5000000712500001
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_dhj8a")
+shader_parameter/refraction = 0.5
 shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_hb6dr")
 shader_parameter/normal_scale = 1.0
-shader_parameter/uv1_scale = Vector3(256, 256, 256)
+shader_parameter/rim = 1.0
+shader_parameter/rim_tint = 0.9
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.05, 0.05, 0.05)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hb6dr"]
-material = SubResource("ShaderMaterial_6bytw")
+lightmap_size_hint = Vector2i(20482, 20482)
+material = SubResource("ShaderMaterial_hb6dr")
 size = Vector2(4096, 4096)
 
 [node name="Track" type="Node3D" node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon", "TrackVoxelGI", "RainParticles", "WaterMesh")]
@@ -163,4 +180,6 @@ draw_pass_1 = SubResource("RibbonTrailMesh_dhj8a")
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+cast_shadow = 0
+ignore_occlusion_culling = true
 mesh = SubResource("PlaneMesh_hb6dr")
