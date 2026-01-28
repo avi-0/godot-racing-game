@@ -76,7 +76,7 @@ public class GameModeTimeAttack : IGameMode
 					var datanow = new CarPositionData(player.PlayerCar.Position, player.PlayerCar.Rotation);
 					player.GhostRecording.AddFrame(ms, datanow);
 
-					if (player.PlayerType == GameModeUtils.PLAYER_LOCAL && !player.PBGhost.Empty)
+					if ((player.PlayerType == GameModeUtils.PLAYER_LOCAL || player.PlayerType == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN) && !player.PBGhost.Empty)
 					{
 						var data = player.PBGhost.GetFrame((int)player.RaceData.CurrentRaceTime.TotalMilliseconds);
 						player.PlayerGhostCar.Position = data.Position;
@@ -184,11 +184,12 @@ public class GameModeTimeAttack : IGameMode
 				player.PlayerGhostCar.QueueFree();
 				player.PlayerGhostCar = null;
 			}
+
 			if (!player.PBGhost.Empty)
 			{
 				player.PlayerGhostCar = CarManager.Instance.CreateCar();
 				player.PlayerGhostCar.IsLocallyControlled = false;
-				player.PlayerGhostCar.SetGhost(true);
+				player.PlayerGhostCar.SetGhost(true, GameManager.Instance.GetPlayerViewPortById(player.PlayerId).CullLayer);
 				player.PlayerGhostCar.Position = player.PlayerCar.Position;
 				player.PlayerGhostCar.Rotation = player.PlayerCar.Rotation;
 				player.PlayerGhostCar.Visible = false;
@@ -284,7 +285,7 @@ public class GameModeTimeAttack : IGameMode
 		player.RaceData.RaceStartTime = DateTime.Now;
 		player.PlayerCar.AcceptsInputs = true;
 
-		if (player.PlayerType == GameModeUtils.PLAYER_LOCAL && player.PlayerGhostCar != null)
+		if ((player.PlayerType == GameModeUtils.PLAYER_LOCAL || player.PlayerType == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN) && player.PlayerGhostCar != null)
 		{
 			player.PlayerGhostCar.Visible = true;
 		}

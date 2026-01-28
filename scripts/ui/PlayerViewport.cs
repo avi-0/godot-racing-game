@@ -24,6 +24,8 @@ public partial class PlayerViewport : SubViewport
 	public long PlayerId;
 	public int StartTimerSeconds = -1;
 
+	public int CullLayer = 0;
+	
 	private CarInputs _inputs;
 	private bool _active = false;
 
@@ -69,10 +71,10 @@ public partial class PlayerViewport : SubViewport
 		
 		Camera.Current = TargetCamera != null;
 		Camera.Match(TargetCamera);
-
+		
 		if (Camera.Current)
 		{
-			GameManager.Instance.SyncCameraVisuals(Camera);
+			GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
 		}
 	}
 

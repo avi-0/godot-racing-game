@@ -44,6 +44,7 @@ public partial class GameManager : Node
 	public const int BlockLayer = 1;
 	public const int CarLayer = 2;
 	public const int DeathY = -9;
+	public const int SplitScreenCullMaskStart = 10;
 
 	//more than one splirscreen screen
 	public bool IsSplitScreen = false;
@@ -113,6 +114,7 @@ public partial class GameManager : Node
 		
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
+			viewport.CullLayer = SplitScreenCullMaskStart + viewport.LocalPlayerId;
 			viewport.MatchViewport(RootViewport);
 		}
 		
@@ -139,6 +141,8 @@ public partial class GameManager : Node
 				id = MultiplayerManager.Instance.PlayerInfo.PlayerId;
 			}
 			
+			viewport.PlayerId = id;
+			
 			if (isFirst)
 			{
 				isFirst = false;
@@ -148,8 +152,6 @@ public partial class GameManager : Node
 			{
 				GameModeController.CurrentGameMode.AddPlayer(id, GameModeUtils.PLAYER_LOCAL_SPLITSCREEN, "Player " + id);
 			}
-			
-			viewport.PlayerId = id;
 
 			if (TrackManager.Instance.Track.Options.Message != "")
 			{
@@ -262,8 +264,33 @@ public partial class GameManager : Node
 		}		
 	}
 
-	public void SyncCameraVisuals(Camera3D camera)
+	public PlayerViewport GetPlayerViewPortById(long id)
 	{
+		foreach (PlayerViewport port in _screenLayout.PlayerViewports)
+		{
+			if (port.PlayerId == id)
+			{
+				return port;
+			}
+		}
+
+		return null;
+	}
+	
+	public void SyncCameraVisuals(Camera3D camera, int cameraCullLayer)
+	{
+		for (int cull = SplitScreenCullMaskStart; cull < SplitScreenCullMaskStart + 8; cull++)
+		{
+			if (cull != cameraCullLayer)
+			{
+				camera.SetCullMaskValue(cull, false);
+			}
+			else
+			{
+				camera.SetCullMaskValue(cull, true);
+			}
+		}
+		
 		TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, camera.GlobalPosition.Y+10, camera.GlobalPosition.Z));
 		TrackManager.Instance.Track.WaterMesh.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, TrackManager.Instance.Track.WaterMesh.GlobalPosition.Y, camera.GlobalPosition.Z));
 	}

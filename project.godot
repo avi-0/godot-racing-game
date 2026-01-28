@@ -329,6 +329,14 @@ game_hide_ui={
 
 3d_render/layer_1="default"
 3d_render/layer_2="editor_overlays"
+3d_render/layer_10="Splitscreen Player 1"
+3d_render/layer_11="Splitscreen Player 2"
+3d_render/layer_12="Splitscreen Player 3"
+3d_render/layer_13="Splitscreen Player 4"
+3d_render/layer_14="Splitscreen Player 5"
+3d_render/layer_15="Splitscreen Player 6"
+3d_render/layer_16="Splitscreen Player 7"
+3d_render/layer_17="Splitscreen Player 8"
 3d_physics/layer_1="blocks"
 3d_physics/layer_2="cars"
 

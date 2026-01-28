@@ -630,7 +630,7 @@ public partial class Car : RigidBody3D
 		Nameplate.Mesh.Set("text", name);
 	}
 
-	public void SetGhost(bool ghost)
+	public void SetGhost(bool ghost, int cullLayer = 1)
 	{
 		IsGhost = ghost;
 		
@@ -649,6 +649,9 @@ public partial class Car : RigidBody3D
 			{
 				mesh.SetMaterialOverride(null);		
 			}
+			
+			mesh.SetLayerMaskValue(1, false);
+			mesh.SetLayerMaskValue(cullLayer, true);
 		}
 	}
 
