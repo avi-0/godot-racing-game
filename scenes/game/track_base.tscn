@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr63oxeshcbuu"]
+[gd_scene load_steps=9 format=3 uid="uid://cr63oxeshcbuu"]
+
+[ext_resource type="Texture2D" uid="uid://5lmr8j4dcyq3" path="res://assets/img/grass.png" id="1_jtjnr"]
+[ext_resource type="Texture2D" uid="uid://c6lxb4prbolnb" path="res://assets/img/grass2.png" id="2_0iiq5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynqis"]
-albedo_color = Color(0.101500005, 0.35, 0.18433337, 1)
+albedo_texture = ExtResource("1_jtjnr")
 metallic_specular = 0.0
+uv1_scale = Vector3(250, 250, 250)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_ynqis"]
 material = SubResource("StandardMaterial3D_ynqis")
@@ -10,6 +15,20 @@ size = Vector3(512, 0.2, 512)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ynqis"]
 points = PackedVector3Array(-256, -0.1, -256, -256, 0.1, -256, 256, -0.1, -256, -256, -0.1, 256, -256, 0.1, 256, 256, 0.1, -256, 256, -0.1, 256, 256, 0.1, 256)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axmpy"]
+albedo_texture = ExtResource("2_0iiq5")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_urhk7"]
+material = SubResource("StandardMaterial3D_axmpy")
+size = Vector3(512, 64, 512)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0iiq5"]
+size = Vector3(512, 64, 512)
 
 [node name="TrackBase" type="Node3D"]
 
@@ -23,5 +42,14 @@ mesh = SubResource("BoxMesh_ynqis")
 shape = SubResource("ConvexPolygonShape3D_ynqis")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.413452, -1.0843506, 0.82089233)
-size = Vector3(516.11743, 2.345459, 524.51385)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31.9, 0)
+size = Vector3(512, 64, 512)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.2, 0)
+mesh = SubResource("BoxMesh_urhk7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("BoxShape3D_0iiq5")

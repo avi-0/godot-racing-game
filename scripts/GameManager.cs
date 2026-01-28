@@ -43,6 +43,7 @@ public partial class GameManager : Node
 	// constants that hui znaet where they should be
 	public const int BlockLayer = 1;
 	public const int CarLayer = 2;
+	public const int DeathY = -9;
 
 	//more than one splirscreen screen
 	public bool IsSplitScreen = false;
@@ -247,5 +248,11 @@ public partial class GameManager : Node
 			MusicPlayer.Play();
 			GD.Print(MusicPlayer.Stream.GetName());
 		}		
+	}
+
+	public void SyncCameraVisuals(Camera3D camera)
+	{
+		TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, TrackManager.Instance.Track.RainParticles.GlobalPosition.Y, camera.GlobalPosition.Z));
+		TrackManager.Instance.Track.WaterMesh.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, TrackManager.Instance.Track.WaterMesh.GlobalPosition.Y, camera.GlobalPosition.Z));
 	}
 }

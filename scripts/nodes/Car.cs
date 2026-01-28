@@ -252,8 +252,6 @@ public partial class Car : RigidBody3D
 		//RAIN
 		if (_isLocallyControlled && TrackManager.Instance.Track.Options.Rain)
 		{
-			TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(GlobalPosition.X, TrackManager.Instance.Track.RainParticles.GlobalPosition.Y, GlobalPosition.Z));
-			
 			if (_rayCastUp == null)
 			{
 				_rayCastUp = new RayCast3D();
@@ -281,6 +279,11 @@ public partial class Car : RigidBody3D
 			_rayCastUp.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y+1.5f, GlobalPosition.Z);
 		}
 		//--
+
+		if (GetGlobalPosition().Y < GameManager.DeathY)
+		{
+			this.QueueFree();
+		}
 	}
 
 	private void ProcessEngineSound()

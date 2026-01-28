@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://ywlk133yau03"]
+[gd_scene load_steps=20 format=3 uid="uid://ywlk133yau03"]
 
 [ext_resource type="Script" uid="uid://c1tvycuj08dj6" path="res://scripts/nodes/Track.cs" id="1_enrm2"]
 [ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/game/track_base.tscn" id="2_h2pho"]
 [ext_resource type="Environment" uid="uid://ctnutos5v0lkx" path="res://scenes/game/track_template_environment.tres" id="3_i06yk"]
 [ext_resource type="Texture2D" uid="uid://x8r8ys4xlecm" path="res://assets/img/Circle.png" id="7_qfxy4"]
+[ext_resource type="Shader" uid="uid://dwwouujmd33h" path="res://shaders/watershader.gdshader" id="8_hb6dr"]
+[ext_resource type="Texture2D" uid="uid://btg22umurlyyk" path="res://assets/img/water.png" id="9_dhj8a"]
 [ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="10_gj4c4"]
 [ext_resource type="Script" uid="uid://b4tkplvh7fq40" path="res://addons/sky_3d/src/SkyDome.gd" id="11_aprr0"]
 [ext_resource type="Script" uid="uid://cjmkcj8hwm7ts" path="res://addons/sky_3d/src/TimeOfDay.gd" id="12_2inyt"]
@@ -43,7 +45,41 @@ size = 0.2
 sections = 3
 curve = SubResource("Curve_hb6dr")
 
-[node name="Track" type="Node3D" node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon", "TrackVoxelGI", "RainParticles")]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_myyg0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hb6dr"]
+noise = SubResource("FastNoiseLite_myyg0")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 1.0
+bump_strength = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bytw"]
+render_priority = 0
+shader = ExtResource("8_hb6dr")
+shader_parameter/albedo = Color(0.47058824, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("9_dhj8a")
+shader_parameter/albedo_texture_size = Vector2i(512, 512)
+shader_parameter/point_size = 1.0000000149012
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_hb6dr")
+shader_parameter/refraction = 0.5000000712500001
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_hb6dr")
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(256, 256, 256)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hb6dr"]
+material = SubResource("ShaderMaterial_6bytw")
+size = Vector2(4096, 4096)
+
+[node name="Track" type="Node3D" node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon", "TrackVoxelGI", "RainParticles", "WaterMesh")]
 physics_interpolation_mode = 2
 script = ExtResource("1_enrm2")
 TimeOfDay = NodePath("Sky3D/TimeOfDay")
@@ -51,6 +87,7 @@ Sun = NodePath("Sky3D/SunLight")
 Moon = NodePath("Sky3D/MoonLight")
 TrackVoxelGI = NodePath("VoxelGI")
 RainParticles = NodePath("GPUParticles3D_Rain")
+WaterMesh = NodePath("Water")
 metadata/TrackUID = "0"
 metadata/TrackName = "New Track"
 metadata/AuthorName = "Anonymous"
@@ -123,3 +160,7 @@ trail_enabled = true
 trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_myyg0")
 draw_pass_1 = SubResource("RibbonTrailMesh_dhj8a")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+mesh = SubResource("PlaneMesh_hb6dr")

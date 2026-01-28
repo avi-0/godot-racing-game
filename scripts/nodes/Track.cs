@@ -11,6 +11,7 @@ public partial class Track : Node3D
 	[Export] public DirectionalLight3D Moon;
 	[Export] public VoxelGI TrackVoxelGI;
 	[Export] public GpuParticles3D RainParticles;
+	[Export] public MeshInstance3D WaterMesh;
 	
 	public TrackOptions Options = new();
 
@@ -23,7 +24,7 @@ public partial class Track : Node3D
 			Sun.ShadowEnabled = false;
 			Moon.ShadowEnabled = false;
 		}
-		
+
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
 		RainParticles.Visible = Options.Rain;
 	}

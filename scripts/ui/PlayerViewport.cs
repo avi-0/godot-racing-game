@@ -69,6 +69,11 @@ public partial class PlayerViewport : SubViewport
 		
 		Camera.Current = TargetCamera != null;
 		Camera.Match(TargetCamera);
+
+		if (Camera.Current)
+		{
+			GameManager.Instance.SyncCameraVisuals(Camera);
+		}
 	}
 
 	public override void _Process(double delta)
