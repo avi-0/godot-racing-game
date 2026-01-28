@@ -671,26 +671,31 @@ public partial class Car : RigidBody3D
 				avgSpeed += peek;
 				_speedStack.Push(peek);
 			}
+
 			avgSpeed /= 5;
-
 			float speedChange = avgSpeed - GetLinearVelocity().Length();
-
-			if (Math.Abs(speedChange) > 1)
-			{
-				PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
-				Vector3 position = state3D.GetContactColliderPosition(0);
-				CarCommon.CollisionDebrisParticles.SetGlobalPosition(position);
-				
-				CarCommon.CollisionDebrisParticles.SetScale(new Vector3(0.5f, 0.5f, 0.5f) * speedChange);
-				if (CarCommon.CollisionDebrisParticles.Scale.X > 5) { CarCommon.CollisionDebrisParticles.SetScale(new Vector3(5, 5, 5));}
-				if (CarCommon.CollisionDebrisParticles.Scale.X < 0.5) { CarCommon.CollisionDebrisParticles.SetScale(new Vector3(0.5f, 0.5f, 0.5f));}
-					
-				CarCommon.CollisionDebrisParticles.Emitting = true;
-			}
-
-			if (speedChange > MaxSpeed/10)
+			if (speedChange > MaxSpeed / 10)
 			{
 				CarCommon.CarSoundPlayer.Play();
+			}
+
+			PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
+
+			if (GetLinearVelocity().Length() > MaxSpeed / 20)
+			{
+				//for (var contact = 0; contact < state3D.GetContactCount(); contact++)
+				{
+					Vector3 position = state3D.GetContactColliderPosition(0);
+					foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
+					{
+						if (!particle.Emitting)
+						{
+							particle.SetGlobalPosition(position);
+							particle.Emitting = true;
+							break;
+						}
+					}
+				}
 			}
 		}
 	}
