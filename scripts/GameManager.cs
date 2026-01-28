@@ -122,6 +122,8 @@ public partial class GameManager : Node
 	public void Play(bool host = true)
 	{
 		CarManager.Instance.Clear();
+		
+		GameModeController.InitGameMode(host);
 		GameModeController.CurrentGameMode.InitTrack(TrackManager.Instance.Track);
 		
 		IsSplitScreen = _screenLayout.PlayerViewports.Count > 1;
@@ -130,26 +132,28 @@ public partial class GameManager : Node
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
 			long id = viewport.LocalPlayerId + 1;
+			if (isFirst) {id = MultiplayerManager.HOST_ID;}
+			
 			if (MultiplayerManager.Instance.OnServer)
 			{
 				id = MultiplayerManager.Instance.PlayerInfo.PlayerId;
 			}
-
-			string name = "Player " + id;
+			
 			if (isFirst)
 			{
-				name = SettingsManager.Instance.GetLocalPlayerName();
+				isFirst = false;
+				GameModeController.CurrentGameMode.AddPlayer(id, GameModeUtils.PLAYER_LOCAL, SettingsManager.Instance.Settings.PlayerName);
 			}
-			GameModeController.CurrentGameMode.AddPlayer(id, true, isFirst, name);
-			isFirst = false;
+			else
+			{
+				GameModeController.CurrentGameMode.AddPlayer(id, GameModeUtils.PLAYER_LOCAL_SPLITSCREEN, "Player " + id);
+			}
 			
 			viewport.PlayerId = id;
 
 			if (TrackManager.Instance.Track.Options.Message != "")
 			{
-				MOTDLabel.Text = TrackManager.Instance.Track.Options.Message;
-				MOTDPanel.Show();
-				Input.MouseMode = Input.MouseModeEnum.Visible;
+				ShowMessage(TrackManager.Instance.Track.Options.Message);
 			}
 			else
 			{
@@ -168,6 +172,8 @@ public partial class GameManager : Node
 
 	public void Stop()
 	{
+		if (!_isPlaying) { return;}
+		
 		SetViewportsActive(false);
 		
 		CarManager.Instance.Clear();
@@ -234,7 +240,13 @@ public partial class GameManager : Node
 	{
 		EmitSignalViewportSettingsChanged();
 	}
-	
+
+	public void ShowMessage(string Msg)
+	{
+		MOTDLabel.Text = Msg;
+		MOTDPanel.Show();
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+	}
 	private void OnMOTDButtonPressed()
 	{
 		MOTDPanel.Hide();

@@ -476,8 +476,11 @@ public partial class MainMenu : Control
 	{
 		MultiplayerManager.Instance.CreateClient(IPLine.Text);
 
-		await GDTask.ToSignal(MultiplayerManager.Instance, MultiplayerManager.SignalName.ConnectedToServer);
+		await GDTask.ToSignal(MultiplayerManager.Instance, MultiplayerManager.SignalName.ConnectionAttemptEnded);
 		
-		OpenTrack(MultiplayerManager.Instance.ServerInfo.TrackPath, false).Forget();
+		if (MultiplayerManager.Instance.LastConnectionAttemptStatus == MultiplayerManager.CONNECTION_STATUS_CONNECTED && MultiplayerManager.Instance.ServerInfo.TrackPath != "")
+		{
+			OpenTrack(MultiplayerManager.Instance.ServerInfo.TrackPath, false).Forget();
+		}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=18 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_micox"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_glvfi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_glvfi"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]
+[ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="8_x43s4"]
 [ext_resource type="PackedScene" uid="uid://ccecgeh8qkbdb" path="res://assets/cartopia/cars/drift.glb" id="10_cn2cu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
@@ -60,7 +61,7 @@ uppercase = true
 pixel_size = 0.007
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -76,6 +77,7 @@ HeadLight = NodePath("Headlights")
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
+MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 Acceleration = 600
 MaxSpeed = 30
 BrakingStrengthMultiplier = 0.25
@@ -159,9 +161,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.36, -0.8485218)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.36, -0.8485218)
 
 [node name="wheel_front_left" parent="drift" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.3522811, 1.2480586)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.36, 1.2480586)
 
 [node name="wheel_front_right" parent="drift" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.36, 1.2480586)
+
+[node name="MultiplayerSynchronizer" parent="." instance=ExtResource("8_x43s4")]
 
 [editable path="drift"]

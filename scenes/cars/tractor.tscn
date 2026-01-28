@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhhyeackuvnkm"]
+[gd_scene load_steps=23 format=3 uid="uid://bhhyeackuvnkm"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_g3c1d"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_hwmkx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="5_14blg"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="6_s6ltu"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_lharr"]
+[ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="8_hwmkx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.01
@@ -79,7 +80,7 @@ font_size = 10
 uppercase = true
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels")]
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 400.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -95,6 +96,7 @@ HeadLight = NodePath("Headlights")
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
+MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 MaxSpeed = 15
 TireTurnSpeed = 0.5
 SteeringBaseDegrees = 3
@@ -173,5 +175,7 @@ transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -4.8919077e-08, 0.828
 [node name="Nameplate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.47900653, -1.1861962)
 mesh = SubResource("TextMesh_lce11")
+
+[node name="MultiplayerSynchronizer" parent="." instance=ExtResource("8_hwmkx")]
 
 [editable path="tractor-shovel"]
