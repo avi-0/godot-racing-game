@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Newtonsoft.Json;
 using racingGame.data;
 using racingGame.extensions;
 
@@ -11,12 +12,18 @@ public class GameModeTimeAttack : IGameMode
 {
 	private TimeAttackMap _currentTrack;
 	private bool _inEditor = false;
-	private Dictionary<long, TimeAttackPlayer> _players;
-
 	private bool _running = false;
+	private Dictionary<long, TimeAttackPlayer> _players { get; set;}
+	
+	private struct GameModeInfoStruct
+	{
+		public Dictionary<long, TimeAttackRaceData> PlayersRaceData { get; set;}
+		public int TimeLeft;
+	}
+	private GameModeInfoStruct _info;
 
 	private bool _hasAuthor = false;
-
+	
 	public void Running(bool running)
 	{
 		_running = running;
@@ -27,52 +34,51 @@ public class GameModeTimeAttack : IGameMode
 		return _running;
 	}
 
+	public void InitGameMode()
+	{
+		_info = new GameModeInfoStruct();
+		_players = new Dictionary<long, TimeAttackPlayer>();
+	}
+	
 	public void Tick()
 	{
 		foreach (var playerId in _players.Keys)
 		{
 			var player = _players[playerId];
-
+			
 			if (player.InGame)
 			{
-				if (player.RaceStartTime.Ticks == 0)
+				if (player.RaceData.RaceStartTime.Ticks == 0)
 				{
-					var timeSinceStartMs = DateTime.Now.Subtract(player.SpawnTime).TotalMilliseconds;
+					var timeSinceStartMs = DateTime.Now.Subtract(player.RaceData.SpawnTime).TotalMilliseconds;
 					if (timeSinceStartMs > 1500)
 					{
-						player.StartTimerSeconds = 0;
-						player.PlayerCar.AcceptsInputs = true;
-						player.RaceStartTime = DateTime.Now;
-
-						if (player.LocalPlayer && player.PlayerGhostCar != null)
-						{
-							player.PlayerGhostCar.Visible = true;
-						}
+						player = PlayerStart(player);
 					}
 					else if (timeSinceStartMs > 1000)
 					{
-						player.StartTimerSeconds = 1;
+						player.RaceData.StartTimerSeconds = 1;
 					}
 					else if (timeSinceStartMs > 500)
 					{
-						player.StartTimerSeconds = 2;
+						player.RaceData.StartTimerSeconds = 2;
 					}
 					else
 					{
-						player.StartTimerSeconds = 3;
+						player.RaceData.StartTimerSeconds = 3;
 					}
 				}
 				else
 				{
-					player.CurrentRaceTime = DateTime.Now.Subtract(player.RaceStartTime);
+					player.RaceData.CurrentRaceTime = DateTime.Now.Subtract(player.RaceData.RaceStartTime);
 
-					var ms = (int)player.CurrentRaceTime.TotalMilliseconds;
+					var ms = (int)player.RaceData.CurrentRaceTime.TotalMilliseconds;
 					var datanow = new CarPositionData(player.PlayerCar.Position, player.PlayerCar.Rotation);
 					player.GhostRecording.AddFrame(ms, datanow);
 
-					if (player.LocalPlayer && !player.PBGhost.Empty)
+					if (player.PlayerType == GameModeUtils.PLAYER_LOCAL && !player.PBGhost.Empty)
 					{
-						var data = player.PBGhost.GetFrame((int)player.CurrentRaceTime.TotalMilliseconds);
+						var data = player.PBGhost.GetFrame((int)player.RaceData.CurrentRaceTime.TotalMilliseconds);
 						player.PlayerGhostCar.Position = data.Position;
 						player.PlayerGhostCar.Rotation = data.Rotation;
 					}
@@ -81,12 +87,14 @@ public class GameModeTimeAttack : IGameMode
 
 			_players[playerId] = player;
 		}
+		
+		if (MultiplayerManager.Instance.OnServer && !MultiplayerManager.Instance.IsServer()) { return; }
+		//server only ticks
 	}
 
 	public void InitTrack(Track track)
 	{
 		_currentTrack = new TimeAttackMap(track);
-		_players = new();
 
 		if (track.Options.Uid == "0")
 			_inEditor = true;
@@ -113,20 +121,18 @@ public class GameModeTimeAttack : IGameMode
 		}
 	}
 
-	public void AddPlayer(long id, bool localPlayer, bool isHost, string playerName)
+	public void AddPlayer(long id, int playerType, string playerName)
 	{
-		var player = new TimeAttackPlayer(id, true);
-		player.IsHost = isHost;
+		var player = new TimeAttackPlayer(id, playerType);
 		player.PlayerName = playerName;
-		player.LocalPlayer = localPlayer;
 
-		if (player.LocalPlayer)
+		if (player.PlayerType == GameModeUtils.PLAYER_LOCAL || player.PlayerType == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
 		{
 			TimeSpan loadedPb = new TimeSpan();
 			Ghost loadedGhost = new Ghost();
 			if (!_inEditor)
 			{
-				if (!GameManager.Instance.IsSplitScreen || player.IsHost)
+				if (player.PlayerType == GameModeUtils.PLAYER_LOCAL)
 				{
 					loadedPb = GameModeUtils.LoadUserPb(_currentTrack.Track.Options.Uid);
 					loadedGhost = GameModeUtils.LoadUserGhost(_currentTrack.Track.Options.Uid);
@@ -139,7 +145,7 @@ public class GameModeTimeAttack : IGameMode
 
 			if (loadedPb != TimeSpan.Zero)
 			{
-				player.PbTime = loadedPb;
+				player.RaceData.GlobalPbTime = loadedPb;
 			}
 
 			if (!loadedGhost.Empty)
@@ -158,18 +164,20 @@ public class GameModeTimeAttack : IGameMode
 		
 		var player = _players[id];
 
-		player.SpawnTime = DateTime.Now;
-		player.RaceStartTime = new DateTime();
-		player.CurrentRaceTime = TimeSpan.Zero;
-		player.CheckPointsCollected = new List<int>();
-		player.LapsDone = 0;
+		player.RaceData.SpawnTime = DateTime.Now;
+		player.RaceData.RaceStartTime = new DateTime();
+		player.RaceData.CurrentRaceTime = TimeSpan.Zero;
+		player.RaceData.CheckPointsCollected = new List<int>();
+		player.RaceData.LapsDone = 0;
+		player.RaceData.RaceOn = false;
+		player.RaceData.HasFinished = false;
+		
 		player.InGame = true;
-		player.HasFinished = false;
 		player.GhostRecording = new Ghost();
 		player.RespawnPoint = new Transform3D();
 		
-		player.PlayerCar.IsLocallyControlled = player.LocalPlayer;
-		if (player.LocalPlayer)
+		player.PlayerCar.IsLocallyControlled = player.PlayerType == GameModeUtils.PLAYER_LOCAL || player.PlayerType == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN;
+		if (player.PlayerType == GameModeUtils.PLAYER_LOCAL || player.PlayerType == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
 		{
 			if (player.PlayerGhostCar != null)
 			{
@@ -186,7 +194,7 @@ public class GameModeTimeAttack : IGameMode
 				player.PlayerGhostCar.Visible = false;
 			}
 
-			if (GameManager.Instance.IsSplitScreen && !player.IsHost)
+			if (player.PlayerType == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
 			{
 				player.PlayerCar.SetRandomSkin();
 			}
@@ -198,6 +206,7 @@ public class GameModeTimeAttack : IGameMode
 		}
 
 		player.PlayerCar.PlayerId = id;
+		player.PlayerCar.AcceptsInputs = false;
 		_players[id] = player;
 	}
 
@@ -229,20 +238,75 @@ public class GameModeTimeAttack : IGameMode
 		_hasAuthor = false;
 	}
 
+	public string GetGameModeInfoJson()
+	{
+		_info.PlayersRaceData = new Dictionary<long, TimeAttackRaceData>();
+		foreach (var kv in _players)
+		{
+			_info.PlayersRaceData[kv.Key] = kv.Value.RaceData;
+			_players[kv.Key].PlayerCar.AcceptsInputs = kv.Value.RaceData.RaceOn;
+		}
+		
+		return JsonConvert.SerializeObject(_info);
+	}
+
+	public void LoadGameModeInfoJson(string gameModeInfoJson)
+	{
+		GameModeInfoStruct newInfo = JsonConvert.DeserializeObject<GameModeInfoStruct>(gameModeInfoJson);
+		if (newInfo.PlayersRaceData != null)
+		{
+			foreach (var kv in newInfo.PlayersRaceData)
+			{
+				if (_players.ContainsKey(kv.Key))
+				{
+					TimeAttackPlayer player = _players[kv.Key];
+
+					bool finished = player.PlayerType == GameModeUtils.PLAYER_LOCAL && player.RaceData.RaceOn && kv.Value.HasFinished;
+					
+					player.RaceData = kv.Value;
+
+					if (finished)
+					{
+						player = PlayerFinished(player);
+					}
+
+					_players[kv.Key] = player;
+				}
+			}
+			_info = newInfo;
+		}
+	}
+
+	public TimeAttackPlayer PlayerStart(TimeAttackPlayer player)
+	{
+		player.RaceData.StartTimerSeconds = 0;
+		player.RaceData.RaceOn = true;
+		player.RaceData.RaceStartTime = DateTime.Now;
+		player.PlayerCar.AcceptsInputs = true;
+
+		if (player.PlayerType == GameModeUtils.PLAYER_LOCAL && player.PlayerGhostCar != null)
+		{
+			player.PlayerGhostCar.Visible = true;
+		}
+
+		return player;
+	}
+
 	private void PlayerAttemptFinish(Car playerCar, int blockId)
 	{
 		if (playerCar.IsGhost) {return;}
+		if (MultiplayerManager.Instance.OnServer && !MultiplayerManager.Instance.IsServer()) {return;}
 		
 		var playerId = playerCar.PlayerId;
 		var player = _players[playerId];
 
-		if (player.InGame && player.CheckPointsCollected.Count == _currentTrack.CheckPointCount)
+		if (player.InGame && player.RaceData.CheckPointsCollected.Count == _currentTrack.CheckPointCount)
 		{
-			player.LapsDone++;
+			player.RaceData.LapsDone++;
 
-			if (player.LapsDone < _currentTrack.Track.Options.Laps)
+			if (player.RaceData.LapsDone < _currentTrack.Track.Options.Laps)
 			{
-				player.CheckPointsCollected = new List<int>();
+				player.RaceData.CheckPointsCollected = new List<int>();
 				player.RespawnPoint = TrackManager.Instance.GetStartPoint();
 			}
 			else
@@ -262,16 +326,18 @@ public class GameModeTimeAttack : IGameMode
 		
 		var player = _players[playerCar.PlayerId];
 
-		if (!player.CheckPointsCollected.Contains(blockId))
+		if (!player.RaceData.CheckPointsCollected.Contains(blockId))
 		{
-			player.CheckPointsCollected.Add(blockId);
-			if (player.LocalPlayer)
+			player.RaceData.CheckPointsCollected.Add(blockId);
+			if (player.PlayerType == GameModeUtils.PLAYER_LOCAL || player.PlayerType == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
 			{
 				UiSoundPlayer.Singleton.CheckpointCollectedSound.Play();
 			}
 			
 			player.RespawnPoint = player.PlayerCar.GetTransform(); // потом поменять на block.SpawnPoint (ещё вопрос как адекватно получать block из blockid)
 		}
+		
+		if (MultiplayerManager.Instance.OnServer && !MultiplayerManager.Instance.IsServer()) {return;}
 
 		_players[playerCar.PlayerId] = player;
 	}
@@ -279,38 +345,39 @@ public class GameModeTimeAttack : IGameMode
 	private TimeAttackPlayer PlayerFinished(TimeAttackPlayer player)
 	{
 		player.InGame = false;
-		player.PlayerCar.AcceptsInputs = false;
+		player.RaceData.RaceOn = false;
 
 		var isPb = false;
-		if (player.PbTime == TimeSpan.Zero ||
-		    player.PbTime.TotalMilliseconds > player.CurrentRaceTime.TotalMilliseconds)
+		if (player.RaceData.PbTime == TimeSpan.Zero ||
+			player.RaceData.PbTime.TotalMilliseconds > player.RaceData.CurrentRaceTime.TotalMilliseconds)
 		{
 			isPb = true;
 
-			player.PbTime = player.CurrentRaceTime;
-			if (player.LocalPlayer && (!GameManager.Instance.IsSplitScreen || player.IsHost))
+			player.RaceData.PbTime = player.RaceData.CurrentRaceTime;
+			if ((player.RaceData.GlobalPbTime == TimeSpan.Zero || player.RaceData.PbTime < player.RaceData.GlobalPbTime) && player.PlayerType == GameModeUtils.PLAYER_LOCAL)
 			{
-				GameModeUtils.SaveUserPb(player.PbTime, TrackManager.Instance.GetLoadedTrackUid());
+				player.RaceData.GlobalPbTime = player.RaceData.PbTime;
+				GameModeUtils.SaveUserPb(player.RaceData.PbTime, TrackManager.Instance.GetLoadedTrackUid());
 
-				if (_inEditor) SetAuthorTime((int)player.CurrentRaceTime.TotalMilliseconds);
+				if (_inEditor) SetAuthorTime((int)player.RaceData.CurrentRaceTime.TotalMilliseconds);
 			}
 		}
 
 		//Ghost Saving
-		if (player.PBGhost.Empty || player.CurrentRaceTime < player.PBGhost.RaceTime)
+		if (player.PBGhost.Empty || player.RaceData.CurrentRaceTime < player.PBGhost.RaceTime)
 		{
 			player.PBGhost = player.GhostRecording;
-			player.PBGhost.RaceTime = player.CurrentRaceTime;
+			player.PBGhost.RaceTime = player.RaceData.CurrentRaceTime;
 
-			if (player.LocalPlayer && (!GameManager.Instance.IsSplitScreen || player.IsHost))
+			if (player.PlayerType == GameModeUtils.PLAYER_LOCAL)
 			{
 				GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid());
 			}
 		}
 		//--
 
-		player.HasFinished = true;
-		player.LastFinishTime = player.CurrentRaceTime;
+		player.RaceData.HasFinished = true;
+		player.RaceData.LastFinishTime = player.RaceData.CurrentRaceTime;
 
 		return player;
 	}
@@ -329,10 +396,10 @@ public class GameModeTimeAttack : IGameMode
 		//--
 		
 		//Race Stats
-		viewport.TimeLabel.Text = GameModeUtils.FormatRaceTime(player.CurrentRaceTime);
-		viewport.CheckPointLabel.Text = GameModeUtils.FormatCheckPointCount(player.CheckPointsCollected.Count,
+		viewport.TimeLabel.Text = GameModeUtils.FormatRaceTime(player.RaceData.CurrentRaceTime);
+		viewport.CheckPointLabel.Text = GameModeUtils.FormatCheckPointCount(player.RaceData.CheckPointsCollected.Count,
 			_currentTrack.CheckPointCount);
-		viewport.LapsLabel.Text = GameModeUtils.FormatLapsCount(player.LapsDone, _currentTrack.Track.Options.Laps);
+		viewport.LapsLabel.Text = GameModeUtils.FormatLapsCount(player.RaceData.LapsDone, _currentTrack.Track.Options.Laps);
 		//--
 			
 		//ScoreBoard
@@ -371,15 +438,37 @@ public class GameModeTimeAttack : IGameMode
 		bronzeLabel.Name = GameModeUtils.GetBronzeFromAt(_currentTrack.Track.Options.AuthorTime).ToString();
 		bronzeLabel.AddThemeColorOverride("font_color", Colors.LightCoral);
 		viewport.ScoreboardContainer.AddChild(bronzeLabel);
+
+		void moveChild(Label child, double ms)
+		{
+			int childId =  viewport.ScoreboardContainer.GetChildCount()-1;
+			while (childId > 0 && int.Parse(viewport.ScoreboardContainer.GetChild(childId - 1).Name) > ms)
+			{
+				viewport.ScoreboardContainer.MoveChild(child, childId-1);
+				childId -= 1;
+			}
+		}
 		
 		foreach (var kv in _players)
 		{
 			var scoreboardPlayer = kv.Value;
-			if (scoreboardPlayer.PbTime != TimeSpan.Zero)
+			
+			if (scoreboardPlayer.PlayerType == GameModeUtils.PLAYER_LOCAL && scoreboardPlayer.RaceData.GlobalPbTime != TimeSpan.Zero && (scoreboardPlayer.RaceData.GlobalPbTime < scoreboardPlayer.RaceData.PbTime || scoreboardPlayer.RaceData.PbTime == TimeSpan.Zero))
+			{
+				Label pbLabel = newLabel();
+				pbLabel.Text = "[PB] " + scoreboardPlayer.PlayerName + ": " + GameModeUtils.FormatRaceTime(scoreboardPlayer.RaceData.GlobalPbTime);
+				pbLabel.Name = scoreboardPlayer.RaceData.GlobalPbTime.TotalMilliseconds.ToString("0000");
+				viewport.ScoreboardContainer.AddChild(pbLabel);
+				viewport.ScoreboardContainer.MoveChild(pbLabel, 0);
+				
+				moveChild(pbLabel, scoreboardPlayer.RaceData.GlobalPbTime.TotalMilliseconds);
+			}
+			
+			if (scoreboardPlayer.RaceData.PbTime != TimeSpan.Zero)
 			{
 				Label scoreLabel = newLabel();
-				scoreLabel.Text = scoreboardPlayer.PlayerName + ": " + GameModeUtils.FormatRaceTime(scoreboardPlayer.PbTime);
-				scoreLabel.Name = scoreboardPlayer.PbTime.TotalMilliseconds.ToString("0000");
+				scoreLabel.Text = scoreboardPlayer.PlayerName + ": " + GameModeUtils.FormatRaceTime(scoreboardPlayer.RaceData.PbTime);
+				scoreLabel.Name = scoreboardPlayer.RaceData.PbTime.TotalMilliseconds.ToString("0000");
 				if (kv.Key == viewport.PlayerId)
 				{
 					if (_inEditor)
@@ -392,17 +481,10 @@ public class GameModeTimeAttack : IGameMode
 					}
 				}
 				viewport.ScoreboardContainer.AddChild(scoreLabel);
-
-
 				
-				int childId =  viewport.ScoreboardContainer.GetChildCount()-1;
-				while (childId > 0 && int.Parse(viewport.ScoreboardContainer.GetChild(childId - 1).Name) > scoreboardPlayer.PbTime.TotalMilliseconds)
-				{
-					viewport.ScoreboardContainer.MoveChild(scoreLabel, childId-1);
-					childId -= 1;
-				}
+				moveChild(scoreLabel, scoreboardPlayer.RaceData.PbTime.TotalMilliseconds);
 				
-				if (scoreboardPlayer.PbTime.TotalMilliseconds <= _currentTrack.Track.Options.AuthorTime)
+				if (scoreboardPlayer.RaceData.PbTime.TotalMilliseconds <= _currentTrack.Track.Options.AuthorTime)
 				{
 					_hasAuthor = true;
 				}
@@ -412,13 +494,13 @@ public class GameModeTimeAttack : IGameMode
 		//--
 		
 		//Finish Panel
-		if (player.HasFinished && !viewport.FinishPanel.Visible)
+		if (player.RaceData.HasFinished && !viewport.FinishPanel.Visible)
 		{
 			if (!viewport.RaceUi.Visible) {viewport.RaceUi.Visible = true;}
 			
-			var isPb = player.LastFinishTime == player.PbTime;
+			var isPb = player.RaceData.LastFinishTime == player.RaceData.GlobalPbTime;
 			
-			viewport.FinishTimeLabel.Text = $"Race Time: {player.LastFinishTime:mm}:{player.LastFinishTime:ss}.{player.LastFinishTime:fff}";
+			viewport.FinishTimeLabel.Text = $"Race Time: {player.RaceData.LastFinishTime:mm}:{player.RaceData.LastFinishTime:ss}.{player.RaceData.LastFinishTime:fff}";
 			
 			if (isPb)
 			{
@@ -430,7 +512,7 @@ public class GameModeTimeAttack : IGameMode
 
 			if (!_inEditor)
 			{
-				viewport.FinishTimeLabel.Text += "\n" + GameModeUtils.GetMedalFromTime((int)player.LastFinishTime.TotalMilliseconds, TrackManager.Instance.Track.Options.AuthorTime);
+				viewport.FinishTimeLabel.Text += "\n" + GameModeUtils.GetMedalFromTime((int)player.RaceData.LastFinishTime.TotalMilliseconds, TrackManager.Instance.Track.Options.AuthorTime);
 			}
 
 			viewport.FinishPanel.Show();
@@ -439,9 +521,9 @@ public class GameModeTimeAttack : IGameMode
 		//--
 		
 		//Start Sound
-		if (viewport.StartTimerSeconds != player.StartTimerSeconds)
+		if (viewport.StartTimerSeconds != player.RaceData.StartTimerSeconds)
 		{
-			viewport.StartTimerSeconds = player.StartTimerSeconds;
+			viewport.StartTimerSeconds = player.RaceData.StartTimerSeconds;
 			
 			if (viewport.StartTimerSeconds == 0)
 				UiSoundPlayer.Singleton.RaceStartSound.Play();

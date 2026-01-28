@@ -17,6 +17,7 @@ public partial class Car : RigidBody3D
 	[Export] public CarCommon CarCommon;
 	[Export] public MeshInstance3D Nameplate;
 	[Export] public CarWheel[] Wheels;
+	[Export] public MultiplayerSynchronizer MultiplayerSynchronizer;
 	
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
@@ -179,8 +180,6 @@ public partial class Car : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		//if ( MultiplayerManager.Instance.OnServer && !IsMultiplayerAuthority()) { return;}
-		
 		_isAccelerating = false;
 		_isReversing = false;
 		var velocity = GlobalBasis.Z.Dot(LinearVelocity);
@@ -620,6 +619,7 @@ public partial class Car : RigidBody3D
 			if (ghost)
 			{
 				mesh.SetMaterialOverride(ResourceLoader.Load<Material>("res://materials/ghost_car.tres"));
+				MultiplayerSynchronizer.PublicVisibility = false;
 			}
 			else
 			{

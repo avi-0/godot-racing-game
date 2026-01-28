@@ -11,6 +11,11 @@ public static class GameModeUtils
 	private const string SavePbPath = "user://userdata.mdat";
 	private const string SaveGhostPath = "user://ghosts.mdat";
 
+	//Player Types
+	public const int PLAYER_LOCAL = 1;
+	public const int PLAYER_LOCAL_SPLITSCREEN = 2;
+	public const int PLAYER_ONLINE = 3;
+	
 	public const int MEDAL_NONE = 0;
 	public const int MEDAL_BRONZE = 1;
 	public const int MEDAL_SILVER = 2;
@@ -157,4 +162,14 @@ public static class GameModeUtils
 		return new Ghost();
 	}
 	//----//
+
+	public static void RestartPlayer(long PlayerId)
+	{
+		GameModeController.CurrentGameMode.RestartPlayer(PlayerId);
+		
+		if (MultiplayerManager.Instance.OnServer && !MultiplayerManager.Instance.IsServer())
+		{
+			MultiplayerManager.Instance.ClientRequestRestart();
+		}		
+	}
 }
