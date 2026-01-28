@@ -648,7 +648,22 @@ public partial class Car : RigidBody3D
 			}
 			avgSpeed /= 5;
 
-			if (avgSpeed > 5)
+			float speedChange = avgSpeed - GetLinearVelocity().Length();
+
+			if (Math.Abs(speedChange) > 1)
+			{
+				PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
+				Vector3 position = state3D.GetContactColliderPosition(0);
+				CarCommon.CollisionDebrisParticles.SetGlobalPosition(position);
+				
+				CarCommon.CollisionDebrisParticles.SetScale(new Vector3(0.5f, 0.5f, 0.5f) * speedChange);
+				if (CarCommon.CollisionDebrisParticles.Scale.X > 5) { CarCommon.CollisionDebrisParticles.SetScale(new Vector3(5, 5, 5));}
+				if (CarCommon.CollisionDebrisParticles.Scale.X < 0.5) { CarCommon.CollisionDebrisParticles.SetScale(new Vector3(0.5f, 0.5f, 0.5f));}
+					
+				CarCommon.CollisionDebrisParticles.Emitting = true;
+			}
+
+			if (speedChange > MaxSpeed/10)
 			{
 				CarCommon.CarSoundPlayer.Play();
 			}

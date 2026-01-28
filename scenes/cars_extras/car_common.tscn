@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://c1a2se6oqams7"]
+[gd_scene load_steps=12 format=4 uid="uid://c1a2se6oqams7"]
 
 [ext_resource type="Script" uid="uid://dqnmdk4ouatc4" path="res://scripts/nodes/CarCommon.cs" id="1_qexnt"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="2_84gro"]
 [ext_resource type="AudioStream" uid="uid://c25toh1o4n27x" path="res://assets/audio/bonk.wav" id="3_3mehs"]
+[ext_resource type="Texture2D" uid="uid://pu4xk6cfo5wu" path="res://assets/img/Flare.png" id="4_3dw60"]
+[ext_resource type="Texture2D" uid="uid://co5walud0wwh6" path="res://assets/img/debris.png" id="5_w3b45"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_84gro"]
 resource_local_to_scene = true
@@ -12,11 +14,53 @@ loop_mode = 1
 loop_end = 264545
 stereo = true
 
-[node name="CarCommon" type="Node3D" node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w3b45"]
+lifetime_randomness = 0.4
+particle_flag_rotate_y = true
+emission_shape_offset = Vector3(0, 0.3, 0)
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(2, 5, 2)
+spread = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, -4, 0)
+scale_min = 0.5
+scale_max = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1rg1"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.7882353, 0.64705884, 1)
+albedo_texture = ExtResource("4_3dw60")
+
+[sub_resource type="QuadMesh" id="QuadMesh_c0dk1"]
+material = SubResource("StandardMaterial3D_b1rg1")
+size = Vector2(0.01, 0.05)
+center_offset = Vector3(0.3, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0dk1"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.119565316, 0.095299534, 0.08686521, 1)
+albedo_texture = ExtResource("5_w3b45")
+
+[sub_resource type="QuadMesh" id="QuadMesh_uv7if"]
+material = SubResource("StandardMaterial3D_c0dk1")
+size = Vector2(0.1, 0.1)
+
+[node name="CarCommon" type="Node3D" node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles")]
 script = ExtResource("1_qexnt")
 OrbitCamera = NodePath("OrbitCamera")
 EngineSoundPlayer = NodePath("EngineSoundPlayer")
 CarSoundPlayer = NodePath("AudioStreamPlayer")
+CollisionDebrisParticles = NodePath("CollisionDebrisParticle")
 
 [node name="OrbitCamera" parent="." instance=ExtResource("2_84gro")]
 
@@ -28,3 +72,14 @@ bus = &"enginesounds"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_3mehs")
 bus = &"GameSounds"
+
+[node name="CollisionDebrisParticle" type="GPUParticles3D" parent="."]
+emitting = false
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_w3b45")
+draw_passes = 2
+draw_pass_1 = SubResource("QuadMesh_c0dk1")
+draw_pass_2 = SubResource("QuadMesh_uv7if")
