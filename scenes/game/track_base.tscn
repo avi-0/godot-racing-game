@@ -7,7 +7,7 @@
 albedo_texture = ExtResource("1_jtjnr")
 metallic_specular = 0.0
 uv1_scale = Vector3(250, 250, 250)
-texture_filter = 0
+texture_filter = 4
 
 [sub_resource type="BoxMesh" id="BoxMesh_ynqis"]
 material = SubResource("StandardMaterial3D_ynqis")
