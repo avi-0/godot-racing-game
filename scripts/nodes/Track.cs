@@ -15,6 +15,8 @@ public partial class Track : Node3D
 	
 	public TrackOptions Options = new();
 
+	public Node3D TrackBase;
+	
 	public void UpdateLighting()
 	{
 		TimeOfDay.Set("current_time", Options.StartDayTime);
@@ -67,7 +69,24 @@ public partial class Track : Node3D
 		}
 
 		Options = data.Options;
+
+		ReloadTrackBase();
 		
 		UpdateLighting();
+	}
+
+	public void ReloadTrackBase()
+	{
+		if (TrackBase != null)
+		{
+			RemoveChild(TrackBase);
+			TrackBase.QueueFree();
+		}
+
+		var path = "res://scenes/game/track_bases/track_base_" + Options.TrackBase + ".tscn";
+		PackedScene baseScene = (PackedScene)GD.Load(path);
+		TrackBase = baseScene.Instantiate<Node3D>();
+		TrackBase.SetName("TrackBase");
+		AddChild(TrackBase, true);
 	}
 }

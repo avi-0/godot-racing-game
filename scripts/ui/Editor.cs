@@ -843,7 +843,13 @@ public partial class Editor : Control
 		foreach (var carPath in paths) carType.SetText(1, carType.GetText(1) + carPath + ",");
 		carType.SetText(1, carType.GetText(1).Trim(','));
 		carType.SetEditable(1, true);
-
+		
+		var trackBase = OptionsTree.CreateItem(root);
+		trackBase.SetText(0, "TrackBase");
+		trackBase.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		trackBase.SetText(1, "grass,sand,snow");
+		trackBase.SetEditable(1, true);
+		
 		var lapsCount = OptionsTree.CreateItem(root);
 		lapsCount.SetText(0, "Laps");
 		lapsCount.SetCellMode(1, TreeItem.TreeCellMode.Range);
@@ -889,14 +895,19 @@ public partial class Editor : Control
 				break;
 			case "TrackType":
 				Track.Options.TrackType = editedItem.GetText(editedColumn);
+				InvalidateTrack();
 				break;
 			case "CarType":
-				Track.Options.CarType =
-					editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				Track.Options.CarType = editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				InvalidateTrack();
+				break;
+			case "TrackBase":
+				Track.Options.TrackBase = editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				Track.ReloadTrackBase();
 				break;
 			case "Laps":
-				Track.Options.Laps =
-					(int) editedItem.GetRange(editedColumn);
+				Track.Options.Laps = (int) editedItem.GetRange(editedColumn);
+				InvalidateTrack();
 				break;
 			case "DayTime":
 				Track.Options.StartDayTime = (int)editedItem.GetRange(editedColumn);

@@ -1,7 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://ywlk133yau03"]
+[gd_scene load_steps=21 format=3 uid="uid://ywlk133yau03"]
 
 [ext_resource type="Script" uid="uid://c1tvycuj08dj6" path="res://scripts/nodes/Track.cs" id="1_enrm2"]
-[ext_resource type="PackedScene" uid="uid://cr63oxeshcbuu" path="res://scenes/game/track_base.tscn" id="2_h2pho"]
 [ext_resource type="Environment" uid="uid://ctnutos5v0lkx" path="res://scenes/game/track_template_environment.tres" id="3_i06yk"]
 [ext_resource type="Texture2D" uid="uid://x8r8ys4xlecm" path="res://assets/img/Circle.png" id="7_qfxy4"]
 [ext_resource type="Shader" uid="uid://dwwouujmd33h" path="res://shaders/watershader.gdshader" id="8_hb6dr"]
@@ -112,8 +111,6 @@ metadata/CarType = "thedriftcar.tscn"
 metadata/LapsCount = "0"
 metadata/MapType = "Race"
 metadata/AuthorTime = "0"
-
-[node name="TrackBase" parent="." instance=ExtResource("2_h2pho")]
 
 [node name="Sky3D" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_i06yk")
