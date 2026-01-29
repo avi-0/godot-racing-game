@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cr63oxeshcbuu"]
 
 [ext_resource type="Texture2D" uid="uid://5lmr8j4dcyq3" path="res://assets/img/grass.png" id="1_jtjnr"]
-[ext_resource type="Material" uid="uid://b5lm6i3p6fsil" path="res://materials/track_base_wall.tres" id="2_n0nop"]
+[ext_resource type="Material" uid="uid://dui2xjgt1c1ck" path="res://materials/track_base_dirt.tres" id="2_n0nop"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynqis"]
 albedo_texture = ExtResource("1_jtjnr")
