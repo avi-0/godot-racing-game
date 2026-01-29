@@ -31,17 +31,22 @@ point_count = 2
 
 [sub_resource type="Resource" id="Resource_x43s4"]
 script = ExtResource("2_glvfi")
-SpringStrength = 8000.0
-SpringDamping = 400.0
-SpringRest = 0.05
+SpringStrength = 10000.0
+SpringDamping = 300.0
+SpringRest = 0.12
 OverExtend = 0.05
-WheelRadius = 0.15
+WheelRadius = 0.21
 IsSteeringWheel = true
 BaseGrip = 0.55
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="Resource" id="Resource_cn2cu"]
 script = ExtResource("2_glvfi")
+SpringStrength = 10000.0
+SpringDamping = 300.0
+SpringRest = 0.12
+OverExtend = 0.05
+WheelRadius = 0.21
 IsDriveWheel = true
 BaseGrip = 0.8
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
@@ -66,7 +71,7 @@ collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0.1, 0)
+center_of_mass = Vector3(0, -0.1, 0)
 continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
@@ -80,7 +85,7 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 Acceleration = 600
 MaxSpeed = 30
-BrakingStrengthMultiplier = 0.25
+BrakingStrengthMultiplier = 0.2
 ReleaseDebuff = true
 SteeringBaseDegrees = 3
 SlippingTraction = 0.15
@@ -100,7 +105,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0, -0.5, 0, 0.5, 0, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_cn2cu")
 
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36810687, 0.18, 0.6240293)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36810687, 0.22345212, 0.6240293)
 max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
@@ -109,7 +114,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 remote_path = NodePath("../../drift/wheel_front_left")
 
 [node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368, 0.18, 0.6240293)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368, 0.22345212, 0.6240293)
 max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
@@ -118,7 +123,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 remote_path = NodePath("../../drift/wheel_front_right")
 
 [node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36810687, 0.18, -0.4242609)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36810687, 0.22345212, -0.4242609)
 max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
@@ -129,7 +134,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 remote_path = NodePath("../../drift/wheel_rear_left")
 
 [node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368, 0.18, -0.4242609)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368, 0.22345212, -0.4242609)
 max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
@@ -155,16 +160,16 @@ mesh = SubResource("TextMesh_glvfi")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="wheel_rear_right" parent="drift" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.36, -0.8485218)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.44690424, -0.8485218)
 
 [node name="wheel_rear_left" parent="drift" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.36, -0.8485218)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.44690424, -0.8485218)
 
 [node name="wheel_front_left" parent="drift" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.36, 1.2480586)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.44690424, 1.2480586)
 
 [node name="wheel_front_right" parent="drift" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.36, 1.2480586)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.44690424, 1.2480586)
 
 [node name="MultiplayerSynchronizer" parent="." instance=ExtResource("8_x43s4")]
 

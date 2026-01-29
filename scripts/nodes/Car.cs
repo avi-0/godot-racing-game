@@ -17,6 +17,7 @@ public partial class Car : RigidBody3D
 	[Export] public CarCommon CarCommon;
 	[Export] public MeshInstance3D Nameplate;
 	[Export] public CarWheel[] Wheels;
+	[Export] public MultiplayerSynchronizer MultiplayerSynchronizer;
 	
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
@@ -653,6 +654,8 @@ public partial class Car : RigidBody3D
 			mesh.SetLayerMaskValue(1, false);
 			mesh.SetLayerMaskValue(cullLayer, true);
 		}
+
+		MultiplayerSynchronizer.PublicVisibility = ghost;
 	}
 
 	public void TeleportToPoint(Transform3D point)

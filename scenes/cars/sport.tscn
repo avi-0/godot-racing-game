@@ -248,7 +248,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3ocps")
 
-[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
+[node name="Car2" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 35.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
