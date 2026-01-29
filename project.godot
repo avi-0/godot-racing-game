@@ -329,6 +329,7 @@ game_hide_ui={
 
 3d_render/layer_1="default"
 3d_render/layer_2="editor_overlays"
+3d_render/layer_3="trails"
 3d_render/layer_10="Splitscreen Player 1"
 3d_render/layer_11="Splitscreen Player 2"
 3d_render/layer_12="Splitscreen Player 3"

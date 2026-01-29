@@ -23,6 +23,7 @@ public partial class GameManager : Node
 	[Export] public Control ScreenLayoutSlot;
 	[Export] public PanelContainer MOTDPanel;
 	[Export] public Label MOTDLabel;
+	[Export] public Label PerfLabel;
 	
 	[ExportCategory("Screen Layouts")]
 	[Export] public PackedScene SingleplayerScreenLayout;
@@ -68,7 +69,7 @@ public partial class GameManager : Node
 		
 		MusicPlayer.Finished += PlayNextSong;
 	}
-
+	
 	public override void _UnhandledInput(InputEvent @event)
 	{ 
 		if (@event.IsActionPressed(InputActionNames.Pause))
@@ -89,7 +90,7 @@ public partial class GameManager : Node
 			OS.LowProcessorUsageMode = false;
 			Engine.MaxFps = 0;
 		}
-		else if (what == NotificationApplicationFocusOut)
+		else if (what == NotificationApplicationFocusOut && !MultiplayerManager.Instance.OnServer)
 		{
 			OS.LowProcessorUsageMode = true;
 			Engine.MaxFps = 20;

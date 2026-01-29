@@ -40,6 +40,7 @@ public partial class CarWheel : ShapeCast3D
 		_previousSkidmarkPosition = GlobalPosition;
 		_skidmarkMesh = new ImmediateMesh();
 		SkidmarkMeshInstance.Mesh = _skidmarkMesh;
+		SkidmarkMeshInstance.SetLayerMaskValue(3, true);
 	}
 
 	public void Slide(Vector3 position, Vector3 velocity)

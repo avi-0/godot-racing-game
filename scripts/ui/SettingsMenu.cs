@@ -27,6 +27,7 @@ public partial class SettingsMenu : Control
 	[Export] public OptionButton Vsync;
 	[Export] public OptionButton ShadowFilterQuality;
 	[Export] public OptionButton ShadowAtlasSize;
+	[Export] public OptionButton PerfMon;
 	
 	[Export] public Slider SoundSlider;
 	[Export] public Slider MusicSlider;
@@ -73,6 +74,8 @@ public partial class SettingsMenu : Control
 			var text = size == 0 ? "None" : size.ToString();
 			ShadowAtlasSize.AddItem(text, size);
 		}
+
+		PerfMon.ItemSelected += _ => OnGraphicsSettingChanged();
 	}
 	
 	private void UpdateUiFromSettings()
@@ -86,6 +89,7 @@ public partial class SettingsMenu : Control
 		WinMode.Selected = settings.Graphics.WindowMode;
 		ShadowFilterQuality.Selected = settings.Graphics.ShadowFilterQuality;
 		ShadowAtlasSize.Selected = ShadowAtlasSize.GetItemIndex(settings.Graphics.ShadowAtlasSize);
+		PerfMon.Selected = 1; if (!settings.PerfMonEnabled) { PerfMon.Selected = 0;}
 
 		SoundSlider.Value = settings.Sound.SfxLevel;
 		MusicSlider.Value = settings.Sound.MusicLevel;
@@ -111,6 +115,7 @@ public partial class SettingsMenu : Control
 		settings.Graphics.WindowMode = WinMode.Selected;
 		settings.Graphics.ShadowFilterQuality = ShadowFilterQuality.Selected;
 		settings.Graphics.ShadowAtlasSize = ShadowAtlasSize.GetSelectedId();
+		settings.PerfMonEnabled = PerfMon.Selected > 0;
 
 		settings.Sound.SfxLevel = SoundSlider.Value;
 		settings.Sound.MusicLevel = MusicSlider.Value;

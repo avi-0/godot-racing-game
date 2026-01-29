@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://q32127h8m7tr"]
+
+[ext_resource type="Shader" uid="uid://boqbgkv05ti1w" path="res://shaders/snowshader.gdshader" id="1_h8tyi"]
+[ext_resource type="Texture2D" uid="uid://bxlauoqriimw4" path="res://assets/img/snow_height.png" id="2_jji7q"]
+[ext_resource type="Texture2D" uid="uid://bwny7yrggkqd1" path="res://assets/img/snow.png" id="3_awtdo"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h8tyi"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jji7q"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_h8tyi")
+shader_parameter/viewport_texture = SubResource("ViewportTexture_h8tyi")
+shader_parameter/floor_texture = ExtResource("3_awtdo")
+shader_parameter/floor_heightmap = ExtResource("2_jji7q")
+shader_parameter/trail_color = Color(0.60933006, 0.6093301, 0.60933006, 1)
+shader_parameter/ground_modulate = Color(1, 1, 1, 1)
+shader_parameter/ditch_height = 0.850000040375
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8qd2k"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_jji7q")
+size = Vector2(100, 100)
+subdivide_width = 1536
+subdivide_depth = 1536
+
+[sub_resource type="Environment" id="Environment_a4fev"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[node name="SnowMesh" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visibility_range_end = 200.0
+mesh = SubResource("PlaneMesh_8qd2k")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31.9, 0)
+size = Vector3(512, 64, 512)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(2048, 2048)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+cull_mask = 4
+environment = SubResource("Environment_a4fev")
+projection = 2

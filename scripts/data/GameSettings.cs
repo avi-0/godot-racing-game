@@ -9,6 +9,7 @@ public class GameSettings
 	public string PlayerName = "Player";
 	public Dictionary<string, List<InputEventData>> InputMap = new();
 	public Dictionary<string, int> SelectedSkins = new();
+	public bool PerfMonEnabled = false;
 	
 	public class GraphicsSettings
 	{

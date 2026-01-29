@@ -871,7 +871,7 @@ public partial class Editor : Control
 		fog.SetEditable(1, true);
 		
 		var rain = OptionsTree.CreateItem(root);
-		rain.SetText(0, "Rain");
+		rain.SetText(0, "Weather");
 		rain.SetCellMode(1, TreeItem.TreeCellMode.Check);
 		rain.SetRange(1, 0);
 		if (Track.Options.Rain) { rain.SetChecked(1, true);}
@@ -917,7 +917,7 @@ public partial class Editor : Control
 				Track.Options.Fog = editedItem.IsChecked(1);
 				Track.UpdateLighting();
 				break;
-			case "Rain":
+			case "Weather":
 				Track.Options.Rain = editedItem.IsChecked(1);
 				Track.UpdateLighting();
 				break;

@@ -1,20 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvmam0d235jkh"]
+[gd_scene load_steps=5 format=3 uid="uid://cvmam0d235jkh"]
 
-[ext_resource type="Texture2D" uid="uid://bwny7yrggkqd1" path="res://assets/img/snow.png" id="1_dqgdl"]
+[ext_resource type="PackedScene" uid="uid://q32127h8m7tr" path="res://scenes/game/track_bases/extras/snow_mesh.tscn" id="1_dqgdl"]
 [ext_resource type="Material" uid="uid://b5lm6i3p6fsil" path="res://materials/track_base_wall.tres" id="2_dqgdl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1mpx"]
-albedo_texture = ExtResource("1_dqgdl")
-metallic_specular = 0.0
-uv1_scale = Vector3(32, 32, 32)
-texture_filter = 4
-
-[sub_resource type="BoxMesh" id="BoxMesh_ynqis"]
-material = SubResource("StandardMaterial3D_i1mpx")
-size = Vector3(512, 0.2, 512)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ynqis"]
-points = PackedVector3Array(-256, -0.1, -256, -256, 0.1, -256, 256, -0.1, -256, -256, -0.1, 256, -256, 0.1, 256, 256, 0.1, -256, 256, -0.1, 256, 256, 0.1, 256)
 
 [sub_resource type="BoxMesh" id="BoxMesh_urhk7"]
 material = ExtResource("2_dqgdl")
@@ -25,21 +12,11 @@ size = Vector3(512, 64, 512)
 
 [node name="TrackBase" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-mesh = SubResource("BoxMesh_ynqis")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_ynqis")
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31.9, 0)
-size = Vector3(512, 64, 512)
+[node name="SnowMesh" parent="." instance=ExtResource("1_dqgdl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43, 0)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.265, -32, -5.989)
 mesh = SubResource("BoxMesh_urhk7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]

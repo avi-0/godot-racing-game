@@ -148,6 +148,9 @@ public partial class SettingsManager : Node
 			TrackManager.Instance.UpdateShadowsEnabled();
 
 		if (GameManager.Instance != null)
+		{
 			GameManager.Instance.NotifyViewportSettingsChanged();
+			GameManager.Instance.PerfLabel.Visible = Settings.PerfMonEnabled;
+		}
 	}
 }

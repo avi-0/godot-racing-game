@@ -686,16 +686,20 @@ public partial class Car : RigidBody3D
 
 			if (GetLinearVelocity().Length() > MaxSpeed / 20)
 			{
-				//for (var contact = 0; contact < state3D.GetContactCount(); contact++)
+				for (var contact = 0; contact < state3D.GetContactCount(); contact++)
 				{
-					Vector3 position = state3D.GetContactColliderPosition(0);
-					foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
+					if (state3D.GetContactColliderId(contact) == node.GetInstanceId())
 					{
-						if (!particle.Emitting)
+						Vector3 position = state3D.GetContactColliderPosition(contact);
+						foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
 						{
-							particle.SetGlobalPosition(position);
-							particle.Emitting = true;
-							break;
+							if (!particle.Emitting)
+							{
+								particle.SetGlobalPosition(position);
+								particle.Emitting = true;
+
+								break;
+							}
 						}
 					}
 				}
