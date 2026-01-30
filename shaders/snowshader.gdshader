@@ -28,6 +28,7 @@ void vertex() {
 	float minY = VERTEX.y + 0.25;
 	VERTEX.y = texture(floor_heightmap, UV).r * ditch_height * trail;
 	if (VERTEX.y < minY) {VERTEX.y = minY;}
+	if (UV.x <= 0.0 || UV.x >= 1.0 || UV.y <= 0.0 || UV.y >= 1.0) {VERTEX.y = minY;}
 
 	// Honestly I don't know about normals nearly enough to know if I'm doing it right...
 	NORMAL.y = VERTEX.y;
