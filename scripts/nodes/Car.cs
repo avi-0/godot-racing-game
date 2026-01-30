@@ -660,6 +660,8 @@ public partial class Car : RigidBody3D
 		}
 
 		MultiplayerSynchronizer.PublicVisibility = !ghost;
+		
+		SetCollisionLayerValue(2, false);
 	}
 
 	public void TeleportToPoint(Transform3D point)
