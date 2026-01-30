@@ -605,6 +605,9 @@ public partial class Car : RigidBody3D
 		name = name.Trim().Normalize();
 		if (name.Length > 10) {name = name.Substring(0, 10);}
 
+		CarCommon.PlayerName.Text = name;
+		CarCommon.PlayerName.Visible = PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type != GameModeUtils.PLAYER_LOCAL;
+		
 		void setFontSize(int size)
 		{
 			Nameplate.Mesh.Set("font_size", size);
@@ -642,6 +645,7 @@ public partial class Car : RigidBody3D
 		if (ghost)
 		{
 			SetPlayerName("");
+			CarCommon.PlayerName.Text = "Personal Best";
 		}
 		
 		foreach (MeshInstance3D mesh in CarModel.GetChildren())
@@ -660,6 +664,7 @@ public partial class Car : RigidBody3D
 		}
 
 		MultiplayerSynchronizer.PublicVisibility = !ghost;
+		CarCommon.PlayerName.Visible = ghost;
 		
 		SetCollisionLayerValue(2, false);
 	}

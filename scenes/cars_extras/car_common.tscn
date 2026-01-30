@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://c1a2se6oqams7"]
+[gd_scene load_steps=22 format=4 uid="uid://c1a2se6oqams7"]
 
 [ext_resource type="Script" uid="uid://dqnmdk4ouatc4" path="res://scripts/nodes/CarCommon.cs" id="1_qexnt"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="2_84gro"]
@@ -104,12 +104,21 @@ albedo_texture = ExtResource("4_3dw60")
 [sub_resource type="QuadMesh" id="QuadMesh_2g4b7"]
 material = SubResource("StandardMaterial3D_j646d")
 
-[node name="CarCommon" type="Node3D" node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_3dw60"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3dw60"]
+font_size = 128
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CarCommon" type="Node3D" node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles", "PlayerName")]
 script = ExtResource("1_qexnt")
 OrbitCamera = NodePath("OrbitCamera")
 EngineSoundPlayer = NodePath("EngineSoundPlayer")
 CarSoundPlayer = NodePath("AudioStreamPlayer")
 CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("CollisionDebris/CDP2"), NodePath("CollisionDebris/CDP3"), NodePath("CollisionDebris/CDP4"), NodePath("CollisionDebris/CDP5"), NodePath("CollisionDebris/CDP6")]
+PlayerName = NodePath("SubViewport/PlayerName")
 
 [node name="OrbitCamera" parent="." instance=ExtResource("2_84gro")]
 
@@ -195,3 +204,25 @@ process_material = SubResource("ParticleProcessMaterial_jbm0j")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_2g4b7")
 draw_pass_2 = null
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.85663086, 0, 0, 0, 0.36438328, 0, 0.93682206, 0)
+pixel_size = 0.0007
+billboard = 1
+texture = SubResource("ViewportTexture_3dw60")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1024, 256)
+
+[node name="PlayerName" type="Label" parent="SubViewport"]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 45.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "PlayerName1"
+label_settings = SubResource("LabelSettings_3dw60")
+horizontal_alignment = 1
+vertical_alignment = 1

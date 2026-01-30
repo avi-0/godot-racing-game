@@ -165,6 +165,7 @@ WheelModel = NodePath("RemoteTransform3D")
 remote_path = NodePath("../../tractor-shovel/wheel-back-right")
 
 [node name="CarCommon" parent="." instance=ExtResource("6_s6ltu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61319387, 0)
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.0441471, -0.08357653)

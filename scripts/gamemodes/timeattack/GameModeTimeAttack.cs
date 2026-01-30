@@ -202,8 +202,7 @@ public class GameModeTimeAttack : IGameMode
 		{
 			player.PlayerCar.HeadLight.Visible = true;
 		}
-
-		player.PlayerCar.PlayerId = id;
+		
 		_players[id] = player;
 
 		if (_players.Count == 1)

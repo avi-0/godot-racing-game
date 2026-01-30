@@ -8,4 +8,5 @@ public partial class CarCommon : Node3D
 	[Export] public AudioStreamPlayer3D EngineSoundPlayer;
 	[Export] public AudioStreamPlayer CarSoundPlayer;
 	[Export] public GpuParticles3D[] CollisionDebrisParticles;
+	[Export] public Label PlayerName;
 }
