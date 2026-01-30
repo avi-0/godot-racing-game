@@ -100,7 +100,7 @@ public class GameModeTimeAttack : IGameMode
 			_inEditor = false;
 
 		CarManager.Instance.SelectCarScene(track.Options.CarType);
-
+		
 		var blockCount = 0;
 		foreach (var block in track.FindChildren("*", "Block", false).Cast<Block>())
 		{
@@ -205,6 +205,11 @@ public class GameModeTimeAttack : IGameMode
 
 		player.PlayerCar.PlayerId = id;
 		_players[id] = player;
+
+		if (_players.Count == 1)
+		{
+			_currentTrack.Track.ResetPhysBlocks(false);
+		}
 	}
 
 	public void RespawnPlayer(long id)

@@ -35,34 +35,14 @@ public partial class GameModeController : Node
 
 	public static void LoadMap(Track track)
 	{
-		foreach (var block in track.FindChildren("*", "Block", false).Cast<Block>())
-		{
-			if (block.IsPhysical)
-			{
-				if (block.GetChild(0) is RigidBody3D rigidBody3D)
-				{
-					rigidBody3D.GlobalTransform = block.GlobalTransform;
-					rigidBody3D.Freeze = false;
-				}
-			}
-		}
+		track.ResetPhysBlocks(false);
 
 		CurrentGameMode.InitTrack(track);
 	}
 
 	public static void UnloadMap(Track track)
 	{
-		foreach (var block in track.FindChildren("*", "Block", false).Cast<Block>())
-		{
-			if (block.IsPhysical)
-			{
-				if (block.GetChild(0) is RigidBody3D rigidBody3D)
-				{
-					rigidBody3D.GlobalTransform = block.GlobalTransform;
-					rigidBody3D.Freeze = true;
-				}
-			}
-		}
+		track.ResetPhysBlocks(true);
 		
 		CurrentGameMode.KillGame();
 	}

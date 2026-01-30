@@ -5,6 +5,8 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_43pdx"]
 resource_local_to_scene = true
+friction = 0.5
+bounce = 0.5
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_43pdx"]
 points = PackedVector3Array(-0.0375, 0, -0.02750098, -0.0375, 0, 0.027493633, -0.0375, 0.018748164, -0.02750098, -0.02750098, 0, -0.0375, -0.02750098, 0, 0.0375, -0.0375, 0.018748164, 0.027493633, -0.010358753, 0.09375, 0, -0.0073267426, 0.09375, -0.0073267426, -0.02750098, 0.018748164, -0.0375, 0.027493633, 0, -0.0375, 0.027493633, 0, 0.0375, -0.02750098, 0.018748164, 0.0375, -0.0073267426, 0.09375, 0.007319398, 0, 0.09375, -0.010358753, 0.027493633, 0.018748164, -0.0375, 0.0375, 0, -0.02750098, 0.0375, 0, 0.027493633, 0.027493633, 0.018748164, 0.0375, 0, 0.09375, 0.010351408, 0.007319398, 0.09375, -0.0073267426, 0.0375, 0.018748164, -0.02750098, 0.0375, 0.018748164, 0.027493633, 0.007319398, 0.09375, 0.007319398, 0.010351408, 0.09375, 0)
@@ -53,7 +55,6 @@ physics_interpolation_mode = 1
 collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_43pdx")
-gravity_scale = 0.377
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="construction-cone2"]

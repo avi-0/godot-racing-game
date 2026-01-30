@@ -327,8 +327,9 @@ public partial class Editor : Control
 			TrackManager.Instance.OpenTrack(path);
 			SetupOptions();
 			_grid = Transform3D.Identity;
-
+			
 			foreach (var block in Track.FindChildren("*", "Block").Cast<Block>()) ConnectBlockSignals(block);
+			Track.ResetPhysBlocks(true);
 		}
 		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
 		{

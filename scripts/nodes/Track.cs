@@ -104,4 +104,21 @@ public partial class Track : Node3D
 		TrackBase.SetName("TrackBase");
 		AddChild(TrackBase, true);
 	}
+
+	public void ResetPhysBlocks(bool freeze)
+	{
+		foreach (var child in GetChildren())
+		{
+			if (child is Block block && block.IsPhysical)
+			{
+				if (block.GetChild(0) is RigidBody3D rigidBody3D)
+				{
+					rigidBody3D.AngularVelocity = Vector3.Zero;
+					rigidBody3D.LinearVelocity = Vector3.Zero;
+					rigidBody3D.GlobalTransform = block.GlobalTransform;
+					rigidBody3D.Freeze = freeze;
+				}
+			}
+		}
+	}
 }
