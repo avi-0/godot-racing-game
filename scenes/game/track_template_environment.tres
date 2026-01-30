@@ -11,8 +11,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_338u6"]
 shader = ExtResource("1_rqvos")
 shader_parameter/sky_visible = true
-shader_parameter/color_correction = Vector2(0, 1)
-shader_parameter/ground_color = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/color_correction = Vector2(0.5, 1)
+shader_parameter/ground_color = Color(1, 1, 1, 1)
 shader_parameter/horizon_offset = 0.0
 shader_parameter/atm_darkness = 0.5
 shader_parameter/atm_sun_intensity = 18.0
