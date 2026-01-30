@@ -28,9 +28,21 @@ public partial class SettingsManager : Node
 		InputActionNames.ToggleLights,
 	};
 	
-	
-	public bool DirectionalShadowsEnabled => Settings.Graphics.ShadowAtlasSize != 0;
-	
+	public bool DirectionalShadowsEnabled => Settings.Graphics.ShadowQuality != 0;
+	public int[] ShadowQualityAtlasSize = { 0, 1024, 2048, 2048, 4096, 8192, 8192, 16384, 16384 };
+
+	public RenderingServer.ShadowQuality[] ShadowQualities =
+	{
+		RenderingServer.ShadowQuality.Hard, 
+		RenderingServer.ShadowQuality.Hard, 
+		RenderingServer.ShadowQuality.Hard,
+		RenderingServer.ShadowQuality.SoftVeryLow, 
+		RenderingServer.ShadowQuality.SoftLow,
+		RenderingServer.ShadowQuality.SoftMedium, 
+		RenderingServer.ShadowQuality.SoftHigh,
+		RenderingServer.ShadowQuality.SoftHigh, 
+		RenderingServer.ShadowQuality.SoftUltra
+	};
 	
 	public override void _Ready()
 	{
@@ -136,13 +148,13 @@ public partial class SettingsManager : Node
 			window.Mode = Window.ModeEnum.Fullscreen;
 		
 		// Positional Shadows можно отключить, выставив им atlas size = 0
-		viewport.PositionalShadowAtlasSize = Settings.Graphics.ShadowAtlasSize;
+		viewport.PositionalShadowAtlasSize = ShadowQualityAtlasSize[Settings.Graphics.ShadowQuality];
 		
 		// Directional Shadows - нельзя, обходим отдельно
-		RenderingServer.DirectionalShadowAtlasSetSize(int.Max(256, Settings.Graphics.ShadowAtlasSize), true);
+		RenderingServer.DirectionalShadowAtlasSetSize(int.Max(256, ShadowQualityAtlasSize[Settings.Graphics.ShadowQuality]), true);
 		
-		RenderingServer.PositionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)Settings.Graphics.ShadowFilterQuality);
-		RenderingServer.DirectionalSoftShadowFilterSetQuality((RenderingServer.ShadowQuality)Settings.Graphics.ShadowFilterQuality);
+		RenderingServer.PositionalSoftShadowFilterSetQuality(ShadowQualities[Settings.Graphics.ShadowQuality]);
+		RenderingServer.DirectionalSoftShadowFilterSetQuality(ShadowQualities[Settings.Graphics.ShadowQuality]);
 		
 		if (TrackManager.Instance != null)
 			TrackManager.Instance.UpdateShadowsEnabled();
