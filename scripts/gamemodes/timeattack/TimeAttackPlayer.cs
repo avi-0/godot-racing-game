@@ -6,14 +6,8 @@ using racingGame.data;
 
 namespace racingGame;
 
-public struct TimeAttackPlayer
+public class TimeAttackPlayer : CartopiaPlayer
 {
-	public long PlayerId { get; init; }
-	
-	public bool InGame { get; set; } = true;
-	public int PlayerType {get; set;} = 0;
-	public string PlayerName { get; set; } = "";
-	
 	public TimeAttackRaceData RaceData { get; set; } = new();
 	
 	public Transform3D RespawnPoint = new Transform3D();
@@ -27,10 +21,10 @@ public struct TimeAttackPlayer
 	[JsonIgnore]
 	public Car PlayerCar => CarManager.Instance.GetPlayerCarById(PlayerId);
 	
-	public TimeAttackPlayer(long playerId, int playerType)
+	public TimeAttackPlayer(long playerId, int type) : base(playerId)
 	{
 		PlayerId = playerId;
-		PlayerType = playerType;
+		Type = type;
 	}
 }
 
@@ -44,8 +38,6 @@ public class TimeAttackRaceData
 	public TimeSpan CurrentRaceTime { get; set; }
 	public TimeSpan PbTime { get; set; } = TimeSpan.Zero;
 	public TimeSpan GlobalPbTime { get; set; } = TimeSpan.Zero;
-
-	public bool RaceOn { get; set; } = false;
 
 	public bool HasFinished = false;
 	public TimeSpan LastFinishTime;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using racingGame.data;
 
@@ -29,6 +30,20 @@ public partial class Track : Node3D
 
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
 		RainParticles.Visible = Options.Rain;
+
+		foreach (var child in GetChildren())
+		{
+			if (child is Block block && block.HasLight)
+			{
+				foreach (var blockChild in block.GetChild(0).GetChildren())
+				{
+					if (blockChild is SpotLight3D light)
+					{
+						light.ShadowEnabled = SettingsManager.Instance.DirectionalShadowsEnabled;
+					}
+				}
+			}
+		}
 	}
 	
 	public TrackData Save()

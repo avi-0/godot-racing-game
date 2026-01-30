@@ -136,6 +136,8 @@ light_energy = 0.0
 
 [node name="SkyDome" type="Node" parent="Sky3D"]
 script = ExtResource("11_aprr0")
+tonemap_level = 0.5
+ground_color = Color(1, 1, 1, 1)
 sun_disk_size = 0.03
 sun_azimuth = -1.199074
 sun_altitude = -1.1047204

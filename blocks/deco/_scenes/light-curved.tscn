@@ -42,6 +42,7 @@ data = PackedVector3Array(0.012499999, 0.675, -0.099999994, 0.024999999, 0.675, 
 
 [node name="light-curved" type="Node3D"]
 script = ExtResource("1_nhlqd")
+HasLight = true
 
 [node name="light-curved2" type="Node3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)

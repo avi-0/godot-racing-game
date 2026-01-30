@@ -82,7 +82,7 @@ public partial class Car : RigidBody3D
 		}
 	}
 	
-	public long PlayerId;
+	public long PlayerId = -1;
 	public bool AcceptsInputs { get; set; } = false;
 
 	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
@@ -298,6 +298,10 @@ public partial class Car : RigidBody3D
 		{
 			_frozen = true;
 			_frozenPosition = GlobalPosition;
+			if (PlayerId >= 0)
+			{
+				GameModeController.CurrentGameMode.GetPlayer(PlayerId).State = GameModeUtils.PLAYER_STATE_DEAD;
+			}
 		}
 	}
 
@@ -367,7 +371,7 @@ public partial class Car : RigidBody3D
 
 		var forwardStrength = _inputs.Forward;
 		var backStrength = -_inputs.Back;
-		if (!AcceptsInputs)
+		if (PlayerId < 0 || GameModeController.CurrentGameMode.GetPlayer(PlayerId).State != GameModeUtils.PLAYER_STATE_PLAYING)
 		{
 			forwardStrength = 0;
 			backStrength = 0;
@@ -426,7 +430,7 @@ public partial class Car : RigidBody3D
 		if (wheel.Config.IsSteeringWheel)
 		{
 			_targetSteering = 0;
-			if (AcceptsInputs)
+			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId).State == GameModeUtils.PLAYER_STATE_PLAYING)
 			{
 				_targetSteering += _inputs.Left;
 				_targetSteering -= _inputs.Right;
@@ -655,7 +659,7 @@ public partial class Car : RigidBody3D
 			mesh.SetLayerMaskValue(cullLayer, true);
 		}
 
-		MultiplayerSynchronizer.PublicVisibility = ghost;
+		MultiplayerSynchronizer.PublicVisibility = !ghost;
 	}
 
 	public void TeleportToPoint(Transform3D point)

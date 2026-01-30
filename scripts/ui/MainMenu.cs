@@ -468,8 +468,11 @@ public partial class MainMenu : Control
 
 	public void OnHostServerButton()
 	{
-		OpenTrack(MultiplayerSelectedTrackPath).Forget();
-		MultiplayerManager.Instance.CreateServer(MultiplayerSelectedTrackPath);
+		if (MultiplayerSelectedTrackPath != "")
+		{
+			OpenTrack(MultiplayerSelectedTrackPath).Forget();
+			MultiplayerManager.Instance.CreateServer(MultiplayerSelectedTrackPath);
+		}
 	}
 
 	public async void OnConnectToServerButton()

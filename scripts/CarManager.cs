@@ -49,10 +49,9 @@ public partial class CarManager : Node
 		{
 			RemoveChild(car);
 			car.QueueFree();
-			
-			_cars = new();
 		}
 		
+		_cars = new();
 		_playerCarsById = new();
 	}
 

@@ -127,7 +127,7 @@ public partial class GameManager : Node
 		CarManager.Instance.Clear();
 		
 		GameModeController.InitGameMode(host);
-		GameModeController.CurrentGameMode.InitTrack(TrackManager.Instance.Track);
+		GameModeController.LoadMap(TrackManager.Instance.Track);
 		
 		IsSplitScreen = _screenLayout.PlayerViewports.Count > 1;
 		
@@ -183,7 +183,7 @@ public partial class GameManager : Node
 
 		_isPlaying = false;
 
-		GameModeController.CurrentGameMode.KillGame();
+		GameModeController.UnloadMap(TrackManager.Instance.Track);
 
 		if (MultiplayerManager.Instance.OnServer)
 		{

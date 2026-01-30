@@ -347,7 +347,7 @@ public partial class Editor : Control
 		IsRunning = false;
 
 		Track.Options.Uid = "0";
-		GameModeController.CurrentGameMode.InitTrack(Track);
+		GameModeController.LoadMap(Track);
 		GameManager.Instance.Play();
 		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 

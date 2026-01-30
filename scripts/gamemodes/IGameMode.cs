@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using racingGame.data;
 
 namespace racingGame;
 
@@ -16,6 +17,7 @@ public interface IGameMode
 	void RestartPlayer(long id); // restarting existing player
 	void RespawnPlayer(long id); // respawning existing player, if possible
 	void DeletePlayer(long id);
+	CartopiaPlayer GetPlayer(long id);
 	void KillGame(); // all gamemode variables will stay even after exiting the mode, so you have to clean up everything in this callback
 
 	//server only

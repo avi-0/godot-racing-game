@@ -12,9 +12,21 @@ public static class GameModeUtils
 	private const string SaveGhostPath = "user://ghosts.mdat";
 
 	//Player Types
+	public const int PLAYER_EMPTY = 0;
 	public const int PLAYER_LOCAL = 1;
 	public const int PLAYER_LOCAL_SPLITSCREEN = 2;
 	public const int PLAYER_ONLINE = 3;
+	public const int PLAYER_BOT = 4;
+	
+	//Player States
+	public const int PLAYER_STATE_NONE = 0;
+	public const int PLAYER_STATE_CONNECTING = 1;
+	public const int PLAYER_STATE_LOADING = 2;
+	public const int PLAYER_STATE_SPECTATING = 3;
+	public const int PLAYER_STATE_PRESTART = 4;
+	public const int PLAYER_STATE_PLAYING = 5;
+	public const int PLAYER_STATE_AFTERFINISH = 6;
+	public const int PLAYER_STATE_DEAD = 7;
 	
 	public const int MEDAL_NONE = 0;
 	public const int MEDAL_BRONZE = 1;
