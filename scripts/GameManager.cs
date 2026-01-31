@@ -310,6 +310,15 @@ public partial class GameManager : Node
 		
 		FollowEffects[cameraCullLayer].Water.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, FollowEffects[cameraCullLayer].Water.GlobalPosition.Y, camera.GlobalPosition.Z));
 		FollowEffects[cameraCullLayer].Water.SetLayerMaskValue(cameraCullLayer, true);
+		
+		if (!TrackManager.Instance.Track.Options.Rain)
+		{
+			FollowEffects[cameraCullLayer].CollisionHeightField.Dispose();
+		}
+		else
+		{
+			FollowEffects[cameraCullLayer].CollisionHeightField.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, camera.GlobalPosition.Y + 20, camera.GlobalPosition.Z));
+		}
 	}
 
 	private void ClearFollowEffects()
@@ -319,6 +328,7 @@ public partial class GameManager : Node
 			TrackManager.Instance.Track.RemoveChild(kv.Value);
 			kv.Value.Water.Dispose();
 			kv.Value.Weather.Dispose();
+			kv.Value.CollisionHeightField.Dispose();
 			kv.Value.Dispose();
 		}
 		

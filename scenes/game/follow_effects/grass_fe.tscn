@@ -68,7 +68,7 @@ initial_velocity_max = 10.0
 color = Color(0.81614345, 0.85428035, 0.87795407, 1)
 collision_mode = 1
 collision_friction = 0.1
-collision_bounce = 0.03
+collision_bounce = 0.02
 
 [sub_resource type="Curve" id="Curve_hb6dr"]
 _limits = [0.0, 0.1, 0.0, 1.0]
@@ -90,10 +90,11 @@ size = 0.2
 sections = 3
 curve = SubResource("Curve_hb6dr")
 
-[node name="GrassFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather")]
+[node name="GrassFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
 script = ExtResource("1_g7doi")
 Water = NodePath("Water")
 Weather = NodePath("Weather")
+CollisionHeightField = NodePath("GPUParticlesCollisionHeightField3D")
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
@@ -114,3 +115,6 @@ trail_enabled = true
 trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_7l00h")
 draw_pass_1 = SubResource("RibbonTrailMesh_31dv0")
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
+size = Vector3(100, 50, 100)

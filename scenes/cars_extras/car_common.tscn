@@ -119,7 +119,7 @@ EngineSoundPlayer = NodePath("EngineSoundPlayer")
 CarSoundPlayer = NodePath("AudioStreamPlayer")
 CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("CollisionDebris/CDP2"), NodePath("CollisionDebris/CDP3"), NodePath("CollisionDebris/CDP4"), NodePath("CollisionDebris/CDP5"), NodePath("CollisionDebris/CDP6")]
 PlayerName = NodePath("SubViewport/PlayerName")
-CollisionHeightField = NodePath("GPUParticlesCollisionHeightField3D")
+CollisionHeightField = NodePath("")
 
 [node name="OrbitCamera" parent="." instance=ExtResource("2_84gro")]
 
@@ -205,10 +205,6 @@ process_material = SubResource("ParticleProcessMaterial_jbm0j")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_2g4b7")
 draw_pass_2 = null
-
-[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
-size = Vector3(100, 50, 100)
-resolution = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.85663086, 0, 0, 0, 0.36438328, 0, 0.93682206, 0)

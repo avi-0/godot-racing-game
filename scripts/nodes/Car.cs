@@ -669,7 +669,6 @@ public partial class Car : RigidBody3D
 		CarCommon.PlayerName.Visible = ghost;
 		
 		SetCollisionLayerValue(2, false);
-		CarCommon.CollisionHeightField.Dispose();
 	}
 
 	public void TeleportToPoint(Transform3D point)

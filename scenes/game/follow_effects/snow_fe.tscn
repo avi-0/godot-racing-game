@@ -64,7 +64,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.5786164, 0.5786164, 0.5786164, 1, 1, 1, 
 gradient = SubResource("Gradient_lwhks")
 
 [sub_resource type="Curve" id="Curve_n2q46"]
-_data = [Vector2(0, 0), 0.0, 5.6219335, 0, 0, Vector2(0.19289342, 1), -0.70427, -0.70427, 0, 0, Vector2(1, 0.46415097), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 5.6219335, 0, 0, Vector2(0.19289342, 1), -0.70427, -0.70427, 0, 0, Vector2(1, 0), -3.2523563, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_63wps"]
@@ -73,7 +73,7 @@ curve = SubResource("Curve_n2q46")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vvg4t"]
 resource_local_to_scene = true
 emission_shape = 3
-emission_box_extents = Vector3(40, 5, 40)
+emission_box_extents = Vector3(40, 10, 40)
 direction = Vector3(0, -1, 0)
 initial_velocity_min = 3.0
 initial_velocity_max = 6.0
@@ -83,18 +83,18 @@ radial_accel_max = 3.9999976
 tangential_accel_min = -8.000002
 tangential_accel_max = 7.9999976
 damping_max = 4.0
-scale_min = 0.19999999
-scale_max = 0.39999998
+scale_min = 0.14999999
+scale_max = 0.29999998
 scale_curve = SubResource("CurveTexture_63wps")
 color = Color(0.95304054, 0.9530404, 0.95304054, 1)
 color_ramp = SubResource("GradientTexture1D_63bs7")
 collision_mode = 1
-collision_friction = 0.5
+collision_friction = 0.7
 collision_bounce = 0.0
 
 [sub_resource type="Gradient" id="Gradient_lqn4k"]
-offsets = PackedFloat32Array(0.36969697, 0.6787879)
-colors = PackedColorArray(1, 1, 1, 1, 0.26244184, 0.26244184, 0.26244184, 0)
+offsets = PackedFloat32Array(0.23636363, 0.43030304, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.809, 0.26244184, 0.26244184, 0.26244184, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1831x"]
 resource_local_to_scene = true
@@ -115,10 +115,11 @@ billboard_keep_scale = true
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_asfok")
 
-[node name="SnowFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather")]
+[node name="SnowFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
 script = ExtResource("1_63bs7")
 Water = NodePath("Water")
 Weather = NodePath("Weather")
+CollisionHeightField = NodePath("GPUParticlesCollisionHeightField3D")
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
@@ -136,3 +137,6 @@ lifetime = 3.5
 visibility_aabb = AABB(-10, -20, -10, 20, 30, 20)
 process_material = SubResource("ParticleProcessMaterial_vvg4t")
 draw_pass_1 = SubResource("QuadMesh_yikha")
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
+size = Vector3(100, 50, 100)
