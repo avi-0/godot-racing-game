@@ -46,3 +46,7 @@ mesh = SubResource("BoxMesh_urhk7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 shape = SubResource("BoxShape3D_0iiq5")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.856064, 0)
+size = Vector3(512, 32, 512)

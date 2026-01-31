@@ -166,6 +166,7 @@ text = "Shadow Quality"
 [node name="shadow_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
 selected = 4
+allow_reselect = true
 item_count = 9
 popup/item_0/text = "Disable"
 popup/item_0/id = 0

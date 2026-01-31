@@ -57,6 +57,8 @@ public partial class GameManager : Node
 
 	public RandomNumberGenerator RNG = new RandomNumberGenerator();
 	
+	public Dictionary<int, FollowEffect> FollowEffects = new Dictionary<int, FollowEffect>();
+	
 	public override void _Ready()
 	{
 		Instance = this;
@@ -125,6 +127,8 @@ public partial class GameManager : Node
 	public void Play(bool host = true)
 	{
 		CarManager.Instance.Clear();
+
+		ClearFollowEffects();
 		
 		GameModeController.InitGameMode(host);
 		GameModeController.LoadMap(TrackManager.Instance.Track);
@@ -193,6 +197,8 @@ public partial class GameManager : Node
 		EmitSignalStoppedPlaying();
 			
 		MusicPlayer.Stop();
+
+		ClearFollowEffects();
 	}
 
 	public void SetViewportsActive(bool visible)
@@ -280,6 +286,12 @@ public partial class GameManager : Node
 	
 	public void SyncCameraVisuals(Camera3D camera, int cameraCullLayer)
 	{
+		if (!FollowEffects.ContainsKey(cameraCullLayer))
+		{
+			FollowEffects[cameraCullLayer] = TrackManager.Instance.Track.FeScene.Instantiate<FollowEffect>();
+			TrackManager.Instance.Track.AddChild(FollowEffects[cameraCullLayer]);
+		}
+		
 		for (int cull = SplitScreenCullMaskStart; cull < SplitScreenCullMaskStart + 8; cull++)
 		{
 			if (cull != cameraCullLayer)
@@ -292,7 +304,24 @@ public partial class GameManager : Node
 			}
 		}
 		
-		TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, camera.GlobalPosition.Y+10, camera.GlobalPosition.Z));
-		TrackManager.Instance.Track.WaterMesh.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, TrackManager.Instance.Track.WaterMesh.GlobalPosition.Y, camera.GlobalPosition.Z));
+		FollowEffects[cameraCullLayer].Weather.Emitting = TrackManager.Instance.Track.Options.Rain;
+		FollowEffects[cameraCullLayer].Weather.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, camera.GlobalPosition.Y+15, camera.GlobalPosition.Z));
+		FollowEffects[cameraCullLayer].Weather.SetLayerMaskValue(cameraCullLayer, true);
+		
+		FollowEffects[cameraCullLayer].Water.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, FollowEffects[cameraCullLayer].Water.GlobalPosition.Y, camera.GlobalPosition.Z));
+		FollowEffects[cameraCullLayer].Water.SetLayerMaskValue(cameraCullLayer, true);
+	}
+
+	private void ClearFollowEffects()
+	{
+		foreach (KeyValuePair<int, FollowEffect> kv in FollowEffects)
+		{
+			TrackManager.Instance.Track.RemoveChild(kv.Value);
+			kv.Value.Water.Dispose();
+			kv.Value.Weather.Dispose();
+			kv.Value.Dispose();
+		}
+		
+		FollowEffects.Clear();
 	}
 }

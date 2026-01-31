@@ -264,6 +264,7 @@ public partial class Car : RigidBody3D
 		_speedStack.Push(LinearVelocity.Length());
 		
 		//RAIN
+		/*
 		if (_isLocallyControlled && TrackManager.Instance.Track.Options.Rain)
 		{
 			if (_rayCastUp == null)
@@ -292,6 +293,7 @@ public partial class Car : RigidBody3D
 			
 			_rayCastUp.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y+1.5f, GlobalPosition.Z);
 		}
+		*/
 		//--
 
 		if (GetGlobalPosition().Y < GameManager.DeathY)
@@ -667,6 +669,7 @@ public partial class Car : RigidBody3D
 		CarCommon.PlayerName.Visible = ghost;
 		
 		SetCollisionLayerValue(2, false);
+		CarCommon.CollisionHeightField.Dispose();
 	}
 
 	public void TeleportToPoint(Transform3D point)

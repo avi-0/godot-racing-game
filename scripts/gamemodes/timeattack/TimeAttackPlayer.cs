@@ -18,8 +18,6 @@ public class TimeAttackPlayer : CartopiaPlayer
 	public Ghost PBGhost { get; set; } = new Ghost();
 	[JsonIgnore]
 	public Ghost GhostRecording { get; set; } = new Ghost();
-	[JsonIgnore]
-	public Car PlayerCar => CarManager.Instance.GetPlayerCarById(PlayerId);
 	
 	public TimeAttackPlayer(long playerId, int type) : base(playerId)
 	{

@@ -11,11 +11,11 @@ public partial class Track : Node3D
 	[Export] public DirectionalLight3D Sun;
 	[Export] public DirectionalLight3D Moon;
 	[Export] public VoxelGI TrackVoxelGI;
-	[Export] public GpuParticles3D RainParticles;
-	[Export] public MeshInstance3D WaterMesh;
 	
 	public TrackOptions Options = new();
 
+	public PackedScene FeScene;
+	
 	public Node3D TrackBase;
 	
 	public void UpdateLighting()
@@ -29,7 +29,6 @@ public partial class Track : Node3D
 		}
 
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
-		RainParticles.Visible = Options.Rain;
 
 		foreach (var child in GetChildren())
 		{
@@ -103,6 +102,8 @@ public partial class Track : Node3D
 		TrackBase = baseScene.Instantiate<Node3D>();
 		TrackBase.SetName("TrackBase");
 		AddChild(TrackBase, true);
+		
+		FeScene = GD.Load<PackedScene>("res://Scenes/game/follow_effects/" + Options.TrackBase + "_fe.tscn");
 	}
 
 	public void ResetPhysBlocks(bool freeze)

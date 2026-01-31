@@ -100,6 +100,11 @@ public partial class CarManager : Node
 		{
 			car.SetSkin(0);
 		}
+
+		if (!TrackManager.Instance.Track.Options.Rain)
+		{
+			car.CarCommon.CollisionHeightField.Dispose();
+		}
 		
 		return car;
 	}
