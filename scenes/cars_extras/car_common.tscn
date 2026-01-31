@@ -112,14 +112,14 @@ font_size = 128
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CarCommon" type="Node3D" node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles", "PlayerName", "CollisionHeightField")]
+[node name="CarCommon" type="Node3D" node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles", "PlayerName", "InfoSprite")]
 script = ExtResource("1_qexnt")
 OrbitCamera = NodePath("OrbitCamera")
 EngineSoundPlayer = NodePath("EngineSoundPlayer")
 CarSoundPlayer = NodePath("AudioStreamPlayer")
 CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("CollisionDebris/CDP2"), NodePath("CollisionDebris/CDP3"), NodePath("CollisionDebris/CDP4"), NodePath("CollisionDebris/CDP5"), NodePath("CollisionDebris/CDP6")]
 PlayerName = NodePath("SubViewport/PlayerName")
-CollisionHeightField = NodePath("")
+InfoSprite = NodePath("Sprite3D")
 
 [node name="OrbitCamera" parent="." instance=ExtResource("2_84gro")]
 

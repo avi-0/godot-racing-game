@@ -648,6 +648,8 @@ public partial class Car : RigidBody3D
 		{
 			SetPlayerName("");
 			CarCommon.PlayerName.Text = "Personal Best";
+			CarCommon.InfoSprite.SetLayerMaskValue(1, false);
+			CarCommon.InfoSprite.SetLayerMaskValue(cullLayer, true);
 		}
 		
 		foreach (MeshInstance3D mesh in CarModel.GetChildren())
