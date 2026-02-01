@@ -506,7 +506,7 @@ public class GameModeTimeAttack : IGameMode
 		//--
 		
 		//Finish Panel
-		if (player.RaceData.HasFinished && !viewport.FinishPanel.Visible)
+		if (player.State == GameModeUtils.PLAYER_STATE_AFTERFINISH && !viewport.FinishPanel.Visible)
 		{
 			if (!viewport.RaceUi.Visible) {viewport.RaceUi.Visible = true;}
 			
@@ -526,9 +526,16 @@ public class GameModeTimeAttack : IGameMode
 			{
 				viewport.FinishTimeLabel.Text += "\n" + GameModeUtils.GetMedalFromTime((int)player.RaceData.LastFinishTime.TotalMilliseconds, TrackManager.Instance.Track.Options.AuthorTime);
 			}
-
+			
+			viewport.FinishTimeLabel.Text += "\n Press [img=32x32]res://assets/icons/controls/game_restart.tres[/img] to restart";
+			
 			viewport.FinishPanel.Show();
 			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else if (player.State != GameModeUtils.PLAYER_STATE_AFTERFINISH && viewport.FinishPanel.Visible)
+		{
+			viewport.FinishPanel.Hide();
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 		//--
 		

@@ -10,7 +10,7 @@ action = &"ui_accept"
 [sub_resource type="Shortcut" id="Shortcut_a7dvw"]
 events = [SubResource("InputEventAction_vtaks")]
 
-[node name="PlayerViewport" type="SubViewport" node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "PbLabel", "RaceUi", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "ScoreboardContainer", "Camera")]
+[node name="PlayerViewport" type="SubViewport" node_paths=PackedStringArray("CheckPointLabel", "FinishPanel", "FinishTimeLabel", "LapsLabel", "RaceUi", "SpeedLabel", "StartTimerLabel", "TimeLabel", "TrackInfoLabel", "ScoreboardContainer", "Camera")]
 process_physics_priority = -100
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_3d = true
@@ -20,7 +20,6 @@ CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
 FinishPanel = NodePath("RaceUI/FinishPanel")
 FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")
 LapsLabel = NodePath("RaceUI/LapsLabel")
-PbLabel = NodePath("RaceUI/PersonalBest")
 RaceUi = NodePath("RaceUI")
 SpeedLabel = NodePath("RaceUI/SpeedLabel")
 StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
@@ -170,9 +169,10 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
-[node name="FinishTimeLabel" type="Label" parent="RaceUI/FinishPanel/MarginContainer/VBoxContainer"]
+[node name="FinishTimeLabel" type="RichTextLabel" parent="RaceUI/FinishPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+bbcode_enabled = true
 text = "Race Time: "
 horizontal_alignment = 1
 vertical_alignment = 1

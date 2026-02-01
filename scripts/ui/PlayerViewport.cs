@@ -8,7 +8,7 @@ public partial class PlayerViewport : SubViewport
 {
 	[Export] public Label CheckPointLabel;
 	[Export] public PanelContainer FinishPanel;
-	[Export] public Label FinishTimeLabel;
+	[Export] public RichTextLabel FinishTimeLabel;
 	[Export] public Label LapsLabel;
 	//[Export] public Label PbLabel;
 	[Export] public Control RaceUi;
