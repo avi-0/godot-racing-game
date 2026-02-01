@@ -139,6 +139,19 @@ public partial class PlayerViewport : SubViewport
 			RaceUi.Visible = !RaceUi.Visible;
 			SetInputAsHandled();
 		}
+		else if (@event.IsActionPressed(InputActionNames.HideGhost))
+		{
+			if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar != null)
+			{
+				GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar.Visible = !GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar.Visible;
+
+				if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL)
+				{
+					SettingsManager.Instance.Settings.GhostVisible = GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar.Visible;
+				}
+			}
+			SetInputAsHandled();
+		}
 	}
 
 	private void UpdateCarInputs()

@@ -13,8 +13,6 @@ public class TimeAttackPlayer : CartopiaPlayer
 	public Transform3D RespawnPoint = new Transform3D();
 	
 	[JsonIgnore]
-	public Car PlayerGhostCar { get; set; }
-	[JsonIgnore]
 	public Ghost PBGhost { get; set; } = new Ghost();
 	[JsonIgnore]
 	public Ghost GhostRecording { get; set; } = new Ghost();

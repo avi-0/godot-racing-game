@@ -300,6 +300,11 @@ public class GameModeTimeAttack : IGameMode
 		if ((player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN) && player.PlayerGhostCar != null)
 		{
 			player.PlayerGhostCar.Visible = true;
+
+			if (player.Type == GameModeUtils.PLAYER_LOCAL && !SettingsManager.Instance.Settings.GhostVisible)
+			{
+				player.PlayerGhostCar.Visible = false;
+			}
 		}
 
 		return player;

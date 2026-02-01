@@ -26,6 +26,8 @@ public partial class SettingsManager : Node
 		InputActionNames.Respawn,
 		InputActionNames.CycleCamera,
 		InputActionNames.ToggleLights,
+		InputActionNames.HideUI,
+		InputActionNames.HideGhost
 	};
 	
 	public bool DirectionalShadowsEnabled => Settings.Graphics.ShadowQuality != 0;

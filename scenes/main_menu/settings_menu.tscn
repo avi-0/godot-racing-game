@@ -424,6 +424,20 @@ layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_hide_ui"
 
+[node name="hideghost" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+text = "Hide PB Ghost"
+
+[node name="hideghost_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("4_2jsdb")
+Action = &"game_hide_ghost"
+
+[node name="hideghost_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_hide_ghost"
+
 [node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls"]
 layout_mode = 2
 size_flags_horizontal = 8

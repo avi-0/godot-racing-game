@@ -11,6 +11,10 @@ public class GameSettings
 	public Dictionary<string, int> SelectedSkins = new();
 	public bool PerfMonEnabled = false;
 	
+	//invisible settings
+	public bool GhostVisible = true;
+	//
+	
 	public class GraphicsSettings
 	{
 		public double RenderScale = 100;
