@@ -115,17 +115,24 @@ public partial class GameManager : Node
 		_screenLayout = layoutScene.Instantiate<ScreenLayout>();
 		ScreenLayoutSlot.AddChild(_screenLayout);
 		
+		MatchViewports();
+		
+		SetViewportsActive(false);
+	}
+
+	public void MatchViewports()
+	{
 		foreach (var viewport in _screenLayout.PlayerViewports)
 		{
 			viewport.CullLayer = SplitScreenCullMaskStart + viewport.LocalPlayerId;
 			viewport.MatchViewport(RootViewport);
 		}
-		
-		SetViewportsActive(false);
 	}
 
 	public void Play(bool host = true)
 	{
+		MatchViewports();
+		
 		CarManager.Instance.Clear();
 
 		ClearFollowEffects();

@@ -165,6 +165,7 @@ public partial class SettingsManager : Node
 		{
 			GameManager.Instance.NotifyViewportSettingsChanged();
 			GameManager.Instance.PerfLabel.Visible = Settings.PerfMonEnabled;
+			GameManager.Instance.MatchViewports();
 		}
 	}
 }
