@@ -67,6 +67,19 @@ public partial class TrackManager : Node
 		}
 	}
 
+	public Image GetTrackImage(TrackOptions trackOptions)
+	{
+		Image image = new Image();
+		if (image.LoadJpgFromBuffer(Marshalls.Base64ToRaw(trackOptions.PreviewImage)) != Error.Ok)
+		{
+			image = Image.CreateEmpty(512, 512, true, Image.Format.Rgb8);
+		}
+
+		Image icon = new Image();
+		icon.CopyFrom(image);
+		return icon;
+	}
+
 	public void NewTrack()
 	{
 		Track.Load(new TrackData());

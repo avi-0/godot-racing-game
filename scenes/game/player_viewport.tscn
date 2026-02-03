@@ -178,6 +178,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="RaceUI/FinishPanel/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 shortcut = SubResource("Shortcut_a7dvw")
 text = "Ok"
