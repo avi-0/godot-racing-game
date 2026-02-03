@@ -61,7 +61,7 @@ public partial class TrackList : Control
 				trackID++;
 				
 				var button = new Button();
-				button.CustomMinimumSize = 64 * Vector2.One;
+				button.CustomMinimumSize = new Vector2(256, 64);
 				button.Text = options.Name;
 
 				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
@@ -124,7 +124,7 @@ public partial class TrackList : Control
 				}
 			}
 		}
-
+		
 		FolderButton.Visible = !isCampaign;
 		Show();
 	}
@@ -167,6 +167,12 @@ public partial class TrackList : Control
 	
 	public void OnTrackListBackButton()
 	{
+		MainMenu.Instance.LastPanel.Visible = true;
+		if (MainMenu.Instance.HadFocus != null)
+		{
+			MainMenu.Instance.HadFocus.GrabFocus();
+		}
+		
 		Hide();
 	}
 }

@@ -43,9 +43,11 @@ public partial class MainMenu : Control
 
 	private Car _loadedCar;
 	private IOrderedEnumerable<string> _carList;
-	private Control _hadFocus;
 	
 	public string MultiplayerSelectedTrackPath = "";
+
+	public Control LastPanel;
+	public Control HadFocus;
 	
 	public bool IsVisible
 	{
@@ -84,6 +86,9 @@ public partial class MainMenu : Control
 			SettingsManager.Instance.Settings.SelectedSkins[_loadedCar.CarName] = (int)index;
 			SettingsManager.Instance.SaveSettings();
 		};
+
+		MainMenuContainer.VisibilityChanged += OnBackToMenu;
+		VisibilityChanged += OnBackToMenu;
 	}
 
 	public override void _ExitTree()
@@ -98,8 +103,10 @@ public partial class MainMenu : Control
 
 	public void OnPlayButtonPressed()
 	{
-		_hadFocus = GetViewport().GuiGetFocusOwner();
-		
+		MainMenuContainer.Visible = false;
+		HadFocus = GetViewport().GuiGetFocusOwner();
+
+		bool first = true;
 		foreach (Campaign campaign in _campaigns)
 		{
 			var button = new Button();
@@ -107,13 +114,23 @@ public partial class MainMenu : Control
 			button.Text = campaign.Name;
 			button.Pressed += () =>
 			{
+				HadFocus = GetViewport().GuiGetFocusOwner();
+				CampaignControl.Hide();
+				LastPanel = CampaignControl;
 				TrackListPanel.FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/", true, campaign.Name, path => { OpenTrack(path);});
 			};
 
-			CampaignContainer.AddChild(button);		
+			CampaignContainer.AddChild(button);
+
+			if (first)
+			{
+				first = false;
+				button.GrabFocus();
+			}
 		}
-	
+		
 		CampaignControl.Show();
+		MainMenuContainer.Hide();
 	}
 
 	public void OnEditorButtonPressed()
@@ -123,8 +140,10 @@ public partial class MainMenu : Control
 
 	public void OnLoadButtonPressed()
 	{
-		_hadFocus = GetViewport().GuiGetFocusOwner();
-		
+		HadFocus = GetViewport().GuiGetFocusOwner();
+
+		MainMenuContainer.Visible = false;
+		LastPanel = MainMenuContainer;
 		TrackListPanel.FillTrackContainer(UserTracksPath, false, "Local Tracks", path => { OpenTrack(path);});
 	}
 
@@ -146,7 +165,7 @@ public partial class MainMenu : Control
 				GarageContainer.AddChild(button);
 			}
 
-			_hadFocus = GetViewport().GuiGetFocusOwner();
+			HadFocus = GetViewport().GuiGetFocusOwner();
 			GarageContainer.GetChild<Control>(0).GrabFocus();
 
 			PlayerNameText.Text = SettingsManager.Instance.GetLocalPlayerName();
@@ -157,8 +176,8 @@ public partial class MainMenu : Control
 			
 			GarageContainer.DestroyAllChildren();
 			
-			if (_hadFocus != null)
-				_hadFocus.GrabFocus();
+			if (HadFocus != null)
+				HadFocus.GrabFocus();
 		}
 	}
 
@@ -210,14 +229,14 @@ public partial class MainMenu : Control
 
 	public async GDTaskVoid OnSettingsButtonPressed()
 	{
-		_hadFocus = GetViewport().GuiGetFocusOwner();
+		HadFocus = GetViewport().GuiGetFocusOwner();
 		MainMenuContainer.Visible = false;
 		
 		SettingsMenu.Show();
 		await GDTask.ToSignal(SettingsMenu, CanvasItem.SignalName.Hidden);
 
 		MainMenuContainer.Visible = true;
-		_hadFocus.GrabFocus();
+		HadFocus.GrabFocus();
 	}
 
 	public void OnExitButtonPressed()
@@ -228,7 +247,7 @@ public partial class MainMenu : Control
 
 	private async GDTaskVoid OpenEditor()
 	{
-		_hadFocus = GetViewport().GuiGetFocusOwner();
+		HadFocus = GetViewport().GuiGetFocusOwner();
 		IsVisible = false;
 		LoadGarageCar();
 
@@ -243,7 +262,7 @@ public partial class MainMenu : Control
 
 		LoadGarageCar(CarManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
-		_hadFocus.GrabFocus();
+		HadFocus.GrabFocus();
 	}
 
 	public async GDTaskVoid OpenTrack(string path, bool host = true)
@@ -268,6 +287,7 @@ public partial class MainMenu : Control
 
 	public void OnCampaignBack()
 	{
+		MainMenuContainer.Visible = true;
 		CampaignControl.Hide();
 		CampaignContainer.DestroyAllChildren();
 	}
@@ -280,6 +300,7 @@ public partial class MainMenu : Control
 	public void OnCredits()
 	{
 		MainMenuContainer.Visible = false;
+		((Control)CreditsPanel.FindChild("BackButton")).GrabFocus();
 		CreditsPanel.Show();
 	}
 
@@ -291,16 +312,21 @@ public partial class MainMenu : Control
 
 	public void OnMultiplayerButton()
 	{
+		MainMenuContainer.Visible = false;
 		MultiplayerWindow.Show();
 	}
 
 	public void OnMultiplayerBack()
 	{
+		MainMenuContainer.Visible = true;
 		MultiplayerWindow.Hide();
 	}
 
 	public void OnHostSelectTrackButton()
 	{
+		MultiplayerWindow.Visible = false;
+		LastPanel = MultiplayerWindow;
+		
 		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[1].DirectoryName + "/" , true, _campaigns[1].Name, HostSelectedTrack);
 		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[0].DirectoryName + "/" , true, _campaigns[0].Name, HostSelectedTrack, false);
 	}
@@ -336,6 +362,18 @@ public partial class MainMenu : Control
 		if (MultiplayerManager.Instance.LastConnectionAttemptStatus == MultiplayerManager.CONNECTION_STATUS_CONNECTED && MultiplayerManager.Instance.ServerInfo.TrackPath != "")
 		{
 			OpenTrack(MultiplayerManager.Instance.ServerInfo.TrackPath, false).Forget();
+		}
+	}
+
+	public void OnBackToMenu()
+	{
+		if (HadFocus != null)
+		{
+			HadFocus.GrabFocus();
+		}
+		if (MainMenuContainer.Visible)
+		{
+			((Control)MainMenuContainer.FindChild("PlayButton")).GrabFocus();
 		}
 	}
 }

@@ -14,8 +14,7 @@ config/name="cartopia"
 config/version="0.1.8"
 run/main_scene="uid://quenom6jkxmi"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
-boot_splash/fullsize=false
-boot_splash/image="uid://du74tb2gnkhxk"
+boot_splash/image="uid://bc5ncwb8874wr"
 config/icon="res://icon.svg"
 
 [autoload]

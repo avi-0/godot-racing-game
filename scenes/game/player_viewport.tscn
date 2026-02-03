@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1yh8684bxiy8"]
+[gd_scene load_steps=8 format=3 uid="uid://b1yh8684bxiy8"]
 
-[ext_resource type="Theme" uid="uid://cqn7x347w3gke" path="res://scenes/game/hud_theme.tres" id="1_7nque"]
 [ext_resource type="Script" uid="uid://bqo10ua034t21" path="res://scripts/ui/PlayerViewport.cs" id="1_hc2ln"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="2_hc2ln"]
+[ext_resource type="FontFile" uid="uid://c7j641sxvojnd" path="res://assets/fonts/Open_Sans/static/OpenSans_SemiCondensed-Bold.ttf" id="3_hc2ln"]
+[ext_resource type="FontFile" uid="uid://cnl2m2x8miuh8" path="res://assets/fonts/Open_Sans/static/OpenSans_Condensed-Regular.ttf" id="4_ahw8t"]
+[ext_resource type="FontFile" uid="uid://bqt3qrexs8qdi" path="res://assets/fonts/Open_Sans/static/OpenSans_Condensed-SemiBold.ttf" id="5_tm1c3"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
 action = &"ui_accept"
@@ -35,7 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_7nque")
+theme = ExtResource("2_hc2ln")
 
 [node name="TimeLabel" type="Label" parent="RaceUI"]
 layout_mode = 1
@@ -49,6 +51,7 @@ offset_top = -132.0
 offset_right = 254.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_hc2ln")
 theme_override_font_sizes/font_size = 96
 text = "00:00:00"
 horizontal_alignment = 1
@@ -117,6 +120,7 @@ offset_right = 39.0
 offset_bottom = -101.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_ahw8t")
 theme_override_font_sizes/font_size = 48
 text = "0/0"
 vertical_alignment = 1
@@ -130,6 +134,7 @@ offset_left = -224.0
 offset_right = -16.0
 offset_bottom = 67.0
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_tm1c3")
 theme_override_font_sizes/font_size = 48
 text = "Laps: 0/0"
 horizontal_alignment = 2

@@ -423,7 +423,7 @@ public class GameModeTimeAttack : IGameMode
 		Label newLabel()
 		{
 			Label label = new Label();
-			label.AddThemeFontSizeOverride("font_size", 48);
+			label.AddThemeFontSizeOverride("font_size", 24);
 			label.HorizontalAlignment = HorizontalAlignment.Center;
 			label.VerticalAlignment = VerticalAlignment.Center;
 			label.Name = "Label";

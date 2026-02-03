@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5ka32jnsmy0s"]
+[gd_scene load_steps=16 format=3 uid="uid://c5ka32jnsmy0s"]
 
 [ext_resource type="Script" uid="uid://bs73ib8ct1cpv" path="res://scripts/ui/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_ekxnf"]
-[ext_resource type="Texture2D" uid="uid://du74tb2gnkhxk" path="res://assets/mashinkilogo.png" id="3_uqeha"]
 [ext_resource type="Script" uid="uid://ru3wonwm4jiw" path="res://scripts/ui/CustomSubViewportContainer.cs" id="3_wem23"]
+[ext_resource type="Texture2D" uid="uid://cynt22pa2m0uw" path="res://assets/cartopia_logo.png" id="4_thkx5"]
+[ext_resource type="FontFile" uid="uid://dqxvpnboyow42" path="res://assets/fonts/trueno/TruenoBlackItalic-dXnl.otf" id="5_thkx5"]
 [ext_resource type="PackedScene" uid="uid://dosvoo7ovfhv0" path="res://scenes/main_menu/splitscreen_settings.tscn" id="5_wem23"]
 [ext_resource type="PackedScene" uid="uid://m1qpnrxiyo34" path="res://scenes/main_menu/settings_menu.tscn" id="6_3ovsr"]
 [ext_resource type="Script" uid="uid://b7ipowkkivsaj" path="res://scripts/ui/VersionLabel.cs" id="7_5seab"]
@@ -95,12 +96,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainMenuContainer" type="VBoxContainer" parent="MainMenu"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_right = 376.0
 offset_bottom = 794.0
-grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="MainMenu/MainMenuContainer"]
@@ -111,9 +112,9 @@ theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
 
 [node name="TextureRect" type="TextureRect" parent="MainMenu/MainMenuContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-texture = ExtResource("3_uqeha")
+texture = ExtResource("4_thkx5")
 expand_mode = 2
 stretch_mode = 5
 
@@ -131,43 +132,51 @@ alignment = 1
 [node name="PlayButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Campaign"
 
 [node name="LoadButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Local Play"
 
 [node name="MultiplayerButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Multiplayer"
 
 [node name="GarageButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Garage
 "
 
 [node name="EditorButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Editor
 "
 
 [node name="SettingsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Settings
 "
 
 [node name="CreditsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Credits"
 
 [node name="ExitButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Exit
 "
 
@@ -395,7 +404,7 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="CreditsPanel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
-texture = ExtResource("3_uqeha")
+texture = ExtResource("4_thkx5")
 expand_mode = 2
 stretch_mode = 5
 
@@ -403,26 +412,27 @@ stretch_mode = 5
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 2
 theme_override_font_sizes/normal_font_size = 28
 theme_override_font_sizes/bold_font_size = 64
 theme_override_font_sizes/italics_font_size = 48
 bbcode_enabled = true
-text = "[b]Mashinki[/b]
-
-[i]Avi[/i]
-Lead Developer, Game Concept, Game Design, Programming, UI, Art, Sounds
+text = "[i]Avi[/i]
+Lead Developer, Game Concept, Game Design, Programming, Models, Textures, UI, Art, Sounds, Drift Car
 
 [i]Avondale[/i]
-Game Design, Programming, Level Design, UI
+Game Design, Programming, Level Design, UI, Multiplayer, Taxi, Sport Car
 
 
-Models borrowed from kenney
+Car models by MenaStudios
+Some models borrowed from kenney
 Music by Vlad Annenkov"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+selection_enabled = true
 
-[node name="Button" type="Button" parent="CreditsPanel/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="CreditsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 shortcut = SubResource("Shortcut_3ovsr")
 text = "Ok"
@@ -534,7 +544,7 @@ layout_mode = 1
 [connection signal="pressed" from="CampaignPanel/MarginContainer/Panel/VBoxContainer/MarginContainer/BackButton" to="." method="OnCampaignBack"]
 [connection signal="text_changed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/PlayerNameLineEdit" to="." method="OnPlayerSetNewName"]
 [connection signal="pressed" from="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer/BackButton" to="." method="OnGarageButton"]
-[connection signal="pressed" from="CreditsPanel/MarginContainer/VBoxContainer/Button" to="." method="OnExitCredits"]
+[connection signal="pressed" from="CreditsPanel/MarginContainer/VBoxContainer/BackButton" to="." method="OnExitCredits"]
 [connection signal="pressed" from="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer/ConnectButton" to="." method="OnConnectToServerButton"]
 [connection signal="pressed" from="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer/HostTrackButton" to="." method="OnHostSelectTrackButton"]
 [connection signal="pressed" from="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer/HostButton" to="." method="OnHostServerButton"]
