@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://dsii22abj8h8d" path="res://scenes/editor/block_erase_material.tres" id="3_j8y2p"]
 [ext_resource type="Material" uid="uid://cii18sx6kkh7w" path="res://scenes/editor/block_highlight_material.tres" id="4_o435n"]
 [ext_resource type="Texture2D" uid="uid://dyx154afg0s1q" path="res://assets/godot-icons/RangeSliderLeft.svg" id="5_3vi5u"]
-[ext_resource type="Resource" uid="uid://cey7wro604g7j" path="res://blocks/road/road-straight.tres" id="5_oljq2"]
+[ext_resource type="Resource" uid="uid://cftfgr2gk0ynh" path="res://blocks/road/straight1.tres" id="5_x7r7a"]
 [ext_resource type="Texture2D" uid="uid://hmfs1b0dmqq1" path="res://assets/godot-icons/RangeSliderRight.svg" id="6_78fwb"]
 [ext_resource type="PackedScene" uid="uid://dklqrgy3scfr7" path="res://scenes/editor/editor_block_button.tscn" id="6_j8y2p"]
 [ext_resource type="Theme" uid="uid://d0edsagec8yv6" path="res://scenes/editor/editor_theme.tres" id="6_o435n"]
@@ -125,7 +125,7 @@ script = ExtResource("1_5lcyj")
 BlockEraseHighlightMaterial = ExtResource("3_j8y2p")
 BlockHighlightMaterial = ExtResource("4_o435n")
 BlockListContainer = NodePath("EditorUI/HSplitContainer/MarginContainer/TabContainer/Blocks/MarginContainer/VBoxContainer/BlockListContainer")
-CurrentBlockRecord = ExtResource("5_oljq2")
+CurrentBlockRecord = ExtResource("5_x7r7a")
 Camera = NodePath("EditorUI/HSplitContainer/VBoxContainer/ViewportWrapper/SubViewportContainer/EditorViewport/OrbitCamera")
 ConfirmNewDialog = NodePath("ConfirmNewDialog")
 ConfirmQuitDialog = NodePath("ConfirmQuitDialog")
