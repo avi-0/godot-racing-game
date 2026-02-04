@@ -27,7 +27,7 @@ public partial class TrackList : Control
 	{
 	}
 	
-	public void FillTrackContainer(string basePath, bool isCampaign, string name, Action<string> callback, bool emptyPrevious = true)
+	public void FillTrackContainer(string basePath, bool isCampaign, string name, int gamemodeType, Action<string> callback, bool emptyPrevious = true)
 	{
 		Callback = callback;
 		
@@ -54,6 +54,9 @@ public partial class TrackList : Control
 			var options = TrackManager.Instance.GetTrackOptions(basePath + trackPath);
 			
 			if (options == null)
+				continue;
+			
+			if (!GameModeUtils.GameModeSupportsTrackType(gamemodeType, options.Type))
 				continue;
 			
 			if (options.AuthorTime > 0)

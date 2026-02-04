@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="11_yrqru"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
-friction = 0.5
+friction = 1.1
 rough = true
 
 [sub_resource type="Curve" id="Curve_qtbni"]
@@ -33,7 +33,7 @@ point_count = 3
 
 [sub_resource type="Resource" id="Resource_x43s4"]
 script = ExtResource("2_dg6r6")
-SpringStrength = 13500.0
+SpringStrength = 18500.0
 SpringDamping = 300.0
 SpringRest = 0.12
 OverExtend = 0.05
@@ -49,7 +49,7 @@ point_count = 2
 
 [sub_resource type="Resource" id="Resource_cn2cu"]
 script = ExtResource("2_dg6r6")
-SpringStrength = 13500.0
+SpringStrength = 18500.0
 SpringDamping = 300.0
 SpringRest = 0.12
 OverExtend = 0.05
@@ -59,8 +59,8 @@ BaseGrip = 0.45
 GripCurve = SubResource("Curve_dg6r6")
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r6maj"]
-points = PackedVector3Array(0.96319604, 0.93759865, 0.77131665, 0.30811715, 1.0765729, 0.3563577, 0.78066397, 0.93759865, 0.8378631, 0.91020894, 0.7563497, 1.2398185, 0.91020894, 0.30960363, 1.9986004, 0.91020894, 0.05073391, 2.0934482, 0.96319604, 0.8341713, 0.77131665, 0.91020894, 0.7563497, -1.734117, 0.85835326, 1.0193363, -1.8029581, -0.30830568, 1.0765729, 0.3563577, 0.30811715, 1.0765729, -0.4808265, -0.78085256, 0.93759865, 0.8378631, -0.9103975, 0.7563497, 1.2398185, -0.9103975, 0.30960363, 1.9986004, -0.9103975, 0.05073391, 2.0934482, 0.91020894, 0.05073391, 1.4394578, 0.91020894, 0.077845946, -0.59173715, 0.91020894, 0.20938951, -1.3845572, 0.91020894, 0.36342603, -1.6346798, 0.91020894, 0.53031564, -1.7253206, 0.85835326, 0.9324775, -1.8136667, -0.8585418, 1.0193363, -1.8029581, -0.96319604, 0.93759865, 0.77131665, -0.30830568, 1.0765729, -0.4808265, -0.9103975, 0.05073391, 1.4394578, -0.96319604, 0.8341713, 0.77131665, -0.9103975, 0.077845946, -0.59173715, -0.9103975, 0.20938951, -1.3845572, -0.9103975, 0.36342603, -1.6346798, 0.14745879, 0.57911736, -1.7849829, -0.8585418, 0.9324775, -1.8136667, -0.9103975, 0.7563497, -1.734117, -0.9103975, 0.53031564, -1.7253206, -0.14764732, 0.57911736, -1.7849829)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yrqru"]
+points = PackedVector3Array(0.9333807, 0.9285584, 0.7825552, 0.9901557, 0.82584536, 0.82156855, -0.88054925, 0.050699998, 2.0145328, -0.9940144, 0.9498438, 0.697655, 0.83135986, 0.0779, -0.5267118, 0.866048, 1.0738423, -1.84432, -0.86836994, 0.23125541, -1.4196707, 0.89504516, 0.15929021, 2.0536954, -0.86990666, 1.0738423, -1.84432, 0.89480525, 0.33870697, -1.5940616, -0.27779862, 1.0744969, 0.3604071, -0.8715214, 0.345947, 1.9371521, -0.83521855, 0.0779, -0.5267118, 0.87669057, 0.050699998, 2.0145328, 0.83706915, 0.74561393, 1.2585148, -0.8985539, 0.3985675, -1.6533991, 0.8676627, 0.345947, 1.9371521, -0.84092784, 0.74561393, 1.2585148, 0.3189436, 1.0592909, 0.35365355, 0.5554319, 0.18772714, -1.253553, 0.89716315, 0.51795995, -1.7184247, -0.86990666, 0.88778996, -1.84432, 0.9901557, 0.9498438, 0.697655, -0.89890385, 0.15929021, 2.0536954, -0.9940144, 0.82584536, 0.697655, -0.8059801, 0.92245036, 0.82893354, 0.866048, 0.88778996, -1.84432, 0.86451125, 0.23125541, -1.4196707, -0.89866394, 0.33870697, -1.5940616, -0.90102184, 0.51795995, -1.7184247, -0.5019377, 0.0779, -0.58240366, 0.8032718, 0.9229433, 0.82991946)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5cig"]
 albedo_color = Color(0, 0, 0, 1)
@@ -280,12 +280,12 @@ SpeedToPitchCurve = SubResource("Curve_xv7xt")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
 CarName = "Sport"
-CarDescription = "The future of race cars! Fast on the straights and around corners, this beast can do anything! If you have the skill to handle it.."
+CarDescription = "Fast on the straights and around corners, this beast can do anything! If you have the skill to handle it.."
 Skins = Array[Material]([ExtResource("3_8lcft"), ExtResource("4_yrqru"), ExtResource("5_2t0n8"), ExtResource("6_8lcft")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_r6maj")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0048357993, 0)
+shape = SubResource("ConvexPolygonShape3D_yrqru")
 
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.22163354, 0.55)

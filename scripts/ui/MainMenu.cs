@@ -117,7 +117,7 @@ public partial class MainMenu : Control
 				HadFocus = GetViewport().GuiGetFocusOwner();
 				CampaignControl.Hide();
 				LastPanel = CampaignControl;
-				TrackListPanel.FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/", true, campaign.Name, path => { OpenTrack(path);});
+				TrackListPanel.FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/", true, campaign.Name, GameModeUtils.GAMEMODE_TIMEATTACK, path => { OpenTrack(path);});
 			};
 
 			CampaignContainer.AddChild(button);
@@ -144,7 +144,7 @@ public partial class MainMenu : Control
 
 		MainMenuContainer.Visible = false;
 		LastPanel = MainMenuContainer;
-		TrackListPanel.FillTrackContainer(UserTracksPath, false, "Local Tracks", path => { OpenTrack(path);});
+		TrackListPanel.FillTrackContainer(UserTracksPath, false, "Local Tracks", GameModeUtils.GAMEMODE_TIMEATTACK, path => { OpenTrack(path);});
 	}
 
 	public void OnGarageButton()
@@ -190,7 +190,10 @@ public partial class MainMenu : Control
 			_loadedCar = GD.Load<PackedScene>(path).Instantiate<Car>();
 			GarageNode.AddChild(_loadedCar);
 		
-			_loadedCar.GlobalTransform = TrackManager.Instance.GetStartPoint();
+
+			Transform3D spawn = TrackManager.Instance.GetStartPoint();
+			spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + _loadedCar.FrontWheelConfig.SpringRest + 0.1f, spawn.Origin.Z);
+			_loadedCar.GlobalTransform = spawn;
 			_loadedCar.ResetPhysicsInterpolation();
 
 			_loadedCar.InputToggleLights();
@@ -327,8 +330,8 @@ public partial class MainMenu : Control
 		MultiplayerWindow.Visible = false;
 		LastPanel = MultiplayerWindow;
 		
-		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[1].DirectoryName + "/" , true, _campaigns[1].Name, HostSelectedTrack);
-		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[0].DirectoryName + "/" , true, _campaigns[0].Name, HostSelectedTrack, false);
+		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[1].DirectoryName + "/" , true, _campaigns[1].Name, GameModeUtils.GAMEMODE_TIMEATTACK, HostSelectedTrack);
+		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[0].DirectoryName + "/" , true, _campaigns[0].Name, GameModeUtils.GAMEMODE_TIMEATTACK, HostSelectedTrack, false);
 	}
 
 	public void HostSelectedTrack(string path)

@@ -35,4 +35,13 @@ public partial class NotificationContainer : VBoxContainer
 		panel.AddChild(timer);
 		timer.Start();
 	}
+
+	public void Clear()
+	{
+		foreach (Node child in GetChildren())
+		{
+			RemoveChild(child);
+			child.Dispose();
+		}
+	}
 }

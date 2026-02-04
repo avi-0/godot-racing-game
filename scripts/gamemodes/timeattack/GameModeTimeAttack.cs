@@ -325,7 +325,10 @@ public class GameModeTimeAttack : IGameMode
 			if (player.RaceData.LapsDone < _currentTrack.Track.Options.Laps)
 			{
 				player.RaceData.CheckPointsCollected = new List<int>();
-				player.RespawnPoint = TrackManager.Instance.GetStartPoint();
+				
+				Transform3D spawn = TrackManager.Instance.GetStartPoint();
+				spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + playerCar.FrontWheelConfig.SpringRest + 0.1f, spawn.Origin.Z);
+				player.RespawnPoint = spawn;
 			}
 			else
 			{
@@ -479,6 +482,11 @@ public class GameModeTimeAttack : IGameMode
 				viewport.ScoreboardContainer.MoveChild(pbLabel, 0);
 				
 				moveChild(pbLabel, scoreboardPlayer.RaceData.GlobalPbTime.TotalMilliseconds);
+
+				if (scoreboardPlayer.RaceData.GlobalPbTime.TotalMilliseconds <= _currentTrack.Track.Options.AuthorTime)
+				{
+					_hasAuthor = true;
+				}
 			}
 			
 			if (scoreboardPlayer.RaceData.PbTime != TimeSpan.Zero)
@@ -537,7 +545,7 @@ public class GameModeTimeAttack : IGameMode
 			viewport.FinishPanel.Show();
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
-		else if (player.State != GameModeUtils.PLAYER_STATE_AFTERFINISH && viewport.FinishPanel.Visible)
+		else if (player.State != GameModeUtils.PLAYER_STATE_AFTERFINISH && player.State != GameModeUtils.PLAYER_STATE_DEAD && viewport.FinishPanel.Visible)
 		{
 			viewport.FinishPanel.Hide();
 			Input.MouseMode = Input.MouseModeEnum.Captured;

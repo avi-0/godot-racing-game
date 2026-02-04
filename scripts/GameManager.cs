@@ -207,6 +207,8 @@ public partial class GameManager : Node
 		MusicPlayer.Stop();
 
 		ClearFollowEffects();
+
+		NotificationContainer.Clear();
 	}
 
 	public void SetViewportsActive(bool visible)

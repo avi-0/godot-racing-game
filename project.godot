@@ -348,7 +348,8 @@ game_hide_ghost={
 
 [physics]
 
-common/physics_ticks_per_second=100
+common/physics_ticks_per_second=128
+common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 

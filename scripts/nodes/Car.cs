@@ -97,6 +97,8 @@ public partial class Car : RigidBody3D
 	private bool _frozen = false;
 	private Vector3 _frozenPosition;
 	
+	private bool _boosted = false;
+	
 	public override void _Ready()
 	{
 		OrbitCamera.Radius = 3.5f;
@@ -227,6 +229,7 @@ public partial class Car : RigidBody3D
 			ProcessSuspension(wheel);
 			
 			wheel.GrassContact = false;
+			_boosted = false;
 			ProcessSpecialBlocks(wheel);
 		}
 
@@ -374,6 +377,11 @@ public partial class Car : RigidBody3D
 		var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;
 		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier * accelerationFromCurve;
 		var forcePosition = contactPoint - GlobalPosition;
+
+		if (_boosted)
+		{
+			accelerationForce *= 3;
+		}
 		
 		if (wheel.IsColliding())
 		{
@@ -514,14 +522,7 @@ public partial class Car : RigidBody3D
 						Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
 						if (block.IsBooster)
 						{
-							var forcePosition = wheel.WheelModel.GlobalPosition - GlobalPosition;
-							var force = block.GlobalBasis.X * 100;
-							ApplyForce(force, forcePosition);
-							//if (DebugMode)
-							{
-								DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(245, 73, 39),
-									arrow_size: 0.1f);
-							}
+							_boosted = true;
 						}
 						else if (block.IsBumper)
 						{

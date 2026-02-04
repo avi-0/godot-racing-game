@@ -87,8 +87,10 @@ public partial class CarManager : Node
 		_playerCarsById[id] = car;
 		
 		AddChild(car, true);
-		car.GlobalTransform = TrackManager.Instance.GetStartPoint();
-		car.Started();
+		Transform3D spawn = TrackManager.Instance.GetStartPoint();
+		spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + car.FrontWheelConfig.SpringRest + 0.1f, spawn.Origin.Z);
+		car.GlobalTransform = spawn;
+ 		car.Started();
 		
 		car.SetPlayerName(GameModeController.CurrentGameMode.GetPlayer(id).PlayerName);
 
