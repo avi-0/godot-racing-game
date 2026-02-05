@@ -73,6 +73,7 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
 [node name="road-Turn-Flat-Flat-Even-Right-Size4" type="MeshInstance3D" parent="subdiv"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+extra_cull_margin = 4.0
 mesh = SubResource("ArrayMesh_h0l8j")
 skeleton = NodePath("")
 

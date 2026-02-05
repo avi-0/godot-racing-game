@@ -80,6 +80,11 @@ public partial class Track : Node3D
 			AddChild(block);
 			
 			block.Owner = this; // not needed but helps for FindChildren etc
+
+			if ((Node3D)block.GetChild(0).GetChild(0) is MeshInstance3D mesh)
+			{
+				mesh.ExtraCullMargin = 4;
+			}
 		}
 
 		Options = data.Options;

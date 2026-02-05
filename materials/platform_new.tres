@@ -1,9 +1,10 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bnkilntrlhbgv"]
 
-[ext_resource type="Texture2D" uid="uid://ccj0mb6jigp6n" path="res://assets/cartopia/materials/concrete.jpg" id="1_rkip2"]
+[ext_resource type="Texture2D" uid="uid://igdwp81lo0jk" path="res://assets/img/plaster.png" id="1_rkip2"]
 
 [resource]
 albedo_texture = ExtResource("1_rkip2")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
-uv1_triplanar_sharpness = 0.00032214605
-texture_filter = 2
+uv1_world_triplanar = true
+texture_filter = 4
