@@ -265,7 +265,8 @@ public partial class Car : RigidBody3D
 		{
 			_frozen = true;
 			_frozenPosition = GlobalPosition;
-			if (PlayerId >= 0)
+			CarModel.Hide();
+			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId).State == GameModeUtils.PLAYER_STATE_PLAYING)
 			{
 				GameModeController.CurrentGameMode.GetPlayer(PlayerId).State = GameModeUtils.PLAYER_STATE_DEAD;
 			}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Godot;
 using Newtonsoft.Json;
 using racingGame.data;
@@ -217,6 +218,7 @@ public class GameModeTimeAttack : IGameMode
 		{
 			_players[id].State = GameModeUtils.PLAYER_STATE_PLAYING;
 			_players[id].PlayerCar.TeleportToPoint(_players[id].RespawnPoint);
+			_players[id].PlayerCar.CarModel.Show();
 		}
 	}
 
@@ -312,10 +314,11 @@ public class GameModeTimeAttack : IGameMode
 
 	private void PlayerAttemptFinish(Car playerCar, int blockId)
 	{
-		if (playerCar.IsGhost) {return;}
+		if (playerCar == null || playerCar.IsGhost) {return;}
 		if (MultiplayerManager.Instance.OnServer && !MultiplayerManager.Instance.IsServer()) {return;}
 		
 		var playerId = playerCar.PlayerId;
+		if (playerId < 0 || !_players.ContainsKey(playerId)) {return;}
 		var player = _players[playerId];
 
 		if (player.State == GameModeUtils.PLAYER_STATE_PLAYING && player.RaceData.CheckPointsCollected.Count == _currentTrack.CheckPointCount)
@@ -391,7 +394,9 @@ public class GameModeTimeAttack : IGameMode
 
 			if (player.Type == GameModeUtils.PLAYER_LOCAL)
 			{
-				GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid());
+				//separate thread to reduce game freeze while saving ghost to file
+				Thread thread = new Thread(() => GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid()));
+				thread.Start();
 			}
 		}
 		//--
@@ -545,7 +550,7 @@ public class GameModeTimeAttack : IGameMode
 			viewport.FinishPanel.Show();
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
-		else if (player.State != GameModeUtils.PLAYER_STATE_AFTERFINISH && player.State != GameModeUtils.PLAYER_STATE_DEAD && viewport.FinishPanel.Visible)
+		else if (player.State != GameModeUtils.PLAYER_STATE_AFTERFINISH && viewport.FinishPanel.Visible)
 		{
 			viewport.FinishPanel.Hide();
 			Input.MouseMode = Input.MouseModeEnum.Captured;

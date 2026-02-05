@@ -331,7 +331,7 @@ public partial class MainMenu : Control
 		LastPanel = MultiplayerWindow;
 		
 		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[1].DirectoryName + "/" , true, _campaigns[1].Name, GameModeUtils.GAMEMODE_TIMEATTACK, HostSelectedTrack);
-		TrackListPanel.FillTrackContainer(CampTracksPath + _campaigns[0].DirectoryName + "/" , true, _campaigns[0].Name, GameModeUtils.GAMEMODE_TIMEATTACK, HostSelectedTrack, false);
+		TrackListPanel.FillTrackContainer("res://tracks/mp/" , false, "Multiplayer Tracks", GameModeUtils.GAMEMODE_TIMEATTACK, HostSelectedTrack, false);
 	}
 
 	public void HostSelectedTrack(string path)

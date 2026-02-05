@@ -19,6 +19,7 @@ public partial class PlayerViewport : SubViewport
 	[Export] public VBoxContainer ScoreboardContainer;
 	[Export] public Camera3D Camera;
 	[Export] public int LocalPlayerId = 0;
+	[Export] public TextureRect SpeedArrow;
 	
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
 	public long PlayerId;
@@ -66,8 +67,15 @@ public partial class PlayerViewport : SubViewport
 			return;
 		
 		UpdateCarInputs();
+
+		int speed = (int)Mathf.Round(Car.LinearVelocity.Length() * 8);
 		
-		SpeedLabel.Text = ((int)Mathf.Round(Car.LinearVelocity.Length() * 8)).ToString();
+		int maxRange = 283 - 14;
+		float ratio = speed / 650.0f;
+		SpeedArrow.RotationDegrees = 14 + (maxRange * ratio);
+		
+		SpeedLabel.Text = speed.ToString();
+		if (speed > 999) { SpeedLabel.Text = "???";}
 		
 		Camera.Current = TargetCamera != null;
 		Camera.Match(TargetCamera);
