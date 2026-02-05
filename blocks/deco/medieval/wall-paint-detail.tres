@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cy0yj7scynyq7"]
+
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_6lj3o"]
+[ext_resource type="Texture2D" path="res://blocks/deco/medieval/_images/wall-paint-detail.png" id="1_40trc"]
+
+[resource]
+script = ExtResource("1_6lj3o")
+ScenePath = "res://blocks/deco/medieval/_scenes/wall-paint-detail.tscn"
+SourceScenePath = "res://assets/kenney/medieval/wall-paint-detail.glb"
+ThumbnailTexture = ExtResource("1_40trc")

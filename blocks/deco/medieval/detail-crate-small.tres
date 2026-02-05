@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://c34x12ffwhgke"]
+
+[ext_resource type="Texture2D" path="res://blocks/deco/medieval/_images/detail-crate-small.png" id="1_8by16"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_grrrw"]
+
+[resource]
+script = ExtResource("1_grrrw")
+ScenePath = "res://blocks/deco/medieval/_scenes/detail-crate-small.tscn"
+SourceScenePath = "res://assets/kenney/medieval/detail-crate-small.glb"
+ThumbnailTexture = ExtResource("1_8by16")
