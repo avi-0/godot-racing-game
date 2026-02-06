@@ -24,12 +24,14 @@ public partial class PlayerViewport : SubViewport
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
 	public long PlayerId;
 	public int StartTimerSeconds = -1;
-
+	
 	public int CullLayer = 0;
 	
 	private CarInputs _inputs;
 	private bool _active = false;
 
+	private int _defaultFov = 80;
+	
 	public bool Active
 	{
 		get => _active;
@@ -83,6 +85,12 @@ public partial class PlayerViewport : SubViewport
 		if (Camera.Current)
 		{
 			GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
+			Camera.Fov = _defaultFov;
+			if (speed > 70)
+			{
+				Camera.Fov += (speed-70) / 15.0f;
+				if (Camera.Fov > 120) { Camera.Fov = 120.0f; }
+			}
 		}
 	}
 
@@ -135,7 +143,7 @@ public partial class PlayerViewport : SubViewport
 		else if (@event.IsActionPressed(InputActionNames.Respawn))
 		{
 			GameModeController.CurrentGameMode.RespawnPlayer(PlayerId);
-			SetInputAsHandled();
+			//SetInputAsHandled();
 		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{

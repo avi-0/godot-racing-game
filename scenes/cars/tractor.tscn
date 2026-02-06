@@ -33,10 +33,10 @@ point_count = 1
 
 [sub_resource type="Resource" id="Resource_lce11"]
 script = ExtResource("2_hwmkx")
-SpringStrength = 9000.0
-SpringDamping = 130.0
-SpringRest = 0.16
-OverExtend = 0.1
+SpringStrength = 50000.0
+SpringDamping = 300.0
+SpringRest = 0.12
+OverExtend = 0.05
 WheelRadius = 0.26
 IsDriveWheel = true
 IsSteeringWheel = true
@@ -45,10 +45,10 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="Resource" id="Resource_lml1i"]
 script = ExtResource("2_hwmkx")
-SpringStrength = 9000.0
-SpringDamping = 130.0
-SpringRest = 0.16
-OverExtend = 0.1
+SpringStrength = 50000.0
+SpringDamping = 300.0
+SpringRest = 0.12
+OverExtend = 0.05
 WheelRadius = 0.26
 IsDriveWheel = true
 GripCurve = ExtResource("3_1ddeo")

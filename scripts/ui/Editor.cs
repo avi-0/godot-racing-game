@@ -596,8 +596,11 @@ public partial class Editor : Control
 				RotateCursor();
 			if (@event.IsActionPressed("editor_go_down", exactMatch: true))
 			{
-				_yLevel -= _gridHeightScale;
-				Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Down);
+				if (_yLevel > GameManager.DeathY+1)
+				{
+					_yLevel -= _gridHeightScale;
+					Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Down);
+				}
 			}
 			if (@event.IsActionPressed("editor_go_up", exactMatch: true))
 			{

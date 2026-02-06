@@ -214,7 +214,7 @@ public class GameModeTimeAttack : IGameMode
 
 	public void RespawnPlayer(long id)
 	{
-		if (_players[id].RespawnPoint != new Transform3D())
+		if ((_players[id].State == GameModeUtils.PLAYER_STATE_PLAYING || _players[id].State == GameModeUtils.PLAYER_STATE_DEAD) && _players[id].RespawnPoint != new Transform3D())
 		{
 			_players[id].State = GameModeUtils.PLAYER_STATE_PLAYING;
 			_players[id].PlayerCar.TeleportToPoint(_players[id].RespawnPoint);

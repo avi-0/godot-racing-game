@@ -141,6 +141,12 @@ public partial class TrackList : Control
 
 	private void TrackListSelectTrack(string basePath, string trackPath, TrackOptions options)
 	{
+		if (SelectedTrackPath == basePath + trackPath)
+		{
+			TrackListOnPlayTrackButtonPressed();
+			return;
+		}
+		
 		TrackListLabel.Text = options.Name + "\n" + GD.Load<PackedScene>(CarManager.CarsPath + options.CarType).Instantiate<Car>().CarName;
 
 		Image image = TrackManager.Instance.GetTrackImage(options);
@@ -159,8 +165,8 @@ public partial class TrackList : Control
 
 	public void TrackListOnPlayTrackButtonPressed()
 	{
-		OnTrackListBackButton();
 		Callback(SelectedTrackPath);
+		OnTrackListBackButton();
 	}
 	
 	public void OnFolderButton()
@@ -170,6 +176,8 @@ public partial class TrackList : Control
 	
 	public void OnTrackListBackButton()
 	{
+		SelectedTrackPath = "";
+		
 		MainMenu.Instance.LastPanel.Visible = true;
 		if (MainMenu.Instance.HadFocus != null)
 		{
