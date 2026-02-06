@@ -1,9 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://crc2q38d8anpl"]
+[gd_scene load_steps=27 format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_micox"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_glvfi"]
-[ext_resource type="Material" uid="uid://cor7rrejfue1y" path="res://assets/cartopia/materials/drift.tres" id="3_g5cig"]
+[ext_resource type="Texture2D" uid="uid://poojimqqe4jj" path="res://assets/cartopia/cars/drift.png" id="3_bnrai"]
+[ext_resource type="Texture2D" uid="uid://csqp1xm6515v" path="res://assets/cartopia/cars/drift2.png" id="4_3ohr3"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_glvfi"]
+[ext_resource type="Texture2D" uid="uid://xd5efcd0as4k" path="res://assets/cartopia/cars/drift3.png" id="5_xxshw"]
+[ext_resource type="Texture2D" uid="uid://c3tymfosvpnfk" path="res://assets/cartopia/cars/drift4.png" id="6_58tp6"]
+[ext_resource type="Texture2D" uid="uid://bh3pqi3d3pjo" path="res://assets/cartopia/cars/drift5.png" id="7_2sndl"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="8_x43s4"]
@@ -50,6 +54,28 @@ WheelRadius = 0.21
 IsDriveWheel = true
 BaseGrip = 0.8
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upx0r"]
+albedo_texture = ExtResource("3_bnrai")
+texture_filter = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2wdl"]
+albedo_texture = ExtResource("4_3ohr3")
+texture_filter = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6va2"]
+albedo_texture = ExtResource("5_xxshw")
+texture_filter = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilv0q"]
+albedo_texture = ExtResource("6_58tp6")
+texture_filter = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5c1ej"]
+albedo_texture = ExtResource("7_2sndl")
+metallic = 0.2
+roughness = 0.8
+texture_filter = 4
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cn2cu"]
 points = PackedVector3Array(-1.0446074, 0.74125767, -1.036995, -1.0446074, 0.74125767, -0.927543, -0.8983869, 1.5583456, -0.5855769, -0.8133131, 1.8695462, -0.61805797, -0.7476673, 1.7913737, -0.8320441, -0.55113876, 0.13560772, -1.3019902, -0.7672997, -1.6690581, -1.2962717, -0.89531934, -1.1386025, -0.6143981, -0.8353996, 1.6581085, -0.13358688, -0.8116771, 1.8695462, -0.13358688, -0.7372376, 1.9849434, -0.13358688, -0.7372376, 1.9849434, -0.5856913, -0.00020444393, 2.0277522, -0.5856913, -0.00020444393, 1.8341825, -0.8320441, -0.55113876, -0.66956806, -1.3019902, 0.5509343, 0.13560772, -1.3019902, 0.7670952, -1.6690581, -1.2962717, -0.7672997, -1.6861815, -1.2182714, -0.74357724, -1.6500733, -0.22473979, -0.7732303, -0.37846887, -0.13370132, 0.83519506, 1.6581085, -0.13358688, -0.00020444393, -0.44584608, -0.13370132, -0.00020444393, 2.0277522, -0.13358688, 0.73682857, 1.9849434, -0.5856913, 0.74746287, 1.7913737, -0.8320441, 0.5509343, -0.66956806, -1.3019902, 1.0446074, 0.74125767, -1.036995, 0.89491034, -1.1386025, -0.6143981, 0.7670952, -1.6861815, -1.2182714, -0.00020444393, -1.7747769, -0.61394066, -0.6677062, -1.7606314, -0.61394066, -0.6677062, -1.7606314, -0.2667135, -0.00020444393, -1.7747769, -0.2667135, 0.7433728, -1.6500733, -0.22473979, -0.74357724, -1.2688898, -0.19054317, 1.0446074, 0.74125767, -0.927543, 0.81147265, 1.8695462, -0.13358688, 0.7730259, -0.37846887, -0.13370132, 0.7433728, -1.2688898, -0.19054317, 0.73682857, 1.9849434, -0.13358688, 0.8131087, 1.8695462, -0.61805797, 0.8981824, 1.5583456, -0.5855769, 0.6675017, -1.7606314, -0.2667135, 0.6675017, -1.7606314, -0.61394066)
@@ -98,7 +124,7 @@ FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
 CarName = "Drift Car"
 CarDescription = "This was just a reasonably priced family car, before some kid turned it into this drift monster."
-Skins = Array[Material]([ExtResource("3_g5cig"), ExtResource("3_g5cig"), ExtResource("3_g5cig"), ExtResource("3_g5cig")])
+Skins = Array[Material]([SubResource("StandardMaterial3D_upx0r"), SubResource("StandardMaterial3D_l2wdl"), SubResource("StandardMaterial3D_w6va2"), SubResource("StandardMaterial3D_ilv0q"), SubResource("StandardMaterial3D_5c1ej")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0, -0.5, 0, 0.5, 0, 0, 0.0011860132, 0)

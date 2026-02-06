@@ -38,6 +38,7 @@ public partial class TrackList : Control
 		
 		ScrollContainer scrollContainer = new ScrollContainer();
 		scrollContainer.SetName(name);
+		scrollContainer.HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled;
 		GridContainer gridContainer = new GridContainer();
 		gridContainer.Columns = 3;
 		scrollContainer.AddChild(gridContainer);
@@ -64,7 +65,7 @@ public partial class TrackList : Control
 				trackID++;
 				
 				var button = new Button();
-				button.CustomMinimumSize = new Vector2(256, 64);
+				button.CustomMinimumSize = new Vector2(200, 64);
 				button.Text = options.Name;
 
 				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
@@ -128,7 +129,6 @@ public partial class TrackList : Control
 			}
 		}
 		
-		FolderButton.Visible = !isCampaign;
 		Show();
 	}
 	private IOrderedEnumerable<string> LoadTrackList(string path)
@@ -176,9 +176,14 @@ public partial class TrackList : Control
 	
 	public void OnTrackListBackButton()
 	{
+		Visible = false;
+		FolderButton.Visible = false;
 		SelectedTrackPath = "";
 		
-		MainMenu.Instance.LastPanel.Visible = true;
+		if (MainMenu.Instance.LastPanel != null)
+		{
+			MainMenu.Instance.LastPanel.Visible = true;
+		}
 		if (MainMenu.Instance.HadFocus != null)
 		{
 			MainMenu.Instance.HadFocus.GrabFocus();
