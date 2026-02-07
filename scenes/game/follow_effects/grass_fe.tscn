@@ -118,3 +118,4 @@ draw_pass_1 = SubResource("RibbonTrailMesh_31dv0")
 
 [node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
 size = Vector3(100, 50, 100)
+resolution = 1

@@ -201,7 +201,7 @@ public class GameModeTimeAttack : IGameMode
 
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
 		{
-			player.PlayerCar.HeadLight.Visible = true;
+			player.PlayerCar.InputToggleLights();
 		}
 		
 		_players[id] = player;

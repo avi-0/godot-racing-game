@@ -140,3 +140,4 @@ draw_pass_1 = SubResource("QuadMesh_yikha")
 
 [node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
 size = Vector3(100, 50, 100)
+resolution = 0

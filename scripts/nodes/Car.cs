@@ -178,9 +178,23 @@ public partial class Car : RigidBody3D
 		EmitSignalRestartRequested();
 	}
 
-	public void InputToggleLights()
+	public void InputToggleLights(int on = -1)
 	{
-		HeadLight.Visible = !HeadLight.Visible;
+		if (on == -1)
+		{
+			HeadLight.Visible = !HeadLight.Visible;
+		}
+		else
+		{
+			HeadLight.Visible = on == 1;
+		}
+
+		if (CarModel.GetChild(0) is MeshInstance3D mesh)
+		{
+			StandardMaterial3D material = (StandardMaterial3D)mesh.GetActiveMaterial(0);
+			material.EmissionEnabled = HeadLight.Visible;
+			CarModel.TreeExited += () => { material.EmissionEnabled = false; };
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
