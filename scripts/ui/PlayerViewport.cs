@@ -85,11 +85,11 @@ public partial class PlayerViewport : SubViewport
 		if (Camera.Current)
 		{
 			GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
-			Camera.Fov = _defaultFov;
+			Camera.SetFov(_defaultFov);
 			if (speed > 70)
 			{
-				Camera.Fov += (speed-70) / 15.0f;
-				if (Camera.Fov > 120) { Camera.Fov = 120.0f; }
+				Camera.SetFov(_defaultFov + ((speed-70) / 15.0f));
+				if (Camera.GetFov() > 120) { Camera.SetFov(120.0f); }
 			}
 		}
 	}
@@ -106,6 +106,8 @@ public partial class PlayerViewport : SubViewport
 	{
 		if (!InputManager.Instance.InputEventMatchesPlayer(@event, LocalPlayerId))
 			return;
+
+		if (GameManager.Instance.PauseMenu.Visible) { return;}
 
 		if (@event.IsAction(InputActionNames.Forward, true))
 		{

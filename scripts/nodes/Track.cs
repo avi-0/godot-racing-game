@@ -108,7 +108,7 @@ public partial class Track : Node3D
 		TrackBase.SetName("TrackBase");
 		AddChild(TrackBase, true);
 		
-		FeScene = GD.Load<PackedScene>("res://Scenes/game/follow_effects/" + Options.TrackBase + "_fe.tscn");
+		FeScene = GD.Load<PackedScene>("res://scenes/game/follow_effects/" + Options.TrackBase + "_fe.tscn");
 	}
 
 	public void ResetPhysBlocks(bool freeze)

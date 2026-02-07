@@ -418,14 +418,15 @@ theme_override_font_sizes/bold_font_size = 64
 theme_override_font_sizes/italics_font_size = 48
 bbcode_enabled = true
 text = "[i]Avi[/i]
-Lead Developer, Game Concept, Game Design, Programming, Models, Textures, UI, Art, Sounds, Drift Car
+Game Concept, Game Design, Programming, Models, Textures, UI, Art, Sounds, Map Editor, Splitscreen, Drift Car
 
 [i]Avondale[/i]
-Game Design, Programming, Level Design, UI, Multiplayer, Taxi, Sport Car
+Game Design, Programming, Level Design, Graphics, UI, Multiplayer, Taxi, Sport Car
 
 
+Assets used:
 Car models by MenaStudios
-Some models borrowed from kenney
+Decorative models & textures by kenney
 Music by Vlad Annenkov"
 fit_content = true
 scroll_active = false

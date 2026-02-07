@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="12_lj8mf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
-friction = 0.1
+friction = 0.5
 rough = true
 bounce = 0.1
 

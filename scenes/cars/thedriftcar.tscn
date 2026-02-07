@@ -15,9 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://ccecgeh8qkbdb" path="res://assets/cartopia/cars/drift.glb" id="10_cn2cu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
-friction = 0.5
+friction = 0.9
 rough = true
-bounce = 0.05
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
 _limits = [1.0, 1.5633919, 0.0, 1.0]

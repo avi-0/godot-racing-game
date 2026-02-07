@@ -65,7 +65,7 @@ public partial class TrackList : Control
 				trackID++;
 				
 				var button = new Button();
-				button.CustomMinimumSize = new Vector2(200, 64);
+				button.CustomMinimumSize = new Vector2(420, 64);
 				button.Text = options.Name;
 
 				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
