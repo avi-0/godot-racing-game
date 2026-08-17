@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://1016nhxkilk7"]
+
+[ext_resource type="Texture2D" path="res://blocks/deco/medieval/_images/tower-edge.png" id="1_ej062"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_uly7v"]
+
+[resource]
+script = ExtResource("1_uly7v")
+ScenePath = "res://blocks/deco/medieval/_scenes/tower-edge.tscn"
+SourceScenePath = "res://assets/kenney/medieval/tower-edge.glb"
+ThumbnailTexture = ExtResource("1_ej062")

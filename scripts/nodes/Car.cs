@@ -97,6 +97,8 @@ public partial class Car : RigidBody3D
 	private bool _frozen = false;
 	private Vector3 _frozenPosition;
 	
+	private bool _boosted = false;
+	
 	public override void _Ready()
 	{
 		OrbitCamera.Radius = 3.5f;
@@ -176,9 +178,23 @@ public partial class Car : RigidBody3D
 		EmitSignalRestartRequested();
 	}
 
-	public void InputToggleLights()
+	public void InputToggleLights(int on = -1)
 	{
-		HeadLight.Visible = !HeadLight.Visible;
+		if (on == -1)
+		{
+			HeadLight.Visible = !HeadLight.Visible;
+		}
+		else
+		{
+			HeadLight.Visible = on == 1;
+		}
+
+		if (CarModel.GetChild(0) is MeshInstance3D mesh)
+		{
+			StandardMaterial3D material = (StandardMaterial3D)mesh.GetActiveMaterial(0);
+			material.EmissionEnabled = HeadLight.Visible;
+			CarModel.TreeExited += () => { material.EmissionEnabled = false; };
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -227,6 +243,7 @@ public partial class Car : RigidBody3D
 			ProcessSuspension(wheel);
 			
 			wheel.GrassContact = false;
+			_boosted = false;
 			ProcessSpecialBlocks(wheel);
 		}
 
@@ -262,7 +279,8 @@ public partial class Car : RigidBody3D
 		{
 			_frozen = true;
 			_frozenPosition = GlobalPosition;
-			if (PlayerId >= 0)
+			CarModel.Hide();
+			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId).State == GameModeUtils.PLAYER_STATE_PLAYING)
 			{
 				GameModeController.CurrentGameMode.GetPlayer(PlayerId).State = GameModeUtils.PLAYER_STATE_DEAD;
 			}
@@ -374,6 +392,11 @@ public partial class Car : RigidBody3D
 		var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;
 		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier * accelerationFromCurve;
 		var forcePosition = contactPoint - GlobalPosition;
+
+		if (_boosted)
+		{
+			accelerationForce *= 3;
+		}
 		
 		if (wheel.IsColliding())
 		{
@@ -514,14 +537,7 @@ public partial class Car : RigidBody3D
 						Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
 						if (block.IsBooster)
 						{
-							var forcePosition = wheel.WheelModel.GlobalPosition - GlobalPosition;
-							var force = block.GlobalBasis.X * 100;
-							ApplyForce(force, forcePosition);
-							//if (DebugMode)
-							{
-								DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(245, 73, 39),
-									arrow_size: 0.1f);
-							}
+							_boosted = true;
 						}
 						else if (block.IsBumper)
 						{

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Godot;
 using Newtonsoft.Json;
 using racingGame.data;
@@ -200,7 +201,7 @@ public class GameModeTimeAttack : IGameMode
 
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
 		{
-			player.PlayerCar.HeadLight.Visible = true;
+			player.PlayerCar.InputToggleLights();
 		}
 		
 		_players[id] = player;
@@ -213,10 +214,11 @@ public class GameModeTimeAttack : IGameMode
 
 	public void RespawnPlayer(long id)
 	{
-		if (_players[id].RespawnPoint != new Transform3D())
+		if ((_players[id].State == GameModeUtils.PLAYER_STATE_PLAYING || _players[id].State == GameModeUtils.PLAYER_STATE_DEAD) && _players[id].RespawnPoint != new Transform3D())
 		{
 			_players[id].State = GameModeUtils.PLAYER_STATE_PLAYING;
 			_players[id].PlayerCar.TeleportToPoint(_players[id].RespawnPoint);
+			_players[id].PlayerCar.CarModel.Show();
 		}
 	}
 
@@ -312,10 +314,11 @@ public class GameModeTimeAttack : IGameMode
 
 	private void PlayerAttemptFinish(Car playerCar, int blockId)
 	{
-		if (playerCar.IsGhost) {return;}
+		if (playerCar == null || playerCar.IsGhost) {return;}
 		if (MultiplayerManager.Instance.OnServer && !MultiplayerManager.Instance.IsServer()) {return;}
 		
 		var playerId = playerCar.PlayerId;
+		if (playerId < 0 || !_players.ContainsKey(playerId)) {return;}
 		var player = _players[playerId];
 
 		if (player.State == GameModeUtils.PLAYER_STATE_PLAYING && player.RaceData.CheckPointsCollected.Count == _currentTrack.CheckPointCount)
@@ -325,7 +328,10 @@ public class GameModeTimeAttack : IGameMode
 			if (player.RaceData.LapsDone < _currentTrack.Track.Options.Laps)
 			{
 				player.RaceData.CheckPointsCollected = new List<int>();
-				player.RespawnPoint = TrackManager.Instance.GetStartPoint();
+				
+				Transform3D spawn = TrackManager.Instance.GetStartPoint();
+				spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + playerCar.FrontWheelConfig.SpringRest + 0.1f, spawn.Origin.Z);
+				player.RespawnPoint = spawn;
 			}
 			else
 			{
@@ -388,7 +394,9 @@ public class GameModeTimeAttack : IGameMode
 
 			if (player.Type == GameModeUtils.PLAYER_LOCAL)
 			{
-				GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid());
+				//separate thread to reduce game freeze while saving ghost to file
+				Thread thread = new Thread(() => GameModeUtils.SaveUserGhost(player.PBGhost, TrackManager.Instance.GetLoadedTrackUid()));
+				thread.Start();
 			}
 		}
 		//--
@@ -479,6 +487,11 @@ public class GameModeTimeAttack : IGameMode
 				viewport.ScoreboardContainer.MoveChild(pbLabel, 0);
 				
 				moveChild(pbLabel, scoreboardPlayer.RaceData.GlobalPbTime.TotalMilliseconds);
+
+				if (scoreboardPlayer.RaceData.GlobalPbTime.TotalMilliseconds <= _currentTrack.Track.Options.AuthorTime)
+				{
+					_hasAuthor = true;
+				}
 			}
 			
 			if (scoreboardPlayer.RaceData.PbTime != TimeSpan.Zero)

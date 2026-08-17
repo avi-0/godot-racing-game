@@ -1,7 +1,10 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnkilntrlhbgv"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bnkilntrlhbgv"]
+
+[ext_resource type="Texture2D" uid="uid://igdwp81lo0jk" path="res://assets/img/plaster.png" id="1_rkip2"]
 
 [resource]
-albedo_color = Color(0.7218587, 0.7218587, 0.7218587, 1)
-metallic = 0.2
-roughness = 0.3
-refraction_scale = 0.5
+albedo_texture = ExtResource("1_rkip2")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 4

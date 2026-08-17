@@ -5,7 +5,7 @@ public class TrackOptions
 	public string Uid = "0";
 	public string Name = "New Track";
 	public string AuthorName = "Anonymous";
-	public string TrackType = "TimeAttack";
+	public int Type = GameModeUtils.TRACK_TYPE_RACE;
 	public string CarType = "thedriftcar.tscn";
 	public string TrackBase = "grass";
 	public string Message = "";

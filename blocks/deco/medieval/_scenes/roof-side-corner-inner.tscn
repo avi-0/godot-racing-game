@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=4 uid="uid://ch618xhxsgi54"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_35yix"]
+[ext_resource type="Material" uid="uid://dcjucyjcyr3c2" path="res://assets/cartopia/materials/roof.tres" id="2_35yix"]
+[ext_resource type="Material" uid="uid://cpvggqdqrb1qj" path="res://assets/cartopia/materials/cobblestone.tres" id="3_tsdvo"]
+[ext_resource type="Material" uid="uid://ccj84nb6f55gl" path="res://assets/cartopia/materials/cobblestoneAlternative.tres" id="4_myehc"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iu4ub"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAwABAAIAAQADAAIA"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD/////AAAAAAAAAAAAAP///////wAA/////wAAAAA=")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAwACAAAAAgADAAAA"),
+"name": "bricks",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAA=")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAAABAAMAAQAAAAMAAwAEAAEABAADAAEABQAEAAMABAAFAAMAAwAGAAUABgADAAUABgACAAUAAgAGAAUA"),
+"name": "stones",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray("AAD/////AAAAAAAA//8AAAAAAAAAAAAA////////AAD//wAA//8AAP//AAAAAAAA/////wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3i7j0"]
+resource_name = "roof-side-corner-inner_roof-side-corner-inner"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("SRIAAEkS/z8AAAAASRL/P0kSAAAAAAAAkiT/P5IkAADbNgAAkiQAAJIk/z/bNgAA"),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsA"),
+"material": ExtResource("2_35yix"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(14, 4.0000005, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD///////8AAAAAAAD/////////////AAAAAAAAAAAAAP////8AAP///////wAAAAAAAAAAaMv/////AABoy////////2jL/////wAACR8AAAAAAAAJH////////wkf/38az/9/Gs//fxrP/38bT/9/G0//fxtPYKM9uWCjPblgoz25Nx4azzceGs83HhrP")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("te0AAP//AAD//6oqte2qKv//AAC17QAA//+qKrXtqio="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUA"),
+"material": ExtResource("3_tsdvo"),
+"name": "bricks",
+"primitive": 3,
+"uv_scale": Vector4(14, 6, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/7///wAA////PwAAAAD///8///8AAAAA/z8AAAAAAAD/PwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("GNv/vxjb//+A0///GNv//xjb/7+A0///AAD/v5gH//8AAP//mAf//wAA/78AAP//L4//vy+P//+Xh///l4f/vy+P//8vj/+/l4f//5eH/79neP+//3//v/9///9neP///3//v2d4/7//f///Z3j//w=="),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADgAPAAwAEAARABIAEwASABEAFAAVABYAFgAXABQAGAAZABoAGwAaABkA"),
+"material": ExtResource("4_myehc"),
+"name": "stones",
+"primitive": 3,
+"uv_scale": Vector4(33.709564, 2, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("AAD//////78AAAAA////vwAAAAAAAP+/AAAAAP//AAAAAP////8AAAAAAAAAAAAA/////wAA//8AAAAAAAD/////AAAAAP//AAAAAAAAAAD/////AAAAAP//AAAAAAAA////////AID//wAA//8AgAAAAAD//wCAAAD/////AID//wAA//8AAP///////wAAAAAAAP//AAAAAP////8AAP////////+//////wAA/7///wAAAAD/v///AAD///+//////wAAAAD///////8AAP//AAAAAAAA//8AAP//AAD/f////3////9/////v/9//7//f/+//3//f////3////9/////f/9//3//f/9//3//f////3////9/////f///////f////3////9/////f/9/AAD/fwAA/38AAP9/AAD/P/9//z//f/8//3//P/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_iu4ub")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i4ugt"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, -0.5, 0, -0.5, 0.5, 0.5, 0.5, -0.5, 0, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0, -0.5, 0.5, 0.5, 0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.5, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.5, 0.5, -0.5, 0, -0.5, 0.5, 0.5, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0.5, -0.5, 0.5, 0, -0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, -0.5, 0, 0.5, -0.5, 0.5, 0.5, -0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0.5, 0.5)
+
+[node name="roof-side-corner-inner" type="Node3D"]
+script = ExtResource("1_35yix")
+
+[node name="roof-side-corner-inner2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="roof-side-corner-inner" type="MeshInstance3D" parent="roof-side-corner-inner2"]
+mesh = SubResource("ArrayMesh_3i7j0")
+skeleton = NodePath("")
+
+[node name="roof-side-corner-inner_col" type="StaticBody3D" parent="roof-side-corner-inner2/roof-side-corner-inner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="roof-side-corner-inner2/roof-side-corner-inner/roof-side-corner-inner_col"]
+shape = SubResource("ConcavePolygonShape3D_i4ugt")

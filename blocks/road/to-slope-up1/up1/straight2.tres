@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bspedtn4d52es"]
+
+[ext_resource type="Texture2D" path="res://blocks/road/to-slope-up1/up1/_images/straight2.png" id="1_g8ueh"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_i4dam"]
+
+[resource]
+script = ExtResource("1_i4dam")
+ScenePath = "res://blocks/road/to-slope-up1/up1/_scenes/straight2.tscn"
+SourceScenePath = "res://assets/cartopia/blocks/road/to-slope-up1/up1/straight2.glb"
+ThumbnailTexture = ExtResource("1_g8ueh")

@@ -27,7 +27,7 @@ public partial class TrackList : Control
 	{
 	}
 	
-	public void FillTrackContainer(string basePath, bool isCampaign, string name, Action<string> callback, bool emptyPrevious = true)
+	public void FillTrackContainer(string basePath, bool isCampaign, string name, int gamemodeType, Action<string> callback, bool emptyPrevious = true)
 	{
 		Callback = callback;
 		
@@ -38,6 +38,7 @@ public partial class TrackList : Control
 		
 		ScrollContainer scrollContainer = new ScrollContainer();
 		scrollContainer.SetName(name);
+		scrollContainer.HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled;
 		GridContainer gridContainer = new GridContainer();
 		gridContainer.Columns = 3;
 		scrollContainer.AddChild(gridContainer);
@@ -56,12 +57,15 @@ public partial class TrackList : Control
 			if (options == null)
 				continue;
 			
+			if (!GameModeUtils.GameModeSupportsTrackType(gamemodeType, options.Type))
+				continue;
+			
 			if (options.AuthorTime > 0)
 			{
 				trackID++;
 				
 				var button = new Button();
-				button.CustomMinimumSize = new Vector2(256, 64);
+				button.CustomMinimumSize = new Vector2(420, 64);
 				button.Text = options.Name;
 
 				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
@@ -125,7 +129,6 @@ public partial class TrackList : Control
 			}
 		}
 		
-		FolderButton.Visible = !isCampaign;
 		Show();
 	}
 	private IOrderedEnumerable<string> LoadTrackList(string path)
@@ -138,6 +141,12 @@ public partial class TrackList : Control
 
 	private void TrackListSelectTrack(string basePath, string trackPath, TrackOptions options)
 	{
+		if (SelectedTrackPath == basePath + trackPath)
+		{
+			TrackListOnPlayTrackButtonPressed();
+			return;
+		}
+		
 		TrackListLabel.Text = options.Name + "\n" + GD.Load<PackedScene>(CarManager.CarsPath + options.CarType).Instantiate<Car>().CarName;
 
 		Image image = TrackManager.Instance.GetTrackImage(options);
@@ -156,8 +165,8 @@ public partial class TrackList : Control
 
 	public void TrackListOnPlayTrackButtonPressed()
 	{
-		OnTrackListBackButton();
 		Callback(SelectedTrackPath);
+		OnTrackListBackButton();
 	}
 	
 	public void OnFolderButton()
@@ -167,7 +176,14 @@ public partial class TrackList : Control
 	
 	public void OnTrackListBackButton()
 	{
-		MainMenu.Instance.LastPanel.Visible = true;
+		Visible = false;
+		FolderButton.Visible = false;
+		SelectedTrackPath = "";
+		
+		if (MainMenu.Instance.LastPanel != null)
+		{
+			MainMenu.Instance.LastPanel.Visible = true;
+		}
 		if (MainMenu.Instance.HadFocus != null)
 		{
 			MainMenu.Instance.HadFocus.GrabFocus();

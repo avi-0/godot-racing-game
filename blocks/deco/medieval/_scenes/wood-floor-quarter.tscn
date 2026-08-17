@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://b0ktjp04jf474"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_gln8s"]
+[ext_resource type="Material" uid="uid://bi3u8tyrl2dfw" path="res://assets/cartopia/materials/planks.tres" id="2_gln8s"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mqbnk"]
+_surfaces = [{
+"aabb": AABB(-0.49999994, 0, 0, 0.49999994, 0.12500001, 0.5),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAgAAAAMAAAACAAMAAgABAAQAAQACAAQAAgADAAQAAwACAAQAAQAFAAAABQABAAAAAQAEAAUABAABAAUAAwAGAAAABgADAAAABgAAAAUAAAAGAAUABQAGAAMABgAFAAMABQAHAAQABAAHAAMABwAFAAQABwAEAAMABwADAAUAAwAHAAUA"),
+"name": "planks",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD+/wAAAAD/////AAAAAAAA/////wAAAAAAAP//AAD///////8AAP//AAAAAAAAAAAAAAAAAAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qqset"]
+resource_name = "wood-floor-quarter_wood-floor-quarter"
+_surfaces = [{
+"aabb": AABB(-0.49999994, 0, 0, 0.49999994, 0.12500001, 0.5),
+"attribute_data": PackedByteArray("SVNF2ElT7enRTkXYSVPt6UlTRdjRTkXYwlft6TpcRdg6XO3pOlxF2MJX7ek6XO3pOlzt6TpcV+7CV1fuwlft6TpcV+46XO3pwldX7sJX7enCV57Gwlc0wjpcNMI6XJ7Gwlc0wsJXnsY6XDTCOlyexsJXV+46XFfuOlz//8JX//86XFfuwldX7jpc///CV///K1Lt6StSRdhJU0XYSVPt6StSRdgrUu3pSVNF2ElT7el4BMn0AADJ9AAAX/B4BF/wAADJ9HgEyfQAAF/weARf8A=="),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADgAPAAwAEAARABIAEwASABEAFAAVABYAFgAXABQAGAAZABoAGwAaABkAHAAdAB4AHgAfABwAIAAhACIAIwAiACEAJAAlACYAJgAnACQAKAApACoAKwAqACkALAAtAC4ALgAvACwAMAAxADIAMwAyADEA"),
+"material": ExtResource("2_gln8s"),
+"name": "planks",
+"primitive": 3,
+"uv_scale": Vector4(28.628292, 7.25, 0, 0),
+"vertex_count": 52,
+"vertex_data": PackedByteArray("AAD+/wAAVNX/////AABU1QAA/////1TV/////wAAqioAAP7/AACqKgAA/////6oqAAD//////7//////AAD/v/////////+//////wAA/z8AAP//////P/////////8/////////AID//wAA//8AgAAAAAD//wCAAAD/////AID//wAA//8AAP///////wAAAAAAAP//AAAAAP////8AAAAA/v8AAP//AAAAAAAA/////wAAAAD///////8AAP//AAAAAAAA/n8AAP7/AAD+f///AAAAAP5//////wAA/n8AAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/v///AAD///8/AAAAAP///z///wAAAAD/PwAAAAAAAP8/AAAAAP//VNUAAAAAAABU1QAA/v8AAFTVAAD/////VNUAAAAAAACqKgAAAAD//6oqAAD+/wAAqioAAP////+qKv///////////////wAA/////wAAAAD/////AAD//////////wAA/z//////////P///AAAAAP8///8AAP///z9U1aoqVNWqKlTVqipUVVRVVFVUVVRVVFX///9/////f////38AAP9/AAD/fwAA/3//f////3////9/////f///////f////3////9/////f////3////9/////f////3//f////3////9/////f///AAD/fwAA/38AAP9/AAD/f////3////9/////f////39U1VTVVNVU1VTVVNVU1VTVqiqqKqoqqiqqKqoqqiqqKv+//3//v/9//7//f/+//3//f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_mqbnk")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ktrst"]
+data = PackedVector3Array(-0.5, 0.125, 0, 0, 0.125, 0, -0.5, 0.125, 0.5, 0, 0.125, 0, -0.5, 0.125, 0, -0.5, 0.125, 0.5, -0.5, 0.125, 0.5, 0, 0.125, 0, 0, 0.125, 0.5, 0, 0.125, 0, -0.5, 0.125, 0.5, 0, 0.125, 0.5, 0, 0.125, 0.5, 0, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.125, 0.5, 0, 0.125, 0.5, 0, 0, 0.5, 0, 0.125, 0.5, -0.5, 0, 0.5, -0.5, 0.125, 0.5, -0.5, 0, 0.5, 0, 0.125, 0.5, -0.5, 0.125, 0, -0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.125, 0, -0.5, 0.125, 0, -0.5, 0, 0, -0.5, 0.125, 0, 0, 0, 0, 0, 0.125, 0, 0, 0, 0, -0.5, 0.125, 0, -0.5, 0, 0.5, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, -0.5, 0, 0, -0.5, 0, 0.5, 0, 0, 0.5, -0.5, 0, 0.5, 0, 0, 0, -0.5, 0, 0, 0, 0, 0, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0, -0.5, 0.125, 0, -0.5, 0.125, 0, -0.5, 0.125, 0.5, -0.5, 0, 0.5, -0.5, 0, 0, -0.5, 0, 0.5, -0.5, 0.125, 0, -0.5, 0.125, 0.5, -0.5, 0.125, 0, -0.5, 0, 0.5, 0, 0.125, 0.5, 0, 0.125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.125, 0.5, 0, 0.125, 0, 0, 0.125, 0.5, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.125, 0.5)
+
+[node name="wood-floor-quarter" type="Node3D"]
+script = ExtResource("1_gln8s")
+
+[node name="wood-floor-quarter2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wood-floor-quarter" type="MeshInstance3D" parent="wood-floor-quarter2"]
+mesh = SubResource("ArrayMesh_qqset")
+skeleton = NodePath("")
+
+[node name="wood-floor-quarter_col" type="StaticBody3D" parent="wood-floor-quarter2/wood-floor-quarter"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wood-floor-quarter2/wood-floor-quarter/wood-floor-quarter_col"]
+shape = SubResource("ConcavePolygonShape3D_ktrst")

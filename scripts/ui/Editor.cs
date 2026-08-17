@@ -596,8 +596,11 @@ public partial class Editor : Control
 				RotateCursor();
 			if (@event.IsActionPressed("editor_go_down", exactMatch: true))
 			{
-				_yLevel -= _gridHeightScale;
-				Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Down);
+				if (_yLevel > GameManager.DeathY+1)
+				{
+					_yLevel -= _gridHeightScale;
+					Camera.GlobalPosition += _gridHeightScale * (_grid.Basis * Vector3.Down);
+				}
 			}
 			if (@event.IsActionPressed("editor_go_up", exactMatch: true))
 			{
@@ -833,7 +836,7 @@ public partial class Editor : Control
 		var mapType = OptionsTree.CreateItem(root);
 		mapType.SetText(0, "TrackType");
 		mapType.SetCellMode(1, TreeItem.TreeCellMode.Range);
-		mapType.SetText(1, Track.Options.TrackType);
+		mapType.SetText(1, GameModeUtils.TRACK_TYPE_NAME[Track.Options.Type]);
 		mapType.SetEditable(1, true);
 
 		var carType = OptionsTree.CreateItem(root);
@@ -895,8 +898,8 @@ public partial class Editor : Control
 				Track.Options.AuthorName = editedItem.GetText(editedColumn);
 				break;
 			case "TrackType":
-				Track.Options.TrackType = editedItem.GetText(editedColumn);
-				InvalidateTrack();
+				//Track.Options.TrackType = editedItem.GetText(editedColumn);
+				//InvalidateTrack();
 				break;
 			case "CarType":
 				Track.Options.CarType = editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];

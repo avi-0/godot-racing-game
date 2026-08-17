@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cy87bpg2c4fgu" path="res://addons/controller_icons/objects/ControllerIconTexture.cs" id="1_bfsuw"]
 
 [resource]
-resource_local_to_scene = false
+resource_local_to_scene = true
 resource_name = ""
 script = ExtResource("1_bfsuw")
 path = "game_restart"

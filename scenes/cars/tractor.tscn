@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bhhyeackuvnkm"]
+[gd_scene load_steps=24 format=3 uid="uid://bhhyeackuvnkm"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_g3c1d"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_hwmkx"]
@@ -33,10 +33,10 @@ point_count = 1
 
 [sub_resource type="Resource" id="Resource_lce11"]
 script = ExtResource("2_hwmkx")
-SpringStrength = 9000.0
-SpringDamping = 130.0
-SpringRest = 0.16
-OverExtend = 0.1
+SpringStrength = 50000.0
+SpringDamping = 300.0
+SpringRest = 0.12
+OverExtend = 0.05
 WheelRadius = 0.26
 IsDriveWheel = true
 IsSteeringWheel = true
@@ -45,10 +45,10 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="Resource" id="Resource_lml1i"]
 script = ExtResource("2_hwmkx")
-SpringStrength = 9000.0
-SpringDamping = 130.0
-SpringRest = 0.16
-OverExtend = 0.1
+SpringStrength = 50000.0
+SpringDamping = 300.0
+SpringRest = 0.12
+OverExtend = 0.05
 WheelRadius = 0.26
 IsDriveWheel = true
 GripCurve = ExtResource("3_1ddeo")
@@ -56,6 +56,9 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g3c1d"]
 points = PackedVector3Array(0.72929996, 0.45209122, -0.1375202, 0.72929996, 0.28389776, -0.1375202, 0.72929996, 0.58000743, -0.15433884, 0.617078, 0.53959906, 0.6826793, 0.72929996, 0.28389776, -0.24879664, 0.617078, 0.4595694, 0.6026932, 0.617078, 0.28389776, 0.14487565, 0.28041214, 0.17172503, 0.61266696, 0.72929996, 0.71290916, -0.20948815, 0.3926341, 0.7325886, 0.7628609, 0.3926341, 0.38386923, 0.7628609, 0.72929996, 0.8269186, -0.29690564, 0.72929996, 0.91442645, -0.41092002, 0.617078, 0.60034287, 0.60347545, 0.4301842, 1.4869665, -0.13184881, 0.28041214, 0.17172503, -1.135097, 0.50485605, 0.28389776, -1.0351634, 0.72929996, 0.5882728, -1.154458, 0.3926341, 0.28389776, 0.66273165, 0.12492901, 0.19638991, 0.71279633, -0.2805549, 0.17172503, 0.61266696, 0.33652312, 0.7887405, 0.7628609, -0.39277688, 0.38386923, 0.7628609, 0.72929996, 0.96952885, -0.5439042, 0.4301842, 1.5120249, -0.23178256, -0.43032697, 1.4869665, -0.13184881, 0.1120792, 0.17172503, -1.2350308, 0.72929996, 0.6683025, -1.234444, -0.12507182, 0.19638991, 0.71279633, -0.39277688, 0.28389776, 0.66273165, -0.61722076, 0.28389776, 0.14487565, -0.72929996, 0.28389776, -0.1375202, -0.2805549, 0.17172503, -1.135097, -0.33666587, 0.7887405, 0.7628609, -0.39277688, 0.7325886, 0.7628609, -0.61722076, 0.53959906, 0.6826793, -0.61722076, 0.4595694, 0.6026932, 0.72929996, 0.9882899, -0.6862755, 0.4301842, 1.5120249, -0.9850987, -0.43032697, 1.5120249, -0.23178256, -0.72929996, 0.96952885, -0.5439042, -0.72929996, 0.91442645, -0.41092002, -0.61722076, 0.60034287, 0.60347545, -0.112221956, 0.17172503, -1.2350308, 0.1120792, 0.28389776, -1.2350308, -0.72929996, 0.6683025, -1.234444, 0.72929996, 0.8269186, -1.075841, -0.72929996, 0.45209122, -0.1375202, -0.72929996, 0.28389776, -0.24879664, -0.5049988, 0.28389776, -1.0351634, -0.72929996, 0.5882728, -1.154458, -0.72929996, 0.8269186, -0.29690564, -0.72929996, 0.71290916, -0.20948815, -0.72929996, 0.58000743, -0.15433884, 0.72929996, 0.96952885, -0.82884234, 0.72929996, 0.91442645, -0.9618265, -0.43032697, 1.5120249, -0.9850987, -0.72929996, 0.9882899, -0.6862755, -0.112221956, 0.28389776, -1.2350308, -0.72929996, 0.8269186, -1.075841, -0.72929996, 0.91442645, -0.9618265, -0.72929996, 0.96952885, -0.82884234)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hwmkx"]
+points = PackedVector3Array(0.45815015, 0.08196139, -2.785772e-05, 0.6549766, 0.029340565, 0.44194326, 0.6549766, 0.029340565, 0.34194404, 0.5729121, 0.032708883, -0.007818259, 0.45815015, 0.07911706, -0.021249995, -0.4584067, 0.08196139, -2.785772e-05, 0.6549766, -0.6120649, 0.60413146, -0.6549766, 0.029340565, 0.44194326, 0.6549766, -0.49132884, 0.34194404, 0.5729121, -0.03278643, -0.007818259, 0.5479082, 0.032708883, -0.032801285, 0.45815015, 0.0709582, -0.04099464, -0.4584067, 0.07911706, -0.021249995, -0.5730404, 0.032708883, -0.007818259, -0.6549766, 0.029340565, 0.34194404, 0.6549766, -0.682725, 0.5333462, -0.6549766, -0.6120649, 0.60413146, 0.5729121, -0.4175998, 0.21273077, 0.5479082, -0.03278643, -0.032801285, 0.45815015, -7.6174736e-05, -0.08196142, 0.45815015, 0.021181703, -0.07920792, 0.45815015, 0.04094261, -0.07101456, 0.45815015, 0.057933986, -0.057985783, -0.4584067, 0.0709582, -0.04099464, -0.5480364, 0.032708883, -0.032801285, -0.5730404, -0.03278643, -0.007818259, -0.6549766, -0.49132884, 0.34194404, -0.6549766, -0.682725, 0.5333462, 0.45815015, -0.041020155, -0.07101456, -0.5730404, -0.4175998, 0.21273077, 0.45815015, -0.021259248, -0.07920792, -0.4584067, -7.6174736e-05, -0.08196142, -0.4584067, 0.021181703, -0.07920792, -0.4584067, 0.04094261, -0.07101456, -0.4584067, 0.057933986, -0.057985783, -0.5480364, -0.03278643, -0.032801285, -0.4584067, -0.041020155, -0.07101456, -0.4584067, -0.021259248, -0.07920792)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1ddeo"]
 radius = 0.25
@@ -114,22 +117,26 @@ CarDescription = "I have no idea how this thing got in here..."
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_g3c1d")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7548515, 0.6308995)
+shape = SubResource("ConvexPolygonShape3D_hwmkx")
+
 [node name="tractor-shovel" parent="." instance=ExtResource("4_g3c1d")]
 
 [node name="wheel-back-left" parent="tractor-shovel" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52, 0.47781727, -0.7)
 
 [node name="wheel-front-left" parent="tractor-shovel" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.24, 0.42)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.31781727, 0.42)
 
 [node name="wheel-front-right" parent="tractor-shovel" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.24, 0.42)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.31781727, 0.42)
 
 [node name="wheel-back-right" parent="tractor-shovel" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52, 0.47781727, -0.7)
 
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.24, 0.42)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.31781727, 0.42)
 shape = SubResource("SphereShape3D_1ddeo")
 WheelModel = NodePath("RemoteTransform3D")
 SkidmarkWidth = 0.15
@@ -138,7 +145,7 @@ SkidmarkWidth = 0.15
 remote_path = NodePath("../../tractor-shovel/wheel-front-left")
 
 [node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.24, 0.42)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.31781727, 0.42)
 shape = SubResource("SphereShape3D_qe0ku")
 WheelModel = NodePath("RemoteTransform3D")
 SkidmarkWidth = 0.15
@@ -147,7 +154,7 @@ SkidmarkWidth = 0.15
 remote_path = NodePath("../../tractor-shovel/wheel-front-right")
 
 [node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.47781727, -0.7)
 shape = SubResource("SphereShape3D_g3c1d")
 IsFrontWheel = false
 IsRearWheel = true
@@ -159,7 +166,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0, 0)
 remote_path = NodePath("../../tractor-shovel/wheel-back-left")
 
 [node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.47781727, -0.7)
 shape = SubResource("SphereShape3D_hwmkx")
 IsFrontWheel = false
 IsRearWheel = true
@@ -171,7 +178,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0, 0)
 remote_path = NodePath("../../tractor-shovel/wheel-back-right")
 
 [node name="CarCommon" parent="." instance=ExtResource("6_s6ltu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61319387, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8410114, 0.086788595)
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.0441471, -0.08357653)

@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Threading;
 using Godot;
 using Newtonsoft.Json;
 using racingGame.data;
@@ -17,6 +18,7 @@ public static class GameModeUtils
 	public const int PLAYER_LOCAL_SPLITSCREEN = 2;
 	public const int PLAYER_ONLINE = 3;
 	public const int PLAYER_BOT = 4;
+	//--
 	
 	//Player States
 	public const int PLAYER_STATE_NONE = 0;
@@ -27,7 +29,45 @@ public static class GameModeUtils
 	public const int PLAYER_STATE_PLAYING = 5;
 	public const int PLAYER_STATE_AFTERFINISH = 6;
 	public const int PLAYER_STATE_DEAD = 7;
+	//--
 	
+	//Track Types
+	public const int TRACK_TYPE_NONE = 0;
+	public const int TRACK_TYPE_RACE = 1;
+	public const int TRACK_TYPE_ARENA = 2;
+	public const int TRACK_TYPE_RING = 3;
+	public const int TRACK_TYPE_ADVENTURE = 4;
+	
+	public static readonly string[] TRACK_TYPE_NAME = 
+	{
+		"None",
+		"Race",
+		"Arena",
+		"Ring",
+		"Adventure",
+	};
+	//--
+	
+	//Gamemodes
+	public const int GAMEMODE_NONE = 0;
+	public const int GAMEMODE_TIMEATTACK = 1;
+	public const int GAMEMODE_ROUNDS = 2;
+	public const int GAMEMODE_CHASE = 3;
+	public const int GAMEMODE_DERBY = 4;
+	public const int GAMEMODE_ADVENTURE = 5;
+
+	public static readonly string[] GAMEMODE_NAME =
+	{
+		"None",
+		"Time Attack",
+		"Rounds",
+		"Chase",
+		"Derby",
+		"Adventure",
+	};
+	//--
+	
+	//Medals
 	public const int MEDAL_NONE = 0;
 	public const int MEDAL_BRONZE = 1;
 	public const int MEDAL_SILVER = 2;
@@ -35,17 +75,35 @@ public static class GameModeUtils
 	public const int MEDAL_AUTHOR = 4;
 	public const int MEDAL_MAX = 4;
 
-	public static readonly string[] MEDAL_NAME = {
+	public static readonly string[] MEDAL_NAME = 
+	{
 		"No Medal",
 		"Bronze Medal",
 		"Silver Medal",
 		"Gold Medal",
 		"Author Medal",
 	};
-	
-	public static void TimeAttack()
+	//--
+
+	public static void LaunchGameMode(int type)
 	{
-		GameModeController.CurrentGameMode = new GameModeTimeAttack();
+		GameModeController.CurrentGameModeType = type;
+		switch (type)
+		{
+			case GAMEMODE_TIMEATTACK:
+				GameModeController.CurrentGameMode = new GameModeTimeAttack();
+				break;
+		}
+	}
+
+	public static bool GameModeSupportsTrackType(int gamemode, int track)
+	{
+		if (track == TRACK_TYPE_RACE && (gamemode == GAMEMODE_TIMEATTACK || gamemode == GAMEMODE_ROUNDS)) { return true; }
+		if (track == TRACK_TYPE_ARENA && (gamemode == GAMEMODE_DERBY || gamemode == GAMEMODE_CHASE)) { return true; }
+		if (track == TRACK_TYPE_RING && (gamemode == GAMEMODE_DERBY)) { return true; }
+		if (track == TRACK_TYPE_ADVENTURE && (gamemode == GAMEMODE_ADVENTURE)) { return true; }
+		
+		return false;
 	}
 
 	public static string FormatRaceTime(TimeSpan raceTime)
@@ -173,7 +231,6 @@ public static class GameModeUtils
 
 		return new Ghost();
 	}
-	//----//
 
 	public static void RestartPlayer(long PlayerId)
 	{

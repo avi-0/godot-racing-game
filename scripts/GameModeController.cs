@@ -7,11 +7,13 @@ public partial class GameModeController : Node
 {
 	public static IGameMode CurrentGameMode;
 
+	public static int CurrentGameModeType;
+	
 	public static bool IsHost;
 	
 	public override void _Ready()
 	{
-		GameModeUtils.TimeAttack();
+		GameModeUtils.LaunchGameMode(GameModeUtils.GAMEMODE_TIMEATTACK);
 	}
 
 	public override void _PhysicsProcess(double delta)

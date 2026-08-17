@@ -80,6 +80,11 @@ public partial class Track : Node3D
 			AddChild(block);
 			
 			block.Owner = this; // not needed but helps for FindChildren etc
+
+			if ((Node3D)block.GetChild(0).GetChild(0) is MeshInstance3D mesh)
+			{
+				mesh.ExtraCullMargin = 4;
+			}
 		}
 
 		Options = data.Options;
@@ -103,7 +108,7 @@ public partial class Track : Node3D
 		TrackBase.SetName("TrackBase");
 		AddChild(TrackBase, true);
 		
-		FeScene = GD.Load<PackedScene>("res://Scenes/game/follow_effects/" + Options.TrackBase + "_fe.tscn");
+		FeScene = GD.Load<PackedScene>("res://scenes/game/follow_effects/" + Options.TrackBase + "_fe.tscn");
 	}
 
 	public void ResetPhysBlocks(bool freeze)

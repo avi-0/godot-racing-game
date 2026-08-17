@@ -19,16 +19,19 @@ public partial class PlayerViewport : SubViewport
 	[Export] public VBoxContainer ScoreboardContainer;
 	[Export] public Camera3D Camera;
 	[Export] public int LocalPlayerId = 0;
+	[Export] public TextureRect SpeedArrow;
 	
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
 	public long PlayerId;
 	public int StartTimerSeconds = -1;
-
+	
 	public int CullLayer = 0;
 	
 	private CarInputs _inputs;
 	private bool _active = false;
 
+	private int _defaultFov = 80;
+	
 	public bool Active
 	{
 		get => _active;
@@ -66,8 +69,15 @@ public partial class PlayerViewport : SubViewport
 			return;
 		
 		UpdateCarInputs();
+
+		int speed = (int)Mathf.Round(Car.LinearVelocity.Length() * 8);
 		
-		SpeedLabel.Text = ((int)Mathf.Round(Car.LinearVelocity.Length() * 8)).ToString();
+		int maxRange = 283 - 14;
+		float ratio = speed / 650.0f;
+		SpeedArrow.RotationDegrees = 14 + (maxRange * ratio);
+		
+		SpeedLabel.Text = speed.ToString();
+		if (speed > 999) { SpeedLabel.Text = "???";}
 		
 		Camera.Current = TargetCamera != null;
 		Camera.Match(TargetCamera);
@@ -75,6 +85,12 @@ public partial class PlayerViewport : SubViewport
 		if (Camera.Current)
 		{
 			GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
+			Camera.SetFov(_defaultFov);
+			if (speed > 70)
+			{
+				Camera.SetFov(_defaultFov + ((speed-70) / 15.0f));
+				if (Camera.GetFov() > 120) { Camera.SetFov(120.0f); }
+			}
 		}
 	}
 
@@ -90,6 +106,8 @@ public partial class PlayerViewport : SubViewport
 	{
 		if (!InputManager.Instance.InputEventMatchesPlayer(@event, LocalPlayerId))
 			return;
+
+		if (GameManager.Instance.PauseMenu.Visible) { return;}
 
 		if (@event.IsAction(InputActionNames.Forward, true))
 		{
@@ -127,7 +145,7 @@ public partial class PlayerViewport : SubViewport
 		else if (@event.IsActionPressed(InputActionNames.Respawn))
 		{
 			GameModeController.CurrentGameMode.RespawnPlayer(PlayerId);
-			SetInputAsHandled();
+			//SetInputAsHandled();
 		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{

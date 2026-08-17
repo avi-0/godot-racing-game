@@ -30,7 +30,7 @@ bump_strength = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hb6dr"]
 render_priority = 0
 shader = ExtResource("2_0ug1r")
-shader_parameter/albedo = Color(0, 0.93820214, 0.9973149, 1)
+shader_parameter/albedo = Color(0.23267815, 0.6397804, 1, 1)
 shader_parameter/texture_albedo = ExtResource("3_weqvu")
 shader_parameter/albedo_texture_size = Vector2i(512, 512)
 shader_parameter/point_size = 1.0
@@ -42,7 +42,7 @@ shader_parameter/texture_refraction = SubResource("NoiseTexture2D_lk6yy")
 shader_parameter/refraction = 0.5
 shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_4lyri")
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 1.5000008312499986
 shader_parameter/rim = 1.0
 shader_parameter/rim_tint = 0.9
 shader_parameter/uv1_blend_sharpness = 1.0
@@ -118,3 +118,4 @@ draw_pass_1 = SubResource("RibbonTrailMesh_31dv0")
 
 [node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
 size = Vector3(100, 50, 100)
+resolution = 1

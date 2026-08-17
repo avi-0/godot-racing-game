@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="12_lj8mf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
-friction = 0.1
+friction = 0.5
 rough = true
 bounce = 0.1
 
@@ -270,7 +270,7 @@ CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
-Acceleration = 360
+Acceleration = 399
 MaxSpeed = 25
 BrakingStrengthMultiplier = 0.4
 ReversingStrengthMultiplier = 0.7
@@ -340,7 +340,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.109947026, 0)
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.742467, 0.44939327)
 
 [node name="Headlights" parent="." instance=ExtResource("8_0wjsq")]
-transform = Transform3D(-1, 2.5467429e-08, -1.2514288e-07, -4.8919077e-08, 0.82878375, 0.55956906, 1.1796716e-07, 0.55956906, -0.82878375, 0, 0.46993336, 1.1454535)
+transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -2.7475641e-08, 0.914063, 0.40557235, 1.2471736e-07, 0.40557235, -0.914063, 0, 0.48327497, 1.1655896)
 
 [node name="Nameplate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.3264677, -1.1225132)

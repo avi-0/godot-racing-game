@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://b6dx2dbvn7oyj"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_gjglq"]
+[ext_resource type="Material" uid="uid://bi3u8tyrl2dfw" path="res://assets/cartopia/materials/planks.tres" id="2_gjglq"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_h5t3t"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.125, 1),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAwABAAAAAQACAAMAAQADAAAAAgABAAMAAAAEAAMABAAAAAMAAwAEAAUABAAFAAAABAADAAUABQAEAAAABgADAAIAAwAGAAIABQAGAAMABgAFAAMABgACAAUAAgAGAAUABQAHAAIAAgAHAAAABwAFAAIABwACAAAAAAAHAAUABwAAAAUA"),
+"name": "planks",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAA////////AAAAAP////8AAAAA//8AAAAA/////wAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_n3nne"]
+resource_name = "wood-floor_wood-floor"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.125, 1),
+"attribute_data": PackedByteArray("GBz//x8D//8fA/fgGBz34B8D//8YHP//HwP34Bgc9+AYHBbdHwMW3R8DDr4YHA6+HwMW3RgcFt0fAw6+GBwOvhgcFt0YHPfgHwP34B8DFt0YHPfgGBwW3R8D9+AfAxbdHwMOvh8DFt0AABbdAAAOvh8DFt0fAw6+AAAW3QAADr4fAw6+HwMtuhgcLboYHA6+HwMtuh8DDr4YHC26GBwOvjgfDr44HxbdGBwW3RgcDr44HxbdOB8OvhgcFt0YHA6+"),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUACAAJAAoACgALAAgADAANAA4ADwAOAA0AEAARABIAEgATABAAFAAVABYAFwAWABUAGAAZABoAGgAbABgAHAAdAB4AHwAeAB0AIAAhACIAIgAjACAAJAAlACYAJwAmACUAKAApACoAKgArACgALAAtAC4ALwAuAC0A"),
+"material": ExtResource("2_gjglq"),
+"name": "planks",
+"primitive": 3,
+"uv_scale": Vector4(10.25, 8.25, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AAAAAP///////wAA////////AAAAAP//AAAAAAAA/////wAA//8AAAAAAAD//wAA//8AAAAAAAAAAAAAAAAAAAAA//8AAP///////wAA/////////////wAA/////////////wAAAAAAAP//AAAAAP///////wAAAAD/////AAAAAP//AAD//wAAAAAAAP////8AAAAA////////AAD//wAAAAAAAAAAAAD//wAAAAD//wAAAAAAAP////8AAAAA////////VNX/////AABU1f//AAAAAFTV//8AAP//VNX/////AACqKv///////6oq//8AAAAAqir//wAA//+qKv////////////8AAP////8AAAAA/////wAA//////////8AAP//AAD///////8AAAAAAAD//wAAAAD/////AAAAAAAA//9U1QAAAAAAAFTVAAD//wAAVNUAAP////9U1QAAAAAAAKoqAAAAAP//qioAAP//AACqKgAA/////6oq/3//P/9//z//f/8//3//P/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//P/9//z//f/8//3//P/9/////f////3////9/////f/9//3//f/9//3//f/9/qiqqKqoqqiqqKqoqqiqqKlTVVNVU1VTVVNVU1VTVVNX/f/9//3//f/9//3//f/9//3////9/////f////3///1RVqqpUVaqqVFWqqlRVqqqqqlRVqqpUVaqqVFWqqlRV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_h5t3t")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_oxydw"]
+data = PackedVector3Array(-0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.125, -0.5, 0.5, 0.125, -0.5, 0.5, 0.125, 0.5, 0.5, 0.125, 0.5, -0.5, 0.125, 0.5, -0.5, 0.125, -0.5, 0.5, 0.125, -0.5, -0.5, 0.125, -0.5, 0.5, 0.125, 0.5, -0.5, 0.125, 0.5, 0.5, 0.125, 0.5, -0.5, 0.125, -0.5, -0.5, 0.125, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.125, -0.5, -0.5, 0.125, -0.5, -0.5, 0, -0.5, -0.5, 0.125, -0.5, 0.5, 0, -0.5, 0.5, 0.125, -0.5, 0.5, 0, -0.5, -0.5, 0.125, -0.5, 0.5, 0.125, 0.5, 0.5, 0.125, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.125, 0.5, 0.5, 0.125, -0.5, 0.5, 0.125, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0.125, 0.5, 0.5, 0.125, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.125, 0.5, 0.5, 0.125, 0.5, 0.5, 0, 0.5, 0.5, 0.125, 0.5, -0.5, 0, 0.5, -0.5, 0.125, 0.5, -0.5, 0, 0.5, 0.5, 0.125, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.125, -0.5, -0.5, 0.125, -0.5, -0.5, 0.125, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.125, -0.5, -0.5, 0.125, 0.5, -0.5, 0.125, -0.5, -0.5, 0, 0.5)
+
+[node name="wood-floor" type="Node3D"]
+script = ExtResource("1_gjglq")
+
+[node name="wood-floor2" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wood-floor" type="MeshInstance3D" parent="wood-floor2"]
+mesh = SubResource("ArrayMesh_n3nne")
+skeleton = NodePath("")
+
+[node name="wood-floor_col" type="StaticBody3D" parent="wood-floor2/wood-floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wood-floor2/wood-floor/wood-floor_col"]
+shape = SubResource("ConcavePolygonShape3D_oxydw")

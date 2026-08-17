@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://blho4jw07g2ca"]
+[gd_scene load_steps=32 format=3 uid="uid://blho4jw07g2ca"]
 
 [ext_resource type="Script" uid="uid://cndyq0syaspg5" path="res://scripts/GameManager.cs" id="1_sg2ap"]
 [ext_resource type="Script" uid="uid://bye4m0dwrdi4a" path="res://scripts/MultiplayerManager.cs" id="3_4alf3"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://4xiky6k8jlrc" path="res://assets/audio/music/frozen_strike.mp3" id="22_7mtld"]
 [ext_resource type="AudioStream" uid="uid://bwfcrih73lhqa" path="res://assets/audio/music/full_throttle.mp3" id="23_rf5wm"]
 [ext_resource type="Script" uid="uid://vwa3lcb1yy7d" path="res://scripts/ui/PrefMonitor.cs" id="27_b80ve"]
+[ext_resource type="Script" uid="uid://x0cryt6u8nhl" path="res://scripts/ui/NotificationContainer.cs" id="28_fi0b8"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hn362"]
 streams_count = 15
@@ -52,7 +53,7 @@ action = &"ui_accept"
 [sub_resource type="Shortcut" id="Shortcut_vcmnf"]
 events = [SubResource("InputEventAction_vtaks")]
 
-[node name="GameManager" type="Node" node_paths=PackedStringArray("MusicPlayer", "PauseMenu", "ScreenLayoutSlot", "MOTDPanel", "MOTDLabel", "PerfLabel")]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("MusicPlayer", "PauseMenu", "ScreenLayoutSlot", "MOTDPanel", "MOTDLabel", "PerfLabel", "NotificationContainer")]
 script = ExtResource("1_sg2ap")
 MusicPlayer = NodePath("AudioStreamPlayer")
 PauseMenu = NodePath("PauseMenu")
@@ -60,6 +61,7 @@ ScreenLayoutSlot = NodePath("Control")
 MOTDPanel = NodePath("MOTDPanel")
 MOTDLabel = NodePath("MOTDPanel/MarginContainer/VBoxContainer/MOTDLabel")
 PerfLabel = NodePath("PerformanceLabel")
+NotificationContainer = NodePath("NotificationContainer")
 SingleplayerScreenLayout = ExtResource("3_ipbon")
 SplitScreen2HLayout = ExtResource("4_vcmnf")
 SplitScreen2VLayout = ExtResource("5_0ykio")
@@ -135,5 +137,22 @@ grow_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 script = ExtResource("27_b80ve")
+
+[node name="NotificationContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(228, 64)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -376.0
+offset_top = 68.0
+offset_right = -51.0
+offset_bottom = -79.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("11_ipbon")
+alignment = 1
+script = ExtResource("28_fi0b8")
 
 [connection signal="pressed" from="MOTDPanel/MarginContainer/VBoxContainer/Button" to="." method="OnMOTDButtonPressed"]

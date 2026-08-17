@@ -24,6 +24,7 @@ public partial class GameManager : Node
 	[Export] public PanelContainer MOTDPanel;
 	[Export] public Label MOTDLabel;
 	[Export] public Label PerfLabel;
+	[Export] public NotificationContainer NotificationContainer;
 	
 	[ExportCategory("Screen Layouts")]
 	[Export] public PackedScene SingleplayerScreenLayout;
@@ -206,6 +207,8 @@ public partial class GameManager : Node
 		MusicPlayer.Stop();
 
 		ClearFollowEffects();
+
+		NotificationContainer.Clear();
 	}
 
 	public void SetViewportsActive(bool visible)
@@ -257,11 +260,9 @@ public partial class GameManager : Node
 		EmitSignalViewportSettingsChanged();
 	}
 
-	public void ShowMessage(string Msg)
+	public void ShowMessage(string msg)
 	{
-		MOTDLabel.Text = Msg;
-		MOTDPanel.Show();
-		Input.MouseMode = Input.MouseModeEnum.Visible;
+		NotificationContainer.DisplayMessage(msg);
 	}
 	private void OnMOTDButtonPressed()
 	{

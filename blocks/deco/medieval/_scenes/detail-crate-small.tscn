@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=4 uid="uid://ctt3kv5khvyiq"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_26k31"]
+[ext_resource type="Material" uid="uid://csg5gpldyhom2" path="res://assets/cartopia/materials/barrel.tres" id="2_26k31"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_26k31"]
+friction = 0.5
+bounce = 0.5
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qyw65"]
+points = PackedVector3Array(0.1, 0.2, 0.1, 0.1, 0.2, -0.1, -0.1, 0.2, 0.1, 0.1, 0, 0.1, 0.1, 0, -0.1, -0.1, 0.2, -0.1, -0.1, 0, 0.1, -0.1, 0, -0.1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gdb55"]
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.1, 0.2, 0.2, 0.2),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAQADAAAAAQACAAMAAgABAAMAAwABAAAAAgAEAAAABAACAAAABAAAAAUABAAFAAIAAAAEAAUABQAEAAIAAAAGAAMABQAGAAAABgAAAAMABgAFAAAAAwAGAAUABgADAAUABQAHAAMABwADAAIABwAFAAMAAwAHAAIAAgAHAAUABwACAAUA"),
+"name": "barrel",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAD//wAA//8AAAAAAAD//wAA//8AAAAAAAAAAP////8AAAAA//8AAAAA/////wAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mgvcx"]
+resource_name = "detail-crate-small_detail-crate-small"
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.1, 0.2, 0.2, 0.2),
+"attribute_data": PackedByteArray("fZo5rX2a9NjJlvTYyZY5rX2a9Nh9mjmtyZb02MmWOa19mjmtfZr02MmW9NjJljmtfZr02H2aOa3JlvTYyZY5rXuaaazHlmmsx5avgHuar4DHlmmse5pprMeWr4B7mq+AnoP//8mA///JgJbenoOW3smA//+eg///yYCW3p6Dlt7Hlq+Ae5qvgHuaaazHlmmse5qvgMeWr4B7mmmsx5ZprAAAlt7UApbe1AL//wAA///UApbeAACW3tQC//8AAP//"),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUACAAJAAoACgALAAgADAANAA4ADwAOAA0AEAARABIAEgATABAAFAAVABYAFwAWABUAGAAZABoAGgAbABgAHAAdAB4AHwAeAB0AIAAhACIAIgAjACAAJAAlACYAJwAmACUAKAApACoAKgArACgALAAtAC4ALwAuAC0A"),
+"material": ExtResource("2_26k31"),
+"name": "barrel",
+"primitive": 3,
+"uv_scale": Vector4(33.797897, 2.8636107, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("////////AID//wAA//8AgAAAAAD//wCAAAD/////AID//wAA//8AAP///////wAAAAAAAP//AAAAAP////8AAAAA//8AAP//AAAAAAAA/////wAAAAD///////8AAP//AAAAAAAAAAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAA////vwAAAAAAAP+/AAD//wAA/78AAP//////vwAAAAAAAAAAAAAAAP//AAAAAP//AAAAAAAA/////wAAAAD//wAA////////AAD/////////////AAD/////////////AAAAAAAA//8AAAAA////////AAAAAP////8AAP////////+//////wAA/7///wAAAAD/v///AAD///+//////wAAAAD///////8AAP//AAAAAAAA//8AAP//AAAAAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/v///AAD///8/AAAAAP///z///wAAAAD/PwAAAAAAAP8//3////9/////f////3///////3////9/////f////3//f////3////9/////f////3//f/9//3//f/9//3//f/9/////f////3////9/////v/9//7//f/+//3//v/9//3//v/9//7//f/+//3//v/9//z//f/8//3//P/9//z//fwAA/38AAP9/AAD/fwAA/z//f/8//3//P/9//z//fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_gdb55")
+
+[node name="detail-crate-small" type="Node3D"]
+script = ExtResource("1_26k31")
+IsPhysical = true
+
+[node name="detail-crate-small2" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_26k31")
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detail-crate-small2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_qyw65")
+
+[node name="detail-crate-small" type="MeshInstance3D" parent="detail-crate-small2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("ArrayMesh_mgvcx")
+skeleton = NodePath("")
