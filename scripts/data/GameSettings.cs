@@ -9,6 +9,11 @@ public class GameSettings
 	public string PlayerName = "Player";
 	public Dictionary<string, List<InputEventData>> InputMap = new();
 	public Dictionary<string, int> SelectedSkins = new();
+	public bool PerfMonEnabled = false;
+	
+	//invisible settings
+	public bool GhostVisible = true;
+	//
 	
 	public class GraphicsSettings
 	{
@@ -17,8 +22,7 @@ public class GameSettings
 		public int Antialiasing = 0;
 		public int Vsync = 1;
 		public int WindowMode = 2;
-		public int ShadowFilterQuality = 2;
-		public int ShadowAtlasSize = 4096;
+		public int ShadowQuality = 4;
 	}
 
 	public class SoundSettings

@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://rljsqp4x73o6"]
+
+[ext_resource type="Texture2D" uid="uid://c8g0k4vp6qb1o" path="res://assets/img/sand.png" id="1_jhuvf"]
+[ext_resource type="Material" uid="uid://dui2xjgt1c1ck" path="res://materials/track_base_dirt.tres" id="2_jhuvf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v52ow"]
+albedo_texture = ExtResource("1_jhuvf")
+metallic_specular = 0.0
+uv1_scale = Vector3(512, 512, 512)
+texture_filter = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_ynqis"]
+material = SubResource("StandardMaterial3D_v52ow")
+size = Vector3(512, 0.2, 512)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ynqis"]
+points = PackedVector3Array(-256, -0.1, -256, -256, 0.1, -256, 256, -0.1, -256, -256, -0.1, 256, -256, 0.1, 256, 256, 0.1, -256, 256, -0.1, 256, 256, 0.1, 256)
+
+[sub_resource type="BoxMesh" id="BoxMesh_urhk7"]
+material = ExtResource("2_jhuvf")
+size = Vector3(512, 64, 512)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0iiq5"]
+size = Vector3(512, 64, 512)
+
+[node name="TrackBase" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_ynqis")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ynqis")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31.9, 0)
+size = Vector3(512, 64, 512)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.2, 0)
+mesh = SubResource("BoxMesh_urhk7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("BoxShape3D_0iiq5")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.856064, 0)
+size = Vector3(512, 32, 512)

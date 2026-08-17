@@ -1,0 +1,142 @@
+[gd_scene load_steps=19 format=3 uid="uid://dqp81afv8w0y"]
+
+[ext_resource type="Script" uid="uid://cl6yfro35h7s6" path="res://scripts/nodes/FollowEffect.cs" id="1_63bs7"]
+[ext_resource type="Shader" uid="uid://dwwouujmd33h" path="res://shaders/watershader.gdshader" id="2_n2q46"]
+[ext_resource type="Texture2D" uid="uid://btg22umurlyyk" path="res://assets/img/water.png" id="3_63wps"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_myyg0"]
+noise_type = 3
+seed = 1337
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4lyri"]
+noise = SubResource("FastNoiseLite_myyg0")
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6bytw"]
+noise_type = 3
+seed = 1337
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lk6yy"]
+noise = SubResource("FastNoiseLite_6bytw")
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hb6dr"]
+render_priority = 0
+shader = ExtResource("2_n2q46")
+shader_parameter/albedo = Color(0, 0.93820214, 0.9973149, 1)
+shader_parameter/texture_albedo = ExtResource("3_63wps")
+shader_parameter/albedo_texture_size = Vector2i(512, 512)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_lk6yy")
+shader_parameter/refraction = 0.5
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_4lyri")
+shader_parameter/normal_scale = 1.0
+shader_parameter/rim = 1.0
+shader_parameter/rim_tint = 0.9
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.05, 0.05, 0.05)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yq6pf"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(20482, 20482)
+material = SubResource("ShaderMaterial_hb6dr")
+size = Vector2(4096, 4096)
+
+[sub_resource type="Gradient" id="Gradient_lwhks"]
+offsets = PackedFloat32Array(0, 0.7044025, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.5786164, 0.5786164, 0.5786164, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_63bs7"]
+gradient = SubResource("Gradient_lwhks")
+
+[sub_resource type="Curve" id="Curve_n2q46"]
+_data = [Vector2(0, 0), 0.0, 5.6219335, 0, 0, Vector2(0.19289342, 1), -0.70427, -0.70427, 0, 0, Vector2(1, 0), -3.2523563, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_63wps"]
+curve = SubResource("Curve_n2q46")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vvg4t"]
+resource_local_to_scene = true
+emission_shape = 3
+emission_box_extents = Vector3(40, 10, 40)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -5, 0)
+radial_accel_min = -4.0000024
+radial_accel_max = 3.9999976
+tangential_accel_min = -8.000002
+tangential_accel_max = 7.9999976
+damping_max = 4.0
+scale_min = 0.14999999
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_63wps")
+color = Color(0.95304054, 0.9530404, 0.95304054, 1)
+color_ramp = SubResource("GradientTexture1D_63bs7")
+collision_mode = 1
+collision_friction = 0.7
+collision_bounce = 0.0
+
+[sub_resource type="Gradient" id="Gradient_lqn4k"]
+offsets = PackedFloat32Array(0.23636363, 0.43030304, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.809, 0.26244184, 0.26244184, 0.26244184, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1831x"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_lqn4k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asfok"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_1831x")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_yikha"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_asfok")
+
+[node name="SnowFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
+script = ExtResource("1_63bs7")
+Water = NodePath("Water")
+Weather = NodePath("Weather")
+CollisionHeightField = NodePath("GPUParticlesCollisionHeightField3D")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+layers = 0
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("PlaneMesh_yq6pf")
+
+[node name="Weather" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+layers = 0
+emitting = false
+amount = 3000
+lifetime = 3.5
+visibility_aabb = AABB(-10, -20, -10, 20, 30, 20)
+process_material = SubResource("ParticleProcessMaterial_vvg4t")
+draw_pass_1 = SubResource("QuadMesh_yikha")
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
+size = Vector3(100, 50, 100)

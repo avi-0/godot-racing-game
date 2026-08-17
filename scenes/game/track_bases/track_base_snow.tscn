@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvmam0d235jkh"]
+
+[ext_resource type="PackedScene" uid="uid://q32127h8m7tr" path="res://scenes/game/track_bases/extras/snow_mesh.tscn" id="1_dqgdl"]
+[ext_resource type="Texture2D" uid="uid://ccw2puq5jweoh" path="res://assets/img/ice.png" id="2_dqgdl"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i1mpx"]
+load_path = "res://.godot/imported/ice.png-ce95fa82fda8915ede3e64145400d20e.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apmyb"]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_dqgdl")
+metallic = 0.5
+metallic_specular = 0.2
+roughness = 0.1
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture = SubResource("CompressedTexture2D_i1mpx")
+refraction_texture_channel = 2
+uv1_scale = Vector3(0.05, 0.05, 0.05)
+uv1_triplanar = true
+texture_filter = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_urhk7"]
+material = SubResource("StandardMaterial3D_apmyb")
+size = Vector3(512, 64, 512)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0iiq5"]
+size = Vector3(512, 64, 512)
+
+[node name="TrackBase" type="Node3D"]
+
+[node name="SnowMesh" parent="." instance=ExtResource("1_dqgdl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32, 0)
+mesh = SubResource("BoxMesh_urhk7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("BoxShape3D_0iiq5")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.856064, 0)
+size = Vector3(512, 32, 512)

@@ -37,7 +37,7 @@ public partial class TrackManager : Node
 
 		UpdateShadowsEnabled();
 
-		GameModeController.CurrentGameMode.InitTrack(Track);
+		GameModeController.LoadMap(Track);
 		GD.Print("Track UID: " + GetLoadedTrackUid());
 	}
 	
@@ -65,6 +65,19 @@ public partial class TrackManager : Node
 			GD.PushError(e);
 			return null;
 		}
+	}
+
+	public Image GetTrackImage(TrackOptions trackOptions)
+	{
+		Image image = new Image();
+		if (image.LoadJpgFromBuffer(Marshalls.Base64ToRaw(trackOptions.PreviewImage)) != Error.Ok)
+		{
+			image = Image.CreateEmpty(512, 512, true, Image.Format.Rgb8);
+		}
+
+		Image icon = new Image();
+		icon.CopyFrom(image);
+		return icon;
 	}
 
 	public void NewTrack()

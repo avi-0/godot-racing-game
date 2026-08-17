@@ -8,7 +8,7 @@ public partial class PlayerViewport : SubViewport
 {
 	[Export] public Label CheckPointLabel;
 	[Export] public PanelContainer FinishPanel;
-	[Export] public Label FinishTimeLabel;
+	[Export] public RichTextLabel FinishTimeLabel;
 	[Export] public Label LapsLabel;
 	//[Export] public Label PbLabel;
 	[Export] public Control RaceUi;
@@ -24,6 +24,8 @@ public partial class PlayerViewport : SubViewport
 	public long PlayerId;
 	public int StartTimerSeconds = -1;
 
+	public int CullLayer = 0;
+	
 	private CarInputs _inputs;
 	private bool _active = false;
 
@@ -69,6 +71,11 @@ public partial class PlayerViewport : SubViewport
 		
 		Camera.Current = TargetCamera != null;
 		Camera.Match(TargetCamera);
+		
+		if (Camera.Current)
+		{
+			GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
+		}
 	}
 
 	public override void _Process(double delta)
@@ -130,6 +137,19 @@ public partial class PlayerViewport : SubViewport
 		else if (@event.IsActionPressed(InputActionNames.HideUI))
 		{
 			RaceUi.Visible = !RaceUi.Visible;
+			SetInputAsHandled();
+		}
+		else if (@event.IsActionPressed(InputActionNames.HideGhost))
+		{
+			if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar != null)
+			{
+				GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar.Visible = !GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar.Visible;
+
+				if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL)
+				{
+					SettingsManager.Instance.Settings.GhostVisible = GameModeController.CurrentGameMode.GetPlayer(PlayerId).PlayerGhostCar.Visible;
+				}
+			}
 			SetInputAsHandled();
 		}
 	}

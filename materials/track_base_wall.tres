@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b5lm6i3p6fsil"]
+
+[ext_resource type="Texture2D" uid="uid://ccw2puq5jweoh" path="res://assets/img/ice.png" id="1_m7rnk"]
+
+[resource]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_m7rnk")
+metallic = 0.5
+metallic_specular = 0.2
+roughness = 0.1
+refraction_enabled = true
+refraction_scale = 0.02
+refraction_texture = ExtResource("1_m7rnk")
+refraction_texture_channel = 2
+uv1_scale = Vector3(0.05, 0.05, 0.05)
+uv1_triplanar = true
+texture_filter = 4

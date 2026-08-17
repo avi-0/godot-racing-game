@@ -49,10 +49,9 @@ public partial class CarManager : Node
 		{
 			RemoveChild(car);
 			car.QueueFree();
-			
-			_cars = new();
 		}
 		
+		_cars = new();
 		_playerCarsById = new();
 	}
 
@@ -75,12 +74,14 @@ public partial class CarManager : Node
 		DestroyPlayerCar(id);
 
 		var car = CarScene.Instantiate<Car>();
-
+		
 		car.Name = id.ToString();
 		if (MultiplayerManager.Instance.OnServer)
 		{
 			car.SetMultiplayerAuthority((int)id);
 		}
+
+		car.PlayerId = id;
 		
 		_cars.Add(car);
 		_playerCarsById[id] = car;
@@ -89,7 +90,7 @@ public partial class CarManager : Node
 		car.GlobalTransform = TrackManager.Instance.GetStartPoint();
 		car.Started();
 		
-		car.SetPlayerName(SettingsManager.Instance.GetLocalPlayerName());
+		car.SetPlayerName(GameModeController.CurrentGameMode.GetPlayer(id).PlayerName);
 
 		if (SettingsManager.Instance.Settings.SelectedSkins.ContainsKey(car.CarName) && SettingsManager.Instance.Settings.SelectedSkins[car.CarName] > 0 && car.Skins[SettingsManager.Instance.Settings.SelectedSkins[car.CarName]] != null)
 		{

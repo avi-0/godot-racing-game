@@ -82,7 +82,7 @@ public partial class Car : RigidBody3D
 		}
 	}
 	
-	public long PlayerId;
+	public long PlayerId = -1;
 	public bool AcceptsInputs { get; set; } = false;
 
 	public OrbitCamera OrbitCamera => CarCommon.OrbitCamera;
@@ -93,6 +93,9 @@ public partial class Car : RigidBody3D
 	private Stack<float> _speedStack = new();
 
 	private RayCast3D _rayCastUp;
+
+	private bool _frozen = false;
+	private Vector3 _frozenPosition;
 	
 	public override void _Ready()
 	{
@@ -180,6 +183,16 @@ public partial class Car : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		//if ( MultiplayerManager.Instance.OnServer && !IsMultiplayerAuthority()) { return;}
+
+		if (_frozen)
+		{
+			GlobalPosition = _frozenPosition;
+			LinearVelocity = new Vector3(0, 0, 0);
+			AngularVelocity = new Vector3(0, 0, 0);
+			return;
+		}
+		
 		_isAccelerating = false;
 		_isReversing = false;
 		var velocity = GlobalBasis.Z.Dot(LinearVelocity);
@@ -212,6 +225,8 @@ public partial class Car : RigidBody3D
 			}
 
 			ProcessSuspension(wheel);
+			
+			wheel.GrassContact = false;
 			ProcessSpecialBlocks(wheel);
 		}
 
@@ -239,45 +254,18 @@ public partial class Car : RigidBody3D
 		{
 			DebugDraw3D.DrawArrowRay(GlobalPosition, LinearVelocity, 0.5f, Color.Color8(255, 255, 255), arrow_size: 0.1f);
 		}
+		
+		_speedStack.Pop(); _speedStack.Push(LinearVelocity.Length()); // for bonk strength calculation
 
-		// хз почемуто не работает
-		//int fov = 80 + (int)Math.Floor(GetLinearVelocity().Length());
-		//OrbitCamera.Camera.SetFov(fov);
-		//FrontCamera.SetFov(fov);
-		
-		_speedStack.Pop();
-		_speedStack.Push(LinearVelocity.Length());
-		
-		//RAIN
-		if (_isLocallyControlled && TrackManager.Instance.Track.Options.Rain)
+		//water fall death
+		if (GetGlobalPosition().Y < GameManager.DeathY)
 		{
-			TrackManager.Instance.Track.RainParticles.SetGlobalPosition(new Vector3(GlobalPosition.X, TrackManager.Instance.Track.RainParticles.GlobalPosition.Y, GlobalPosition.Z));
-			
-			if (_rayCastUp == null)
+			_frozen = true;
+			_frozenPosition = GlobalPosition;
+			if (PlayerId >= 0)
 			{
-				_rayCastUp = new RayCast3D();
-				_rayCastUp.SetTargetPosition(new Vector3(0,10,0));
-				_rayCastUp.SetEnabled(true);
-				_rayCastUp.SetCollisionMask(1);
-				AddChild(_rayCastUp);
+				GameModeController.CurrentGameMode.GetPlayer(PlayerId).State = GameModeUtils.PLAYER_STATE_DEAD;
 			}
-			
-			//using raycast up to see if theres something above the car so the rain needs to stop
-			//rain will still be going under blocks in the distance, but its up to map makers to use rain correctly, cant do much more with gpuparticles
-			if(_rayCastUp.IsColliding())
-			{
-				var collidingObject = _rayCastUp.GetCollider();
-				if (!(collidingObject is StaticBody3D && (collidingObject as StaticBody3D).GetOwner() is Block) || (!(collidingObject as StaticBody3D).GetOwner<Block>().IsStart && !(collidingObject as StaticBody3D).GetOwner<Block>().IsCheckpoint))
-				{
-					TrackManager.Instance.Track.RainParticles.Visible = false;
-				}
-			}
-			else
-			{
-				TrackManager.Instance.Track.RainParticles.Visible = true;
-			}
-			
-			_rayCastUp.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y+1.5f, GlobalPosition.Z);
 		}
 		//--
 	}
@@ -348,7 +336,7 @@ public partial class Car : RigidBody3D
 
 		var forwardStrength = _inputs.Forward;
 		var backStrength = -_inputs.Back;
-		if (!AcceptsInputs)
+		if (PlayerId < 0 || GameModeController.CurrentGameMode.GetPlayer(PlayerId).State != GameModeUtils.PLAYER_STATE_PLAYING)
 		{
 			forwardStrength = 0;
 			backStrength = 0;
@@ -407,7 +395,7 @@ public partial class Car : RigidBody3D
 		if (wheel.Config.IsSteeringWheel)
 		{
 			_targetSteering = 0;
-			if (AcceptsInputs)
+			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId).State == GameModeUtils.PLAYER_STATE_PLAYING)
 			{
 				_targetSteering += _inputs.Left;
 				_targetSteering -= _inputs.Right;
@@ -466,7 +454,7 @@ public partial class Car : RigidBody3D
 
 				var handbrake = _isBraking && _isAccelerating;
 
-				if (handbrake || grip > SlipThreshold)
+				if (handbrake || grip > SlipThreshold || wheel.GrassContact)
 				{
 					_isSlipping = true;
 				}
@@ -519,30 +507,37 @@ public partial class Car : RigidBody3D
 			for (int collider = 0; collider < wheel.GetCollisionCount(); collider++)
 			{
 				Object collidingObject = wheel.GetCollider(collider);
-				if (collidingObject is StaticBody3D && (collidingObject as StaticBody3D).GetOwner() is Block)
+				if (collidingObject is StaticBody3D staticBody3D)
 				{
-					Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
-					if (block.IsBooster)
+					if (staticBody3D.GetOwner() is Block)
 					{
-						var forcePosition = wheel.WheelModel.GlobalPosition - GlobalPosition;
-						var force = block.GlobalBasis.X * 100;
-						ApplyForce(force, forcePosition);
-						//if (DebugMode)
+						Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
+						if (block.IsBooster)
 						{
-							DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(245, 73, 39),
-								arrow_size: 0.1f);
+							var forcePosition = wheel.WheelModel.GlobalPosition - GlobalPosition;
+							var force = block.GlobalBasis.X * 100;
+							ApplyForce(force, forcePosition);
+							//if (DebugMode)
+							{
+								DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(245, 73, 39),
+									arrow_size: 0.1f);
+							}
+						}
+						else if (block.IsBumper)
+						{
+							var forcePosition = GlobalPosition;
+							var force = block.GlobalBasis.Y * 150;
+							ApplyForce(force, forcePosition);
+							//if (DebugMode)
+							{
+								DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
+									arrow_size: 0.1f);
+							}
 						}
 					}
-					else if (block.IsBumper)
+					else if (staticBody3D.GetOwner().Name == "TrackBase")
 					{
-						var forcePosition = GlobalPosition;
-						var force = block.GlobalBasis.Y * 150;
-						ApplyForce(force, forcePosition);
-						//if (DebugMode)
-						{
-							DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
-								arrow_size: 0.1f);
-						}
+						wheel.GrassContact = true;
 					}
 				}
 			}
@@ -575,6 +570,9 @@ public partial class Car : RigidBody3D
 		name = name.Trim().Normalize();
 		if (name.Length > 10) {name = name.Substring(0, 10);}
 
+		CarCommon.PlayerName.Text = name;
+		CarCommon.PlayerName.Visible = PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type != GameModeUtils.PLAYER_LOCAL;
+		
 		void setFontSize(int size)
 		{
 			Nameplate.Mesh.Set("font_size", size);
@@ -605,13 +603,16 @@ public partial class Car : RigidBody3D
 		Nameplate.Mesh.Set("text", name);
 	}
 
-	public void SetGhost(bool ghost)
+	public void SetGhost(bool ghost, int cullLayer = 1)
 	{
 		IsGhost = ghost;
 		
 		if (ghost)
 		{
 			SetPlayerName("");
+			CarCommon.PlayerName.Text = "Personal Best";
+			CarCommon.InfoSprite.SetLayerMaskValue(1, false);
+			CarCommon.InfoSprite.SetLayerMaskValue(cullLayer, true);
 		}
 		
 		foreach (MeshInstance3D mesh in CarModel.GetChildren())
@@ -619,17 +620,25 @@ public partial class Car : RigidBody3D
 			if (ghost)
 			{
 				mesh.SetMaterialOverride(ResourceLoader.Load<Material>("res://materials/ghost_car.tres"));
-				MultiplayerSynchronizer.PublicVisibility = false;
 			}
 			else
 			{
 				mesh.SetMaterialOverride(null);		
 			}
+			
+			mesh.SetLayerMaskValue(1, false);
+			mesh.SetLayerMaskValue(cullLayer, true);
 		}
+
+		MultiplayerSynchronizer.PublicVisibility = !ghost;
+		CarCommon.PlayerName.Visible = ghost;
+		
+		SetCollisionLayerValue(2, false);
 	}
 
 	public void TeleportToPoint(Transform3D point)
 	{
+		_frozen = false;
 		SetTransform(point.Orthonormalized());
 		LinearVelocity = new Vector3(0, 0, 0);
 		AngularVelocity = new Vector3(0, 0, 0);
@@ -647,11 +656,53 @@ public partial class Car : RigidBody3D
 				_speedStack.Push(peek);
 			}
 			avgSpeed /= 5;
-
-			if (avgSpeed > 5)
+			float speedChange = avgSpeed - GetLinearVelocity().Length(); 
+			
+			//bonk sound
+			if (speedChange > MaxSpeed / 10)
 			{
 				CarCommon.CarSoundPlayer.Play();
 			}
+			//--
+
+			//bonk particles
+			if (GetLinearVelocity().Length() > MaxSpeed / 20)
+			{
+				PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
+				
+				for (var contact = 0; contact < state3D.GetContactCount(); contact++)
+				{
+					if (state3D.GetContactColliderId(contact) == node.GetInstanceId())
+					{
+						Vector3 position = state3D.GetContactColliderPosition(contact);
+						foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
+						{
+							if (!particle.Emitting)
+							{
+								particle.SetGlobalPosition(position);
+								particle.Emitting = true;
+
+								break;
+							}
+						}
+					}
+				}
+			}
+			//--
+
+			//pad vibration
+			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId) != null && (GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL || GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN))
+			{
+				float magnitude = speedChange / (MaxSpeed / 4);
+				float duration = 0.2f;
+				if (magnitude > 1.0f) { magnitude = 1.0f; duration += magnitude - 1.0f;}
+
+				if (magnitude > 0)
+				{
+					InputManager.Instance.VibratePlayer(GameManager.Instance.GetPlayerViewPortById(PlayerId).LocalPlayerId, 0.0f, magnitude, duration);
+				}
+			}
+			//--
 		}
 	}
 

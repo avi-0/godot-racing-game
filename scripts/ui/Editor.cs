@@ -327,8 +327,9 @@ public partial class Editor : Control
 			TrackManager.Instance.OpenTrack(path);
 			SetupOptions();
 			_grid = Transform3D.Identity;
-
+			
 			foreach (var block in Track.FindChildren("*", "Block").Cast<Block>()) ConnectBlockSignals(block);
+			Track.ResetPhysBlocks(true);
 		}
 		else if (FileDialog.FileMode == FileDialog.FileModeEnum.SaveFile)
 		{
@@ -347,7 +348,7 @@ public partial class Editor : Control
 		IsRunning = false;
 
 		Track.Options.Uid = "0";
-		GameModeController.CurrentGameMode.InitTrack(Track);
+		GameModeController.LoadMap(Track);
 		GameManager.Instance.Play();
 		await GDTask.ToSignal(GameManager.Instance, GameManager.SignalName.StoppedPlaying);
 
@@ -843,7 +844,13 @@ public partial class Editor : Control
 		foreach (var carPath in paths) carType.SetText(1, carType.GetText(1) + carPath + ",");
 		carType.SetText(1, carType.GetText(1).Trim(','));
 		carType.SetEditable(1, true);
-
+		
+		var trackBase = OptionsTree.CreateItem(root);
+		trackBase.SetText(0, "TrackBase");
+		trackBase.SetCellMode(1, TreeItem.TreeCellMode.Range);
+		trackBase.SetText(1, "grass,sand,snow");
+		trackBase.SetEditable(1, true);
+		
 		var lapsCount = OptionsTree.CreateItem(root);
 		lapsCount.SetText(0, "Laps");
 		lapsCount.SetCellMode(1, TreeItem.TreeCellMode.Range);
@@ -865,7 +872,7 @@ public partial class Editor : Control
 		fog.SetEditable(1, true);
 		
 		var rain = OptionsTree.CreateItem(root);
-		rain.SetText(0, "Rain");
+		rain.SetText(0, "Weather");
 		rain.SetCellMode(1, TreeItem.TreeCellMode.Check);
 		rain.SetRange(1, 0);
 		if (Track.Options.Rain) { rain.SetChecked(1, true);}
@@ -889,14 +896,19 @@ public partial class Editor : Control
 				break;
 			case "TrackType":
 				Track.Options.TrackType = editedItem.GetText(editedColumn);
+				InvalidateTrack();
 				break;
 			case "CarType":
-				Track.Options.CarType =
-					editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				Track.Options.CarType = editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				InvalidateTrack();
+				break;
+			case "TrackBase":
+				Track.Options.TrackBase = editedItem.GetText(editedColumn).Split(",")[(int)editedItem.GetRange(editedColumn)];
+				Track.ReloadTrackBase();
 				break;
 			case "Laps":
-				Track.Options.Laps =
-					(int) editedItem.GetRange(editedColumn);
+				Track.Options.Laps = (int) editedItem.GetRange(editedColumn);
+				InvalidateTrack();
 				break;
 			case "DayTime":
 				Track.Options.StartDayTime = (int)editedItem.GetRange(editedColumn);
@@ -906,7 +918,7 @@ public partial class Editor : Control
 				Track.Options.Fog = editedItem.IsChecked(1);
 				Track.UpdateLighting();
 				break;
-			case "Rain":
+			case "Weather":
 				Track.Options.Rain = editedItem.IsChecked(1);
 				Track.UpdateLighting();
 				break;

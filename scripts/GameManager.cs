@@ -23,6 +23,7 @@ public partial class GameManager : Node
 	[Export] public Control ScreenLayoutSlot;
 	[Export] public PanelContainer MOTDPanel;
 	[Export] public Label MOTDLabel;
+	[Export] public Label PerfLabel;
 	
 	[ExportCategory("Screen Layouts")]
 	[Export] public PackedScene SingleplayerScreenLayout;
@@ -43,6 +44,8 @@ public partial class GameManager : Node
 	// constants that hui znaet where they should be
 	public const int BlockLayer = 1;
 	public const int CarLayer = 2;
+	public const int DeathY = -9;
+	public const int SplitScreenCullMaskStart = 10;
 
 	//more than one splirscreen screen
 	public bool IsSplitScreen = false;
@@ -53,6 +56,8 @@ public partial class GameManager : Node
 	private ScreenLayout _screenLayout;
 
 	public RandomNumberGenerator RNG = new RandomNumberGenerator();
+	
+	public Dictionary<int, FollowEffect> FollowEffects = new Dictionary<int, FollowEffect>();
 	
 	public override void _Ready()
 	{
@@ -66,7 +71,7 @@ public partial class GameManager : Node
 		
 		MusicPlayer.Finished += PlayNextSong;
 	}
-
+	
 	public override void _UnhandledInput(InputEvent @event)
 	{ 
 		if (@event.IsActionPressed(InputActionNames.Pause))
@@ -87,7 +92,7 @@ public partial class GameManager : Node
 			OS.LowProcessorUsageMode = false;
 			Engine.MaxFps = 0;
 		}
-		else if (what == NotificationApplicationFocusOut)
+		else if (what == NotificationApplicationFocusOut && !MultiplayerManager.Instance.OnServer)
 		{
 			OS.LowProcessorUsageMode = true;
 			Engine.MaxFps = 20;
@@ -110,20 +115,30 @@ public partial class GameManager : Node
 		_screenLayout = layoutScene.Instantiate<ScreenLayout>();
 		ScreenLayoutSlot.AddChild(_screenLayout);
 		
-		foreach (var viewport in _screenLayout.PlayerViewports)
-		{
-			viewport.MatchViewport(RootViewport);
-		}
+		MatchViewports();
 		
 		SetViewportsActive(false);
 	}
 
+	public void MatchViewports()
+	{
+		foreach (var viewport in _screenLayout.PlayerViewports)
+		{
+			viewport.CullLayer = SplitScreenCullMaskStart + viewport.LocalPlayerId;
+			viewport.MatchViewport(RootViewport);
+		}
+	}
+
 	public void Play(bool host = true)
 	{
+		MatchViewports();
+		
 		CarManager.Instance.Clear();
+
+		ClearFollowEffects();
 		
 		GameModeController.InitGameMode(host);
-		GameModeController.CurrentGameMode.InitTrack(TrackManager.Instance.Track);
+		GameModeController.LoadMap(TrackManager.Instance.Track);
 		
 		IsSplitScreen = _screenLayout.PlayerViewports.Count > 1;
 		
@@ -138,6 +153,8 @@ public partial class GameManager : Node
 				id = MultiplayerManager.Instance.PlayerInfo.PlayerId;
 			}
 			
+			viewport.PlayerId = id;
+			
 			if (isFirst)
 			{
 				isFirst = false;
@@ -147,8 +164,6 @@ public partial class GameManager : Node
 			{
 				GameModeController.CurrentGameMode.AddPlayer(id, GameModeUtils.PLAYER_LOCAL_SPLITSCREEN, "Player " + id);
 			}
-			
-			viewport.PlayerId = id;
 
 			if (TrackManager.Instance.Track.Options.Message != "")
 			{
@@ -179,7 +194,7 @@ public partial class GameManager : Node
 
 		_isPlaying = false;
 
-		GameModeController.CurrentGameMode.KillGame();
+		GameModeController.UnloadMap(TrackManager.Instance.Track);
 
 		if (MultiplayerManager.Instance.OnServer)
 		{
@@ -189,6 +204,8 @@ public partial class GameManager : Node
 		EmitSignalStoppedPlaying();
 			
 		MusicPlayer.Stop();
+
+		ClearFollowEffects();
 	}
 
 	public void SetViewportsActive(bool visible)
@@ -259,5 +276,69 @@ public partial class GameManager : Node
 			MusicPlayer.Play();
 			GD.Print(MusicPlayer.Stream.GetName());
 		}		
+	}
+
+	public PlayerViewport GetPlayerViewPortById(long id)
+	{
+		foreach (PlayerViewport port in _screenLayout.PlayerViewports)
+		{
+			if (port.PlayerId == id)
+			{
+				return port;
+			}
+		}
+
+		return null;
+	}
+	
+	public void SyncCameraVisuals(Camera3D camera, int cameraCullLayer)
+	{
+		if (!FollowEffects.ContainsKey(cameraCullLayer))
+		{
+			FollowEffects[cameraCullLayer] = TrackManager.Instance.Track.FeScene.Instantiate<FollowEffect>();
+			TrackManager.Instance.Track.AddChild(FollowEffects[cameraCullLayer]);
+		}
+		
+		for (int cull = SplitScreenCullMaskStart; cull < SplitScreenCullMaskStart + 8; cull++)
+		{
+			if (cull != cameraCullLayer)
+			{
+				camera.SetCullMaskValue(cull, false);
+			}
+			else
+			{
+				camera.SetCullMaskValue(cull, true);
+			}
+		}
+		
+		FollowEffects[cameraCullLayer].Weather.Emitting = TrackManager.Instance.Track.Options.Rain;
+		FollowEffects[cameraCullLayer].Weather.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, camera.GlobalPosition.Y+15, camera.GlobalPosition.Z));
+		FollowEffects[cameraCullLayer].Weather.SetLayerMaskValue(cameraCullLayer, true);
+		
+		FollowEffects[cameraCullLayer].Water.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, FollowEffects[cameraCullLayer].Water.GlobalPosition.Y, camera.GlobalPosition.Z));
+		FollowEffects[cameraCullLayer].Water.SetLayerMaskValue(cameraCullLayer, true);
+		
+		if (!TrackManager.Instance.Track.Options.Rain)
+		{
+			FollowEffects[cameraCullLayer].CollisionHeightField.Dispose();
+		}
+		else
+		{
+			FollowEffects[cameraCullLayer].CollisionHeightField.SetGlobalPosition(new Vector3(camera.GlobalPosition.X, camera.GlobalPosition.Y + 20, camera.GlobalPosition.Z));
+		}
+	}
+
+	private void ClearFollowEffects()
+	{
+		foreach (KeyValuePair<int, FollowEffect> kv in FollowEffects)
+		{
+			TrackManager.Instance.Track.RemoveChild(kv.Value);
+			kv.Value.Water.Dispose();
+			kv.Value.Weather.Dispose();
+			kv.Value.CollisionHeightField.Dispose();
+			kv.Value.Dispose();
+		}
+		
+		FollowEffects.Clear();
 	}
 }

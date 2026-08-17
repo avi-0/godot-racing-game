@@ -25,8 +25,8 @@ public partial class SettingsMenu : Control
 	[Export] public OptionButton WinMode;
 	[Export] public OptionButton Aa;
 	[Export] public OptionButton Vsync;
-	[Export] public OptionButton ShadowFilterQuality;
-	[Export] public OptionButton ShadowAtlasSize;
+	[Export] public OptionButton ShadowQuality;
+	[Export] public OptionButton PerfMon;
 	
 	[Export] public Slider SoundSlider;
 	[Export] public Slider MusicSlider;
@@ -45,7 +45,7 @@ public partial class SettingsMenu : Control
 		SoundSlider.DragEnded += _ => OnSoundSettingChanged();
 		MusicSlider.DragEnded += _ => OnSoundSettingChanged();
 		TDrs.DragEnded += _ => OnGraphicsSettingChanged();
-		foreach (var optionButton in new List<OptionButton> {ScaleMode, WinMode, Aa, Vsync, ShadowFilterQuality, ShadowAtlasSize})
+		foreach (var optionButton in new List<OptionButton> {ScaleMode, WinMode, Aa, Vsync, ShadowQuality})
 		{
 			optionButton.ItemSelected += _ => OnGraphicsSettingChanged();
 		}
@@ -68,11 +68,15 @@ public partial class SettingsMenu : Control
 		};
 		BackButton.Pressed += OnBackButton;
 
+		/*
 		foreach (var size in ShadowAtlasSizes)
 		{
 			var text = size == 0 ? "None" : size.ToString();
 			ShadowAtlasSize.AddItem(text, size);
 		}
+		*/
+
+		PerfMon.ItemSelected += _ => OnGraphicsSettingChanged();
 	}
 	
 	private void UpdateUiFromSettings()
@@ -84,8 +88,9 @@ public partial class SettingsMenu : Control
 		Aa.Selected = settings.Graphics.Antialiasing;
 		Vsync.Selected = settings.Graphics.Vsync;
 		WinMode.Selected = settings.Graphics.WindowMode;
-		ShadowFilterQuality.Selected = settings.Graphics.ShadowFilterQuality;
-		ShadowAtlasSize.Selected = ShadowAtlasSize.GetItemIndex(settings.Graphics.ShadowAtlasSize);
+		ShadowQuality.Selected = settings.Graphics.ShadowQuality;
+		//ShadowAtlasSize.Selected = ShadowAtlasSize.GetItemIndex(settings.Graphics.ShadowAtlasSize);
+		PerfMon.Selected = 1; if (!settings.PerfMonEnabled) { PerfMon.Selected = 0;}
 
 		SoundSlider.Value = settings.Sound.SfxLevel;
 		MusicSlider.Value = settings.Sound.MusicLevel;
@@ -109,8 +114,9 @@ public partial class SettingsMenu : Control
 		settings.Graphics.Antialiasing = Aa.Selected;
 		settings.Graphics.Vsync = Vsync.Selected;
 		settings.Graphics.WindowMode = WinMode.Selected;
-		settings.Graphics.ShadowFilterQuality = ShadowFilterQuality.Selected;
-		settings.Graphics.ShadowAtlasSize = ShadowAtlasSize.GetSelectedId();
+		settings.Graphics.ShadowQuality = ShadowQuality.Selected;
+		//settings.Graphics.ShadowAtlasSize = ShadowAtlasSize.GetSelectedId();
+		settings.PerfMonEnabled = PerfMon.Selected > 0;
 
 		settings.Sound.SfxLevel = SoundSlider.Value;
 		settings.Sound.MusicLevel = MusicSlider.Value;

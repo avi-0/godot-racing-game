@@ -11,11 +11,10 @@ config_version=5
 [application]
 
 config/name="cartopia"
-config/version="0.1.1"
+config/version="0.1.8"
 run/main_scene="uid://quenom6jkxmi"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
-boot_splash/fullsize=false
-boot_splash/image="uid://du74tb2gnkhxk"
+boot_splash/image="uid://bc5ncwb8874wr"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -324,11 +323,26 @@ game_hide_ui={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":13,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+game_hide_ghost={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":71,"key_label":0,"unicode":103,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":14,"pressure":0.0,"pressed":true,"script":null)
+]
+}
 
 [layer_names]
 
 3d_render/layer_1="default"
 3d_render/layer_2="editor_overlays"
+3d_render/layer_3="trails"
+3d_render/layer_10="Splitscreen Player 1"
+3d_render/layer_11="Splitscreen Player 2"
+3d_render/layer_12="Splitscreen Player 3"
+3d_render/layer_13="Splitscreen Player 4"
+3d_render/layer_14="Splitscreen Player 5"
+3d_render/layer_15="Splitscreen Player 6"
+3d_render/layer_16="Splitscreen Player 7"
+3d_render/layer_17="Splitscreen Player 8"
 3d_physics/layer_1="blocks"
 3d_physics/layer_2="cars"
 

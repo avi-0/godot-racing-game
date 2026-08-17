@@ -42,6 +42,7 @@ data = PackedVector3Array(-0.012499999, 0.59999996, -0.012499999, 0.012499999, 0
 
 [node name="light-square" type="Node3D"]
 script = ExtResource("1_c8lc5")
+HasLight = true
 
 [node name="light-square2" type="Node3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)

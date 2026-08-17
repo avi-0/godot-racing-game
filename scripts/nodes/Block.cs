@@ -21,6 +21,8 @@ public partial class Block : Node3D
 	[Export] public bool IsStart = false;
 	[Export] public bool IsBooster = false;
 	[Export] public bool IsBumper = false;
+	[Export] public bool IsPhysical = false;
+	[Export] public bool HasLight = false;
 	[Export] public Node3D SpawnPointNode;
 
 	public Transform3D SpawnPoint =>

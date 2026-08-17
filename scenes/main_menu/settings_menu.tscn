@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://m1qpnrxiyo34"]
+[gd_scene load_steps=7 format=3 uid="uid://m1qpnrxiyo34"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_cr101"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/ui/SettingsMenu.cs" id="2_wswnh"]
-[ext_resource type="Theme" uid="uid://bsps78iirgjnp" path="res://scenes/main_menu/controls_menu_theme.tres" id="3_7upf4"]
 [ext_resource type="Script" uid="uid://bqqa0tfwkhmp0" path="res://scripts/ui/KeyboardRemapButton.cs" id="4_2jsdb"]
 [ext_resource type="Script" uid="uid://1uq1ee3c3fje" path="res://scripts/ui/JoypadRemapButton.cs" id="5_t0huu"]
 
@@ -12,7 +11,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowFilterQuality", "ShadowAtlasSize", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton", "BackButton")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowQuality", "PerfMon", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton", "BackButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,8 +25,8 @@ ScaleMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabCon
 WinMode = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/winopt")
 Aa = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/aaopt")
 Vsync = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/vsyncopt")
-ShadowFilterQuality = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/shadow_filter_quality_opt")
-ShadowAtlasSize = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/shadow_atlas_opt")
+ShadowQuality = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/shadow_quality_opt")
+PerfMon = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/perfmonop")
 SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/soundslider")
 MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
 ControlsContainer = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer")
@@ -161,31 +160,53 @@ popup/item_2/id = 2
 
 [node name="shadow_filter_quality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
-text = "Shadow Filter Quality"
+text = "Shadow Quality"
 
-[node name="shadow_filter_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="shadow_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
 layout_mode = 2
-selected = 2
-item_count = 6
-popup/item_0/text = "Hard Only"
+selected = 4
+allow_reselect = true
+item_count = 9
+popup/item_0/text = "Disable"
 popup/item_0/id = 0
-popup/item_1/text = "Very Low"
+popup/item_1/text = "Potato"
 popup/item_1/id = 1
-popup/item_2/text = "Low"
+popup/item_2/text = "Potato+"
 popup/item_2/id = 2
-popup/item_3/text = "Medium"
+popup/item_3/text = "Very Low"
 popup/item_3/id = 3
-popup/item_4/text = "High"
+popup/item_4/text = "Low"
 popup/item_4/id = 4
-popup/item_5/text = "Ultra"
+popup/item_5/text = "Medium"
 popup/item_5/id = 5
+popup/item_6/text = "High"
+popup/item_6/id = 6
+popup/item_7/text = "Very High"
+popup/item_7/id = 7
+popup/item_8/text = "Ultra"
+popup/item_8/id = 8
 
 [node name="shadow_atlas" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+visible = false
 layout_mode = 2
 text = "Shadow Atlas Size"
 
 [node name="shadow_atlas_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+visible = false
 layout_mode = 2
+
+[node name="perfmon" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+layout_mode = 2
+text = "Performance Monitor"
+
+[node name="perfmonop" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "OFF"
+popup/item_0/id = 0
+popup/item_1/text = "ON"
+popup/item_1/id = 1
 
 [node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]
 layout_mode = 2
@@ -255,7 +276,6 @@ autowrap_mode = 3
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("3_7upf4")
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 3
@@ -401,6 +421,20 @@ Action = &"game_hide_ui"
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_hide_ui"
+
+[node name="hideghost" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+text = "Hide PB Ghost"
+
+[node name="hideghost_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("4_2jsdb")
+Action = &"game_hide_ghost"
+
+[node name="hideghost_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_hide_ghost"
 
 [node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls"]
 layout_mode = 2

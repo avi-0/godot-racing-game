@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace racingGame;
@@ -30,5 +31,19 @@ public partial class GameModeController : Node
 	{
 		IsHost = Host;
 		CurrentGameMode.InitGameMode();
+	}
+
+	public static void LoadMap(Track track)
+	{
+		track.ResetPhysBlocks(false);
+
+		CurrentGameMode.InitTrack(track);
+	}
+
+	public static void UnloadMap(Track track)
+	{
+		track.ResetPhysBlocks(true);
+		
+		CurrentGameMode.KillGame();
 	}
 }

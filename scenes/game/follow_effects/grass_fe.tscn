@@ -1,0 +1,120 @@
+[gd_scene load_steps=15 format=3 uid="uid://b1ktamia67lg0"]
+
+[ext_resource type="Script" uid="uid://cl6yfro35h7s6" path="res://scripts/nodes/FollowEffect.cs" id="1_g7doi"]
+[ext_resource type="Shader" uid="uid://dwwouujmd33h" path="res://shaders/watershader.gdshader" id="2_71sgg"]
+[ext_resource type="Texture2D" uid="uid://btg22umurlyyk" path="res://assets/img/water.png" id="3_rw75r"]
+[ext_resource type="Texture2D" uid="uid://x8r8ys4xlecm" path="res://assets/img/Circle.png" id="4_w3a8l"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_myyg0"]
+noise_type = 3
+seed = 1337
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4lyri"]
+noise = SubResource("FastNoiseLite_myyg0")
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6bytw"]
+noise_type = 3
+seed = 1337
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lk6yy"]
+noise = SubResource("FastNoiseLite_6bytw")
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hb6dr"]
+render_priority = 0
+shader = ExtResource("2_71sgg")
+shader_parameter/albedo = Color(0, 0.93820214, 0.9973149, 1)
+shader_parameter/texture_albedo = ExtResource("3_rw75r")
+shader_parameter/albedo_texture_size = Vector2i(512, 512)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_lk6yy")
+shader_parameter/refraction = 0.5
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_4lyri")
+shader_parameter/normal_scale = 1.0
+shader_parameter/rim = 1.0
+shader_parameter/rim_tint = 0.9
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.05, 0.05, 0.05)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yq6pf"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(20482, 20482)
+material = SubResource("ShaderMaterial_hb6dr")
+size = Vector2(4096, 4096)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7l00h"]
+resource_local_to_scene = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 0.5, 50)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+color = Color(0.81614345, 0.85428035, 0.87795407, 1)
+collision_mode = 1
+collision_friction = 0.1
+collision_bounce = 0.02
+
+[sub_resource type="Curve" id="Curve_hb6dr"]
+_limits = [0.0, 0.1, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.08163266, 0.038545452), 0.38315782, 0.38315782, 0, 0, Vector2(1, 0), 0.0072184745, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bytw"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_w3a8l")
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_31dv0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6bytw")
+size = 0.2
+sections = 3
+curve = SubResource("Curve_hb6dr")
+
+[node name="GrassFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
+script = ExtResource("1_g7doi")
+Water = NodePath("Water")
+Weather = NodePath("Weather")
+CollisionHeightField = NodePath("GPUParticlesCollisionHeightField3D")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+layers = 0
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("PlaneMesh_yq6pf")
+
+[node name="Weather" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.924017, 0)
+layers = 0
+emitting = false
+amount = 3000
+lifetime = 2.0
+randomness = 0.9
+visibility_aabb = AABB(-10, -20, -10, 20, 30, 20)
+trail_enabled = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_7l00h")
+draw_pass_1 = SubResource("RibbonTrailMesh_31dv0")
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
+size = Vector3(100, 50, 100)

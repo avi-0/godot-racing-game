@@ -62,4 +62,16 @@ public partial class InputManager : Node
 		var device = _devices[player];
 		return GetDevice(@event)?.Equals(device) ?? false;
 	}
+
+	public void VibratePlayer(int player, float weak, float strong, float duration)
+	{
+		if (_devices.Count == 0 || player < 0 || player >= _devices.Count)
+		{
+			Input.StartJoyVibration(0, weak, strong, duration);
+		}
+		else if (_devices[player] != null && _devices[player] is InputDeviceJoypad joypad)
+		{
+			Input.StartJoyVibration(joypad.DeviceId, weak, strong, duration);
+		}
+	}
 }

@@ -117,7 +117,7 @@ shape = SubResource("ConvexPolygonShape3D_g3c1d")
 [node name="tractor-shovel" parent="." instance=ExtResource("4_g3c1d")]
 
 [node name="wheel-back-left" parent="tractor-shovel" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52, 0.4, -0.7)
 
 [node name="wheel-front-left" parent="tractor-shovel" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.24, 0.42)
@@ -126,12 +126,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.24, 0.42)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.24, 0.42)
 
 [node name="wheel-back-right" parent="tractor-shovel" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52, 0.4, -0.7)
 
 [node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.24, 0.42)
 shape = SubResource("SphereShape3D_1ddeo")
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.15
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
 remote_path = NodePath("../../tractor-shovel/wheel-front-left")
@@ -140,31 +141,37 @@ remote_path = NodePath("../../tractor-shovel/wheel-front-left")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.24, 0.42)
 shape = SubResource("SphereShape3D_qe0ku")
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.15
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
 remote_path = NodePath("../../tractor-shovel/wheel-front-right")
 
 [node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.4, -0.7)
 shape = SubResource("SphereShape3D_g3c1d")
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.3
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0, 0)
 remote_path = NodePath("../../tractor-shovel/wheel-back-left")
 
 [node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.4, -0.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.4, -0.7)
 shape = SubResource("SphereShape3D_hwmkx")
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
+SkidmarkWidth = 0.3
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0, 0)
 remote_path = NodePath("../../tractor-shovel/wheel-back-right")
 
 [node name="CarCommon" parent="." instance=ExtResource("6_s6ltu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61319387, 0)
 
 [node name="FrontCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.0441471, -0.08357653)

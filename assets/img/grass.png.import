@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ujcsnu80uge7"
-path="res://.godot/imported/gold_lock.png-c6cbaa04567e36e12b602adb8609d935.ctex"
+uid="uid://5lmr8j4dcyq3"
+path.s3tc="res://.godot/imported/grass.png-5fc174a924d07e38f0c3923946eeb8b3.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://blocks/deco/_scenes/gold_lock.png"
-dest_files=["res://.godot/imported/gold_lock.png-c6cbaa04567e36e12b602adb8609d935.ctex"]
+source_file="res://assets/img/grass.png"
+dest_files=["res://.godot/imported/grass.png-5fc174a924d07e38f0c3923946eeb8b3.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -37,4 +38,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
