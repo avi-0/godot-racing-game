@@ -323,10 +323,9 @@ public class GameModeTimeAttack : IGameMode
 
 		if (player.State == GameModeUtils.PLAYER_STATE_PLAYING && player.RaceData.CheckPointsCollected.Count == _currentTrack.CheckPointCount)
 		{
-			player.RaceData.LapsDone++;
-
-			if (player.RaceData.LapsDone < _currentTrack.Track.Options.Laps)
+			if (player.RaceData.LapsDone+1 < _currentTrack.Track.Options.Laps)
 			{
+				player.RaceData.LapsDone++;
 				player.RaceData.CheckPointsCollected = new List<int>();
 				
 				Transform3D spawn = TrackManager.Instance.GetStartPoint();
