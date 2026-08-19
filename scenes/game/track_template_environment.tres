@@ -105,7 +105,6 @@ glow_normalized = true
 glow_intensity = 1.0
 glow_strength = 0.6
 glow_bloom = 0.05
-glow_blend_mode = 0
 fog_light_color = Color(0.15803462, 0.17550427, 0.20268732, 1)
 fog_sky_affect = 0.0
 volumetric_fog_density = 0.1
