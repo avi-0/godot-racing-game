@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://dok0if2iog0no"]
+[gd_scene format=4 uid="uid://dok0if2iog0no"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_qtbni"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_dg6r6"]
@@ -248,7 +248,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3ocps")
 
-[node name="Car2" type="RigidBody3D" node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
+[node name="Car2" type="RigidBody3D" unique_id=1419133245 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 35.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -283,88 +283,88 @@ CarName = "Sport"
 CarDescription = "Fast on the straights and around corners, this beast can do anything! If you have the skill to handle it.."
 Skins = Array[Material]([ExtResource("3_8lcft"), ExtResource("4_yrqru"), ExtResource("5_2t0n8"), ExtResource("6_8lcft")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=980466963]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0048357993, 0)
 shape = SubResource("ConvexPolygonShape3D_yrqru")
 
-[node name="WheelFL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
+[node name="WheelFL" parent="." unique_id=1246587200 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.22163354, 0.55)
 max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL" unique_id=1660286868]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 remote_path = NodePath("../../Prototype_Car/FLW")
 
-[node name="WheelFR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
+[node name="WheelFR" parent="." unique_id=31243168 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.22163354, 0.55)
 max_results = 1
 WheelModel = NodePath("RemoteTransform3D")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR" unique_id=1123913041]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 remote_path = NodePath("../../Prototype_Car/FRW")
 
-[node name="WheelBL" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
+[node name="WheelBL" parent="." unique_id=1344432381 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.22163354, -0.5)
 max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBL" unique_id=250659806]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 remote_path = NodePath("../../Prototype_Car/RLW")
 
-[node name="WheelBR" parent="." node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
+[node name="WheelBR" parent="." unique_id=1205780133 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.22163354, -0.5)
 max_results = 1
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelBR" unique_id=1425495421]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 remote_path = NodePath("../../Prototype_Car/RRW")
 
-[node name="CarCommon" parent="." instance=ExtResource("5_qtbni")]
+[node name="CarCommon" parent="." unique_id=1832816281 instance=ExtResource("5_qtbni")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20387608, 0)
 
-[node name="FrontCamera" type="Camera3D" parent="."]
+[node name="FrontCamera" type="Camera3D" parent="." unique_id=655175277]
 transform = Transform3D(-1, 0, -8.742278e-08, -5.614962e-10, 0.9999794, 0.0064227674, 8.742097e-08, 0.0064227674, -0.9999794, 0, 0.43103254, 0.57892364)
 
-[node name="Headlights" parent="." instance=ExtResource("7_dg6r6")]
+[node name="Headlights" parent="." unique_id=53652753 instance=ExtResource("7_dg6r6")]
 transform = Transform3D(-1, 2.546745e-08, -1.2514286e-07, -1.7358442e-08, 0.9437144, 0.3307615, 1.2652278e-07, 0.3307615, -0.9437144, 0, 0.21423426, 1.0293632)
 
-[node name="PlayerName3D" type="MeshInstance3D" parent="."]
+[node name="PlayerName3D" type="MeshInstance3D" parent="." unique_id=917446310]
 transform = Transform3D(-1, -3.0079662e-15, 8.742278e-08, -4.2142972e-08, 0.8761385, -0.4820595, -7.659445e-08, -0.4820595, -0.8761385, 0, 0.23244113, -0.84498763)
 mesh = SubResource("TextMesh_dg6r6")
 
-[node name="Prototype_Car" type="Node3D" parent="."]
+[node name="Prototype_Car" type="Node3D" parent="." unique_id=912424812]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Body" type="MeshInstance3D" parent="Prototype_Car"]
+[node name="Body" type="MeshInstance3D" parent="Prototype_Car" unique_id=1946236495]
 mesh = SubResource("ArrayMesh_n1iou")
 skeleton = NodePath("")
 
-[node name="FLW" type="MeshInstance3D" parent="Prototype_Car"]
+[node name="FLW" type="MeshInstance3D" parent="Prototype_Car" unique_id=1282442958]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74, 0.44326708, 1.1)
 mesh = SubResource("ArrayMesh_fjdvg")
 skeleton = NodePath("")
 
-[node name="RLW" type="MeshInstance3D" parent="Prototype_Car"]
+[node name="RLW" type="MeshInstance3D" parent="Prototype_Car" unique_id=1051602654]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74, 0.44326708, -1)
 mesh = SubResource("ArrayMesh_cklni")
 skeleton = NodePath("")
 
-[node name="RRW" type="MeshInstance3D" parent="Prototype_Car"]
+[node name="RRW" type="MeshInstance3D" parent="Prototype_Car" unique_id=1740587367]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.74, 0.44326708, -1)
 mesh = SubResource("ArrayMesh_7fbkd")
 skeleton = NodePath("")
 
-[node name="FRW" type="MeshInstance3D" parent="Prototype_Car"]
+[node name="FRW" type="MeshInstance3D" parent="Prototype_Car" unique_id=1953633515]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.74, 0.44326708, 1.1)
 mesh = SubResource("ArrayMesh_blpu5")
 skeleton = NodePath("")
 
-[node name="MultiplayerSynchronizer" parent="." instance=ExtResource("11_yrqru")]
+[node name="MultiplayerSynchronizer" parent="." unique_id=267651533 instance=ExtResource("11_yrqru")]

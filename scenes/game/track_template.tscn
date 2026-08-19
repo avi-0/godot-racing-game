@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ywlk133yau03"]
+[gd_scene format=3 uid="uid://ywlk133yau03"]
 
 [ext_resource type="Script" uid="uid://c1tvycuj08dj6" path="res://scripts/nodes/Track.cs" id="1_enrm2"]
 [ext_resource type="Environment" uid="uid://ctnutos5v0lkx" path="res://scenes/game/track_template_environment.tres" id="3_i06yk"]
@@ -10,7 +10,7 @@
 
 [sub_resource type="VoxelGIData" id="VoxelGIData_i06yk"]
 
-[node name="Track" type="Node3D" node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon", "TrackVoxelGI")]
+[node name="Track" type="Node3D" unique_id=1937638531 node_paths=PackedStringArray("TimeOfDay", "Sun", "Moon", "TrackVoxelGI")]
 physics_interpolation_mode = 2
 script = ExtResource("1_enrm2")
 TimeOfDay = NodePath("Sky3D/TimeOfDay")
@@ -25,7 +25,7 @@ metadata/LapsCount = "0"
 metadata/MapType = "Race"
 metadata/AuthorTime = "0"
 
-[node name="Sky3D" type="WorldEnvironment" parent="."]
+[node name="Sky3D" type="WorldEnvironment" parent="." unique_id=1426807051]
 environment = ExtResource("3_i06yk")
 camera_attributes = SubResource("CameraAttributesPractical_1stiv")
 script = ExtResource("10_gj4c4")
@@ -37,7 +37,7 @@ sun_shadow_opacity = 0.8
 wind_direction = 2.35619451204804
 metadata/_custom_type_script = "uid://deo0gxkmk2ahd"
 
-[node name="SunLight" type="DirectionalLight3D" parent="Sky3D"]
+[node name="SunLight" type="DirectionalLight3D" parent="Sky3D" unique_id=936358246]
 transform = Transform3D(0, -0.5542859, 0.83232635, -0.5854001, 0.6748041, 0.44938427, -0.8107446, -0.48724392, -0.324479, 0.83232635, 0.44938427, -0.324479)
 light_color = Color(0.99797535, 0.9517126, 0.9285306, 1)
 light_energy = 1.5
@@ -45,12 +45,12 @@ shadow_enabled = true
 shadow_bias = 0.005
 shadow_opacity = 0.8
 
-[node name="MoonLight" type="DirectionalLight3D" parent="Sky3D"]
+[node name="MoonLight" type="DirectionalLight3D" parent="Sky3D" unique_id=399735204]
 transform = Transform3D(0, -0.71860963, -0.69541365, 0.60077465, 0.55592644, -0.5744698, 0.7994184, -0.4177869, 0.4317225, -0.69541365, -0.5744698, 0.4317225)
 light_color = Color(0.572549, 0.776471, 0.956863, 1)
 light_energy = 0.0
 
-[node name="SkyDome" type="Node" parent="Sky3D"]
+[node name="SkyDome" type="Node" parent="Sky3D" unique_id=358385151]
 script = ExtResource("11_aprr0")
 tonemap_level = 0.5
 ground_color = Color(1, 1, 1, 1)
@@ -65,7 +65,7 @@ atm_day_tint = Color(0.7539982, 0.88494706, 0.99999994, 1)
 fog_visible = false
 wind_direction = 2.35619451204804
 
-[node name="TimeOfDay" type="Node" parent="Sky3D"]
+[node name="TimeOfDay" type="Node" parent="Sky3D" unique_id=997208034]
 script = ExtResource("12_2inyt")
 editor_time_enabled = false
 game_time_enabled = false
@@ -76,7 +76,7 @@ latitude = 0.0
 longitude = 0.0
 utc = 0.0
 
-[node name="VoxelGI" type="VoxelGI" parent="."]
+[node name="VoxelGI" type="VoxelGI" parent="." unique_id=2045574955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28134155, 50.98694, -14.77356)
 size = Vector3(539.6785, 105.90259, 557.66724)
 data = SubResource("VoxelGIData_i06yk")

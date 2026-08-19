@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1ktamia67lg0"]
+[gd_scene format=3 uid="uid://b1ktamia67lg0"]
 
 [ext_resource type="Script" uid="uid://cl6yfro35h7s6" path="res://scripts/nodes/FollowEffect.cs" id="1_g7doi"]
 [ext_resource type="Shader" uid="uid://dwwouujmd33h" path="res://shaders/watershader.gdshader" id="2_71sgg"]
@@ -90,20 +90,20 @@ size = 0.2
 sections = 3
 curve = SubResource("Curve_hb6dr")
 
-[node name="GrassFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
+[node name="GrassFe" type="Node3D" unique_id=48615237 node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
 script = ExtResource("1_g7doi")
 Water = NodePath("Water")
 Weather = NodePath("Weather")
 CollisionHeightField = NodePath("GPUParticlesCollisionHeightField3D")
 
-[node name="Water" type="MeshInstance3D" parent="."]
+[node name="Water" type="MeshInstance3D" parent="." unique_id=1628555998]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
 layers = 0
 cast_shadow = 0
 ignore_occlusion_culling = true
 mesh = SubResource("PlaneMesh_yq6pf")
 
-[node name="Weather" type="GPUParticles3D" parent="."]
+[node name="Weather" type="GPUParticles3D" parent="." unique_id=340915446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.924017, 0)
 layers = 0
 emitting = false
@@ -116,6 +116,6 @@ trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_7l00h")
 draw_pass_1 = SubResource("RibbonTrailMesh_31dv0")
 
-[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="." unique_id=766938123]
 size = Vector3(100, 50, 100)
 resolution = 1
