@@ -18,7 +18,7 @@ public class GameSettings
 	public class GraphicsSettings
 	{
 		public double RenderScale = 100;
-		public int ScaleMode = 1;
+		public int ScaleMode = 0;
 		public int Antialiasing = 0;
 		public int Vsync = 1;
 		public int WindowMode = 2;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://m1qpnrxiyo34"]
+[gd_scene format=3 uid="uid://m1qpnrxiyo34"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_cr101"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/ui/SettingsMenu.cs" id="2_wswnh"]
@@ -11,7 +11,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowQuality", "PerfMon", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton", "BackButton")]
+[node name="SettingsMenu" type="Control" unique_id=478260255 node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowQuality", "PerfMon", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton", "BackButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +35,7 @@ ResetSoundButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer
 ResetControlsButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/ResetButton")
 BackButton = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/BackButton")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1336579459]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,47 +43,47 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="MarginContainer"]
+[node name="Panel" type="PanelContainer" parent="MarginContainer" unique_id=855129558]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=228908657]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=615984821]
 layout_mode = 2
 
-[node name="TabContainer" type="TabContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=58465728]
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
 current_tab = 0
 
-[node name="Graphics" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+[node name="Graphics" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1737519709]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics" unique_id=1458116281]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GraphicsSettingsContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer"]
+[node name="GraphicsSettingsContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer" unique_id=1409442797]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="3drenderscale" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="3drenderscale" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=809480388]
 layout_mode = 2
 text = "3D Render Scale"
 
-[node name="3drsslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="3drsslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=899076257]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -94,26 +94,28 @@ tick_count = 16
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="scaletype" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=1982995592]
 layout_mode = 2
 text = "3D Scaling Mode"
 
-[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="scaletypeopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=832276285]
 layout_mode = 2
 selected = 0
-item_count = 3
-popup/item_0/text = "Bilinear"
-popup/item_0/id = 0
-popup/item_1/text = "FSR 1.0"
-popup/item_1/id = 1
-popup/item_2/text = "FSR 2.2"
-popup/item_2/id = 2
+item_count = 4
+popup/item_0/text = "Nearest"
+popup/item_0/id = 5
+popup/item_1/text = "Bilinear"
+popup/item_1/id = 0
+popup/item_2/text = "FSR 1.0"
+popup/item_2/id = 1
+popup/item_3/text = "FSR 2.2"
+popup/item_3/id = 2
 
-[node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=609756460]
 layout_mode = 2
 text = "Anti-Aliasing"
 
-[node name="aaopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="aaopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=1760942970]
 layout_mode = 2
 selected = 0
 item_count = 6
@@ -130,11 +132,11 @@ popup/item_4/id = 4
 popup/item_5/text = "MSAA 8X"
 popup/item_5/id = 5
 
-[node name="vsync" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="vsync" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=1387469894]
 layout_mode = 2
 text = "V-Sync"
 
-[node name="vsyncopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="vsyncopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=579970381]
 layout_mode = 2
 selected = 1
 item_count = 2
@@ -143,11 +145,11 @@ popup/item_0/id = 0
 popup/item_1/text = "ON"
 popup/item_1/id = 1
 
-[node name="winmode" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="winmode" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=1549432389]
 layout_mode = 2
 text = "Window Mode"
 
-[node name="winopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="winopt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=1452646978]
 layout_mode = 2
 selected = 2
 item_count = 3
@@ -158,11 +160,11 @@ popup/item_1/id = 1
 popup/item_2/text = "Exclusive"
 popup/item_2/id = 2
 
-[node name="shadow_filter_quality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="shadow_filter_quality" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=2127088387]
 layout_mode = 2
 text = "Shadow Quality"
 
-[node name="shadow_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="shadow_quality_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=608596722]
 layout_mode = 2
 selected = 4
 allow_reselect = true
@@ -186,20 +188,20 @@ popup/item_7/id = 7
 popup/item_8/text = "Ultra"
 popup/item_8/id = 8
 
-[node name="shadow_atlas" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="shadow_atlas" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=1112980247]
 visible = false
 layout_mode = 2
 text = "Shadow Atlas Size"
 
-[node name="shadow_atlas_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="shadow_atlas_opt" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=42201136]
 visible = false
 layout_mode = 2
 
-[node name="perfmon" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="perfmon" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=385548399]
 layout_mode = 2
 text = "Performance Monitor"
 
-[node name="perfmonop" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer"]
+[node name="perfmonop" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=990893871]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -208,27 +210,27 @@ popup/item_0/id = 0
 popup/item_1/text = "ON"
 popup/item_1/id = 1
 
-[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics"]
+[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics" unique_id=196318334]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Reset to Default"
 
-[node name="Sound" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+[node name="Sound" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1982069527]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 32
 metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound" unique_id=149975459]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="sound" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="sound" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer" unique_id=1409148808]
 layout_mode = 2
 text = "Sound Volume"
 
-[node name="soundslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="soundslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer" unique_id=1698103537]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -237,11 +239,11 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="music" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="music" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer" unique_id=1927338184]
 layout_mode = 2
 text = "Music Volume"
 
-[node name="musicslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer"]
+[node name="musicslider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer" unique_id=606499390]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -250,198 +252,198 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound"]
+[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound" unique_id=513834764]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Reset to Default"
 
-[node name="Controls" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer"]
+[node name="Controls" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1267809377]
 visible = false
 layout_mode = 2
 horizontal_scroll_mode = 0
 metadata/_tab_index = 2
 
-[node name="Controls" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls"]
+[node name="Controls" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls" unique_id=2134910270]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls"]
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls" unique_id=121225602]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Left click to add a new binding. Right click to remove all bindings."
 autowrap_mode = 3
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls" unique_id=885890588]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 3
 
-[node name="Control" type="Control" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Control" type="Control" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=676233511]
 layout_mode = 2
 
-[node name="Keyboard" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Keyboard" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=334099715]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Keyboard"
 horizontal_alignment = 1
 
-[node name="Controller" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Controller" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=429837318]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Controller"
 horizontal_alignment = 1
 
-[node name="Throttle" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Throttle" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1052208214]
 layout_mode = 2
 text = "Throttle"
 
-[node name="throttle_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="throttle_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1698432651]
 layout_mode = 2
 autowrap_mode = 3
 script = ExtResource("4_2jsdb")
 Action = &"game_forward"
 
-[node name="throttle_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="throttle_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=601678117]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_forward"
 
-[node name="Brake" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Brake" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1745550416]
 layout_mode = 2
 text = "Brake/Reverse"
 
-[node name="brake_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="brake_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1336461730]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_back"
 
-[node name="brake_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="brake_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=292342957]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_back"
 
-[node name="Left" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Left" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=864599338]
 layout_mode = 2
 text = "Left"
 
-[node name="left_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="left_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1872522609]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_left"
 
-[node name="left_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="left_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=245070340]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_left"
 
-[node name="Right" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Right" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=256921131]
 layout_mode = 2
 text = "Right"
 
-[node name="right_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="right_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=814839605]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_right"
 
-[node name="right_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="right_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=127470409]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_right"
 
-[node name="Restart" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Restart" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=425924137]
 layout_mode = 2
 text = "Restart"
 
-[node name="restart_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="restart_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1728482313]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_restart"
 
-[node name="restart_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="restart_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1980811838]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_restart"
 
-[node name="Respawn" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Respawn" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1759852554]
 layout_mode = 2
 text = "Respawn"
 
-[node name="respawn_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="respawn_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=2048692999]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_respawn"
 
-[node name="respawn_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="respawn_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=481907692]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_respawn"
 
-[node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Camera" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1702042661]
 layout_mode = 2
 text = "Cycle Camera"
 
-[node name="camera_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="camera_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=100491816]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_cycle_camera"
 
-[node name="camera_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="camera_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=17647409]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_cycle_camera"
 
-[node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1571822621]
 layout_mode = 2
 text = "Toggle Headlights"
 
-[node name="lights_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="lights_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=666636754]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_car_lights"
 
-[node name="lights_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="lights_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=2043287574]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_car_lights"
 
-[node name="hideui" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="hideui" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=24722543]
 layout_mode = 2
 text = "Toggle In-Game UI"
 
-[node name="hideui_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="hideui_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=341950599]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_hide_ui"
 
-[node name="hideui_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="hideui_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=866415644]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_hide_ui"
 
-[node name="hideghost" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="hideghost" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=136728569]
 layout_mode = 2
 text = "Hide PB Ghost"
 
-[node name="hideghost_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="hideghost_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=622251836]
 layout_mode = 2
 script = ExtResource("4_2jsdb")
 Action = &"game_hide_ghost"
 
-[node name="hideghost_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer"]
+[node name="hideghost_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=2124826247]
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_hide_ghost"
 
-[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls"]
+[node name="ResetButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls" unique_id=387212944]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Reset to Default"
 
-[node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=782946345]
 layout_mode = 2
 size_flags_horizontal = 4
 shortcut = SubResource("Shortcut_wswnh")

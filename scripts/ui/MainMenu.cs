@@ -89,6 +89,8 @@ public partial class MainMenu : Control
 
 		MainMenuContainer.VisibilityChanged += OnBackToMenu;
 		VisibilityChanged += OnBackToMenu;
+		
+		SettingsManager.Instance.ApplySettings();
 	}
 
 	public override void _ExitTree()
