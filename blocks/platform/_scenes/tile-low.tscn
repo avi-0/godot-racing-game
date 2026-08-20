@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://cy4p5ub0hp5s5"]
+[gd_scene format=4 uid="uid://cy4p5ub0hp5s5"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_tkm63"]
 [ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_tkm63"]
@@ -38,17 +38,18 @@ shadow_mesh = SubResource("ArrayMesh_s6wi1")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kp15t"]
 data = PackedVector3Array(-0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.5, -0.5, 0, 0.5)
 
-[node name="tile-low" type="Node3D"]
+[node name="tile-low" type="Node3D" unique_id=296466845]
 script = ExtResource("1_tkm63")
 
-[node name="tile-low2" type="Node3D" parent="."]
+[node name="tile-low2" type="Node3D" parent="." unique_id=1804821748]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
-[node name="tile-low" type="MeshInstance3D" parent="tile-low2"]
+[node name="tile-low" type="MeshInstance3D" parent="tile-low2" unique_id=1998362953]
+transform = Transform3D(1, 0, 0, 0, 1.6, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_s64kg")
 skeleton = NodePath("")
 
-[node name="tile-low_col" type="StaticBody3D" parent="tile-low2/tile-low"]
+[node name="tile-low_col" type="StaticBody3D" parent="tile-low2/tile-low" unique_id=1002667004]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-low2/tile-low/tile-low_col"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-low2/tile-low/tile-low_col" unique_id=1996075852]
 shape = SubResource("ConcavePolygonShape3D_kp15t")
