@@ -1,54 +1,26 @@
-[gd_scene load_steps=6 format=4 uid="uid://bpq4vg8oqdowm"]
+[gd_scene format=3 uid="uid://bpq4vg8oqdowm"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_eti5j"]
 [ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_eti5j"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_lqmys"]
-_surfaces = [{
-"aabb": AABB(-0.5, 0, -0.5, 1, 0.52, 1),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMAAwAGAAIABwAFAAAAAwAFAAcAAAAEAAcABwAGAAMABwAEAAIAAgAGAAcA"),
-"name": "colormap",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAA////////AAAAAAAAAAAAAAAA2An//wAA/////wAAAAAAANgJAAAAAA==")
-}]
-blend_shape_mode = 0
+[sub_resource type="PrismMesh" id="PrismMesh_eti5j"]
+material = ExtResource("2_eti5j")
+left_to_right = 1.0
+size = Vector3(8, 4, 8)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_haqlb"]
-resource_name = "tile-slantHigh_tile-slantHigh"
-_surfaces = [{
-"aabb": AABB(-0.5, 0, -0.5, 1, 0.52, 1),
-"attribute_data": PackedByteArray("/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f"),
-"format": 34896613399,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
-"material": ExtResource("2_eti5j"),
-"name": "colormap",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAAAA////vwAAAAAAAP+/AADYCQAA/78AANgJ////v////////wCA//8AAP//AIAAAAAA//8AgAAA2An//wCAAADYCQAAaMv/////AABoy////////2jLAADYCf//aMv/////////v/////8AAP+///8AAAAA/7///wAA////vwAA2AkAAP//AAAAAAAA/////wAAAAD///////8AAP//AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f///YKM9uWCjPblgoz25YKM9uf9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_lqmys")
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kqf1t"]
+data = PackedVector3Array(4, 2, 4, 4, -2, 4, -4, -2, 4, 4, 2, -4, -4, -2, -4, 4, -2, -4, 4, 2, 4, 4, 2, -4, 4, -2, 4, 4, 2, -4, 4, -2, -4, 4, -2, 4, 4, 2, -4, 4, 2, 4, -4, -2, -4, 4, 2, 4, -4, -2, 4, -4, -2, -4, -4, -2, 4, 4, -2, 4, -4, -2, -4, 4, -2, 4, 4, -2, -4, -4, -2, -4)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q5440"]
-data = PackedVector3Array(-0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.5, -0.5, 0, 0.5, 0.5, 0.52, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.52, 0.5, -0.5, 0.02, -0.5, 0.5, 0.52, -0.5, 0.5, 0.52, 0.5, 0.5, 0.52, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, -0.5, 0.5, 0.52, 0.5, 0.5, 0.52, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.52, 0.5, -0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.52, -0.5, -0.5, 0.02, -0.5)
-
-[node name="tile-slantHigh" type="Node3D"]
+[node name="tile-slantHigh" type="Node3D" unique_id=1790466111]
 script = ExtResource("1_eti5j")
 
-[node name="tile-slantHigh2" type="Node3D" parent="."]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+[node name="tile-slantHigh2" type="Node3D" parent="." unique_id=1616334123]
 
-[node name="tile-slantHigh" type="MeshInstance3D" parent="tile-slantHigh2"]
-mesh = SubResource("ArrayMesh_haqlb")
-skeleton = NodePath("")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tile-slantHigh2" unique_id=2015009775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+mesh = SubResource("PrismMesh_eti5j")
 
-[node name="tile-slantHigh_col" type="StaticBody3D" parent="tile-slantHigh2/tile-slantHigh"]
+[node name="StaticBody3D" type="StaticBody3D" parent="tile-slantHigh2/MeshInstance3D" unique_id=1527774571]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-slantHigh2/tile-slantHigh/tile-slantHigh_col"]
-shape = SubResource("ConcavePolygonShape3D_q5440")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-slantHigh2/MeshInstance3D/StaticBody3D" unique_id=1077242353]
+shape = SubResource("ConcavePolygonShape3D_kqf1t")

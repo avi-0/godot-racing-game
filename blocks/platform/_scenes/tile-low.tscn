@@ -1,55 +1,25 @@
-[gd_scene format=4 uid="uid://cy4p5ub0hp5s5"]
+[gd_scene format=3 uid="uid://cy4p5ub0hp5s5"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_tkm63"]
 [ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_tkm63"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_s6wi1"]
-_surfaces = [{
-"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMAAwAGAAIABwAFAAAAAwAFAAcAAAAEAAcABwAGAAMABwAEAAIAAgAGAAcA"),
-"name": "colormap",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("AAD//wAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP//AAD/////AAAAAAAA/////wAA//8AAP//AAD///////8AAA==")
-}]
-blend_shape_mode = 0
+[sub_resource type="BoxMesh" id="BoxMesh_6aa1e"]
+material = ExtResource("2_tkm63")
+size = Vector3(8, 0.25, 8)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_s64kg"]
-resource_name = "tile-low_tile-low"
-_surfaces = [{
-"aabb": AABB(-0.5, 0, -0.5, 1, 0.02, 1),
-"attribute_data": PackedByteArray("/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f/+f/3//n/9//5//f"),
-"format": 34896613399,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
-"material": ExtResource("2_tkm63"),
-"name": "colormap",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("AAD//wAA//8AAAAAAAD/////AAAAAP///////wAA//////////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgP////////+//////wAA/7///wAAAAD/v///AAD///+/AAD//wAA////////AAD/////////////AAD///////8AAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/vwAAAAD///+/AAAAAAAA/78AAP//AAD/vwAA//////+//3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3//f////3////9/////f///")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_s6wi1")
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kp15t"]
-data = PackedVector3Array(-0.5, 0.02, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.02, -0.5, -0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, 0.5, 0.02, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, -0.5, 0.5, 0.02, -0.5, 0.5, 0.02, 0.5, 0.5, 0.02, 0.5, -0.5, 0.02, 0.5, -0.5, 0.02, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, -0.5, -0.5, 0.02, 0.5, -0.5, 0, 0.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tkm63"]
+data = PackedVector3Array(-4, 0.125, 4, 4, 0.125, 4, -4, -0.125, 4, 4, 0.125, 4, 4, -0.125, 4, -4, -0.125, 4, 4, 0.125, -4, -4, 0.125, -4, 4, -0.125, -4, -4, 0.125, -4, -4, -0.125, -4, 4, -0.125, -4, 4, 0.125, 4, 4, 0.125, -4, 4, -0.125, 4, 4, 0.125, -4, 4, -0.125, -4, 4, -0.125, 4, -4, 0.125, -4, -4, 0.125, 4, -4, -0.125, -4, -4, 0.125, 4, -4, -0.125, 4, -4, -0.125, -4, 4, 0.125, 4, -4, 0.125, 4, 4, 0.125, -4, -4, 0.125, 4, -4, 0.125, -4, 4, 0.125, -4, -4, -0.125, 4, 4, -0.125, 4, -4, -0.125, -4, 4, -0.125, 4, 4, -0.125, -4, -4, -0.125, -4)
 
 [node name="tile-low" type="Node3D" unique_id=296466845]
 script = ExtResource("1_tkm63")
 
 [node name="tile-low2" type="Node3D" parent="." unique_id=1804821748]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
-[node name="tile-low" type="MeshInstance3D" parent="tile-low2" unique_id=1998362953]
-transform = Transform3D(1, 0, 0, 0, 1.6, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("ArrayMesh_s64kg")
-skeleton = NodePath("")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tile-low2" unique_id=1090893713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("BoxMesh_6aa1e")
 
-[node name="tile-low_col" type="StaticBody3D" parent="tile-low2/tile-low" unique_id=1002667004]
+[node name="StaticBody3D" type="StaticBody3D" parent="tile-low2/MeshInstance3D" unique_id=1494129862]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-low2/tile-low/tile-low_col" unique_id=1996075852]
-shape = SubResource("ConcavePolygonShape3D_kp15t")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-low2/MeshInstance3D/StaticBody3D" unique_id=1957550935]
+shape = SubResource("ConcavePolygonShape3D_tkm63")

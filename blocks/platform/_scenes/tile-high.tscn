@@ -45,7 +45,7 @@ script = ExtResource("1_ftfx5")
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
 [node name="tile-high" type="MeshInstance3D" parent="tile-high2" unique_id=912117079]
-transform = Transform3D(1, 0, 0, 0, 1.08, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1.125, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_i3lc1")
 skeleton = NodePath("")
 
