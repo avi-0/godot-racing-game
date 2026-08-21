@@ -234,7 +234,7 @@ public partial class Car : RigidBody3D
 			// => сначала чекнем нулевой вектор и только потом дадим какой надо
 			wheel.TargetPosition = new Vector3();
 			wheel.ForceShapecastUpdate();
-			if (!wheel.IsColliding())
+			if (!wheel.IsWheelColiding())
 			{
 				wheel.TargetPosition = new Vector3(wheel.TargetPosition.X, -(wheel.Config.SpringRest + wheel.Config.OverExtend), wheel.TargetPosition.Z);
 				wheel.ForceShapecastUpdate();
@@ -309,7 +309,7 @@ public partial class Car : RigidBody3D
 		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
 		wheel.WheelModel.Position = wheelPos;
 		
-		if (wheel.IsColliding())
+		if (wheel.IsWheelColiding())
 		{
 			for (int i = 0; i < wheel.GetCollisionCount(); i++)
 			{
@@ -398,7 +398,7 @@ public partial class Car : RigidBody3D
 			accelerationForce *= 3;
 		}
 		
-		if (wheel.IsColliding())
+		if (wheel.IsWheelColiding())
 		{
 			if (wheel.Config.IsDriveWheel)
 			{
@@ -451,7 +451,7 @@ public partial class Car : RigidBody3D
 	{
 		var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
 		
-		if (wheel.IsColliding())
+		if (wheel.IsWheelColiding())
 		{
 			for (int i = 0; i < wheel.GetCollisionCount(); i++)
 			{
@@ -525,7 +525,7 @@ public partial class Car : RigidBody3D
 
 	private void ProcessSpecialBlocks(CarWheel wheel)
 	{
-		if (wheel.IsColliding())
+		if (wheel.IsWheelColiding())
 		{
 			for (int collider = 0; collider < wheel.GetCollisionCount(); collider++)
 			{

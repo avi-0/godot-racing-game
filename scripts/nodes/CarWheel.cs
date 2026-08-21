@@ -70,6 +70,15 @@ public partial class CarWheel : ShapeCast3D
 		_isSliding = false;
 	}
 
+	public bool IsWheelColiding()
+	{
+		if (!IsColliding()) {return false;}
+		
+		if (GetCollisionPoint(0).Y > GetGlobalPosition().Y) {return false;}
+
+		return true;
+	}
+
 	private void CreateSkidmarkMesh()
 	{
 		if (_skidmarkLines.Count > 0)
