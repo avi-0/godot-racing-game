@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://bi3u8tyrl2dfw"]
 
-[ext_resource type="Texture2D" uid="uid://ckxg3os5i83x" path="res://textures/blocks/deco/planks.png" id="1_qc5ce"]
+[ext_resource type="Texture2D" uid="uid://ckxg3os5i83x" path="res://textures/blocks/deco/planks.png" id="1_uesbr"]
 
 [resource]
-albedo_texture = ExtResource("1_qc5ce")
+albedo_texture = ExtResource("1_uesbr")
 texture_filter = 4

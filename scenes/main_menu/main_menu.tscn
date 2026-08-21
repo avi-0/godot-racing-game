@@ -29,7 +29,7 @@ gradient = SubResource("Gradient_5seab")
 width = 160
 height = 160
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel", "CreditsPanel", "SkinButton", "MultiplayerWindow", "MultiplayerTrackImage", "MultiplayerTrackLabel", "IPLine")]
+[node name="MainMenu" type="Control" unique_id=1406502132 node_paths=PackedStringArray("PlayButton", "SettingsButton", "SettingsMenu", "TrackListPanel", "MainMenuContainer", "SplitscreenFoldableContainer", "GarageWindow", "GarageViewportContainer", "GarageViewport", "GarageNode", "GarageCameraBase", "GarageContainer", "PlayerNameText", "CampaignControl", "CampaignContainer", "CarDescLabel", "CreditsPanel", "SkinButton", "MultiplayerWindow", "MultiplayerTrackImage", "MultiplayerTrackLabel", "IPLine")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,7 +63,7 @@ MultiplayerTrackLabel = NodePath("MultiplayerWindow/PanelContainer/MarginContain
 IPLine = NodePath("MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer/IPLine")
 DefaultCarPath = "res://scenes/cars/thedriftcar.tscn"
 
-[node name="GarageViewportContainer" type="Container" parent="."]
+[node name="GarageViewportContainer" type="Container" parent="." unique_id=1903768631]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -73,21 +73,21 @@ focus_mode = 1
 script = ExtResource("3_wem23")
 metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
-[node name="GarageViewport" type="SubViewport" parent="GarageViewportContainer"]
+[node name="GarageViewport" type="SubViewport" parent="GarageViewportContainer" unique_id=586914233]
 handle_input_locally = false
 size = Vector2i(1921, 1080)
 render_target_update_mode = 4
 
-[node name="CameraBase" type="Node3D" parent="GarageViewportContainer/GarageViewport"]
+[node name="CameraBase" type="Node3D" parent="GarageViewportContainer/GarageViewport" unique_id=932639289]
 
-[node name="Camera3D" type="Camera3D" parent="GarageViewportContainer/GarageViewport/CameraBase"]
+[node name="Camera3D" type="Camera3D" parent="GarageViewportContainer/GarageViewport/CameraBase" unique_id=1227607175]
 transform = Transform3D(0.33630645, -0.32587957, 0.8835726, -1.3893482e-08, 0.9382215, 0.3460352, -0.9417527, -0.11637389, 0.3155299, 1.66627, 1.5004501, 2.4788918)
 current = true
 fov = 80.0
 
-[node name="GarageNode" type="Node3D" parent="GarageViewportContainer/GarageViewport"]
+[node name="GarageNode" type="Node3D" parent="GarageViewportContainer/GarageViewport" unique_id=1830165547]
 
-[node name="MainMenu" type="Control" parent="."]
+[node name="MainMenu" type="Control" parent="." unique_id=1245944585]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,7 +95,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainMenuContainer" type="VBoxContainer" parent="MainMenu"]
+[node name="MainMenuContainer" type="VBoxContainer" parent="MainMenu" unique_id=137329379]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -104,83 +104,83 @@ offset_right = 376.0
 offset_bottom = 794.0
 theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MainMenuContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MainMenuContainer" unique_id=679792198]
 layout_mode = 2
 theme_override_constants/margin_left = 48
 theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
 
-[node name="TextureRect" type="TextureRect" parent="MainMenu/MainMenuContainer/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainMenu/MainMenuContainer/MarginContainer" unique_id=672383148]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 texture = ExtResource("4_thkx5")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu/MainMenuContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/MainMenuContainer" unique_id=1180970171]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MainMenuContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MainMenuContainer/PanelContainer" unique_id=1925106108]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer" unique_id=627686065]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=523969888]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Campaign"
 
-[node name="LoadButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LoadButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2060250820]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Local Play"
 
-[node name="MultiplayerButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MultiplayerButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=802352209]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Multiplayer"
 
-[node name="GarageButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="GarageButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1810574497]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Garage
 "
 
-[node name="EditorButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="EditorButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1977670233]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Editor
 "
 
-[node name="SettingsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1298056603]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Settings
 "
 
-[node name="CreditsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1531985863]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Credits"
 
-[node name="ExitButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MainMenu/MainMenuContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1697253807]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_thkx5")
 text = "Exit
 "
 
-[node name="SplitscreenFoldable" type="FoldableContainer" parent="MainMenu"]
+[node name="SplitscreenFoldable" type="FoldableContainer" parent="MainMenu" unique_id=1543082065]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -198,11 +198,11 @@ title = "Splitscreen"
 title_alignment = 1
 title_position = 1
 
-[node name="SplitscreenSettings" parent="MainMenu/SplitscreenFoldable" instance=ExtResource("5_wem23")]
+[node name="SplitscreenSettings" parent="MainMenu/SplitscreenFoldable" unique_id=944326834 instance=ExtResource("5_wem23")]
 visible = false
 layout_mode = 2
 
-[node name="CampaignPanel" type="Control" parent="."]
+[node name="CampaignPanel" type="Control" parent="." unique_id=1177688356]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -211,7 +211,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CampaignPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CampaignPanel" unique_id=1919467697]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,37 +219,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="CampaignPanel/MarginContainer"]
+[node name="Panel" type="PanelContainer" parent="CampaignPanel/MarginContainer" unique_id=788403378]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CampaignPanel/MarginContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CampaignPanel/MarginContainer/Panel" unique_id=1942487632]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer" unique_id=1156844189]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer" unique_id=630171486]
 layout_mode = 2
 
-[node name="CampaignContainer" type="GridContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="CampaignContainer" type="GridContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer/ScrollContainer/MarginContainer" unique_id=1063175806]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer" unique_id=1468975067]
 layout_mode = 2
 theme_override_constants/margin_top = 0
 
-[node name="BackButton" type="Button" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer/MarginContainer"]
+[node name="BackButton" type="Button" parent="CampaignPanel/MarginContainer/Panel/VBoxContainer/MarginContainer" unique_id=1375370794]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
 
-[node name="GarageWindow" type="Control" parent="."]
+[node name="GarageWindow" type="Control" parent="." unique_id=1505276981]
 visible = false
 anchors_preset = 0
 anchor_right = 1.0
@@ -260,7 +260,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 
-[node name="MarginContainer" type="MarginContainer" parent="GarageWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow" unique_id=489066261]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -269,24 +269,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GarageWindow/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GarageWindow/MarginContainer" unique_id=596621444]
 layout_mode = 2
 
-[node name="PlayerSettingsPanel" type="PanelContainer" parent="GarageWindow/MarginContainer/HBoxContainer"]
+[node name="PlayerSettingsPanel" type="PanelContainer" parent="GarageWindow/MarginContainer/HBoxContainer" unique_id=1594198293]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel" unique_id=1603628971]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer" unique_id=142620215]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer" unique_id=971843021]
 layout_mode = 2
 text = "Player name"
 
-[node name="PlayerNameLineEdit" type="LineEdit" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+[node name="PlayerNameLineEdit" type="LineEdit" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer" unique_id=407397212]
 layout_mode = 2
 text = "Player"
 placeholder_text = "Player Name"
@@ -298,11 +298,11 @@ middle_mouse_paste_enabled = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Label2" type="Label" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer" unique_id=651126004]
 layout_mode = 2
 text = "Select Skin"
 
-[node name="SkinButton" type="OptionButton" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+[node name="SkinButton" type="OptionButton" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer" unique_id=1635284292]
 layout_mode = 2
 size_flags_vertical = 4
 selected = 0
@@ -310,44 +310,44 @@ item_count = 1
 popup/item_0/text = "0"
 popup/item_0/id = 0
 
-[node name="BackButton" type="Button" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="GarageWindow/MarginContainer/HBoxContainer/PlayerSettingsPanel/MarginContainer/VBoxContainer" unique_id=1733284728]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
 
-[node name="PanelContainer" type="PanelContainer" parent="GarageWindow/MarginContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="GarageWindow/MarginContainer/HBoxContainer" unique_id=1671770081]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer" unique_id=313975172]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1391550079]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=1403456112]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GarageWindow/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer" unique_id=976427340]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GarageWindow/MarginContainer/HBoxContainer" unique_id=1774593465]
 custom_minimum_size = Vector2(350, 300)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Panel" type="Panel" parent="GarageWindow/MarginContainer/HBoxContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="GarageWindow/MarginContainer/HBoxContainer/MarginContainer" unique_id=1719070596]
 layout_mode = 2
 
-[node name="CarDescriptionLabel" type="RichTextLabel" parent="GarageWindow/MarginContainer/HBoxContainer/MarginContainer/Panel"]
+[node name="CarDescriptionLabel" type="RichTextLabel" parent="GarageWindow/MarginContainer/HBoxContainer/MarginContainer/Panel" unique_id=1901380246]
 layout_mode = 0
 offset_right = 302.0
 offset_bottom = 240.0
@@ -357,13 +357,13 @@ scroll_active = false
 shortcut_keys_enabled = false
 horizontal_alignment = 1
 
-[node name="SettingsMenu" parent="." instance=ExtResource("6_3ovsr")]
+[node name="SettingsMenu" parent="." unique_id=657265636 instance=ExtResource("6_3ovsr")]
 visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=141364721]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -378,7 +378,7 @@ text = "[version]"
 vertical_alignment = 1
 script = ExtResource("7_5seab")
 
-[node name="CreditsPanel" type="PanelContainer" parent="."]
+[node name="CreditsPanel" type="PanelContainer" parent="." unique_id=158580334]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -394,21 +394,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
 
-[node name="MarginContainer" type="MarginContainer" parent="CreditsPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CreditsPanel" unique_id=1611587845]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsPanel/MarginContainer" unique_id=459216594]
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CreditsPanel/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CreditsPanel/MarginContainer/VBoxContainer" unique_id=1868147644]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 texture = ExtResource("4_thkx5")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CreditsPanel/MarginContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CreditsPanel/MarginContainer/VBoxContainer" unique_id=1266662826]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 size_flags_vertical = 3
@@ -423,22 +423,24 @@ Game Concept, Game Design, Programming, Models, Textures, UI, Art, Sounds, Map E
 [i]Avondale[/i]
 Game Design, Programming, Level Design, Graphics, UI, Multiplayer, Taxi, Sport Car
 
-
-Assets used:
+Assets:
 Car models by MenaStudios
-Decorative models & textures by kenney
-Music by Vlad Annenkov"
+Music by Vlad Annenkov
+
+CC0 models and textures from:
+kenney, Screaming Brain Studios, miziziziz
+"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 selection_enabled = true
 
-[node name="BackButton" type="Button" parent="CreditsPanel/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="CreditsPanel/MarginContainer/VBoxContainer" unique_id=305507075]
 layout_mode = 2
 shortcut = SubResource("Shortcut_3ovsr")
 text = "Ok"
 
-[node name="MultiplayerWindow" type="Control" parent="."]
+[node name="MultiplayerWindow" type="Control" parent="." unique_id=1317770489]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -447,7 +449,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MultiplayerWindow"]
+[node name="PanelContainer" type="PanelContainer" parent="MultiplayerWindow" unique_id=2071452573]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -461,77 +463,77 @@ offset_bottom = 210.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MultiplayerWindow/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MultiplayerWindow/PanelContainer" unique_id=1833157124]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer" unique_id=1004557733]
 layout_mode = 2
 
-[node name="TabContainer" type="TabContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer" unique_id=1614476448]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Connect" type="HBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+[node name="Connect" type="HBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1594215007]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect" unique_id=1740501365]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer"]
+[node name="Label" type="Label" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer" unique_id=1620713111]
 layout_mode = 2
 text = "IP Adress:"
 
-[node name="IPLine" type="LineEdit" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer"]
+[node name="IPLine" type="LineEdit" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer" unique_id=259971166]
 layout_mode = 2
 text = "localhost"
 
-[node name="ConnectButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer"]
+[node name="ConnectButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Connect/VBoxContainer" unique_id=472601530]
 layout_mode = 2
 text = "Connect
 "
 
-[node name="Host" type="HBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+[node name="Host" type="HBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1555189112]
 visible = false
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host" unique_id=758057465]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="HostTrackButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer"]
+[node name="HostTrackButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer" unique_id=1178764535]
 layout_mode = 2
 text = "Select Track"
 
-[node name="HostButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer"]
+[node name="HostButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer" unique_id=663731661]
 layout_mode = 2
 text = "Host"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host" unique_id=59269245]
 layout_mode = 2
 
-[node name="MP_TrackImage" type="TextureRect" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2"]
+[node name="MP_TrackImage" type="TextureRect" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2" unique_id=94453614]
 layout_mode = 2
 texture = SubResource("GradientTexture2D_4xg86")
 
-[node name="MP_TrackName" type="Label" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2"]
+[node name="MP_TrackName" type="Label" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer/TabContainer/Host/VBoxContainer2" unique_id=2117266954]
 layout_mode = 2
 text = "Track"
 
-[node name="BackButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="MultiplayerWindow/PanelContainer/MarginContainer/VBoxContainer" unique_id=1986208899]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 shortcut = SubResource("Shortcut_wu84c")
 text = "Back"
 
-[node name="TrackListPanel" parent="." instance=ExtResource("8_4xg86")]
+[node name="TrackListPanel" parent="." unique_id=918746761 instance=ExtResource("8_4xg86")]
 visible = false
 layout_mode = 1
 
