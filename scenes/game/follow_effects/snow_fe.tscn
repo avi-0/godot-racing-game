@@ -115,29 +115,29 @@ billboard_keep_scale = true
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_asfok")
 
-[node name="SnowFe" type="Node3D" node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
+[node name="SnowFe" type="Node3D" unique_id=795059817 node_paths=PackedStringArray("Water", "Weather", "CollisionHeightField")]
 script = ExtResource("1_63bs7")
 Water = NodePath("Water")
 Weather = NodePath("Weather")
 CollisionHeightField = NodePath("GPUParticlesCollisionHeightField3D")
 
-[node name="Water" type="MeshInstance3D" parent="."]
+[node name="Water" type="MeshInstance3D" parent="." unique_id=694771817]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
 layers = 0
 cast_shadow = 0
 ignore_occlusion_culling = true
 mesh = SubResource("PlaneMesh_yq6pf")
 
-[node name="Weather" type="GPUParticles3D" parent="."]
+[node name="Weather" type="GPUParticles3D" parent="." unique_id=1711060693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 layers = 0
 emitting = false
-amount = 3000
+amount = 1500
 lifetime = 3.5
 visibility_aabb = AABB(-10, -20, -10, 20, 30, 20)
 process_material = SubResource("ParticleProcessMaterial_vvg4t")
 draw_pass_1 = SubResource("QuadMesh_yikha")
 
-[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="." unique_id=2031178093]
 size = Vector3(100, 50, 100)
 resolution = 0
