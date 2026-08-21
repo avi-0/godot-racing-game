@@ -475,9 +475,9 @@ public partial class Car : RigidBody3D
 				//SkidMarks[wheelId].GlobalPosition = wheel.GetCollisionPoint(0) + Vector3.Up * 0.01f;
 				//SkidMarks[wheelId].LookAt(wheel.GlobalPosition + LinearVelocity);
 
-				var handbrake = _isBraking && _isAccelerating;
+				var handbrake = _isBraking;
 
-				if (handbrake || grip > SlipThreshold || wheel.GrassContact)
+				if ( (handbrake && tireVelocity.Length() > 2) || grip > SlipThreshold || wheel.GrassContact)
 				{
 					_isSlipping = true;
 				}
