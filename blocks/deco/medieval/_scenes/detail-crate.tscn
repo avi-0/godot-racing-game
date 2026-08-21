@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://ms3edwjnwjs1"]
+[gd_scene format=4 uid="uid://ms3edwjnwjs1"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_aril5"]
-[ext_resource type="Material" uid="uid://csg5gpldyhom2" path="res://assets/cartopia/materials/barrel.tres" id="2_aril5"]
+[ext_resource type="Material" uid="uid://csg5gpldyhom2" path="res://materials/barrel.tres" id="2_aril5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aril5"]
 friction = 0.5

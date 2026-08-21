@@ -1,6 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cofnd6ia15joj"]
-
-[ext_resource type="Texture2D" uid="uid://ds5anlt5i2hwn" path="res://assets/cartopia/materials/colormap_road.png" id="1_giwx6"]
-
-[resource]
-albedo_texture = ExtResource("1_giwx6")

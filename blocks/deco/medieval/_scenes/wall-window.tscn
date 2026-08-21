@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://br30rnoslia2b"]
+[gd_scene format=4 uid="uid://br30rnoslia2b"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_pfio2"]
-[ext_resource type="Material" uid="uid://cpvggqdqrb1qj" path="res://assets/cartopia/materials/cobblestone.tres" id="2_pfio2"]
-[ext_resource type="Material" uid="uid://ccj84nb6f55gl" path="res://assets/cartopia/materials/cobblestoneAlternative.tres" id="3_ynk7j"]
-[ext_resource type="Material" uid="uid://da2o5p6wpjhj0" path="res://assets/cartopia/materials/details.tres" id="4_13opd"]
+[ext_resource type="Material" uid="uid://cpvggqdqrb1qj" path="res://materials/cobblestone.tres" id="2_pfio2"]
+[ext_resource type="Material" uid="uid://ccj84nb6f55gl" path="res://materials/cobblestoneAlternative.tres" id="3_ynk7j"]
+[ext_resource type="Material" uid="uid://da2o5p6wpjhj0" path="res://materials/details.tres" id="4_13opd"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kphb5"]
 _surfaces = [{

@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://h2sflxky20kk"]
+[gd_scene format=4 uid="uid://h2sflxky20kk"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_43pdx"]
-[ext_resource type="Material" uid="uid://ds2tnd45lhtof" path="res://assets/kenney/cityroads/materials/colormap.tres" id="2_bip1q"]
+[ext_resource type="Material" uid="uid://ds2tnd45lhtof" path="res://assets/asset_packs/kenney/cityroads/materials/colormap.tres" id="2_bip1q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_43pdx"]
 resource_local_to_scene = true

@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_micox"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_glvfi"]
-[ext_resource type="Texture2D" uid="uid://poojimqqe4jj" path="res://assets/cartopia/cars/drift.png" id="3_bnrai"]
-[ext_resource type="Texture2D" uid="uid://csqp1xm6515v" path="res://assets/cartopia/cars/drift2.png" id="4_3ohr3"]
+[ext_resource type="Texture2D" uid="uid://poojimqqe4jj" path="res://textures/cars/drift.png" id="3_bnrai"]
+[ext_resource type="Texture2D" uid="uid://csqp1xm6515v" path="res://textures/cars/drift2.png" id="4_3ohr3"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_glvfi"]
-[ext_resource type="Texture2D" uid="uid://xd5efcd0as4k" path="res://assets/cartopia/cars/drift3.png" id="5_xxshw"]
-[ext_resource type="Texture2D" uid="uid://c3tymfosvpnfk" path="res://assets/cartopia/cars/drift4.png" id="6_58tp6"]
-[ext_resource type="Texture2D" uid="uid://bh3pqi3d3pjo" path="res://assets/cartopia/cars/drift5.png" id="7_2sndl"]
+[ext_resource type="Texture2D" uid="uid://xd5efcd0as4k" path="res://textures/cars/drift3.png" id="5_xxshw"]
+[ext_resource type="Texture2D" uid="uid://c3tymfosvpnfk" path="res://textures/cars/drift4.png" id="6_58tp6"]
+[ext_resource type="Texture2D" uid="uid://bh3pqi3d3pjo" path="res://textures/cars/drift5.png" id="7_2sndl"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_g5cig"]
-[ext_resource type="Texture2D" uid="uid://i64j6fwl3g1t" path="res://assets/cartopia/cars/driftemis.png" id="8_3ohr3"]
+[ext_resource type="Texture2D" uid="uid://i64j6fwl3g1t" path="res://textures/cars/driftemis.png" id="8_3ohr3"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="8_glvfi"]
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="8_x43s4"]
-[ext_resource type="Texture2D" uid="uid://c5as7djgjw4vd" path="res://assets/cartopia/cars/drift_rough.png" id="9_xxshw"]
-[ext_resource type="PackedScene" uid="uid://ccecgeh8qkbdb" path="res://assets/cartopia/cars/drift.glb" id="10_cn2cu"]
+[ext_resource type="Texture2D" uid="uid://c5as7djgjw4vd" path="res://textures/cars/drift_rough.png" id="9_xxshw"]
+[ext_resource type="PackedScene" uid="uid://ccecgeh8qkbdb" path="res://textures/cars/drift.glb" id="10_cn2cu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.9
@@ -210,16 +210,16 @@ mesh = SubResource("TextMesh_glvfi")
 [node name="drift" parent="." unique_id=206338664 instance=ExtResource("10_cn2cu")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="wheel_rear_right" parent="drift" index="1"]
+[node name="wheel_rear_right" parent="drift" index="1" unique_id=677799254]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.44690424, -0.8485218)
 
-[node name="wheel_rear_left" parent="drift" index="2"]
+[node name="wheel_rear_left" parent="drift" index="2" unique_id=562150513]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.44690424, -0.8485218)
 
-[node name="wheel_front_left" parent="drift" index="3"]
+[node name="wheel_front_left" parent="drift" index="3" unique_id=1971197707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73621374, 0.44690424, 1.2480586)
 
-[node name="wheel_front_right" parent="drift" index="4"]
+[node name="wheel_front_right" parent="drift" index="4" unique_id=537565994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.44690424, 1.2480586)
 
 [node name="MultiplayerSynchronizer" parent="." unique_id=2135817358 instance=ExtResource("8_x43s4")]

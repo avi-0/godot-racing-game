@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cl6yfro35h7s6" path="res://scripts/nodes/FollowEffect.cs" id="1_g7doi"]
 [ext_resource type="Shader" uid="uid://dwwouujmd33h" path="res://shaders/watershader.gdshader" id="2_71sgg"]
-[ext_resource type="Texture2D" uid="uid://btg22umurlyyk" path="res://assets/img/water.png" id="3_rw75r"]
-[ext_resource type="Texture2D" uid="uid://x8r8ys4xlecm" path="res://assets/img/Circle.png" id="4_w3a8l"]
+[ext_resource type="Texture2D" uid="uid://btg22umurlyyk" path="res://textures/enviornment/water.png" id="3_rw75r"]
+[ext_resource type="Texture2D" uid="uid://x8r8ys4xlecm" path="res://textures/Circle.png" id="4_w3a8l"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_myyg0"]
 noise_type = 3

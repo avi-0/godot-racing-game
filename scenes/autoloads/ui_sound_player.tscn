@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlbr8yolvk5gj"]
+[gd_scene format=3 uid="uid://dlbr8yolvk5gj"]
 
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/ui/UiSoundPlayer.cs" id="1_vb3yo"]
-[ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://assets/audio/ui/click_001.ogg" id="2_xms1e"]
+[ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://audio/audio_packs/ui/click_001.ogg" id="2_xms1e"]
 [ext_resource type="Script" uid="uid://bl5cpfcp361n1" path="res://scripts/ui/UiSound.cs" id="3_kqb5d"]
-[ext_resource type="AudioStream" uid="uid://cbh2o7irh5lmy" path="res://assets/audio/ui/switch_004.ogg" id="4_1s1fn"]
-[ext_resource type="AudioStream" uid="uid://c11gwvvxqgkr" path="res://assets/audio/ui/select_001.ogg" id="5_jis51"]
-[ext_resource type="AudioStream" uid="uid://b2kvcbs1acbcs" path="res://assets/audio/ui/toggle_002.ogg" id="6_fwclh"]
+[ext_resource type="AudioStream" uid="uid://cbh2o7irh5lmy" path="res://audio/audio_packs/ui/switch_004.ogg" id="4_1s1fn"]
+[ext_resource type="AudioStream" uid="uid://c11gwvvxqgkr" path="res://audio/audio_packs/ui/select_001.ogg" id="5_jis51"]
+[ext_resource type="AudioStream" uid="uid://b2kvcbs1acbcs" path="res://audio/audio_packs/ui/toggle_002.ogg" id="6_fwclh"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
 script = ExtResource("3_kqb5d")

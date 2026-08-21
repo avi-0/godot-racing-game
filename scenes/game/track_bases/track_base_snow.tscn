@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvmam0d235jkh"]
+[gd_scene format=3 uid="uid://cvmam0d235jkh"]
 
 [ext_resource type="PackedScene" uid="uid://q32127h8m7tr" path="res://scenes/game/track_bases/extras/snow_mesh.tscn" id="1_dqgdl"]
-[ext_resource type="Texture2D" uid="uid://ccw2puq5jweoh" path="res://assets/img/ice.png" id="2_dqgdl"]
+[ext_resource type="Texture2D" uid="uid://ccw2puq5jweoh" path="res://textures/enviornment/ice.png" id="2_dqgdl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i1mpx"]
 load_path = "res://.godot/imported/ice.png-ce95fa82fda8915ede3e64145400d20e.s3tc.ctex"

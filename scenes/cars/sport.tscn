@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_qtbni"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_dg6r6"]
-[ext_resource type="Material" uid="uid://cok5acfebmyip" path="res://assets/cars/Textures/godot_materials/set0.tres" id="3_8lcft"]
+[ext_resource type="Material" uid="uid://cok5acfebmyip" path="res://assets/asset_packs/cars/Textures/godot_materials/set0.tres" id="3_8lcft"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_dg6r6"]
-[ext_resource type="Material" uid="uid://ewvvi13y2cg8" path="res://assets/cars/Textures/godot_materials/set1.tres" id="4_yrqru"]
-[ext_resource type="Material" uid="uid://cxury5fss0wwx" path="res://assets/cars/Textures/godot_materials/set2.tres" id="5_2t0n8"]
+[ext_resource type="Material" uid="uid://ewvvi13y2cg8" path="res://assets/asset_packs/cars/Textures/godot_materials/set1.tres" id="4_yrqru"]
+[ext_resource type="Material" uid="uid://cxury5fss0wwx" path="res://assets/asset_packs/cars/Textures/godot_materials/set2.tres" id="5_2t0n8"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="5_qtbni"]
-[ext_resource type="Material" uid="uid://bhqqd3h287dey" path="res://assets/cars/Textures/godot_materials/set3.tres" id="6_8lcft"]
-[ext_resource type="Texture2D" uid="uid://dl32cd5f1y7kx" path="res://assets/cars/Textures/CHP_Tex_Veh_Land_Col2.png" id="6_qtbni"]
+[ext_resource type="Material" uid="uid://bhqqd3h287dey" path="res://assets/asset_packs/cars/Textures/godot_materials/set3.tres" id="6_8lcft"]
+[ext_resource type="Texture2D" uid="uid://dl32cd5f1y7kx" path="res://assets/asset_packs/cars/Textures/CHP_Tex_Veh_Land_Col2.png" id="6_qtbni"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_dg6r6"]
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="11_yrqru"]
 

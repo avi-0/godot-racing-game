@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bi3u8tyrl2dfw"]
-
-[ext_resource type="Texture2D" uid="uid://ckxg3os5i83x" path="res://assets/kenney/medieval/Textures/planks.png" id="1_qc5ce"]
-
-[resource]
-albedo_texture = ExtResource("1_qc5ce")
-texture_filter = 4

@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bo4jwuw2x584y"]
+[gd_scene format=3 uid="uid://bo4jwuw2x584y"]
 
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_3chua"]
 [ext_resource type="Script" uid="uid://bh7gac1jxwdqc" path="res://scripts/ui/RaceUi.cs" id="2_3chua"]
 [ext_resource type="FontFile" uid="uid://c7j641sxvojnd" path="res://assets/fonts/Open_Sans/static/OpenSans_SemiCondensed-Bold.ttf" id="2_aq8qp"]
-[ext_resource type="Texture2D" uid="uid://c44c67fho6as0" path="res://assets/img/speedo.png" id="3_aq8qp"]
+[ext_resource type="Texture2D" uid="uid://c44c67fho6as0" path="res://textures/ui/speedo.png" id="3_aq8qp"]
 [ext_resource type="FontFile" uid="uid://cnl2m2x8miuh8" path="res://assets/fonts/Open_Sans/static/OpenSans_Condensed-Regular.ttf" id="3_tggw1"]
 [ext_resource type="FontFile" uid="uid://bqt3qrexs8qdi" path="res://assets/fonts/Open_Sans/static/OpenSans_Condensed-SemiBold.ttf" id="4_qtqpf"]
-[ext_resource type="Texture2D" uid="uid://02n8suoao2w4" path="res://assets/img/speedarrow.png" id="7_tggw1"]
+[ext_resource type="Texture2D" uid="uid://02n8suoao2w4" path="res://textures/ui/speedarrow.png" id="7_tggw1"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_vtaks"]
 action = &"ui_accept"

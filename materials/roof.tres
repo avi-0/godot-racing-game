@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dcjucyjcyr3c2"]
+
+[ext_resource type="Texture2D" uid="uid://bk25ltl2ftbmb" path="res://assets/asset_packs/kenney/medieval/Textures/roof.png" id="1_ghom3"]
+
+[resource]
+albedo_texture = ExtResource("1_ghom3")
+texture_filter = 4

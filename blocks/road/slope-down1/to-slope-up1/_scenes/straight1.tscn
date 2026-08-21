@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://h36a47xunclq"]
+[gd_scene format=4 uid="uid://h36a47xunclq"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_vfyso"]
-[ext_resource type="Material" uid="uid://p476tku17qwd" path="res://assets/cartopia/materials/road.tres" id="2_2mk7b"]
-[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://assets/cartopia/materials/concrete.tres" id="3_olig8"]
+[ext_resource type="Material" uid="uid://p476tku17qwd" path="res://materials/road.tres" id="2_2mk7b"]
+[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="3_olig8"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_73akc"]
 _surfaces = [{

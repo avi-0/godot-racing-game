@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cpvggqdqrb1qj"]
+
+[ext_resource type="Texture2D" uid="uid://bm3cx2regm1ou" path="res://assets/asset_packs/kenney/medieval/Textures/cobblestone.png" id="1_mgqiu"]
+
+[resource]
+albedo_texture = ExtResource("1_mgqiu")
+texture_filter = 4

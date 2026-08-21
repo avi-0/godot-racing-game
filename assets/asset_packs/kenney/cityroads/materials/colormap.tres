@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ds2tnd45lhtof"]
+
+[ext_resource type="Texture2D" uid="uid://b5i2khgixpwvv" path="res://assets/asset_packs/kenney/cityroads/materials/colormap.png" id="1_jl7ti"]
+
+[resource]
+resource_name = "colormap"
+albedo_texture = ExtResource("1_jl7ti")
+texture_filter = 2

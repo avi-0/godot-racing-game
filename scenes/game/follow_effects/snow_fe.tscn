@@ -1,8 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://dqp81afv8w0y"]
+[gd_scene format=3 uid="uid://dqp81afv8w0y"]
 
 [ext_resource type="Script" uid="uid://cl6yfro35h7s6" path="res://scripts/nodes/FollowEffect.cs" id="1_63bs7"]
 [ext_resource type="Shader" uid="uid://dwwouujmd33h" path="res://shaders/watershader.gdshader" id="2_n2q46"]
-[ext_resource type="Texture2D" uid="uid://btg22umurlyyk" path="res://assets/img/water.png" id="3_63wps"]
+[ext_resource type="Texture2D" uid="uid://btg22umurlyyk" path="res://textures/enviornment/water.png" id="3_63wps"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_myyg0"]
 noise_type = 3

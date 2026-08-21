@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://d1a6niioh464h"]
+[gd_scene format=4 uid="uid://d1a6niioh464h"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_67ek6"]
-[ext_resource type="Material" uid="uid://bi3u8tyrl2dfw" path="res://assets/cartopia/materials/planks.tres" id="2_67ek6"]
+[ext_resource type="Material" uid="uid://bi3u8tyrl2dfw" path="res://materials/planks.tres" id="2_67ek6"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_c2lqa"]
 _surfaces = [{

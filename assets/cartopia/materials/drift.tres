@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cor7rrejfue1y"]
-
-[ext_resource type="Texture2D" uid="uid://poojimqqe4jj" path="res://assets/cartopia/cars/drift.png" id="1_opp5l"]
-
-[resource]
-albedo_texture = ExtResource("1_opp5l")
-texture_filter = 4
