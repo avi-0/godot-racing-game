@@ -27,6 +27,8 @@ public partial class SettingsMenu : Control
 	[Export] public OptionButton Vsync;
 	[Export] public OptionButton ShadowQuality;
 	[Export] public OptionButton PerfMon;
+	[Export] public OptionButton Ao;
+	[Export] public OptionButton Reflection;
 	
 	[Export] public Slider SoundSlider;
 	[Export] public Slider MusicSlider;
@@ -45,7 +47,7 @@ public partial class SettingsMenu : Control
 		SoundSlider.DragEnded += _ => OnSoundSettingChanged();
 		MusicSlider.DragEnded += _ => OnSoundSettingChanged();
 		TDrs.DragEnded += _ => OnGraphicsSettingChanged();
-		foreach (var optionButton in new List<OptionButton> {ScaleMode, WinMode, Aa, Vsync, ShadowQuality})
+		foreach (var optionButton in new List<OptionButton> {ScaleMode, WinMode, Aa, Vsync, ShadowQuality, Ao, Reflection})
 		{
 			optionButton.ItemSelected += _ => OnGraphicsSettingChanged();
 		}
@@ -91,7 +93,9 @@ public partial class SettingsMenu : Control
 		ShadowQuality.Selected = settings.Graphics.ShadowQuality;
 		//ShadowAtlasSize.Selected = ShadowAtlasSize.GetItemIndex(settings.Graphics.ShadowAtlasSize);
 		PerfMon.Selected = 1; if (!settings.PerfMonEnabled) { PerfMon.Selected = 0;}
-
+		Ao.Selected = settings.Graphics.Ao;
+		Reflection.Selected = settings.Graphics.Reflection;
+		
 		SoundSlider.Value = settings.Sound.SfxLevel;
 		MusicSlider.Value = settings.Sound.MusicLevel;
 
@@ -117,6 +121,8 @@ public partial class SettingsMenu : Control
 		settings.Graphics.ShadowQuality = ShadowQuality.Selected;
 		//settings.Graphics.ShadowAtlasSize = ShadowAtlasSize.GetSelectedId();
 		settings.PerfMonEnabled = PerfMon.Selected > 0;
+		settings.Graphics.Ao = Ao.Selected;
+		settings.Graphics.Reflection = Reflection.Selected;
 
 		settings.Sound.SfxLevel = SoundSlider.Value;
 		settings.Sound.MusicLevel = MusicSlider.Value;

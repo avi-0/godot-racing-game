@@ -23,6 +23,8 @@ public class GameSettings
 		public int Vsync = 1;
 		public int WindowMode = 2;
 		public int ShadowQuality = 4;
+		public int Ao = 1;
+		public int Reflection = 0;
 	}
 
 	public class SoundSettings

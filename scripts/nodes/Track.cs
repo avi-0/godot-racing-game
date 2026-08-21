@@ -18,7 +18,7 @@ public partial class Track : Node3D
 	
 	public Node3D TrackBase;
 	
-	public void UpdateLighting()
+	public void UpdateLighting() // also called when user updates graphics settings
 	{
 		TimeOfDay.Set("current_time", Options.StartDayTime);
 		TimeOfDay.Call("_update_celestial_coords"); // make sure to reenable shadows as needed
@@ -30,6 +30,9 @@ public partial class Track : Node3D
 
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
 
+		TimeOfDay.GetParent<WorldEnvironment>().Environment.SsaoEnabled = SettingsManager.Instance.Settings.Graphics.Ao == 1;
+		TimeOfDay.GetParent<WorldEnvironment>().Environment.SsrEnabled = SettingsManager.Instance.Settings.Graphics.Reflection == 1;
+		
 		foreach (var child in GetChildren())
 		{
 			if (child is Block block && block.HasLight)
