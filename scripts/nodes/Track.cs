@@ -80,13 +80,17 @@ public partial class Track : Node3D
 		foreach (var blockPlacementData in data.Blocks)
 		{
 			var block = Block.Load(blockPlacementData);
-			AddChild(block);
-			
-			block.Owner = this; // not needed but helps for FindChildren etc
 
-			if ((Node3D)block.GetChild(0).GetChild(0) is MeshInstance3D mesh)
+			if (block != null)
 			{
-				mesh.ExtraCullMargin = 4;
+				AddChild(block);
+
+				block.Owner = this; // not needed but helps for FindChildren etc
+
+				if ((Node3D)block.GetChild(0).GetChild(0) is MeshInstance3D mesh)
+				{
+					mesh.ExtraCullMargin = 4;
+				}
 			}
 		}
 

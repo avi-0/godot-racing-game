@@ -73,6 +73,7 @@ public partial class Block : Node3D
 	public static Block Load(BlockPlacementData data)
 	{
 		var record = ResourceLoader.Load<BlockRecord>(data.BlockRecordPath);
+		if (record == null) return null;
 		var instance = record.Instantiate();
 
 		instance.Transform = data.Transform;
