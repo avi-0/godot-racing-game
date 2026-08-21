@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbj0eymdnpday"
-path.s3tc="res://.godot/imported/roof.png-db693e8b96efdb97f9824f9cba48b128.s3tc.ctex"
+uid="uid://bm3cx2regm1ou"
+path.s3tc="res://.godot/imported/cobblestone.png-5623a43c56b8bfb338d4542741a8f7c7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/asset_packs/kenney/medieval/Textures/roof.png"
-dest_files=["res://.godot/imported/roof.png-db693e8b96efdb97f9824f9cba48b128.s3tc.ctex"]
+source_file="res://textures/blocks/deco/cobblestone.png"
+dest_files=["res://.godot/imported/cobblestone.png-5623a43c56b8bfb338d4542741a8f7c7.s3tc.ctex"]
 
 [params]
 

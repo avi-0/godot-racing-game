@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://c3ov4p2faa6id"]
 
-[ext_resource type="Texture2D" uid="uid://dkvhox48045wi" path="res://assets/asset_packs/kenney/medieval/Textures/cobblestonePainted.png" id="1_83kff"]
+[ext_resource type="Texture2D" uid="uid://ciuv1sv04b5co" path="res://textures/blocks/deco/cobblestonePainted.png" id="1_83kff"]
 
 [resource]
 albedo_texture = ExtResource("1_83kff")

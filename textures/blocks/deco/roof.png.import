@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3r0chx61v0lt"
-path.s3tc="res://.godot/imported/barrel.png-bc0a6869f961da6e290c3d7b128a465d.s3tc.ctex"
+uid="uid://cbj0eymdnpday"
+path.s3tc="res://.godot/imported/roof.png-55bc0df3f2652635a7f5efdcad9558df.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/asset_packs/kenney/medieval/Textures/barrel.png"
-dest_files=["res://.godot/imported/barrel.png-bc0a6869f961da6e290c3d7b128a465d.s3tc.ctex"]
+source_file="res://textures/blocks/deco/roof.png"
+dest_files=["res://.godot/imported/roof.png-55bc0df3f2652635a7f5efdcad9558df.s3tc.ctex"]
 
 [params]
 

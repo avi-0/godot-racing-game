@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://csg5gpldyhom2"]
 
-[ext_resource type="Texture2D" uid="uid://b3r0chx61v0lt" path="res://assets/asset_packs/kenney/medieval/Textures/barrel.png" id="1_8agrt"]
+[ext_resource type="Texture2D" uid="uid://b3r0chx61v0lt" path="res://textures/blocks/deco/barrel.png" id="1_8agrt"]
 
 [resource]
 albedo_texture = ExtResource("1_8agrt")

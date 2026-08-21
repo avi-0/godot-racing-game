@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bme0xothvpqqe"
-path.s3tc="res://.godot/imported/fence.png-f65e44415027e5da84389a912ec93593.s3tc.ctex"
+uid="uid://b3r0chx61v0lt"
+path.s3tc="res://.godot/imported/barrel.png-69b1d0ddfc73ad340ad6395c0ed724cb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/asset_packs/kenney/medieval/Textures/fence.png"
-dest_files=["res://.godot/imported/fence.png-f65e44415027e5da84389a912ec93593.s3tc.ctex"]
+source_file="res://textures/blocks/deco/barrel.png"
+dest_files=["res://.godot/imported/barrel.png-69b1d0ddfc73ad340ad6395c0ed724cb.s3tc.ctex"]
 
 [params]
 

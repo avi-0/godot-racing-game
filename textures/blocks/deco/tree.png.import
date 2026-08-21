@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm3cx2regm1ou"
-path.s3tc="res://.godot/imported/cobblestone.png-48650ed25600ad558532eaf1c258d1e7.s3tc.ctex"
+uid="uid://b62sslqrskjgu"
+path.s3tc="res://.godot/imported/tree.png-9f0e2e19eae12498b0b08583456ce6eb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/asset_packs/kenney/medieval/Textures/cobblestone.png"
-dest_files=["res://.godot/imported/cobblestone.png-48650ed25600ad558532eaf1c258d1e7.s3tc.ctex"]
+source_file="res://textures/blocks/deco/tree.png"
+dest_files=["res://.godot/imported/tree.png-9f0e2e19eae12498b0b08583456ce6eb.s3tc.ctex"]
 
 [params]
 

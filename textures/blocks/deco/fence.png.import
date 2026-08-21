@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckxg3os5i83x"
-path.s3tc="res://.godot/imported/planks.png-48e809d85657d33fdf45e7dcef46a222.s3tc.ctex"
+uid="uid://bme0xothvpqqe"
+path.s3tc="res://.godot/imported/fence.png-d13934cb485c12cf169ad48f0b4ec880.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/asset_packs/kenney/medieval/Textures/planks.png"
-dest_files=["res://.godot/imported/planks.png-48e809d85657d33fdf45e7dcef46a222.s3tc.ctex"]
+source_file="res://textures/blocks/deco/fence.png"
+dest_files=["res://.godot/imported/fence.png-d13934cb485c12cf169ad48f0b4ec880.s3tc.ctex"]
 
 [params]
 
