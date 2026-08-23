@@ -5,7 +5,7 @@
 [ext_resource type="Curve" uid="uid://cxhyv7al6iqul" path="res://scenes/cars_extras/curves/taxi_rear.tres" id="3_1ddeo"]
 [ext_resource type="PackedScene" uid="uid://bcdl4ikhscxbg" path="res://assets/asset_packs/kenney/carkit/tractor-shovel.glb" id="4_g3c1d"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="5_14blg"]
-[ext_resource type="Texture2D" uid="uid://daf5s5qv3u3b2" path="res://assets/asset_packs/kenney/carkit/Textures/colormap.png" id="5_qe0ku"]
+[ext_resource type="Texture2D" uid="uid://jkqqr8s7y8br" path="res://assets/asset_packs/kenney/carkit/Textures/colormap.png" id="5_qe0ku"]
 [ext_resource type="Texture2D" uid="uid://cf4xlmc7l117j" path="res://assets/asset_packs/kenney/carkit/Textures/colormap_rough.png" id="6_14blg"]
 [ext_resource type="PackedScene" uid="uid://c1a2se6oqams7" path="res://scenes/cars_extras/car_common.tscn" id="6_s6ltu"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="7_lharr"]
@@ -168,24 +168,25 @@ shape = SubResource("ConvexPolygonShape3D_hwmkx")
 
 [node name="tractor-shovel" parent="." unique_id=2026431860 instance=ExtResource("4_g3c1d")]
 
-[node name="body" parent="tractor-shovel" index="0"]
+[node name="body" parent="tractor-shovel" index="0" unique_id=1836855375]
 mesh = SubResource("ArrayMesh_lharr")
 
-[node name="wheel-back-left" parent="tractor-shovel" index="1"]
+[node name="wheel-back-left" parent="tractor-shovel" index="1" unique_id=106554786]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52, 0.47781727, -0.7)
 
-[node name="wheel-front-left" parent="tractor-shovel" index="2"]
+[node name="wheel-front-left" parent="tractor-shovel" index="2" unique_id=982689493]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.31781727, 0.42)
 
-[node name="wheel-front-right" parent="tractor-shovel" index="3"]
+[node name="wheel-front-right" parent="tractor-shovel" index="3" unique_id=1625242500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.31781727, 0.42)
 
-[node name="wheel-back-right" parent="tractor-shovel" index="4"]
+[node name="wheel-back-right" parent="tractor-shovel" index="4" unique_id=789100687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52, 0.47781727, -0.7)
 
 [node name="WheelFL" parent="." unique_id=1241174582 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.31781727, 0.42)
 shape = SubResource("SphereShape3D_1ddeo")
+max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 SkidmarkWidth = 0.15
 
@@ -195,6 +196,7 @@ remote_path = NodePath("../../tractor-shovel/wheel-front-left")
 [node name="WheelFR" parent="." unique_id=1915944117 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.31781727, 0.42)
 shape = SubResource("SphereShape3D_qe0ku")
+max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 SkidmarkWidth = 0.15
 
@@ -204,6 +206,7 @@ remote_path = NodePath("../../tractor-shovel/wheel-front-right")
 [node name="WheelBL" parent="." unique_id=824104802 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.47781727, -0.7)
 shape = SubResource("SphereShape3D_g3c1d")
+max_results = 16
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -216,6 +219,7 @@ remote_path = NodePath("../../tractor-shovel/wheel-back-left")
 [node name="WheelBR" parent="." unique_id=850023765 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_14blg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.47781727, -0.7)
 shape = SubResource("SphereShape3D_hwmkx")
+max_results = 16
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")

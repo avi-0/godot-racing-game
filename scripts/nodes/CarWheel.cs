@@ -70,12 +70,37 @@ public partial class CarWheel : ShapeCast3D
 		_isSliding = false;
 	}
 
-	public bool IsWheelColiding()
+	public bool HasValidCollision()
 	{
-		if (!IsColliding()) {return false;}
-		
-		if (GetCollisionPoint(0).Y > GetGlobalPosition().Y) {return false;}
+		for (int i = 0; i < GetCollisionCount(); i++)
+		{
+			if (IsValidCollisionPoint(GetCollisionPoint(i)))
+			{
+				return true;
+			}
+		}
 
+		return false;
+	}
+	public int[] GetValidCollisions()
+	{
+		List<int> collisions = new List<int>();
+		
+		for (int i = 0; i < GetCollisionCount(); i++)
+		{
+			if (IsValidCollisionPoint(GetCollisionPoint(i)))
+			{
+				collisions.Add(i);
+			}
+		}
+
+		return collisions.ToArray();
+	}
+
+	private bool IsValidCollisionPoint(Vector3 collisionPoint)
+	{
+		if (collisionPoint.Y >= GetGlobalPosition().Y) { return false;}
+		
 		return true;
 	}
 

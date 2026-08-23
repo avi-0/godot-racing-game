@@ -289,7 +289,7 @@ shape = SubResource("ConvexPolygonShape3D_yrqru")
 
 [node name="WheelFL" parent="." unique_id=1246587200 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.22163354, 0.55)
-max_results = 1
+max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL" unique_id=1660286868]
@@ -298,7 +298,7 @@ remote_path = NodePath("../../Prototype_Car/FLW")
 
 [node name="WheelFR" parent="." unique_id=31243168 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.22163354, 0.55)
-max_results = 1
+max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR" unique_id=1123913041]
@@ -307,7 +307,7 @@ remote_path = NodePath("../../Prototype_Car/FRW")
 
 [node name="WheelBL" parent="." unique_id=1344432381 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.22163354, -0.5)
-max_results = 1
+max_results = 16
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -318,7 +318,7 @@ remote_path = NodePath("../../Prototype_Car/RLW")
 
 [node name="WheelBR" parent="." unique_id=1205780133 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.22163354, -0.5)
-max_results = 1
+max_results = 16
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")

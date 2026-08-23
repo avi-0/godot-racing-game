@@ -234,7 +234,7 @@ public partial class Car : RigidBody3D
 			// => сначала чекнем нулевой вектор и только потом дадим какой надо
 			wheel.TargetPosition = new Vector3();
 			wheel.ForceShapecastUpdate();
-			if (!wheel.IsWheelColiding())
+			if (!wheel.HasValidCollision())
 			{
 				wheel.TargetPosition = new Vector3(wheel.TargetPosition.X, -(wheel.Config.SpringRest + wheel.Config.OverExtend), wheel.TargetPosition.Z);
 				wheel.ForceShapecastUpdate();
@@ -309,38 +309,36 @@ public partial class Car : RigidBody3D
 		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
 		wheel.WheelModel.Position = wheelPos;
 		
-		if (wheel.IsWheelColiding())
+		int[] collisions = wheel.GetValidCollisions();
+		for (int i = 0; i < collisions.Length; i++)
 		{
-			for (int i = 0; i < wheel.GetCollisionCount(); i++)
-			{
-				var contactPoint = wheel.GetCollisionPoint(i);
-				var normal = wheel.GetCollisionNormal(i);
-				
-				// doesn't work well for spherical tires
-				//if (normal.Dot(wheelRay.GlobalBasis.Y) < 0.95)
-				//	continue;
-				
-				var springUpDirection = wheel.GlobalTransform.Basis.Y;
-				var offset = Mathf.Max(0, wheel.Config.SpringRest - springLength);
-				if (offset > 0)
-					_hasCompressedWheel = true;
-			
-				var force = wheel.Config.SpringStrength * offset;
-				var worldVelocity = GetPointVelocity(contactPoint);
-				var relativeVelocity = springUpDirection.Dot(worldVelocity);
-				var dampForce = wheel.Config.SpringDamping * relativeVelocity;
-				var susForce = (force - dampForce);
-				var forceVector = susForce * normal / wheel.GetCollisionCount();
-				
-				var forcePositionOffset = wheel.GlobalPosition - GlobalPosition;
-				
-				ApplyForce(forceVector, forcePositionOffset);
+			var contactPoint = wheel.GetCollisionPoint(collisions[i]);
+			var normal = wheel.GetCollisionNormal(collisions[i]);
 
-				if (DebugMode)
-				{
-					DebugDraw3D.DrawArrowRay(contactPoint, forceVector/Mass, 0.5f, arrow_size: 0.1f);
-					DebugDraw3D.DrawSphere(contactPoint, wheel.Config.WheelRadius * 0.1f);
-				}
+			// doesn't work well for spherical tires
+			//if (normal.Dot(wheelRay.GlobalBasis.Y) < 0.95)
+			//	continue;
+
+			var springUpDirection = wheel.GlobalTransform.Basis.Y;
+			var offset = Mathf.Max(0, wheel.Config.SpringRest - springLength);
+			if (offset > 0)
+				_hasCompressedWheel = true;
+
+			var force = wheel.Config.SpringStrength * offset;
+			var worldVelocity = GetPointVelocity(contactPoint);
+			var relativeVelocity = springUpDirection.Dot(worldVelocity);
+			var dampForce = wheel.Config.SpringDamping * relativeVelocity;
+			var susForce = (force - dampForce);
+			var forceVector = susForce * normal / collisions.Length;
+
+			var forcePositionOffset = wheel.GlobalPosition - GlobalPosition;
+
+			ApplyForce(forceVector, forcePositionOffset);
+
+			if (DebugMode)
+			{
+				DebugDraw3D.DrawArrowRay(contactPoint, forceVector / Mass, 0.5f, arrow_size: 0.1f);
+				DebugDraw3D.DrawSphere(contactPoint, wheel.Config.WheelRadius * 0.1f);
 			}
 		}
 	}
@@ -398,7 +396,7 @@ public partial class Car : RigidBody3D
 			accelerationForce *= 3;
 		}
 		
-		if (wheel.IsWheelColiding())
+		if (wheel.HasValidCollision())
 		{
 			if (wheel.Config.IsDriveWheel)
 			{
@@ -451,16 +449,17 @@ public partial class Car : RigidBody3D
 	{
 		var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
 		
-		if (wheel.IsWheelColiding())
+		if (wheel.HasValidCollision())
 		{
-			for (int i = 0; i < wheel.GetCollisionCount(); i++)
+			int[] collisions = wheel.GetValidCollisions();
+			for (int i = 0; i < collisions.Length; i++)
 			{
-				var contactPoint = wheel.GetCollisionPoint(i);
-				var normal = wheel.GetCollisionNormal(i);
+				var contactPoint = wheel.GetCollisionPoint(collisions[i]);
+				var normal = wheel.GetCollisionNormal(collisions[i]);
 
 				if (normal.Dot(wheel.GlobalBasis.Y) < 0.95)
 					continue;
-				
+
 				var steerSideDirection = wheel.GlobalBasis.Z.Cross(normal).Normalized();
 				var tireVelocity = GetPointVelocity(contactPoint);
 				var steerXVelocity = steerSideDirection.Dot(tireVelocity);
@@ -477,7 +476,7 @@ public partial class Car : RigidBody3D
 
 				var handbrake = _isBraking;
 
-				if ( (handbrake && tireVelocity.Length() > 2) || grip > SlipThreshold || wheel.GrassContact)
+				if ((handbrake || grip > SlipThreshold || wheel.GrassContact) && tireVelocity.Length() > 1)
 				{
 					_isSlipping = true;
 				}
@@ -485,12 +484,12 @@ public partial class Car : RigidBody3D
 				{
 					_isSlipping = false;
 				}
-				
+
 				if (_isSlipping)
 				{
 					xTraction = SlippingTraction;
 					wheel.Slide(contactPoint + normal * 0.01f, GetPointVelocity(contactPoint));
-					
+
 					if (wheel.Config.FullLoseGripOnSlip && tireVelocity.Length() > 2 && _targetSteering != 0)
 					{
 						xTraction = 0;
@@ -500,20 +499,22 @@ public partial class Car : RigidBody3D
 				{
 					wheel.StopSliding();
 				}
-			
+
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
 
 				var fVelocity = -wheel.GlobalBasis.Z.Dot(tireVelocity);
 				var zTraction = WheelZFriction;
 				var zForce = wheel.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
-			
+
 				var forcePos = contactPoint - GlobalPosition;
-				ApplyForce(xForce / wheel.GetCollisionCount(), forcePos);
-				ApplyForce(zForce / wheel.GetCollisionCount(), forcePos);
+				ApplyForce(xForce / collisions.Length, forcePos);
+				ApplyForce(zForce / collisions.Length, forcePos);
 				if (DebugMode)
 				{
-					DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
-					DebugDraw3D.DrawArrowRay(contactPoint, zForce / Mass, 0.1f, Color.Color8(0, 0, 255), arrow_size: 0.1f);
+					DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255),
+						arrow_size: 0.1f);
+					DebugDraw3D.DrawArrowRay(contactPoint, zForce / Mass, 0.1f, Color.Color8(0, 0, 255),
+						arrow_size: 0.1f);
 				}
 			}
 		}
@@ -525,7 +526,7 @@ public partial class Car : RigidBody3D
 
 	private void ProcessSpecialBlocks(CarWheel wheel)
 	{
-		if (wheel.IsWheelColiding())
+		if (wheel.IsColliding())
 		{
 			for (int collider = 0; collider < wheel.GetCollisionCount(); collider++)
 			{
