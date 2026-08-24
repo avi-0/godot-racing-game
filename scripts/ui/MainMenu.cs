@@ -273,12 +273,16 @@ public partial class MainMenu : Control
 		
 		Editor.IsRunning = true;
 		Editor.SetupOptions();
+		
+		GameManager.Instance.MenuMusicPlayer.Stop();
 
 		await GDTask.ToSignal(Editor, Editor.SignalName.Exited);
 
 		LoadGarageCar(CarManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
 		HadFocus.GrabFocus();
+		
+		GameManager.Instance.MenuMusicPlayer.Play();
 	}
 
 	public async GDTaskVoid OpenTrack(string path, bool host = true)

@@ -19,6 +19,7 @@ public partial class GameManager : Node
 	
 	
 	[Export] public AudioStreamPlayer MusicPlayer;
+	[Export] public AudioStreamPlayer MenuMusicPlayer;
 	[Export] public Control PauseMenu;
 	[Export] public Control ScreenLayoutSlot;
 	[Export] public PanelContainer MOTDPanel;
@@ -182,6 +183,7 @@ public partial class GameManager : Node
 
 		SetViewportsActive(true);
 		
+		MenuMusicPlayer.Stop();
 		PlayNextSong();
 	}
 
@@ -205,6 +207,10 @@ public partial class GameManager : Node
 		EmitSignalStoppedPlaying();
 			
 		MusicPlayer.Stop();
+		if (!MainMenu.Instance.Editor.IsRunning)
+		{
+			MenuMusicPlayer.Play();
+		}
 
 		ClearFollowEffects();
 
