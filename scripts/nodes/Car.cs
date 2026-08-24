@@ -90,7 +90,7 @@ public partial class Car : RigidBody3D
 
 	private CarInputs _inputs = new();
 
-	private Stack<float> _speedStack = new();
+	private Queue<float> _speedQueue = new();
 
 	private RayCast3D _rayCastUp;
 
@@ -121,7 +121,7 @@ public partial class Car : RigidBody3D
 
 		for (int i = 0; i < 5; i++)
 		{
-			_speedStack.Push(0);
+			_speedQueue.Enqueue(0);
 		}
 
 		_defaultDamp = LinearDamp;
@@ -272,7 +272,7 @@ public partial class Car : RigidBody3D
 			DebugDraw3D.DrawArrowRay(GlobalPosition, LinearVelocity, 0.5f, Color.Color8(255, 255, 255), arrow_size: 0.1f);
 		}
 		
-		_speedStack.Pop(); _speedStack.Push(LinearVelocity.Length()); // for bonk strength calculation
+		_speedQueue.Dequeue(); _speedQueue.Enqueue(LinearVelocity.Length()); // for bonk strength calculation
 
 		//water fall death
 		if (GetGlobalPosition().Y < GameManager.DeathY)
@@ -668,9 +668,9 @@ public partial class Car : RigidBody3D
 			float avgSpeed = 0;
 			for (int i = 0; i < 5; i++)
 			{
-				float peek = _speedStack.Pop();
+				float peek = _speedQueue.Dequeue();
 				avgSpeed += peek;
-				_speedStack.Push(peek);
+				_speedQueue.Enqueue(peek);
 			}
 			avgSpeed /= 5;
 			float speedChange = avgSpeed - GetLinearVelocity().Length(); 
