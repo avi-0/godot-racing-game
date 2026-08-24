@@ -146,12 +146,12 @@ public static class GameModeUtils
 
 	public static int GetSilverFromAt(int ms)
 	{
-		return Mathf.FloorToInt(ms * 1.6);
+		return Mathf.FloorToInt(ms * 1.45);
 	}
 
 	public static int GetBronzeFromAt(int ms)
 	{
-		return Mathf.FloorToInt(ms * 2.0);
+		return Mathf.FloorToInt(ms * 1.8);
 	}
 
 	public static string GetMedalFromTime(int timeMs, int atMs)
