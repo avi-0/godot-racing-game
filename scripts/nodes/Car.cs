@@ -358,7 +358,7 @@ public partial class Car : RigidBody3D
 		}
 		
 		//костыль против наскарности дрифткара
-		if (forwardStrength == 0 && ReleaseDebuff && velocity > 10)
+		if (forwardStrength == 0 && backStrength == 0 && ReleaseDebuff && velocity > 10)
 		{
 			forwardStrength = 0.7f;
 		}
@@ -387,7 +387,7 @@ public partial class Car : RigidBody3D
 		
 		var contactPoint = wheel.WheelModel.GlobalPosition;
 		var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;
-		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier * accelerationFromCurve;
+		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier;
 		var forcePosition = contactPoint - GlobalPosition;
 
 		if (_boosted)
