@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="8_x43s4"]
 [ext_resource type="Texture2D" uid="uid://c5as7djgjw4vd" path="res://textures/cars/drift_rough.png" id="9_xxshw"]
 [ext_resource type="PackedScene" uid="uid://ccecgeh8qkbdb" path="res://textures/cars/drift.glb" id="10_cn2cu"]
+[ext_resource type="Shape3D" uid="uid://b6chbli04dvd0" path="res://resources/tyre_hitbox_shape3d.tres" id="11_58tp6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.9
@@ -156,6 +157,7 @@ shape = SubResource("ConvexPolygonShape3D_cn2cu")
 
 [node name="WheelFL" parent="." unique_id=741344460 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36810687, 0.22345212, 0.6240293)
+shape = ExtResource("11_58tp6")
 max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 
@@ -165,6 +167,7 @@ remote_path = NodePath("../../drift/wheel_front_left")
 
 [node name="WheelFR" parent="." unique_id=1367609255 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368, 0.22345212, 0.6240293)
+shape = ExtResource("11_58tp6")
 max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 
@@ -174,6 +177,7 @@ remote_path = NodePath("../../drift/wheel_front_right")
 
 [node name="WheelBL" parent="." unique_id=1218142961 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36810687, 0.22345212, -0.4242609)
+shape = ExtResource("11_58tp6")
 max_results = 16
 IsFrontWheel = false
 IsRearWheel = true
@@ -185,6 +189,7 @@ remote_path = NodePath("../../drift/wheel_rear_left")
 
 [node name="WheelBR" parent="." unique_id=1784977769 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_glvfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368, 0.22345212, -0.4242609)
+shape = ExtResource("11_58tp6")
 max_results = 16
 IsFrontWheel = false
 IsRearWheel = true

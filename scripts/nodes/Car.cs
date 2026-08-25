@@ -234,7 +234,7 @@ public partial class Car : RigidBody3D
 			// => сначала чекнем нулевой вектор и только потом дадим какой надо
 			wheel.TargetPosition = new Vector3();
 			wheel.ForceShapecastUpdate();
-			if (!wheel.HasValidCollision())
+			if (!wheel.IsColliding())
 			{
 				wheel.TargetPosition = new Vector3(wheel.TargetPosition.X, -(wheel.Config.SpringRest + wheel.Config.OverExtend), wheel.TargetPosition.Z);
 				wheel.ForceShapecastUpdate();
@@ -309,11 +309,10 @@ public partial class Car : RigidBody3D
 		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
 		wheel.WheelModel.Position = wheelPos;
 		
-		int[] collisions = wheel.GetValidCollisions();
-		for (int i = 0; i < collisions.Length; i++)
+		for (int i = 0; i < wheel.GetCollisionCount(); i++)
 		{
-			var contactPoint = wheel.GetCollisionPoint(collisions[i]);
-			var normal = wheel.GetCollisionNormal(collisions[i]);
+			var contactPoint = wheel.GetCollisionPoint(i);
+			var normal = wheel.GetCollisionNormal(i);
 
 			// doesn't work well for spherical tires
 			//if (normal.Dot(wheelRay.GlobalBasis.Y) < 0.95)
@@ -329,7 +328,7 @@ public partial class Car : RigidBody3D
 			var relativeVelocity = springUpDirection.Dot(worldVelocity);
 			var dampForce = wheel.Config.SpringDamping * relativeVelocity;
 			var susForce = (force - dampForce);
-			var forceVector = susForce * normal / collisions.Length;
+			var forceVector = susForce * normal / wheel.GetCollisionCount();
 
 			var forcePositionOffset = wheel.GlobalPosition - GlobalPosition;
 
@@ -396,7 +395,7 @@ public partial class Car : RigidBody3D
 			accelerationForce *= 3;
 		}
 		
-		if (wheel.HasValidCollision())
+		if (wheel.IsColliding())
 		{
 			if (wheel.Config.IsDriveWheel)
 			{
@@ -449,13 +448,12 @@ public partial class Car : RigidBody3D
 	{
 		var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
 		
-		if (wheel.HasValidCollision())
+		if (wheel.IsColliding())
 		{
-			int[] collisions = wheel.GetValidCollisions();
-			for (int i = 0; i < collisions.Length; i++)
+			for (int i = 0; i < wheel.GetCollisionCount(); i++)
 			{
-				var contactPoint = wheel.GetCollisionPoint(collisions[i]);
-				var normal = wheel.GetCollisionNormal(collisions[i]);
+				var contactPoint = wheel.GetCollisionPoint(i);
+				var normal = wheel.GetCollisionNormal(i);
 
 				if (normal.Dot(wheel.GlobalBasis.Y) < 0.95)
 					continue;
@@ -507,8 +505,8 @@ public partial class Car : RigidBody3D
 				var zForce = wheel.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
 
 				var forcePos = contactPoint - GlobalPosition;
-				ApplyForce(xForce / collisions.Length, forcePos);
-				ApplyForce(zForce / collisions.Length, forcePos);
+				ApplyForce(xForce / wheel.GetCollisionCount(), forcePos);
+				ApplyForce(zForce / wheel.GetCollisionCount(), forcePos);
 				if (DebugMode)
 				{
 					DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255),
