@@ -11,13 +11,12 @@
 [ext_resource type="Material" uid="uid://cxury5fss0wwx" path="res://assets/asset_packs/cars/Textures/godot_materials/set2.tres" id="7_filc1"]
 [ext_resource type="Texture2D" uid="uid://beji1vrloh4th" path="res://assets/asset_packs/cars/Textures/CHP_Tex_Veh_Land_Col1.png" id="7_sw6ji"]
 [ext_resource type="PackedScene" uid="uid://prmd3hbgb20k" path="res://scenes/cars_extras/headlights.tscn" id="8_0wjsq"]
-[ext_resource type="Shape3D" uid="uid://b6chbli04dvd0" path="res://resources/tyre_hitbox_shape3d.tres" id="9_4mu2d"]
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="12_lj8mf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
 friction = 0.5
 rough = true
-bounce = 0.1
+bounce = 0.5
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
 _limits = [1.0, 4.0, 0.0, 1.0]
@@ -296,8 +295,6 @@ shape = SubResource("ConvexPolygonShape3D_sw6ji")
 
 [node name="WheelFL" parent="." unique_id=140454738 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.26345325, 0.72)
-shape = ExtResource("9_4mu2d")
-max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFL" unique_id=138049365]
@@ -306,8 +303,6 @@ remote_path = NodePath("../../Taxi/FLW")
 
 [node name="WheelFR" parent="." unique_id=1516774417 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.26345325, 0.72)
-shape = ExtResource("9_4mu2d")
-max_results = 16
 WheelModel = NodePath("RemoteTransform3D")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="WheelFR" unique_id=573376032]
@@ -316,8 +311,6 @@ remote_path = NodePath("../../Taxi/FRW")
 
 [node name="WheelBL" parent="." unique_id=378786320 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.26345325, -0.52)
-shape = ExtResource("9_4mu2d")
-max_results = 16
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -328,8 +321,6 @@ remote_path = NodePath("../../Taxi/RLW")
 
 [node name="WheelBR" parent="." unique_id=317014232 node_paths=PackedStringArray("WheelModel") instance=ExtResource("5_0wjsq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.26345325, -0.52)
-shape = ExtResource("9_4mu2d")
-max_results = 16
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")

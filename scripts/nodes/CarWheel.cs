@@ -3,7 +3,7 @@ using Godot;
 using racingGame;
 using racingGame.data;
 
-public partial class CarWheel : ShapeCast3D
+public partial class CarWheel : Node3D
 {
 	[Export] public WheelConfig Config;
 	
@@ -24,6 +24,8 @@ public partial class CarWheel : ShapeCast3D
 	private int SkidmarkCapacity = 512;
 	[Export]
 	private Curve SkidmarkOpacityCurve;
+
+	[Export] public ShapeCast3D ShapeCast;
 	
 	private ImmediateMesh _skidmarkMesh;
 	private RingBuffer<SkidmarkSegment> _skidmarkLines;
@@ -46,6 +48,9 @@ public partial class CarWheel : ShapeCast3D
 	public void Slide(Vector3 position, Vector3 velocity)
 	{
 		var left = velocity.Cross(Basis.Y).Normalized();
+
+		position.X = GlobalPosition.X;
+		position.Z = GlobalPosition.Z;
 		
 		if (_isSliding)
 		{

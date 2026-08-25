@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://rcirugm2el6u"]
+[gd_scene format=3 uid="uid://rcirugm2el6u"]
 
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/nodes/CarWheel.cs" id="1_c8yof"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_wofr7"]
-radius = 0.21
+[ext_resource type="Shape3D" uid="uid://b6chbli04dvd0" path="res://resources/tyre_hitbox_shape3d.tres" id="2_415vt"]
 
 [sub_resource type="Curve" id="Curve_c8yof"]
 bake_resolution = 512
@@ -19,16 +17,21 @@ metallic_specular = 0.0
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_c8yof"]
 
-[node name="Wheel" type="ShapeCast3D" node_paths=PackedStringArray("WheelModel", "SkidmarkMeshInstance")]
-shape = SubResource("SphereShape3D_wofr7")
-target_position = Vector3(0, 0, 0)
+[node name="Wheel" type="Node3D" unique_id=284570040 node_paths=PackedStringArray("SkidmarkMeshInstance", "ShapeCast")]
 script = ExtResource("1_c8yof")
 IsFrontWheel = true
-WheelModel = NodePath("")
 SkidmarkMeshInstance = NodePath("SkidmarkMesh")
 SkidmarkOpacityCurve = SubResource("Curve_c8yof")
+ShapeCast = NodePath("ShapeCast3D")
 
-[node name="SkidmarkMesh" type="MeshInstance3D" parent="."]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=792324347]
+process_physics_priority = -1
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = ExtResource("2_415vt")
+target_position = Vector3(0, 0, 0)
+max_results = 4
+
+[node name="SkidmarkMesh" type="MeshInstance3D" parent="." unique_id=530440816]
 top_level = true
 material_override = SubResource("StandardMaterial3D_c8yof")
 cast_shadow = 0

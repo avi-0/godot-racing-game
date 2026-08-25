@@ -232,12 +232,12 @@ public partial class Car : RigidBody3D
 			// проблема: если ShapeCast уже коллайдится в начальной позиции,
 			// он репортит расстояние как будто бы он растягивается на полную дистанцию
 			// => сначала чекнем нулевой вектор и только потом дадим какой надо
-			wheel.TargetPosition = new Vector3();
-			wheel.ForceShapecastUpdate();
-			if (!wheel.IsColliding())
+			wheel.ShapeCast.TargetPosition = new Vector3();
+			wheel.ShapeCast.ForceShapecastUpdate();
+			if (!wheel.ShapeCast.IsColliding())
 			{
-				wheel.TargetPosition = new Vector3(wheel.TargetPosition.X, -(wheel.Config.SpringRest + wheel.Config.OverExtend), wheel.TargetPosition.Z);
-				wheel.ForceShapecastUpdate();
+				wheel.ShapeCast.TargetPosition = new Vector3(-(wheel.Config.SpringRest + wheel.Config.OverExtend), 0, 0);
+				wheel.ShapeCast.ForceShapecastUpdate();
 			}
 
 			ProcessSuspension(wheel);
@@ -304,15 +304,15 @@ public partial class Car : RigidBody3D
 
 	private void ProcessSuspension(CarWheel wheel)
 	{
-		var springLength = wheel.TargetPosition.Length() * wheel.GetClosestCollisionSafeFraction();
+		var springLength = wheel.ShapeCast.TargetPosition.Length() * wheel.ShapeCast.GetClosestCollisionSafeFraction();
 		Vector3 wheelPos = wheel.WheelModel.Position;
 		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
 		wheel.WheelModel.Position = wheelPos;
 		
-		for (int i = 0; i < wheel.GetCollisionCount(); i++)
+		for (int i = 0; i < wheel.ShapeCast.GetCollisionCount(); i++)
 		{
-			var contactPoint = wheel.GetCollisionPoint(i);
-			var normal = wheel.GetCollisionNormal(i);
+			var contactPoint = wheel.ShapeCast.GetCollisionPoint(i);
+			var normal = wheel.ShapeCast.GetCollisionNormal(i);
 
 			// doesn't work well for spherical tires
 			//if (normal.Dot(wheelRay.GlobalBasis.Y) < 0.95)
@@ -328,7 +328,7 @@ public partial class Car : RigidBody3D
 			var relativeVelocity = springUpDirection.Dot(worldVelocity);
 			var dampForce = wheel.Config.SpringDamping * relativeVelocity;
 			var susForce = (force - dampForce);
-			var forceVector = susForce * normal / wheel.GetCollisionCount();
+			var forceVector = susForce * normal / wheel.ShapeCast.GetCollisionCount();
 
 			var forcePositionOffset = wheel.GlobalPosition - GlobalPosition;
 
@@ -395,7 +395,7 @@ public partial class Car : RigidBody3D
 			accelerationForce *= 3;
 		}
 		
-		if (wheel.IsColliding())
+		if (wheel.ShapeCast.IsColliding())
 		{
 			if (wheel.Config.IsDriveWheel)
 			{
@@ -448,12 +448,12 @@ public partial class Car : RigidBody3D
 	{
 		var tireWeight = (Mass * -GetGravity().Y) / _wheelCount;
 		
-		if (wheel.IsColliding())
+		if (wheel.ShapeCast.IsColliding())
 		{
-			for (int i = 0; i < wheel.GetCollisionCount(); i++)
+			for (int i = 0; i < wheel.ShapeCast.GetCollisionCount(); i++)
 			{
-				var contactPoint = wheel.GetCollisionPoint(i);
-				var normal = wheel.GetCollisionNormal(i);
+				var contactPoint = wheel.ShapeCast.GetCollisionPoint(i);
+				var normal = wheel.ShapeCast.GetCollisionNormal(i);
 
 				if (normal.Dot(wheel.GlobalBasis.Y) < 0.95)
 					continue;
@@ -505,8 +505,8 @@ public partial class Car : RigidBody3D
 				var zForce = wheel.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
 
 				var forcePos = contactPoint - GlobalPosition;
-				ApplyForce(xForce / wheel.GetCollisionCount(), forcePos);
-				ApplyForce(zForce / wheel.GetCollisionCount(), forcePos);
+				ApplyForce(xForce / wheel.ShapeCast.GetCollisionCount(), forcePos);
+				ApplyForce(zForce / wheel.ShapeCast.GetCollisionCount(), forcePos);
 				if (DebugMode)
 				{
 					DebugDraw3D.DrawArrowRay(contactPoint, xForce / Mass, 0.1f, Color.Color8(0, 0, 255),
@@ -524,11 +524,11 @@ public partial class Car : RigidBody3D
 
 	private void ProcessSpecialBlocks(CarWheel wheel)
 	{
-		if (wheel.IsColliding())
+		if (wheel.ShapeCast.IsColliding())
 		{
-			for (int collider = 0; collider < wheel.GetCollisionCount(); collider++)
+			for (int collider = 0; collider < wheel.ShapeCast.GetCollisionCount(); collider++)
 			{
-				Object collidingObject = wheel.GetCollider(collider);
+				Object collidingObject = wheel.ShapeCast.GetCollider(collider);
 				if (collidingObject is StaticBody3D staticBody3D)
 				{
 					if (staticBody3D.GetOwner() is Block)
