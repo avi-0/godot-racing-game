@@ -34,6 +34,7 @@ public partial class Car : RigidBody3D
 	[Export] public float UnslipThreshold = 0.5f;
 	[Export] public float WheelZFriction = 0.05f;
 	[Export] public bool SteeringAffectsCenterOfMass = false;
+	[Export] public bool FullGripOffroad = false;
 	
 	[ExportCategory("Debug")]
 	[Export] public bool DebugMode = false;
@@ -224,6 +225,7 @@ public partial class Car : RigidBody3D
 		}
 
 		_hasCompressedWheel = false;
+		_boosted = false;
 		foreach (var wheel in Wheels)
 		{
 			SteeringRotation(delta, wheel);
@@ -243,7 +245,6 @@ public partial class Car : RigidBody3D
 			ProcessSuspension(wheel);
 			
 			wheel.GrassContact = false;
-			_boosted = false;
 			ProcessSpecialBlocks(wheel);
 		}
 
@@ -387,7 +388,7 @@ public partial class Car : RigidBody3D
 		
 		var contactPoint = wheel.WheelModel.GlobalPosition;
 		var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;
-		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier;
+		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier * accelerationFromCurve;
 		var forcePosition = contactPoint - GlobalPosition;
 
 		if (_boosted)
@@ -550,7 +551,7 @@ public partial class Car : RigidBody3D
 							}
 						}
 					}
-					else if (staticBody3D.GetOwner().Name == "TrackBase")
+					else if (!FullGripOffroad && staticBody3D.GetOwner().Name == "TrackBase")
 					{
 						wheel.GrassContact = true;
 					}
