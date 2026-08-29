@@ -1,0 +1,57 @@
+[gd_scene format=4 uid="uid://dfgof7c6cbsm"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_yjntk"]
+[ext_resource type="Material" uid="uid://ct42cyb4e5kgr" path="res://materials/small_tree_rt_1.tres" id="2_jtoy2"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u7786"]
+_surfaces = [{
+"aabb": AABB(-0.28896794, -0.288968, -1.2240001, 0.57793593, 0.57793593, 1.2240001),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"name": "small_tree_rt_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AACbrv//AAD+/2NRsxEAAP//Y1H//wAAAACbrrMRAACbrv////8AAGNRAAADCAAAY1EAAP//AACbrv//AwgAAHJGdvv//wAAjLmIBAAAAACMuYgE//8AAHJGdvsAAAAAdvuMuf//AACIBHJGAwgAAIgEckb//wAAdvuMuQMIAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4il0u"]
+resource_name = "small_tree_rt_1_small_tree_rt_1"
+_surfaces = [{
+"aabb": AABB(-0.28896794, -0.288968, -1.2240001, 0.57793593, 0.57793593, 1.2240001),
+"attribute_data": PackedByteArray("AABL7v//AAD//0vuAAAAAP//+/cAAAAAAAD79///AAD/////AAAAAAAA/////wAA///79wAAAAAAAPv3//8AAA=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": ExtResource("2_jtoy2"),
+"name": "small_tree_rt_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AACbrv//OsH+/2NRsxE6wf//Y1H//zrBAACbrrMROsGbrv////9XMmNRAAADCFcyY1EAAP//VzKbrv//AwhXMnJGdvv//8IfjLmIBAAAwh+MuYgE///CH3JGdvsAAMIfdvuMuf//Fz6IBHJGAwgXPogEckb//xc+dvuMuQMIFz6d3k5vnd5Ob53eTm+d3k5vVSVUNVUlVDVVJVQ1VSVUNYkw7R6JMO0eiTDtHokw7R6nE7BYpxOwWKcTsFinE7BY")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_u7786")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xd111"]
+radius = 0.030273438
+height = 1.0219727
+
+[node name="small_tree_rt_1" type="Node3D" unique_id=929285299]
+script = ExtResource("1_yjntk")
+
+[node name="small_tree_rt_12" type="Node3D" parent="." unique_id=248466786]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="small_tree_rt_1" type="MeshInstance3D" parent="small_tree_rt_12" unique_id=2111931990]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_4il0u")
+skeleton = NodePath("")
+
+[node name="small_tree_rt_1_col" type="StaticBody3D" parent="small_tree_rt_12/small_tree_rt_1" unique_id=533834357]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="small_tree_rt_12/small_tree_rt_1/small_tree_rt_1_col" unique_id=1172639575]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.1375467e-08, -0.48901367)
+shape = SubResource("CapsuleShape3D_xd111")

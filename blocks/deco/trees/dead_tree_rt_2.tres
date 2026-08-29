@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://bfwwxjga8ko1a"]
+
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_0wiim"]
+[ext_resource type="Texture2D" uid="uid://cy0ydyoowmakm" path="res://textures/blocks/deco/trees/dead_tree_rt_2.png" id="1_1smf8"]
+
+[resource]
+script = ExtResource("1_0wiim")
+ScenePath = "res://blocks/deco/trees/_scenes/dead_tree_rt_2.tscn"
+SourceScenePath = "res://assets/asset_packs/pizza_trees/dead_tree_rt_2.glb"
+ThumbnailTexture = ExtResource("1_1smf8")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://6terol2wyj7t"]
+
+[ext_resource type="Texture2D" uid="uid://b8kx7m48gb6vd" path="res://textures/blocks/deco/trees/tree_rt_2.png" id="1_abcdj"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_lcd6c"]
+
+[resource]
+script = ExtResource("1_lcd6c")
+ScenePath = "res://blocks/deco/trees/_scenes/tree_rt_2.tscn"
+SourceScenePath = "res://assets/asset_packs/pizza_trees/tree_rt_2.glb"
+ThumbnailTexture = ExtResource("1_abcdj")
