@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://ccj84nb6f55gl"]
 
-[ext_resource type="Texture2D" uid="uid://cwsb0vbqifmar" path="res://textures/blocks/deco/cobblestoneAlternative.png" id="1_n0swa"]
+[ext_resource type="Texture2D" uid="uid://cwsb0vbqifmar" path="res://textures/blocks/deco/medieval/cobblestoneAlternative.png" id="1_n0swa"]
 
 [resource]
 albedo_texture = ExtResource("1_n0swa")

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pxwblv25phbf"
-path.s3tc="res://.godot/imported/details.png-fa994353fa7755f5e71e182e94d49cdf.s3tc.ctex"
+path.s3tc="res://.godot/imported/details.png-5d5f3ba2edf7e0c8bff003320b79d488.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/blocks/deco/details.png"
-dest_files=["res://.godot/imported/details.png-fa994353fa7755f5e71e182e94d49cdf.s3tc.ctex"]
+source_file="res://textures/blocks/deco/medieval/details.png"
+dest_files=["res://.godot/imported/details.png-5d5f3ba2edf7e0c8bff003320b79d488.s3tc.ctex"]
 
 [params]
 
