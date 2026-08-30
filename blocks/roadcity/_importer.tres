@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BlockDirectoryImporter" format=3 uid="uid://cj3vf1c4el3ah"]
+
+[ext_resource type="Script" uid="uid://d0mlqj4pey0s3" path="res://scripts/resources/BlockDirectoryImporter.cs" id="1_odi5c"]
+
+[resource]
+script = ExtResource("1_odi5c")
+SourcePath = "res://assets/cartopia/blocks/cityroad"
+metadata/_custom_type_script = "uid://d0mlqj4pey0s3"

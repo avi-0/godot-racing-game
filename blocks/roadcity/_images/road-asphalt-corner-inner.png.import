@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cutkwrwk18u7l"
-path.s3tc="res://.godot/imported/dirt.png-81809702f67aac9a11c6755b9c74b532.s3tc.ctex"
+uid="uid://bra8ot4fjptug"
+path="res://.godot/imported/road-asphalt-corner-inner.png-c9b5c4681e73b6232a83ed689443618c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/blocks/deco/urban/dirt.png"
-dest_files=["res://.godot/imported/dirt.png-81809702f67aac9a11c6755b9c74b532.s3tc.ctex"]
+source_file="res://blocks/roadcity/_images/road-asphalt-corner-inner.png"
+dest_files=["res://.godot/imported/road-asphalt-corner-inner.png-c9b5c4681e73b6232a83ed689443618c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

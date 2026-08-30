@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://0ug6aeagy2du"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_k0dx2"]
+[ext_resource type="Material" uid="uid://xbmi8lmevt4w" path="res://materials/concrete_smooth.tres" id="2_otep8"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rd7an"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"name": "concreteSmooth",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mbt81"]
+resource_name = "road-asphalt-pavement_road-asphalt-pavement"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray(255, 255, 255, 255, 169, 234, 255, 255, 169, 234, 84, 245, 255, 255, 84, 245),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"material": ExtResource("2_otep8"),
+"name": "concreteSmooth",
+"primitive": 3,
+"uv_scale": Vector4(12, 24, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_rd7an")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k0dx2"]
+data = PackedVector3Array(-0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5)
+
+[node name="road-asphalt-pavement" type="Node3D" unique_id=1967943825]
+script = ExtResource("1_k0dx2")
+
+[node name="road-asphalt-pavement2" type="Node3D" parent="." unique_id=1960044697]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
+
+[node name="road-asphalt-pavement" type="MeshInstance3D" parent="road-asphalt-pavement2" unique_id=725146713]
+mesh = SubResource("ArrayMesh_mbt81")
+skeleton = NodePath("")
+
+[node name="road-asphalt-pavement_col" type="StaticBody3D" parent="road-asphalt-pavement2/road-asphalt-pavement" unique_id=1126315441]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road-asphalt-pavement2/road-asphalt-pavement/road-asphalt-pavement_col" unique_id=837950505]
+shape = SubResource("ConcavePolygonShape3D_k0dx2")

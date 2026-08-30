@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b7wvs61aj2ovw"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_svnmu"]
+[ext_resource type="Material" uid="uid://cqxwr5ebpgh84" path="res://materials/dirt.tres" id="2_6wbhv"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jkae7"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"name": "dirt",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vag8n"]
+resource_name = "road-dirt-center_road-dirt-center"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 0, 0, 255, 127, 255, 127, 255, 127, 255, 127, 255, 255),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"material": ExtResource("2_6wbhv"),
+"name": "dirt",
+"primitive": 3,
+"uv_scale": Vector4(2, 2, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 84, 213, 255, 255, 0, 0, 0, 0, 84, 213, 255, 255, 0, 0, 255, 255, 84, 213, 0, 0, 0, 0, 255, 255, 84, 213, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jkae7")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_svnmu"]
+data = PackedVector3Array(-0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5)
+
+[node name="road-dirt-center" type="Node3D" unique_id=409257373]
+script = ExtResource("1_svnmu")
+
+[node name="road-dirt-center2" type="Node3D" parent="." unique_id=766731059]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
+
+[node name="road-dirt-center" type="MeshInstance3D" parent="road-dirt-center2" unique_id=613691933]
+mesh = SubResource("ArrayMesh_vag8n")
+skeleton = NodePath("")
+
+[node name="road-dirt-center_col" type="StaticBody3D" parent="road-dirt-center2/road-dirt-center" unique_id=2147429877]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road-dirt-center2/road-dirt-center/road-dirt-center_col" unique_id=1489486056]
+shape = SubResource("ConcavePolygonShape3D_svnmu")
