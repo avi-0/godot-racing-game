@@ -4,4 +4,5 @@
 
 [resource]
 albedo_texture = ExtResource("1_ghom3")
+roughness = 0.75
 texture_filter = 4

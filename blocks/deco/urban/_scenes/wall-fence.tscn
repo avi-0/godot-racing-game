@@ -1,28 +1,9 @@
 [gd_scene format=4 uid="uid://cuup4kyfc4wdy"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_afni5"]
-[ext_resource type="Texture2D" uid="uid://8nwux7u0fr38" path="res://textures/blocks/deco/urban/wall_lines.png" id="2_nvkpm"]
-[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="3_007k7"]
-[ext_resource type="Texture2D" uid="uid://tmiovmgy0mv3" path="res://textures/blocks/deco/urban/bars.png" id="4_de7n5"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2vo6"]
-resource_name = "wall_lines"
-shading_mode = 0
-albedo_texture = ExtResource("2_nvkpm")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdxeu"]
-resource_name = "concrete"
-shading_mode = 0
-albedo_texture = ExtResource("3_007k7")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tw7kq"]
-resource_name = "bars"
-transparency = 4
-shading_mode = 0
-albedo_texture = ExtResource("4_de7n5")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://dg4y30ub2y7s5" path="res://materials/wall_lines.tres" id="2_afni5"]
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="3_afni5"]
+[ext_resource type="Material" uid="uid://no8qi6r5hsem" path="res://materials/bars.tres" id="4_nvkpm"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_uebb5"]
 _surfaces = [{
@@ -66,7 +47,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 54,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAEwAUABAAFQAWABcAFwAYABUAGQAaABsAGwAcABkAHAAdABkAHgAfACAAIAAhAB4A"),
-"material": SubResource("StandardMaterial3D_d2vo6"),
+"material": ExtResource("2_afni5"),
 "name": "wall_lines",
 "primitive": 3,
 "uv_scale": Vector4(10, 1.0000002, 0, 0),
@@ -78,7 +59,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 30,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAHAAYACQAKAAsACwAMAAkADQAOAA8ADwAQAA0ADwARABAA"),
-"material": SubResource("StandardMaterial3D_tdxeu"),
+"material": ExtResource("3_afni5"),
 "name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(28, 24, 0, 0),
@@ -90,7 +71,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 12,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUA"),
-"material": SubResource("StandardMaterial3D_tw7kq"),
+"material": ExtResource("4_nvkpm"),
 "name": "bars",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

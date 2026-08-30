@@ -1,17 +1,11 @@
 [gd_scene format=4 uid="uid://gmgeqv5xlp31"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_d85c2"]
-[ext_resource type="Texture2D" uid="uid://cwjgsunt4x306" path="res://textures/blocks/deco/urban/planks.png" id="2_1ef2f"]
+[ext_resource type="Material" uid="uid://bkmemifwthdbq" path="res://materials/planks2.tres" id="2_d85c2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d85c2"]
 friction = 0.5
 bounce = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xn1wg"]
-resource_name = "planks"
-shading_mode = 0
-albedo_texture = ExtResource("2_1ef2f")
-metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_76g2d"]
 _surfaces = [{
@@ -35,7 +29,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 252,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdgB3AHQAeAB5AHoAegB7AHgAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjgCPAIwAkACRAJIAkgCTAJAAlACVAJYAlgCXAJQAmACZAJoAmgCbAJgAnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQA"),
-"material": SubResource("StandardMaterial3D_xn1wg"),
+"material": ExtResource("2_d85c2"),
 "name": "planks",
 "primitive": 3,
 "uv_scale": Vector4(4.223762, 6.461382, 0, 0),

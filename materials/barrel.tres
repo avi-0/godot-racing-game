@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://csg5gpldyhom2"]
 
-[ext_resource type="Texture2D" uid="uid://b3r0chx61v0lt" path="res://textures/blocks/deco/medieval/barrel.png" id="1_8agrt"]
+[ext_resource type="Texture2D" uid="uid://b3r0chx61v0lt" path="res://textures/blocks/deco/medieval/barrel.png" id="1_tu0hh"]
 
 [resource]
-albedo_texture = ExtResource("1_8agrt")
+albedo_texture = ExtResource("1_tu0hh")
 texture_filter = 4

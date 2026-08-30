@@ -1,20 +1,8 @@
 [gd_scene format=4 uid="uid://buwownta4g658"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_mkjru"]
-[ext_resource type="Texture2D" uid="uid://b2l3dqr0shxaa" path="res://textures/blocks/deco/urban/windows.png" id="2_73t2c"]
-[ext_resource type="Texture2D" uid="uid://c66aibq2infi0" path="res://textures/blocks/deco/urban/metal.png" id="3_upgg5"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifdwd"]
-resource_name = "windows"
-shading_mode = 0
-albedo_texture = ExtResource("2_73t2c")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wetv"]
-resource_name = "metal"
-shading_mode = 0
-albedo_texture = ExtResource("3_upgg5")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://bvrn614ao5iab" path="res://materials/windows.tres" id="2_mkjru"]
+[ext_resource type="Material" uid="uid://d0p5yb2cc5xnw" path="res://materials/metal.tres" id="3_73t2c"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1bgnu"]
 _surfaces = [{
@@ -48,7 +36,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAgADAAAA"),
-"material": SubResource("StandardMaterial3D_ifdwd"),
+"material": ExtResource("2_mkjru"),
 "name": "windows",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -60,7 +48,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 102,
 "index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABAAFAAAABgAHAAgACAAJAAYACQAKAAYACgALAAYADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJQAnACYAKAAkACYAJAAoACkAKgAoACYAKQArACQAKgAmACwALAAtACoALgAqAC0ALwAmACcALQAvAC4ALwAnACsALwApAC4ALwArACkA"),
-"material": SubResource("StandardMaterial3D_0wetv"),
+"material": ExtResource("3_73t2c"),
 "name": "metal",
 "primitive": 3,
 "uv_scale": Vector4(27.597794, 3.597794, 0, 0),

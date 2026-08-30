@@ -1,21 +1,8 @@
 [gd_scene format=4 uid="uid://d0ygmaih5dwmm"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_bdgw4"]
-[ext_resource type="Texture2D" uid="uid://c66aibq2infi0" path="res://textures/blocks/deco/urban/metal.png" id="2_vw7ae"]
-[ext_resource type="Texture2D" uid="uid://tmiovmgy0mv3" path="res://textures/blocks/deco/urban/bars.png" id="3_m15om"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1s4w"]
-resource_name = "metal"
-shading_mode = 0
-albedo_texture = ExtResource("2_vw7ae")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmpjt"]
-resource_name = "bars"
-transparency = 4
-shading_mode = 0
-albedo_texture = ExtResource("3_m15om")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://d0p5yb2cc5xnw" path="res://materials/metal.tres" id="2_bdgw4"]
+[ext_resource type="Material" uid="uid://no8qi6r5hsem" path="res://materials/bars.tres" id="3_vw7ae"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qmx5p"]
 _surfaces = [{
@@ -49,7 +36,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 102,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIwAiACEAJAAlACYAJgAnACQAKAAmACUAJgApACcAJQAqACgAKQArACcAKgArACgAKgAnACsALAAtAC4ALQAvAC4ALAAuADAAMQAuAC8AMAAyACwAMQAvADMAMwAsADIAMgAxADMA"),
-"material": SubResource("StandardMaterial3D_c1s4w"),
+"material": ExtResource("2_bdgw4"),
 "name": "metal",
 "primitive": 3,
 "uv_scale": Vector4(39.86761, 7.2459426, 0, 0),
@@ -61,7 +48,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 12,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUA"),
-"material": SubResource("StandardMaterial3D_cmpjt"),
+"material": ExtResource("3_vw7ae"),
 "name": "bars",
 "primitive": 3,
 "uv_scale": Vector4(28, 2, 0, 0),

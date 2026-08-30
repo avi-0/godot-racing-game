@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bqfgjb4rwgm8l"]
+
+[ext_resource type="Texture2D" uid="uid://cbhbm5fjudxe8" path="res://textures/blocks/deco/urban/roof_plates.png" id="1_671oo"]
+
+[resource]
+resource_name = "roof_plates"
+albedo_texture = ExtResource("1_671oo")
+metallic = 1.0
+roughness = 0.75
+texture_filter = 4
+metadata/_gltf_primary_texture_coord = 0

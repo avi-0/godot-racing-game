@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dg4y30ub2y7s5"]
+
+[ext_resource type="Texture2D" uid="uid://8nwux7u0fr38" path="res://textures/blocks/deco/urban/wall_lines.png" id="1_vp2x0"]
+
+[resource]
+resource_name = "wall_lines"
+albedo_texture = ExtResource("1_vp2x0")
+roughness = 0.9
+texture_filter = 4
+metadata/_gltf_primary_texture_coord = 0

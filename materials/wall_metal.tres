@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://digkd5bgspe7u"]
+
+[ext_resource type="Texture2D" uid="uid://bdvfeuqr5ohkb" path="res://textures/blocks/deco/urban/metal_wall.png" id="1_n5ajl"]
+
+[resource]
+resource_name = "wall_metal"
+albedo_texture = ExtResource("1_n5ajl")
+metallic = 1.0
+roughness = 0.75
+texture_filter = 4
+metadata/_gltf_primary_texture_coord = 0

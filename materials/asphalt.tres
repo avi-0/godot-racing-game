@@ -6,4 +6,6 @@
 resource_name = "asphalt"
 cull_mode = 2
 albedo_texture = ExtResource("1_d1gwr")
+roughness = 0.8
+texture_filter = 4
 metadata/_gltf_primary_texture_coord = 0

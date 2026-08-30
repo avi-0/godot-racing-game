@@ -6,4 +6,6 @@
 resource_name = "concreteSmooth"
 cull_mode = 2
 albedo_texture = ExtResource("1_jvi2b")
+roughness = 0.5
+texture_filter = 4
 metadata/_gltf_primary_texture_coord = 0

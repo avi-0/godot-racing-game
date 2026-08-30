@@ -1,13 +1,7 @@
 [gd_scene format=4 uid="uid://crnr1ee6o5a5y"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_iic2r"]
-[ext_resource type="Texture2D" uid="uid://nqo7fpx8qg5h" path="res://textures/blocks/deco/urban/roof.png" id="2_o52eq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cy2sy"]
-resource_name = "roof"
-shading_mode = 0
-albedo_texture = ExtResource("2_o52eq")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://divrsvgki7mv0" path="res://materials/roof2.tres" id="2_iic2r"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kngg1"]
 _surfaces = [{
@@ -33,7 +27,7 @@ _surfaces = [{
 "index_count": 72,
 "index_data": PackedByteArray("DgAPABAAEAARAA4AEAAYABEAEgATABQAFQAUABMAGQAUABUAAAABAAIAAgAWAAAAAgAaABYAAwAEAAUAFwAFAAQAGwAFABcAHAAdAB4AHgAfABwAIAAhACIAIwAiACEAJAAlACYAJgAnACQAKAApACoAKwAqACkABgAHAAgACAAJAAYACgALAAwADQAMAAsA"),
 "lods": [0.0565056, PackedByteArray("DgAPABAAEAARAA4AEgATABQAFQAUABMAAAABAAIAAgAWAAAAAwAEAAUAFwAFAAQABgAHAAgACAAJAAYACgALAAwADQAMAAsA"), 0.08475841, PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACAAJAAYACgALAAwADQAMAAsA")],
-"material": SubResource("StandardMaterial3D_cy2sy"),
+"material": ExtResource("2_iic2r"),
 "name": "roof",
 "primitive": 3,
 "uv_scale": Vector4(2.121081, 2, 0, 0),

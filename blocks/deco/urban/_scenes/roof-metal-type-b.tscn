@@ -1,27 +1,9 @@
 [gd_scene format=4 uid="uid://dqmx8viikf65s"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_63sb4"]
-[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="2_4wk2e"]
-[ext_resource type="Texture2D" uid="uid://nqo7fpx8qg5h" path="res://textures/blocks/deco/urban/roof.png" id="3_gptig"]
-[ext_resource type="Texture2D" uid="uid://cbhbm5fjudxe8" path="res://textures/blocks/deco/urban/roof_plates.png" id="4_cbdcm"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fo0cu"]
-resource_name = "concrete"
-shading_mode = 0
-albedo_texture = ExtResource("2_4wk2e")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnain"]
-resource_name = "roof"
-shading_mode = 0
-albedo_texture = ExtResource("3_gptig")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccknf"]
-resource_name = "roof_plates"
-shading_mode = 0
-albedo_texture = ExtResource("4_cbdcm")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_63sb4"]
+[ext_resource type="Material" uid="uid://divrsvgki7mv0" path="res://materials/roof2.tres" id="3_4wk2e"]
+[ext_resource type="Material" uid="uid://bqfgjb4rwgm8l" path="res://materials/roof_plates.tres" id="4_gptig"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7vviw"]
 _surfaces = [{
@@ -66,7 +48,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 12,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
-"material": SubResource("StandardMaterial3D_fo0cu"),
+"material": ExtResource("2_63sb4"),
 "name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(28, 24, 0, 0),
@@ -79,7 +61,7 @@ _surfaces = [{
 "index_count": 60,
 "index_data": PackedByteArray("AAABAAIAAgADAAAAAwACABoAGgAEAAMABQAGABsAGwAHAAUACAAJABwACgAcAAkADAANAB0ACwAdAA0AEAAeAA8ADgAPAB4AEQASAB8AHwATABEAEQATABQAFAAVABEAFQAUACAAIAAWABUAFwAhABkAGAAZACEA"),
 "lods": [0.044808093, PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABQAGAAcACAAJAAoACwAMAA0ADgAPABAAEQASABMAEQATABQAFAAVABEAFAAWABUAFwAYABkA")],
-"material": SubResource("StandardMaterial3D_fnain"),
+"material": ExtResource("3_4wk2e"),
 "name": "roof",
 "primitive": 3,
 "uv_scale": Vector4(18.137165, 10, 0, 0),
@@ -91,7 +73,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_ccknf"),
+"material": ExtResource("4_gptig"),
 "name": "roof_plates",
 "primitive": 3,
 "uv_scale": Vector4(8, 12, 0, 0),

@@ -1,14 +1,7 @@
 [gd_scene format=4 uid="uid://c2r0e8js3p86j"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_0mhda"]
-[ext_resource type="Texture2D" uid="uid://tmiovmgy0mv3" path="res://textures/blocks/deco/urban/bars.png" id="2_ovfhf"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6heyn"]
-resource_name = "bars"
-transparency = 4
-shading_mode = 0
-albedo_texture = ExtResource("2_ovfhf")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://no8qi6r5hsem" path="res://materials/bars.tres" id="2_0mhda"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_85hh8"]
 _surfaces = [{
@@ -32,7 +25,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 12,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUA"),
-"material": SubResource("StandardMaterial3D_6heyn"),
+"material": ExtResource("2_0mhda"),
 "name": "bars",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

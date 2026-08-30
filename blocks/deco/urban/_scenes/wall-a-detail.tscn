@@ -1,24 +1,8 @@
 [gd_scene format=4 uid="uid://bis526ur6f47h"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_q4nhx"]
-[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="2_rakeb"]
-[ext_resource type="Texture2D" uid="uid://8nwux7u0fr38" path="res://textures/blocks/deco/urban/wall_lines.png" id="3_6h6lo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xiqmd"]
-resource_name = "_defaultMat"
-shading_mode = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b6wdo"]
-resource_name = "concrete"
-shading_mode = 0
-albedo_texture = ExtResource("2_rakeb")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tumvt"]
-resource_name = "wall_lines"
-shading_mode = 0
-albedo_texture = ExtResource("3_6h6lo")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_q4nhx"]
+[ext_resource type="Material" uid="uid://dg4y30ub2y7s5" path="res://materials/wall_lines.tres" id="3_rakeb"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l6c72"]
 _surfaces = [{
@@ -62,7 +46,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAgADAAAA"),
-"material": SubResource("StandardMaterial3D_xiqmd"),
+"material": ExtResource("2_q4nhx"),
 "name": "_defaultMat",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -74,7 +58,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAgADAAAA"),
-"material": SubResource("StandardMaterial3D_b6wdo"),
+"material": ExtResource("2_q4nhx"),
 "name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(9.6, 24.4, 0, 0),
@@ -86,7 +70,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwA"),
-"material": SubResource("StandardMaterial3D_tumvt"),
+"material": ExtResource("3_rakeb"),
 "name": "wall_lines",
 "primitive": 3,
 "uv_scale": Vector4(17.760864, 2, 0, 0),

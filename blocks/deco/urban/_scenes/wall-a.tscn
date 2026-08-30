@@ -1,20 +1,8 @@
 [gd_scene format=4 uid="uid://b3wqvse2agcy5"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_6jv61"]
-[ext_resource type="Texture2D" uid="uid://8nwux7u0fr38" path="res://textures/blocks/deco/urban/wall_lines.png" id="2_xq6qj"]
-[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="3_csu2h"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68qus"]
-resource_name = "wall_lines"
-shading_mode = 0
-albedo_texture = ExtResource("2_xq6qj")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yd1h"]
-resource_name = "concrete"
-shading_mode = 0
-albedo_texture = ExtResource("3_csu2h")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://dg4y30ub2y7s5" path="res://materials/wall_lines.tres" id="2_6jv61"]
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="3_xq6qj"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_a5p50"]
 _surfaces = [{
@@ -48,7 +36,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwA"),
-"material": SubResource("StandardMaterial3D_68qus"),
+"material": ExtResource("2_6jv61"),
 "name": "wall_lines",
 "primitive": 3,
 "uv_scale": Vector4(10, 2, 0, 0),
@@ -60,7 +48,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 12,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
-"material": SubResource("StandardMaterial3D_5yd1h"),
+"material": ExtResource("3_xq6qj"),
 "name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(28, 24, 0, 0),

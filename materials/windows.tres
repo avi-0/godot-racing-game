@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bvrn614ao5iab"]
+
+[ext_resource type="Texture2D" uid="uid://b2l3dqr0shxaa" path="res://textures/blocks/deco/urban/windows.png" id="1_m6pmp"]
+
+[resource]
+resource_name = "windows"
+albedo_texture = ExtResource("1_m6pmp")
+roughness = 0.15
+texture_filter = 4
+metadata/_gltf_primary_texture_coord = 0

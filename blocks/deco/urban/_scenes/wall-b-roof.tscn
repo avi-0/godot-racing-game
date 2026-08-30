@@ -1,27 +1,9 @@
 [gd_scene format=4 uid="uid://hwfmofqnp5f4"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_k1f6b"]
-[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="2_mydvi"]
-[ext_resource type="Texture2D" uid="uid://cbhbm5fjudxe8" path="res://textures/blocks/deco/urban/roof_plates.png" id="3_csvoq"]
-[ext_resource type="Texture2D" uid="uid://bdvfeuqr5ohkb" path="res://textures/blocks/deco/urban/metal_wall.png" id="4_spdv6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5scu"]
-resource_name = "concrete"
-shading_mode = 0
-albedo_texture = ExtResource("2_mydvi")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hwq01"]
-resource_name = "roof_plates"
-shading_mode = 0
-albedo_texture = ExtResource("3_csvoq")
-metadata/_gltf_primary_texture_coord = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqhgj"]
-resource_name = "wall_metal"
-shading_mode = 0
-albedo_texture = ExtResource("4_spdv6")
-metadata/_gltf_primary_texture_coord = 0
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_k1f6b"]
+[ext_resource type="Material" uid="uid://bqfgjb4rwgm8l" path="res://materials/roof_plates.tres" id="3_mydvi"]
+[ext_resource type="Material" uid="uid://digkd5bgspe7u" path="res://materials/wall_metal.tres" id="4_csvoq"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_c1uvw"]
 _surfaces = [{
@@ -65,7 +47,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 18,
 "index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABAAFAAAABQAGAAAABQAHAAYA"),
-"material": SubResource("StandardMaterial3D_q5scu"),
+"material": ExtResource("2_k1f6b"),
 "name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(28, 24, 0, 0),
@@ -77,7 +59,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_hwq01"),
+"material": ExtResource("3_mydvi"),
 "name": "roof_plates",
 "primitive": 3,
 "uv_scale": Vector4(24, 12, 0, 0),
@@ -89,7 +71,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
-"material": SubResource("StandardMaterial3D_oqhgj"),
+"material": ExtResource("4_csvoq"),
 "name": "wall_metal",
 "primitive": 3,
 "uv_scale": Vector4(21.8, 0.79999995, 0, 0),
