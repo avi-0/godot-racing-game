@@ -3,6 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://cbsf5kaf3tvtk" path="res://textures/blocks/road.png" id="1_hm4vs"]
 
 [resource]
-cull_mode = 2
 albedo_texture = ExtResource("1_hm4vs")
 texture_filter = 4

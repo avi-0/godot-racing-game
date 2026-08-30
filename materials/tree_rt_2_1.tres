@@ -1,4 +1,6 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://b274lodiysdtp"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b274lodiysdtp"]
+
+[ext_resource type="Shader" uid="uid://cqnh3gwdvigwy" path="res://shaders/treeshader.gdshader" id="1_jv2kj"]
 
 [sub_resource type="Image" id="Image_8bxqp"]
 data = {
@@ -15,11 +17,18 @@ image = SubResource("Image_8bxqp")
 
 [resource]
 resource_name = "tree_rt_2_1"
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-cull_mode = 2
-albedo_texture = SubResource("ImageTexture_1lqjc")
-texture_filter = 0
-texture_repeat = false
-metadata/_gltf_primary_texture_coord = 0
+render_priority = 0
+shader = ExtResource("1_jv2kj")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = SubResource("ImageTexture_1lqjc")
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/albedo_texture_size = Vector2i(228, 380)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)

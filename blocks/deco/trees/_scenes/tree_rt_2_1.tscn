@@ -68,7 +68,7 @@ height = 4.0999756
 script = ExtResource("1_w8cqf")
 
 [node name="tree_rt_2_12" type="Node3D" parent="." unique_id=484567913]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="tree_rt_2_1" type="MeshInstance3D" parent="tree_rt_2_12" unique_id=683746386]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
