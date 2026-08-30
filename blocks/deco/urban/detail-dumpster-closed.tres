@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://rh6nsagqgxn7"]
+
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_em5y7"]
+[ext_resource type="Texture2D" path="res://blocks/deco/urban/_images/detail-dumpster-closed.png" id="1_wxi53"]
+
+[resource]
+script = ExtResource("1_em5y7")
+ScenePath = "res://blocks/deco/urban/_scenes/detail-dumpster-closed.tscn"
+SourceScenePath = "res://assets/asset_packs/kenney/retrourban/detail-dumpster-closed.glb"
+ThumbnailTexture = ExtResource("1_wxi53")

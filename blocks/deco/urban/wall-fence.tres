@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://bmlw7ttdbpkut"]
+
+[ext_resource type="Texture2D" path="res://blocks/deco/urban/_images/wall-fence.png" id="1_pybhu"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_ra43o"]
+
+[resource]
+script = ExtResource("1_ra43o")
+ScenePath = "res://blocks/deco/urban/_scenes/wall-fence.tscn"
+SourceScenePath = "res://assets/asset_packs/kenney/retrourban/wall-fence.glb"
+ThumbnailTexture = ExtResource("1_pybhu")

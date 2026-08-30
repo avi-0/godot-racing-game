@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://drfksx2o24dgg"]
+
+[ext_resource type="Texture2D" path="res://blocks/deco/urban/_images/wall-a-garage.png" id="1_84fni"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_mghr1"]
+
+[resource]
+script = ExtResource("1_mghr1")
+ScenePath = "res://blocks/deco/urban/_scenes/wall-a-garage.tscn"
+SourceScenePath = "res://assets/asset_packs/kenney/retrourban/wall-a-garage.glb"
+ThumbnailTexture = ExtResource("1_84fni")

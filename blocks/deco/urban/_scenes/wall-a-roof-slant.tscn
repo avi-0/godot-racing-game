@@ -1,0 +1,118 @@
+[gd_scene format=4 uid="uid://crd7htgptrf32"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_nj0wx"]
+[ext_resource type="Texture2D" uid="uid://8nwux7u0fr38" path="res://textures/blocks/deco/urban/wall_lines.png" id="2_8i2ey"]
+[ext_resource type="Texture2D" uid="uid://nqo7fpx8qg5h" path="res://textures/blocks/deco/urban/roof.png" id="3_50la5"]
+[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="4_mhsvp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oecc7"]
+resource_name = "wall_lines"
+shading_mode = 0
+albedo_texture = ExtResource("2_8i2ey")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sg7jx"]
+resource_name = "roof"
+shading_mode = 0
+albedo_texture = ExtResource("3_50la5")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mc6q4"]
+resource_name = "concrete"
+shading_mode = 0
+albedo_texture = ExtResource("4_mhsvp")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kb4s6"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAgAEAAMAAwAEAAUA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("/////wAAAAAAAAAAAAAAAP//AAAAAAAA////////AAD//wAA//8AAAAAAAD//wAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAAAD/////AAAAAP///////wAAAAAAAP//AAA=")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5r0vh"]
+resource_name = "wall-a-roof-slant_wall-a-roof-slant"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("VVUAAP9/qipVVaoqqioAAKoqqioAAKoqqioAAFVVAABVVaoqqiqqKg=="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACAAJAAYA"),
+"material": SubResource("StandardMaterial3D_oecc7"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(5.999999, 3.0000005, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("/////wAA//8AAAAAAAD/////AAAAAP//////////AID//wAA//8AgAAAAAD//wCA/////////7//////AAD/v///AAAAAP+///8AAP///7//f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("AAD//wAAxvH/f8bx/3///w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_sg7jx"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(2, 18, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAaMv/////AABoy////////2jLAAAAAP//aMtgoz25YKM9uWCjPblgoz25")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("AABU9f8HVPX/B///AAD//w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_mc6q4"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(32, 24, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kb4s6")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2o2rm"]
+data = PackedVector3Array(0.5, 0.5, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, -0.5, 0, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5)
+
+[node name="wall-a-roof-slant" type="Node3D" unique_id=567985548]
+script = ExtResource("1_nj0wx")
+
+[node name="wall-a-roof-slant2" type="Node3D" parent="." unique_id=1531501344]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-a-roof-slant" type="MeshInstance3D" parent="wall-a-roof-slant2" unique_id=1573198339]
+mesh = SubResource("ArrayMesh_5r0vh")
+skeleton = NodePath("")
+
+[node name="wall-a-roof-slant_col" type="StaticBody3D" parent="wall-a-roof-slant2/wall-a-roof-slant" unique_id=933059367]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-a-roof-slant2/wall-a-roof-slant/wall-a-roof-slant_col" unique_id=689883776]
+shape = SubResource("ConcavePolygonShape3D_2o2rm")

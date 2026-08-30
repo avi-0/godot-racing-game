@@ -1,0 +1,60 @@
+[gd_scene format=4 uid="uid://cg573mby367h7"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_oyo47"]
+[ext_resource type="Texture2D" uid="uid://8nwux7u0fr38" path="res://textures/blocks/deco/urban/wall_lines.png" id="2_4h6h5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5o1k"]
+resource_name = "wall_lines"
+shading_mode = 0
+albedo_texture = ExtResource("2_4h6h5")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dyndo"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_m6ubh"]
+resource_name = "wall-a-flat_wall-a-flat"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 1e-05),
+"attribute_data": PackedByteArray("AgBAQAAAgL8BAEBAAAAAtAAAAEAAAAAAAAAAQAAAgL8="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_y5o1k"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAA/////wAA/7//////AAD/v/////8AAP+//////wAA/78=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dyndo")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hkdlh"]
+data = PackedVector3Array(-0.5, 1, 0, -0.5, 0, 0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 1, 0, -0.5, 1, 0)
+
+[node name="wall-a-flat" type="Node3D" unique_id=1107721370]
+script = ExtResource("1_oyo47")
+
+[node name="wall-a-flat2" type="Node3D" parent="." unique_id=1724523648]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-a-flat" type="MeshInstance3D" parent="wall-a-flat2" unique_id=1142962225]
+mesh = SubResource("ArrayMesh_m6ubh")
+skeleton = NodePath("")
+
+[node name="wall-a-flat_col" type="StaticBody3D" parent="wall-a-flat2/wall-a-flat" unique_id=1863329267]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-a-flat2/wall-a-flat/wall-a-flat_col" unique_id=1280713991]
+shape = SubResource("ConcavePolygonShape3D_hkdlh")

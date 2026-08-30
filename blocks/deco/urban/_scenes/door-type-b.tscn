@@ -1,0 +1,89 @@
+[gd_scene format=4 uid="uid://fy3x0si4mxo6"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_aavu7"]
+[ext_resource type="Texture2D" uid="uid://rhoa7f5a5yl" path="res://textures/blocks/deco/urban/doors.png" id="2_x5d6r"]
+[ext_resource type="Texture2D" uid="uid://c66aibq2infi0" path="res://textures/blocks/deco/urban/metal.png" id="3_esw0w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpqcj"]
+resource_name = "doors"
+shading_mode = 0
+albedo_texture = ExtResource("2_x5d6r")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s37p8"]
+resource_name = "metal"
+shading_mode = 0
+albedo_texture = ExtResource("3_esw0w")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fk0a7"]
+_surfaces = [{
+"aabb": AABB(-0.1465725, 0, 7.219114e-16, 0.293145, 0.57546943, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "doors",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("GhcWvvdREz+pE1AmGhcWvgAAAACpE1AmGhcWPgAAAACpE1AmGhcWPvdREz+pE1Am")
+}, {
+"aabb": AABB(-0.19889693, 0, -0.025, 0.39779386, 0.62779385, 0.05),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAABAAAAAAAFAAQAAgABAAYAAQAEAAYAAwACAAcAAgAIAAcABgAIAAIABwAIAAYABgAJAAcACgAJAAYACwADAAcABAAFAAsACwAHAAwADQAGAAQABgANAAoACwAOAAQADAAPAAsADgALAA8ADwAMAAoABAAOAA8ACgANAA8ADwANAAQA"),
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("rCGo6v9/AACsIajqAAAAAKwhAAAAAAAArCEAAP9/AABS3qjqAAAAAFLeqOr/fwAAAAD//wAAAAAAAAAA//8AAAAAAAAAAAAAAAD/////AAD///////8AAFLeAAD/fwAA//8AAP//AAD/////AAAAAFLeAAAAAAAA//8AAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ou36o"]
+resource_name = "door-type-b_door-type-b"
+_surfaces = [{
+"aabb": AABB(-0.1465725, 0, 7.219114e-16, 0.293145, 0.57546943, 1e-05),
+"attribute_data": PackedByteArray("rYR/P7C0Jz2jhH8/iTZ/P/vZAj+JNn8/BNoCP7C0Jz0="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_kpqcj"),
+"name": "doors",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("GhcWvvdREz+pE1AmGhcWvgAAAACpE1AmGhcWPgAAAACpE1AmGhcWPvdREz+pE1Am/////wAA/7//////AAD/v/////8AAP+//////wAA/78=")
+}, {
+"aabb": AABB(-0.19889693, 0, -0.025, 0.39779386, 0.62779385, 0.05),
+"attribute_data": PackedByteArray("2MupA1DMqQNQzO8r2MvvK7WU7ys9lO8rPZSpA7WUqQMNYen4z2Pp+M9jafwNYWn8//8AAP//7yuA/+8rgP+pA778qQNA/AAAQPzvK7787ytfywAAUMwAAFDM7ytfy+8rDWFp/I9gafyPYGn1DWHp+M9j6fhNZGn1TWRp/M9jafz//2n8QPxp/ED8afX//2n1LpXvKz2U7ys9lAAALpUAAA=="),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwADwAQAAwAEQAMABAAEgARABAAEAATABIAFAAVABYAFgAXABQAGAAZABoAGwAYABoAHAAbABoAHAAaAB0AHQAeABwAHwAcAB4AIAAhACIAIgAjACAAJAAlACYAJgAnACQA"),
+"material": SubResource("StandardMaterial3D_s37p8"),
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(27.197794, 3.657794, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("rCGo6v9//7+sIajqAAD/v6whAAAAAP+/rCEAAP9//79S3gAA/3//v1LeAAAAAP+/Ut6o6gAA/79S3qjq/3//v6whqOr/f/+/Ut6o6v9//79S3qjqAAD/v6whqOoAAP+/AAD//wAA//8AAAAAAAD//6whAAAAAP//rCGo6gAA//9S3qjqAAD///////8AAP////8AAAAA//9S3gAAAAD///////////+//////wAA/7///wAAAAD/v///AAD///+/rCEAAAAA/78AAAAAAAD/vwAAAAD///+/rCEAAP9//79S3gAA/3//v///AAD///+///8AAAAA/79S3gAAAAD/vwAA//8AAP///////wAA/////////////wAA////////AAAAAP///78AAAAAAAD/vwAA//8AAP+/AAD//////7//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///wAA/38AAP9/AAD/fwAA/3//f////3////9/////f////3////9/////f////3////9/AAD/fwAA/38AAP9/AAAAAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f/9//7//f/+//3//v/9//7//f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fk0a7")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_l02rp"]
+data = PackedVector3Array(-0.1466, 0.5755, 0, -0.1466, 0, 0, 0.1466, 0, 0, 0.1466, 0, 0, 0.1466, 0.5755, 0, -0.1466, 0.5755, 0, -0.1466, 0.5755, 0, -0.1466, 0.5755, -0.024999999, -0.1466, 0, -0.024999999, -0.1466, 0, -0.024999999, -0.1466, 0, 0, -0.1466, 0.5755, 0, 0.1466, 0, 0, 0.1466, 0, -0.024999999, 0.1466, 0.5755, -0.024999999, 0.1466, 0.5755, -0.024999999, 0.1466, 0.5755, 0, 0.1466, 0, 0, -0.1466, 0.5755, 0, 0.1466, 0.5755, 0, 0.1466, 0.5755, -0.024999999, 0.1466, 0.5755, -0.024999999, -0.1466, 0.5755, -0.024999999, -0.1466, 0.5755, 0, -0.1989, 0.6278, -0.024999999, -0.1989, 0, -0.024999999, -0.1466, 0, -0.024999999, -0.1466, 0, -0.024999999, -0.1466, 0.5755, -0.024999999, -0.1989, 0.6278, -0.024999999, -0.1466, 0.5755, -0.024999999, 0.1466, 0.5755, -0.024999999, -0.1989, 0.6278, -0.024999999, 0.1989, 0.6278, -0.024999999, -0.1989, 0.6278, -0.024999999, 0.1466, 0.5755, -0.024999999, 0.1989, 0, -0.024999999, 0.1989, 0.6278, -0.024999999, 0.1466, 0.5755, -0.024999999, 0.1466, 0.5755, -0.024999999, 0.1466, 0, -0.024999999, 0.1989, 0, -0.024999999, 0.1989, 0.6278, 0.024999999, 0.1989, 0.6278, -0.024999999, 0.1989, 0, -0.024999999, 0.1989, 0, -0.024999999, 0.1989, 0, 0.024999999, 0.1989, 0.6278, 0.024999999, -0.1466, 0, -0.024999999, -0.1989, 0, -0.024999999, -0.1989, 0, 0.024999999, -0.1466, 0, 0, -0.1466, 0, -0.024999999, -0.1989, 0, 0.024999999, 0.1466, 0, 0, -0.1466, 0, 0, -0.1989, 0, 0.024999999, 0.1466, 0, 0, -0.1989, 0, 0.024999999, 0.1989, 0, 0.024999999, 0.1989, 0, 0.024999999, 0.1989, 0, -0.024999999, 0.1466, 0, 0, 0.1466, 0, -0.024999999, 0.1466, 0, 0, 0.1989, 0, -0.024999999, -0.1989, 0.6278, -0.024999999, 0.1989, 0.6278, -0.024999999, 0.1989, 0.6278, 0.024999999, 0.1989, 0.6278, 0.024999999, -0.1989, 0.6278, 0.024999999, -0.1989, 0.6278, -0.024999999, -0.1989, 0, 0.024999999, -0.1989, 0, -0.024999999, -0.1989, 0.6278, -0.024999999, -0.1989, 0.6278, -0.024999999, -0.1989, 0.6278, 0.024999999, -0.1989, 0, 0.024999999)
+
+[node name="door-type-b" type="Node3D" unique_id=1483476446]
+script = ExtResource("1_aavu7")
+
+[node name="door-type-b2" type="Node3D" parent="." unique_id=1401074692]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 3.95)
+
+[node name="door-type-b" type="MeshInstance3D" parent="door-type-b2" unique_id=1696095259]
+mesh = SubResource("ArrayMesh_ou36o")
+skeleton = NodePath("")
+
+[node name="door-type-b_col" type="StaticBody3D" parent="door-type-b2/door-type-b" unique_id=604147966]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door-type-b2/door-type-b/door-type-b_col" unique_id=1075601457]
+shape = SubResource("ConcavePolygonShape3D_l02rp")

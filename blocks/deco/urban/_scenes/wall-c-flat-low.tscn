@@ -1,0 +1,61 @@
+[gd_scene format=4 uid="uid://be0hhi8s52luo"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_hjy4a"]
+[ext_resource type="Texture2D" uid="uid://tmiovmgy0mv3" path="res://textures/blocks/deco/urban/bars.png" id="2_g7now"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnrbo"]
+resource_name = "bars"
+transparency = 4
+shading_mode = 0
+albedo_texture = ExtResource("2_g7now")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_unkbx"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 0.5, 1e-05),
+"format": 34359742465,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAwACAAAAAgADAAAA"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAAD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_20yya"]
+resource_name = "wall-c-flat-low_wall-c-flat-low"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 0.5, 1e-05),
+"attribute_data": PackedByteArray("AABgQQAAAAAAAGBBAAAAPwAAUEEAAAA/AABQQQAAAAAAAGBBAAAAPwAAYEEAAAAAAABQQQAAAD8AAFBBAAAAAA=="),
+"format": 34359742487,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUA"),
+"material": SubResource("StandardMaterial3D_nnrbo"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAvwAAAD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAvwAAAAAAAAAAAAAAvwAAAD8AAAAAAAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAA/////wAA/7//////AAD/v/////8AAP+//////wAA/7//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/Pw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_unkbx")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fhyh1"]
+data = PackedVector3Array(-0.5, 0.5, 0, -0.5, 0, 0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0, 0, -0.5, 0.5, 0, 0.5, 0, 0, 0.5, 0.5, 0, 0.5, 0, 0, -0.5, 0.5, 0)
+
+[node name="wall-c-flat-low" type="Node3D" unique_id=1417126270]
+script = ExtResource("1_hjy4a")
+
+[node name="wall-c-flat-low2" type="Node3D" parent="." unique_id=1014879185]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-c-flat-low" type="MeshInstance3D" parent="wall-c-flat-low2" unique_id=110919217]
+mesh = SubResource("ArrayMesh_20yya")
+skeleton = NodePath("")
+
+[node name="wall-c-flat-low_col" type="StaticBody3D" parent="wall-c-flat-low2/wall-c-flat-low" unique_id=1720052769]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-c-flat-low2/wall-c-flat-low/wall-c-flat-low_col" unique_id=1386472690]
+shape = SubResource("ConcavePolygonShape3D_fhyh1")

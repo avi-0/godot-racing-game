@@ -1,0 +1,89 @@
+[gd_scene format=4 uid="uid://mi55tqe62cc1"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_3fy1b"]
+[ext_resource type="Texture2D" uid="uid://bdvfeuqr5ohkb" path="res://textures/blocks/deco/urban/metal_wall.png" id="2_1cwm1"]
+[ext_resource type="Texture2D" uid="uid://cs8q4m85dd88i" path="res://textures/blocks/deco/urban/wall_garage.png" id="3_d7lkh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8aunw"]
+resource_name = "wall_metal"
+shading_mode = 0
+albedo_texture = ExtResource("2_1cwm1")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyplo"]
+resource_name = "wall_garage"
+shading_mode = 0
+albedo_texture = ExtResource("3_d7lkh")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wfpkm"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 0.1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAADAAIAAgAFAAQAAwAGAAAABgADAAQABwAAAAYABAAIAAYACQAHAAYABgAIAAoABgALAAkACgALAAYA"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD//wAAAAAAAAAAAAAAAGYmAAAAAAAAZiaEqwAAAABmJoSr//8AAGYmAAD//wAAmNmEqwAAAAD/////AAAAAJjZhKv//wAA//8AAAAAAACY2QAA//8AAJjZAAAAAAAA")
+}, {
+"aabb": AABB(-0.35, 0, 0.1, 0.7, 0.67, 1e-05),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "wall_garage",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD//wAAAAAAAAAAAAAAAP//AAAAAAAA/////wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8lwd2"]
+resource_name = "wall-b-flat-garage_wall-b-flat-garage"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 0.1),
+"attribute_data": PackedByteArray("////f/////+f/v//n/48qjn4PKra9v9/2vb//zn4//+f/gm3OfgJtzn4PKqf/jyqtf08qp/+PKqf/v//tf3//yP5//85+P//Ofg8qiP5PKo="),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQAAAAQABgAFAAQABAAHAAYACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAA"),
+"material": SubResource("StandardMaterial3D_8aunw"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(28, 2, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAD//wAA//8AAAAAAAD//2YmAAAAAP//ZiaEqwAA//+Y2YSrAAD///////8AAP////8AAAAA//+Y2QAAAAD//2YmhKv/////mNmEq/////+Y2YSrAAD//2YmhKsAAP//ZiaEq////79mJoSrAAD/v2YmAAAAAP+/ZiYAAP///7+Y2QAA////v5jZAAAAAP+/mNmEqwAA/7+Y2YSr////v/9/////f////3////9/////f////3////9/////f////3//P/9//z//f/8//3//P/9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///")
+}, {
+"aabb": AABB(-0.35, 0, 0.1, 0.7, 0.67, 1e-05),
+"attribute_data": PackedByteArray("mNl6VJjZ//9mJv//ZiZ6VA=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_pyplo"),
+"name": "wall_garage",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD//wAA//8AAAAAAAD/////AAAAAP///////wAA////f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_wfpkm")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pw7f5"]
+data = PackedVector3Array(-0.5, 1, 0, -0.5, 0, 0, -0.35, 0, 0, -0.35, 0, 0, -0.35, 0.66999996, 0, -0.5, 1, 0, -0.35, 0.66999996, 0, 0.35, 0.66999996, 0, -0.5, 1, 0, 0.5, 1, 0, -0.5, 1, 0, 0.35, 0.66999996, 0, 0.5, 0, 0, 0.5, 1, 0, 0.35, 0.66999996, 0, 0.35, 0.66999996, 0, 0.35, 0, 0, 0.5, 0, 0, -0.35, 0.66999996, 0.099999994, 0.35, 0.66999996, 0.099999994, 0.35, 0.66999996, 0, 0.35, 0.66999996, 0, -0.35, 0.66999996, 0, -0.35, 0.66999996, 0.099999994, -0.35, 0.66999996, 0.099999994, -0.35, 0.66999996, 0, -0.35, 0, 0, -0.35, 0, 0, -0.35, 0, 0.099999994, -0.35, 0.66999996, 0.099999994, 0.35, 0, 0.099999994, 0.35, 0, 0, 0.35, 0.66999996, 0, 0.35, 0.66999996, 0, 0.35, 0.66999996, 0.099999994, 0.35, 0, 0.099999994, -0.35, 0.66999996, 0.099999994, -0.35, 0, 0.099999994, 0.35, 0, 0.099999994, 0.35, 0, 0.099999994, 0.35, 0.66999996, 0.099999994, -0.35, 0.66999996, 0.099999994)
+
+[node name="wall-b-flat-garage" type="Node3D" unique_id=313541510]
+script = ExtResource("1_3fy1b")
+
+[node name="wall-b-flat-garage2" type="Node3D" parent="." unique_id=1903983602]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-b-flat-garage" type="MeshInstance3D" parent="wall-b-flat-garage2" unique_id=2047046996]
+mesh = SubResource("ArrayMesh_8lwd2")
+skeleton = NodePath("")
+
+[node name="wall-b-flat-garage_col" type="StaticBody3D" parent="wall-b-flat-garage2/wall-b-flat-garage" unique_id=2043100275]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-b-flat-garage2/wall-b-flat-garage/wall-b-flat-garage_col" unique_id=1925802667]
+shape = SubResource("ConcavePolygonShape3D_pw7f5")

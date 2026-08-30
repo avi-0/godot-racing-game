@@ -1,0 +1,89 @@
+[gd_scene format=4 uid="uid://hgcfgy0i7qvb"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_5sx4l"]
+[ext_resource type="Texture2D" uid="uid://8nwux7u0fr38" path="res://textures/blocks/deco/urban/wall_lines.png" id="2_e245x"]
+[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="3_6mjjh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25ngw"]
+resource_name = "wall_lines"
+shading_mode = 0
+albedo_texture = ExtResource("2_e245x")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2txyd"]
+resource_name = "concrete"
+shading_mode = 0
+albedo_texture = ExtResource("3_6mjjh")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_51ofd"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.035, 1, 0.4, 0.07),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgAEAAAAAwAFAAIAAAAEAAYABgAFAAMABgAHAAAAAwAHAAYA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAD/////AAAAAP//AAAAAAAAAAD//wAAAAD//wAA//8AAAAAAAAAAAAAAAAAAP//AAAAAP////8AAA==")
+}, {
+"aabb": AABB(-0.5, 0, -0.035, 1, 0.4, 0.07),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD//wAAAAD/////AAAAAP///////wAAAAD/////AAAAAAAA//8AAP//AAD//wAA//8AAAAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_43ns8"]
+resource_name = "wall-type-a_wall-type-a"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.035, 1, 0.4, 0.07),
+"attribute_data": PackedByteArray("6rEAADKzAAAys/9/6rH/f8zMAADMzP9/MrP/fzKzAAD//wAA////f2Xm/39l5gAAE87/f8zM/3/MzAAAE84AAA=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwA"),
+"material": SubResource("StandardMaterial3D_25ngw"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(10, 0.8000002, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("/////////7//////AAD/v///AAAAAP+///8AAP///78AAP//AAD//wAAAAAAAP////8AAAAA////////AAD//////////wCA//8AAP//AIAAAAAA//8AgAAA/////wCAAAAAAP///78AAAAAAAD/vwAA//8AAP+/AAD//////7//fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////f////3////9/////f///")
+}, {
+"aabb": AABB(-0.5, 0, -0.035, 1, 0.4, 0.07),
+"attribute_data": PackedByteArray("kaT//22b//9tm3b/kaR2/wAAdv8kCXb/JAn//wAA//8="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"material": SubResource("StandardMaterial3D_2txyd"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(28, 24, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD//wAA////////AAD/////////////AAD///////8AAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_51ofd")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mb7dd"]
+data = PackedVector3Array(0.5, 0.39999998, 0.035, 0.5, 0.39999998, -0.035, 0.5, 0, -0.035, 0.5, 0, -0.035, 0.5, 0, 0.035, 0.5, 0.39999998, 0.035, -0.5, 0.39999998, -0.035, -0.5, 0, -0.035, 0.5, 0, -0.035, 0.5, 0, -0.035, 0.5, 0.39999998, -0.035, -0.5, 0.39999998, -0.035, 0.5, 0.39999998, 0.035, 0.5, 0, 0.035, -0.5, 0, 0.035, -0.5, 0, 0.035, -0.5, 0.39999998, 0.035, 0.5, 0.39999998, 0.035, -0.5, 0, 0.035, -0.5, 0, -0.035, -0.5, 0.39999998, -0.035, -0.5, 0.39999998, -0.035, -0.5, 0.39999998, 0.035, -0.5, 0, 0.035, -0.5, 0.39999998, -0.035, 0.5, 0.39999998, -0.035, 0.5, 0.39999998, 0.035, 0.5, 0.39999998, 0.035, -0.5, 0.39999998, 0.035, -0.5, 0.39999998, -0.035, -0.5, 0, 0.035, 0.5, 0, 0.035, 0.5, 0, -0.035, 0.5, 0, -0.035, -0.5, 0, -0.035, -0.5, 0, 0.035)
+
+[node name="wall-type-a" type="Node3D" unique_id=620512771]
+script = ExtResource("1_5sx4l")
+
+[node name="wall-type-a2" type="Node3D" parent="." unique_id=1214893751]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-type-a" type="MeshInstance3D" parent="wall-type-a2" unique_id=686919517]
+mesh = SubResource("ArrayMesh_43ns8")
+skeleton = NodePath("")
+
+[node name="wall-type-a_col" type="StaticBody3D" parent="wall-type-a2/wall-type-a" unique_id=1310107916]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-type-a2/wall-type-a/wall-type-a_col" unique_id=117582405]
+shape = SubResource("ConcavePolygonShape3D_mb7dd")

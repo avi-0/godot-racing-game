@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://kxr5dobpur2a"]
+
+[ext_resource type="Texture2D" path="res://blocks/deco/urban/_images/door-type-b.png" id="1_nft0o"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_opnfi"]
+
+[resource]
+script = ExtResource("1_opnfi")
+ScenePath = "res://blocks/deco/urban/_scenes/door-type-b.tscn"
+SourceScenePath = "res://assets/asset_packs/kenney/retrourban/door-type-b.glb"
+ThumbnailTexture = ExtResource("1_nft0o")

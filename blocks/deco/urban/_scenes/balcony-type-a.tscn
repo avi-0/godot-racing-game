@@ -1,0 +1,61 @@
+[gd_scene format=4 uid="uid://bwfygfrv87yw4"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_wgeup"]
+[ext_resource type="Texture2D" uid="uid://tmiovmgy0mv3" path="res://textures/blocks/deco/urban/bars.png" id="2_gnp0y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vs5kp"]
+resource_name = "bars"
+transparency = 4
+shading_mode = 0
+albedo_texture = ExtResource("2_gnp0y")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d1yqc"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.14187267, 1, 0.28079078, 0.28374535),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAgADAAAAAwACAAAAAAADAAQAAwAAAAQAAAAEAAEABAAAAAEABAAFAAMABQAEAAMAAQAGAAQABgABAAQAAgABAAYAAQACAAYABwAGAAIABgAHAAIA"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAP//AAD//wAAAAAAAP//AAAAAP//AAAAAAAA/////wAA/////wAAAAD///////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tii7k"]
+resource_name = "balcony-type-a_balcony-type-a"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.14187267, 1, 0.28079078, 0.28374535),
+"attribute_data": PackedByteArray("/3+J4zUAieM1AEvH/39LxzUAieP/f4njNQBLx/9/S8dCpHz//398//9/ieNCpInj/398/0KkfP//f4njQqSJ40KkfP//f3z//3+J40KkieP/f3z/QqR8//9/ieNCpInj//8L5P////80gP//NIAL5P///////wvkNID//zSAC+Q="),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUACAAJAAoACgALAAgADAANAA4ADwAOAA0AEAARABIAEgATABAAFAAVABYAFwAWABUAGAAZABoAGgAbABgAHAAdAB4AHwAeAB0A"),
+"material": SubResource("StandardMaterial3D_vs5kp"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(2.0032473, 2.5718057, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("AAAAAAAA/////wAAAAD/////AAD/////AAAAAP///////wAAAAAAAAAAAAAAAAAA//8AAP//AAAAAAAA//8AAP//AAD///+///8AAAAA/7//////AAD/v/////////+///8AAAAAAAD//wAA//8AAP////8AAAAA////////AAAAAAAA////vwAAAAAAAP+/AAD//wAA/78AAP//////vwAAAAAAAAAAAAAAAP//AAAAAP//AAAAAAAA/////wAAAAD//wAA//8AAAAAAAD/////AAAAAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAP9//7//f/+//3//v/9//7//f/8//3//P/9//z//f/8//3////9/////f////3////+//3//v/9//7//f/+//3//f////3////9/////f////7//f/+//3//v/9//7//f/9/////f////3////9/////f/9//3//f/9//3//f/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_d1yqc")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ygb51"]
+data = PackedVector3Array(-0.5, 0, -0.1419, 0.5, 0, -0.1419, 0.5, 0, 0.1419, 0.5, 0, 0.1419, -0.5, 0, 0.1419, -0.5, 0, -0.1419, 0.5, 0, -0.1419, -0.5, 0, -0.1419, 0.5, 0, 0.1419, -0.5, 0, 0.1419, 0.5, 0, 0.1419, -0.5, 0, -0.1419, 0.5, 0, 0.1419, 0.5, 0, -0.1419, 0.5, 0.28079998, -0.1419, 0.5, 0.28079998, -0.1419, 0.5, 0.28079998, 0.1419, 0.5, 0, 0.1419, 0.5, 0, -0.1419, 0.5, 0, 0.1419, 0.5, 0.28079998, -0.1419, 0.5, 0.28079998, 0.1419, 0.5, 0.28079998, -0.1419, 0.5, 0, 0.1419, -0.5, 0, 0.1419, -0.5, 0, -0.1419, -0.5, 0.28079998, -0.1419, -0.5, 0.28079998, -0.1419, -0.5, 0.28079998, 0.1419, -0.5, 0, 0.1419, -0.5, 0, -0.1419, -0.5, 0, 0.1419, -0.5, 0.28079998, -0.1419, -0.5, 0.28079998, 0.1419, -0.5, 0.28079998, -0.1419, -0.5, 0, 0.1419, -0.5, 0.28079998, -0.1419, -0.5, 0, -0.1419, 0.5, 0, -0.1419, 0.5, 0, -0.1419, 0.5, 0.28079998, -0.1419, -0.5, 0.28079998, -0.1419, -0.5, 0, -0.1419, -0.5, 0.28079998, -0.1419, 0.5, 0, -0.1419, 0.5, 0.28079998, -0.1419, 0.5, 0, -0.1419, -0.5, 0.28079998, -0.1419)
+
+[node name="balcony-type-a" type="Node3D" unique_id=1704318068]
+script = ExtResource("1_wgeup")
+
+[node name="balcony-type-a2" type="Node3D" parent="." unique_id=497036292]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="balcony-type-a" type="MeshInstance3D" parent="balcony-type-a2" unique_id=1602350973]
+mesh = SubResource("ArrayMesh_tii7k")
+skeleton = NodePath("")
+
+[node name="balcony-type-a_col" type="StaticBody3D" parent="balcony-type-a2/balcony-type-a" unique_id=75410212]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="balcony-type-a2/balcony-type-a/balcony-type-a_col" unique_id=1917474293]
+shape = SubResource("ConcavePolygonShape3D_ygb51")

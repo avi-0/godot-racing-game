@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://x7wrq543vho2"]
+
+[ext_resource type="Texture2D" path="res://blocks/deco/urban/_images/wall-a-roof-slant-detailed.png" id="1_fhpt3"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_qrshb"]
+
+[resource]
+script = ExtResource("1_qrshb")
+ScenePath = "res://blocks/deco/urban/_scenes/wall-a-roof-slant-detailed.tscn"
+SourceScenePath = "res://assets/asset_packs/kenney/retrourban/wall-a-roof-slant-detailed.glb"
+ThumbnailTexture = ExtResource("1_fhpt3")

@@ -1,0 +1,120 @@
+[gd_scene format=4 uid="uid://cr3kvganpy7q1"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_1gacm"]
+[ext_resource type="Texture2D" uid="uid://bdvfeuqr5ohkb" path="res://textures/blocks/deco/urban/metal_wall.png" id="2_1orik"]
+[ext_resource type="Texture2D" uid="uid://cbhbm5fjudxe8" path="res://textures/blocks/deco/urban/roof_plates.png" id="3_q5yga"]
+[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="4_olyqe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wul6p"]
+resource_name = "wall_metal"
+shading_mode = 0
+albedo_texture = ExtResource("2_1orik")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0w8i3"]
+resource_name = "roof_plates"
+shading_mode = 0
+albedo_texture = ExtResource("3_q5yga")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08ljm"]
+resource_name = "concrete"
+shading_mode = 0
+albedo_texture = ExtResource("4_olyqe")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iet4s"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAgAEAAMAAwAEAAUA"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("/////wAAAAAAAAAAAAAAAP//AAAAAAAA////////AAD//wAA//8AAAAAAAD//wAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5685822, 1, 0.5, 1.1371644),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAQAAAAUAAAABAAUABAAFAAEABQAEAAEAAgADAAAAAgADAAYAAwACAAYABwAGAAMABgAHAAMA"),
+"lods": [0.05496797, PackedByteArray("AAABAAIAAgADAAAABAAAAAEAAAAEAAEA")],
+"name": "roof_plates",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////47wAAAAAAAAjvAAAAAAAABwDwAA/////3APAAAAAAAA//8AAP///////wAAAAAAAAAAAAD/////AAAAAA==")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2mw4j"]
+resource_name = "wall-b-roof-slant-detailed_wall-b-roof-slant-detailed"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("LfoAAP///38t+v9/XPQAAFz0/3+K7v9/XPQAAC36AAAt+v9/XPT/fw=="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACAAJAAYA"),
+"material": SubResource("StandardMaterial3D_wul6p"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(44, 1, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("/////wAA//8AAAAAAAD/////AAAAAP//////////AID//wAA//8AgAAAAAD//wCA/////////7//////AAD/v///AAAAAP+///8AAP///7//f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5685822, 1, 0.5, 1.1371644),
+"attribute_data": PackedByteArray("/3/G8f9///83CP//NwjG8TcIxvFuEP//Nwj//24Q//83CMbxNwj//wAA//8AAMbxbhDG8W4Q//+lGMbxpRj//24QxvFuEMbx"),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwACAAoACgALAAMADAANAA4ADwAOAA0ABgAEABAAEAAFAAYACAAJABEABwARAAkA"),
+"lods": [0.05496797, PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAIAAkA")],
+"material": SubResource("StandardMaterial3D_0w8i3"),
+"name": "roof_plates",
+"primitive": 3,
+"uv_scale": Vector4(2.1371644, 18, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("/////47waMsAAAAAjvBoywAAAABwD2jL/////3APaMv/////jvBoywAAAAD//2jLAAAAAI7waMsAAAAA//8JH/////+O8AkfAAAAAI7wCR8AAAAAAABoy/////8AAGjL/////wAACR8AAAAAAAAJH/////9wDwkfAAAAAHAPCR////////9oy////////wkfYKM9uWCjPblgoz25YKM9uWCjPblgoz25YKM9uTceGs83HhrPNx4az2CjPblgoz25Nx4azzceGs83HhrPNx4az2CjPbk3HhrP")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("AABU9f8HVPX/B///AAD//w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_08ljm"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(32, 24, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_iet4s")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cwi3j"]
+data = PackedVector3Array(0.5, 0.5, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0, -0.5, -0.5, 0, -0.5686, -0.5, 0, -0.5686, 0.5, 0.5, -0.5686, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5686, -0.5, 0, -0.5686, 0.5, 0.5, -0.5, -0.5, 0, -0.5, 0.5, 0.5, -0.5, -0.5, 0, -0.5686, -0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5686, 0.5, 0.5, 0.5686, -0.5, 0, 0.5686, -0.5, 0, 0.5, 0.5, 0.5, 0.5, -0.5, 0, 0.5, 0.5, 0.5, 0.5686, -0.5, 0, 0.5686, 0.5, 0.5, 0.5686, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5)
+
+[node name="wall-b-roof-slant-detailed" type="Node3D" unique_id=2074297425]
+script = ExtResource("1_1gacm")
+
+[node name="wall-b-roof-slant-detailed2" type="Node3D" parent="." unique_id=1592880773]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-b-roof-slant-detailed" type="MeshInstance3D" parent="wall-b-roof-slant-detailed2" unique_id=485212519]
+mesh = SubResource("ArrayMesh_2mw4j")
+skeleton = NodePath("")
+
+[node name="wall-b-roof-slant-detailed_col" type="StaticBody3D" parent="wall-b-roof-slant-detailed2/wall-b-roof-slant-detailed" unique_id=1381073300]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-b-roof-slant-detailed2/wall-b-roof-slant-detailed/wall-b-roof-slant-detailed_col" unique_id=86127365]
+shape = SubResource("ConcavePolygonShape3D_cwi3j")

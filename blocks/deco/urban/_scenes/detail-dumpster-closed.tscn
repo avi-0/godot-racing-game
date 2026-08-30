@@ -1,0 +1,127 @@
+[gd_scene format=4 uid="uid://cik8q05n8rg2w"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_8x088"]
+[ext_resource type="Texture2D" uid="uid://bdvfeuqr5ohkb" path="res://textures/blocks/deco/urban/metal_wall.png" id="2_e6uk0"]
+[ext_resource type="Texture2D" uid="uid://d0a0me3x2kc16" path="res://textures/blocks/deco/urban/wall.png" id="3_nl25s"]
+[ext_resource type="Texture2D" uid="uid://nqo7fpx8qg5h" path="res://textures/blocks/deco/urban/roof.png" id="4_efvm7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6aa1e"]
+friction = 0.7
+bounce = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfx71"]
+resource_name = "wall_metal"
+shading_mode = 0
+albedo_texture = ExtResource("2_e6uk0")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckfw2"]
+resource_name = "wall"
+shading_mode = 0
+albedo_texture = ExtResource("3_nl25s")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hus2j"]
+resource_name = "roof"
+shading_mode = 0
+albedo_texture = ExtResource("4_efvm7")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d0eab"]
+_surfaces = [{
+"aabb": AABB(-0.3, 0, -0.2, 0.6, 0.5, 0.4),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgAEAAAAAwAFAAIAAAAEAAYABgAFAAMABgAHAAAAAwAHAAYA"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAD//5mZAAAAAP//AAAAAAAAAACZmQAAAAD//wAA//8AAAAAAAAAAAAAAAAAAP//AAAAAP////8AAA==")
+}, {
+"aabb": AABB(-0.3, 0, -0.2, 0.6, 1e-05, 0.4),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAA=")
+}, {
+"aabb": AABB(-0.3, 0.2843475, -0.25366563, 0.6, 0.26037386, 0.4536656),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAAAAQABAAAAAMABQADAAIAAwAFAAQAAgAGAAUABAAFAAYABgACAAEABAAHAAEAAQAHAAYABgAHAAQA"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("///4KwAAAAD/////YPMAAAAA//9g8wAAAAD4KwAAAAD//wAAngwAAAAAAACeDAAAAAAG1P//AAD//wbU//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kibcf"]
+resource_name = "detail-dumpster-closed_detail-dumpster-closed"
+_surfaces = [{
+"aabb": AABB(-0.3, 0, -0.2, 0.6, 0.5, 0.4),
+"attribute_data": PackedByteArray("2vb/v4L6mNmC+v//2vb//ySJVJUkif///3////9/VJX/////Vvz//1b8mNn///+//3//v/9////adv//2nb/vw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwA"),
+"material": SubResource("StandardMaterial3D_kfx71"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(28, 2, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("/////////7///5mZAAD/v///AAAAAP+///8AAP///7////////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgAAAAAD///+/AAAAAAAA/78AAJmZAAD/vwAA//////+/AACZmQAA//8AAAAAAAD/////AAAAAP////+ZmQAA////fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////f////3////9/////f///")
+}, {
+"aabb": AABB(-0.3, 0, -0.2, 0.6, 1e-05, 0.4),
+"attribute_data": PackedByteArray("AAAI+bcNCPm3Df//AAD//w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_ckfw2"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(3.0401964, 3.9931746, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAP9/AAD/fwAA/38AAP9/")
+}, {
+"aabb": AABB(-0.3, 0.2843475, -0.25366563, 0.6, 0.26037386, 0.4536656),
+"attribute_data": PackedByteArray("/38K/f9/FZ6IiBWeiIgK/ZaAZZaWgFr14H9a9eB/ZZaIiCb2iIj///9/////fyb2pYgp+u+HKfrvhzSbpYg0m/9/FZ7/fz2UiIg9lIiIFZ52986U///OlP//w/N298Pz"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_hus2j"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(29.998514, 2.1666667, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("///4KwAA////////YPP//wAA//9g8///AAD4KwAA////////YPNoy///+CsAAGjL//8AAJ4MaMv//wbU//9oywAA+CsAAP//AAAAAJ4M/////wAAngz/////+CsAAP//AAAAAJ4MaMsAAPgrAABoywAA//9g82jLAAAG1P//aMv/////YPP/////BtT/////AAAG1P////8AAP//YPP//wAABtT//xut//8G1P//G63//wAAngwbrQAAAACeDBut/38az/9/Gs//fxrP/38azz45YCM+OWAjPjlgIz45YCNxmP//cZj//3GY//9xmP//nlw9uZ5cPbmeXD25nlw9uf9/cZj/f3GY/39xmP9/cZgAAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_d0eab")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8x088"]
+points = PackedVector3Array(0.3, 0.54472136, 0.17761868, 0.3, 0.49998552, 0.19999999, 0.3, 0.3290403, -0.25366563, -0.3, 0.54472136, 0.17761868, -0.3, 0.49998552, 0.19999999, 0.3, 0, 0.19999999, 0.3, 0, -0.20002154, -0.3, 0.3290403, -0.25366563, -0.3, 0, 0.19999999, -0.3, 0, -0.20002154)
+
+[node name="detail-dumpster-closed" type="Node3D" unique_id=343750515]
+script = ExtResource("1_8x088")
+IsPhysical = true
+
+[node name="detail-dumpster-closed2" type="RigidBody3D" parent="." unique_id=1207781224]
+collision_layer = 4
+collision_mask = 7
+mass = 15.0
+physics_material_override = SubResource("PhysicsMaterial_6aa1e")
+freeze = true
+
+[node name="detail-dumpster-closed" type="MeshInstance3D" parent="detail-dumpster-closed2" unique_id=133868618]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("ArrayMesh_kibcf")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detail-dumpster-closed2" unique_id=37271879]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_8x088")

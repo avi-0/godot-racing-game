@@ -1,0 +1,89 @@
+[gd_scene format=4 uid="uid://i65jxd6usiak"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_e8bqa"]
+[ext_resource type="Texture2D" uid="uid://d0a0me3x2kc16" path="res://textures/blocks/deco/urban/wall.png" id="2_mdqon"]
+[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="3_ud8ks"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7s0q"]
+resource_name = "wall"
+shading_mode = 0
+albedo_texture = ExtResource("2_mdqon")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmlga"]
+resource_name = "concrete"
+shading_mode = 0
+albedo_texture = ExtResource("3_ud8ks")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_verdf"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAgAEAAAAAAAFAAMABgAEAAIAAwAFAAYAAgAHAAYABgAHAAMA"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD//wAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP//AAD/////AAAAAAAA/////wAA////////AAD//wAA//8AAA==")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD//wAAAAD/////AAAAAP///////wAAAAD/////AAAAAAAA//8AAP//AAD//wAA//8AAAAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ueeu2"]
+resource_name = "wall-a-painted_wall-a-painted"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("/3//f/9///9UVf//VFX/f6oq/3+qKv//AAD//wAA/3+qqv///3////9//3+qqv9/qir/f1RV/39UVf//qir//w=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwA"),
+"material": SubResource("StandardMaterial3D_l7s0q"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(6, 2, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD//wAA//8AAAAAAAD/////AAAAAP///////wAA//////////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgAAAAAD///+/AAAAAAAA/78AAP//AAD/vwAA//////+//////////7//////AAD/v///AAAAAP+///8AAP///7//f////3////9/////f////3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("qqr//yGi//8holT1qqpU9QAAVPWICFT1iAj//wAA//8="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"material": SubResource("StandardMaterial3D_rmlga"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(30, 24, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD//wAA////////AAD/////////////AAD///////8AAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_verdf")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_187ii"]
+data = PackedVector3Array(-0.5, 1, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 1, -0.5, -0.5, 1, -0.5, 0.5, 1, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 1, 0.5, 0.5, 1, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 1, -0.5, -0.5, 1, -0.5, -0.5, 1, 0.5, -0.5, 0, 0.5, 0.5, 1, 0.5, 0.5, 1, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 1, 0.5, -0.5, 1, -0.5, 0.5, 1, -0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, -0.5, 1, 0.5, -0.5, 1, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 0, 0.5)
+
+[node name="wall-a-painted" type="Node3D" unique_id=1413193372]
+script = ExtResource("1_e8bqa")
+
+[node name="wall-a-painted2" type="Node3D" parent="." unique_id=736518279]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-a-painted" type="MeshInstance3D" parent="wall-a-painted2" unique_id=2011965512]
+mesh = SubResource("ArrayMesh_ueeu2")
+skeleton = NodePath("")
+
+[node name="wall-a-painted_col" type="StaticBody3D" parent="wall-a-painted2/wall-a-painted" unique_id=1385117084]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-a-painted2/wall-a-painted/wall-a-painted_col" unique_id=1737428563]
+shape = SubResource("ConcavePolygonShape3D_187ii")

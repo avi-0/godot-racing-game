@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://befw0ectpogs8"]
+
+[ext_resource type="Texture2D" path="res://blocks/deco/urban/_images/scaffolding-poles.png" id="1_kpm3f"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_xg7g8"]
+
+[resource]
+script = ExtResource("1_xg7g8")
+ScenePath = "res://blocks/deco/urban/_scenes/scaffolding-poles.tscn"
+SourceScenePath = "res://assets/asset_packs/kenney/retrourban/scaffolding-poles.glb"
+ThumbnailTexture = ExtResource("1_kpm3f")

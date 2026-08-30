@@ -1,0 +1,89 @@
+[gd_scene format=4 uid="uid://h12jc7i2resd"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_ptn3e"]
+[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="2_t0r8r"]
+[ext_resource type="Texture2D" uid="uid://bdvfeuqr5ohkb" path="res://textures/blocks/deco/urban/metal_wall.png" id="3_0qvxx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phsvl"]
+resource_name = "concrete"
+shading_mode = 0
+albedo_texture = ExtResource("2_t0r8r")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yevhy"]
+resource_name = "wall_metal"
+shading_mode = 0
+albedo_texture = ExtResource("3_0qvxx")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fak04"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAD/////AAD/////AAAAAP///////wAAAAAAAP//AAD//wAA//8AAP//AAAAAAAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAgAEAAAABAACAAMAAAAFAAMAAwAFAAQA"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("////////AAD//wAA//8AAAAAAAD//wAA//8AAAAAAAAAAP////8AAP////8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_amxb3"]
+resource_name = "wall-b-diagonal_wall-b-diagonal"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("qqpU9SGi//8holT1AABU9YgIVPWICP//"),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": SubResource("StandardMaterial3D_phsvl"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(30, 24, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAD/////////////AAD/////////////AAAAAP///7///wAA////v///AAAAAP+//3//v/9//7//f/+/AAD/fwAA/38AAP9/")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("Zeb/f2Xm///d3f//3d3/f2Xm/3/u7v9/7u7//2Xm//////9//////3b3//929/9/"),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgA"),
+"material": SubResource("StandardMaterial3D_yevhy"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(30, 2, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("////////AID//wAA//8AgAAAAAD//wCAAAD/////AID/////////v/////8AAP+///8AAAAA/7///wAA////vwAA///////fAAAAAP///9///wAAAAD/3/////8AAP/f/3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fak04")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2q7gu"]
+data = PackedVector3Array(-0.5, 1, 0.5, 0.5, 1, -0.5, 0.5, 1, 0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 1, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, -0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 1, 0.5, -0.5, 1, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 1, -0.5, -0.5, 1, 0.5)
+
+[node name="wall-b-diagonal" type="Node3D" unique_id=1950461913]
+script = ExtResource("1_ptn3e")
+
+[node name="wall-b-diagonal2" type="Node3D" parent="." unique_id=27144536]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-b-diagonal" type="MeshInstance3D" parent="wall-b-diagonal2" unique_id=44361846]
+mesh = SubResource("ArrayMesh_amxb3")
+skeleton = NodePath("")
+
+[node name="wall-b-diagonal_col" type="StaticBody3D" parent="wall-b-diagonal2/wall-b-diagonal" unique_id=607578308]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-b-diagonal2/wall-b-diagonal/wall-b-diagonal_col" unique_id=1251008463]
+shape = SubResource("ConcavePolygonShape3D_2q7gu")

@@ -1,0 +1,61 @@
+[gd_scene format=4 uid="uid://c2r0e8js3p86j"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_0mhda"]
+[ext_resource type="Texture2D" uid="uid://tmiovmgy0mv3" path="res://textures/blocks/deco/urban/bars.png" id="2_ovfhf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6heyn"]
+resource_name = "bars"
+transparency = 4
+shading_mode = 0
+albedo_texture = ExtResource("2_ovfhf")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_85hh8"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 1e-05),
+"format": 34359742465,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAwACAAAAAgADAAAA"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8vij7"]
+resource_name = "wall-c-flat_wall-c-flat"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 1e-05),
+"attribute_data": PackedByteArray("AABgQQAAAAAAAGBBAACAPwAAUEEAAIA/AABQQQAAAAAAAGBBAACAPwAAYEEAAAAAAABQQQAAgD8AAFBBAAAAAA=="),
+"format": 34359742487,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUA"),
+"material": SubResource("StandardMaterial3D_6heyn"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAvwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAvwAAgD8AAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAA/////wAA/7//////AAD/v/////8AAP+//////wAA/7//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/Pw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_85hh8")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e60sw"]
+data = PackedVector3Array(-0.5, 1, 0, -0.5, 0, 0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 1, 0, -0.5, 1, 0, -0.5, 0, 0, -0.5, 1, 0, 0.5, 0, 0, 0.5, 1, 0, 0.5, 0, 0, -0.5, 1, 0)
+
+[node name="wall-c-flat" type="Node3D" unique_id=1669684364]
+script = ExtResource("1_0mhda")
+
+[node name="wall-c-flat2" type="Node3D" parent="." unique_id=1904092299]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="wall-c-flat" type="MeshInstance3D" parent="wall-c-flat2" unique_id=1045660309]
+mesh = SubResource("ArrayMesh_8vij7")
+skeleton = NodePath("")
+
+[node name="wall-c-flat_col" type="StaticBody3D" parent="wall-c-flat2/wall-c-flat" unique_id=812104011]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall-c-flat2/wall-c-flat/wall-c-flat_col" unique_id=1869317035]
+shape = SubResource("ConcavePolygonShape3D_e60sw")
