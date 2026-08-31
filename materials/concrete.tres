@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://fjiwbtrhsjri"]
 
-[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="1_pkk0l"]
+[ext_resource type="Texture2D" uid="uid://ccj0mb6jigp6n" path="res://textures/blocks/concrete.jpg" id="1_pkk0l"]
 
 [resource]
 resource_name = "concrete"
