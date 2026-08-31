@@ -38,8 +38,13 @@ shadow_mesh = SubResource("ArrayMesh_jkae7")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_svnmu"]
 data = PackedVector3Array(-0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5)
 
-[node name="road-dirt-center" type="Node3D" unique_id=409257373]
+[sub_resource type="BoxMesh" id="BoxMesh_6wbhv"]
+size = Vector3(8, 0.25, 8)
+
+[node name="road-dirt-center" type="Node3D" unique_id=409257373 node_paths=PackedStringArray("WheelTriggerMeshInstance")]
 script = ExtResource("1_svnmu")
+IsGrass = true
+WheelTriggerMeshInstance = NodePath("road-dirt-center2/MeshInstance3D")
 
 [node name="road-dirt-center2" type="Node3D" parent="." unique_id=766731059]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
@@ -52,3 +57,9 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="road-dirt-center2/road-dirt-center/road-dirt-center_col" unique_id=1489486056]
 shape = SubResource("ConcavePolygonShape3D_svnmu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="road-dirt-center2" unique_id=1256113551]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, -0.000625, 0)
+layers = 0
+mesh = SubResource("BoxMesh_6wbhv")
+skeleton = NodePath("../..")

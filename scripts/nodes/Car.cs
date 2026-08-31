@@ -98,8 +98,6 @@ public partial class Car : RigidBody3D
 	private bool _frozen = false;
 	private Vector3 _frozenPosition;
 	
-	private bool _boosted = false;
-	
 	public override void _Ready()
 	{
 		OrbitCamera.Radius = 3.5f;
@@ -225,7 +223,6 @@ public partial class Car : RigidBody3D
 		}
 
 		_hasCompressedWheel = false;
-		_boosted = false;
 		foreach (var wheel in Wheels)
 		{
 			SteeringRotation(delta, wheel);
@@ -390,11 +387,6 @@ public partial class Car : RigidBody3D
 		var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;
 		var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier * accelerationFromCurve;
 		var forcePosition = contactPoint - GlobalPosition;
-
-		if (_boosted)
-		{
-			accelerationForce *= 3;
-		}
 		
 		if (wheel.ShapeCast.IsColliding())
 		{
@@ -535,19 +527,30 @@ public partial class Car : RigidBody3D
 					if (staticBody3D.GetOwner() is Block)
 					{
 						Block block = (Block)(collidingObject as StaticBody3D).GetOwner();
-						if (block.IsBooster)
+						if (block.WheelTriggerMeshInstance != null && (block.WheelTriggerMeshInstance.GlobalTransform * block.WheelTriggerMeshInstance.GetAabb()).Abs().HasPoint(wheel.ShapeCast.GetCollisionPoint(collider)))
 						{
-							_boosted = true;
-						}
-						else if (block.IsBumper)
-						{
-							var forcePosition = GlobalPosition;
-							var force = block.GlobalBasis.Y * 150;
-							ApplyForce(force, forcePosition);
-							//if (DebugMode)
+							if (block.IsBooster)
 							{
-								DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
-									arrow_size: 0.1f);
+								var forcePosition = GetCenterOfMass();
+								var force = -block.GlobalBasis.Z * 400;
+								ApplyForce(force, forcePosition);
+							}
+							
+							if (block.IsBumper)
+							{
+								var forcePosition = GetCenterOfMass();
+								var force = block.GlobalBasis.Y * 150;
+								ApplyForce(force, forcePosition);
+								//if (DebugMode)
+								{
+									DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
+										arrow_size: 0.1f);
+								}
+							}
+
+							if (block.IsGrass && !FullGripOffroad)
+							{
+								wheel.GrassContact = true;
 							}
 						}
 					}

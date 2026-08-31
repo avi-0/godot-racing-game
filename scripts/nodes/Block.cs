@@ -21,9 +21,11 @@ public partial class Block : Node3D
 	[Export] public bool IsStart = false;
 	[Export] public bool IsBooster = false;
 	[Export] public bool IsBumper = false;
+	[Export] public bool IsGrass = false;
 	[Export] public bool IsPhysical = false;
 	[Export] public bool HasLight = false;
 	[Export] public Node3D SpawnPointNode;
+	[Export] public MeshInstance3D WheelTriggerMeshInstance;
 
 	public Transform3D SpawnPoint =>
 		SpawnPointNode.GlobalTransform.Orthonormalized().RotatedLocal(Vector3.Up, float.Pi / 2);
