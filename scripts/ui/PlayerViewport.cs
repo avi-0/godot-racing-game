@@ -70,7 +70,7 @@ public partial class PlayerViewport : SubViewport
 		
 		UpdateCarInputs();
 
-		int speed = (int)Mathf.Round(Car.LinearVelocity.Length() * 8);
+		int speed = (int)Mathf.Round(Car.LinearVelocity.Length() * 3.6f);
 		
 		int maxRange = 283 - 14;
 		float ratio = speed / 650.0f;
