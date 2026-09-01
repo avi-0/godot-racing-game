@@ -494,6 +494,11 @@ public partial class Car : RigidBody3D
 					{
 						xTraction = 0;
 					}
+
+					if (!wheel.GrassContact && _isAccelerating && _isBraking && wheel.Config.IsDriveWheel && tireVelocity.Length() > 4)
+					{
+						wheel.SmokeParticles.SetEmitting(true);
+					}
 				}
 				else
 				{
@@ -515,6 +520,11 @@ public partial class Car : RigidBody3D
 						arrow_size: 0.1f);
 					DebugDraw3D.DrawArrowRay(contactPoint, zForce / Mass, 0.1f, Color.Color8(0, 0, 255),
 						arrow_size: 0.1f);
+				}
+
+				if (wheel.GrassContact && tireVelocity.Length() > 5)
+				{
+					wheel.GrassParticles.SetEmitting(true);
 				}
 			}
 		}

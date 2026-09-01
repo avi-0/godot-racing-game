@@ -16,6 +16,8 @@ public partial class CarWheel : Node3D
 	public Node3D WheelModel;
 	[Export]
 	public float SkidmarkWidth = 0.1f;
+	[Export] 
+	public ShapeCast3D ShapeCast;
 	
 	[ExportCategory("Builtin")]
 	[Export]
@@ -25,7 +27,9 @@ public partial class CarWheel : Node3D
 	[Export]
 	private Curve SkidmarkOpacityCurve;
 
-	[Export] public ShapeCast3D ShapeCast;
+	[ExportCategory("Particles")]
+	[Export] public GpuParticles3D SmokeParticles;
+	[Export] public GpuParticles3D GrassParticles;
 	
 	private ImmediateMesh _skidmarkMesh;
 	private RingBuffer<SkidmarkSegment> _skidmarkLines;
@@ -73,6 +77,7 @@ public partial class CarWheel : Node3D
 	public void StopSliding()
 	{
 		_isSliding = false;
+		_previousSkidmarkPosition = GlobalPosition;
 	}
 
 	private void CreateSkidmarkMesh()

@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/nodes/CarWheel.cs" id="1_c8yof"]
 [ext_resource type="Shape3D" uid="uid://b6chbli04dvd0" path="res://resources/tyre_hitbox_shape3d.tres" id="2_415vt"]
+[ext_resource type="Material" uid="uid://bdmbwvw5md4st" path="res://particles/tyre_smoke_particle_process_material.tres" id="3_bvrlt"]
+[ext_resource type="PlaneMesh" uid="uid://b5snrwsemic5g" path="res://particles/tyre_smoke_drawpass_mesh.tres" id="4_682lt"]
+[ext_resource type="Material" uid="uid://bnndhjgjuqn2u" path="res://particles/tyre_grass_particle_process_material.tres" id="5_1tg5k"]
+[ext_resource type="PlaneMesh" uid="uid://xfo71731q85r" path="res://particles/tyre_grass_drawpass_mesh.tres" id="6_lxc8e"]
 
 [sub_resource type="Curve" id="Curve_c8yof"]
 bake_resolution = 512
@@ -17,12 +21,14 @@ metallic_specular = 0.0
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_c8yof"]
 
-[node name="Wheel" type="Node3D" unique_id=284570040 node_paths=PackedStringArray("SkidmarkMeshInstance", "ShapeCast")]
+[node name="Wheel" type="Node3D" unique_id=284570040 node_paths=PackedStringArray("ShapeCast", "SkidmarkMeshInstance", "SmokeParticles", "GrassParticles")]
 script = ExtResource("1_c8yof")
 IsFrontWheel = true
+ShapeCast = NodePath("ShapeCast3D")
 SkidmarkMeshInstance = NodePath("SkidmarkMesh")
 SkidmarkOpacityCurve = SubResource("Curve_c8yof")
-ShapeCast = NodePath("ShapeCast3D")
+SmokeParticles = NodePath("SmokeGPUParticles3D")
+GrassParticles = NodePath("GrassGPUParticles3D")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=792324347]
 process_physics_priority = -1
@@ -36,3 +42,23 @@ top_level = true
 material_override = SubResource("StandardMaterial3D_c8yof")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_c8yof")
+
+[node name="SmokeGPUParticles3D" type="GPUParticles3D" parent="." unique_id=1912322397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17437422, 0.045502216)
+emitting = false
+amount = 500
+lifetime = 0.15000000000000002
+one_shot = true
+fixed_fps = 60
+process_material = ExtResource("3_bvrlt")
+draw_pass_1 = ExtResource("4_682lt")
+
+[node name="GrassGPUParticles3D" type="GPUParticles3D" parent="." unique_id=1121290933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24694383, -0.057933718)
+emitting = false
+amount = 100
+lifetime = 0.5
+one_shot = true
+fixed_fps = 60
+process_material = ExtResource("5_1tg5k")
+draw_pass_1 = ExtResource("6_lxc8e")

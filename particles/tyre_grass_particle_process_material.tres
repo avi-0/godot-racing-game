@@ -1,0 +1,39 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://bnndhjgjuqn2u"]
+
+[sub_resource type="Curve" id="Curve_5jg8k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7735043, 0.7623762), 0.0, 0.0, 0, 0, Vector2(1, 0.38943893), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kjif7"]
+curve = SubResource("Curve_5jg8k")
+
+[sub_resource type="Curve" id="Curve_giwj8"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 6.9306946), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iwsej"]
+curve = SubResource("Curve_giwj8")
+
+[sub_resource type="Curve" id="Curve_q6caa"]
+_data = [Vector2(0, 0.4511041), 0.0, 0.0, 0, 0, Vector2(0.33333334, 1), 0.0, 0.0, 0, 0, Vector2(0.82692313, 0.5488959), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_feq86"]
+curve = SubResource("Curve_q6caa")
+
+[resource]
+direction = Vector3(0, 2, 0)
+spread = 50.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, -8.6, 0)
+damping_min = 1.0
+damping_max = 2.0
+damping_curve = SubResource("CurveTexture_iwsej")
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_feq86")
+alpha_curve = SubResource("CurveTexture_kjif7")
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 0.0
