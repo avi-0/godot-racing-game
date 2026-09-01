@@ -2,8 +2,9 @@
 
 [resource]
 render_priority = -1
-shading_mode = 0
+shading_mode = 2
 vertex_color_use_as_albedo = true
+texture_filter = 2
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
