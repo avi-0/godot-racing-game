@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://cjtrr03r7gwgr"]
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://cjtrr03r7gwgr"]
 
-[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_go53c"]
 [ext_resource type="Texture2D" uid="uid://nglkta1b8agc" path="res://blocks/platform/_images/tile-low.png" id="1_l41am"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_78opq"]
 
 [resource]
-script = ExtResource("1_go53c")
+script = ExtResource("2_78opq")
 ScenePath = "res://blocks/platform/_scenes/tile-low.tscn"
 SourceScenePath = "res://assets/kenney/cityroads/platform/tile-low.glb"
 ThumbnailTexture = ExtResource("1_l41am")
+DisplayName = "Platform"
