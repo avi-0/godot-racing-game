@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cvmam0d235jkh"]
 
 [ext_resource type="PackedScene" uid="uid://q32127h8m7tr" path="res://scenes/game/track_bases/extras/snow_mesh.tscn" id="1_dqgdl"]
+[ext_resource type="Script" uid="uid://blogk3rbn8itg" path="res://scripts/nodes/TrackBase.cs" id="1_i1mpx"]
+[ext_resource type="Material" uid="uid://bc8u7iux4v8ox" path="res://particles/tyre_ice_drawpass_material.tres" id="2_apmyb"]
 [ext_resource type="Texture2D" uid="uid://ccw2puq5jweoh" path="res://textures/enviornment/ice.png" id="2_dqgdl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i1mpx"]
@@ -26,6 +28,8 @@ size = Vector3(512, 64, 512)
 size = Vector3(512, 64, 512)
 
 [node name="TrackBase" type="Node3D" unique_id=829403103]
+script = ExtResource("1_i1mpx")
+ContactParticleMaterial = ExtResource("2_apmyb")
 
 [node name="SnowMesh" parent="." unique_id=1845626434 instance=ExtResource("1_dqgdl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43, 0)

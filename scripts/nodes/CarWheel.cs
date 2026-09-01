@@ -30,6 +30,7 @@ public partial class CarWheel : Node3D
 	[ExportCategory("Particles")]
 	[Export] public GpuParticles3D SmokeParticles;
 	[Export] public GpuParticles3D GrassParticles;
+	[Export] public StandardMaterial3D ParticlesDefaultMaterial;
 	
 	private ImmediateMesh _skidmarkMesh;
 	private RingBuffer<SkidmarkSegment> _skidmarkLines;

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcg12cbu11ls7" path="res://scripts/nodes/CarWheel.cs" id="1_c8yof"]
 [ext_resource type="Shape3D" uid="uid://b6chbli04dvd0" path="res://resources/tyre_hitbox_shape3d.tres" id="2_415vt"]
+[ext_resource type="Material" uid="uid://2qrhacy552f0" path="res://particles/tyre_grass_drawpass_material.tres" id="2_lxc8e"]
 [ext_resource type="Material" uid="uid://bdmbwvw5md4st" path="res://particles/tyre_smoke_particle_process_material.tres" id="3_bvrlt"]
 [ext_resource type="PlaneMesh" uid="uid://b5snrwsemic5g" path="res://particles/tyre_smoke_drawpass_mesh.tres" id="4_682lt"]
 [ext_resource type="Material" uid="uid://bnndhjgjuqn2u" path="res://particles/tyre_grass_particle_process_material.tres" id="5_1tg5k"]
@@ -29,6 +30,7 @@ SkidmarkMeshInstance = NodePath("SkidmarkMesh")
 SkidmarkOpacityCurve = SubResource("Curve_c8yof")
 SmokeParticles = NodePath("SmokeGPUParticles3D")
 GrassParticles = NodePath("GrassGPUParticles3D")
+ParticlesDefaultMaterial = ExtResource("2_lxc8e")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=792324347]
 process_physics_priority = -1

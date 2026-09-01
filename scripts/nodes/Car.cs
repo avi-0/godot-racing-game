@@ -570,12 +570,14 @@ public partial class Car : RigidBody3D
 							if (block.IsGrass && !FullGripOffroad)
 							{
 								wheel.GrassContact = true;
+								wheel.GrassParticles.DrawPass1.SurfaceSetMaterial(0, wheel.ParticlesDefaultMaterial);
 							}
 						}
 					}
-					else if (!FullGripOffroad && staticBody3D.GetOwner().Name == "TrackBase")
+					else if (!FullGripOffroad && staticBody3D.GetOwner() is TrackBase trackBase)
 					{
 						wheel.GrassContact = true;
+						wheel.GrassParticles.DrawPass1.SurfaceSetMaterial(0, trackBase.ContactParticleMaterial);
 					}
 				}
 			}
