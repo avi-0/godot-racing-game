@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d06jg4xe4qt8g"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_m1je8"]
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_nbkcr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8tm7q"]
+material = ExtResource("2_nbkcr")
+size = Vector3(1, 0.226, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_in2q8"]
+points = PackedVector3Array(-0.5, -0.125, -0.5, -0.5, 0.125, -0.5, 0.5, -0.125, -0.5, -0.5, -0.125, 0.5, -0.5, 0.125, 0.5, 0.5, 0.125, -0.5, 0.5, -0.125, 0.5, 0.5, 0.125, 0.5)
+
+[node name="tile-med" type="Node3D" unique_id=511893744]
+script = ExtResource("1_m1je8")
+
+[node name="tile-high2" type="Node3D" parent="." unique_id=1827194330]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="tile-high" type="MeshInstance3D" parent="tile-high2" unique_id=912117079]
+transform = Transform3D(1, 0, 0, 0, 1.125, 0, 0, 0, 1, 0, 0.123, 0)
+mesh = SubResource("BoxMesh_8tm7q")
+skeleton = NodePath("")
+
+[node name="tile-high_col" type="StaticBody3D" parent="tile-high2/tile-high" unique_id=1330618372]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-high2/tile-high/tile-high_col" unique_id=1148434480]
+shape = SubResource("ConvexPolygonShape3D_in2q8")

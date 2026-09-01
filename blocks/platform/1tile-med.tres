@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://2erbctabax3e"]
+
+[ext_resource type="Texture2D" path="res://blocks/platform/_images/tile-med.png" id="1_jlp41"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_c6jw8"]
+
+[resource]
+script = ExtResource("2_c6jw8")
+ScenePath = "res://blocks/platform/_scenes/tile-med.tscn"
+SourceScenePath = "uid://4fjcpbfrqo2p"
+ThumbnailTexture = ExtResource("1_jlp41")
