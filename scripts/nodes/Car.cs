@@ -476,7 +476,7 @@ public partial class Car : RigidBody3D
 
 				var handbrake = _isBraking;
 
-				if ((handbrake || grip > SlipThreshold || wheel.GrassContact) && tireVelocity.Length() > 1)
+				if ((handbrake || grip > SlipThreshold || (wheel.GrassContact && !FullGripOffroad)) && tireVelocity.Length() > 1)
 				{
 					_isSlipping = true;
 				}
@@ -567,14 +567,14 @@ public partial class Car : RigidBody3D
 								}
 							}
 
-							if (block.IsGrass && !FullGripOffroad)
+							if (block.IsGrass)
 							{
 								wheel.GrassContact = true;
 								wheel.GrassParticles.DrawPass1.SurfaceSetMaterial(0, wheel.ParticlesDefaultMaterial);
 							}
 						}
 					}
-					else if (!FullGripOffroad && staticBody3D.GetOwner() is TrackBase trackBase)
+					else if (staticBody3D.GetOwner() is TrackBase trackBase)
 					{
 						wheel.GrassContact = true;
 						wheel.GrassParticles.DrawPass1.SurfaceSetMaterial(0, trackBase.ContactParticleMaterial);
