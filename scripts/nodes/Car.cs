@@ -38,11 +38,15 @@ public partial class Car : RigidBody3D
 	
 	[ExportCategory("Debug")]
 	[Export] public bool DebugMode = false;
+
+	[ExportCategory("Downforce")] 
+	[Export] public float MaxDownforce = 0f;
 	
 	[ExportCategory("Curves")]
 	[Export] public Curve AccelerationCurve;
 	[Export] public Curve SpeedSteeringCurve;
 	[Export] public Curve SpeedToPitchCurve;
+	[Export] public Curve SpeedToDownforceCurve;
 
 	[ExportCategory("Wheel Setup")] 
 	[Export] public WheelConfig FrontWheelConfig;
@@ -258,6 +262,8 @@ public partial class Car : RigidBody3D
 
 				wheelId++;
 			}
+			
+			ProcessDownForce();
 		}
 		
 		ProcessEngineSound();
@@ -564,6 +570,13 @@ public partial class Car : RigidBody3D
 				}
 			}
 		}
+	}
+
+	private void ProcessDownForce()
+	{
+		var forcePosition = GetCenterOfMass();
+		var force = -GlobalBasis.Y * MaxDownforce * SpeedToDownforceCurve.SampleBaked(Mathf.Clamp(GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed, 0, 1));
+		ApplyForce(force, forcePosition);
 	}
 
 	private Vector3 GetPointVelocity(Vector3 point)

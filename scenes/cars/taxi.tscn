@@ -33,6 +33,8 @@ point_count = 3
 _data = [Vector2(0.10181819, 0.50250566), 0.0, 0.0, 0, 0, Vector2(0.39636362, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_yrqru"]
+
 [sub_resource type="Curve" id="Curve_0wjsq"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
 point_count = 1
@@ -284,6 +286,7 @@ SteeringAffectsCenterOfMass = true
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_vwi5m")
+SpeedToDownforceCurve = SubResource("Curve_yrqru")
 FrontWheelConfig = SubResource("Resource_lce11")
 RearWheelConfig = SubResource("Resource_lml1i")
 CarName = "Taxi"

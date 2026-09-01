@@ -35,6 +35,8 @@ _limits = [1.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_4mu2d"]
+
 [sub_resource type="Resource" id="Resource_x43s4"]
 script = ExtResource("2_glvfi")
 SpringStrength = 16000.0
@@ -145,6 +147,7 @@ UnslipThreshold = 1.0
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")
+SpeedToDownforceCurve = SubResource("Curve_4mu2d")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
 CarName = "Drift Car"

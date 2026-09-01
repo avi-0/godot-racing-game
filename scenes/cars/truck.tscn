@@ -30,6 +30,8 @@ point_count = 3
 _data = [Vector2(0, 0.43126684), 0.0, 0.69256365, 0, 0, Vector2(0.2783883, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_xxshw"]
+
 [sub_resource type="Curve" id="Curve_0wjsq"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
 point_count = 1
@@ -287,6 +289,7 @@ FullGripOffroad = true
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_vwi5m")
+SpeedToDownforceCurve = SubResource("Curve_xxshw")
 FrontWheelConfig = SubResource("Resource_lce11")
 RearWheelConfig = SubResource("Resource_lml1i")
 CarName = "Offroad Truck"
