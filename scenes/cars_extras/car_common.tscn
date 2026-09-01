@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="2_84gro"]
 [ext_resource type="AudioStream" uid="uid://c25toh1o4n27x" path="res://audio/bonk.wav" id="3_3mehs"]
 [ext_resource type="Texture2D" uid="uid://pu4xk6cfo5wu" path="res://textures/Flare.png" id="4_3dw60"]
+[ext_resource type="Material" uid="uid://bcgydgpyui3mp" path="res://particles/sparks_particle_process_material.tres" id="4_w3b45"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_84gro"]
 resource_local_to_scene = true
@@ -12,41 +13,6 @@ format = 3
 loop_mode = 1
 loop_end = 264545
 stereo = true
-
-[sub_resource type="Curve" id="Curve_3dw60"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_w3b45"]
-_limits = [0.0, 5.0, 0.0, 1.0]
-_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_b1rg1"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
-point_count = 1
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_c0dk1"]
-curve_x = SubResource("Curve_3dw60")
-curve_y = SubResource("Curve_w3b45")
-curve_z = SubResource("Curve_b1rg1")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w3b45"]
-particle_flag_align_y = true
-emission_shape_offset = Vector3(0, 0.3, 0)
-emission_shape = 1
-emission_sphere_radius = 0.2
-angle_min = -720.0
-angle_max = 720.0
-direction = Vector3(2, 5, 2)
-spread = 180.0
-initial_velocity_min = 1.75
-initial_velocity_max = 3.25
-gravity = Vector3(0, -4, 0)
-scale_min = 0.04
-scale_max = 0.07
-scale_curve = SubResource("CurveXYZTexture_c0dk1")
-color = Color(2.007956, 1.3532561, 1.0000001, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1rg1"]
 transparency = 1
@@ -57,42 +23,6 @@ albedo_texture = ExtResource("4_3dw60")
 
 [sub_resource type="QuadMesh" id="QuadMesh_c0dk1"]
 material = SubResource("StandardMaterial3D_b1rg1")
-
-[sub_resource type="Curve" id="Curve_c0dk1"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_uv7if"]
-_limits = [0.0, 5.0, 0.0, 1.0]
-_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_g7tne"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
-point_count = 1
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_bqdnb"]
-curve_x = SubResource("Curve_c0dk1")
-curve_y = SubResource("Curve_uv7if")
-curve_z = SubResource("Curve_g7tne")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jbm0j"]
-resource_local_to_scene = true
-particle_flag_align_y = true
-emission_shape_offset = Vector3(0, 0.3, 0)
-emission_shape = 1
-emission_sphere_radius = 0.2
-angle_min = -720.0
-angle_max = 720.0
-direction = Vector3(2, 5, 2)
-spread = 180.0
-initial_velocity_min = 1.75
-initial_velocity_max = 3.25
-gravity = Vector3(0, -4, 0)
-scale_min = 0.04
-scale_max = 0.07
-scale_curve = SubResource("CurveXYZTexture_bqdnb")
-color = Color(2.007956, 1.3532561, 1.0000001, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j646d"]
 transparency = 1
@@ -112,7 +42,7 @@ font_size = 128
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CarCommon" type="Node3D" node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles", "PlayerName", "InfoSprite")]
+[node name="CarCommon" type="Node3D" unique_id=1236792490 node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles", "PlayerName", "InfoSprite")]
 script = ExtResource("1_qexnt")
 OrbitCamera = NodePath("OrbitCamera")
 EngineSoundPlayer = NodePath("EngineSoundPlayer")
@@ -121,102 +51,102 @@ CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("Collisio
 PlayerName = NodePath("SubViewport/PlayerName")
 InfoSprite = NodePath("Sprite3D")
 
-[node name="OrbitCamera" parent="." instance=ExtResource("2_84gro")]
+[node name="OrbitCamera" parent="." unique_id=1822407780 instance=ExtResource("2_84gro")]
 
-[node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+[node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1633681975]
 stream = SubResource("AudioStreamWAV_84gro")
 attenuation_model = 3
 bus = &"enginesounds"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=861127934]
 stream = ExtResource("3_3mehs")
 bus = &"GameSounds"
 
-[node name="CollisionDebris" type="Node3D" parent="."]
+[node name="CollisionDebris" type="Node3D" parent="." unique_id=1032372833]
 
-[node name="CDP1" type="GPUParticles3D" parent="CollisionDebris"]
+[node name="CDP1" type="GPUParticles3D" parent="CollisionDebris" unique_id=209191182]
 emitting = false
 amount = 12
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 64
-process_material = SubResource("ParticleProcessMaterial_w3b45")
+process_material = ExtResource("4_w3b45")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_c0dk1")
 draw_pass_2 = null
 
-[node name="CDP2" type="GPUParticles3D" parent="CollisionDebris"]
+[node name="CDP2" type="GPUParticles3D" parent="CollisionDebris" unique_id=1884556421]
 emitting = false
 amount = 12
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 64
-process_material = SubResource("ParticleProcessMaterial_jbm0j")
+process_material = ExtResource("4_w3b45")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_2g4b7")
 draw_pass_2 = null
 
-[node name="CDP3" type="GPUParticles3D" parent="CollisionDebris"]
+[node name="CDP3" type="GPUParticles3D" parent="CollisionDebris" unique_id=2125819636]
 emitting = false
 amount = 12
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 64
-process_material = SubResource("ParticleProcessMaterial_jbm0j")
+process_material = ExtResource("4_w3b45")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_2g4b7")
 draw_pass_2 = null
 
-[node name="CDP4" type="GPUParticles3D" parent="CollisionDebris"]
+[node name="CDP4" type="GPUParticles3D" parent="CollisionDebris" unique_id=1017967533]
 emitting = false
 amount = 12
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 64
-process_material = SubResource("ParticleProcessMaterial_jbm0j")
+process_material = ExtResource("4_w3b45")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_2g4b7")
 draw_pass_2 = null
 
-[node name="CDP5" type="GPUParticles3D" parent="CollisionDebris"]
+[node name="CDP5" type="GPUParticles3D" parent="CollisionDebris" unique_id=1663838377]
 emitting = false
 amount = 12
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 64
-process_material = SubResource("ParticleProcessMaterial_jbm0j")
+process_material = ExtResource("4_w3b45")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_2g4b7")
 draw_pass_2 = null
 
-[node name="CDP6" type="GPUParticles3D" parent="CollisionDebris"]
+[node name="CDP6" type="GPUParticles3D" parent="CollisionDebris" unique_id=1264694589]
 emitting = false
 amount = 12
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 64
-process_material = SubResource("ParticleProcessMaterial_jbm0j")
+process_material = ExtResource("4_w3b45")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_2g4b7")
 draw_pass_2 = null
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=214800083]
 transform = Transform3D(1, 0, 0, 0, 0.85663086, 0, 0, 0, 0.36438328, 0, 0.93682206, 0)
 pixel_size = 0.0007
 billboard = 1
 texture = SubResource("ViewportTexture_3dw60")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=325461661]
 transparent_bg = true
 size = Vector2i(1024, 256)
 
-[node name="PlayerName" type="Label" parent="SubViewport"]
+[node name="PlayerName" type="Label" parent="SubViewport" unique_id=1622800553]
 visible = false
 anchors_preset = 10
 anchor_right = 1.0
