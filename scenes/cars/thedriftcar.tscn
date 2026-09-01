@@ -119,7 +119,7 @@ uppercase = true
 pixel_size = 0.007
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" unique_id=2022946763 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
+[node name="Car" type="RigidBody3D" unique_id=2022946763 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -131,7 +131,8 @@ linear_damp = 0.25
 script = ExtResource("1_micox")
 CarModel = NodePath("drift")
 FrontCamera = NodePath("FrontCamera")
-HeadLight = NodePath("Headlights")
+HeadLights = [NodePath("Headlights"), NodePath("Headlights2")]
+RearLights = []
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
@@ -201,7 +202,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12972619, 0)
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.6319779, 0.3509409)
 
 [node name="Headlights" parent="." unique_id=1117639996 instance=ExtResource("7_g5cig")]
-transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -4.8919077e-08, 0.82878375, 0.55956906, 1.1796716e-07, 0.55956906, -0.82878375, 0, 0.3719683, 1.0770241)
+transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -4.8919077e-08, 0.82878375, 0.55956906, 1.1796716e-07, 0.55956906, -0.82878375, 0.31, 0.372, 1.077)
+
+[node name="Headlights2" parent="." unique_id=1652557081 instance=ExtResource("7_g5cig")]
+transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -4.8919077e-08, 0.82878375, 0.55956906, 1.1796716e-07, 0.55956906, -0.82878375, -0.31, 0.372, 1.077)
 
 [node name="Nameplate" type="MeshInstance3D" parent="." unique_id=1419120470]
 transform = Transform3D(-1, 0, 8.742278e-08, 1.2635119e-08, 0.9895006, 0.14452891, -8.650489e-08, 0.14452891, -0.9895006, 0, 0.40886098, -0.82926375)

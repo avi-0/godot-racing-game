@@ -253,7 +253,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3ocps")
 
-[node name="Car2" type="RigidBody3D" unique_id=1419133245 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
+[node name="Car2" type="RigidBody3D" unique_id=1419133245 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 30.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -264,7 +264,8 @@ linear_damp_mode = 1
 script = ExtResource("1_qtbni")
 CarModel = NodePath("Prototype_Car")
 FrontCamera = NodePath("FrontCamera")
-HeadLight = NodePath("Headlights")
+HeadLights = [NodePath("Headlights"), NodePath("Headlights2")]
+RearLights = []
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("PlayerName3D")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
@@ -336,7 +337,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20387608, 0)
 transform = Transform3D(-1, 0, -8.742278e-08, -5.614962e-10, 0.9999794, 0.0064227674, 8.742097e-08, 0.0064227674, -0.9999794, 0, 0.43103254, 0.57892364)
 
 [node name="Headlights" parent="." unique_id=53652753 instance=ExtResource("7_dg6r6")]
-transform = Transform3D(-1, 2.546745e-08, -1.2514286e-07, -1.7358442e-08, 0.9437144, 0.3307615, 1.2652278e-07, 0.3307615, -0.9437144, 0, 0.21423426, 1.0293632)
+transform = Transform3D(-1, 2.546745e-08, -1.2514286e-07, -1.7358442e-08, 0.9437144, 0.3307615, 1.2652278e-07, 0.3307615, -0.9437144, 0.28841287, 0.21423426, 1.0293632)
+
+[node name="Headlights2" parent="." unique_id=668443408 instance=ExtResource("7_dg6r6")]
+transform = Transform3D(-1, 2.546745e-08, -1.2514286e-07, -1.7358442e-08, 0.9437144, 0.3307615, 1.2652278e-07, 0.3307615, -0.9437144, -0.288, 0.214, 1.029)
 
 [node name="PlayerName3D" type="MeshInstance3D" parent="." unique_id=917446310]
 transform = Transform3D(-1, -3.0079662e-15, 8.742278e-08, -4.2142972e-08, 0.8761385, -0.4820595, -7.659445e-08, -0.4820595, -0.8761385, 0, 0.23244113, -0.84498763)

@@ -256,7 +256,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ync2c")
 
-[node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLight", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
+[node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
 collision_layer = 2
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -268,7 +268,8 @@ linear_damp = 0.25
 script = ExtResource("1_denii")
 CarModel = NodePath("Taxi")
 FrontCamera = NodePath("FrontCamera")
-HeadLight = NodePath("Headlights")
+HeadLights = [NodePath("Headlights"), NodePath("Headlights2")]
+RearLights = []
 CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
@@ -372,7 +373,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.109947026, 0)
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.742467, 0.44939327)
 
 [node name="Headlights" parent="." unique_id=701691914 instance=ExtResource("8_0wjsq")]
-transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -2.7475641e-08, 0.914063, 0.40557235, 1.2471736e-07, 0.40557235, -0.914063, 0, 0.48327497, 1.1655896)
+transform = Transform3D(-1, 2.5467447e-08, -1.2514289e-07, -2.7475641e-08, 0.914063, 0.40557235, 1.2471736e-07, 0.40557235, -0.914063, 0.257, 0.483, 1.166)
+
+[node name="Headlights2" parent="." unique_id=1283162692 instance=ExtResource("8_0wjsq")]
+transform = Transform3D(-1, 2.5467429e-08, -1.2514286e-07, -2.7475641e-08, 0.914063, 0.40557235, 1.2471736e-07, 0.40557235, -0.914063, -0.257, 0.483, 1.166)
 
 [node name="Nameplate" type="MeshInstance3D" parent="." unique_id=2138589436]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.3264677, -1.1225132)

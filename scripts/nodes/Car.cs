@@ -13,7 +13,8 @@ public partial class Car : RigidBody3D
 	[ExportCategory("Components")] 
 	[Export] public Node3D CarModel;
 	[Export] public Camera3D FrontCamera;
-	[Export] public SpotLight3D HeadLight;
+	[Export] public SpotLight3D[] HeadLights;
+	[Export] public SpotLight3D[] RearLights;
 	[Export] public CarCommon CarCommon;
 	[Export] public MeshInstance3D Nameplate;
 	[Export] public CarWheel[] Wheels;
@@ -183,19 +184,22 @@ public partial class Car : RigidBody3D
 
 	public void InputToggleLights(int on = -1)
 	{
-		if (on == -1)
+		for (int light = 0; light < HeadLights.Length; light++)
 		{
-			HeadLight.Visible = !HeadLight.Visible;
-		}
-		else
-		{
-			HeadLight.Visible = on == 1;
+			if (on == -1)
+			{
+				HeadLights[light].Visible = !HeadLights[light].Visible;
+			}
+			else
+			{
+				HeadLights[light].Visible = on == 1;
+			}
 		}
 
 		if (CarModel.GetChild(0) is MeshInstance3D mesh)
 		{
 			StandardMaterial3D material = (StandardMaterial3D)mesh.GetActiveMaterial(0);
-			material.EmissionEnabled = HeadLight.Visible;
+			material.EmissionEnabled = HeadLights[0].Visible;
 			CarModel.TreeExited += () => { material.EmissionEnabled = false; };
 		}
 	}
