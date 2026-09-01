@@ -7,8 +7,8 @@
 material = ExtResource("2_nbkcr")
 size = Vector3(1, 0.226, 1)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_in2q8"]
-points = PackedVector3Array(-0.5, -0.125, -0.5, -0.5, 0.125, -0.5, 0.5, -0.125, -0.5, -0.5, -0.125, 0.5, -0.5, 0.125, 0.5, 0.5, 0.125, -0.5, 0.5, -0.125, 0.5, 0.5, 0.125, 0.5)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nbkcr"]
+points = PackedVector3Array(-0.5, -0.113, -0.5, -0.5, 0.11300001, -0.5, 0.5, -0.113, -0.5, -0.5, -0.113, 0.5, -0.5, 0.11300001, 0.5, 0.5, 0.11300001, -0.5, 0.5, -0.113, 0.5, 0.5, 0.11300001, 0.5)
 
 [node name="tile-med" type="Node3D" unique_id=511893744]
 script = ExtResource("1_m1je8")
@@ -23,5 +23,5 @@ skeleton = NodePath("")
 
 [node name="tile-high_col" type="StaticBody3D" parent="tile-high2/tile-high" unique_id=1330618372]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-high2/tile-high/tile-high_col" unique_id=1148434480]
-shape = SubResource("ConvexPolygonShape3D_in2q8")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-high2/tile-high/tile-high_col" unique_id=1746768691]
+shape = SubResource("ConvexPolygonShape3D_nbkcr")
