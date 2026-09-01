@@ -811,6 +811,10 @@ public partial class Editor : Control
 			var button = EditorBlockButtonScene.Instantiate<Button>();
 			button.Icon = record.ThumbnailTexture;
 			button.TooltipText = record.ResourcePath;
+			if (record.DisplayName != null)
+			{
+				button.TooltipText = record.DisplayName;
+			}
 
 			BlockListContainer.AddChild(button);
 

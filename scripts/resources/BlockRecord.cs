@@ -13,6 +13,8 @@ public partial class BlockRecord : Resource
 	[Export(PropertyHint.File)] public string SourceScenePath;
 
 	[Export] public Texture2D ThumbnailTexture;
+	
+	[Export] public string DisplayName;
 
 	public Block Instantiate()
 	{
