@@ -342,13 +342,13 @@ public partial class Car : RigidBody3D
 
 	void ProcessAcceleration(CarWheel wheel)
 	{
+		var forwardDir = wheel.GlobalBasis.Z;
+		var carForwardDir = GlobalBasis.Z;
+		var velocity = carForwardDir.Dot(LinearVelocity);
+		wheel.WheelModel.RotateX((-velocity * (float)GetProcessDeltaTime()) / wheel.Config.WheelRadius);
+		
 		if (wheel.ShapeCast.IsColliding())
 		{
-			var forwardDir = wheel.GlobalBasis.Z;
-			var carForwardDir = GlobalBasis.Z;
-			var velocity = carForwardDir.Dot(LinearVelocity);
-			wheel.WheelModel.RotateX((-velocity * (float)GetProcessDeltaTime()) / wheel.Config.WheelRadius);
-
 			var forwardStrength = _inputs.Forward;
 			var backStrength = -_inputs.Back;
 			if (PlayerId < 0 || GameModeController.CurrentGameMode.GetPlayer(PlayerId).State !=
@@ -384,28 +384,24 @@ public partial class Car : RigidBody3D
 			}
 
 			var accelerationForce = forwardDir * Acceleration * accelerationStrength * accelerationFromCurve;
-			var brakingForce = carForwardDir * Acceleration * brakeStrength * BrakingStrengthMultiplier * accelerationFromCurve;
+			var brakingForce = carForwardDir * Acceleration * brakeStrength * accelerationFromCurve * BrakingStrengthMultiplier;
+			var contactPoint = wheel.WheelModel.GlobalPosition;
+			var forcePosition = contactPoint - GlobalPosition;
 
-			for (int i = 0; i < wheel.ShapeCast.GetCollisionCount(); i++)
+			if (wheel.Config.IsDriveWheel)
 			{
-				var contactPoint = wheel.ShapeCast.GetCollisionPoint(i);
-				var forcePosition = contactPoint - GlobalPosition;
+				ApplyForce(accelerationForce / _driveWheelCount,
+					forcePosition);
+			}
 
-				if (wheel.Config.IsDriveWheel)
-				{
-					ApplyForce(accelerationForce / wheel.ShapeCast.GetCollisionCount() / _driveWheelCount,
-						forcePosition);
-				}
-
-				ApplyForce(brakingForce / wheel.ShapeCast.GetCollisionCount() / _wheelCount, forcePosition);
-				
-				if (DebugMode)
-				{
-					DebugDraw3D.DrawArrowRay(contactPoint, accelerationForce / Mass, 0.5f, Color.Color8(0, 255, 0),
-						arrow_size: 0.1f);
-					DebugDraw3D.DrawArrowRay(contactPoint, brakingForce / Mass, 0.5f, Color.Color8(255, 000, 0),
-						arrow_size: 0.1f);
-				}
+			ApplyForce(brakingForce / _wheelCount, forcePosition);
+			
+			if (DebugMode)
+			{
+				DebugDraw3D.DrawArrowRay(contactPoint, accelerationForce / Mass, 0.5f, Color.Color8(0, 255, 0),
+					arrow_size: 0.1f);
+				DebugDraw3D.DrawArrowRay(contactPoint, brakingForce / Mass, 0.5f, Color.Color8(255, 000, 0),
+					arrow_size: 0.1f);
 			}
 		}
 	}
