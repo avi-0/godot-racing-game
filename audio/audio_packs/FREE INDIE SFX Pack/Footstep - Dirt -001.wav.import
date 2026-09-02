@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqy6iy0j8tvju"
+path="res://.godot/imported/Footstep - Dirt -001.wav-417301c36254c3650217e7b0e163976c.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Footstep - Dirt -001.wav"
+dest_files=["res://.godot/imported/Footstep - Dirt -001.wav-417301c36254c3650217e7b0e163976c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

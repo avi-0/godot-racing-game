@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgiht1sx8biap"
+path="res://.godot/imported/Ambience - Wind Field (Loop).wav-784692241de717c0afe655a1655f0c95.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Ambience - Wind Field (Loop).wav"
+dest_files=["res://.godot/imported/Ambience - Wind Field (Loop).wav-784692241de717c0afe655a1655f0c95.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

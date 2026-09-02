@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cghmtlxhf4l0e"
+path="res://.godot/imported/Misc - Eat.wav-2d1b63ad43431bd6202fce2c41e35ce7.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Misc - Eat.wav"
+dest_files=["res://.godot/imported/Misc - Eat.wav-2d1b63ad43431bd6202fce2c41e35ce7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

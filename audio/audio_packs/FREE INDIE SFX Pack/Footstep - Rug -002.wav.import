@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://h1pcbjvoh5ca"
+path="res://.godot/imported/Footstep - Rug -002.wav-bd14e1ad4c871db3debe1e198b2472a1.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Footstep - Rug -002.wav"
+dest_files=["res://.godot/imported/Footstep - Rug -002.wav-bd14e1ad4c871db3debe1e198b2472a1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cuq1hey7tn5ng"
+path="res://.godot/imported/Object - Arcade Turn On.wav-ce95c74baf720e206e5f7d56c4ef6dbd.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Object - Arcade Turn On.wav"
+dest_files=["res://.godot/imported/Object - Arcade Turn On.wav-ce95c74baf720e206e5f7d56c4ef6dbd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

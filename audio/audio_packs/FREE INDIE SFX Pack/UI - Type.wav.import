@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b847d5h5jahcr"
+path="res://.godot/imported/UI - Type.wav-54c0f418b704c6978a8afcdaae13b6bc.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/UI - Type.wav"
+dest_files=["res://.godot/imported/UI - Type.wav-54c0f418b704c6978a8afcdaae13b6bc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

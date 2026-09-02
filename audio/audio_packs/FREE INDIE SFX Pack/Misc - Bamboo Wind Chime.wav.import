@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://rf5c832oncea"
+path="res://.godot/imported/Misc - Bamboo Wind Chime.wav-00dc763509adfba3cf1f03ae67a154e1.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Misc - Bamboo Wind Chime.wav"
+dest_files=["res://.godot/imported/Misc - Bamboo Wind Chime.wav-00dc763509adfba3cf1f03ae67a154e1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

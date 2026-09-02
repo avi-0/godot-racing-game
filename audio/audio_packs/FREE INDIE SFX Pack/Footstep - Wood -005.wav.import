@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cq6u3rt55rptj"
+path="res://.godot/imported/Footstep - Wood -005.wav-2adbac4a04c448f92f14c6466e9b451e.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Footstep - Wood -005.wav"
+dest_files=["res://.godot/imported/Footstep - Wood -005.wav-2adbac4a04c448f92f14c6466e9b451e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

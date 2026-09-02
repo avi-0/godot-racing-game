@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnk3g0gqlip4v"
+path="res://.godot/imported/UI - Button 2.wav-f74acd9488dfed1a1def20e10647489e.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/UI - Button 2.wav"
+dest_files=["res://.godot/imported/UI - Button 2.wav-f74acd9488dfed1a1def20e10647489e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

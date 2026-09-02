@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bk8kropowqtkr"
+path="res://.godot/imported/Cartoon - Frog Jump 2.wav-bb2cc36128166ee12c9ca698d215f0b6.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Cartoon - Frog Jump 2.wav"
+dest_files=["res://.godot/imported/Cartoon - Frog Jump 2.wav-bb2cc36128166ee12c9ca698d215f0b6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

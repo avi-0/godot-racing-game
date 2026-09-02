@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bmkx2cvs8to7m"
+path="res://.godot/imported/Misc - Dice Roll.wav-fb587c8a8bac5d98b7f555b0e6d2ec84.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Misc - Dice Roll.wav"
+dest_files=["res://.godot/imported/Misc - Dice Roll.wav-fb587c8a8bac5d98b7f555b0e6d2ec84.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

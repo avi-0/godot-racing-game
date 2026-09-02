@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cmwst5hfjwxrw"
+path="res://.godot/imported/Cartoon - Frog Croak 2.wav-6158a9625f6a9aad24c52e5f12ca68e2.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Cartoon - Frog Croak 2.wav"
+dest_files=["res://.godot/imported/Cartoon - Frog Croak 2.wav-6158a9625f6a9aad24c52e5f12ca68e2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

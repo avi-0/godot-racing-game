@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c06st2lnjjgjv"
+path="res://.godot/imported/Misc - Scissors Cut.wav-4a98ee88fb5c078b60dc92d1c62480ff.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Misc - Scissors Cut.wav"
+dest_files=["res://.godot/imported/Misc - Scissors Cut.wav-4a98ee88fb5c078b60dc92d1c62480ff.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwqlgxbqfxyyl"
+path="res://.godot/imported/Footstep - Concrete -007.wav-4666890a98ec33e35e7ad0ea06b605f4.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Footstep - Concrete -007.wav"
+dest_files=["res://.godot/imported/Footstep - Concrete -007.wav-4666890a98ec33e35e7ad0ea06b605f4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

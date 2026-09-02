@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djcj4rqibagos"
+path="res://.godot/imported/Misc - Big Ben Bells.wav-9080b42fb68cabde46000be31246b219.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Misc - Big Ben Bells.wav"
+dest_files=["res://.godot/imported/Misc - Big Ben Bells.wav-9080b42fb68cabde46000be31246b219.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

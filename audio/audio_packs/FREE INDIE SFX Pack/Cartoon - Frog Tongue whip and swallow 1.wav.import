@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ct8fr7xoy5l57"
+path="res://.godot/imported/Cartoon - Frog Tongue whip and swallow 1.wav-2278bd77e4d0539dce3d69971185cf8e.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Cartoon - Frog Tongue whip and swallow 1.wav"
+dest_files=["res://.godot/imported/Cartoon - Frog Tongue whip and swallow 1.wav-2278bd77e4d0539dce3d69971185cf8e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

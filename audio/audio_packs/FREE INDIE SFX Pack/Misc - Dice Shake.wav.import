@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3gamvl4lqi5m"
+path="res://.godot/imported/Misc - Dice Shake.wav-2687bd319d8ac17814453e32ab632b02.sample"
+
+[deps]
+
+source_file="res://audio/audio_packs/FREE INDIE SFX Pack/Misc - Dice Shake.wav"
+dest_files=["res://.godot/imported/Misc - Dice Shake.wav-2687bd319d8ac17814453e32ab632b02.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
