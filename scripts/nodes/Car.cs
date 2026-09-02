@@ -496,6 +496,16 @@ public partial class Car : RigidBody3D
 					_isSlipping = false;
 				}
 
+				if (wheel.GrassContact)
+				{
+					if (!wheel.WheelSoundPlayer.Playing || wheel.WheelSoundPlayer.Stream != wheel.GrassSound)
+					{
+						wheel.WheelSoundPlayer.Stream = wheel.GrassSound;
+						wheel.WheelSoundPlayer.VolumeDb = -3;
+						wheel.WheelSoundPlayer.Play();
+					}
+				}
+				
 				if (_isSlipping)
 				{
 					xTraction = SlippingTraction;
@@ -510,10 +520,22 @@ public partial class Car : RigidBody3D
 					{
 						wheel.SmokeParticles.SetEmitting(true);
 					}
+
+					if (!wheel.GrassContact && (!wheel.WheelSoundPlayer.Playing || wheel.WheelSoundPlayer.Stream != wheel.DriftSounds))
+					{
+						wheel.WheelSoundPlayer.Stream = wheel.DriftSounds;
+						wheel.WheelSoundPlayer.VolumeDb = -9;
+						wheel.WheelSoundPlayer.Play();
+					}
 				}
 				else
 				{
 					wheel.StopSliding();
+				}
+				
+				if ((!wheel.GrassContact && !_isSlipping) || LinearVelocity.Length() < 2)
+				{
+					wheel.WheelSoundPlayer.Stop();
 				}
 
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
@@ -721,7 +743,7 @@ public partial class Car : RigidBody3D
 			{
 				CarCommon.CrashSoundPlayer.Play();
 			}
-			else if(LinearVelocity.Length() > 2)
+			else if(LinearVelocity.Length() > 2 && !CarCommon.GrindSoundPlayer.Playing)
 			{
 				CarCommon.GrindSoundPlayer.Play();
 				_bonkCount++;

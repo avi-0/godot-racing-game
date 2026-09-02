@@ -20,7 +20,6 @@ stereo = true
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2g4b7"]
 resource_local_to_scene = true
-random_volume_offset_db = 1.0
 streams_count = 4
 stream_0/stream = ExtResource("3_uv7if")
 stream_1/stream = ExtResource("4_g7tne")
@@ -75,20 +74,19 @@ bus = &"enginesounds"
 
 [node name="CrashSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1299940127]
 stream = SubResource("AudioStreamRandomizer_2g4b7")
-max_db = 3.5
-max_distance = 300.0
+volume_db = 7.0
+unit_size = 30.0
+max_db = 6.0
+max_distance = 400.0
 max_polyphony = 3
 bus = &"GameSounds"
-area_mask = 1
 
 [node name="GrindSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=630299558]
 stream = ExtResource("7_g7tne")
-volume_db = -4.0
 unit_size = 5.0
-max_db = 1.0
+max_db = 2.0
 max_distance = 50.0
 bus = &"GameSounds"
-area_mask = 1
 
 [node name="CollisionDebris" type="Node3D" parent="." unique_id=1032372833]
 
