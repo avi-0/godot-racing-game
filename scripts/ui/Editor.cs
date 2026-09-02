@@ -162,6 +162,8 @@ public partial class Editor : Control
 
 	private Track Track => TrackManager.Instance.Track;
 
+	private float _lastAutosaveTime = 0;
+
 	public bool IsRunning
 	{
 		get => _isRunning;
@@ -237,6 +239,7 @@ public partial class Editor : Control
 		ThumbnailCancelButton.Pressed += ThumbnailCancelButtonOnPressed;
 
 		DirAccess.MakeDirRecursiveAbsolute("user://tracks/");
+		DirAccess.MakeDirRecursiveAbsolute("user://tracks/autosaves");
 
 		CreateCursor();
 
@@ -491,6 +494,16 @@ public partial class Editor : Control
 		UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 
 		InvalidateTrack();
+
+		if (_lastAutosaveTime == 0)
+		{
+			_lastAutosaveTime = Time.GetTicksMsec();
+		}
+		else if (Time.GetTicksMsec() - _lastAutosaveTime >= 900000)
+		{
+			_lastAutosaveTime = Time.GetTicksMsec();
+			Autosave();
+		}
 		
 		_cursor = null;
 		CreateCursor();
@@ -1008,5 +1021,36 @@ public partial class Editor : Control
 	public void OnBakeLighting()
 	{
 		Track.TrackVoxelGI.Bake();
+	}
+
+	private void Autosave()
+	{
+		GD.Print("autosaving track");
+		TrackManager.Instance.SaveTrack("user://tracks/autosaves/last_autosave.tk.jz");
+
+		int oldestI = -1;
+		ulong oldestT = 0;
+		bool saved = false;
+		for (int i = 1; i <= 30; i++)
+		{
+			string path = "user://tracks/autosaves/autosave_" + i + ".tk.jz";
+			if (!FileAccess.FileExists(path))
+			{
+				TrackManager.Instance.SaveTrack(path);
+				saved = true;
+				break;
+			}
+
+			ulong editDate = FileAccess.GetModifiedTime(path);
+			if (editDate > 0 && editDate > oldestT)
+			{
+				oldestI = i;
+				oldestT = editDate;
+			}
+		}
+		if (!saved)
+		{
+			TrackManager.Instance.SaveTrack("user://tracks/autosaves/autosave_" + oldestI + ".tk.jz");
+		}
 	}
 }
