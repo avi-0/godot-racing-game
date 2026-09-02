@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dqnmdk4ouatc4" path="res://scripts/nodes/CarCommon.cs" id="1_qexnt"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="2_84gro"]
-[ext_resource type="AudioStream" uid="uid://c25toh1o4n27x" path="res://audio/bonk.wav" id="3_3mehs"]
+[ext_resource type="AudioStream" uid="uid://d4a3f7n0pxxuq" path="res://audio/carsounds/bonk1.wav" id="3_uv7if"]
 [ext_resource type="Texture2D" uid="uid://pu4xk6cfo5wu" path="res://textures/Flare.png" id="4_3dw60"]
+[ext_resource type="AudioStream" uid="uid://xnjlw2qltyaw" path="res://audio/carsounds/bonk2.wav" id="4_g7tne"]
 [ext_resource type="Material" uid="uid://bcgydgpyui3mp" path="res://particles/sparks_particle_process_material.tres" id="4_w3b45"]
+[ext_resource type="AudioStream" uid="uid://cnjgt0ltcn0ci" path="res://audio/carsounds/bonk3.wav" id="5_bqdnb"]
+[ext_resource type="AudioStream" uid="uid://cat1nom6s5le" path="res://audio/carsounds/bonk4.wav" id="6_jbm0j"]
+[ext_resource type="AudioStream" uid="uid://dprt0qswxt2wg" path="res://audio/carsounds/grind_audio_stream.tres" id="7_g7tne"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_84gro"]
 resource_local_to_scene = true
@@ -13,6 +17,15 @@ format = 3
 loop_mode = 1
 loop_end = 264545
 stereo = true
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2g4b7"]
+resource_local_to_scene = true
+random_volume_offset_db = 1.0
+streams_count = 4
+stream_0/stream = ExtResource("3_uv7if")
+stream_1/stream = ExtResource("4_g7tne")
+stream_2/stream = ExtResource("5_bqdnb")
+stream_3/stream = ExtResource("6_jbm0j")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1rg1"]
 transparency = 1
@@ -42,11 +55,12 @@ font_size = 128
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CarCommon" type="Node3D" unique_id=1236792490 node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CarSoundPlayer", "CollisionDebrisParticles", "PlayerName", "InfoSprite")]
+[node name="CarCommon" type="Node3D" unique_id=1236792490 node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CrashSoundPlayer", "GrindSoundPlayer", "CollisionDebrisParticles", "PlayerName", "InfoSprite")]
 script = ExtResource("1_qexnt")
 OrbitCamera = NodePath("OrbitCamera")
 EngineSoundPlayer = NodePath("EngineSoundPlayer")
-CarSoundPlayer = NodePath("AudioStreamPlayer")
+CrashSoundPlayer = NodePath("CrashSoundPlayer")
+GrindSoundPlayer = NodePath("GrindSoundPlayer")
 CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("CollisionDebris/CDP2"), NodePath("CollisionDebris/CDP3"), NodePath("CollisionDebris/CDP4"), NodePath("CollisionDebris/CDP5"), NodePath("CollisionDebris/CDP6")]
 PlayerName = NodePath("SubViewport/PlayerName")
 InfoSprite = NodePath("Sprite3D")
@@ -55,12 +69,26 @@ InfoSprite = NodePath("Sprite3D")
 
 [node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1633681975]
 stream = SubResource("AudioStreamWAV_84gro")
-attenuation_model = 3
+unit_size = 15.0
+max_distance = 150.0
 bus = &"enginesounds"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=861127934]
-stream = ExtResource("3_3mehs")
+[node name="CrashSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1299940127]
+stream = SubResource("AudioStreamRandomizer_2g4b7")
+max_db = 3.5
+max_distance = 300.0
+max_polyphony = 3
 bus = &"GameSounds"
+area_mask = 1
+
+[node name="GrindSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=630299558]
+stream = ExtResource("7_g7tne")
+volume_db = -4.0
+unit_size = 5.0
+max_db = 1.0
+max_distance = 50.0
+bus = &"GameSounds"
+area_mask = 1
 
 [node name="CollisionDebris" type="Node3D" parent="." unique_id=1032372833]
 

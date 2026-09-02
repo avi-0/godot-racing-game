@@ -102,6 +102,8 @@ public partial class Car : RigidBody3D
 
 	private bool _frozen = false;
 	private Vector3 _frozenPosition;
+
+	private int _bonkCount = 0;
 	
 	public override void _Ready()
 	{
@@ -122,6 +124,7 @@ public partial class Car : RigidBody3D
 		ContactMonitor = true;
 		MaxContactsReported = 5;
 		BodyEntered += Bonk;
+		BodyExited += Unbonk;
 
 		for (int i = 0; i < 5; i++)
 		{
@@ -281,7 +284,11 @@ public partial class Car : RigidBody3D
 		}
 		
 		_speedQueue.Dequeue(); _speedQueue.Enqueue(LinearVelocity.Length()); // for bonk strength calculation
-
+		if (LinearVelocity.Length() < 2)
+		{
+			CarCommon.GrindSoundPlayer.Stop();
+		}
+		
 		//water fall death
 		if (GetGlobalPosition().Y < GameManager.DeathY)
 		{
@@ -710,14 +717,19 @@ public partial class Car : RigidBody3D
 			float speedChange = avgSpeed - GetLinearVelocity().Length(); 
 			
 			//bonk sound
-			if (speedChange > MaxSpeed / 10)
+			if (speedChange > MaxSpeed / 15)
 			{
-				CarCommon.CarSoundPlayer.Play();
+				CarCommon.CrashSoundPlayer.Play();
+			}
+			else if(LinearVelocity.Length() > 2)
+			{
+				CarCommon.GrindSoundPlayer.Play();
+				_bonkCount++;
 			}
 			//--
 
 			//bonk particles
-			if (GetLinearVelocity().Length() > MaxSpeed / 20)
+			if (LinearVelocity.Length() > 2)
 			{
 				PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
 				
@@ -754,6 +766,19 @@ public partial class Car : RigidBody3D
 				}
 			}
 			//--
+		}
+	}
+
+	public void Unbonk(Node node)
+	{
+		if (!IsGhost)
+		{
+			_bonkCount--;
+			if (_bonkCount <= 0)
+			{
+				_bonkCount = 0;
+				CarCommon.GrindSoundPlayer.Stop();
+			}
 		}
 	}
 
