@@ -10,8 +10,10 @@ public class Ghost
     public string PlayerName = "Ghost";
     public bool Empty = true;
     public TimeSpan RaceTime = TimeSpan.Zero;
-
+    
     public List<GhostFrame> Frames = new List<GhostFrame>();
+    public List<TimeSpan> CheckpointTimes = new List<TimeSpan>();
+    public List<TimeSpan> LapTimes = new List<TimeSpan>();
     
     public void AddFrame(int raceTime, CarPositionData data)
     {

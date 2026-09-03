@@ -25,6 +25,8 @@ public class GameModeTimeAttack : IGameMode
 	private GameModeInfoStruct _info;
 
 	private bool _hasAuthor = false;
+
+	private string _splitLabelText = "";
 	
 	public void Running(bool running)
 	{
@@ -71,7 +73,8 @@ public class GameModeTimeAttack : IGameMode
 			else if (player.State == GameModeUtils.PLAYER_STATE_PLAYING || player.State == GameModeUtils.PLAYER_STATE_DEAD)
 			{
 				player.RaceData.CurrentRaceTime = DateTime.Now.Subtract(player.RaceData.RaceStartTime);
-
+				player.RaceData.CurrentLapTime = DateTime.Now.Subtract(player.RaceData.LapStartTime);
+				
 				var ms = (int)player.RaceData.CurrentRaceTime.TotalMilliseconds;
 				var datanow = new CarPositionData(player.PlayerCar.Position, player.PlayerCar.Rotation);
 				player.GhostRecording.AddFrame(ms, datanow);
@@ -129,12 +132,14 @@ public class GameModeTimeAttack : IGameMode
 		{
 			TimeSpan loadedPb = new TimeSpan();
 			Ghost loadedGhost = new Ghost();
+			TimeSpan loadedFastestLap = new TimeSpan();
 			if (!_inEditor)
 			{
 				if (player.Type == GameModeUtils.PLAYER_LOCAL)
 				{
 					loadedPb = GameModeUtils.LoadUserPb(_currentTrack.Track.Options.Uid);
 					loadedGhost = GameModeUtils.LoadUserGhost(_currentTrack.Track.Options.Uid);
+					loadedFastestLap = GameModeUtils.LoadUserFastestLap(_currentTrack.Track.Options.Uid);
 				}
 			}
 			else
@@ -151,6 +156,11 @@ public class GameModeTimeAttack : IGameMode
 			{
 				player.PBGhost = loadedGhost;
 			}
+
+			if (loadedFastestLap != TimeSpan.Zero)
+			{
+				player.RaceData.GlobalFastestLapTime = loadedFastestLap;
+			}
 		}
 
 		_players[id] = player;
@@ -166,10 +176,16 @@ public class GameModeTimeAttack : IGameMode
 		player.State = GameModeUtils.PLAYER_STATE_PRESTART;
 		player.RaceData.SpawnTime = DateTime.Now;
 		player.RaceData.RaceStartTime = new DateTime();
+		player.RaceData.LapStartTime = new DateTime();
 		player.RaceData.CurrentRaceTime = TimeSpan.Zero;
+		player.RaceData.CurrentLapTime = TimeSpan.Zero;
 		player.RaceData.CheckPointsCollected = new List<int>();
 		player.RaceData.LapsDone = 0;
+		player.RaceData.TotalCheckPointsCollected = 0;
 		player.RaceData.HasFinished = false;
+		player.RaceData.RunFastestLapTime = TimeSpan.Zero;
+		player.SplitText = "";
+		player.SplitTextChangeTime = new DateTime();
 		
 		player.GhostRecording = new Ghost();
 		player.RespawnPoint = new Transform3D();
@@ -298,6 +314,7 @@ public class GameModeTimeAttack : IGameMode
 		player.State = GameModeUtils.PLAYER_STATE_PLAYING;
 		player.RaceData.StartTimerSeconds = 0;
 		player.RaceData.RaceStartTime = DateTime.Now;
+		player.RaceData.LapStartTime = DateTime.Now;
 
 		if ((player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN) && player.PlayerGhostCar != null)
 		{
@@ -336,6 +353,14 @@ public class GameModeTimeAttack : IGameMode
 			{
 				player = PlayerFinished(player);
 			}
+
+			if (_currentTrack.Track.Options.Laps > 1)
+			{
+				CheckFastestLap(player);
+				player.GhostRecording.LapTimes.Add(player.RaceData.CurrentLapTime);
+				player.RaceData.LapStartTime = DateTime.Now;
+				player.RaceData.CurrentLapTime = TimeSpan.Zero;
+			}
 			
 			UiSoundPlayer.Singleton.LapFinishedSound.Play();
 		}
@@ -352,12 +377,31 @@ public class GameModeTimeAttack : IGameMode
 		if (!player.RaceData.CheckPointsCollected.Contains(blockId))
 		{
 			player.RaceData.CheckPointsCollected.Add(blockId);
-			if (player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
-			{
-				UiSoundPlayer.Singleton.CheckpointCollectedSound.Play();
-			}
+			player.RaceData.TotalCheckPointsCollected++;
 			
 			player.RespawnPoint = player.PlayerCar.GetTransform(); // потом поменять на block.SpawnPoint (ещё вопрос как адекватно получать block из blockid)
+			
+			player.GhostRecording.CheckpointTimes.Add(player.RaceData.CurrentRaceTime);
+
+			if (player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
+			{
+				bool betterTime = true;
+				if (player.PBGhost != null && player.PBGhost.CheckpointTimes != null && player.PBGhost.CheckpointTimes.Count >= player.RaceData.TotalCheckPointsCollected)
+				{
+					if (player.RaceData.CurrentRaceTime > player.PBGhost.CheckpointTimes[player.RaceData.TotalCheckPointsCollected-1]) { betterTime = false; }
+					player.SplitText = "Split: " + GameModeUtils.FormatTimeDiff(player.RaceData.CurrentRaceTime, player.PBGhost.CheckpointTimes[player.RaceData.TotalCheckPointsCollected-1]);
+					player.SplitTextChangeTime = DateTime.Now;
+				}
+				
+				if (betterTime)
+				{
+					UiSoundPlayer.Singleton.CheckpointCollectedSound.Play();
+				}
+				else
+				{
+					UiSoundPlayer.Singleton.CheckpointCollectedWorseTimeSound.Play();
+				}
+			}
 		}
 		
 		if (MultiplayerManager.Instance.OnServer && !MultiplayerManager.Instance.IsServer()) {return;}
@@ -409,6 +453,57 @@ public class GameModeTimeAttack : IGameMode
 	private void SetAuthorTime(int ms)
 	{
 		_currentTrack.Track.Options.AuthorTime = ms;
+	}
+
+	private void CheckFastestLap(TimeAttackPlayer player)
+	{
+		bool bestLap = false;
+		bool saveLap = false;
+		TimeSpan prevGlobalFastestLap = player.RaceData.GlobalFastestLapTime;
+		if (player.RaceData.RunFastestLapTime == TimeSpan.Zero)
+		{
+			player.RaceData.RunFastestLapTime = player.RaceData.CurrentLapTime;
+			if (player.RaceData.GlobalFastestLapTime == TimeSpan.Zero)
+			{
+				player.RaceData.GlobalFastestLapTime = player.RaceData.CurrentLapTime;
+				saveLap = true;
+			}
+		}
+		else if (player.RaceData.RunFastestLapTime > player.RaceData.CurrentLapTime)
+		{
+			player.RaceData.RunFastestLapTime = player.RaceData.CurrentLapTime;
+
+			if (player.RaceData.GlobalFastestLapTime == TimeSpan.Zero || player.RaceData.GlobalFastestLapTime > player.RaceData.RunFastestLapTime)
+			{
+				bestLap = true;
+				saveLap = true;
+				player.RaceData.GlobalFastestLapTime = player.RaceData.RunFastestLapTime;
+			}
+		}
+				
+		if (saveLap && player.Type == GameModeUtils.PLAYER_LOCAL)
+		{
+			GameModeUtils.SaveUserFastestLap(player.RaceData.GlobalFastestLapTime, TrackManager.Instance.GetLoadedTrackUid());
+			GD.Print("Saved new fastest lap");
+		}
+				
+		if (player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
+		{
+			player.SplitText = "Lap Time: " + GameModeUtils.FormatRaceTime(player.RaceData.CurrentLapTime);
+			if (prevGlobalFastestLap != TimeSpan.Zero)
+			{
+				player.SplitText += " (" + GameModeUtils.FormatTimeDiff(player.RaceData.CurrentLapTime, prevGlobalFastestLap) + ")";
+			}		
+			
+			if (player.PBGhost != null && player.PBGhost.LapTimes != null && player.PBGhost.LapTimes.Count >= player.RaceData.LapsDone)
+			{
+				player.SplitText = "Split: " + GameModeUtils.FormatTimeDiff(player.RaceData.CurrentLapTime, player.PBGhost.LapTimes[player.RaceData.LapsDone-1]) + "\n" + player.SplitText;
+			}
+			
+			if (bestLap) { player.SplitText += "\nNew Fastest Lap!"; }
+			
+			player.SplitTextChangeTime = DateTime.Now;
+		}
 	}
 
 	public void UpdateHud(PlayerViewport viewport)
@@ -528,8 +623,24 @@ public class GameModeTimeAttack : IGameMode
 			if (!viewport.RaceUi.Visible) {viewport.RaceUi.Visible = true;}
 			
 			var isPb = player.RaceData.LastFinishTime == player.RaceData.GlobalPbTime;
-			
-			viewport.FinishTimeLabel.Text = $"Race Time: {player.RaceData.LastFinishTime:mm}:{player.RaceData.LastFinishTime:ss}.{player.RaceData.LastFinishTime:fff}";
+
+			viewport.FinishTimeLabel.Text = "Race Time: " + GameModeUtils.FormatRaceTime(player.RaceData.LastFinishTime);
+			if (!isPb && player.RaceData.PbTime != TimeSpan.Zero)
+			{
+				viewport.FinishTimeLabel.Text += " (" + GameModeUtils.FormatTimeDiff(player.RaceData.LastFinishTime, player.RaceData.GlobalPbTime) + ")";
+			}
+			if (player.RaceData.LapsDone > 0)
+			{
+				viewport.FinishTimeLabel.Text += "\nFastest Lap: " + GameModeUtils.FormatRaceTime(player.RaceData.RunFastestLapTime);
+				if (player.RaceData.RunFastestLapTime == player.RaceData.GlobalFastestLapTime)
+				{
+					viewport.FinishTimeLabel.Text += "\nNew Fastest Lap Record!!";
+				}
+				else
+				{
+					viewport.FinishTimeLabel.Text += " (" + GameModeUtils.FormatTimeDiff(player.RaceData.RunFastestLapTime, player.RaceData.GlobalFastestLapTime) + ")";
+				}
+			}
 			
 			if (isPb)
 			{
@@ -579,5 +690,14 @@ public class GameModeTimeAttack : IGameMode
 			viewport.StartTimerLabel.Hide();
 		}
 		//--
+		
+		if (player.State == GameModeUtils.PLAYER_STATE_PLAYING && player.SplitTextChangeTime != new DateTime() && (DateTime.Now - player.SplitTextChangeTime).TotalSeconds < 3)
+		{
+			viewport.CheckSplit.Text = player.SplitText;
+		}
+		else
+		{
+			viewport.CheckSplit.Text = "";
+		}
 	}
 }

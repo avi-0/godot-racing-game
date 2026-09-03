@@ -138,6 +138,17 @@ public static class GameModeUtils
 
 		return "";
 	}
+
+	public static string FormatTimeDiff(TimeSpan newTime, TimeSpan oldTime)
+	{
+		double diff = newTime.TotalMilliseconds - oldTime.TotalMilliseconds;
+		string diffText = (diff / 1000).ToString("0.000");
+		if (diff > 0)
+		{
+			diffText = "+" + diffText;
+		}
+		return diffText;
+	}
 	
 	public static int GetGoldFromAt(int ms)
 	{
@@ -190,6 +201,16 @@ public static class GameModeUtils
 		config.SetValue("PBS", trackUid, time.TotalMilliseconds);
 		config.SaveEncrypted(SavePbPath, "sosal?".Sha256Buffer());
 	}
+	
+	public static void SaveUserFastestLap(TimeSpan time, string trackUid)
+	{
+		if (time == TimeSpan.Zero || trackUid == "0") return;
+
+		var config = new ConfigFile();
+		config.LoadEncrypted(SavePbPath, "sosal?".Sha256Buffer());
+		config.SetValue("FASTESTLAPS", trackUid, time.TotalMilliseconds);
+		config.SaveEncrypted(SavePbPath, "sosal?".Sha256Buffer());
+	}
 
 	public static void SaveUserGhost(Ghost ghost, string trackUid)
 	{
@@ -208,6 +229,19 @@ public static class GameModeUtils
 		if (err == Error.Ok)
 		{
 			var ms = (int)config.GetValue("PBS", trackUid, 0);
+			if (ms != 0) return TimeSpan.FromMilliseconds(ms);
+		}
+
+		return TimeSpan.Zero;
+	}
+	
+	public static TimeSpan LoadUserFastestLap(string trackUid)
+	{
+		var config = new ConfigFile();
+		var err = config.LoadEncrypted(SavePbPath, "sosal?".Sha256Buffer());
+		if (err == Error.Ok)
+		{
+			var ms = (int)config.GetValue("FASTESTLAPS", trackUid, 0);
 			if (ms != 0) return TimeSpan.FromMilliseconds(ms);
 		}
 

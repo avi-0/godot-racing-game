@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://cm4hqh1ifpiuc" path="res://scripts/ui/UiSoundPlayer.cs" id="1_vb3yo"]
 [ext_resource type="AudioStream" uid="uid://c18cw6opcwl8n" path="res://audio/audio_packs/ui/click_001.ogg" id="2_xms1e"]
 [ext_resource type="Script" uid="uid://bl5cpfcp361n1" path="res://scripts/ui/UiSound.cs" id="3_kqb5d"]
-[ext_resource type="AudioStream" uid="uid://cbh2o7irh5lmy" path="res://audio/audio_packs/ui/switch_004.ogg" id="4_1s1fn"]
+[ext_resource type="AudioStream" uid="uid://qb1pvow3mb2a" path="res://audio/audio_packs/ui/switch_003.ogg" id="4_kqb5d"]
 [ext_resource type="AudioStream" uid="uid://c11gwvvxqgkr" path="res://audio/audio_packs/ui/select_001.ogg" id="5_jis51"]
 [ext_resource type="AudioStream" uid="uid://b2kvcbs1acbcs" path="res://audio/audio_packs/ui/toggle_002.ogg" id="6_fwclh"]
+[ext_resource type="AudioStream" uid="uid://cxpo5ksxuj516" path="res://audio/audio_packs/ui/switch_007.ogg" id="8_1s1fn"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
 script = ExtResource("3_kqb5d")
@@ -22,13 +23,12 @@ metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
 [sub_resource type="Resource" id="Resource_10c2w"]
 script = ExtResource("3_kqb5d")
-AudioStream = ExtResource("4_1s1fn")
-PitchScale = 1.122
+AudioStream = ExtResource("4_kqb5d")
 metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
 [sub_resource type="Resource" id="Resource_otnwt"]
 script = ExtResource("3_kqb5d")
-AudioStream = ExtResource("4_1s1fn")
+AudioStream = ExtResource("6_fwclh")
 metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
 [sub_resource type="Resource" id="Resource_5v6r0"]
@@ -43,7 +43,12 @@ PitchScale = 0.6
 VolumeDb = -6.0
 metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
-[node name="UISoundPlayer" type="Node" node_paths=PackedStringArray("Player")]
+[sub_resource type="Resource" id="Resource_n68mc"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("8_1s1fn")
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[node name="UISoundPlayer" type="Node" unique_id=1757482478 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_vb3yo")
 BlockErasedSound = SubResource("Resource_ftsea")
 BlockPlacedSound = SubResource("Resource_vaxfo")
@@ -52,7 +57,8 @@ LapFinishedSound = SubResource("Resource_otnwt")
 Player = NodePath("AudioStreamPlayer")
 RaceCountDownSound = SubResource("Resource_5v6r0")
 RaceStartSound = SubResource("Resource_uyinl")
+CheckpointCollectedWorseTimeSound = SubResource("Resource_n68mc")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448463363]
 volume_db = 2.0
 bus = &"GameSounds"

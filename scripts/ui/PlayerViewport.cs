@@ -20,6 +20,7 @@ public partial class PlayerViewport : SubViewport
 	[Export] public Camera3D Camera;
 	[Export] public int LocalPlayerId = 0;
 	[Export] public TextureRect SpeedArrow;
+	[Export] public Label CheckSplit;
 	
 	public GameManager.CarCameraMode CameraMode = GameManager.CarCameraMode.Orbit;
 	public long PlayerId;

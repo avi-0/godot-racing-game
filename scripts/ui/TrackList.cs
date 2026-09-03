@@ -156,8 +156,14 @@ public partial class TrackList : Control
 		var loadedPb = GameModeUtils.LoadUserPb(options.Uid);
 		if (loadedPb != TimeSpan.Zero)
 		{
-			TrackListLabel.Text += "\n" + loadedPb.ToString("mm") + ":" + loadedPb.ToString("ss") + "." + loadedPb.ToString("fff");
+			TrackListLabel.Text += "\nPB: " + GameModeUtils.FormatRaceTime(loadedPb);
 			TrackListLabel.Text += "\n" + GameModeUtils.GetMedalFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime);
+		}
+
+		var loadedFastestLap = GameModeUtils.LoadUserFastestLap(options.Uid);
+		if (loadedFastestLap != TimeSpan.Zero)
+		{
+			TrackListLabel.Text += "\n\nFL: " + GameModeUtils.FormatRaceTime(loadedFastestLap);
 		}
 		
 		SelectedTrackPath = basePath + trackPath;

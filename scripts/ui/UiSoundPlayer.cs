@@ -27,6 +27,9 @@ public partial class UiSoundPlayer : Node
 
 	[Export(PropertyHint.ResourceType, "UiSound")]
 	public UiSound RaceStartSound;
+	
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound CheckpointCollectedWorseTimeSound;
 
 	public override void _Ready()
 	{
