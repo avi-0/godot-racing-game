@@ -68,8 +68,11 @@ public partial class PlayerViewport : SubViewport
 	{
 		if (!Active || Car == null)
 			return;
-		
-		UpdateCarInputs();
+
+		if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).State == GameModeUtils.PLAYER_STATE_PLAYING)
+		{
+			UpdateCarInputs();
+		}
 
 		int speed = (int)Mathf.Round(Car.LinearVelocity.Length() * 3.6f);
 		
