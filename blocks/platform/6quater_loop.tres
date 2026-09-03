@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://bs6xmfwllctn4"]
+
+[ext_resource type="Texture2D" path="res://blocks/platform/_images/6quater_loop.png" id="1_ixrpy"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_ba2hx"]
+
+[resource]
+script = ExtResource("2_ba2hx")
+ScenePath = "res://blocks/platform/_scenes/6quater_loop.tscn"
+SourceScenePath = "uid://cy66tn1dg0xkd"
+ThumbnailTexture = ExtResource("1_ixrpy")
+DisplayName = "Quater Loop"
