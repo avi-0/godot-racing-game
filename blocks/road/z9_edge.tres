@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://b7yrm4hhgcmck"]
+
+[ext_resource type="Texture2D" uid="uid://cqj2ewih1lf43" path="res://blocks/road/_images/z9_edge.png" id="1_ah5xp"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_0ckte"]
+
+[resource]
+script = ExtResource("2_0ckte")
+ScenePath = "res://blocks/road/_scenes/z9_edge.tscn"
+SourceScenePath = "uid://xokcgnh4rfty"
+ThumbnailTexture = ExtResource("1_ah5xp")
+DisplayName = "Road Edge"

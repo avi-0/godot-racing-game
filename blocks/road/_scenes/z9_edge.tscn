@@ -1,0 +1,55 @@
+[gd_scene format=4 uid="uid://d1brp4i1hgi6r"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_85ha2"]
+[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="2_ychuc"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_q7vcx"]
+_surfaces = [{
+"aabb": AABB(0.5, 0, -0.5, 1e-05, 0.09375, 1),
+"format": 34896613377,
+"index_count": 126,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAADAAAABAAFAAMABgAFAAQABgAHAAUACAAGAAQACAAJAAYACgAJAAgACgALAAkADAALAAoADAANAAsADgANAAwADgAPAA0AEAAPAA4AEAARAA8AEgARABAAEgATABEAFAATABIAFAAVABMAFgAVABQAFgAXABUAGAAXABYAGAAZABcAGgAZABgAGgAbABkAHAAbABoAHAAdABsAHgAdABwAHgAfAB0AIAAfAB4AIAAhAB8AIgAhACAAIQAiACMAIQAjACQAIQAkACUAJAAmACUAJAAnACYAKAAnACQAKAApACcAKgApACgAKgArACkA"),
+"name": "road",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 44,
+"vertex_data": PackedByteArray("AAAqjP/vAAAAAP///+sAAAAA3N3/6wAAAAD////3AAAAAFVV/+8AAAAAVVX//wAAAAAAAP/vAAAAAAAA//8AAAAAVVX/4QAAAAAAAP/fAAAAAFVV/9MAAAAAAAD/zwAAAABVVf/FAAAAAAAA/78AAAAAVVX/twAAAAAAAP+vAAAAAFVV/6kAAAAAAAD/nwAAAABVVf+bAAAAAAAA/48AAAAAVVX/jQAAAAAAAP9/AAAAAFVV/38AAAAAAAD/bwAAAABVVf9xAAAAAAAA/18AAAAAVVX/YwAAAAAAAP9PAAAAAFVV/1UAAAAAAAD/PwAAAABVVf9HAAAAAAAA/y8AAAAAVVX/OQAAAAAAAP8fAAAAAFVV/ysAAAAAVVX/HQAAAABVVf8PAAAAAAAA/w8AAAAAAAAAAAAAAABVVQAAAAAAACqM/w8AAAAA////BwAAAADc3f8TAAAAAP///xMAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0ppuq"]
+resource_name = "road_edge_Cube_002"
+_surfaces = [{
+"aabb": AABB(0.5, 0, -0.5, 1e-05, 0.09375, 1),
+"attribute_data": PackedByteArray("2wr/7wAA/+szA//rAAD/9/8P/+//D////xf/7/8X////D//h/xf/3/8P/9P/F//P/w//xf8X/7//D/+3/xf/r/8P/6n/F/+f/w//m/8X/4//D/+N/xf/f/8P/3//F/9v/w//cf8X/1//D/9j/xf/T/8P/1X/F/8//w//R/8X/y//D/85/xf/H/8P/yv/D/8d/w//D/8X/w//FwAA/w8AANsK/w8AAP8HMwP/EwAA/xM="),
+"format": 34896613399,
+"index_count": 126,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAADAAAABAAFAAMABgAFAAQABgAHAAUACAAGAAQACAAJAAYACgAJAAgACgALAAkADAALAAoADAANAAsADgANAAwADgAPAA0AEAAPAA4AEAARAA8AEgARABAAEgATABEAFAATABIAFAAVABMAFgAVABQAFgAXABUAGAAXABYAGAAZABcAGgAZABgAGgAbABkAHAAbABoAHAAdABsAHgAdABwAHgAfAB0AIAAfAB4AIAAhAB8AIgAhACAAIQAiACMAIQAjACQAIQAkACUAJAAmACUAJAAnACYAKAAnACQAKAApACcAKgApACgAKgArACkA"),
+"material": ExtResource("2_ychuc"),
+"name": "road",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 44,
+"vertex_data": PackedByteArray("AAAqjP/vVNUAAP///+tU1QAA3N3/61TVAAD////3VNUAAFVV/+9U1QAAVVX//1TVAAAAAP/vVNUAAAAA//9U1QAAVVX/4VTVAAAAAP/fVNUAAFVV/9NU1QAAAAD/z1TVAABVVf/FVNUAAAAA/79U1QAAVVX/t1TVAAAAAP+vVNUAAFVV/6lU1QAAAAD/n1TVAABVVf+bVNUAAAAA/49U1QAAVVX/jVTVAAAAAP9/VNUAAFVV/39U1QAAAAD/b1TVAABVVf9xVNUAAAAA/19U1QAAVVX/Y1TVAAAAAP9PVNUAAFVV/1VU1QAAAAD/P1TVAABVVf9HVNUAAAAA/y9U1QAAVVX/OVTVAAAAAP8fVNUAAFVV/ytU1QAAVVX/HVTVAABVVf8PVNUAAAAA/w9U1QAAAAAAAFTVAABVVQAAVNUAACqM/w9U1QAA////B1TVAADc3f8TVNUAAP///xNU1aqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqqlRV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_q7vcx")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_85ha2"]
+data = PackedVector3Array(0.5, 0.0513, 0.4375, 0.5, 0.0938, 0.4219, 0.5, 0.081199996, 0.4219, 0.5, 0.0513, 0.4375, 0.5, 0.0938, 0.4687, 0.5, 0.0938, 0.4219, 0.5, 0.0313, 0.4375, 0.5, 0.0938, 0.4687, 0.5, 0.0513, 0.4375, 0.5, 0.0313, 0.4375, 0.5, 0.0313, 0.5, 0.5, 0.0938, 0.4687, 0.5, 0, 0.4375, 0.5, 0.0313, 0.5, 0.5, 0.0313, 0.4375, 0.5, 0, 0.4375, 0.5, 0, 0.5, 0.5, 0.0313, 0.5, 0.5, 0.0313, 0.38279998, 0.5, 0, 0.4375, 0.5, 0.0313, 0.4375, 0.5, 0.0313, 0.38279998, 0.5, 0, 0.375, 0.5, 0, 0.4375, 0.5, 0.0313, 0.3281, 0.5, 0, 0.375, 0.5, 0.0313, 0.38279998, 0.5, 0.0313, 0.3281, 0.5, 0, 0.3125, 0.5, 0, 0.375, 0.5, 0.0313, 0.27339998, 0.5, 0, 0.3125, 0.5, 0.0313, 0.3281, 0.5, 0.0313, 0.27339998, 0.5, 0, 0.25, 0.5, 0, 0.3125, 0.5, 0.0313, 0.21869999, 0.5, 0, 0.25, 0.5, 0.0313, 0.27339998, 0.5, 0.0313, 0.21869999, 0.5, 0, 0.1875, 0.5, 0, 0.25, 0.5, 0.0313, 0.16409999, 0.5, 0, 0.1875, 0.5, 0.0313, 0.21869999, 0.5, 0.0313, 0.16409999, 0.5, 0, 0.125, 0.5, 0, 0.1875, 0.5, 0.0313, 0.1094, 0.5, 0, 0.125, 0.5, 0.0313, 0.16409999, 0.5, 0.0313, 0.1094, 0.5, 0, 0.0625, 0.5, 0, 0.125, 0.5, 0.0313, 0.0547, 0.5, 0, 0.0625, 0.5, 0.0313, 0.1094, 0.5, 0.0313, 0.0547, 0.5, 0, 0, 0.5, 0, 0.0625, 0.5, 0.0313, 0, 0.5, 0, 0, 0.5, 0.0313, 0.0547, 0.5, 0.0313, 0, 0.5, 0, -0.0625, 0.5, 0, 0, 0.5, 0.0313, -0.0547, 0.5, 0, -0.0625, 0.5, 0.0313, 0, 0.5, 0.0313, -0.0547, 0.5, 0, -0.125, 0.5, 0, -0.0625, 0.5, 0.0313, -0.1094, 0.5, 0, -0.125, 0.5, 0.0313, -0.0547, 0.5, 0.0313, -0.1094, 0.5, 0, -0.1875, 0.5, 0, -0.125, 0.5, 0.0313, -0.16409999, 0.5, 0, -0.1875, 0.5, 0.0313, -0.1094, 0.5, 0.0313, -0.16409999, 0.5, 0, -0.25, 0.5, 0, -0.1875, 0.5, 0.0313, -0.2188, 0.5, 0, -0.25, 0.5, 0.0313, -0.16409999, 0.5, 0.0313, -0.2188, 0.5, 0, -0.3125, 0.5, 0, -0.25, 0.5, 0.0313, -0.27339998, 0.5, 0, -0.3125, 0.5, 0.0313, -0.2188, 0.5, 0.0313, -0.27339998, 0.5, 0, -0.375, 0.5, 0, -0.3125, 0.5, 0.0313, -0.3281, 0.5, 0, -0.375, 0.5, 0.0313, -0.27339998, 0.5, 0, -0.375, 0.5, 0.0313, -0.3281, 0.5, 0.0313, -0.38279998, 0.5, 0, -0.375, 0.5, 0.0313, -0.38279998, 0.5, 0.0313, -0.4375, 0.5, 0, -0.375, 0.5, 0.0313, -0.4375, 0.5, 0, -0.4375, 0.5, 0.0313, -0.4375, 0.5, 0, -0.5, 0.5, 0, -0.4375, 0.5, 0.0313, -0.4375, 0.5, 0.0313, -0.5, 0.5, 0, -0.5, 0.5, 0.0513, -0.4375, 0.5, 0.0313, -0.5, 0.5, 0.0313, -0.4375, 0.5, 0.0513, -0.4375, 0.5, 0.0938, -0.46879998, 0.5, 0.0313, -0.5, 0.5, 0.081199996, -0.4219, 0.5, 0.0938, -0.46879998, 0.5, 0.0513, -0.4375, 0.5, 0.081199996, -0.4219, 0.5, 0.0938, -0.4219, 0.5, 0.0938, -0.46879998)
+
+[node name="xokcgnh4rfty" type="Node3D" unique_id=1814417521]
+script = ExtResource("1_85ha2")
+
+[node name="road_edge" type="Node3D" parent="." unique_id=1097256841]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="road_001" type="MeshInstance3D" parent="road_edge" unique_id=482072108]
+transform = Transform3D(-1.6292068e-07, 0, 1, 0, 1, 0, -1, 0, -1.6292068e-07, 0, 0, 0)
+mesh = SubResource("ArrayMesh_0ppuq")
+skeleton = NodePath("")
+
+[node name="road_001_col" type="StaticBody3D" parent="road_edge/road_001" unique_id=1750677993]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road_edge/road_001/road_001_col" unique_id=1143951922]
+shape = SubResource("ConcavePolygonShape3D_85ha2")
