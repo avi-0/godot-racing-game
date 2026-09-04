@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://pkdsrv8c5vaa"]
 
-[ext_resource type="Texture2D" uid="uid://cuq88o35luokb" path="res://blocks/platform/_images/tile-slant.png" id="1_iialo"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_l63au"]
+[ext_resource type="Texture2D" uid="uid://buwykdvc604ug" path="res://blocks/platform/_images/4tile-slant.png" id="1_pbl20"]
 
 [resource]
 script = ExtResource("1_l63au")
 ScenePath = "res://blocks/platform/_scenes/tile-slant.tscn"
 SourceScenePath = "res://assets/kenney/cityroads/platform/tile-slant.glb"
-ThumbnailTexture = ExtResource("1_iialo")
+ThumbnailTexture = ExtResource("1_pbl20")
 DisplayName = "High Platform - Slant"

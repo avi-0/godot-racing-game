@@ -28,7 +28,9 @@ public partial class BlockRecord : Resource
 #if TOOLS
 	[ExportToolButton("Generate from source")]
 	public Callable GenerateButton => Callable.From(() => GenerateScene().Forget());
-
+	[ExportToolButton("Generate preview from block")]
+	public Callable GeneratePreviewButton => Callable.From(() => GeneratePreview().Forget());
+	
 	public async GDTask GenerateScene()
 	{
 		// creating node (somewhere in current scene, doesn't matter)
@@ -98,6 +100,35 @@ public partial class BlockRecord : Resource
 
 		// clean up
 
+		EditorInterface.Singleton.CloseScene();
+	}
+
+	public async GDTask GeneratePreview()
+	{
+		EditorInterface.Singleton.OpenSceneFromPath("res://scenes/model_import_scene.tscn");
+		var root = EditorInterface.Singleton.GetEditedSceneRoot() as SubViewport;
+		Debug.Assert(root != null, nameof(root) + " != null");
+		var modelBase = root.GetNode("ModelBase");
+		var camera = root.GetNode<Camera3D>("Camera3D");
+
+		var block = ResourceLoader.Load<PackedScene>(ScenePath).Instantiate<Node3D>();
+		modelBase.AddChild(block);
+		
+		var bounds = CalculateCameraSize(block.GetChild(0) as Node3D);
+		camera.Size = bounds.GetLongestAxisSize();
+		camera.GlobalTranslate(new Vector3(bounds.GetCenter().X, bounds.GetCenter().Y, 0));
+
+		root.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
+		await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+
+		var image = root.GetTexture().GetImage();
+		image.GenerateMipmaps();
+		ThumbnailTexture = ImageTexture.CreateFromImage(image);
+		ThumbnailTexture.TakeOverPath(ResourcePath.GetBaseDir()
+			.PathJoin("/_images/" + ResourcePath.GetFile().GetBaseName() + ".png"));
+		DirAccess.MakeDirRecursiveAbsolute(ThumbnailTexture.ResourcePath.GetBaseDir());
+		ResourceSaver.Singleton.Save(ThumbnailTexture);
+		
 		EditorInterface.Singleton.CloseScene();
 	}
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuq88o35luokb"
-path="res://.godot/imported/tile-slant.png-c53d4ce7aecf4df61794f69eb69aa559.ctex"
+uid="uid://buwykdvc604ug"
+path="res://.godot/imported/4tile-slant.png-ac14295955f8d44821df17124ee96f37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://blocks/platform/_images/tile-slant.png"
-dest_files=["res://.godot/imported/tile-slant.png-c53d4ce7aecf4df61794f69eb69aa559.ctex"]
+source_file="res://blocks/platform/_images/4tile-slant.png"
+dest_files=["res://.godot/imported/4tile-slant.png-ac14295955f8d44821df17124ee96f37.ctex"]
 
 [params]
 
