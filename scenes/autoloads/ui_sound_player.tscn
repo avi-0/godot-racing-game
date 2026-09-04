@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://c11gwvvxqgkr" path="res://audio/audio_packs/ui/select_001.ogg" id="5_jis51"]
 [ext_resource type="AudioStream" uid="uid://b2kvcbs1acbcs" path="res://audio/audio_packs/ui/toggle_002.ogg" id="6_fwclh"]
 [ext_resource type="AudioStream" uid="uid://cxpo5ksxuj516" path="res://audio/audio_packs/ui/switch_007.ogg" id="8_1s1fn"]
+[ext_resource type="AudioStream" uid="uid://b05xsphekvoy8" path="res://audio/audio_packs/ui/back_002.ogg" id="8_jis51"]
+[ext_resource type="AudioStream" uid="uid://qwqrie1htki2" path="res://audio/audio_packs/ui/back_003.ogg" id="9_fwclh"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
 script = ExtResource("3_kqb5d")
@@ -48,6 +50,16 @@ script = ExtResource("3_kqb5d")
 AudioStream = ExtResource("8_1s1fn")
 metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
+[sub_resource type="Resource" id="Resource_jbm0j"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("8_jis51")
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
+[sub_resource type="Resource" id="Resource_j646d"]
+script = ExtResource("3_kqb5d")
+AudioStream = ExtResource("9_fwclh")
+metadata/_custom_type_script = "uid://bl5cpfcp361n1"
+
 [node name="UISoundPlayer" type="Node" unique_id=1757482478 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_vb3yo")
 BlockErasedSound = SubResource("Resource_ftsea")
@@ -58,6 +70,8 @@ Player = NodePath("AudioStreamPlayer")
 RaceCountDownSound = SubResource("Resource_5v6r0")
 RaceStartSound = SubResource("Resource_uyinl")
 CheckpointCollectedWorseTimeSound = SubResource("Resource_n68mc")
+RespawnSound1 = SubResource("Resource_jbm0j")
+RespawnSound2 = SubResource("Resource_j646d")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448463363]
 volume_db = 2.0

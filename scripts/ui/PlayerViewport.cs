@@ -149,7 +149,7 @@ public partial class PlayerViewport : SubViewport
 		else if (@event.IsActionPressed(InputActionNames.Respawn))
 		{
 			GameModeController.CurrentGameMode.RespawnPlayer(PlayerId);
-			//SetInputAsHandled();
+			SetInputAsHandled();
 		}
 		else if(@event.IsActionPressed(InputActionNames.ToggleLights))
 		{

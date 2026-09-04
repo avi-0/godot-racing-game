@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqnmdk4ouatc4" path="res://scripts/nodes/CarCommon.cs" id="1_qexnt"]
 [ext_resource type="PackedScene" uid="uid://du0u6oshpc0ql" path="res://scenes/cars_extras/orbit_camera.tscn" id="2_84gro"]
+[ext_resource type="Material" uid="uid://bnkm4oxdmfdm5" path="res://materials/respawning_car.tres" id="2_bqdnb"]
 [ext_resource type="AudioStream" uid="uid://d4a3f7n0pxxuq" path="res://audio/carsounds/bonk1.wav" id="3_uv7if"]
 [ext_resource type="Texture2D" uid="uid://pu4xk6cfo5wu" path="res://textures/Flare.png" id="4_3dw60"]
 [ext_resource type="AudioStream" uid="uid://xnjlw2qltyaw" path="res://audio/carsounds/bonk2.wav" id="4_g7tne"]
@@ -63,6 +64,7 @@ GrindSoundPlayer = NodePath("GrindSoundPlayer")
 CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("CollisionDebris/CDP2"), NodePath("CollisionDebris/CDP3"), NodePath("CollisionDebris/CDP4"), NodePath("CollisionDebris/CDP5"), NodePath("CollisionDebris/CDP6")]
 PlayerName = NodePath("SubViewport/PlayerName")
 InfoSprite = NodePath("Sprite3D")
+RespawnMaterial = ExtResource("2_bqdnb")
 
 [node name="OrbitCamera" parent="." unique_id=1822407780 instance=ExtResource("2_84gro")]
 

@@ -85,6 +85,19 @@ public class GameModeTimeAttack : IGameMode
 					player.PlayerGhostCar.Position = data.Position;
 					player.PlayerGhostCar.Rotation = data.Rotation;
 				}
+
+				if (player.IsRespawning && (DateTime.Now - player.RespawnTime).TotalSeconds >= 1.0f)
+				{
+					player.IsRespawning = false;
+					player.PlayerCar.SetLinearAndAngularVelocities(player.RespawnLinearVelocity, player.RespawnAngularVelocity);
+					player.PlayerCar.SetFrozen(false);
+					player.PlayerCar.CancelOverrideMaterial();
+
+					if (player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
+					{
+						UiSoundPlayer.Singleton.RespawnSound2.Play();
+					}
+				}
 			}
 
 			_players[playerId] = player;
@@ -189,6 +202,10 @@ public class GameModeTimeAttack : IGameMode
 		
 		player.GhostRecording = new Ghost();
 		player.RespawnPoint = new Transform3D();
+		player.IsRespawning = false;
+		player.RespawnLinearVelocity = Vector3.Zero;
+		player.RespawnAngularVelocity = Vector3.Zero;
+		player.RespawnTime = new DateTime();
 		
 		player.PlayerCar.IsLocallyControlled = player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN;
 		if (player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
@@ -232,9 +249,33 @@ public class GameModeTimeAttack : IGameMode
 	{
 		if ((_players[id].State == GameModeUtils.PLAYER_STATE_PLAYING || _players[id].State == GameModeUtils.PLAYER_STATE_DEAD) && _players[id].RespawnPoint != new Transform3D())
 		{
-			_players[id].State = GameModeUtils.PLAYER_STATE_PLAYING;
-			_players[id].PlayerCar.TeleportToPoint(_players[id].RespawnPoint);
-			_players[id].PlayerCar.CarModel.Show();
+			if (_players[id].IsRespawning && (DateTime.Now - _players[id].RespawnTime).TotalMilliseconds > 50)
+			{
+				_players[id].IsRespawning = false;
+				_players[id].PlayerCar.SetFrozen(false);
+				_players[id].PlayerCar.SetLinearAndAngularVelocities(Vector3.Zero, Vector3.Zero);
+				_players[id].PlayerCar.CancelOverrideMaterial();
+				
+				if (_players[id].Type == GameModeUtils.PLAYER_LOCAL || _players[id].Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
+				{
+					UiSoundPlayer.Singleton.RespawnSound2.Play();
+				}
+			}
+			else
+			{
+				_players[id].State = GameModeUtils.PLAYER_STATE_PLAYING;
+				_players[id].PlayerCar.TeleportToPoint(_players[id].RespawnPoint);
+				_players[id].PlayerCar.SetFrozen(true);
+				_players[id].PlayerCar.SetOverrideMaterial(_players[id].PlayerCar.CarCommon.RespawnMaterial);
+				_players[id].IsRespawning = true;
+				_players[id].RespawnTime = DateTime.Now;
+				_players[id].PlayerCar.CarModel.Show();
+				
+				if (_players[id].Type == GameModeUtils.PLAYER_LOCAL || _players[id].Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
+				{
+					UiSoundPlayer.Singleton.RespawnSound1.Play();
+				}
+			}
 		}
 	}
 
@@ -345,9 +386,9 @@ public class GameModeTimeAttack : IGameMode
 				player.RaceData.LapsDone++;
 				player.RaceData.CheckPointsCollected = new List<int>();
 				
-				Transform3D spawn = TrackManager.Instance.GetStartPoint();
-				spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + playerCar.FrontWheelConfig.SpringRest + 0.1f, spawn.Origin.Z);
-				player.RespawnPoint = spawn;
+				player.RespawnPoint = player.PlayerCar.GetTransform();
+				player.RespawnLinearVelocity = player.PlayerCar.GetLinearVelocity();
+				player.RespawnAngularVelocity = player.PlayerCar.GetAngularVelocity();
 			}
 			else
 			{
@@ -379,7 +420,9 @@ public class GameModeTimeAttack : IGameMode
 			player.RaceData.CheckPointsCollected.Add(blockId);
 			player.RaceData.TotalCheckPointsCollected++;
 			
-			player.RespawnPoint = player.PlayerCar.GetTransform(); // потом поменять на block.SpawnPoint (ещё вопрос как адекватно получать block из blockid)
+			player.RespawnPoint = player.PlayerCar.GetTransform();
+			player.RespawnLinearVelocity = player.PlayerCar.GetLinearVelocity();
+			player.RespawnAngularVelocity = player.PlayerCar.GetAngularVelocity();
 			
 			player.GhostRecording.CheckpointTimes.Add(player.RaceData.CurrentRaceTime);
 

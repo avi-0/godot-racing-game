@@ -104,6 +104,8 @@ public partial class Car : RigidBody3D
 	private Vector3 _frozenPosition;
 
 	private int _bonkCount = 0;
+
+	private int _currentSkin = 0;
 	
 	public override void _Ready()
 	{
@@ -716,12 +718,23 @@ public partial class Car : RigidBody3D
 		SetCollisionLayerValue(2, false);
 	}
 
+	public void SetFrozen(bool frozen)
+	{
+		_frozen = frozen;
+		_frozenPosition = GlobalPosition;
+	}
+	
 	public void TeleportToPoint(Transform3D point)
 	{
-		_frozen = false;
 		SetTransform(point.Orthonormalized());
 		LinearVelocity = new Vector3(0, 0, 0);
 		AngularVelocity = new Vector3(0, 0, 0);
+	}
+
+	public void SetLinearAndAngularVelocities(Vector3 linearVelocity, Vector3 angularVelocity)
+	{
+		LinearVelocity = linearVelocity;
+		AngularVelocity = angularVelocity;
 	}
 
 	public void Bonk(Node node)
@@ -810,6 +823,7 @@ public partial class Car : RigidBody3D
 		{
 			MeshInstance3D mesh = (MeshInstance3D)CarModel.GetChildren()[0];
 			mesh.SetMaterialOverride(Skins[id]);
+			_currentSkin = id;
 		}
 	}
 
@@ -817,7 +831,19 @@ public partial class Car : RigidBody3D
 	{
 		if (Skins != null && Skins.Length > 0)
 		{
-			SetSkin(GameManager.Instance.RNG.RandiRange(0, Skins.Length-1));			
+			_currentSkin = GameManager.Instance.RNG.RandiRange(0, Skins.Length - 1);
+			SetSkin(_currentSkin);			
 		}
+	}
+
+	public void SetOverrideMaterial(Material material)
+	{
+		MeshInstance3D mesh = (MeshInstance3D)CarModel.GetChildren()[0];
+		mesh.SetMaterialOverride(material);
+	}
+
+	public void CancelOverrideMaterial()
+	{
+		SetSkin(_currentSkin);
 	}
 }

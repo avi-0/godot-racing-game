@@ -30,6 +30,12 @@ public partial class UiSoundPlayer : Node
 	
 	[Export(PropertyHint.ResourceType, "UiSound")]
 	public UiSound CheckpointCollectedWorseTimeSound;
+	
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound RespawnSound1;
+	
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound RespawnSound2;
 
 	public override void _Ready()
 	{
