@@ -43,29 +43,30 @@ data = PackedVector3Array(0.012499999, 0.575, 0.48749998, 0.012499999, 0.1499999
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_taje6"]
 points = PackedVector3Array(-0.004946351, 0, -0.47900617, 0.004946351, 0, -0.47900617, -0.004946351, 0, 0.47900617, -0.004946351, 0.582021, -0.47900617, 0.004946351, 0.582021, -0.47900617, 0.004946351, 0, 0.47900617, -0.004946351, 0.582021, 0.47900617, 0.004946351, 0.582021, 0.47900617)
 
-[node name="func-checkpoint" type="Node3D" node_paths=PackedStringArray("SpawnPointNode")]
+[node name="func-checkpoint" type="Node3D" unique_id=1998543623 node_paths=PackedStringArray("SpawnPointNode")]
 script = ExtResource("1_m0tfn")
 IsCheckpoint = true
 SpawnPointNode = NodePath("spawnpoint")
 
-[node name="func-checkpoint" type="Node3D" parent="."]
+[node name="func-checkpoint" type="Node3D" parent="." unique_id=1979755350]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
-[node name="checkpoint" type="MeshInstance3D" parent="func-checkpoint"]
+[node name="checkpoint" type="MeshInstance3D" parent="func-checkpoint" unique_id=1918831224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.98, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mgguw")
 skeleton = NodePath("")
 
-[node name="checkpoint_col" type="StaticBody3D" parent="func-checkpoint/checkpoint"]
+[node name="checkpoint_col" type="StaticBody3D" parent="func-checkpoint/checkpoint" unique_id=1770263005]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="func-checkpoint/checkpoint/checkpoint_col"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="func-checkpoint/checkpoint/checkpoint_col" unique_id=1169514933]
 shape = SubResource("ConcavePolygonShape3D_1dt7t")
 
-[node name="checkpointHitbox" type="Area3D" parent="." groups=["checkpoint_hitbox"]]
+[node name="checkpointHitbox" type="Area3D" parent="." unique_id=1581598459 groups=["checkpoint_hitbox"]]
 collision_mask = 2
 
-[node name="checkpointHitbox" type="CollisionShape3D" parent="checkpointHitbox"]
+[node name="checkpointHitbox" type="CollisionShape3D" parent="checkpointHitbox" unique_id=160622925]
 transform = Transform3D(7.9999995, 0, 0, 0, 7.9999995, 0, 0, 0, 7.9999995, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_taje6")
 
-[node name="spawnpoint" type="Node3D" parent="."]
+[node name="spawnpoint" type="Node3D" parent="." unique_id=474236314]
 transform = Transform3D(7.9999995, 0, 0, 0, 7.9999995, 0, 0, 0, 7.9999995, 0, 0, 0)

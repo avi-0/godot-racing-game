@@ -43,26 +43,26 @@ data = PackedVector3Array(0.012499999, 0.575, 0.48749998, 0.012499999, 0.1499999
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el4ss"]
 points = PackedVector3Array(-0.37994635, 0, -0.47900617, -0.37005365, 0, -0.47900617, -0.37994635, 0, 0.47900617, -0.37994635, 0.582021, -0.47900617, -0.37005365, 0.582021, -0.47900617, -0.37005365, 0, 0.47900617, -0.37994635, 0.582021, 0.47900617, -0.37005365, 0.582021, 0.47900617)
 
-[node name="func-finish" type="Node3D"]
+[node name="func-finish" type="Node3D" unique_id=113411008]
 script = ExtResource("1_dueck")
 IsFinish = true
 
-[node name="func-finish" type="Node3D" parent="."]
+[node name="func-finish" type="Node3D" parent="." unique_id=1807232832]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
 
-[node name="finish" type="MeshInstance3D" parent="func-finish"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0)
+[node name="finish" type="MeshInstance3D" parent="func-finish" unique_id=1367729066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.98, -0.375, 0, 0)
 mesh = SubResource("ArrayMesh_a2aw7")
 skeleton = NodePath("")
 
-[node name="finish_col" type="StaticBody3D" parent="func-finish/finish"]
+[node name="finish_col" type="StaticBody3D" parent="func-finish/finish" unique_id=1108872032]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="func-finish/finish/finish_col"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="func-finish/finish/finish_col" unique_id=1264078430]
 shape = SubResource("ConcavePolygonShape3D_fkj4g")
 
-[node name="finishHitbox" type="Area3D" parent="." groups=["finish_hitbox"]]
+[node name="finishHitbox" type="Area3D" parent="." unique_id=1934736746 groups=["finish_hitbox"]]
 collision_mask = 2
 
-[node name="finishHitbox" type="CollisionShape3D" parent="finishHitbox"]
+[node name="finishHitbox" type="CollisionShape3D" parent="finishHitbox" unique_id=2059028517]
 transform = Transform3D(7.9999995, 0, 0, 0, 7.9999995, 0, 0, 0, 7.9999995, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_el4ss")
