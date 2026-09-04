@@ -8,3 +8,4 @@ script = ExtResource("1_6306l")
 ScenePath = "res://blocks/road/_scenes/straight1-boost.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/straight1-boost.glb"
 ThumbnailTexture = ExtResource("1_67o65")
+DisplayName = "Road Straight Booster"

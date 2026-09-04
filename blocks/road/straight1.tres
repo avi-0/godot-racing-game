@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://dy6e3es1otwlm"]
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://dy6e3es1otwlm"]
 
-[ext_resource type="Texture2D" path="res://blocks/road/_images/straight1.png" id="1_2foho"]
+[ext_resource type="Texture2D" uid="uid://dh8qrix6eywa3" path="res://blocks/road/_images/straight1.png" id="1_2foho"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_by2rt"]
 
 [resource]
@@ -8,3 +8,4 @@ script = ExtResource("1_by2rt")
 ScenePath = "res://blocks/road/_scenes/straight1.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/straight1.glb"
 ThumbnailTexture = ExtResource("1_2foho")
+DisplayName = "Road Straight"

@@ -8,3 +8,4 @@ script = ExtResource("1_f4mj2")
 ScenePath = "res://blocks/road/_scenes/chicane-left1x2.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/chicane-left1x2.glb"
 ThumbnailTexture = ExtResource("1_7841j")
+DisplayName = "Road Chicane - Left 2"

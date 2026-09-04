@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://e1qgupxt2iex"]
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://e1qgupxt2iex"]
 
-[ext_resource type="Texture2D" path="res://blocks/road/_images/chicane-left1x3.png" id="1_s8h2j"]
+[ext_resource type="Texture2D" uid="uid://63yx8uo1w86m" path="res://blocks/road/_images/chicane-left1x3.png" id="1_s8h2j"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_twm6n"]
 
 [resource]
@@ -8,3 +8,4 @@ script = ExtResource("1_twm6n")
 ScenePath = "res://blocks/road/_scenes/chicane-left1x3.tscn"
 SourceScenePath = "res://assets/cartopia/blocks/road/chicane-left1x3.glb"
 ThumbnailTexture = ExtResource("1_s8h2j")
+DisplayName = "Road Chicane - Left 3"
