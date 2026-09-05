@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://bcl2eix0ubhxw"]
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://bcl2eix0ubhxw"]
 
 [ext_resource type="Texture2D" uid="uid://c60ro7xmxi3xs" path="res://blocks/deco/_images/bridge-pillar-wide.png" id="1_fd8nl"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_w3uw4"]
@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_w3uw4")
 ScenePath = "res://blocks/deco/_scenes/bridge-pillar-wide.tscn"
-SourceScenePath = "res://assets/kenney/cityroads/deco/bridge-pillar-wide.glb"
+SourceScenePath = "uid://5t0jqrsch4dh"
 ThumbnailTexture = ExtResource("1_fd8nl")

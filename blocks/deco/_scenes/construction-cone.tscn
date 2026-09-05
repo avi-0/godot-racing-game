@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://h2sflxky20kk"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_43pdx"]
-[ext_resource type="Material" uid="uid://ds2tnd45lhtof" path="res://assets/asset_packs/kenney/cityroads/materials/colormap.tres" id="2_bip1q"]
+[ext_resource type="Texture2D" uid="uid://b5i2khgixpwvv" path="res://assets/asset_packs/kenney/cityroads/materials/colormap.png" id="2_43pdx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_43pdx"]
 resource_local_to_scene = true
@@ -10,6 +10,13 @@ bounce = 0.5
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_43pdx"]
 points = PackedVector3Array(-0.0375, 0, -0.02750098, -0.0375, 0, 0.027493633, -0.0375, 0.018748164, -0.02750098, -0.02750098, 0, -0.0375, -0.02750098, 0, 0.0375, -0.0375, 0.018748164, 0.027493633, -0.010358753, 0.09375, 0, -0.0073267426, 0.09375, -0.0073267426, -0.02750098, 0.018748164, -0.0375, 0.027493633, 0, -0.0375, 0.027493633, 0, 0.0375, -0.02750098, 0.018748164, 0.0375, -0.0073267426, 0.09375, 0.007319398, 0, 0.09375, -0.010358753, 0.027493633, 0.018748164, -0.0375, 0.0375, 0, -0.02750098, 0.0375, 0, 0.027493633, 0.027493633, 0.018748164, 0.0375, 0, 0.09375, 0.010351408, 0.007319398, 0.09375, -0.0073267426, 0.0375, 0.018748164, -0.02750098, 0.0375, 0.018748164, 0.027493633, 0.007319398, 0.09375, 0.007319398, 0.010351408, 0.09375, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bip1q"]
+resource_name = "colormap"
+albedo_color = Color(0.90359825, 0.90359825, 0.9035982, 1)
+albedo_texture = ExtResource("2_43pdx")
+roughness = 0.59
+texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_a37v7"]
 _surfaces = [{
@@ -35,7 +42,7 @@ _surfaces = [{
 "index_count": 198,
 "index_data": PackedByteArray("HQAAAB4AHgAfAB0AIAAhAAIAAgAiACAAIwAkAAMAAwAlACMAAQAmACcAJwAoAAEAKQAqACsAKwAsACkALQAuAC8ALwAwAC0AMQAyADMAMwA0ADEANQA2ADcANwA4ADUAOQA6ADsAOwA8ADkAPAA9ADkAPAA+AD0APgA/AD0APgBAAD8AQQBCAEMAQwBEAEEARABFAEEARABGAEUARgBHAEUARgBIAEcASQAFAAYABgBKAEkASwBMAAkACQAHAEsATQBOAE8ATwBQAE0ATwBRAFAAUQBSAFAAUQBTAFIAUwBUAFIACAAKAAQABABVAAgAVgAMAAsACwBXAFYAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQADQAOAA8ADwAOABAADwARAA0AEAASAA8ADQARABMAEgAQABQAEwAVAA0AFAAWABIAFQATABcAFgAUABgAFwAZABUAGAAaABYAGQAXABsAGwAaABgAGwAcABkAGAAcABsA"),
 "lods": [0.069658026, PackedByteArray("AAABAAIAAwACAAEAAwAAAAIAAAADAAEABAAFAAYABAAHAAUABAAGAAgACQAHAAQACAAKAAQABAALAAkABAAKAAwABAAMAAsADQAOAA8ADwAOABAADwARAA0AEAASAA8ADQARABMAEgAQABQAEwAVAA0AFAAWABIAFQATABcAFgAUABgAFwAZABUAGAAaABYAGQAXABsAGwAaABgAGwAcABkAGAAcABsA")],
-"material": ExtResource("2_bip1q"),
+"material": SubResource("StandardMaterial3D_bip1q"),
 "name": "colormap",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -45,23 +52,23 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_a37v7")
 
-[node name="construction-cone" type="Node3D"]
+[node name="construction-cone" type="Node3D" unique_id=466477521]
 physics_interpolation_mode = 2
 script = ExtResource("1_43pdx")
 IsPhysical = true
 
-[node name="construction-cone2" type="RigidBody3D" parent="."]
+[node name="construction-cone2" type="RigidBody3D" parent="." unique_id=287932154]
 physics_interpolation_mode = 1
 collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_43pdx")
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="construction-cone2"]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="construction-cone2" unique_id=652382460]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_43pdx")
 
-[node name="construction-cone" type="MeshInstance3D" parent="construction-cone2"]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+[node name="construction-cone" type="MeshInstance3D" parent="construction-cone2" unique_id=1267751680]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_aqeos")
 skeleton = NodePath("")
