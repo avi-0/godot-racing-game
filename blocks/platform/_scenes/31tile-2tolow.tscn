@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://nqxqkiyvt1il"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_ofmkm"]
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_brfi6"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_xbbaf"]
+material = ExtResource("2_brfi6")
+left_to_right = 1.0
+size = Vector3(8, 0.25, 8)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_brfi6"]
+points = PackedVector3Array(-4, -0.125, -4, -4, -0.125, 4, 4, 0.125, -4, 4, -0.125, -4, 4, -0.125, 4, 4, 0.125, 4)
+
+[node name="x8yauvstmhlp" type="Node3D" unique_id=1826073881]
+script = ExtResource("1_ofmkm")
+
+[node name="tile-low2" type="Node3D" parent="." unique_id=1080580737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.003, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tile-low2" unique_id=1316250379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("PrismMesh_xbbaf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tile-low2/MeshInstance3D" unique_id=94254967]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="tile-low2/MeshInstance3D/StaticBody3D" unique_id=2114708954]
+shape = SubResource("ConvexPolygonShape3D_brfi6")

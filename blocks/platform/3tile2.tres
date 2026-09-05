@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://tbbfpjmrrb0w"]
+
+[ext_resource type="Texture2D" uid="uid://ct3t3aysjgi0w" path="res://blocks/platform/_images/10tile2.png" id="1_s66sa"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_afjww"]
+
+[resource]
+script = ExtResource("2_afjww")
+ScenePath = "res://blocks/platform/_scenes/10tile2.tscn"
+SourceScenePath = "uid://x8yauvstmhlp"
+ThumbnailTexture = ExtResource("1_s66sa")
+DisplayName = "Low Tile"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://cgpf6mnbxivy0"]
+
+[ext_resource type="Texture2D" uid="uid://cdcd7ffsdu2o0" path="res://blocks/platform/_images/BtriagHigh.png" id="1_ljo5e"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_wubjc"]
+
+[resource]
+script = ExtResource("2_wubjc")
+ScenePath = "uid://deck3gte5rm1u"
+SourceScenePath = "uid://4fjcpbfrqo2p"
+ThumbnailTexture = ExtResource("1_ljo5e")
+DisplayName = "High Triangle"

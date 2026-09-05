@@ -15,6 +15,7 @@ data = PackedVector3Array(4, 1, 4, 4, -1, 4, -4, -1, 4, 4, 1, -4, -4, -1, -4, 4,
 script = ExtResource("1_1mocp")
 
 [node name="tile-slant2" type="Node3D" parent="." unique_id=1145625201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.003, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="tile-slant2" unique_id=246013416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://nipp3ma3il7g"]
+
+[ext_resource type="Texture2D" uid="uid://cibhd7wr0xkd7" path="res://blocks/platform/_images/3tile-2tolow.png" id="1_aflyr"]
+[ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="2_ipqyd"]
+
+[resource]
+script = ExtResource("2_ipqyd")
+ScenePath = "res://blocks/platform/_scenes/31tile-2tolow.tscn"
+SourceScenePath = "uid://x8yauvstmhlp"
+ThumbnailTexture = ExtResource("1_aflyr")
+DisplayName = "Low To High Tile"

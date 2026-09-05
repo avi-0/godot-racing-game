@@ -14,7 +14,7 @@ points = PackedVector3Array(-0.5, -0.113, -0.5, -0.5, 0.11300001, -0.5, 0.5, -0.
 script = ExtResource("1_m1je8")
 
 [node name="tile-high2" type="Node3D" parent="." unique_id=1827194330]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.002, 0)
 
 [node name="tile-high" type="MeshInstance3D" parent="tile-high2" unique_id=912117079]
 transform = Transform3D(1, 0, 0, 0, 1.125, 0, 0, 0, 1, 0, 0.123, 0)
