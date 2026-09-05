@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b1l732is0onvp"]
+
+[ext_resource type="Texture2D" uid="uid://dobf3enbsa1m4" path="res://textures/blocks/jumper.png" id="1_0h7u2"]
+
+[resource]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_0h7u2")
+texture_filter = 4

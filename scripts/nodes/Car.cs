@@ -106,6 +106,8 @@ public partial class Car : RigidBody3D
 	private int _bonkCount = 0;
 
 	private int _currentSkin = 0;
+
+	private int _wheelsOnBump = 0;
 	
 	public override void _Ready()
 	{
@@ -236,6 +238,7 @@ public partial class Car : RigidBody3D
 		}
 
 		_hasCompressedWheel = false;
+		_wheelsOnBump = 0;
 		foreach (var wheel in Wheels)
 		{
 			SteeringRotation(delta, wheel);
@@ -585,20 +588,16 @@ public partial class Car : RigidBody3D
 						{
 							if (block.IsBooster)
 							{
-								var forcePosition = GetCenterOfMass();
 								var force = -block.GlobalBasis.Z * 400;
-								ApplyForce(force, forcePosition);
+								ApplyCentralForce(force);
 							}
 							
 							if (block.IsBumper)
 							{
-								var forcePosition = GetCenterOfMass();
-								var force = block.GlobalBasis.Y * 150;
-								ApplyForce(force, forcePosition);
-								//if (DebugMode)
+								_wheelsOnBump++;
+								if (_wheelsOnBump == 1)
 								{
-									DebugDraw3D.DrawArrowRay(forcePosition, force, 0.1f, Color.Color8(255, 0, 0),
-										arrow_size: 0.1f);
+									BumpCar(block.GlobalBasis.Y, 1.0f);
 								}
 							}
 
@@ -762,8 +761,7 @@ public partial class Car : RigidBody3D
 				_bonkCount++;
 			}
 			//--
-
-			//bonk particles
+			
 			if (LinearVelocity.Length() > 2)
 			{
 				PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
@@ -772,6 +770,7 @@ public partial class Car : RigidBody3D
 				{
 					if (state3D.GetContactColliderId(contact) == node.GetInstanceId())
 					{
+						//bonk particles
 						Vector3 position = state3D.GetContactColliderPosition(contact);
 						foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
 						{
@@ -783,10 +782,20 @@ public partial class Car : RigidBody3D
 								break;
 							}
 						}
+						//--
+
+						//bumper
+						if (node is StaticBody3D staticBody3D && staticBody3D.GetOwner() is Block block)
+						{
+							if (block.IsBumper && (block.WheelTriggerMeshInstance.GlobalTransform * block.WheelTriggerMeshInstance.GetAabb()).Abs().HasPoint(state3D.GetContactColliderPosition(contact)))
+							{
+								BumpCar(block.GlobalBasis.Y, 0.25f);
+							}
+						}
+						//--
 					}
 				}
 			}
-			//--
 
 			//pad vibration
 			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId) != null && (GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL || GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN))
@@ -845,5 +854,12 @@ public partial class Car : RigidBody3D
 	public void CancelOverrideMaterial()
 	{
 		SetSkin(_currentSkin);
+	}
+
+	public void BumpCar(Vector3 globalBasisY, float multiplier)
+	{
+		var force = globalBasisY * Mass * 1500 * multiplier;
+		force.Y = Mathf.Min(force.Y, 100000);
+		ApplyCentralForce(force);
 	}
 }
