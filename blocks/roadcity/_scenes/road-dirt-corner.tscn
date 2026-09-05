@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_cx5u7"]
 [ext_resource type="Material" uid="uid://cqxwr5ebpgh84" path="res://materials/dirt.tres" id="2_tos1j"]
 [ext_resource type="Material" uid="uid://xbmi8lmevt4w" path="res://materials/concrete_smooth.tres" id="3_kneup"]
-[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="4_pr114"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7xmxs"]
 _surfaces = [{
@@ -71,7 +70,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 33,
 "index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABAAFAAAABQAGAAAABgAHAAAABwAIAAAACAAJAAAACgALAAwADAANAAoADQAOAAoA"),
-"material": ExtResource("4_pr114"),
+"material": ExtResource("3_kneup"),
 "name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(16, 29, 0, 0),
@@ -93,7 +92,7 @@ IsGrass = true
 WheelTriggerMeshInstance = NodePath("road-dirt-corner2/MeshInstance3D")
 
 [node name="road-dirt-corner2" type="Node3D" parent="." unique_id=1994218515]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 4, 0.005, 4)
+transform = Transform3D(8, 0, 0, 0, 5.1, 0, 0, 0, 8, 4, 0.005, 4)
 
 [node name="road-dirt-corner" type="MeshInstance3D" parent="road-dirt-corner2" unique_id=1396461010]
 mesh = SubResource("ArrayMesh_wi4gr")

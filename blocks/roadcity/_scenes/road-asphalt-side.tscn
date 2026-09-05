@@ -65,7 +65,7 @@ data = PackedVector3Array(-0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0, 0.5, 0, 0, -0.
 script = ExtResource("1_8ggfr")
 
 [node name="road-asphalt-side2" type="Node3D" parent="." unique_id=1581854808]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
+transform = Transform3D(8, 0, 0, 0, 5.1, 0, 0, 0, 8, 0, 0.005, 0)
 
 [node name="road-asphalt-side" type="MeshInstance3D" parent="road-asphalt-side2" unique_id=367999896]
 mesh = SubResource("ArrayMesh_hwnj5")

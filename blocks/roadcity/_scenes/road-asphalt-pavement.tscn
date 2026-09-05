@@ -1,54 +1,64 @@
-[gd_scene format=3 uid="uid://0ug6aeagy2du"]
+[gd_scene format=4 uid="uid://0ug6aeagy2du"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_k0dx2"]
-[ext_resource type="Material" uid="uid://xbmi8lmevt4w" path="res://materials/concrete_smooth.tres" id="2_otep8"]
+[ext_resource type="Texture2D" uid="uid://bcb5k0haljwia" path="res://textures/blocks/deco/urban/concrete.png" id="2_otep8"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_rd7an"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrhd1"]
+resource_name = "concreteSmooth"
+cull_mode = 2
+albedo_texture = ExtResource("2_otep8")
+roughness = 0.5
+uv1_scale = Vector3(2, 2, 2)
+texture_filter = 4
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rvbvk"]
 _surfaces = [{
-"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"aabb": AABB(-0.25, 0, -0.25, 0.5, 0.05, 0.5),
 "format": 34896613377,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
-"name": "concreteSmooth",
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMAAwAGAAIABwAFAAAAAwAFAAcAAAAEAAcABwAGAAMABwAEAAIAAgAGAAcA"),
+"name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0)
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD//wAAAAD/////AAAAAP///////wAA//8AAAAAAAAAAP////8AAAAAAAAAAAAA//8AAP//AAAAAAAA//8AAA==")
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_mbt81"]
-resource_name = "road-asphalt-pavement_road-asphalt-pavement"
+[sub_resource type="ArrayMesh" id="ArrayMesh_otep8"]
+resource_name = "road-dirt-tile_road-dirt-tile"
 _surfaces = [{
-"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
-"attribute_data": PackedByteArray(255, 255, 255, 255, 169, 234, 255, 255, 169, 234, 84, 245, 255, 255, 84, 245),
+"aabb": AABB(-0.25, 0, -0.25, 0.5, 0.05, 0.5),
+"attribute_data": PackedByteArray("SJLOif9/zon/f+aESJLmhP9/zolIks6JSJK1jv9/tY617YH/te3//2zb//9s24H//////7Xt//+17YH///+B/yPJgf8jyf//2rb//9q2gf8jyYH/bNuB/2zb//8jyf//"),
 "format": 34896613399,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
-"material": ExtResource("2_otep8"),
-"name": "concreteSmooth",
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_xrhd1"),
+"name": "concrete",
 "primitive": 3,
-"uv_scale": Vector4(12, 24, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+"uv_scale": Vector4(7, 26.1, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAD//wAA////////AAD/////////////AAD///////8AAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/vwAA//8AAP//AAAAAAAA/////wAAAAD///////8AAP//AAAAAP///78AAAAAAAD/vwAA//8AAP+/AAD//////7////////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgP////////+//////wAA/7///wAAAAD/v///AAD///+//3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3//f////3////9/////f////3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_rd7an")
+shadow_mesh = SubResource("ArrayMesh_rvbvk")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k0dx2"]
-data = PackedVector3Array(-0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xrhd1"]
+data = PackedVector3Array(-0.25, 0.049999997, -0.25, 0.25, 0.049999997, -0.25, 0.25, 0.049999997, 0.25, 0.25, 0.049999997, 0.25, -0.25, 0.049999997, 0.25, -0.25, 0.049999997, -0.25, -0.25, 0, 0.25, 0.25, 0, 0.25, 0.25, 0, -0.25, 0.25, 0, -0.25, -0.25, 0, -0.25, -0.25, 0, 0.25, -0.25, 0.049999997, -0.25, -0.25, 0, -0.25, 0.25, 0, -0.25, 0.25, 0, -0.25, 0.25, 0.049999997, -0.25, -0.25, 0.049999997, -0.25, -0.25, 0, 0.25, -0.25, 0, -0.25, -0.25, 0.049999997, -0.25, -0.25, 0.049999997, -0.25, -0.25, 0.049999997, 0.25, -0.25, 0, 0.25, 0.25, 0.049999997, 0.25, 0.25, 0, 0.25, -0.25, 0, 0.25, -0.25, 0, 0.25, -0.25, 0.049999997, 0.25, 0.25, 0.049999997, 0.25, 0.25, 0.049999997, 0.25, 0.25, 0.049999997, -0.25, 0.25, 0, -0.25, 0.25, 0, -0.25, 0.25, 0, 0.25, 0.25, 0.049999997, 0.25)
 
 [node name="road-asphalt-pavement" type="Node3D" unique_id=1967943825]
 script = ExtResource("1_k0dx2")
 
 [node name="road-asphalt-pavement2" type="Node3D" parent="." unique_id=1960044697]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
+transform = Transform3D(8, 0, 0, 0, 5.1, 0, 0, 0, 8, 0, 0.005, 0)
 
-[node name="road-asphalt-pavement" type="MeshInstance3D" parent="road-asphalt-pavement2" unique_id=725146713]
-mesh = SubResource("ArrayMesh_mbt81")
+[node name="road-dirt-tile" type="MeshInstance3D" parent="road-asphalt-pavement2" unique_id=390403369]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("ArrayMesh_otep8")
 skeleton = NodePath("")
 
-[node name="road-asphalt-pavement_col" type="StaticBody3D" parent="road-asphalt-pavement2/road-asphalt-pavement" unique_id=1126315441]
+[node name="road-dirt-tile_col" type="StaticBody3D" parent="road-asphalt-pavement2/road-dirt-tile" unique_id=734410546]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="road-asphalt-pavement2/road-asphalt-pavement/road-asphalt-pavement_col" unique_id=837950505]
-shape = SubResource("ConcavePolygonShape3D_k0dx2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road-asphalt-pavement2/road-dirt-tile/road-dirt-tile_col" unique_id=1259920025]
+shape = SubResource("ConcavePolygonShape3D_xrhd1")

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://3p2adkv5ofvw"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_0mhnp"]
-[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="2_tubga"]
+[ext_resource type="Material" uid="uid://xbmi8lmevt4w" path="res://materials/concrete_smooth.tres" id="2_tubga"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_rvbvk"]
 _surfaces = [{
@@ -42,7 +42,7 @@ data = PackedVector3Array(-0.25, 0.049999997, -0.25, 0.25, 0.049999997, -0.25, 0
 script = ExtResource("1_0mhnp")
 
 [node name="road-dirt-tile2" type="Node3D" parent="." unique_id=1650205744]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
+transform = Transform3D(8, 0, 0, 0, 5.1, 0, 0, 0, 8, 0, 0.005, 0)
 
 [node name="road-dirt-tile" type="MeshInstance3D" parent="road-dirt-tile2" unique_id=1976094019]
 mesh = SubResource("ArrayMesh_rjrsa")

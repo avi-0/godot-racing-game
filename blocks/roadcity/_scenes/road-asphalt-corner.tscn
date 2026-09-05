@@ -65,7 +65,7 @@ data = PackedVector3Array(1, 0, -0.5, 1, 0, 0.5, 0.75, 0, 0.567, 0.75, 0, 0.567,
 script = ExtResource("1_tb01m")
 
 [node name="road-asphalt-corner2" type="Node3D" parent="." unique_id=394706633]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 4, 0.005, 4)
+transform = Transform3D(8, 0, 0, 0, 5.1, 0, 0, 0, 8, 4, 0.005, 4)
 
 [node name="road-asphalt-corner" type="MeshInstance3D" parent="road-asphalt-corner2" unique_id=1406691400]
 mesh = SubResource("ArrayMesh_du3y1")

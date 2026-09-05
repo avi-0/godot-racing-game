@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://b4dnf87esya3h"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_isuyo"]
-[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="2_fbu0g"]
+[ext_resource type="Material" uid="uid://xbmi8lmevt4w" path="res://materials/concrete_smooth.tres" id="2_fbu0g"]
 [ext_resource type="Material" uid="uid://cqxwr5ebpgh84" path="res://materials/dirt.tres" id="3_vtrth"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_4mpwe"]
@@ -70,7 +70,7 @@ IsGrass = true
 WheelTriggerMeshInstance = NodePath("road-dirt-straight2/MeshInstance3D")
 
 [node name="road-dirt-straight2" type="Node3D" parent="." unique_id=792405047]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
+transform = Transform3D(8, 0, 0, 0, 5.1, 0, 0, 0, 8, 0, 0.005, 0)
 
 [node name="road-dirt-straight" type="MeshInstance3D" parent="road-dirt-straight2" unique_id=117812110]
 mesh = SubResource("ArrayMesh_kodhy")

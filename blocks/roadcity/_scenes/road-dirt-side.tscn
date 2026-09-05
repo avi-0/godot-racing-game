@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_k81aa"]
 [ext_resource type="Material" uid="uid://cqxwr5ebpgh84" path="res://materials/dirt.tres" id="2_femru"]
-[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="3_1gor3"]
+[ext_resource type="Material" uid="uid://xbmi8lmevt4w" path="res://materials/concrete_smooth.tres" id="3_femru"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ugmbw"]
 _surfaces = [{
@@ -48,7 +48,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 30,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAA"),
-"material": ExtResource("3_1gor3"),
+"material": ExtResource("3_femru"),
 "name": "concrete",
 "primitive": 3,
 "uv_scale": Vector4(8.1, 26.1, 0, 0),
@@ -70,7 +70,7 @@ IsGrass = true
 WheelTriggerMeshInstance = NodePath("road-dirt-side2/MeshInstance3D")
 
 [node name="road-dirt-side2" type="Node3D" parent="." unique_id=497048695]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0.005, 0)
+transform = Transform3D(8, 0, 0, 0, 5.1, 0, 0, 0, 8, 0, 0.005, 0)
 
 [node name="road-dirt-side" type="MeshInstance3D" parent="road-dirt-side2" unique_id=1100817840]
 mesh = SubResource("ArrayMesh_t1usv")
