@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://c83g6eb8202fo"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_2kwva"]
-[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_aaink"]
+[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="2_aaink"]
 [ext_resource type="Material" uid="uid://ccj84nb6f55gl" path="res://materials/cobblestoneAlternative.tres" id="3_o65k1"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_guljy"]

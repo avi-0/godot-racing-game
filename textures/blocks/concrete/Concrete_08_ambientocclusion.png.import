@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccj0mb6jigp6n"
-path.s3tc="res://.godot/imported/concrete.jpg-de0cec7be05c81497e867e1907980215.s3tc.ctex"
+uid="uid://dk7fg2ee02pai"
+path.s3tc="res://.godot/imported/Concrete_08_ambientocclusion.png-e7db235e9039c5126c5df025437f98d7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/blocks/concrete.jpg"
-dest_files=["res://.godot/imported/concrete.jpg-de0cec7be05c81497e867e1907980215.s3tc.ctex"]
+source_file="res://textures/blocks/concrete/Concrete_08_ambientocclusion.png"
+dest_files=["res://.godot/imported/Concrete_08_ambientocclusion.png-e7db235e9039c5126c5df025437f98d7.s3tc.ctex"]
 
 [params]
 

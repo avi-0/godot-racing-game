@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://db2yjaaq0k2h1"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_7raoc"]
-[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_7raoc"]
+[ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="2_7raoc"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_uxebl"]
 _surfaces = [{
