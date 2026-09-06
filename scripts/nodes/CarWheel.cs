@@ -48,15 +48,6 @@ public partial class CarWheel : Node3D
 		_skidmarkMesh = new ImmediateMesh();
 		SkidmarkMeshInstance.Mesh = _skidmarkMesh;
 		SkidmarkMeshInstance.SetLayerMaskValue(3, true);
-		
-		/*
-		WheelSoundPlayer.VolumeDb = -8;
-		WheelSoundPlayer.UnitSize = 2;
-		WheelSoundPlayer.MaxDb = 1;
-		WheelSoundPlayer.Bus = "GameSounds";
-		WheelSoundPlayer.MaxDistance = 40;
-		WheelSoundPlayer.MaxPolyphony = 1;
-		*/
 	}
 
 	public void Slide(Vector3 position, Vector3 velocity)
