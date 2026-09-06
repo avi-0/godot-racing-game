@@ -362,7 +362,7 @@ public partial class Car : RigidBody3D
 			avgLength /= wheel.SpringLengths.Count;
 			float lengthChange = Math.Abs(avgLength - springLength);
 
-			GD.Print((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000 + " | " + (wheel.Config.SpringRest + wheel.Config.OverExtend) + " | " + lengthChange);
+			//GD.Print((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000 + " | " + (wheel.Config.SpringRest + wheel.Config.OverExtend) + " | " + lengthChange);
 
 			if (lengthChange + ((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000) >= wheel.Config.SpringRest + wheel.Config.OverExtend)
 			{
