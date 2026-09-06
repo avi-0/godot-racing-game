@@ -15,6 +15,7 @@ public partial class CarCommon : Node3D
 	[Export] public AudioStreamPlayer3D EngineSoundPlayer;
 	[Export] public AudioStreamPlayer3D CrashSoundPlayer;
 	[Export] public AudioStreamPlayer3D GrindSoundPlayer;
+	[Export] public AudioStreamPlayer3D SuspensionSoundPlayer;
 	[Export] public AudioStreamPlayer3D TyreSoundPlayer;
 	[Export] public AudioStream DriftSounds;
 	[Export] public AudioStream GrassSounds;

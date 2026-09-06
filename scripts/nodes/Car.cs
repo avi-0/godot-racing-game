@@ -83,7 +83,6 @@ public partial class Car : RigidBody3D
 		get => _isLocallyControlled;
 		set
 		{
-			EngineSoundPlayer.Playing = value;
 			Input.MouseMode = value ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible;
 
 			if (value)
@@ -156,6 +155,7 @@ public partial class Car : RigidBody3D
 
 		CarCommon.EngineSoundPlayer.Stream = EngineSoundStream;
 		CarCommon.EngineSoundPlayer.Transform = EnginePosition.Transform;
+		CarCommon.EngineSoundPlayer.Playing = true;
 	}
 
 	private void SetupWheels()
@@ -344,6 +344,32 @@ public partial class Car : RigidBody3D
 		Vector3 wheelPos = wheel.WheelModel.Position;
 		wheelPos.Y = Mathf.MoveToward(wheelPos.Y, -springLength, 5 * (float)GetPhysicsProcessDeltaTime());
 		wheel.WheelModel.Position = wheelPos;
+
+		// suspension sound
+		if (wheel.SpringLengths.Count < 15)
+		{
+			wheel.SpringLengths.Enqueue(springLength);
+		}
+		else
+		{
+			float avgLength = 0;
+			for (int i = 0; i < wheel.SpringLengths.Count; i++)
+			{
+				float peek = wheel.SpringLengths.Dequeue();
+				avgLength += peek;
+				wheel.SpringLengths.Enqueue(peek);
+			}
+			avgLength /= wheel.SpringLengths.Count;
+			float lengthChange = Math.Abs(avgLength - springLength);
+
+			GD.Print((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000 + " | " + (wheel.Config.SpringRest + wheel.Config.OverExtend) + " | " + lengthChange);
+
+			if (lengthChange + ((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000) >= wheel.Config.SpringRest + wheel.Config.OverExtend)
+			{
+				CarCommon.SuspensionSoundPlayer.Play();
+			}
+		}
+		//--
 		
 		for (int i = 0; i < wheel.ShapeCast.GetCollisionCount(); i++)
 		{

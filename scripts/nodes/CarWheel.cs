@@ -40,6 +40,8 @@ public partial class CarWheel : Node3D
 
 	public bool GrassContact = false;
 	
+	public Queue<float> SpringLengths = new Queue<float>();
+	
 	public override void _Ready()
 	{
 		_skidmarkLines = new RingBuffer<SkidmarkSegment>(SkidmarkCapacity);

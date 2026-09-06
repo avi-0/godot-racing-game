@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://c2x6ytduyshbm" path="res://audio/carsounds/tire2.wav" id="10_yajbt"]
 [ext_resource type="AudioStream" uid="uid://dv5we2aaf68bl" path="res://audio/carsounds/tire3.wav" id="11_2000p"]
 [ext_resource type="AudioStream" uid="uid://d3vqn6gcby01g" path="res://audio/carsounds/tire4.wav" id="12_nini5"]
+[ext_resource type="AudioStream" uid="uid://bvabjcde8j51g" path="res://audio/streams/suspension_creak_random_stream.tres" id="14_2000p"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yhkb5"]
 streams_count = 4
@@ -59,7 +60,7 @@ font_size = 128
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CarCommon" type="Node3D" unique_id=1236792490 node_paths=PackedStringArray("OrbitCamera", "CollisionDebrisParticles", "PlayerName", "InfoSprite", "AudioListener", "EngineSoundPlayer", "CrashSoundPlayer", "GrindSoundPlayer", "TyreSoundPlayer")]
+[node name="CarCommon" type="Node3D" unique_id=1236792490 node_paths=PackedStringArray("OrbitCamera", "CollisionDebrisParticles", "PlayerName", "InfoSprite", "AudioListener", "EngineSoundPlayer", "CrashSoundPlayer", "GrindSoundPlayer", "SuspensionSoundPlayer", "TyreSoundPlayer")]
 script = ExtResource("1_qexnt")
 OrbitCamera = NodePath("OrbitCamera")
 CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("CollisionDebris/CDP2"), NodePath("CollisionDebris/CDP3"), NodePath("CollisionDebris/CDP4"), NodePath("CollisionDebris/CDP5"), NodePath("CollisionDebris/CDP6")]
@@ -70,6 +71,7 @@ AudioListener = NodePath("AudioListener3D")
 EngineSoundPlayer = NodePath("EngineSoundPlayer")
 CrashSoundPlayer = NodePath("CrashSoundPlayer")
 GrindSoundPlayer = NodePath("GrindSoundPlayer")
+SuspensionSoundPlayer = NodePath("SuspensionSoundPlayer")
 TyreSoundPlayer = NodePath("TyreSoundPlayer")
 DriftSounds = SubResource("AudioStreamRandomizer_yhkb5")
 GrassSounds = ExtResource("7_yajbt")
@@ -102,6 +104,15 @@ bus = &"GameSounds"
 [node name="TyreSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1512815294]
 max_db = -1.0
 max_distance = 40.0
+bus = &"GameSounds"
+doppler_tracking = 2
+
+[node name="SuspensionSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=675878939]
+stream = ExtResource("14_2000p")
+volume_db = 2.0
+unit_size = 3.0
+max_distance = 40.0
+max_polyphony = 2
 bus = &"GameSounds"
 doppler_tracking = 2
 

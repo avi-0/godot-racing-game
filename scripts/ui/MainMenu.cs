@@ -61,6 +61,8 @@ public partial class MainMenu : Control
 	}
 	
 	private List<Campaign> _campaigns = new();
+
+	private AudioListener3D MenuListener;
 	
 	public override void _Ready()
 	{
@@ -74,6 +76,10 @@ public partial class MainMenu : Control
 		
 		_carList = CarManager.Instance.LoadCarList();
 		LoadGarageCar(DefaultCarPath);
+
+		MenuListener = new AudioListener3D();
+		AddChild(MenuListener);
+		MenuListener.MakeCurrent();
 		
 		AddCampaign("Tutorial", "tutorial");
 		AddCampaign("Main Campaign", "main");
@@ -280,9 +286,12 @@ public partial class MainMenu : Control
 
 		LoadGarageCar(CarManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
-		HadFocus.GrabFocus();
-		
+		if (HadFocus != null)
+		{
+			HadFocus.GrabFocus();
+		}
 		GameManager.Instance.MenuMusicPlayer.Play();
+		MenuListener.MakeCurrent();
 	}
 
 	public async GDTaskVoid OpenTrack(string path, bool host = true)
@@ -297,6 +306,12 @@ public partial class MainMenu : Control
 		
 		LoadGarageCar(CarManager.CarsPath + TrackManager.Instance.Track.Options.CarType);
 		IsVisible = true;
+		if (HadFocus != null)
+		{
+			HadFocus.GrabFocus();
+		}
+		GameManager.Instance.MenuMusicPlayer.Play();
+		MenuListener.MakeCurrent();
 	}
 
 	public void OnPlayerSetNewName(string newName)

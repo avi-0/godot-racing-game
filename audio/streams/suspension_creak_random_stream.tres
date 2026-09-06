@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bvabjcde8j51g"]
+
+[ext_resource type="AudioStream" uid="uid://chcv5faquwv8m" path="res://audio/carsounds/creak1.wav" id="1_7dqqu"]
+[ext_resource type="AudioStream" uid="uid://bcrna0mu83jc2" path="res://audio/carsounds/creak2.wav" id="2_3jm25"]
+[ext_resource type="AudioStream" uid="uid://bwk2jd2u4q8nm" path="res://audio/carsounds/creak3.wav" id="3_veila"]
+[ext_resource type="AudioStream" uid="uid://tilgwsigmvek" path="res://audio/carsounds/creak4.wav" id="4_0bevo"]
+[ext_resource type="AudioStream" uid="uid://bkehxbgmkrxr4" path="res://audio/carsounds/creak5.wav" id="5_ac15t"]
+[ext_resource type="AudioStream" uid="uid://i76c8k566t51" path="res://audio/carsounds/creak6.wav" id="6_ethxw"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("1_7dqqu")
+stream_1/stream = ExtResource("2_3jm25")
+stream_2/stream = ExtResource("3_veila")
+stream_3/stream = ExtResource("4_0bevo")
+stream_4/stream = ExtResource("5_ac15t")
+stream_5/stream = ExtResource("6_ethxw")
