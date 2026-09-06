@@ -332,7 +332,7 @@ public partial class Car : RigidBody3D
 		
 		var speediness = GetSpeediness();
 		EngineSoundPlayer.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
-		if (!(_inputs.Forward > 0 || _inputs.Back > 0))
+		if (!((!_isReversing && _inputs.Forward > 0 ) || (_isReversing && _inputs.Back > 0)))
 		{
 			EngineSoundPlayer.PitchScale *= 0.65f;
 		}

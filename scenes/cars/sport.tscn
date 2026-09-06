@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dok0if2iog0no"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_qtbni"]
-[ext_resource type="AudioStream" uid="uid://c7j1alax8kr5q" path="res://audio/streams/og_engine_stream.tres" id="2_2t0n8"]
+[ext_resource type="AudioStream" uid="uid://c1d8lq3f4nl0n" path="res://audio/streams/ferrari_engine_stream.tres" id="2_2t0n8"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_dg6r6"]
 [ext_resource type="Material" uid="uid://cok5acfebmyip" path="res://assets/asset_packs/cars/Textures/godot_materials/set0.tres" id="3_8lcft"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_dg6r6"]
@@ -30,8 +30,8 @@ point_count = 3
 
 [sub_resource type="Curve" id="Curve_xv7xt"]
 _limits = [1.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 3.059838, 0, 0, Vector2(0.123636365, 1.7453302), 0.43696904, 0.43696904, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 2.4640503, 0, 0, Vector2(1, 2), 1.7543262, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve" id="Curve_xxshw"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.104395606, 0), 0.0, 0.4011571, 0, 0, Vector2(0.5, 0.7450981), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
