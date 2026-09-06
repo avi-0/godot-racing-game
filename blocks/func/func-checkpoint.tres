@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("1_emjjj")
-ScenePath = "res://blocks/func/_scenes/func-checkpoint.tscn"
-SourceScenePath = "res://assets/kenney/cityroads/func/func-checkpoint.glb"
+ScenePath = "uid://dn4n4cqytmsni"
+SourceScenePath = "uid://8mkr0ji0x7ak"
 ThumbnailTexture = ExtResource("1_6ykw7")
