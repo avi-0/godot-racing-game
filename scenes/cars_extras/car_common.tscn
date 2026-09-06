@@ -10,6 +10,18 @@
 [ext_resource type="AudioStream" uid="uid://cnjgt0ltcn0ci" path="res://audio/carsounds/bonk3.wav" id="5_bqdnb"]
 [ext_resource type="AudioStream" uid="uid://cat1nom6s5le" path="res://audio/carsounds/bonk4.wav" id="6_jbm0j"]
 [ext_resource type="AudioStream" uid="uid://dprt0qswxt2wg" path="res://audio/carsounds/grind_audio_stream.tres" id="7_g7tne"]
+[ext_resource type="AudioStream" uid="uid://b66cml3my4fty" path="res://audio/carsounds/tire_grass.wav" id="7_yajbt"]
+[ext_resource type="AudioStream" uid="uid://wba57sbonyd1" path="res://audio/carsounds/tire1.wav" id="9_q4cf3"]
+[ext_resource type="AudioStream" uid="uid://c2x6ytduyshbm" path="res://audio/carsounds/tire2.wav" id="10_yajbt"]
+[ext_resource type="AudioStream" uid="uid://dv5we2aaf68bl" path="res://audio/carsounds/tire3.wav" id="11_2000p"]
+[ext_resource type="AudioStream" uid="uid://d3vqn6gcby01g" path="res://audio/carsounds/tire4.wav" id="12_nini5"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yhkb5"]
+streams_count = 4
+stream_0/stream = ExtResource("9_q4cf3")
+stream_1/stream = ExtResource("10_yajbt")
+stream_2/stream = ExtResource("11_2000p")
+stream_3/stream = ExtResource("12_nini5")
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_84gro"]
 resource_local_to_scene = true
@@ -55,30 +67,37 @@ font_size = 128
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CarCommon" type="Node3D" unique_id=1236792490 node_paths=PackedStringArray("OrbitCamera", "EngineSoundPlayer", "CrashSoundPlayer", "GrindSoundPlayer", "CollisionDebrisParticles", "PlayerName", "InfoSprite")]
+[node name="CarCommon" type="Node3D" unique_id=1236792490 node_paths=PackedStringArray("OrbitCamera", "CollisionDebrisParticles", "PlayerName", "InfoSprite", "AudioListener", "EngineSoundPlayer", "CrashSoundPlayer", "GrindSoundPlayer", "TyreSoundPlayer")]
 script = ExtResource("1_qexnt")
 OrbitCamera = NodePath("OrbitCamera")
-EngineSoundPlayer = NodePath("EngineSoundPlayer")
-CrashSoundPlayer = NodePath("CrashSoundPlayer")
-GrindSoundPlayer = NodePath("GrindSoundPlayer")
 CollisionDebrisParticles = [NodePath("CollisionDebris/CDP1"), NodePath("CollisionDebris/CDP2"), NodePath("CollisionDebris/CDP3"), NodePath("CollisionDebris/CDP4"), NodePath("CollisionDebris/CDP5"), NodePath("CollisionDebris/CDP6")]
 PlayerName = NodePath("SubViewport/PlayerName")
 InfoSprite = NodePath("Sprite3D")
 RespawnMaterial = ExtResource("2_bqdnb")
+AudioListener = NodePath("AudioListener3D")
+EngineSoundPlayer = NodePath("EngineSoundPlayer")
+CrashSoundPlayer = NodePath("CrashSoundPlayer")
+GrindSoundPlayer = NodePath("GrindSoundPlayer")
+TyreSoundPlayer = NodePath("TyreSoundPlayer")
+DriftSounds = SubResource("AudioStreamRandomizer_yhkb5")
+GrassSounds = ExtResource("7_yajbt")
 
 [node name="OrbitCamera" parent="." unique_id=1822407780 instance=ExtResource("2_84gro")]
 
 [node name="EngineSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1633681975]
 stream = SubResource("AudioStreamWAV_84gro")
+volume_db = 1.0
 unit_size = 15.0
+max_db = 5.0
 max_distance = 150.0
 bus = &"enginesounds"
+doppler_tracking = 2
 
 [node name="CrashSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1299940127]
 stream = SubResource("AudioStreamRandomizer_2g4b7")
-volume_db = 7.0
+volume_db = 5.0
 unit_size = 30.0
-max_db = 6.0
+max_db = 5.0
 max_distance = 400.0
 max_polyphony = 3
 bus = &"GameSounds"
@@ -89,6 +108,14 @@ unit_size = 5.0
 max_db = 2.0
 max_distance = 50.0
 bus = &"GameSounds"
+
+[node name="TyreSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1512815294]
+volume_db = -1.0
+unit_size = 2.0
+max_db = -1.0
+max_distance = 40.0
+bus = &"GameSounds"
+doppler_tracking = 2
 
 [node name="CollisionDebris" type="Node3D" parent="." unique_id=1032372833]
 
@@ -185,3 +212,6 @@ text = "PlayerName1"
 label_settings = SubResource("LabelSettings_3dw60")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=860415454]
+doppler_tracking = 2

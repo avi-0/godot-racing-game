@@ -85,6 +85,7 @@ public partial class PlayerViewport : SubViewport
 		
 		Camera.Current = TargetCamera != null;
 		Camera.Match(TargetCamera);
+		Car.CarCommon.AudioListener.GlobalPosition = Camera.GlobalPosition;
 		
 		if (Camera.Current)
 		{

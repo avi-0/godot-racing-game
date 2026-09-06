@@ -256,7 +256,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ync2c")
 
-[node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer")]
+[node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition")]
 collision_layer = 2
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -274,6 +274,7 @@ CarCommon = NodePath("CarCommon")
 Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
+EnginePosition = NodePath("EnginePosition")
 Acceleration = 399
 MaxSpeed = 25
 BrakingStrengthMultiplier = 0.4
@@ -410,3 +411,6 @@ mesh = SubResource("ArrayMesh_mx0uw")
 skeleton = NodePath("")
 
 [node name="MultiplayerSynchronizer" parent="." unique_id=426991781 instance=ExtResource("12_lj8mf")]
+
+[node name="EnginePosition" type="Node3D" parent="." unique_id=526303458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45656288, 0.7380534)

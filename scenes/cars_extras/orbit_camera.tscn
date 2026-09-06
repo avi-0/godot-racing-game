@@ -1,26 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://du0u6oshpc0ql"]
+[gd_scene format=3 uid="uid://du0u6oshpc0ql"]
 
 [ext_resource type="Script" uid="uid://docw30sum6w5" path="res://scripts/nodes/OrbitCamera.cs" id="1_pn1ox"]
 
-[node name="OrbitCamera" type="Node3D" node_paths=PackedStringArray("Camera", "CameraStick", "CameraStickBase")]
+[node name="OrbitCamera" type="Node3D" unique_id=463997853 node_paths=PackedStringArray("Camera", "CameraStick", "CameraStickBase")]
 script = ExtResource("1_pn1ox")
 Camera = NodePath("CameraStickBase/CameraStick/Camera3D")
 CameraStick = NodePath("CameraStickBase/CameraStick")
 CameraStickBase = NodePath("CameraStickBase")
 
-[node name="CameraMover" type="RemoteTransform3D" parent="."]
+[node name="CameraMover" type="RemoteTransform3D" parent="." unique_id=1068098833]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77636e-15, 0, 0)
 remote_path = NodePath("../CameraStickBase")
 update_rotation = false
 update_scale = false
 
-[node name="CameraStickBase" type="Marker3D" parent="."]
+[node name="CameraStickBase" type="Marker3D" parent="." unique_id=1049983964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77636e-15, 0, 0)
 top_level = true
 
-[node name="CameraStick" type="Node3D" parent="CameraStickBase"]
+[node name="CameraStick" type="Node3D" parent="CameraStickBase" unique_id=525436457]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.77636e-15, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraStickBase/CameraStick"]
+[node name="Camera3D" type="Camera3D" parent="CameraStickBase/CameraStick" unique_id=896381521]
 doppler_tracking = 2
 fov = 80.0

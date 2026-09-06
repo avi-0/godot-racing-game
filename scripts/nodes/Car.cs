@@ -19,6 +19,7 @@ public partial class Car : RigidBody3D
 	[Export] public MeshInstance3D Nameplate;
 	[Export] public CarWheel[] Wheels;
 	[Export] public MultiplayerSynchronizer MultiplayerSynchronizer;
+	[Export] public Node3D EnginePosition;
 	
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;
@@ -83,7 +84,16 @@ public partial class Car : RigidBody3D
 		{
 			EngineSoundPlayer.Playing = value;
 			Input.MouseMode = value ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible;
-			
+
+			if (value)
+			{
+				CarCommon.AudioListener.MakeCurrent();
+			}
+			else
+			{
+				CarCommon.AudioListener.ClearCurrent();
+			}
+
 			_isLocallyControlled = value;
 		}
 	}
@@ -142,6 +152,8 @@ public partial class Car : RigidBody3D
 		{
 			_PhysicsProcess(60);
 		}
+
+		CarCommon.EngineSoundPlayer.Transform = EnginePosition.Transform;
 	}
 
 	private void SetupWheels()
@@ -310,9 +322,7 @@ public partial class Car : RigidBody3D
 
 	private void ProcessEngineSound()
 	{
-		var engineSoundTarget = 0.5f;
-		if (_inputs.Forward > 0 || _inputs.Back > 0)
-			engineSoundTarget = 1.0f;
+		var engineSoundTarget = 1.0f;
 		
 		EngineSoundPlayer.VolumeDb = Mathf.LinearToDb(
 			Mathf.MoveToward(Mathf.DbToLinear(EngineSoundPlayer.VolumeDb), engineSoundTarget, 2 * (float)GetPhysicsProcessDeltaTime())
@@ -320,6 +330,10 @@ public partial class Car : RigidBody3D
 		
 		var speediness = GetSpeediness();
 		EngineSoundPlayer.PitchScale = SpeedToPitchCurve.Sample(Mathf.Abs(speediness));
+		if (!(_inputs.Forward > 0 || _inputs.Back > 0))
+		{
+			EngineSoundPlayer.PitchScale *= 0.65f;
+		}
 	}
 
 	private void ProcessSuspension(CarWheel wheel)
@@ -503,11 +517,11 @@ public partial class Car : RigidBody3D
 
 				if (wheel.GrassContact)
 				{
-					if (!wheel.WheelSoundPlayer.Playing || wheel.WheelSoundPlayer.Stream != wheel.GrassSound)
+					if (!CarCommon.TyreSoundPlayer.Playing || CarCommon.TyreSoundPlayer.Stream != CarCommon.GrassSounds)
 					{
-						wheel.WheelSoundPlayer.Stream = wheel.GrassSound;
-						wheel.WheelSoundPlayer.VolumeDb = -3;
-						wheel.WheelSoundPlayer.Play();
+						CarCommon.TyreSoundPlayer.Stream = CarCommon.GrassSounds;
+						CarCommon.TyreSoundPlayer.VolumeDb = -1;
+						CarCommon.TyreSoundPlayer.Play();
 					}
 				}
 				
@@ -526,11 +540,11 @@ public partial class Car : RigidBody3D
 						wheel.SmokeParticles.SetEmitting(true);
 					}
 
-					if (!wheel.GrassContact && (!wheel.WheelSoundPlayer.Playing || wheel.WheelSoundPlayer.Stream != wheel.DriftSounds))
+					if (!wheel.GrassContact && (!CarCommon.TyreSoundPlayer.Playing || CarCommon.TyreSoundPlayer.Stream != CarCommon.DriftSounds))
 					{
-						wheel.WheelSoundPlayer.Stream = wheel.DriftSounds;
-						wheel.WheelSoundPlayer.VolumeDb = -9;
-						wheel.WheelSoundPlayer.Play();
+						CarCommon.TyreSoundPlayer.Stream = CarCommon.DriftSounds;
+						CarCommon.TyreSoundPlayer.VolumeDb = -6;
+						CarCommon.TyreSoundPlayer.Play();
 					}
 				}
 				else
@@ -540,7 +554,7 @@ public partial class Car : RigidBody3D
 				
 				if ((!wheel.GrassContact && !_isSlipping) || LinearVelocity.Length() < 2)
 				{
-					wheel.WheelSoundPlayer.Stop();
+					CarCommon.TyreSoundPlayer.Stop();
 				}
 
 				var xForce = -steerSideDirection * steerXVelocity * xTraction * tireWeight;
@@ -748,19 +762,10 @@ public partial class Car : RigidBody3D
 				_speedQueue.Enqueue(peek);
 			}
 			avgSpeed /= 5;
-			float speedChange = avgSpeed - GetLinearVelocity().Length(); 
-			
-			//bonk sound
-			if (speedChange > MaxSpeed / 15)
-			{
-				CarCommon.CrashSoundPlayer.Play();
-			}
-			else if(LinearVelocity.Length() > 2 && !CarCommon.GrindSoundPlayer.Playing)
-			{
-				CarCommon.GrindSoundPlayer.Play();
-				_bonkCount++;
-			}
-			//--
+			float speedChange = avgSpeed - GetLinearVelocity().Length();
+
+			CarCommon.CrashSoundPlayer.GlobalPosition = GlobalPosition;
+			CarCommon.GrindSoundPlayer.GlobalPosition = GlobalPosition;
 			
 			if (LinearVelocity.Length() > 2)
 			{
@@ -770,8 +775,14 @@ public partial class Car : RigidBody3D
 				{
 					if (state3D.GetContactColliderId(contact) == node.GetInstanceId())
 					{
-						//bonk particles
 						Vector3 position = state3D.GetContactColliderPosition(contact);
+						
+						//sound pos
+						CarCommon.CrashSoundPlayer.GlobalPosition = position;
+						CarCommon.GrindSoundPlayer.GlobalPosition = position;
+						//
+						
+						//bonk particles
 						foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
 						{
 							if (!particle.Emitting)
@@ -787,7 +798,7 @@ public partial class Car : RigidBody3D
 						//bumper
 						if (node is StaticBody3D staticBody3D && staticBody3D.GetOwner() is Block block)
 						{
-							if (block.IsBumper && (block.WheelTriggerMeshInstance.GlobalTransform * block.WheelTriggerMeshInstance.GetAabb()).Abs().HasPoint(state3D.GetContactColliderPosition(contact)))
+							if (block.IsBumper && (block.WheelTriggerMeshInstance.GlobalTransform * block.WheelTriggerMeshInstance.GetAabb()).Abs().HasPoint(position))
 							{
 								BumpCar(block.GlobalBasis.Y, 0.25f);
 							}
@@ -796,6 +807,18 @@ public partial class Car : RigidBody3D
 					}
 				}
 			}
+			
+			//bonk sound
+			if (speedChange > MaxSpeed / 15)
+			{
+				CarCommon.CrashSoundPlayer.Play();
+			}
+			else if(LinearVelocity.Length() > 2 && !CarCommon.GrindSoundPlayer.Playing)
+			{
+				CarCommon.GrindSoundPlayer.Play();
+				_bonkCount++;
+			}
+			//--
 
 			//pad vibration
 			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId) != null && (GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL || GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN))
@@ -861,5 +884,25 @@ public partial class Car : RigidBody3D
 		var force = globalBasisY * Mass * 1500 * multiplier;
 		force.Y = Mathf.Min(force.Y, 100000);
 		ApplyCentralForce(force);
+	}
+	
+	public AudioStream PreloadStreams(AudioStream audioStream)
+	{
+		if (audioStream is AudioStreamRandomizer audioStreamRandomizer)
+		{
+			for (int i = 0; i < audioStreamRandomizer.StreamsCount; i++)
+			{
+				audioStreamRandomizer.SetStream(i, LoadStreamFromPath(audioStreamRandomizer.GetStream(i).ResourcePath));
+			}
+			
+			return audioStreamRandomizer;
+		}
+
+		return LoadStreamFromPath(audioStream.ResourcePath);
+	}
+
+	private AudioStream LoadStreamFromPath(string path)
+	{
+		return GD.Load<AudioStream>(path);
 	}
 }

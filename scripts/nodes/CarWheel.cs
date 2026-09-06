@@ -31,10 +31,6 @@ public partial class CarWheel : Node3D
 	[Export] public GpuParticles3D SmokeParticles;
 	[Export] public GpuParticles3D GrassParticles;
 	[Export] public StandardMaterial3D ParticlesDefaultMaterial;
-
-	[ExportCategory("Sounds")] 
-	[Export] public AudioStream DriftSounds;
-	[Export] public AudioStream GrassSound;
 	
 	private ImmediateMesh _skidmarkMesh;
 	private RingBuffer<SkidmarkSegment> _skidmarkLines;
@@ -44,8 +40,6 @@ public partial class CarWheel : Node3D
 
 	public bool GrassContact = false;
 	
-	public AudioStreamPlayer3D WheelSoundPlayer = new AudioStreamPlayer3D();
-	
 	public override void _Ready()
 	{
 		_skidmarkLines = new RingBuffer<SkidmarkSegment>(SkidmarkCapacity);
@@ -54,13 +48,15 @@ public partial class CarWheel : Node3D
 		_skidmarkMesh = new ImmediateMesh();
 		SkidmarkMeshInstance.Mesh = _skidmarkMesh;
 		SkidmarkMeshInstance.SetLayerMaskValue(3, true);
-
+		
+		/*
 		WheelSoundPlayer.VolumeDb = -8;
 		WheelSoundPlayer.UnitSize = 2;
 		WheelSoundPlayer.MaxDb = 1;
 		WheelSoundPlayer.Bus = "GameSounds";
 		WheelSoundPlayer.MaxDistance = 40;
-		AddChild(WheelSoundPlayer);
+		WheelSoundPlayer.MaxPolyphony = 1;
+		*/
 	}
 
 	public void Slide(Vector3 position, Vector3 velocity)
