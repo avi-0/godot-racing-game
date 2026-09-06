@@ -14,6 +14,8 @@ public partial class Block : Node3D
 	public delegate void ChildMouseEnteredEventHandler(Block block);
 
 	public BlockRecord Record;
+
+	public AudioStreamPlayer3D SpecialSoundPlayer;
 	
 	public int BlockId = 0;
 	[Export] public bool IsCheckpoint = false;
@@ -26,7 +28,8 @@ public partial class Block : Node3D
 	[Export] public bool HasLight = false;
 	[Export] public Node3D SpawnPointNode;
 	[Export] public MeshInstance3D WheelTriggerMeshInstance;
-
+	[Export] public AudioStream SpecialSoundAudioStream = null; 
+	
 	public Transform3D SpawnPoint =>
 		SpawnPointNode.GlobalTransform.Orthonormalized().RotatedLocal(Vector3.Up, float.Pi / 2);
 
@@ -45,6 +48,33 @@ public partial class Block : Node3D
 		foreach (var area in FindChildren("*", "Area3D").Cast<Area3D>())
 			if (area.IsInGroup("finish_hitbox") || area.IsInGroup("checkpoint_hitbox"))
 				area.BodyEntered += AreaOnBodyEntered;
+
+		if (IsPhysical)
+		{
+			if (GetChild(0) is RigidBody3D rigidBody)
+			{
+				rigidBody.ContactMonitor = true;
+				rigidBody.MaxContactsReported = 5;
+				rigidBody.BodyEntered += PhysicalHit;
+			}
+			
+			if (SpecialSoundAudioStream == null)
+			{
+				SpecialSoundAudioStream = GD.Load<AudioStream>("res://audio/streams/object_drop_random_stream.tres");
+			}
+		}
+		
+		if (SpecialSoundAudioStream != null)
+		{
+			SpecialSoundPlayer = new AudioStreamPlayer3D();
+			SpecialSoundPlayer.Stream = SpecialSoundAudioStream;
+			SpecialSoundPlayer.VolumeDb = 0;
+			SpecialSoundPlayer.UnitSize = 7;
+			SpecialSoundPlayer.MaxDistance = 50;
+			SpecialSoundPlayer.SetBus("GameSounds");
+			SpecialSoundPlayer.MaxPolyphony = 4;
+			GetChild(0).AddChild(SpecialSoundPlayer);
+		}
 	}
 
 	private void AreaOnBodyEntered(Node3D body)
@@ -81,5 +111,10 @@ public partial class Block : Node3D
 		instance.Transform = data.Transform;
 
 		return instance;
+	}
+
+	private void PhysicalHit(Node body)
+	{
+		SpecialSoundPlayer.Play();
 	}
 }

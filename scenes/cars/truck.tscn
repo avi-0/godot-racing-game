@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_w0oio"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_oy6i6"]
+[ext_resource type="AudioStream" uid="uid://c7j1alax8kr5q" path="res://audio/streams/og_engine_stream.tres" id="2_rfm5q"]
 [ext_resource type="Material" uid="uid://cxury5fss0wwx" path="res://assets/asset_packs/cars/Textures/godot_materials/set2.tres" id="4_onaia"]
 [ext_resource type="Material" uid="uid://bhqqd3h287dey" path="res://assets/asset_packs/cars/Textures/godot_materials/set3.tres" id="5_j5vh0"]
 [ext_resource type="Material" uid="uid://cok5acfebmyip" path="res://assets/asset_packs/cars/Textures/godot_materials/set0.tres" id="6_ev7v8"]
@@ -280,6 +281,7 @@ Acceleration = 200
 MaxSpeed = 35
 BrakingStrengthMultiplier = 1.0
 ReversingStrengthMultiplier = 2.0
+EngineSoundStream = ExtResource("2_rfm5q")
 TireTurnSpeed = 0.6
 SteeringBaseDegrees = 2
 SlippingTraction = 0.5

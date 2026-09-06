@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://lejlxkwbedup"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_denii"]
+[ext_resource type="AudioStream" uid="uid://c7j1alax8kr5q" path="res://audio/streams/og_engine_stream.tres" id="2_filc1"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_sw6ji"]
 [ext_resource type="Material" uid="uid://bhqqd3h287dey" path="res://assets/asset_packs/cars/Textures/godot_materials/set3.tres" id="4_30yta"]
 [ext_resource type="Curve" uid="uid://cxhyv7al6iqul" path="res://scenes/cars_extras/curves/taxi_rear.tres" id="4_vwi5m"]
@@ -279,6 +280,7 @@ Acceleration = 399
 MaxSpeed = 25
 BrakingStrengthMultiplier = 0.4
 ReversingStrengthMultiplier = 0.7
+EngineSoundStream = ExtResource("2_filc1")
 TireTurnSpeed = 1.0
 SteeringBaseDegrees = 5
 SlippingTraction = 0.2

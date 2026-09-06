@@ -27,6 +27,7 @@ public partial class Car : RigidBody3D
 	[Export] public float BrakingStrengthMultiplier = 0.5f;
 	[Export] public float ReversingStrengthMultiplier = 0.5f;
 	[Export] public bool ReleaseDebuff = false;
+	[Export] public AudioStreamWav EngineSoundStream;
 	
 	[ExportCategory("Steering and Drifting")]
 	[Export] public float TireTurnSpeed = 2.0f;
@@ -153,6 +154,7 @@ public partial class Car : RigidBody3D
 			_PhysicsProcess(60);
 		}
 
+		CarCommon.EngineSoundPlayer.Stream = EngineSoundStream;
 		CarCommon.EngineSoundPlayer.Transform = EnginePosition.Transform;
 	}
 
@@ -521,6 +523,7 @@ public partial class Car : RigidBody3D
 					{
 						CarCommon.TyreSoundPlayer.Stream = CarCommon.GrassSounds;
 						CarCommon.TyreSoundPlayer.VolumeDb = -1;
+						CarCommon.TyreSoundPlayer.UnitSize = 3.25f;
 						CarCommon.TyreSoundPlayer.Play();
 					}
 				}
@@ -543,7 +546,8 @@ public partial class Car : RigidBody3D
 					if (!wheel.GrassContact && (!CarCommon.TyreSoundPlayer.Playing || CarCommon.TyreSoundPlayer.Stream != CarCommon.DriftSounds))
 					{
 						CarCommon.TyreSoundPlayer.Stream = CarCommon.DriftSounds;
-						CarCommon.TyreSoundPlayer.VolumeDb = -6;
+						CarCommon.TyreSoundPlayer.VolumeDb = -12;
+						CarCommon.TyreSoundPlayer.UnitSize = 10;
 						CarCommon.TyreSoundPlayer.Play();
 					}
 				}
@@ -752,88 +756,89 @@ public partial class Car : RigidBody3D
 
 	public void Bonk(Node node)
 	{
-		if (!IsGhost)
+		if (IsGhost) {return;}
+		if (GetLinearVelocity().Length() < 0.05f) {return;}
+		if (node is RigidBody3D) {return;}
+		
+		float avgSpeed = 0;
+		for (int i = 0; i < 5; i++)
 		{
-			float avgSpeed = 0;
-			for (int i = 0; i < 5; i++)
-			{
-				float peek = _speedQueue.Dequeue();
-				avgSpeed += peek;
-				_speedQueue.Enqueue(peek);
-			}
-			avgSpeed /= 5;
-			float speedChange = avgSpeed - GetLinearVelocity().Length();
-
-			CarCommon.CrashSoundPlayer.GlobalPosition = GlobalPosition;
-			CarCommon.GrindSoundPlayer.GlobalPosition = GlobalPosition;
-			
-			if (LinearVelocity.Length() > 2)
-			{
-				PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
-				
-				for (var contact = 0; contact < state3D.GetContactCount(); contact++)
-				{
-					if (state3D.GetContactColliderId(contact) == node.GetInstanceId())
-					{
-						Vector3 position = state3D.GetContactColliderPosition(contact);
-						
-						//sound pos
-						CarCommon.CrashSoundPlayer.GlobalPosition = position;
-						CarCommon.GrindSoundPlayer.GlobalPosition = position;
-						//
-						
-						//bonk particles
-						foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
-						{
-							if (!particle.Emitting)
-							{
-								particle.SetGlobalPosition(position);
-								particle.Emitting = true;
-
-								break;
-							}
-						}
-						//--
-
-						//bumper
-						if (node is StaticBody3D staticBody3D && staticBody3D.GetOwner() is Block block)
-						{
-							if (block.IsBumper && (block.WheelTriggerMeshInstance.GlobalTransform * block.WheelTriggerMeshInstance.GetAabb()).Abs().HasPoint(position))
-							{
-								BumpCar(block.GlobalBasis.Y, 0.25f);
-							}
-						}
-						//--
-					}
-				}
-			}
-			
-			//bonk sound
-			if (speedChange > MaxSpeed / 15)
-			{
-				CarCommon.CrashSoundPlayer.Play();
-			}
-			else if(LinearVelocity.Length() > 2 && !CarCommon.GrindSoundPlayer.Playing)
-			{
-				CarCommon.GrindSoundPlayer.Play();
-				_bonkCount++;
-			}
-			//--
-
-			//pad vibration
-			if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId) != null && (GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL || GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN))
-			{
-				float magnitude = speedChange / (MaxSpeed / 4);
-				float duration = 0.2f;
-				if (magnitude > 1.0f) { magnitude = 1.0f; duration += magnitude - 1.0f;}
-
-				if (magnitude > 0)
-				{
-					InputManager.Instance.VibratePlayer(GameManager.Instance.GetPlayerViewPortById(PlayerId).LocalPlayerId, 0.0f, magnitude, duration);
-				}
-			}
-			//--
+			float peek = _speedQueue.Dequeue();
+			avgSpeed += peek;
+			_speedQueue.Enqueue(peek);
 		}
+		avgSpeed /= 5;
+		float speedChange = avgSpeed - GetLinearVelocity().Length();
+
+		CarCommon.CrashSoundPlayer.GlobalPosition = GlobalPosition;
+		CarCommon.GrindSoundPlayer.GlobalPosition = GlobalPosition;
+		
+		if (LinearVelocity.Length() > 2)
+		{
+			PhysicsDirectBodyState3D state3D = PhysicsServer3D.BodyGetDirectState(GetRid());
+			
+			for (var contact = 0; contact < state3D.GetContactCount(); contact++)
+			{
+				if (state3D.GetContactColliderId(contact) == node.GetInstanceId())
+				{
+					Vector3 position = state3D.GetContactColliderPosition(contact);
+					
+					//sound pos
+					CarCommon.CrashSoundPlayer.GlobalPosition = position;
+					CarCommon.GrindSoundPlayer.GlobalPosition = position;
+					//
+					
+					//bonk particles
+					foreach (GpuParticles3D particle in CarCommon.CollisionDebrisParticles)
+					{
+						if (!particle.Emitting)
+						{
+							particle.SetGlobalPosition(position);
+							particle.Emitting = true;
+
+							break;
+						}
+					}
+					//--
+
+					//bumper
+					if (node is StaticBody3D staticBody3D && staticBody3D.GetOwner() is Block block)
+					{
+						if (block.IsBumper && (block.WheelTriggerMeshInstance.GlobalTransform * block.WheelTriggerMeshInstance.GetAabb()).Abs().HasPoint(position))
+						{
+							BumpCar(block.GlobalBasis.Y, 0.25f);
+						}
+					}
+					//--
+				}
+			}
+		}
+		
+		//bonk sound
+		if (speedChange > MaxSpeed / 15)
+		{
+			CarCommon.CrashSoundPlayer.Play();
+		}
+		else if(LinearVelocity.Length() > 2 && !CarCommon.GrindSoundPlayer.Playing)
+		{
+			CarCommon.GrindSoundPlayer.Play();
+			_bonkCount++;
+		}
+		//--
+
+		//pad vibration
+		if (PlayerId >= 0 && GameModeController.CurrentGameMode.GetPlayer(PlayerId) != null && (GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL || GameModeController.CurrentGameMode.GetPlayer(PlayerId).Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN))
+		{
+			float magnitude = speedChange / (MaxSpeed / 4);
+			float duration = 0.2f;
+			if (magnitude > 1.0f) { magnitude = 1.0f; duration += magnitude - 1.0f;}
+
+			if (magnitude > 0)
+			{
+				InputManager.Instance.VibratePlayer(GameManager.Instance.GetPlayerViewPortById(PlayerId).LocalPlayerId, 0.0f, magnitude, duration);
+			}
+		}
+		//--
 	}
 
 	public void Unbonk(Node node)

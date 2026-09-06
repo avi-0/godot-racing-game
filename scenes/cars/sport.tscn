@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dok0if2iog0no"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_qtbni"]
+[ext_resource type="AudioStream" uid="uid://c7j1alax8kr5q" path="res://audio/streams/og_engine_stream.tres" id="2_2t0n8"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_dg6r6"]
 [ext_resource type="Material" uid="uid://cok5acfebmyip" path="res://assets/asset_packs/cars/Textures/godot_materials/set0.tres" id="3_8lcft"]
 [ext_resource type="PackedScene" uid="uid://rcirugm2el6u" path="res://scenes/cars_extras/wheel.tscn" id="4_dg6r6"]
@@ -274,6 +275,7 @@ EnginePosition = NodePath("EnginePosition")
 Acceleration = 235
 MaxSpeed = 70
 BrakingStrengthMultiplier = 1.5
+EngineSoundStream = ExtResource("2_2t0n8")
 TireTurnSpeed = 1.5
 SteeringBaseDegrees = 4
 SlippingTraction = 0.2

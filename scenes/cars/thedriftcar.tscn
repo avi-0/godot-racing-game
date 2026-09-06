@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://crc2q38d8anpl"]
 
 [ext_resource type="Script" uid="uid://b0tnrs7ikoyh4" path="res://scripts/nodes/Car.cs" id="1_micox"]
+[ext_resource type="AudioStream" uid="uid://c7j1alax8kr5q" path="res://audio/streams/og_engine_stream.tres" id="2_58tp6"]
 [ext_resource type="Script" uid="uid://dkdi4r3choyux" path="res://scripts/resources/WheelConfig.cs" id="2_glvfi"]
 [ext_resource type="Texture2D" uid="uid://poojimqqe4jj" path="res://textures/cars/drift.png" id="3_bnrai"]
 [ext_resource type="Texture2D" uid="uid://csqp1xm6515v" path="res://textures/cars/drift2.png" id="4_3ohr3"]
@@ -142,6 +143,7 @@ Acceleration = 600
 MaxSpeed = 30
 BrakingStrengthMultiplier = 0.2
 ReleaseDebuff = true
+EngineSoundStream = ExtResource("2_58tp6")
 SteeringBaseDegrees = 3
 SlippingTraction = 0.15
 SlipThreshold = 1.0
