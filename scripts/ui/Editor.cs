@@ -164,6 +164,8 @@ public partial class Editor : Control
 
 	private float _lastAutosaveTime = 0;
 
+	private Button SelectedBlockButton;
+
 	public bool IsRunning
 	{
 		get => _isRunning;
@@ -747,6 +749,14 @@ public partial class Editor : Control
 			
 			UiSoundPlayer.Singleton.BlockPlacedSound.Play();
 
+			string[] dir = CurrentBlockRecord.ResourcePath.Split("/");
+			string path = "/";
+			for (int i = 3; i < dir.Length - 1; i++)
+			{
+				path += dir[i] + "/";
+			}
+			SetDirectory(path).Forget();
+			
 			PickButton.SetPressed(false);
 		}
 	}
@@ -772,10 +782,17 @@ public partial class Editor : Control
 		return null;
 	}
 
-	private void OnBlockButtonPressed(BlockRecord blockRecord)
+	private void OnBlockButtonPressed(BlockRecord blockRecord, Button button)
 	{
 		CurrentBlockRecord = blockRecord;
-
+		
+		if (IsInstanceValid(SelectedBlockButton))
+		{
+			SelectedBlockButton.RemoveThemeColorOverride("icon_normal_color");
+		}
+		button.AddThemeColorOverride("icon_normal_color", Colors.Green);
+		SelectedBlockButton = button;
+		
 		CreateCursor();
 	}
 
@@ -831,7 +848,13 @@ public partial class Editor : Control
 
 			BlockListContainer.AddChild(button);
 
-			button.Pressed += () => OnBlockButtonPressed(record);
+			if (record == CurrentBlockRecord)
+			{
+				button.AddThemeColorOverride("icon_normal_color", Colors.Green);
+				SelectedBlockButton = button;
+			}
+			
+			button.Pressed += () => OnBlockButtonPressed(record, button);
 		}
 	}
 
