@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://srhlqf72uocv"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_p3skm"]
+[ext_resource type="AudioStream" uid="uid://d27n373enla5x" path="res://audio/objects/booster.wav" id="2_7utdc"]
 [ext_resource type="Material" uid="uid://crpaw66wg2bpk" path="res://materials/booster.tres" id="2_xgu8l"]
 [ext_resource type="Material" uid="uid://fjiwbtrhsjri" path="res://materials/concrete.tres" id="3_7utdc"]
 
@@ -72,6 +73,8 @@ size = Vector3(0.7, 0.1, 1)
 script = ExtResource("1_p3skm")
 IsBooster = true
 WheelTriggerMeshInstance = NodePath("subdiv/MeshInstance3D")
+SpecialSoundAudioStream = ExtResource("2_7utdc")
+SpecialSoundVolumeDb = -3.0
 
 [node name="subdiv" type="Node3D" parent="." unique_id=1799189647]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)

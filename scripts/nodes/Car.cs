@@ -634,6 +634,11 @@ public partial class Car : RigidBody3D
 							{
 								var force = -block.GlobalBasis.Z * 400;
 								ApplyCentralForce(force);
+
+								if (!block.SpecialSoundPlayer.IsPlaying())
+								{
+									block.SpecialSoundPlayer.Play();
+								}
 							}
 							
 							if (block.IsBumper)
@@ -642,6 +647,8 @@ public partial class Car : RigidBody3D
 								if (_wheelsOnBump == 1)
 								{
 									BumpCar(block.GlobalBasis.Y, 1.0f);
+									
+									block.SpecialSoundPlayer.Play();
 								}
 							}
 
@@ -833,6 +840,8 @@ public partial class Car : RigidBody3D
 						if (block.IsBumper && (block.WheelTriggerMeshInstance.GlobalTransform * block.WheelTriggerMeshInstance.GetAabb()).Abs().HasPoint(position))
 						{
 							BumpCar(block.GlobalBasis.Y, 0.25f);
+							
+							block.SpecialSoundPlayer.Play();
 						}
 					}
 					//--

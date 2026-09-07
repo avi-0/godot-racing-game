@@ -29,6 +29,7 @@ public partial class Block : Node3D
 	[Export] public Node3D SpawnPointNode;
 	[Export] public MeshInstance3D WheelTriggerMeshInstance;
 	[Export] public AudioStream SpecialSoundAudioStream = null; 
+	[Export] public float SpecialSoundVolumeDb = 0.0f;
 	
 	public Transform3D SpawnPoint =>
 		SpawnPointNode.GlobalTransform.Orthonormalized().RotatedLocal(Vector3.Up, float.Pi / 2);
@@ -68,7 +69,8 @@ public partial class Block : Node3D
 		{
 			SpecialSoundPlayer = new AudioStreamPlayer3D();
 			SpecialSoundPlayer.Stream = SpecialSoundAudioStream;
-			SpecialSoundPlayer.VolumeDb = 0;
+			SpecialSoundPlayer.VolumeDb = SpecialSoundVolumeDb;
+			SpecialSoundPlayer.MaxDb = 4;
 			SpecialSoundPlayer.UnitSize = 7;
 			SpecialSoundPlayer.MaxDistance = 50;
 			SpecialSoundPlayer.SetBus("GameSounds");
