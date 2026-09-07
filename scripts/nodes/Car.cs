@@ -745,6 +745,8 @@ public partial class Car : RigidBody3D
 			CarCommon.PlayerName.Text = "Personal Best";
 			CarCommon.InfoSprite.SetLayerMaskValue(1, false);
 			CarCommon.InfoSprite.SetLayerMaskValue(cullLayer, true);
+			CarCommon.EngineSoundPlayer.Playing = false;
+			CarCommon.SuspensionSoundPlayer.VolumeDb = -100;
 		}
 		
 		foreach (MeshInstance3D mesh in CarModel.GetChildren())

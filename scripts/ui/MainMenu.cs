@@ -214,7 +214,9 @@ public partial class MainMenu : Control
 			spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + _loadedCar.FrontWheelConfig.SpringRest + 0.1f, spawn.Origin.Z);
 			_loadedCar.GlobalTransform = spawn;
 			_loadedCar.ResetPhysicsInterpolation();
-
+			_loadedCar.CarCommon.EngineSoundPlayer.Playing = false;
+			_loadedCar.CarCommon.SuspensionSoundPlayer.VolumeDb = -100;
+			
 			_loadedCar.InputToggleLights(0);
 			
 			GarageCameraBase.GlobalTransform = _loadedCar.GlobalTransform;
