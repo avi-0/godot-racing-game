@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BlockRecord" load_steps=3 format=3 uid="uid://h6qdf8ytmwrm"]
+[gd_resource type="Resource" script_class="BlockRecord" format=3 uid="uid://h6qdf8ytmwrm"]
 
 [ext_resource type="Texture2D" uid="uid://cns5sny0hm1sm" path="res://blocks/deco/_images/construction-light.png" id="1_3xpjr"]
 [ext_resource type="Script" uid="uid://lv38sateupjv" path="res://scripts/resources/BlockRecord.cs" id="1_76y8s"]
@@ -8,3 +8,4 @@ script = ExtResource("1_76y8s")
 ScenePath = "res://blocks/deco/_scenes/construction-light.tscn"
 SourceScenePath = "res://assets/kenney/cityroads/deco/construction-light.glb"
 ThumbnailTexture = ExtResource("1_3xpjr")
+DisplayName = "[Physical] Construction Light"
