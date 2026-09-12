@@ -39,8 +39,8 @@ public partial class JoypadRemapButton : RemapButton
 		return joypadMotionEvent.Axis switch
 		{
 		JoyAxis.LeftX => "l_stick",
-		JoyAxis.LeftY => "r_stick",
-		JoyAxis.RightX => "l_stick",
+		JoyAxis.LeftY => "l_stick",
+		JoyAxis.RightX => "r_stick",
 		JoyAxis.RightY => "r_stick",
 		JoyAxis.TriggerLeft => "lt",
 		JoyAxis.TriggerRight => "rt",
