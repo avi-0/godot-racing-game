@@ -56,11 +56,13 @@ public partial class SettingsMenu : Control
 		{
 			SettingsManager.Instance.Settings.Graphics = new();
 			UpdateUiFromSettings();
+			OnGraphicsSettingChanged();
 		};
 		ResetSoundButton.Pressed += () =>
 		{
 			SettingsManager.Instance.Settings.Sound = new();
 			UpdateUiFromSettings();
+			OnSoundSettingChanged();
 		};
 		ResetControlsButton.Pressed += () =>
 		{
