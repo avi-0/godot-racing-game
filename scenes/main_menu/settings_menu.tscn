@@ -3,7 +3,15 @@
 [ext_resource type="Theme" uid="uid://icnr3mmy82ij" path="res://scenes/main_menu/menu_theme.tres" id="1_cr101"]
 [ext_resource type="Script" uid="uid://b3f851ai88ros" path="res://scripts/ui/SettingsMenu.cs" id="2_wswnh"]
 [ext_resource type="Script" uid="uid://bqqa0tfwkhmp0" path="res://scripts/ui/KeyboardRemapButton.cs" id="4_2jsdb"]
+[ext_resource type="Script" uid="uid://cy87bpg2c4fgu" path="res://addons/controller_icons/objects/ControllerIconTexture.cs" id="5_onjmn"]
 [ext_resource type="Script" uid="uid://1uq1ee3c3fje" path="res://scripts/ui/JoypadRemapButton.cs" id="5_t0huu"]
+
+[sub_resource type="Texture2D" id="Texture2D_t0huu"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("5_onjmn")
+path = "game_move_camera"
+metadata/_custom_type_script = "uid://cy87bpg2c4fgu"
 
 [sub_resource type="InputEventAction" id="InputEventAction_cr101"]
 action = &"ui_cancel"
@@ -381,6 +389,36 @@ Action = &"game_right"
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_right"
+
+[node name="movecam1" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=2107750777]
+layout_mode = 2
+text = "Camera Left"
+
+[node name="movecam1_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1799121820]
+layout_mode = 2
+icon = SubResource("Texture2D_t0huu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="movecam1_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=198416884]
+layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_pad_move_camera_left"
+
+[node name="movecam2" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1227343598]
+layout_mode = 2
+text = "Camera Right"
+
+[node name="movecam2_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=574507694]
+layout_mode = 2
+icon = SubResource("Texture2D_t0huu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="movecam2_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=668641169]
+layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_pad_move_camera_right"
 
 [node name="Restart" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=425924137]
 layout_mode = 2

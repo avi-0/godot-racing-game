@@ -107,12 +107,47 @@ public partial class PlayerViewport : SubViewport
 		}
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (!Active || Car == null || GameManager.Instance.PauseMenu.Visible) { return;}
+		
+		//control camera with mouse - RMB bind
+		if (@event is InputEventMouseButton mouseButtonEvent)
+		{
+			if (InputManager.Instance.Devices.Count > 0) { return; }
+			
+			if (mouseButtonEvent.IsActionPressed(InputActionNames.MoveCamera))
+			{
+				Car.IsPlayerMouseControllingCamera = true;
+				SetInputAsHandled();
+			}
+			else if (mouseButtonEvent.IsActionReleased(InputActionNames.MoveCamera))
+			{
+				Car.IsPlayerMouseControllingCamera = false;
+				//SetInputAsHandled();
+			}
+		}
+		//--
+	}
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		if (!Active || Car == null || GameManager.Instance.PauseMenu.Visible) { return;}
+		
+		//control camera with mouse
+		if (@event is InputEventMouseMotion mouseMotionEvent)
+		{
+			if (Car.IsPlayerMouseControllingCamera)
+			{
+				Car.OrbitCamera.RotateCameraX(-mouseMotionEvent.Relative.X * 0.005f);
+			}
+			
+			//SetInputAsHandled();
+			return;
+		}
+		//--
+		
 		if (!InputManager.Instance.InputEventMatchesPlayer(@event, LocalPlayerId))
 			return;
-
-		if (GameManager.Instance.PauseMenu.Visible) { return;}
 
 		if (@event.IsAction(InputActionNames.Forward, true))
 		{
@@ -174,6 +209,26 @@ public partial class PlayerViewport : SubViewport
 				}
 			}
 			SetInputAsHandled();
+		}
+		else if (@event.IsActionPressed(InputActionNames.MoveCameraLeft))
+		{
+			Car.IsPlayerPadControllingCamera = true;
+			_inputs.PadCamLeft = @event.GetActionStrength(InputActionNames.MoveCameraLeft, true);
+		}
+		else if (@event.IsActionPressed(InputActionNames.MoveCameraRight))
+		{
+			Car.IsPlayerPadControllingCamera = true;
+			_inputs.PadCamRight = @event.GetActionStrength(InputActionNames.MoveCameraRight, true);
+		}
+		else if (@event.IsActionReleased(InputActionNames.MoveCameraLeft))
+		{
+			Car.IsPlayerPadControllingCamera = false;
+			_inputs.PadCamLeft = 0;
+		}
+		else if (@event.IsActionReleased(InputActionNames.MoveCameraRight))
+		{
+			Car.IsPlayerPadControllingCamera = false;
+			_inputs.PadCamRight = 0;
 		}
 	}
 

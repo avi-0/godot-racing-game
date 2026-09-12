@@ -63,6 +63,9 @@ public partial class Car : RigidBody3D
 	[Export] public Material[] Skins;
 	
 	public bool IsGhost = false;
+
+	public bool IsPlayerMouseControllingCamera = false;
+	public bool IsPlayerPadControllingCamera = false;
 	
 	private float _mouseSensitivity;
 	private int _wheelCount;
@@ -91,7 +94,7 @@ public partial class Car : RigidBody3D
 			}
 			else
 			{
-				CarCommon.AudioListener.ClearCurrent();
+				//CarCommon.AudioListener.ClearCurrent();
 			}
 
 			_isLocallyControlled = value;
@@ -121,8 +124,8 @@ public partial class Car : RigidBody3D
 	
 	public override void _Ready()
 	{
-		OrbitCamera.Radius = 3.5f;
-		OrbitCamera.Pitch = float.DegreesToRadians(30);
+		OrbitCamera.Radius = 4.0f;
+		OrbitCamera.Pitch = float.DegreesToRadians(25);
 
 		_wheelCount = Wheels.Length;
 
@@ -294,7 +297,7 @@ public partial class Car : RigidBody3D
 		
 		ProcessEngineSound();
 
-		if (LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
+		if (!(IsPlayerMouseControllingCamera || IsPlayerPadControllingCamera) && LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
 			OrbitCamera.UpdateYawFromVelocity((float) delta, LinearVelocity);
 		
 		if (DebugMode)
@@ -318,6 +321,13 @@ public partial class Car : RigidBody3D
 			{
 				GameModeController.CurrentGameMode.GetPlayer(PlayerId).State = GameModeUtils.PLAYER_STATE_DEAD;
 			}
+		}
+		//--
+		
+		//pad camera control
+		if (IsPlayerPadControllingCamera)
+		{
+			OrbitCamera.RotateCameraX(-(_inputs.PadCamLeft + -_inputs.PadCamRight) * 0.01f);
 		}
 		//--
 	}

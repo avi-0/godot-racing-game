@@ -15,4 +15,7 @@ public static class InputActionNames
 	public static readonly StringName Respawn = new("game_respawn");
 	public static readonly StringName HideUI = new("game_hide_ui");
 	public static readonly StringName HideGhost = new("game_hide_ghost");
+	public static readonly StringName MoveCamera = new("game_move_camera");
+	public static readonly StringName MoveCameraLeft = new("game_pad_move_camera_left");
+	public static readonly StringName MoveCameraRight = new("game_pad_move_camera_right");
 }

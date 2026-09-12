@@ -57,4 +57,9 @@ public partial class OrbitCamera : Node3D
 	{
 		CameraStickBase.RotationDegrees += 360 *  new Vector3(movement.Y, -movement.X, 0);
 	}
+
+	public void RotateCameraX(float x)
+	{
+		CameraStickBase.RotationDegrees += 360 *  new Vector3(0, x, 0);
+	}
 }

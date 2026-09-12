@@ -22,6 +22,8 @@ public partial class SettingsManager : Node
 		InputActionNames.Back,
 		InputActionNames.Left,
 		InputActionNames.Right,
+		InputActionNames.MoveCameraLeft,
+		InputActionNames.MoveCameraRight,
 		InputActionNames.Restart,
 		InputActionNames.Respawn,
 		InputActionNames.CycleCamera,

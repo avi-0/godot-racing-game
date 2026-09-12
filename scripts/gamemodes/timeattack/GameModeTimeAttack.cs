@@ -230,6 +230,8 @@ public class GameModeTimeAttack : IGameMode
 			{
 				player.PlayerCar.SetRandomSkin();
 			}
+			
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 
 		if (_currentTrack.Track.Options.StartDayTime is <= 8 or >= 16)
@@ -701,12 +703,10 @@ public class GameModeTimeAttack : IGameMode
 			viewport.FinishTimeLabel.Text += "\n Press [img=32x32]res://assets/icons/controls/game_restart.tres[/img] to restart";
 			
 			viewport.FinishPanel.Show();
-			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 		else if (player.State != GameModeUtils.PLAYER_STATE_AFTERFINISH && viewport.FinishPanel.Visible)
 		{
 			viewport.FinishPanel.Hide();
-			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 		//--
 		
