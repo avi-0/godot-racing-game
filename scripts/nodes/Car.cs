@@ -399,8 +399,8 @@ public partial class Car : RigidBody3D
 			var worldVelocity = GetPointVelocity(contactPoint);
 			var relativeVelocity = springUpDirection.Dot(worldVelocity);
 			var dampForce = wheel.Config.SpringDamping * relativeVelocity;
-			var susForce = (force - dampForce);
-			var forceVector = susForce * normal / wheel.ShapeCast.GetCollisionCount();
+			wheel.LastSuspForce = (force - dampForce);
+			var forceVector = wheel.LastSuspForce * normal / wheel.ShapeCast.GetCollisionCount();
 
 			var forcePositionOffset = wheel.GlobalPosition - GlobalPosition;
 
@@ -601,8 +601,19 @@ public partial class Car : RigidBody3D
 
 				var fVelocity = -wheel.GlobalBasis.Z.Dot(tireVelocity);
 				var zTraction = WheelZFriction;
+				if (MathF.Abs(fVelocity) < 0.15f)
+				{
+					zTraction = 2.0f;
+				}
 				var zForce = wheel.GlobalBasis.Z * fVelocity * zTraction * tireWeight;
-
+				
+				if (MathF.Abs(fVelocity) < 0.5f)
+				{
+					Vector3 suspension = wheel.GlobalBasis.Y * wheel.LastSuspForce;
+					xForce.X -= suspension.X * GlobalBasis.Y.Dot(Vector3.Up);
+					zForce.Z -= suspension.Z * GlobalBasis.Y.Dot(Vector3.Up);
+				}
+				
 				var forcePos = contactPoint - GlobalPosition;
 				ApplyForce(xForce / wheel.ShapeCast.GetCollisionCount(), forcePos);
 				ApplyForce(zForce / wheel.ShapeCast.GetCollisionCount(), forcePos);
@@ -613,7 +624,7 @@ public partial class Car : RigidBody3D
 					DebugDraw3D.DrawArrowRay(contactPoint, zForce / Mass, 0.1f, Color.Color8(0, 0, 255),
 						arrow_size: 0.1f);
 				}
-
+				
 				if (wheel.GrassContact && tireVelocity.Length() > 5)
 				{
 					wheel.GrassParticles.SetEmitting(true);

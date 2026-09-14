@@ -39,6 +39,7 @@ public partial class CarWheel : Node3D
 	private bool _isSliding = false;
 
 	public bool GrassContact = false;
+	public float LastSuspForce = 0;
 	
 	public Queue<float> SpringLengths = new Queue<float>();
 	
