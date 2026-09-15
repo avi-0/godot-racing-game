@@ -77,7 +77,7 @@ public partial class PlayerViewport : SubViewport
 		int speed = (int)Mathf.Round(Car.LinearVelocity.Length() * 3.6f);
 		
 		int maxRange = 283 - 14;
-		float ratio = speed / 650.0f;
+		float ratio = speed / 300.0f;
 		SpeedArrow.RotationDegrees = 14 + (maxRange * ratio);
 		
 		SpeedLabel.Text = speed.ToString();

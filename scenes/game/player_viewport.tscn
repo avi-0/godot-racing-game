@@ -9,18 +9,18 @@ snap_2d_vertices_to_pixel = true
 audio_listener_enable_3d = true
 oversampling = false
 script = ExtResource("1_hc2ln")
-CheckPointLabel = NodePath("RaceUI/CheckPointLabel")
+CheckPointLabel = NodePath("RaceUI/speedo/CheckPointLabel")
 FinishPanel = NodePath("RaceUI/FinishPanel")
 FinishTimeLabel = NodePath("RaceUI/FinishPanel/MarginContainer/VBoxContainer/FinishTimeLabel")
 LapsLabel = NodePath("RaceUI/LapsLabel")
 RaceUi = NodePath("RaceUI")
-SpeedLabel = NodePath("RaceUI/SpeedLabel")
+SpeedLabel = NodePath("RaceUI/speedo/SpeedLabel")
 StartTimerLabel = NodePath("RaceUI/StartTimerLabel")
 TimeLabel = NodePath("RaceUI/TimeLabel")
 TrackInfoLabel = NodePath("RaceUI/TrackInfo")
 ScoreboardContainer = NodePath("RaceUI/Panel/Scoreboard")
 Camera = NodePath("Camera")
-SpeedArrow = NodePath("RaceUI/SpeedArrow")
+SpeedArrow = NodePath("RaceUI/speedo/SpeedArrow")
 CheckSplit = NodePath("RaceUI/CheckSplit")
 
 [node name="RaceUI" parent="." unique_id=902265255 instance=ExtResource("2_7nque")]

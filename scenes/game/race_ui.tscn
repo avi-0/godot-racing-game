@@ -24,19 +24,6 @@ grow_vertical = 2
 theme = ExtResource("1_3chua")
 script = ExtResource("2_3chua")
 
-[node name="SpeedoTextureRect" type="TextureRect" parent="." unique_id=1802319936]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -106.0
-offset_top = -422.0
-offset_right = 520.0
-grow_vertical = 0
-texture = ExtResource("3_aq8qp")
-expand_mode = 2
-stretch_mode = 5
-
 [node name="TimeLabel" type="Label" parent="." unique_id=1178739506]
 layout_mode = 1
 anchors_preset = 7
@@ -78,25 +65,6 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpeedLabel" type="Label" parent="." unique_id=291696011]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 159.0
-offset_top = -242.0
-offset_right = 256.0
-offset_bottom = -180.0
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.99999875, 0.8744475, 0.8514822, 1)
-theme_override_colors/font_shadow_color = Color(0.12315822, 0.29337206, 0.74966514, 0.67600006)
-theme_override_font_sizes/font_size = 48
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 1
-
 [node name="TrackInfo" type="Label" parent="." unique_id=118134597]
 layout_mode = 0
 offset_left = 16.0
@@ -137,25 +105,6 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 150
 text = "3
 "
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CheckPointLabel" type="Label" parent="." unique_id=155628280]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 134.0
-offset_top = -134.0
-offset_right = 280.0
-offset_bottom = -67.0
-grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.64000005)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("3_tggw1")
-theme_override_font_sizes/font_size = 48
-text = "000/000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -225,15 +174,88 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_a7dvw")
 text = "Ok"
 
-[node name="SpeedArrow" type="TextureRect" parent="." unique_id=704606994]
+[node name="speedo" type="Control" parent="." unique_id=1622127736]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -106.0
-offset_top = -422.0
-offset_right = 520.0
+offset_top = -330.0
+offset_right = 330.0
 grow_vertical = 0
+
+[node name="CheckPointLabel" type="Label" parent="speedo" unique_id=155628280]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -67.0
+offset_right = 73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.64000005)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("3_tggw1")
+theme_override_font_sizes/font_size = 48
+text = "000/000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedoTextureRect" type="TextureRect" parent="speedo" unique_id=1802319936]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -313.0
+offset_top = -211.0
+offset_right = 313.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_aq8qp")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SpeedLabel" type="Label" parent="speedo" unique_id=291696011]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -31.0
+offset_right = 48.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.99999875, 0.8744475, 0.8514822, 1)
+theme_override_colors/font_shadow_color = Color(0.12315822, 0.29337206, 0.74966514, 0.67600006)
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="SpeedArrow" type="TextureRect" parent="speedo" unique_id=704606994]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -313.0
+offset_top = -211.0
+offset_right = 313.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(313, 211)
 texture = ExtResource("7_tggw1")
 expand_mode = 2
