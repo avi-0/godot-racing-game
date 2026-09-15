@@ -7,7 +7,8 @@
 process_physics_priority = -100
 snap_2d_vertices_to_pixel = true
 audio_listener_enable_3d = true
-oversampling = false
+size_2d_override = Vector2i(512, 512)
+size_2d_override_stretch = true
 script = ExtResource("1_hc2ln")
 CheckPointLabel = NodePath("RaceUI/speedo/CheckPointLabel")
 FinishPanel = NodePath("RaceUI/FinishPanel")

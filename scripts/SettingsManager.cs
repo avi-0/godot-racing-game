@@ -125,6 +125,8 @@ public partial class SettingsManager : Node
 		viewport.SetScaling3DMode((Viewport.Scaling3DModeEnum)Settings.Graphics.ScaleMode);
 		
 		viewport.Scaling3DScale = (float)Settings.Graphics.RenderScale * 0.01f;
+
+		GetTree().Root.ContentScaleFactor = Settings.Graphics.UiScale;
 		
 		viewport.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Disabled;
 		viewport.UseTaa = false;

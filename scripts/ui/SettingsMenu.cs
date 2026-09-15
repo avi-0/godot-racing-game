@@ -29,6 +29,7 @@ public partial class SettingsMenu : Control
 	[Export] public OptionButton PerfMon;
 	[Export] public OptionButton Ao;
 	[Export] public OptionButton Reflection;
+	[Export] public Slider Uis;
 	
 	[Export] public Slider SoundSlider;
 	[Export] public Slider MusicSlider;
@@ -47,6 +48,7 @@ public partial class SettingsMenu : Control
 		SoundSlider.DragEnded += _ => OnSoundSettingChanged();
 		MusicSlider.DragEnded += _ => OnSoundSettingChanged();
 		TDrs.DragEnded += _ => OnGraphicsSettingChanged();
+		Uis.DragEnded += _ => OnGraphicsSettingChanged();
 		foreach (var optionButton in new List<OptionButton> {ScaleMode, WinMode, Aa, Vsync, ShadowQuality, Ao, Reflection})
 		{
 			optionButton.ItemSelected += _ => OnGraphicsSettingChanged();
@@ -97,6 +99,7 @@ public partial class SettingsMenu : Control
 		PerfMon.Selected = 1; if (!settings.PerfMonEnabled) { PerfMon.Selected = 0;}
 		Ao.Selected = settings.Graphics.Ao;
 		Reflection.Selected = settings.Graphics.Reflection;
+		Uis.Value = settings.Graphics.UiScale;
 		
 		SoundSlider.Value = settings.Sound.SfxLevel;
 		MusicSlider.Value = settings.Sound.MusicLevel;
@@ -125,6 +128,7 @@ public partial class SettingsMenu : Control
 		settings.PerfMonEnabled = PerfMon.Selected > 0;
 		settings.Graphics.Ao = Ao.Selected;
 		settings.Graphics.Reflection = Reflection.Selected;
+		settings.Graphics.UiScale = (float)Uis.Value;
 
 		settings.Sound.SfxLevel = SoundSlider.Value;
 		settings.Sound.MusicLevel = MusicSlider.Value;

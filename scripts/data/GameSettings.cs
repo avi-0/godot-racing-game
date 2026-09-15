@@ -25,6 +25,7 @@ public class GameSettings
 		public int ShadowQuality = 4;
 		public int Ao = 1;
 		public int Reflection = 0;
+		public float UiScale = 1.0f;
 	}
 
 	public class SoundSettings

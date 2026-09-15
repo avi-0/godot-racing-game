@@ -34,7 +34,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ekxnf")
@@ -75,7 +74,7 @@ metadata/_custom_type_script = "uid://ru3wonwm4jiw"
 
 [node name="GarageViewport" type="SubViewport" parent="GarageViewportContainer" unique_id=586914233]
 handle_input_locally = false
-size = Vector2i(1921, 1080)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="CameraBase" type="Node3D" parent="GarageViewportContainer/GarageViewport" unique_id=932639289]

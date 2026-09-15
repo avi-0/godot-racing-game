@@ -19,7 +19,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wswnh"]
 events = [SubResource("InputEventAction_cr101")]
 
-[node name="SettingsMenu" type="Control" unique_id=478260255 node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowQuality", "PerfMon", "Ao", "Reflection", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton", "BackButton")]
+[node name="SettingsMenu" type="Control" unique_id=478260255 node_paths=PackedStringArray("TDrs", "ScaleMode", "WinMode", "Aa", "Vsync", "ShadowQuality", "PerfMon", "Ao", "Reflection", "Uis", "SoundSlider", "MusicSlider", "ControlsContainer", "ResetGraphicsButton", "ResetSoundButton", "ResetControlsButton", "BackButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +37,7 @@ ShadowQuality = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/Ta
 PerfMon = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/perfmonop")
 Ao = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/aoopt")
 Reflection = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/reflectionopt")
+Uis = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer/uislider")
 SoundSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/soundslider")
 MusicSlider = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Sound/GridContainer/musicslider")
 ControlsContainer = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer")
@@ -120,6 +121,22 @@ popup/item_2/text = "FSR 1.0"
 popup/item_2/id = 1
 popup/item_3/text = "FSR 2.2"
 popup/item_3/id = 2
+
+[node name="uiscale" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=34553381]
+layout_mode = 2
+text = "Interface Scale"
+
+[node name="uislider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=1431118248]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 1.1
+step = 0.05
+value = 1.0
+tick_count = 13
+ticks_on_borders = true
+ticks_position = 3
 
 [node name="aa" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Graphics/ScrollContainer/GraphicsSettingsContainer" unique_id=609756460]
 layout_mode = 2

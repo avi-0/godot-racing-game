@@ -67,7 +67,7 @@ public partial class GameManager : Node
 		
 		RootViewport = GetViewport();
 		RootViewport.Disable3D = true;
-		GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
+		//GetTree().Root.ContentScaleFactor = GuessResolutionScaling();
 		
 		SetScreenLayout(SingleplayerScreenLayout);
 		
@@ -128,6 +128,7 @@ public partial class GameManager : Node
 		{
 			viewport.CullLayer = SplitScreenCullMaskStart + viewport.LocalPlayerId;
 			viewport.MatchViewport(RootViewport);
+			
 		}
 	}
 
