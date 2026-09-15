@@ -22,16 +22,16 @@ bounce = 0.5
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
 _limits = [1.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 1.6013672), 0.0, 0.0, 0, 0, Vector2(0.36, 1.6007638), 0.0, 0.0, 0, 0, Vector2(1, 2.9694765), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1.2030075), 0.0, 0.0, 0, 0, Vector2(0.5, 2.5563908), 0.0, 0.0, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 6.383143), 0.0, -14.701177, 0, 0, Vector2(0.22872339, 3.0594616), -8.123794, -8.123794, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 4.352941), 0.0, -14.701177, 0, 0, Vector2(0.22872339, 3.0594616), -8.123794, -8.123794, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_vwi5m"]
-_data = [Vector2(0.10181819, 0.50250566), 0.0, 0.0, 0, 0, Vector2(0.39636362, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.42105263), 0.0, 0.0, 0, 0, Vector2(0.39636362, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_yrqru"]
@@ -43,9 +43,10 @@ point_count = 1
 [sub_resource type="Resource" id="Resource_lce11"]
 script = ExtResource("2_sw6ji")
 SpringStrength = 6000.0
-SpringDamping = 75.0
+SpringDamping = 70.0
 SpringRest = 0.16
 OverExtend = 0.1
+SoundTriggerOffset = 0.08
 WheelRadius = 0.26
 IsDriveWheel = true
 IsSteeringWheel = true
@@ -55,9 +56,10 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 [sub_resource type="Resource" id="Resource_lml1i"]
 script = ExtResource("2_sw6ji")
 SpringStrength = 6000.0
-SpringDamping = 75.0
+SpringDamping = 70.0
 SpringRest = 0.16
 OverExtend = 0.1
+SoundTriggerOffset = 0.08
 WheelRadius = 0.26
 GripCurve = ExtResource("4_vwi5m")
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
@@ -259,10 +261,10 @@ shadow_mesh = SubResource("ArrayMesh_ync2c")
 
 [node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition")]
 collision_layer = 2
-mass = 100.0
+mass = 85.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.05, 0.1)
+center_of_mass = Vector3(0, -0.1, 0.1)
 continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
@@ -276,16 +278,15 @@ Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 EnginePosition = NodePath("EnginePosition")
-Acceleration = 399
-MaxSpeed = 25
-BrakingStrengthMultiplier = 0.4
+Acceleration = 550
+MaxSpeed = 70
+BrakingStrengthMultiplier = 0.3
 ReversingStrengthMultiplier = 0.7
 EngineSoundStream = ExtResource("2_filc1")
-TireTurnSpeed = 1.0
-SteeringBaseDegrees = 5
-SlippingTraction = 0.2
-SlipThreshold = 0.3
-UnslipThreshold = 0.4
+TireTurnSpeed = 0.75
+SteeringBaseDegrees = 4
+SlippingTraction = 0.4
+UnslipThreshold = 0.7
 SteeringAffectsCenterOfMass = true
 AccelerationCurve = SubResource("Curve_hcdi7")
 SpeedSteeringCurve = SubResource("Curve_wofr7")

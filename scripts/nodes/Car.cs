@@ -374,7 +374,7 @@ public partial class Car : RigidBody3D
 
 			//GD.Print((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000 + " | " + (wheel.Config.SpringRest + wheel.Config.OverExtend) + " | " + lengthChange);
 
-			if (lengthChange + ((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000) >= wheel.Config.SpringRest + wheel.Config.OverExtend)
+			if (lengthChange + ((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000) + wheel.Config.SoundTriggerOffset >= wheel.Config.SpringRest + wheel.Config.OverExtend)
 			{
 				CarCommon.SuspensionSoundPlayer.Play();
 			}
