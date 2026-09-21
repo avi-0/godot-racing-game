@@ -258,7 +258,7 @@ top_radius = 0.03
 bottom_radius = 0.03
 height = 0.7600586
 
-[node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition")]
+[node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition", "PlayerExitPosition")]
 collision_layer = 2
 mass = 90.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -277,6 +277,7 @@ Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 EnginePosition = NodePath("EnginePosition")
+PlayerExitPosition = NodePath("PlayerExitPosition")
 Acceleration = 200
 MaxSpeed = 35
 BrakingStrengthMultiplier = 1.0
@@ -407,3 +408,6 @@ mesh = SubResource("CylinderMesh_6aa1e")
 
 [node name="EnginePosition" type="Node3D" parent="." unique_id=71775274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4500566, 0.5649843)
+
+[node name="PlayerExitPosition" type="Node3D" parent="." unique_id=129338522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88762295, 0.45656288, 0.000452213)

@@ -120,7 +120,7 @@ uppercase = true
 pixel_size = 0.007
 depth = 0.0
 
-[node name="Car" type="RigidBody3D" unique_id=2022946763 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition")]
+[node name="Car" type="RigidBody3D" unique_id=2022946763 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition", "PlayerExitPosition")]
 collision_layer = 2
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -139,6 +139,7 @@ Nameplate = NodePath("Nameplate")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 EnginePosition = NodePath("EnginePosition")
+PlayerExitPosition = NodePath("PlayerExitPosition")
 Acceleration = 600
 MaxSpeed = 30
 BrakingStrengthMultiplier = 0.2
@@ -233,5 +234,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.736, 0.44690424, 1.2480586
 
 [node name="EnginePosition" type="Node3D" parent="." unique_id=1669862819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37760293, 0.66957265)
+
+[node name="PlayerExitPosition" type="Node3D" parent="." unique_id=1121891580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7804929, 0.45656288, 0.077881634)
 
 [editable path="drift"]

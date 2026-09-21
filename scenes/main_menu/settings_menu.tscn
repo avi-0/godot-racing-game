@@ -71,9 +71,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Graphics" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1737519709]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -311,7 +312,6 @@ size_flags_horizontal = 8
 text = "Reset to Default"
 
 [node name="Controls" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1267809377]
-visible = false
 layout_mode = 2
 horizontal_scroll_mode = 0
 metadata/_tab_index = 2
@@ -453,7 +453,7 @@ Action = &"game_restart"
 
 [node name="Respawn" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1759852554]
 layout_mode = 2
-text = "Respawn"
+text = "Respawn/Jump"
 
 [node name="respawn_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=2048692999]
 layout_mode = 2
@@ -478,6 +478,20 @@ Action = &"game_cycle_camera"
 layout_mode = 2
 script = ExtResource("5_t0huu")
 Action = &"game_cycle_camera"
+
+[node name="exitcar" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=649305098]
+layout_mode = 2
+text = "Exit/Enter Car"
+
+[node name="exitcar_kb" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=779621779]
+layout_mode = 2
+script = ExtResource("4_2jsdb")
+Action = &"game_exit_car"
+
+[node name="exitcar_joypad" type="Button" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1519280207]
+layout_mode = 2
+script = ExtResource("5_t0huu")
+Action = &"game_exit_car"
 
 [node name="Lights" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/TabContainer/Controls/Controls/GridContainer" unique_id=1571822621]
 layout_mode = 2

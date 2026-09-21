@@ -27,6 +27,8 @@ public partial class PlayerViewport : SubViewport
 	public int StartTimerSeconds = -1;
 	
 	public int CullLayer = 0;
+
+	public float MouseSensitivity = 0.005f;
 	
 	private CarInputs _inputs;
 	private bool _active = false;
@@ -69,11 +71,12 @@ public partial class PlayerViewport : SubViewport
 		if (!Active || Car == null)
 			return;
 
-		if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).State == GameModeUtils.PLAYER_STATE_PLAYING)
+		int playerState = GameModeController.CurrentGameMode.GetPlayer(PlayerId).State;
+		if (playerState == GameModeUtils.PLAYER_STATE_PLAYING)
 		{
 			UpdateCarInputs();
 		}
-
+		
 		int speed = (int)Mathf.Round(Car.LinearVelocity.Length() * 3.6f);
 		
 		int maxRange = 283 - 14;
@@ -82,19 +85,37 @@ public partial class PlayerViewport : SubViewport
 		
 		SpeedLabel.Text = speed.ToString();
 		if (speed > 999) { SpeedLabel.Text = "???";}
-		
-		Camera.Current = TargetCamera != null;
-		Camera.Match(TargetCamera);
-		Car.CarCommon.AudioListener.GlobalPosition = Camera.GlobalPosition;
-		
-		if (Camera.Current)
+
+		if (playerState == GameModeUtils.PLAYER_STATE_PLAYING || playerState == GameModeUtils.PLAYER_STATE_PRESTART || playerState == GameModeUtils.PLAYER_STATE_DEAD || playerState == GameModeUtils.PLAYER_STATE_AFTERFINISH)
 		{
-			GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
-			Camera.SetFov(_defaultFov);
-			if (speed > 70)
+			Camera.Current = TargetCamera != null;
+			Camera.Match(TargetCamera);
+			Car.CarCommon.AudioListener.GlobalPosition = Camera.GlobalPosition;
+
+			if (Camera.Current)
 			{
-				Camera.SetFov(_defaultFov + ((speed-70) / 15.0f));
-				if (Camera.GetFov() > 120) { Camera.SetFov(120.0f); }
+				GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
+				Camera.SetFov(_defaultFov);
+				if (speed > 70)
+				{
+					Camera.SetFov(_defaultFov + ((speed - 70) / 15.0f));
+					if (Camera.GetFov() > 120)
+					{
+						Camera.SetFov(120.0f);
+					}
+				}
+			}
+		}
+		else if (playerState == GameModeUtils.PLAYER_STATE_WALKING)
+		{
+			GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.SetInputs(_inputs);
+			
+			Camera.Match(GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.Camera);
+			Car.CarCommon.AudioListener.GlobalPosition = Camera.GlobalPosition;
+
+			if (Camera.Current)
+			{
+				GameManager.Instance.SyncCameraVisuals(Camera, CullLayer);
 			}
 		}
 	}
@@ -111,11 +132,12 @@ public partial class PlayerViewport : SubViewport
 	{
 		if (!Active || Car == null || GameManager.Instance.PauseMenu.Visible) { return;}
 		
+		if (!InputManager.Instance.InputEventMatchesPlayer(@event, LocalPlayerId))
+			return;
+		
 		//control camera with mouse - RMB bind
 		if (@event is InputEventMouseButton mouseButtonEvent)
 		{
-			if (InputManager.Instance.Devices.Count > 0) { return; }
-			
 			if (mouseButtonEvent.IsActionPressed(InputActionNames.MoveCamera))
 			{
 				Car.IsPlayerMouseControllingCamera = true;
@@ -133,21 +155,38 @@ public partial class PlayerViewport : SubViewport
 	{
 		if (!Active || Car == null || GameManager.Instance.PauseMenu.Visible) { return;}
 		
+		if (!InputManager.Instance.InputEventMatchesPlayer(@event, LocalPlayerId))
+			return;
+
+		int state = GameModeController.CurrentGameMode.GetPlayer(PlayerId).State;
+		
 		//control camera with mouse
 		if (@event is InputEventMouseMotion mouseMotionEvent)
 		{
 			if (Car.IsPlayerMouseControllingCamera)
 			{
-				Car.OrbitCamera.RotateCameraX(-mouseMotionEvent.Relative.X * 0.005f);
+				Car.OrbitCamera.RotateCameraX(-mouseMotionEvent.Relative.X * MouseSensitivity);
+			}
+
+			if (state == GameModeUtils.PLAYER_STATE_WALKING)
+			{
+				GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.RotateY(-mouseMotionEvent.Relative.X * MouseSensitivity);
+				GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.Camera.RotateX(-mouseMotionEvent.Relative.Y * MouseSensitivity);
+
+				if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.Camera.Rotation.X > 1.0f)
+				{
+					GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.Camera.Rotation = new Vector3(1.0f, 0, 0);
+				} 
+				else if (GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.Camera.Rotation.X < -1.0f)
+				{
+					GameModeController.CurrentGameMode.GetPlayer(PlayerId).WalkingPlayer.Camera.Rotation = new Vector3(-1.0f, 0, 0);
+				}
 			}
 			
 			//SetInputAsHandled();
 			return;
 		}
 		//--
-		
-		if (!InputManager.Instance.InputEventMatchesPlayer(@event, LocalPlayerId))
-			return;
 
 		if (@event.IsAction(InputActionNames.Forward, true))
 		{
@@ -224,11 +263,18 @@ public partial class PlayerViewport : SubViewport
 		{
 			Car.IsPlayerPadControllingCamera = false;
 			_inputs.PadCamLeft = 0;
+			_inputs.PadCamRight = 0;
 		}
 		else if (@event.IsActionReleased(InputActionNames.MoveCameraRight))
 		{
 			Car.IsPlayerPadControllingCamera = false;
+			_inputs.PadCamLeft = 0;
 			_inputs.PadCamRight = 0;
+		}
+		else if (@event.IsActionPressed(InputActionNames.ExitCar))
+		{
+			GameModeController.CurrentGameMode.PlayerAttemptsToExitCar(PlayerId);
+			SetInputAsHandled();
 		}
 	}
 

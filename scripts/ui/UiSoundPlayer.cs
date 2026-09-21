@@ -36,6 +36,9 @@ public partial class UiSoundPlayer : Node
 	
 	[Export(PropertyHint.ResourceType, "UiSound")]
 	public UiSound RespawnSound2;
+	
+	[Export(PropertyHint.ResourceType, "UiSound")]
+	public UiSound CarExitSound;
 
 	public override void _Ready()
 	{

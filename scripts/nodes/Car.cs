@@ -19,7 +19,10 @@ public partial class Car : RigidBody3D
 	[Export] public MeshInstance3D Nameplate;
 	[Export] public CarWheel[] Wheels;
 	[Export] public MultiplayerSynchronizer MultiplayerSynchronizer;
+	
+	[ExportCategory("Positions")]
 	[Export] public Node3D EnginePosition;
+	[Export] public Node3D PlayerExitPosition;
 	
 	[ExportCategory("Acceleration & Braking")]
 	[Export] public int Acceleration = 500;

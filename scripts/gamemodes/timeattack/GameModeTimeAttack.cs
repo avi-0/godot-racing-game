@@ -70,7 +70,7 @@ public class GameModeTimeAttack : IGameMode
 					player.RaceData.StartTimerSeconds = 3;
 				}
 			}
-			else if (player.State == GameModeUtils.PLAYER_STATE_PLAYING || player.State == GameModeUtils.PLAYER_STATE_DEAD)
+			else if (player.State == GameModeUtils.PLAYER_STATE_PLAYING || player.State == GameModeUtils.PLAYER_STATE_DEAD || player.State == GameModeUtils.PLAYER_STATE_WALKING)
 			{
 				player.RaceData.CurrentRaceTime = DateTime.Now.Subtract(player.RaceData.RaceStartTime);
 				player.RaceData.CurrentLapTime = DateTime.Now.Subtract(player.RaceData.LapStartTime);
@@ -239,6 +239,9 @@ public class GameModeTimeAttack : IGameMode
 			player.PlayerCar.InputToggleLights();
 		}
 		
+		GameManager.Instance.DestroyWalkingPlayer(id);
+		player.WalkingPlayer = null;
+		
 		_players[id] = player;
 
 		if (_players.Count == 1)
@@ -276,6 +279,44 @@ public class GameModeTimeAttack : IGameMode
 				if (_players[id].Type == GameModeUtils.PLAYER_LOCAL || _players[id].Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
 				{
 					UiSoundPlayer.Singleton.RespawnSound1.Play();
+				}
+			}
+		}
+		
+		//temporarily use respawn key as a jump key for walking player
+		if (_players[id].State == GameModeUtils.PLAYER_STATE_WALKING)
+		{
+			_players[id].WalkingPlayer.Jump();
+		}
+		//--
+	}
+
+	public void PlayerAttemptsToExitCar(long id)
+	{
+		if (!_players.ContainsKey(id)) { return; }
+
+		if (_players[id].State == GameModeUtils.PLAYER_STATE_PLAYING && _players[id].PlayerCar != null && _players[id].PlayerCar.LinearVelocity.Length() < 5)
+		{
+			_players[id].WalkingPlayer = GameManager.Instance.CreateWalkingPlayer(id);
+			_players[id].State = GameModeUtils.PLAYER_STATE_WALKING;
+			_players[id].WalkingPlayer.SetGlobalPosition(_players[id].PlayerCar.PlayerExitPosition.GlobalPosition);
+
+			if (_players[id].Type == GameModeUtils.PLAYER_LOCAL || _players[id].Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
+			{
+				UiSoundPlayer.Singleton.CarExitSound.Play();
+			}
+		}
+		else if (_players[id].State == GameModeUtils.PLAYER_STATE_WALKING)
+		{
+			if (_players[id].WalkingPlayer == null || Time.GetTicksMsec() - _players[id].WalkingPlayer.SpawnTime > 2000)
+			{
+				GameManager.Instance.DestroyWalkingPlayer(id);
+				_players[id].WalkingPlayer = null;
+				_players[id].State = GameModeUtils.PLAYER_STATE_PLAYING;
+				
+				if (_players[id].Type == GameModeUtils.PLAYER_LOCAL || _players[id].Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
+				{
+					UiSoundPlayer.Singleton.CarExitSound.Play();
 				}
 			}
 		}
@@ -554,7 +595,7 @@ public class GameModeTimeAttack : IGameMode
 	public void UpdateHud(PlayerViewport viewport)
 	{
 		var player = _players[viewport.PlayerId];
-
+		
 		//Track Info
 		viewport.TrackInfoLabel.Text = GameModeUtils.FormatTrackInfo(_currentTrack.Track.Options.Name, _currentTrack.Track.Options.AuthorName);
 		//--

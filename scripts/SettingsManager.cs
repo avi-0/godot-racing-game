@@ -29,7 +29,8 @@ public partial class SettingsManager : Node
 		InputActionNames.CycleCamera,
 		InputActionNames.ToggleLights,
 		InputActionNames.HideUI,
-		InputActionNames.HideGhost
+		InputActionNames.HideGhost,
+		InputActionNames.ExitCar
 	};
 	
 	public bool DirectionalShadowsEnabled => Settings.Graphics.ShadowQuality != 0;

@@ -29,6 +29,7 @@ public static class GameModeUtils
 	public const int PLAYER_STATE_PLAYING = 5;
 	public const int PLAYER_STATE_AFTERFINISH = 6;
 	public const int PLAYER_STATE_DEAD = 7;
+	public const int PLAYER_STATE_WALKING = 8;
 	//--
 	
 	//Track Types

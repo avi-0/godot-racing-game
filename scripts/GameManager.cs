@@ -26,6 +26,7 @@ public partial class GameManager : Node
 	[Export] public Label MOTDLabel;
 	[Export] public Label PerfLabel;
 	[Export] public NotificationContainer NotificationContainer;
+	[Export] public PackedScene WalkingPlayerScene;
 	
 	[ExportCategory("Screen Layouts")]
 	[Export] public PackedScene SingleplayerScreenLayout;
@@ -53,6 +54,9 @@ public partial class GameManager : Node
 	public bool IsSplitScreen = false;
 	
 	private bool _isPlaying = false;
+	
+	private List<WalkingPlayer> _walkingPlayers = new();
+	private Dictionary<long, WalkingPlayer> _walkingPlayersById = new();
 
 	public Viewport RootViewport;
 	private ScreenLayout _screenLayout;
@@ -137,6 +141,7 @@ public partial class GameManager : Node
 		MatchViewports();
 		
 		CarManager.Instance.Clear();
+		ClearWalkingPlayers();
 
 		ClearFollowEffects();
 		
@@ -195,6 +200,7 @@ public partial class GameManager : Node
 		SetViewportsActive(false);
 		
 		CarManager.Instance.Clear();
+		ClearWalkingPlayers();
 
 		_isPlaying = false;
 
@@ -348,5 +354,50 @@ public partial class GameManager : Node
 		}
 		
 		FollowEffects.Clear();
+	}
+
+	public WalkingPlayer CreateWalkingPlayer(long id)
+	{
+		DestroyWalkingPlayer(id);
+		
+		WalkingPlayer walkingPlayer = WalkingPlayerScene.Instantiate<WalkingPlayer>();
+		walkingPlayer.PlayerId = id;
+		
+		if (MultiplayerManager.Instance.OnServer)
+		{
+			walkingPlayer.SetMultiplayerAuthority((int)id);
+		}
+
+		walkingPlayer.SpawnTime = Time.GetTicksMsec();
+		
+		AddChild(walkingPlayer, true);
+		_walkingPlayers.Add(walkingPlayer);
+		_walkingPlayersById[id] = walkingPlayer;
+		
+		return walkingPlayer;
+	}
+
+	public void DestroyWalkingPlayer(long id)
+	{
+		if (_walkingPlayersById.GetValueOrDefault(id) is WalkingPlayer walkingPlayer)
+		{
+			_walkingPlayers.Remove(walkingPlayer);
+			_walkingPlayersById.Remove(id);
+			RemoveChild(walkingPlayer);
+			
+			walkingPlayer.QueueFree();
+		}
+	}
+
+	public void ClearWalkingPlayers()
+	{
+		foreach (WalkingPlayer walkingPlayer in _walkingPlayers)
+		{
+			RemoveChild(walkingPlayer);
+			walkingPlayer.QueueFree();
+		}
+
+		_walkingPlayers = new();
+		_walkingPlayersById = new();
 	}
 }

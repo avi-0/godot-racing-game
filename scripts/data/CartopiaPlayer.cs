@@ -12,4 +12,5 @@ public class CartopiaPlayer(long playerId)
     
     [JsonIgnore] public Car PlayerCar => CarManager.Instance.GetPlayerCarById(PlayerId);
     [JsonIgnore] public Car PlayerGhostCar { get; set; }
+    [JsonIgnore] public WalkingPlayer WalkingPlayer { get; set; }
 }

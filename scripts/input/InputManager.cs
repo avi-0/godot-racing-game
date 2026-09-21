@@ -58,6 +58,9 @@ public partial class InputManager : Node
 
 		if (player < 0 || player >= _devices.Count)
 			return false;
+		
+		if (@event is InputEventMouse && _devices[player] is InputDeviceKeyboard)
+			return true;	
 
 		var device = _devices[player];
 		return GetDevice(@event)?.Equals(device) ?? false;

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ihqfdh24aseq"]
+
+[ext_resource type="Script" uid="uid://sryy2de42211" path="res://scripts/nodes/WalkingPlayer.cs" id="1_fbeq3"]
+[ext_resource type="Material" uid="uid://cqppwungse8ga" path="res://assets/asset_packs/kenney/carkit/colormap.tres" id="2_2xkos"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6aa1e"]
+material = ExtResource("2_2xkos")
+radius = 0.2
+height = 0.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6aa1e"]
+radius = 0.2
+height = 0.9
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fbeq3"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="WalkingPlayer" type="CharacterBody3D" unique_id=789182302 node_paths=PackedStringArray("Camera")]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_fbeq3")
+Camera = NodePath("Camera3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1862593104]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_6aa1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1121879461]
+shape = SubResource("CapsuleShape3D_6aa1e")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1480780206]
+replication_config = SubResource("SceneReplicationConfig_fbeq3")
+visibility_update_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=874060343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28136745, -0.24037078)
+doppler_tracking = 2
+fov = 80.0

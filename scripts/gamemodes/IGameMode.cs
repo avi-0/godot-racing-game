@@ -16,6 +16,7 @@ public interface IGameMode
 	void AddPlayer(long id, int playerType, string playerName); // creating a new player, only once per match
 	void RestartPlayer(long id); // restarting existing player
 	void RespawnPlayer(long id); // respawning existing player, if possible
+	void PlayerAttemptsToExitCar(long id); // player presses F
 	void DeletePlayer(long id);
 	CartopiaPlayer GetPlayer(long id);
 	void KillGame(); // all gamemode variables will stay even after exiting the mode, so you have to clean up everything in this callback

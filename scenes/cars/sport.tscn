@@ -254,7 +254,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3ocps")
 
-[node name="Car2" type="RigidBody3D" unique_id=1419133245 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition")]
+[node name="Car2" type="RigidBody3D" unique_id=1419133245 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition", "PlayerExitPosition")]
 collision_layer = 2
 mass = 30.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
@@ -272,6 +272,7 @@ Nameplate = NodePath("PlayerName3D")
 Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePath("WheelBR")]
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 EnginePosition = NodePath("EnginePosition")
+PlayerExitPosition = NodePath("PlayerExitPosition")
 Acceleration = 235
 MaxSpeed = 70
 BrakingStrengthMultiplier = 1.5
@@ -380,3 +381,6 @@ skeleton = NodePath("")
 
 [node name="EnginePosition" type="Node3D" parent="." unique_id=1611308837]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45656288, -0.4149)
+
+[node name="PlayerExitPosition" type="Node3D" parent="." unique_id=501293472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7804929, 0.45656288, -0.021083206)

@@ -18,4 +18,5 @@ public static class InputActionNames
 	public static readonly StringName MoveCamera = new("game_move_camera");
 	public static readonly StringName MoveCameraLeft = new("game_pad_move_camera_left");
 	public static readonly StringName MoveCameraRight = new("game_pad_move_camera_right");
+	public static readonly StringName ExitCar = new("game_exit_car");
 }
