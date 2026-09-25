@@ -18,14 +18,14 @@ rough = true
 bounce = 0.1
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
-_limits = [1.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(0.49633703, 2.4537814), 0.0, 0.0, 0, 0, Vector2(1, 2.132075), 0.39420483, 0.0, 0, 0]
+_limits = [1.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(0.051282056, 2), 10.473143, 10.473143, 0, 0, Vector2(1, 8), 0.39420483, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
-_limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 8), 0.0, -14.701177, 0, 0, Vector2(0.24725276, 6.8627453), -8.123794, -8.123794, 0, 0, Vector2(1, 1), -34.125072, 0.0, 0, 0]
-point_count = 3
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 8), 0.0, -14.701177, 0, 0, Vector2(0.24725276, 6.8627453), -8.123794, -8.123794, 0, 0, Vector2(0.3571429, 3.4901958), -9.754241, -9.754241, 0, 0, Vector2(1, 0), -0.2664265, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Curve" id="Curve_vwi5m"]
 _data = [Vector2(0, 0.25336927), 0.0, 0.69256365, 0, 0, Vector2(0.3992674, 0.76549864), 0.0, 0.0, 0, 0]
@@ -39,11 +39,11 @@ point_count = 1
 
 [sub_resource type="Resource" id="Resource_lce11"]
 script = ExtResource("2_oy6i6")
-SpringStrength = 6000.0
+SpringStrength = 8000.0
 SpringDamping = 175.0
-SpringRest = 0.16
-OverExtend = 0.1
-WheelRadius = 0.5
+SpringRest = 0.25
+OverExtend = 0.05
+WheelRadius = 0.55
 IsDriveWheel = true
 IsSteeringWheel = true
 GripCurve = SubResource("Curve_0wjsq")
@@ -55,11 +55,11 @@ point_count = 2
 
 [sub_resource type="Resource" id="Resource_lml1i"]
 script = ExtResource("2_oy6i6")
-SpringStrength = 5500.0
+SpringStrength = 7500.0
 SpringDamping = 175.0
-SpringRest = 0.16
-OverExtend = 0.1
-WheelRadius = 0.5
+SpringRest = 0.25
+OverExtend = 0.05
+WheelRadius = 0.55
 IsDriveWheel = true
 GripCurve = SubResource("Curve_ihn81")
 metadata/_custom_type_script = "uid://dkdi4r3choyux"
@@ -260,10 +260,10 @@ height = 0.7600586
 
 [node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition", "PlayerExitPosition")]
 collision_layer = 2
-mass = 90.0
+mass = 120.0
 physics_material_override = SubResource("PhysicsMaterial_hcdi7")
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.05, -0.05)
+center_of_mass = Vector3(0, -0.2, -0.05)
 continuous_cd = true
 linear_damp_mode = 1
 linear_damp = 0.25
@@ -278,16 +278,15 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 EnginePosition = NodePath("EnginePosition")
 PlayerExitPosition = NodePath("PlayerExitPosition")
-Acceleration = 200
-MaxSpeed = 35
+Acceleration = 750
 BrakingStrengthMultiplier = 1.0
-ReversingStrengthMultiplier = 2.0
+ReversingStrengthMultiplier = 1.5
 EngineSoundStream = ExtResource("2_rfm5q")
 TireTurnSpeed = 0.6
 SteeringBaseDegrees = 2
 SlippingTraction = 0.5
-SlipThreshold = 0.4
-UnslipThreshold = 0.8
+SlipThreshold = 0.6
+UnslipThreshold = 1.0
 WheelZFriction = 0.1
 SteeringAffectsCenterOfMass = true
 FullGripOffroad = true
@@ -306,7 +305,7 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_rfm5q")
 
 [node name="WheelFL" parent="." unique_id=140454738 node_paths=PackedStringArray("WheelModel") instance=ExtResource("8_trqnt")]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0.45, 0.075, 0.64)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.5, 0.11617915, 0.64)
 WheelModel = NodePath("RemoteTransform3D")
 SkidmarkWidth = 0.2
 
@@ -315,7 +314,7 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 remote_path = NodePath("../../Off_Road_Truck/FLW")
 
 [node name="WheelFR" parent="." unique_id=1516774417 node_paths=PackedStringArray("WheelModel") instance=ExtResource("8_trqnt")]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -0.45, 0.075, 0.64)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.5, 0.11617915, 0.64)
 WheelModel = NodePath("RemoteTransform3D")
 SkidmarkWidth = 0.2
 
@@ -324,7 +323,7 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 remote_path = NodePath("../../Off_Road_Truck/FRW")
 
 [node name="WheelBL" parent="." unique_id=378786320 node_paths=PackedStringArray("WheelModel") instance=ExtResource("8_trqnt")]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0.45, 0.075, -0.54)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.5, 0.11617915, -0.54)
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -335,7 +334,7 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 remote_path = NodePath("../../Off_Road_Truck/RLW")
 
 [node name="WheelBR" parent="." unique_id=317014232 node_paths=PackedStringArray("WheelModel") instance=ExtResource("8_trqnt")]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -0.45, 0.075, -0.54)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.5, 0.11617915, -0.54)
 IsFrontWheel = false
 IsRearWheel = true
 WheelModel = NodePath("RemoteTransform3D")
@@ -371,39 +370,39 @@ mesh = SubResource("ArrayMesh_w0oio")
 skeleton = NodePath("")
 
 [node name="FLW" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=2097615430]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0.81818175, 0.13636364, 1.1636363)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.9090909, 0.21123482, 1.1636363)
 mesh = SubResource("ArrayMesh_b7gwd")
 skeleton = NodePath("")
 
 [node name="RLW" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=272001782]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0.81818175, 0.13636364, -0.9818182)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.9090909, 0.21123482, -0.9818182)
 mesh = SubResource("ArrayMesh_davr1")
 skeleton = NodePath("")
 
 [node name="RRW" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1314578703]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -0.81818175, 0.13636364, -0.9818182)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.9090909, 0.21123482, -0.9818182)
 mesh = SubResource("ArrayMesh_gwoah")
 skeleton = NodePath("")
 
 [node name="FRW" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1645351691]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -0.81818175, 0.13636364, 1.1636363)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.9090909, 0.21123482, 1.1636363)
 mesh = SubResource("ArrayMesh_knlkl")
 skeleton = NodePath("")
 
 [node name="sus" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=777113787]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.2, 1.16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69, 0.2, 1.16)
 mesh = SubResource("CylinderMesh_6aa1e")
 
 [node name="sus2" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1473258892]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.2, 1.16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.69, 0.2, 1.16)
 mesh = SubResource("CylinderMesh_6aa1e")
 
 [node name="sus3" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=650189456]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.2, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69, 0.2, -1)
 mesh = SubResource("CylinderMesh_6aa1e")
 
 [node name="sus4" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1542825635]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.2, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.69, 0.2, -1)
 mesh = SubResource("CylinderMesh_6aa1e")
 
 [node name="EnginePosition" type="Node3D" parent="." unique_id=71775274]
