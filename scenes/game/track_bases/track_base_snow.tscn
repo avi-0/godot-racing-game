@@ -24,7 +24,7 @@ texture_filter = 4
 material = SubResource("StandardMaterial3D_apmyb")
 size = Vector3(512, 64, 512)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0iiq5"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_apmyb"]
 size = Vector3(512, 64, 512)
 
 [node name="TrackBase" type="Node3D" unique_id=829403103]
@@ -38,11 +38,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32, 0)
 mesh = SubResource("BoxMesh_urhk7")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=2087411505]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1172747411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.2, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=303392715]
-shape = SubResource("BoxShape3D_0iiq5")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2007887298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_apmyb")
+debug_color = Color(1, 0, 0, 1)
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=97112160]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.856064, 0)
-size = Vector3(512, 32, 512)
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="StaticBody3D" unique_id=529715882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000076, 0)
+size = Vector3(512, 64, 512)
