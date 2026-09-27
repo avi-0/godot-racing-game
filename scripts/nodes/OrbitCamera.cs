@@ -6,6 +6,8 @@ public partial class OrbitCamera : Node3D
 	[Export] public Node3D CameraStick;
 	[Export] public Node3D CameraStickBase;
 
+	public float CameraSensitivity = 7.5f;
+
 	public float Radius
 	{
 		get => Camera.Position.Z;
@@ -37,7 +39,7 @@ public partial class OrbitCamera : Node3D
 		var target = GetTargetYaw(velocity);
 		CameraStickBase.Rotation = new Vector3(
 			CameraStickBase.Rotation.X,
-			Mathf.LerpAngle(target, CameraStickBase.Rotation.Y, Mathf.Exp(-5.0f * delta)),
+			Mathf.LerpAngle(target, CameraStickBase.Rotation.Y, Mathf.Exp(-CameraSensitivity * delta)),
 			CameraStickBase.Rotation.Z
 		);
 	}
