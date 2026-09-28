@@ -252,7 +252,8 @@ func _update_sun_coords() -> void:
 	
 	# Position the sun on a unit sphere, orienting the light to the origin, mimicking a star orbiting a planet.
 	_sun_transform.origin = TOD_Math.spherical_to_cartesian(sun_altitude, sun_azimuth)
-	_sun_transform = _sun_transform.looking_at(Vector3.ZERO, Vector3.LEFT)
+	# Transform with Vector3.UP to ensure Z-rotation is 0, otherwise shadows will flicker more
+	_sun_transform = _sun_transform.looking_at(Vector3.ZERO, Vector3.UP)
 	
 	fog_material.set_shader_parameter("sun_direction", _sun_transform.origin)
 	if _sun_light_node:
@@ -311,6 +312,8 @@ func _update_sun_light_color() -> void:
 		return
 	var sun_light_altitude_mult: float = clampf(_sun_transform.origin.y * 2.0, 0., 1.)
 	_sun_light_node.light_color = sun_horizon_light_color.lerp(sun_light_color, sun_light_altitude_mult)
+	if is_scene_built:
+		sky_material.set_shader_parameter("sun_light_color", _sun_light_node.light_color)
 
 
 func _update_sun_light_energy() -> void:
@@ -395,6 +398,9 @@ func _update_sun_light_energy() -> void:
 
 ## The moon's Transform3D
 var _moon_transform: Transform3D
+## Celestial North Pole direction, set by [TimeOfDay] based on observer latitude.
+## Used to derive the parallactic angle rotation for the moon texture.
+var celestial_north_pole: Vector3 = Vector3.LEFT
 ## We disable the moon DirectionalLight3D by setting [member DirectionalLight3D.shadow_enabled] 
 ## and [member DirectionalLight3D.light_energy] to false and zero respectively
 var moon_light_enabled: bool = true:
@@ -416,9 +422,16 @@ func update_moon_coords() -> void:
 		_moon_light_node.visible = true
 	
 	_moon_transform.origin = TOD_Math.spherical_to_cartesian(moon_altitude, moon_azimuth)
+	# Transform with Vector3.Left which puts the slight gimbal lock on the horizon. Up puts it at the zenith.
 	_moon_transform = _moon_transform.looking_at(Vector3.ZERO, Vector3.LEFT)
-	
-	var moon_basis: Basis = get_parent().moon.get_global_transform().basis.inverse()
+
+	# Moon texture basis: up axis aligns with the Celestial North Pole (parallactic angle).
+	var moon_dir: Vector3 = _moon_transform.origin.normalized()
+	var cnp: Vector3 = celestial_north_pole
+	var cnp_proj: Vector3 = cnp - moon_dir * cnp.dot(moon_dir)
+	var up: Vector3 = cnp_proj.normalized()
+	var right: Vector3 = up.cross(moon_dir)
+	var moon_basis: Basis = Basis(right, up, moon_dir).inverse()
 	sky_material.set_shader_parameter("moon_matrix", moon_basis)
 	fog_material.set_shader_parameter("moon_direction", _moon_transform.origin)
 	if _moon_light_node:
@@ -705,14 +718,6 @@ func _update_beta_mie() -> void:
 			fog_mesh.visible = fog_visible
 
 
-## Applies an exponential decay to fog density along the view ray, softening the transition from clear to foggy areas—lower values create sharp cutoffs for localized mist, higher for gradual blending into the distance.
-@export_range(0.0, 50.0, .01, "or_greater") var fog_falloff: float = 3.0 :
-	set(value):
-		fog_falloff = value
-		if is_scene_built:
-			fog_material.set_shader_parameter("fog_falloff", fog_falloff)
-
-
 ## Set the fog's density
 @export_exp_easing() var fog_density: float = 0.0007 :
 	set(value):
@@ -737,6 +742,23 @@ func _update_beta_mie() -> void:
 			fog_material.set_shader_parameter("fog_end", fog_end)
 
 
+## Limits the vertical height of the fog's depth texture to avoid conflicting with depth texture
+## reads of your ocean shader. Set to the height level of your ocean. 
+@export_range(-2048.0, 2048.0) var fog_sea_level: float = 0.0 :
+	set(value):
+		fog_sea_level = value
+		if is_scene_built:
+			fog_material.set_shader_parameter("sea_level", fog_sea_level)
+
+
+## Adjusts vertical fog coverage up into the sky.
+@export_range(0.0, 50.0, .01, "or_greater") var fog_falloff: float = 3.0 :
+	set(value):
+		fog_falloff = value
+		if is_scene_built:
+			fog_material.set_shader_parameter("fog_falloff", fog_falloff)
+
+
 ## Scales the Rayleigh (blue sky) component in fog's optical depth calculation, controlling how much
 ## scattering accumulates in distant fog.
 @export_exp_easing() var fog_rayleigh_depth: float = 0.115 :
@@ -746,7 +768,7 @@ func _update_beta_mie() -> void:
 			fog_material.set_shader_parameter("fog_rayleigh_depth", fog_rayleigh_depth)
 
 
-## Adjusts the Mie (hazy around the sun/moon) depth in the fog.
+## Adjusts the Mie (haze around the sun/moon) depth in the fog.
 @export_exp_easing() var fog_mie_depth: float = 0.0001 :
 	set(value):
 		fog_mie_depth = value
@@ -783,6 +805,15 @@ func _update_beta_mie() -> void:
 #####################
 
 @export_group("Clouds")
+
+
+## The night time color tint for the clouds.
+@export var clouds_night_color := Color(0.090196, 0.094118, 0.129412, 1.0) :
+	set(value):
+		clouds_night_color = value
+		if is_scene_built:
+			cumulus_material.set_shader_parameter("clouds_night_color", clouds_night_color)
+			sky_material.set_shader_parameter("clouds_night_color", clouds_night_color)
 
 
 #####################
@@ -882,10 +913,18 @@ func _check_cloud_processing() -> void:
 ## Toggles visibility of high-altitude cirrus clouds.
 @export var cirrus_visible: bool = true :
 	set(value):
+		cirrus_visible = value
 		if is_scene_built:
-			cirrus_visible = value
 			sky_material.set_shader_parameter("cirrus_visible", value)
 			_check_cloud_processing()
+
+## Adjusts the brightness of cirrus clouds. If covering the sky, this has a dramatic affect on lighting.
+@export_range(0.0, 16.0, 0.005) var cirrus_intensity: float = 2.0 :
+	set(value):
+		cirrus_intensity = value
+		if is_scene_built:
+			sky_material.set_shader_parameter("cirrus_intensity", cirrus_intensity)
+
 
 
 ## Set density for cirrus clouds.
@@ -918,14 +957,6 @@ func _check_cloud_processing() -> void:
 		cirrus_sky_tint_fade = value
 		if is_scene_built:
 			sky_material.set_shader_parameter("cirrus_sky_tint_fade", cirrus_sky_tint_fade)
-
-
-## Adjusts the brightness of cirrus clouds. If covering the sky, this has a dramatic affect on lighting.
-@export var cirrus_intensity: float = 10.0 :
-	set(value):
-		cirrus_intensity = value
-		if is_scene_built:
-			sky_material.set_shader_parameter("cirrus_intensity", cirrus_intensity)
 
 
 ## The noise texture used for generating cirrus cloud patterns.
@@ -969,31 +1000,12 @@ func _check_cloud_processing() -> void:
 			_check_cloud_processing()
 
 
-## The daytime color tint for the cumulus clouds.
-@export var cumulus_day_color := Color(0.823529, 0.87451, 1.0, 1.0) :
+## Adjusts the brightness of cumulus clouds. If covering the sky, this has a dramatic affect on lighting.
+@export_range(0, 16, 0.005) var cumulus_intensity: float = 0.6 :
 	set(value):
-		cumulus_day_color = value
+		cumulus_intensity = value
 		if is_scene_built:
-			cumulus_material.set_shader_parameter("cumulus_day_color", cumulus_day_color)
-			sky_material.set_shader_parameter("cumulus_day_color", cumulus_day_color)
-
-
-## The warm color tint for the cumulus clouds during sunrise and sunset.
-@export var cumulus_horizon_light_color := Color(.98, 0.43, 0.15, 1.0) :
-	set(value):
-		cumulus_horizon_light_color = value
-		if is_scene_built:
-			cumulus_material.set_shader_parameter("cumulus_horizon_light_color", cumulus_horizon_light_color)
-			sky_material.set_shader_parameter("cumulus_horizon_light_color", cumulus_horizon_light_color)
-
-
-## The nighttime color tint for the cumulus clouds.
-@export var cumulus_night_color := Color(0.090196, 0.094118, 0.129412, 1.0) :
-	set(value):
-		cumulus_night_color = value
-		if is_scene_built:
-			cumulus_material.set_shader_parameter("cumulus_night_color", cumulus_night_color)
-			sky_material.set_shader_parameter("cumulus_night_color", cumulus_night_color)
+			cumulus_material.set_shader_parameter("cumulus_intensity", cumulus_intensity)
 
 
 ## Controls the vertical depth and layering thickness of the cumulus clouds.
@@ -1026,14 +1038,6 @@ func _check_cloud_processing() -> void:
 		cumulus_noise_freq = value
 		if is_scene_built:
 			cumulus_material.set_shader_parameter("cumulus_noise_freq", cumulus_noise_freq)
-
-
-## Adjusts the brightness of cumulus clouds. If covering the sky, this has a dramatic affect on lighting.
-@export_range(0, 16, 0.005) var cumulus_intensity: float = 0.6 :
-	set(value):
-		cumulus_intensity = value
-		if is_scene_built:
-			cumulus_material.set_shader_parameter("cumulus_intensity", cumulus_intensity)
 
 
 ## Controls the strength of hazy light scattering around the cumulus clouds from the sun and moon, enhancing glow and diffusion near edges.
