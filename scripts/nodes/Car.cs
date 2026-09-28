@@ -695,9 +695,8 @@ public partial class Car : RigidBody3D
 
 	private void ProcessDownForce()
 	{
-		var forcePosition = GetCenterOfMass();
 		var force = -GlobalBasis.Y * MaxDownforce * SpeedToDownforceCurve.SampleBaked(Mathf.Clamp(GlobalBasis.Z.Dot(LinearVelocity) / MaxSpeed, 0, 1));
-		ApplyForce(force, forcePosition);
+		ApplyCentralForce(force);
 	}
 
 	private Vector3 GetPointVelocity(Vector3 point)
