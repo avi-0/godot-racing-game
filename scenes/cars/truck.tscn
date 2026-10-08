@@ -19,7 +19,7 @@ bounce = 0.1
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(0.051282056, 2), 10.473143, 10.473143, 0, 0, Vector2(1, 8), 0.39420483, 0.0, 0, 0]
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(0.05311355, 1.7358489), 8.329184, 8.329184, 0, 0, Vector2(1, 8), 0.39420483, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
@@ -28,7 +28,7 @@ _data = [Vector2(0, 8), 0.0, -14.701177, 0, 0, Vector2(0.24725276, 6.8627453), -
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_vwi5m"]
-_data = [Vector2(0, 0.25336927), 0.0, 0.69256365, 0, 0, Vector2(0.3992674, 0.76549864), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.25336927), 0.0, 0.69256365, 0, 0, Vector2(0.7014652, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_xxshw"]
@@ -66,6 +66,9 @@ metadata/_custom_type_script = "uid://dkdi4r3choyux"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rfm5q"]
 points = PackedVector3Array(0.978867, 0.5925139, 1.610401, 0.94054013, 0.56729966, 1.7628757, 0.978867, 0.35993865, 1.610401, 0.978867, 0.7910762, 1.4460546, 0.61552876, 0.56729966, 1.8860427, 0.94054013, 0.3947396, 1.7628757, 0.6594129, 1.0053973, 1.5896257, 0.61552876, 0.3947396, 1.8860427, 0.61552876, 0.35993865, 1.7331969, 0.5287184, 0.3243498, -1.4743378, 0.978867, 0.35993865, -0.564312, 0.978867, 0.80210745, 0.9174012, 0.9543378, 1.3006142, 0.46517074, 0.66477865, 1.077363, 1.4942826, -0.6157204, 0.56729966, 1.8860427, -0.65960455, 1.0053973, 1.5896257, -0.6157204, 0.3947396, 1.8860427, -0.6157204, 0.35993865, 1.7331969, -0.52891016, 0.3243498, -1.4743378, 0.5287184, 0.3243498, -1.7919008, 0.9190771, 0.35993865, -1.4342713, 0.978867, 0.57911885, -1.3077656, 0.978867, 0.7916015, -1.2101965, 0.586592, 1.6492802, 0.239241, 0.5921493, 1.6632005, -1.4057056, -0.66497034, 1.077363, 1.4942826, -0.9407318, 0.56729966, 1.7628757, -0.978867, 0.7910762, 1.4460546, -0.9407318, 0.3947396, 1.7628757, -0.978867, 0.35993865, 1.610401, -0.52891016, 0.3243498, -1.7919008, 0.11459714, 0.65003395, -1.9039382, 0.30009896, 0.78490394, -1.9039382, 0.74239045, 0.35993865, -1.762964, 0.8698272, 0.35993865, -1.6909928, 0.9181189, 0.6116873, -1.6965576, 0.978867, 0.6116873, -1.3548806, 0.7393244, 1.1744117, -1.6416519, 0, 1.6659583, -1.4053346, 0, 1.6584729, -0.6655909, -0.58678365, 1.6492802, 0.239241, 0.30009896, 1.2210318, -1.9039382, 0.11459714, 1.3557705, -1.9039382, -0.95452946, 1.3006142, 0.46517074, -0.978867, 0.5925139, 1.610401, -0.978867, 0.80210745, 0.9174012, -0.978867, 0.35993865, -0.564312, -0.30029064, 0.78490394, -1.9039382, -0.11478883, 0.65003395, -1.9039382, -0.9192688, 0.35993865, -1.4342713, -0.87001884, 0.35993865, -1.6909928, -0.74258214, 0.35993865, -1.762964, 0.37100357, 1.0029023, -1.9039382, 0.78684956, 0.6116873, -1.7677867, 0.7393244, 1.1031026, -1.6672499, -0.11478883, 1.3557705, -1.9039382, -0.592341, 1.6632005, -1.4057056, -0.978867, 0.7916015, -1.2101965, -0.978867, 0.57911885, -1.3077656, -0.37119526, 1.0029023, -1.9039382, -0.91831064, 0.6116873, -1.6965576, -0.978867, 0.6116873, -1.3548806, -0.78704125, 0.6116873, -1.7677867, -0.30029064, 1.2210318, -1.9039382, -0.739516, 1.1744117, -1.6416519, -0.739516, 1.1031026, -1.6672499)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w0oio"]
+points = PackedVector3Array(0.055058733, 0.6112508, 0.035953406, -0.059550792, -0.6112508, -0.040434245, -0.059550792, -0.6112508, 0.035953406, -0.059550792, 0.6112508, -0.040434245, 0.055058733, -0.6112508, -0.040434245, 0.035953406, 0.6112508, -0.059550792, 0.035953406, -0.6112508, 0.055058733, -0.040434245, 0.6112508, 0.055058733, -0.040434245, -0.6112508, -0.059550792, -0.059550792, 0.6112508, 0.035953406, -0.040434245, 0.6112508, -0.059550792, 0.035953406, -0.6112508, -0.059550792, -0.040434245, -0.6112508, 0.055058733, 0.055058733, -0.6112508, 0.035953406, 0.035953406, 0.6112508, 0.055058733, 0.055058733, 0.6112508, -0.040434245)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwm82"]
 
@@ -252,11 +255,23 @@ albedo_color = Color(0.15727392, 0.15727395, 0.15727395, 1)
 metallic = 1.0
 roughness = 0.75
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_rfm5q"]
+material = SubResource("StandardMaterial3D_ihn81")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_juhgd"]
+material = SubResource("StandardMaterial3D_ihn81")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.2033691
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_6aa1e"]
 material = SubResource("StandardMaterial3D_ihn81")
-top_radius = 0.03
-bottom_radius = 0.03
-height = 0.7600586
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.6
 
 [node name="Car" type="RigidBody3D" unique_id=72150921 node_paths=PackedStringArray("CarModel", "FrontCamera", "HeadLights", "RearLights", "CarCommon", "Nameplate", "Wheels", "MultiplayerSynchronizer", "EnginePosition", "PlayerExitPosition")]
 collision_layer = 2
@@ -278,7 +293,8 @@ Wheels = [NodePath("WheelFL"), NodePath("WheelFR"), NodePath("WheelBL"), NodePat
 MultiplayerSynchronizer = NodePath("MultiplayerSynchronizer")
 EnginePosition = NodePath("EnginePosition")
 PlayerExitPosition = NodePath("PlayerExitPosition")
-Acceleration = 750
+Acceleration = 620
+MaxSpeed = 40
 BrakingStrengthMultiplier = 1.0
 ReversingStrengthMultiplier = 1.5
 EngineSoundStream = ExtResource("2_rfm5q")
@@ -303,6 +319,14 @@ Skins = Array[Material]([ExtResource("6_ev7v8"), ExtResource("4_onaia"), ExtReso
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1109126717]
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_rfm5q")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1522271015]
+transform = Transform3D(0.55, 0, 0, 0, -2.404126e-08, -0.55, 0, 0.55, -2.404126e-08, -0.5676342, 0.0248838, 0.05444947)
+shape = SubResource("ConvexPolygonShape3D_w0oio")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1413945408]
+transform = Transform3D(0.55, 0, 0, 0, -2.404126e-08, -0.55, 0, 0.55, -2.404126e-08, 0.568, 0.025170617, 0.054)
+shape = SubResource("ConvexPolygonShape3D_w0oio")
 
 [node name="WheelFL" parent="." unique_id=140454738 node_paths=PackedStringArray("WheelModel") instance=ExtResource("8_trqnt")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.5, 0.11617915, 0.64)
@@ -390,19 +414,43 @@ mesh = SubResource("ArrayMesh_knlkl")
 skeleton = NodePath("")
 
 [node name="sus" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=777113787]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69, 0.2, 1.16)
-mesh = SubResource("CylinderMesh_6aa1e")
+transform = Transform3D(0.64278764, -0.76604444, 0, 0.76604444, 0.64278764, 0, 0, 0, 1, 0.45, 0.10003084, 1.16)
+mesh = SubResource("CylinderMesh_rfm5q")
 
 [node name="sus2" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1473258892]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.69, 0.2, 1.16)
-mesh = SubResource("CylinderMesh_6aa1e")
+transform = Transform3D(0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0, 0, 1, -0.45, 0.10003084, 1.1550969)
+mesh = SubResource("CylinderMesh_rfm5q")
 
 [node name="sus3" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=650189456]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69, 0.2, -1)
-mesh = SubResource("CylinderMesh_6aa1e")
+transform = Transform3D(0.64278764, -0.76604444, 0, 0.76604444, 0.64278764, 0, 0, 0, 1, 0.45, 0.10003084, -1)
+mesh = SubResource("CylinderMesh_rfm5q")
 
 [node name="sus4" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1542825635]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.69, 0.2, -1)
+transform = Transform3D(0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0, 0, 1, -0.45, 0.10003084, -1)
+mesh = SubResource("CylinderMesh_rfm5q")
+
+[node name="bar1" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=863067780]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -1, 0, 1, -4.371138e-08, -1.0320622, 0.04524327, 0.09899903)
+mesh = SubResource("CylinderMesh_juhgd")
+
+[node name="bar2" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1100930398]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -1, 0, 1, -4.371138e-08, 1.032, 0.044764753, 0.099)
+mesh = SubResource("CylinderMesh_juhgd")
+
+[node name="bar_sup1" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1678891700]
+transform = Transform3D(0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0, 0, 1, -0.798, 0.24063359, 0.64841086)
+mesh = SubResource("CylinderMesh_6aa1e")
+
+[node name="bar_sup2" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=184746288]
+transform = Transform3D(0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0, 0, 1, -0.798, 0.24063359, -0.46378562)
+mesh = SubResource("CylinderMesh_6aa1e")
+
+[node name="bar_sup3" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1461416824]
+transform = Transform3D(0.64278764, -0.76604444, 0, 0.76604444, 0.64278764, 0, 0, 0, 1, 0.7981615, 0.24063359, 0.64841086)
+mesh = SubResource("CylinderMesh_6aa1e")
+
+[node name="bar_sup4" type="MeshInstance3D" parent="Off_Road_Truck" unique_id=1002484513]
+transform = Transform3D(0.64278764, -0.76604444, 0, 0.76604444, 0.64278764, 0, 0, 0, 1, 0.7981615, 0.24063359, -0.46378562)
 mesh = SubResource("CylinderMesh_6aa1e")
 
 [node name="EnginePosition" type="Node3D" parent="." unique_id=71775274]
