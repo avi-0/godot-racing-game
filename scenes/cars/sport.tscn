@@ -29,12 +29,12 @@ _data = [Vector2(0, 5.710084), 0.0, -13.468104, 0, 0, Vector2(0.058181822, 4.179
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_xv7xt"]
-_limits = [1.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 2.4640503, 0, 0, Vector2(1, 2), 1.7543262, 0.0, 0, 0]
-point_count = 2
+_limits = [1.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 2.7928357, 0, 0, Vector2(0.48534802, 2), 0.0, 0.0, 0, 0, Vector2(1, 4.0196075), 1.2701881, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_xxshw"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.104395606, 0), 0.0, 0.4011571, 0, 0, Vector2(0.5, 0.7450981), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.104395606, 0), 0.0, 0.4011571, 0, 0, Vector2(0.4908425, 0.47899163), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="Resource" id="Resource_x43s4"]
@@ -281,7 +281,7 @@ TireTurnSpeed = 1.2
 SteeringBaseDegrees = 3
 SlippingTraction = 0.2
 WheelZFriction = 0.04
-MaxDownforce = 12000.0
+MaxDownforce = 4000.0
 AccelerationCurve = SubResource("Curve_qtbni")
 SpeedSteeringCurve = SubResource("Curve_wofr7")
 SpeedToPitchCurve = SubResource("Curve_xv7xt")
