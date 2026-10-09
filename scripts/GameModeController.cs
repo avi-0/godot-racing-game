@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 
@@ -10,6 +11,10 @@ public partial class GameModeController : Node
 	public static int CurrentGameModeType;
 	
 	public static bool IsHost;
+
+	public static ulong TicksPerSecond = 0;
+	public static DateTime TPSSecond = DateTime.MinValue;
+	public static int TPSViolationsInARow = 0;
 	
 	public override void _Ready()
 	{
@@ -26,6 +31,36 @@ public partial class GameModeController : Node
 			{
 				MultiplayerManager.Instance.UpdateGameModeInfo();
 			}
+			
+			//anti speedhack
+			TicksPerSecond++;
+			if (TPSSecond == DateTime.MinValue || (DateTime.Now-TPSSecond).TotalSeconds > 1)
+			{
+				if (TPSSecond != DateTime.MinValue && (TicksPerSecond < 125 || TicksPerSecond > 131))
+				{
+					GD.Print("TPS violated with " + TicksPerSecond);
+					
+					TPSViolationsInARow++;
+					if (TPSViolationsInARow > 2)
+					{
+						CurrentGameMode.RestartPlayer(MultiplayerManager.HOST_ID);
+						TPSViolationsInARow = 1;
+					}
+				}
+				else
+				{
+					TPSViolationsInARow = 0;
+				}
+				
+				TicksPerSecond = 0;
+				TPSSecond = DateTime.Now;
+			}
+			//--
+		}
+		else
+		{
+			TicksPerSecond = 0;
+			TPSSecond = DateTime.MinValue;
 		}
 	}
 
