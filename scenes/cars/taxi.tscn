@@ -16,9 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://cs0sd30pp13hy" path="res://scenes/cars_extras/multiplayer_synchronizer.tscn" id="12_lj8mf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hcdi7"]
-friction = 0.5
+friction = 0.35
 rough = true
-bounce = 0.5
+absorbent = true
 
 [sub_resource type="Curve" id="Curve_hcdi7"]
 _limits = [1.0, 4.0, 0.0, 1.0]
@@ -27,7 +27,7 @@ point_count = 3
 
 [sub_resource type="Curve" id="Curve_wofr7"]
 _limits = [1.0, 8.0, 0.0, 1.0]
-_data = [Vector2(0, 4.352941), 0.0, -14.701177, 0, 0, Vector2(0.22872339, 3.0594616), -8.123794, -8.123794, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 4.352941), 0.0, -14.701177, 0, 0, Vector2(0.22161174, 2.2156858), -4.84313, -4.84313, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_vwi5m"]
