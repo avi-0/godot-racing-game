@@ -623,7 +623,7 @@ public class GameModeTimeAttack : IGameMode
 		if (!_inEditor && _hasAuthor)
 		{
 			var authorLabel = newLabel();
-			authorLabel.Text = "Author: " + GameModeUtils.FormatRaceTime(_currentTrack.Track.Options.AuthorTime);
+			authorLabel.Text = "Creator: " + GameModeUtils.FormatRaceTime(_currentTrack.Track.Options.AuthorTime);
 			authorLabel.Name = _currentTrack.Track.Options.AuthorTime.ToString();
 			authorLabel.AddThemeColorOverride("font_color", Colors.GreenYellow);
 			viewport.ScoreboardContainer.AddChild(authorLabel);

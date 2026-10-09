@@ -82,7 +82,7 @@ public static class GameModeUtils
 		"Bronze Medal",
 		"Silver Medal",
 		"Gold Medal",
-		"Author Medal",
+		"Creator Medal",
 	};
 	//--
 
@@ -153,17 +153,17 @@ public static class GameModeUtils
 	
 	public static int GetGoldFromAt(int ms)
 	{
-		return Mathf.FloorToInt(ms * 1.2);
+		return Mathf.FloorToInt(ms * 1.1);
 	}
 
 	public static int GetSilverFromAt(int ms)
 	{
-		return Mathf.FloorToInt(ms * 1.45);
+		return Mathf.FloorToInt(ms * 1.3);
 	}
 
 	public static int GetBronzeFromAt(int ms)
 	{
-		return Mathf.FloorToInt(ms * 1.8);
+		return Mathf.FloorToInt(ms * 1.5);
 	}
 
 	public static string GetMedalFromTime(int timeMs, int atMs)
