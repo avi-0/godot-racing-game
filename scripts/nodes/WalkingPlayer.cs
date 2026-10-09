@@ -5,7 +5,7 @@ using racingGame.data;
 public partial class WalkingPlayer : CharacterBody3D
 {
 	public const float Speed = 4.0f;
-	public const float JumpVelocity = 3.5f;
+	public const float JumpVelocity = 4.0f;
 	
 	[Export] public Camera3D Camera;
 	

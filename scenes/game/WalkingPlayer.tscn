@@ -6,11 +6,11 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6aa1e"]
 material = ExtResource("2_2xkos")
 radius = 0.2
-height = 0.9
+height = 1.15
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6aa1e"]
 radius = 0.275
-height = 0.9
+height = 1.15
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fbeq3"]
 properties/0/path = NodePath(".:position")
@@ -38,6 +38,6 @@ replication_config = SubResource("SceneReplicationConfig_fbeq3")
 visibility_update_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=874060343]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, -0.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38311827, -0.21)
 doppler_tracking = 2
 fov = 80.0
