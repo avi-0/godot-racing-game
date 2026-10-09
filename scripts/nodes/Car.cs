@@ -57,6 +57,7 @@ public partial class Car : RigidBody3D
 	[ExportCategory("Wheel Setup")] 
 	[Export] public WheelConfig FrontWheelConfig;
 	[Export] public WheelConfig RearWheelConfig;
+	[Export] public bool HasSuspensionSounds = true;
 	
 	[ExportCategory("Descriptions")]
 	[Export] public string CarName = "Default";
@@ -359,27 +360,31 @@ public partial class Car : RigidBody3D
 		wheel.WheelModel.Position = wheelPos;
 
 		// suspension sound
-		if (wheel.SpringLengths.Count < 15)
+		if (HasSuspensionSounds)
 		{
-			wheel.SpringLengths.Enqueue(springLength);
-		}
-		else
-		{
-			float avgLength = 0;
-			for (int i = 0; i < wheel.SpringLengths.Count; i++)
+			if (wheel.SpringLengths.Count < 15)
 			{
-				float peek = wheel.SpringLengths.Dequeue();
-				avgLength += peek;
-				wheel.SpringLengths.Enqueue(peek);
+				wheel.SpringLengths.Enqueue(springLength);
 			}
-			avgLength /= wheel.SpringLengths.Count;
-			float lengthChange = Math.Abs(avgLength - springLength);
-
-			//GD.Print((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000 + " | " + (wheel.Config.SpringRest + wheel.Config.OverExtend) + " | " + lengthChange);
-
-			if (lengthChange + ((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000) + wheel.Config.SoundTriggerOffset >= wheel.Config.SpringRest + wheel.Config.OverExtend)
+			else
 			{
-				CarCommon.SuspensionSoundPlayer.Play();
+				float avgLength = 0;
+				for (int i = 0; i < wheel.SpringLengths.Count; i++)
+				{
+					float peek = wheel.SpringLengths.Dequeue();
+					avgLength += peek;
+					wheel.SpringLengths.Enqueue(peek);
+				}
+
+				avgLength /= wheel.SpringLengths.Count;
+				float lengthChange = Math.Abs(avgLength - springLength);
+
+				//GD.Print((((wheel.Config.SpringStrength-wheel.Config.SpringDamping)/150000) + wheel.Config.SoundTriggerOffset) + " | " + (wheel.Config.SpringRest + wheel.Config.OverExtend) + " | " + lengthChange);
+
+				if (lengthChange + ((wheel.Config.SpringStrength - wheel.Config.SpringDamping) / 150000) + wheel.Config.SoundTriggerOffset >= wheel.Config.SpringRest + wheel.Config.OverExtend)
+				{
+					CarCommon.SuspensionSoundPlayer.Play();
+				}
 			}
 		}
 		//--

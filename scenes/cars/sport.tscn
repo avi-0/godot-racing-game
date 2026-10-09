@@ -288,6 +288,7 @@ SpeedToPitchCurve = SubResource("Curve_xv7xt")
 SpeedToDownforceCurve = SubResource("Curve_xxshw")
 FrontWheelConfig = SubResource("Resource_x43s4")
 RearWheelConfig = SubResource("Resource_cn2cu")
+HasSuspensionSounds = false
 CarName = "Sport"
 CarDescription = "Fast on the straights and around corners, this beast can do anything! If you have the skill to handle it.."
 Skins = Array[Material]([ExtResource("3_8lcft"), ExtResource("4_yrqru"), ExtResource("5_2t0n8"), ExtResource("6_8lcft")])
