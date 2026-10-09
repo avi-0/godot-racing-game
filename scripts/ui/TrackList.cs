@@ -40,7 +40,7 @@ public partial class TrackList : Control
 		scrollContainer.SetName(name);
 		scrollContainer.HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled;
 		GridContainer gridContainer = new GridContainer();
-		gridContainer.Columns = 3;
+		gridContainer.Columns = 4;
 		scrollContainer.AddChild(gridContainer);
 		TrackContainer.AddChild(scrollContainer);
 		
@@ -65,13 +65,19 @@ public partial class TrackList : Control
 				trackID++;
 				
 				var button = new Button();
-				button.CustomMinimumSize = new Vector2(420, 64);
+				button.CustomMinimumSize = new Vector2(300, 100);
+				button.CustomMaximumSize = new Vector2(300, 100);
 				button.Text = options.Name;
+
+				var fontSize = 23;
+				fontSize -= Mathf.CeilToInt(options.Name.Length / 2);
+				if (fontSize < 5) {fontSize = 5;}
+				button.AddThemeFontSizeOverride("font_size", fontSize);
 
 				button.SizeFlagsHorizontal = SizeFlags.ShrinkEnd;
 				
 				Image icon = TrackManager.Instance.GetTrackImage(options);
-				icon.Resize(128, 128, Image.Interpolation.Cubic);
+				icon.Resize(96, 96, Image.Interpolation.Nearest);
 				button.SetButtonIcon(ImageTexture.CreateFromImage(icon));
 
 				bool canPlay = true;
