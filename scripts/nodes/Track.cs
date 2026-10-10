@@ -34,6 +34,7 @@ public partial class Track : Node3D
 		}
 
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
+		TimeOfDay.GetParent().Set("fog_enabled", !Options.Fog);
 
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.SsaoEnabled = SettingsManager.Instance.Settings.Graphics.Ao == 1;
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.SsrEnabled = SettingsManager.Instance.Settings.Graphics.Reflection == 1;
