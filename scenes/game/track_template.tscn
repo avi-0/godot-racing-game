@@ -32,34 +32,36 @@ script = ExtResource("10_gj4c4")
 fog_enabled = false
 editor_time_enabled = false
 game_time_enabled = false
+current_time = 10.0
+minutes_per_day = 24.0
 sun_energy = 1.5
 sun_shadow_opacity = 0.8
 wind_direction = 2.35619451204804
 metadata/_custom_type_script = "uid://deo0gxkmk2ahd"
 
 [node name="SunLight" type="DirectionalLight3D" parent="Sky3D" unique_id=936358246]
-transform = Transform3D(0, -0.5542859, 0.83232635, -0.5854001, 0.6748041, 0.44938427, -0.8107446, -0.48724392, -0.324479, 0.83232635, 0.44938427, -0.324479)
-light_color = Color(0.99797535, 0.9517126, 0.9285306, 1)
+transform = Transform3D(-0.17992075, -0.872999, 0.4533224, 0, 0.46084285, 0.88748175, -0.9836811, 0.15967637, -0.082915194, 0.4533224, 0.88748175, -0.082915194)
 light_energy = 1.5
 shadow_enabled = true
 shadow_bias = 0.005
 shadow_opacity = 0.8
 
 [node name="MoonLight" type="DirectionalLight3D" parent="Sky3D" unique_id=399735204]
-transform = Transform3D(0, -0.71860963, -0.69541365, 0.60077465, 0.55592644, -0.5744698, 0.7994184, -0.4177869, 0.4317225, -0.69541365, -0.5744698, 0.4317225)
+transform = Transform3D(0, -0.9738128, -0.22735147, 0.16889851, 0.22408521, -0.9598225, 0.98563343, -0.038399324, 0.16447553, -0.22735146, -0.9598224, 0.16447552)
 light_color = Color(0.572549, 0.776471, 0.956863, 1)
 light_energy = 0.0
+light_indirect_energy = 0.5
 
 [node name="SkyDome" type="Node" parent="Sky3D" unique_id=358385151]
 script = ExtResource("11_aprr0")
 tonemap_level = 0.5
 ground_color = Color(1, 1, 1, 1)
 sun_disk_size = 0.03
-sun_azimuth = -1.199074
-sun_altitude = -1.1047204
+sun_azimuth = -1.3898904
+sun_altitude = -0.4789447
 sun_light_energy = 1.5
-moon_azimuth = -4.1568055
-moon_altitude = -2.1827526
+moon_azimuth = -4.086103
+moon_altitude = -2.857165
 moon_size = 0.03
 atm_day_tint = Color(0.7539982, 0.88494706, 0.99999994, 1)
 fog_visible = false
@@ -70,11 +72,11 @@ script = ExtResource("12_2inyt")
 editor_time_enabled = false
 game_time_enabled = false
 dome_path = NodePath("../SkyDome")
+minutes_per_day = 24.0
+current_time = 10.0
 day = 28
 month = 7
-latitude = 0.0
-longitude = 0.0
-utc = 0.0
+year = 2026
 
 [node name="VoxelGI" type="VoxelGI" parent="." unique_id=2045574955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28134155, 50.98694, -14.77356)

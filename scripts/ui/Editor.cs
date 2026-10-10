@@ -904,7 +904,7 @@ public partial class Editor : Control
 		dayTime.SetText(0, "DayTime");
 		dayTime.SetCellMode(1, TreeItem.TreeCellMode.Range);
 		dayTime.SetRange(1, Track.Options.StartDayTime);
-		dayTime.SetRangeConfig(1, 1, 24, 1, false);
+		dayTime.SetRangeConfig(1, 0.0f, 23.5f, 0.5f, false);
 		dayTime.SetEditable(1, true);
 
 		var fog = OptionsTree.CreateItem(root);
@@ -954,7 +954,7 @@ public partial class Editor : Control
 				InvalidateTrack();
 				break;
 			case "DayTime":
-				Track.Options.StartDayTime = (int)editedItem.GetRange(editedColumn);
+				Track.Options.StartDayTime = (float)editedItem.GetRange(editedColumn);
 				Track.UpdateLighting();
 				break;
 			case "Fog":

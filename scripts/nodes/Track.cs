@@ -27,6 +27,11 @@ public partial class Track : Node3D
 			Sun.ShadowEnabled = false;
 			Moon.ShadowEnabled = false;
 		}
+		else
+		{
+			Sun.ShadowEnabled = true;
+			Moon.ShadowEnabled = true;
+		}
 
 		TimeOfDay.GetParent<WorldEnvironment>().Environment.VolumetricFogEnabled = Options.Fog;
 
