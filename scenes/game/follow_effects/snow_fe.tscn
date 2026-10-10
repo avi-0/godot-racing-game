@@ -59,7 +59,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asfok"]
 resource_local_to_scene = true
 transparency = 1
-shading_mode = 0
+shading_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = SubResource("GradientTexture2D_1831x")
 billboard_mode = 1

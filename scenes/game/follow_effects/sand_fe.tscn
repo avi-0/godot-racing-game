@@ -32,7 +32,7 @@ point_count = 3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bytw"]
 transparency = 1
 cull_mode = 2
-shading_mode = 0
+shading_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("4_hcuc1")
 use_particle_trails = true
