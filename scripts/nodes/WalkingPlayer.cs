@@ -2,6 +2,8 @@ using Godot;
 using System;
 using racingGame.data;
 
+namespace racingGame;
+
 public partial class WalkingPlayer : CharacterBody3D
 {
 	public const float Speed = 4.0f;
@@ -58,6 +60,11 @@ public partial class WalkingPlayer : CharacterBody3D
 		else if (_inputs.PadCamRight > 0.1f)
 		{
 			RotateY((-_inputs.PadCamRight * 0.05f));
+		}
+
+		if (GetGlobalPosition().Y < GameManager.DeathY)
+		{
+			GameModeController.CurrentGameMode.PlayerAttemptsToExitCar(PlayerId);
 		}
 	}
 	
