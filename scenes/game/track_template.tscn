@@ -46,6 +46,7 @@ light_energy = 1.5
 shadow_enabled = true
 shadow_bias = 0.005
 shadow_opacity = 0.8
+directional_shadow_max_distance = 200.0
 
 [node name="MoonLight" type="DirectionalLight3D" parent="Sky3D" unique_id=399735204]
 transform = Transform3D(0, -0.9738128, -0.22735147, 0.16889851, 0.22408521, -0.9598225, 0.98563343, -0.038399324, 0.16447553, -0.22735146, -0.9598224, 0.16447552)
@@ -55,6 +56,7 @@ light_indirect_energy = 0.5
 shadow_bias = 0.005
 shadow_opacity = 0.5
 shadow_blur = 2.0
+directional_shadow_max_distance = 150.0
 
 [node name="SkyDome" type="Node" parent="Sky3D" unique_id=358385151]
 script = ExtResource("11_aprr0")
