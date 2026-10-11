@@ -243,7 +243,7 @@ icon = ExtResource("7_3vi5u")
 layout_mode = 2
 text = "Controls"
 icon = ExtResource("11_a3vti")
-item_count = 13
+item_count = 14
 popup/item_0/text = "WASD + Mouse - Move Camera"
 popup/item_0/id = 0
 popup/item_1/text = "Q - Camera Down"
@@ -270,6 +270,8 @@ popup/item_11/text = "Alt + MouseWheel - Zoom"
 popup/item_11/id = 11
 popup/item_12/text = "ArrowKeys - Rotate Grid"
 popup/item_12/id = 12
+popup/item_13/text = "Alt + Shit + MouseWheel - Change All Placed Blocks Height"
+popup/item_13/id = 13
 
 [node name="MarginContainer2" type="MarginContainer" parent="EditorUI/HSplitContainer/VBoxContainer" unique_id=857390586]
 layout_mode = 2

@@ -630,6 +630,14 @@ public partial class Editor : Control
 			{
 				Camera.Radius += 3;
 			}
+			if (@event.IsActionPressed("editor_raise_all_blocks", exactMatch: true))
+			{
+				AllBlocksChangeHeight(1);
+			}
+			if (@event.IsActionPressed("editor_lower_all_blocks", exactMatch: true))
+			{
+				AllBlocksChangeHeight(-1);
+			}			
 			
 			if (@event.IsActionPressed("editor_yawplus", allowEcho: true))
 				YawPlusButtonOnPressed();
@@ -1074,6 +1082,20 @@ public partial class Editor : Control
 		if (!saved)
 		{
 			TrackManager.Instance.SaveTrack("user://tracks/autosaves/autosave_" + oldestI + ".tk.jz");
+		}
+	}
+
+	private void AllBlocksChangeHeight(int inc)
+	{
+		foreach (var child in Track.GetChildren())
+		{
+			if (child is Block block)
+			{
+				if (inc > 0 || block.Position.Y > GameManager.DeathY+1)
+				{
+					block.SetPosition(new Vector3(block.Position.X, block.Position.Y + (_gridHeightScale * inc), block.Position.Z));
+				}
+			}
 		}
 	}
 }
