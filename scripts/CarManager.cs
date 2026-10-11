@@ -88,7 +88,7 @@ public partial class CarManager : Node
 		
 		AddChild(car, true);
 		Transform3D spawn = TrackManager.Instance.GetStartPoint();
-		spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + car.FrontWheelConfig.SpringRest + 0.1f, spawn.Origin.Z);
+		spawn.Origin = new Vector3(spawn.Origin.X, spawn.Origin.Y + car.FrontWheelConfig.SpringRest + car.FrontWheelConfig.OverExtend + 0.1f, spawn.Origin.Z);
 		car.GlobalTransform = spawn;
  		car.Started();
 		

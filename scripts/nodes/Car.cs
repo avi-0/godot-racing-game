@@ -125,6 +125,8 @@ public partial class Car : RigidBody3D
 	private int _currentSkin = 0;
 
 	private int _wheelsOnBump = 0;
+
+	private bool _started = false;
 	
 	public override void _Ready()
 	{
@@ -243,7 +245,9 @@ public partial class Car : RigidBody3D
 			AngularVelocity = new Vector3(0, 0, 0);
 			return;
 		}
-		
+
+		if (AcceptsInputs) { _started = true;}
+
 		_isAccelerating = false;
 		_isReversing = false;
 		var velocity = GlobalBasis.Z.Dot(LinearVelocity);
@@ -268,8 +272,11 @@ public partial class Car : RigidBody3D
 			// проблема: если ShapeCast уже коллайдится в начальной позиции,
 			// он репортит расстояние как будто бы он растягивается на полную дистанцию
 			// => сначала чекнем нулевой вектор и только потом дадим какой надо
-			wheel.ShapeCast.TargetPosition = new Vector3();
-			wheel.ShapeCast.ForceShapecastUpdate();
+			if (_started)
+			{
+				wheel.ShapeCast.TargetPosition = new Vector3();
+				wheel.ShapeCast.ForceShapecastUpdate();
+			}
 			if (!wheel.ShapeCast.IsColliding())
 			{
 				wheel.ShapeCast.TargetPosition = new Vector3(-(wheel.Config.SpringRest + wheel.Config.OverExtend), 0, 0);
