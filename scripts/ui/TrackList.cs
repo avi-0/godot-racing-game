@@ -98,12 +98,12 @@ public partial class TrackList : Control
 						}
 					}
 					
-					if (trackID > 5 && trackID == trackList.Count())
+					if (trackID > 10 && trackID == trackList.Count())
 					{
 						if (goldMedals < trackList.Count() - 1)
 						{
 							canPlay = false;
-							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://assets/img/gold_lock.png").GetImage();
+							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://textures/ui/gold_lock.png").GetImage();
 							lockImage.Resize(128, 128, Image.Interpolation.Cubic);
 							button.SetButtonIcon(ImageTexture.CreateFromImage(lockImage));
 						}
@@ -113,7 +113,7 @@ public partial class TrackList : Control
 						if (silverMedals < trackID / 2)
 						{
 							canPlay = false;
-							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://assets/img/silver_lock.png").GetImage();
+							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://textures/ui/silver_lock.png").GetImage();
 							lockImage.Resize(128, 128, Image.Interpolation.Cubic);
 							button.SetButtonIcon(ImageTexture.CreateFromImage(lockImage));
 						}
