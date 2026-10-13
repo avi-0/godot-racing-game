@@ -294,7 +294,7 @@ CarDescription = "Fast on the straights and around corners, this beast can do an
 Skins = Array[Material]([ExtResource("3_8lcft"), ExtResource("4_yrqru"), ExtResource("5_2t0n8"), ExtResource("6_8lcft")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=980466963]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0048357993, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.49992865, 0.008448594, 0, -0.008448594, 0.49992865, 0, 0.038853213, 0)
 shape = SubResource("ConvexPolygonShape3D_yrqru")
 
 [node name="WheelFL" parent="." unique_id=1246587200 node_paths=PackedStringArray("WheelModel") instance=ExtResource("4_dg6r6")]
