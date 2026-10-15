@@ -206,6 +206,7 @@ public class GameModeTimeAttack : IGameMode
 		player.RespawnLinearVelocity = Vector3.Zero;
 		player.RespawnAngularVelocity = Vector3.Zero;
 		player.RespawnTime = new DateTime();
+		player.RespawnWheelRotation = new List<Vector3>();
 		
 		player.PlayerCar.IsLocallyControlled = player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN;
 		if (player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
@@ -275,6 +276,12 @@ public class GameModeTimeAttack : IGameMode
 				_players[id].IsRespawning = true;
 				_players[id].RespawnTime = DateTime.Now;
 				_players[id].PlayerCar.CarModel.Show();
+				int i = 0;
+				foreach (var wheel in _players[id].PlayerCar.Wheels)
+				{
+					wheel.Rotation = _players[id].RespawnWheelRotation[i];
+					i++;
+				}
 				
 				if (_players[id].Type == GameModeUtils.PLAYER_LOCAL || _players[id].Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)
 				{
@@ -466,7 +473,12 @@ public class GameModeTimeAttack : IGameMode
 			player.RespawnPoint = player.PlayerCar.GetTransform();
 			player.RespawnLinearVelocity = player.PlayerCar.GetLinearVelocity();
 			player.RespawnAngularVelocity = player.PlayerCar.GetAngularVelocity();
-			
+			player.RespawnWheelRotation = new List<Vector3>();
+			foreach (var wheel in player.PlayerCar.Wheels)
+			{
+				player.RespawnWheelRotation.Add(wheel.Rotation);
+			}
+
 			player.GhostRecording.CheckpointTimes.Add(player.RaceData.CurrentRaceTime);
 
 			if (player.Type == GameModeUtils.PLAYER_LOCAL || player.Type == GameModeUtils.PLAYER_LOCAL_SPLITSCREEN)

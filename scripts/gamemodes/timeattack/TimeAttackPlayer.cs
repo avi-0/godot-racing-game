@@ -14,6 +14,7 @@ public class TimeAttackPlayer : CartopiaPlayer
 	public bool IsRespawning = false;
 	public Vector3 RespawnLinearVelocity = Vector3.Zero;
 	public Vector3 RespawnAngularVelocity = Vector3.Zero;
+	public List<Vector3> RespawnWheelRotation;
 	public DateTime RespawnTime;
 	
 	[JsonIgnore]
