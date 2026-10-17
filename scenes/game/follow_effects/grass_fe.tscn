@@ -31,10 +31,12 @@ point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bytw"]
 transparency = 1
+blend_mode = 1
 cull_mode = 2
 shading_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("4_w3a8l")
+texture_filter = 4
 use_particle_trails = true
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_31dv0"]
