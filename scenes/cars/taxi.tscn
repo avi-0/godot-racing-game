@@ -300,6 +300,7 @@ CarDescription = "After a million kilometers of delivering passengers, this car 
 Skins = Array[Material]([ExtResource("7_filc1"), ExtResource("4_30yta"), ExtResource("5_lj8mf"), ExtResource("6_4mu2d")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=678201632]
+process_physics_priority = 2
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_sw6ji")
 

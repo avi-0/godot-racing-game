@@ -319,14 +319,17 @@ CarDescription = "Perfect for going to the grocery store"
 Skins = Array[Material]([ExtResource("6_ev7v8"), ExtResource("4_onaia"), ExtResource("7_fx6et"), ExtResource("5_j5vh0")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1109126717]
+process_physics_priority = 2
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_rfm5q")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1522271015]
+process_physics_priority = 2
 transform = Transform3D(0.55, 0, 0, 0, -2.404126e-08, -0.55, 0, 0.55, -2.404126e-08, -0.5676342, 0.0248838, 0.05444947)
 shape = SubResource("ConvexPolygonShape3D_w0oio")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1413945408]
+process_physics_priority = 2
 transform = Transform3D(0.55, 0, 0, 0, -2.404126e-08, -0.55, 0, 0.55, -2.404126e-08, 0.568, 0.025170617, 0.054)
 shape = SubResource("ConvexPolygonShape3D_w0oio")
 

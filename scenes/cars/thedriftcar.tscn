@@ -160,6 +160,7 @@ CarDescription = "This was just a reasonably priced family car, before some kid 
 Skins = Array[Material]([SubResource("StandardMaterial3D_upx0r"), SubResource("StandardMaterial3D_l2wdl"), SubResource("StandardMaterial3D_w6va2"), SubResource("StandardMaterial3D_ilv0q"), SubResource("StandardMaterial3D_5c1ej")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=899872761]
+process_physics_priority = 2
 transform = Transform3D(0.5, 0, 0, 0, 0, -0.5, 0, 0.5, 0, 0, 0.0011860132, 0)
 shape = SubResource("ConvexPolygonShape3D_cn2cu")
 
