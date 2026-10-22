@@ -109,6 +109,8 @@ public partial class PlayerViewport : SubViewport
 						Camera.SetFov(120.0f);
 					}
 				}
+				
+				UiSoundPlayer.Singleton.AmbiencePlayer.CurrentCamera = Camera;
 			}
 		}
 		else if (playerState == GameModeUtils.PLAYER_STATE_WALKING)

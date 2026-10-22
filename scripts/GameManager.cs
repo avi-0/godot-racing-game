@@ -191,6 +191,8 @@ public partial class GameManager : Node
 		
 		MenuMusicPlayer.Stop();
 		PlayNextSong();
+		
+		UiSoundPlayer.Singleton.AmbiencePlayer.StartPlaying(TrackManager.Instance.Track.Options);
 	}
 
 	public void Stop()
@@ -222,6 +224,8 @@ public partial class GameManager : Node
 		ClearFollowEffects();
 
 		NotificationContainer.Clear();
+		
+		UiSoundPlayer.Singleton.AmbiencePlayer.StopPlaying();
 	}
 
 	public void SetViewportsActive(bool visible)

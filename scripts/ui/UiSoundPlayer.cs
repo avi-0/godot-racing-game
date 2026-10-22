@@ -5,9 +5,11 @@ namespace racingGame;
 public partial class UiSoundPlayer : Node
 {
 	public static UiSoundPlayer Singleton;
-
+	
+	[Export] public AmbiencePlayer AmbiencePlayer;
+	
 	private AudioStreamPlaybackPolyphonic _playback;
-
+	
 	[Export(PropertyHint.ResourceType, "UiSound")]
 	public UiSound BlockErasedSound;
 

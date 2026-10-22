@@ -10,6 +10,11 @@
 [ext_resource type="AudioStream" uid="uid://b05xsphekvoy8" path="res://audio/audio_packs/ui/back_002.ogg" id="8_jis51"]
 [ext_resource type="AudioStream" uid="uid://qwqrie1htki2" path="res://audio/audio_packs/ui/back_003.ogg" id="9_fwclh"]
 [ext_resource type="AudioStream" uid="uid://cwhsif1njrnmf" path="res://audio/carsounds/enter_car.wav" id="10_jis51"]
+[ext_resource type="Script" uid="uid://gy7qsstt4qdj" path="res://scripts/ui/AmbiencePlayer.cs" id="11_fwclh"]
+[ext_resource type="AudioStream" uid="uid://c4uk2n33rebcl" path="res://audio/streams/wind_normal.tres" id="12_hpple"]
+[ext_resource type="AudioStream" uid="uid://ban6wejcevjp3" path="res://audio/streams/wind_fog.tres" id="13_1ghkt"]
+[ext_resource type="AudioStream" uid="uid://bv0l6o4dfa20l" path="res://audio/streams/rain.tres" id="14_3ff32"]
+[ext_resource type="AudioStream" uid="uid://cwy2kvuikkhis" path="res://audio/streams/water.tres" id="14_xsfvm"]
 
 [sub_resource type="Resource" id="Resource_ftsea"]
 script = ExtResource("3_kqb5d")
@@ -66,8 +71,9 @@ script = ExtResource("3_kqb5d")
 AudioStream = ExtResource("10_jis51")
 metadata/_custom_type_script = "uid://bl5cpfcp361n1"
 
-[node name="UISoundPlayer" type="Node" unique_id=1757482478 node_paths=PackedStringArray("Player")]
+[node name="UISoundPlayer" type="Node" unique_id=1757482478 node_paths=PackedStringArray("AmbiencePlayer", "Player")]
 script = ExtResource("1_vb3yo")
+AmbiencePlayer = NodePath("AmbiencePlayer")
 BlockErasedSound = SubResource("Resource_ftsea")
 BlockPlacedSound = SubResource("Resource_vaxfo")
 CheckpointCollectedSound = SubResource("Resource_10c2w")
@@ -83,3 +89,30 @@ CarExitSound = SubResource("Resource_h0kb8")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=448463363]
 volume_db = 2.0
 bus = &"GameSounds"
+
+[node name="AmbiencePlayer" type="Node" parent="." unique_id=471264260 node_paths=PackedStringArray("_windNormal", "_windStrong", "_rain", "_water")]
+script = ExtResource("11_fwclh")
+_windNormal = NodePath("WindNormal")
+_windStrong = NodePath("WindStrong")
+_rain = NodePath("Rain")
+_water = NodePath("Water")
+
+[node name="WindNormal" type="AudioStreamPlayer" parent="AmbiencePlayer" unique_id=395345954]
+stream = ExtResource("12_hpple")
+volume_db = 5.0
+bus = &"Ambience"
+
+[node name="WindStrong" type="AudioStreamPlayer" parent="AmbiencePlayer" unique_id=774654163]
+stream = ExtResource("13_1ghkt")
+volume_db = 3.0
+bus = &"Ambience"
+
+[node name="Rain" type="AudioStreamPlayer" parent="AmbiencePlayer" unique_id=2141029206]
+stream = ExtResource("14_3ff32")
+volume_db = -20.0
+bus = &"Ambience"
+
+[node name="Water" type="AudioStreamPlayer" parent="AmbiencePlayer" unique_id=985872418]
+stream = ExtResource("14_xsfvm")
+volume_db = -3.0
+bus = &"Ambience"

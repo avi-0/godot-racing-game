@@ -109,7 +109,7 @@ doppler_tracking = 2
 
 [node name="SuspensionSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=675878939]
 stream = ExtResource("14_2000p")
-volume_db = 2.0
+volume_db = 0.5
 unit_size = 3.0
 max_distance = 40.0
 max_polyphony = 2
