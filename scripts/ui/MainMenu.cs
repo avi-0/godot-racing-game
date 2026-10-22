@@ -127,17 +127,15 @@ public partial class MainMenu : Control
 				LastPanel = CampaignControl;
 				TrackListPanel.FillTrackContainer(CampTracksPath + campaign.DirectoryName + "/", true, campaign.Name, GameModeUtils.GAMEMODE_TIMEATTACK, path => { OpenTrack(path);});
 			};
-			
-			//looks like shit need something better
-			/*
-			if (ResourceLoader.Exists(CampTracksPath + campaign.DirectoryName + "/logo.jpg"))
+
+			string logoPath = "res://textures/ui/campaigns/" + campaign.DirectoryName + ".png";
+			if (ResourceLoader.Exists(logoPath))
 			{
-				CompressedTexture2D logo = ResourceLoader.Load<CompressedTexture2D>(CampTracksPath + campaign.DirectoryName + "/logo.jpg");
+				CompressedTexture2D logo = ResourceLoader.Load<CompressedTexture2D>(logoPath);
 				Image image = logo.GetImage();
-				image.Resize(256, 256);
+				image.Resize(540, 360, Image.Interpolation.Lanczos);
 				button.Icon = ImageTexture.CreateFromImage(image);
 			}
-			*/
 			
 			CampaignContainer.AddChild(button);
 
