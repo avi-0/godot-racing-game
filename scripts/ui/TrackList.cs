@@ -104,7 +104,7 @@ public partial class TrackList : Control
 						{
 							canPlay = false;
 							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://textures/ui/gold_lock.png").GetImage();
-							lockImage.Resize(128, 128, Image.Interpolation.Cubic);
+							lockImage.Resize(96, 96, Image.Interpolation.Nearest);
 							button.SetButtonIcon(ImageTexture.CreateFromImage(lockImage));
 						}
 					}
@@ -114,7 +114,7 @@ public partial class TrackList : Control
 						{
 							canPlay = false;
 							Image lockImage = ResourceLoader.Load<CompressedTexture2D>("res://textures/ui/silver_lock.png").GetImage();
-							lockImage.Resize(128, 128, Image.Interpolation.Cubic);
+							lockImage.Resize(96, 96, Image.Interpolation.Nearest);
 							button.SetButtonIcon(ImageTexture.CreateFromImage(lockImage));
 						}
 					}
