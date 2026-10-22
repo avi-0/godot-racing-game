@@ -306,6 +306,8 @@ public partial class Car : RigidBody3D
 			ProcessDownForce();
 		}
 		
+		if (IsGhost) {return;}
+		
 		ProcessEngineSound();
 
 		if (!(IsPlayerMouseControllingCamera || IsPlayerPadControllingCamera) && LinearVelocity.Slide(Vector3.Up).Length() > 2.0f)
@@ -654,6 +656,8 @@ public partial class Car : RigidBody3D
 
 	private void ProcessSpecialBlocks(CarWheel wheel)
 	{
+		if (IsGhost) {return;}
+		
 		if (wheel.ShapeCast.IsColliding())
 		{
 			for (int collider = 0; collider < wheel.ShapeCast.GetCollisionCount(); collider++)
