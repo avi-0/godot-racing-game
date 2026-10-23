@@ -637,23 +637,23 @@ public class GameModeTimeAttack : IGameMode
 			var authorLabel = newLabel();
 			authorLabel.Text = "Creator: " + GameModeUtils.FormatRaceTime(_currentTrack.Track.Options.AuthorTime);
 			authorLabel.Name = _currentTrack.Track.Options.AuthorTime.ToString();
-			authorLabel.AddThemeColorOverride("font_color", Colors.GreenYellow);
+			authorLabel.AddThemeColorOverride("font_color", GameModeUtils.MEDAL_COLOR[GameModeUtils.MEDAL_AUTHOR]);
 			viewport.ScoreboardContainer.AddChild(authorLabel);
 		}
 		var goldLabel = newLabel();
 		goldLabel.Text = "Gold: " + GameModeUtils.FormatRaceTime(GameModeUtils.GetGoldFromAt(_currentTrack.Track.Options.AuthorTime));
 		goldLabel.Name = GameModeUtils.GetGoldFromAt(_currentTrack.Track.Options.AuthorTime).ToString();
-		goldLabel.AddThemeColorOverride("font_color", Colors.Gold);
+		goldLabel.AddThemeColorOverride("font_color", GameModeUtils.MEDAL_COLOR[GameModeUtils.MEDAL_GOLD]);
 		viewport.ScoreboardContainer.AddChild(goldLabel);
 		var silverLabel = newLabel();
 		silverLabel.Text = "Silver: " + GameModeUtils.FormatRaceTime(GameModeUtils.GetSilverFromAt(_currentTrack.Track.Options.AuthorTime));
 		silverLabel.Name = GameModeUtils.GetSilverFromAt(_currentTrack.Track.Options.AuthorTime).ToString();
-		silverLabel.AddThemeColorOverride("font_color", Colors.Silver);
+		silverLabel.AddThemeColorOverride("font_color", GameModeUtils.MEDAL_COLOR[GameModeUtils.MEDAL_SILVER]);
 		viewport.ScoreboardContainer.AddChild(silverLabel);
 		var bronzeLabel = newLabel();
 		bronzeLabel.Text = "Bronze: " + GameModeUtils.FormatRaceTime(GameModeUtils.GetBronzeFromAt(_currentTrack.Track.Options.AuthorTime));
 		bronzeLabel.Name = GameModeUtils.GetBronzeFromAt(_currentTrack.Track.Options.AuthorTime).ToString();
-		bronzeLabel.AddThemeColorOverride("font_color", Colors.LightCoral);
+		bronzeLabel.AddThemeColorOverride("font_color", GameModeUtils.MEDAL_COLOR[GameModeUtils.MEDAL_BRONZE]);
 		viewport.ScoreboardContainer.AddChild(bronzeLabel);
 
 		void moveChild(Label child, double ms)

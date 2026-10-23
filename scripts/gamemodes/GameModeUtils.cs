@@ -84,6 +84,15 @@ public static class GameModeUtils
 		"Gold Medal",
 		"Creator Medal",
 	};
+
+	public static readonly Color[] MEDAL_COLOR =
+	{
+		Colors.White,
+		Colors.LightCoral,
+		Colors.Silver,
+		Colors.Gold,
+		Colors.MediumVioletRed,
+	};
 	//--
 
 	public static void LaunchGameMode(int type)

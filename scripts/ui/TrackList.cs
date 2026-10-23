@@ -96,6 +96,10 @@ public partial class TrackList : Control
 						{
 							silverMedals++;
 						}
+						
+						Color medalColor = GameModeUtils.MEDAL_COLOR[GameModeUtils.GetMedalIdFromTime((int)loadedPb.TotalMilliseconds, options.AuthorTime)];
+						button.AddThemeColorOverride("font_color", medalColor);
+						button.AddThemeColorOverride("font_focus_color", medalColor);
 					}
 					
 					if (trackID > 10 && trackID == trackList.Count())
