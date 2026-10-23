@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cksjo32fij56d"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_pnacq"]
-[ext_resource type="Material" uid="uid://8532xa1jfhxc" path="res://materials/grass.tres" id="2_2b1id"]
+[ext_resource type="Material" uid="uid://cbvml2m2nttjd" path="res://materials/grassblock.tres" id="2_2b1id"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_lxlku"]
 material = ExtResource("2_2b1id")

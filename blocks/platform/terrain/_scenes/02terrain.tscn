@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dx2bh7eyog5b0"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_xo0qw"]
-[ext_resource type="Material" uid="uid://8532xa1jfhxc" path="res://materials/grass.tres" id="2_b10j3"]
+[ext_resource type="Material" uid="uid://cbvml2m2nttjd" path="res://materials/grassblock.tres" id="2_b10j3"]
 [ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="3_rx6oj"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_o552i"]

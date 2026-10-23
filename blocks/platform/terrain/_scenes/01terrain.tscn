@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhmqhliho44ee"]
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_kr56c"]
-[ext_resource type="Material" uid="uid://8532xa1jfhxc" path="res://materials/grass.tres" id="2_b5fqh"]
+[ext_resource type="Material" uid="uid://cbvml2m2nttjd" path="res://materials/grassblock.tres" id="2_b5fqh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xd14t"]
 material = ExtResource("2_b5fqh")

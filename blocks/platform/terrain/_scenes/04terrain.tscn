@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_p6q1c"]
 [ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_sfwgm"]
-[ext_resource type="Material" uid="uid://8532xa1jfhxc" path="res://materials/grass.tres" id="3_gk5vj"]
+[ext_resource type="Material" uid="uid://cbvml2m2nttjd" path="res://materials/grassblock.tres" id="3_sfwgm"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_woaeu"]
 material = ExtResource("2_sfwgm")
@@ -13,7 +13,7 @@ size = Vector3(8, 2, 8)
 data = PackedVector3Array(4, 1, 4, 4, -1, 4, -4, -1, 4, 4, 1, -4, -4, -1, -4, 4, -1, -4, 4, 1, 4, 4, 1, -4, 4, -1, 4, 4, 1, -4, 4, -1, -4, 4, -1, 4, 4, 1, -4, 4, 1, 4, -4, -1, -4, 4, 1, 4, -4, -1, 4, -4, -1, -4, -4, -1, 4, 4, -1, 4, -4, -1, -4, 4, -1, 4, 4, -1, -4, -4, -1, -4)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6dsll"]
-material = ExtResource("3_gk5vj")
+material = ExtResource("3_sfwgm")
 size = Vector2(8.25, 8)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sfwgm"]
