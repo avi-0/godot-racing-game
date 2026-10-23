@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://beit1j7orfpei"]
+
+[ext_resource type="Script" uid="uid://coplhy57s5yf4" path="res://scripts/nodes/Block.cs" id="1_p6q1c"]
+[ext_resource type="Material" uid="uid://bnkilntrlhbgv" path="res://materials/platform_new.tres" id="2_sfwgm"]
+[ext_resource type="Material" uid="uid://8532xa1jfhxc" path="res://materials/grass.tres" id="3_gk5vj"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_woaeu"]
+material = ExtResource("2_sfwgm")
+left_to_right = 1.0
+size = Vector3(8, 2, 8)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b8fsb"]
+data = PackedVector3Array(4, 1, 4, 4, -1, 4, -4, -1, 4, 4, 1, -4, -4, -1, -4, 4, -1, -4, 4, 1, 4, 4, 1, -4, 4, -1, 4, 4, 1, -4, 4, -1, -4, 4, -1, 4, 4, 1, -4, 4, 1, 4, -4, -1, -4, 4, 1, 4, -4, -1, 4, -4, -1, -4, -4, -1, 4, 4, -1, 4, -4, -1, -4, 4, -1, 4, 4, -1, -4, -4, -1, -4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6dsll"]
+material = ExtResource("3_gk5vj")
+size = Vector2(8.25, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sfwgm"]
+size = Vector3(8, 2.2, 8)
+
+[node name="4fjcpbfrqo2p" type="Node3D" unique_id=1374549699 node_paths=PackedStringArray("WheelTriggerMeshInstance")]
+script = ExtResource("1_p6q1c")
+IsGrass = true
+WheelTriggerMeshInstance = NodePath("MeshInstance3D")
+
+[node name="tile-slant2" type="Node3D" parent="." unique_id=1322133379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.003, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tile-slant2" unique_id=1905348961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("PrismMesh_woaeu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tile-slant2/MeshInstance3D" unique_id=2055354704]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile-slant2/MeshInstance3D/StaticBody3D" unique_id=1094384170]
+shape = SubResource("ConcavePolygonShape3D_b8fsb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="tile-slant2" unique_id=1330694086]
+transform = Transform3D(0.969872, -0.24361502, 0, 0.24361502, 0.969872, 0, 0, 0, 1, 0, 1.005, 0)
+mesh = SubResource("PlaneMesh_6dsll")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1016096817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+layers = 0
+mesh = SubResource("BoxMesh_sfwgm")
+skeleton = NodePath("../..")

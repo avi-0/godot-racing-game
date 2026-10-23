@@ -1,21 +1,15 @@
 [gd_scene format=3 uid="uid://cr63oxeshcbuu"]
 
-[ext_resource type="Texture2D" uid="uid://5lmr8j4dcyq3" path="res://textures/enviornment/grass.png" id="1_jtjnr"]
 [ext_resource type="Script" uid="uid://blogk3rbn8itg" path="res://scripts/nodes/TrackBase.cs" id="1_trct1"]
 [ext_resource type="Material" uid="uid://2qrhacy552f0" path="res://particles/tyre_grass_drawpass_material.tres" id="2_cix4l"]
 [ext_resource type="Material" uid="uid://dui2xjgt1c1ck" path="res://materials/track_base_dirt.tres" id="2_n0nop"]
+[ext_resource type="Material" uid="uid://8532xa1jfhxc" path="res://materials/grass.tres" id="3_cix4l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0iiq5"]
 size = Vector3(512, 64, 512)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynqis"]
-albedo_texture = ExtResource("1_jtjnr")
-metallic_specular = 0.0
-uv1_scale = Vector3(250, 250, 250)
-texture_filter = 4
-
 [sub_resource type="BoxMesh" id="BoxMesh_ynqis"]
-material = SubResource("StandardMaterial3D_ynqis")
+material = ExtResource("3_cix4l")
 size = Vector3(512, 0.2, 512)
 
 [sub_resource type="BoxMesh" id="BoxMesh_urhk7"]

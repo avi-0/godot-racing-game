@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://8532xa1jfhxc"]
+
+[ext_resource type="Texture2D" uid="uid://5lmr8j4dcyq3" path="res://textures/enviornment/grass.png" id="1_oysvd"]
+
+[resource]
+albedo_texture = ExtResource("1_oysvd")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.15, 0.15, 0.15)
+uv1_offset = Vector3(0.125, 0, 0)
+uv1_triplanar = true
+texture_filter = 4
