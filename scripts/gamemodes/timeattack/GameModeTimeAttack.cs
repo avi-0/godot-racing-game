@@ -248,6 +248,8 @@ public class GameModeTimeAttack : IGameMode
 		if (_players.Count == 1)
 		{
 			_currentTrack.Track.ResetPhysBlocks(false);
+
+			if (_currentTrack.Track.Options.StartDayTime != (float)_currentTrack.Track.TimeOfDay.Get("current_time")) { _currentTrack.Track.UpdateLighting(); } // lvl99 ding
 		}
 	}
 

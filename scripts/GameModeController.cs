@@ -74,6 +74,8 @@ public partial class GameModeController : Node
 	{
 		track.ResetPhysBlocks(false);
 
+		track.TimeOfDay.Set("game_time_enabled", track.Options.Uid == "2111d6a3-3466-48ef-ab42-563a5e22f448"); // lvl99 ding
+
 		CurrentGameMode.InitTrack(track);
 	}
 

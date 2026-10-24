@@ -18,9 +18,12 @@ public partial class Track : Node3D
 	
 	public Node3D TrackBase;
 	
-	public void UpdateLighting() // also called when user updates graphics settings
+	public void UpdateLighting(bool resetTime = true) // also called when user updates graphics settings
 	{
-		TimeOfDay.Set("current_time", Options.StartDayTime);
+		if (resetTime)
+		{
+			TimeOfDay.Set("current_time", Options.StartDayTime);
+		}
 		TimeOfDay.Call("_update_celestial_coords"); // make sure to reenable shadows as needed
 		if (!SettingsManager.Instance.DirectionalShadowsEnabled)
 		{

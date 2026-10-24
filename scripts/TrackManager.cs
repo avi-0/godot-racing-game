@@ -38,7 +38,7 @@ public partial class TrackManager : Node
 		UpdateShadowsEnabled();
 
 		GameModeController.LoadMap(Track);
-		GD.Print("Track UID: " + GetLoadedTrackUid());
+		//GD.Print("Track UID: " + GetLoadedTrackUid());
 	}
 	
 	public void SaveTrack(string path)
@@ -92,6 +92,6 @@ public partial class TrackManager : Node
 	
 	public void UpdateShadowsEnabled()
 	{
-		Track.UpdateLighting();
+		Track.UpdateLighting(false);
 	}
 }
