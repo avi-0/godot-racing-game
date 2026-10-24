@@ -77,8 +77,10 @@ physics_material_override = SubResource("PhysicsMaterial_6aa1e")
 freeze = true
 
 [node name="detail-bench" type="MeshInstance3D" parent="detail-bench2" unique_id=38056852]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_4squ0")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="detail-bench2" unique_id=1437730315]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nfhpb")
